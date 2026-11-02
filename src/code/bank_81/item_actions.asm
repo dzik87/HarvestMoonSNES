@@ -35,6 +35,7 @@ fItemCarried_Begin:
     SEP #$20                                                   ;818000|E220    |      ;
     REP #$10                                                   ;818002|C210    |      ;
     LDA.B #$01                                                 ;818004|A901    |      ;
+    ; slot defaults: flags=1 (active), handler index=1 (fItemCarried_RunHandler), phase=0
     STA.W $0974+!RAM_SHIFT                                 ;818006|8D7409  |000974;
     LDA.B #$01                                                 ;818009|A901    |      ;
     STA.W $0975+!RAM_SHIFT                                 ;81800B|8D7509  |000975;
@@ -45,6 +46,7 @@ fItemCarried_Begin:
     REP #$20                                                   ;818019|C220    |      ;
     LDA.W #$0002                                               ;81801B|A90200  |      ;
     CLC                                                        ;81801E|18      |      ;
+    ; pose 2 + direction = pick-up animation
     ADC.B strcPlayer.direction                                 ;81801F|65DA    |0000DA;
     TAY                                                        ;818021|A8      |      ;
     JSL.L fItemCarried_LoadPoseData                                      ;818022|22B78081|8180B7;
@@ -52,6 +54,7 @@ fItemCarried_Begin:
     LDA.B strcPlayer.posX                                      ;818028|A5D6    |0000D6;
     STA.W nUnknownX                                            ;81802A|8D8009  |000980;
     LDA.B strcPlayer.posY                                      ;81802D|A5D8    |0000D8;
+    ; object is placed 2 pixels below the player
     INC A                                                      ;81802F|1A      |      ;
     INC A                                                      ;818030|1A      |      ;
     STA.W nUnknownY                                            ;818031|8D8209  |000982;
@@ -69,6 +72,7 @@ fItemCarried_Begin:
     REP #$20                                                   ;818051|C220    |      ;
     TAX                                                        ;818053|AA      |      ;
     SEP #$20                                                   ;818054|E220    |      ;
+    ; tile index to restore under the picked up object (0 = none)
     LDA.L nItemCarriedIndexForTilemap,X                        ;818056|BFADA281|81A2AD;
     BEQ +                                                      ;81805A|F016    |818072;
     REP #$20                                                   ;81805C|C220    |      ;
@@ -91,6 +95,7 @@ fItemCarried_Begin:
     REP #$20                                                   ;81807C|C220    |      ;
     TAX                                                        ;81807E|AA      |      ;
     SEP #$20                                                   ;81807F|E220    |      ;
+    ; play the pick-up sound only for items flagged in the table
     LDA.L nItemCarriedPickupSoundTable,X                      ;818081|BF08A381|81A308;
     BEQ +                                                      ;818085|F012    |818099;
     SEP #$20                                                   ;818087|E220    |      ;
@@ -152,8 +157,10 @@ fItemCarried_LoadPoseData:
     LDA.W nCarriedItemId                                       ;8180BE|AD8409  |000984;
     REP #$20                                                   ;8180C1|C220    |      ;
     STA.B strcVariables.n16Temp1                               ;8180C3|857E    |00007E;
+    ; pose * 3: frame entries are [word sprite][byte flip]
     ASL A                                                      ;8180C5|0A      |      ;
     CLC                                                        ;8180C6|18      |      ;
+    ; X = id * 3: pItemCarriedFramesTable has 3-byte (ptr24) entries
     ADC.B strcVariables.n16Temp1                               ;8180C7|657E    |00007E;
     TAX                                                        ;8180C9|AA      |      ;
     LDA.L pItemCarriedFramesTable,X                           ;8180CA|BFAF9681|8196AF;
@@ -888,6 +895,7 @@ fEggFestival_SetEggFlag0040:
 ;;
 fEggFestival_WrongEggDialog:
     REP #$30                                                   ;81836C|C230    |      ;
+    ; tile pattern $FC replaces the basket tile
     LDA.W #$00FC                                               ;81836E|A9FC00  |      ;
     LDX.W $09AD+!RAM_SHIFT                                 ;818371|AEAD09  |0009AD;
     LDY.W $09AF+!RAM_SHIFT                                 ;818374|ACAF09  |0009AF;
@@ -904,6 +912,7 @@ fEggFestival_WrongEggDialog:
     SEP #$20                                                   ;8183A2|E220    |      ;
     LDA.B #$02                                                 ;8183A4|A902    |      ;
     STA.W strcDialogDisplay.inputMode                          ;8183A6|8D9A01  |00019A;
+    ; dialog id $038D (wrong egg)
     LDX.W #$038D                                               ;8183A9|A28D03  |      ;
     LDA.B #$00                                                 ;8183AC|A900    |      ;
     STA.W strcDialogDisplay.boxPosition                       ;8183AE|8D9101  |000191;
@@ -1994,6 +2003,7 @@ fItemCarriedTool_EquipFromShed:
     XBA                                                        ;8187D6|EB      |      ;
     LDA.W nCarriedItemId                                       ;8187D7|AD8409  |000984;
     SEC                                                        ;8187DA|38      |      ;
+    ; carried id - $29 = tool id !EITEM_*
     SBC.B #$29                                                 ;8187DB|E929    |      ;
     STA.W strcPlayerData.toolEquipped                          ;8187DD|8D2109  |000921;
     REP #$20                                                   ;8187E0|C220    |      ;
@@ -2008,6 +2018,7 @@ fItemCarriedTool_EquipFromShed:
     PHA                                                        ;8187F0|48      |      ;
     INX                                                        ;8187F1|E8      |      ;
     LDA.L nShedToolPlacementTable,X                           ;8187F2|BF0FBE81|81BE0F;
+    ; invert the shed mask to clear the tool bit
     EOR.B #$FF                                                 ;8187F6|49FF    |      ;
     STA.B strcVariables.n8Temp1                                ;8187F8|8592    |000092;
     PLA                                                        ;8187FA|68      |      ;
@@ -2307,6 +2318,7 @@ fItemBuy_ShowPurchaseDialog:
     CMP.B #$44                                                 ;81894B|C944    |      ;
     BCS .item_id_high                                                ;81894D|B008    |818957;
     SEC                                                        ;81894F|38      |      ;
+    ; ids below $44 are the fragrances $1B-$1D -> rows $13-$15
     SBC.B #$1B                                                 ;818950|E91B    |      ;
     CLC                                                        ;818952|18      |      ;
     ADC.B #$13                                                 ;818953|6913    |      ;
@@ -2325,6 +2337,7 @@ fItemBuy_ShowPurchaseDialog:
 .item_index_ready:
     REP #$20                                                   ;818964|C220    |      ;
     STA.B strcVariables.n16Temp1                               ;818966|857E    |00007E;
+    ; row size is 12 bytes: index * 3 * 4
     ASL A                                                      ;818968|0A      |      ;
     CLC                                                        ;818969|18      |      ;
     ADC.B strcVariables.n16Temp1                               ;81896A|657E    |00007E;
@@ -2398,6 +2411,7 @@ fItemBuy_HandleAnswer:
     ASL A                                                      ;8189C3|0A      |      ;
     ASL A                                                      ;8189C4|0A      |      ;
     CLC                                                        ;8189C5|18      |      ;
+    ; row offset 9: 24-bit cost
     ADC.W #$0009                                               ;8189C6|690900  |      ;
     TAX                                                        ;8189C9|AA      |      ;
     LDA.L aDialogsData_BuyItems,X                              ;8189CA|BFA5A181|81A1A5;
@@ -2410,6 +2424,7 @@ fItemBuy_HandleAnswer:
     JSL.L fGameEngine_AddProfit                                ;8189DA|22C9B183|83B1C9;
     REP #$20                                                   ;8189DE|C220    |      ;
     BEQ .zero0x80                                              ;8189E0|F007    |8189E9;
+    ; row offset 4 chooses the "too poor" dialog (yes = offset 2)
     LDA.W #$0004                                               ;8189E2|A90400  |      ;
     STA.B strcVariables.n16Temp2                               ;8189E5|8580    |000080;
     BRA .show_result_dialog                                                ;8189E7|8002    |8189EB;
@@ -2604,6 +2619,7 @@ fItemBuy_ReturnItemToShelf:
     ASL A                                                      ;818AFC|0A      |      ;
     ASL A                                                      ;818AFD|0A      |      ;
     CLC                                                        ;818AFE|18      |      ;
+    ; row offset 8: shelf tile pattern
     ADC.W #$0008                                               ;818AFF|690800  |      ;
     TAX                                                        ;818B02|AA      |      ;
     SEP #$20                                                   ;818B03|E220    |      ;
@@ -2635,6 +2651,7 @@ fItemBuy_FinishPurchase:
  
  
   + LDA.W nCarriedItemId                                       ;818B25|AD8409  |000984;
+    ; flower, cake and fragrances stay in the hands
     CMP.B #$49                                                 ;818B28|C949    |      ;
     BEQ +                                                      ;818B2A|F037    |818B63;
     CMP.B #$56                                                 ;818B2C|C956    |      ;
@@ -2656,6 +2673,7 @@ fItemBuy_FinishPurchase:
     STZ.W strcPlayerData.carryItemId                           ;818B60|9C1D09  |00091D;
  
   + SEP #$20                                                   ;818B63|E220    |      ;
+    ; phase $FF = purchase done (checked by the shelf wrappers)
     LDA.B #$FF                                                 ;818B65|A9FF    |      ;
     STA.W $0976+!RAM_SHIFT                                 ;818B67|8D7609  |000976;
  
@@ -2688,6 +2706,7 @@ fItemFound_ShowFoundDialog:
     ASL A                                                      ;818B81|0A      |      ;
     CLC                                                        ;818B82|18      |      ;
     ADC.B strcVariables.n16Temp1                               ;818B83|657E    |00007E;
+    ; X = (id - 1) * 3 = row of aFoundItemData
     TAX                                                        ;818B85|AA      |      ; X = (nCarriedItem - 1) * 3
     LDA.L aFoundItemData,X                                     ;818B86|BFC69F81|819FC6;
     TAX                                                        ;818B8A|AA      |      ;
@@ -2748,6 +2767,7 @@ fItemFound_Consume:
     CLC                                                        ;818BEE|18      |      ;
     ADC.B strcVariables.n16Temp1                               ;818BEF|657E    |00007E;
     TAX                                                        ;818BF1|AA      |      ;
+    ; offset 2: signed stamina change
     INX                                                        ;818BF2|E8      |      ;
     INX                                                        ;818BF3|E8      |      ;
     SEP #$20                                                   ;818BF4|E220    |      ;
@@ -2891,6 +2911,7 @@ fItemCarried_CarryLoop_NoSell:
     STA.B strcPlayer.lastY                                     ;818D01|85E1    |0000E1;
     STZ.B strcPlayer.newX                                      ;818D03|64E5    |0000E5;
     STZ.B strcPlayer.newY                                      ;818D05|64E7    |0000E7;
+    ; unkE3 = 16: test distance for the step check
     LDA.W #$0010                                               ;818D07|A91000  |      ;
     STA.B strcPlayer.unkE3                                     ;818D0A|85E3    |0000E3;
     LDA.B strcPlayer.direction                                 ;818D0C|A5DA    |0000DA;
@@ -2992,6 +3013,7 @@ fItemShipped_SetBinTileAndRelease:
     XBA                                                        ;818DBE|EB      |      ;
     LDA.W nCarriedItemId                                       ;818DBF|AD8409  |000984;
     REP #$20                                                   ;818DC2|C220    |      ;
+    ; id * 2: row of aDialogData_ShippingProfit
     ASL A                                                      ;818DC4|0A      |      ;
     TAX                                                        ;818DC5|AA      |      ;
     SEP #$20                                                   ;818DC6|E220    |      ;
@@ -3021,6 +3043,7 @@ fItemShipped_SetBinTileAndRelease:
 ;;
 fItemCarried_StartDropAtTarget:
     REP #$20                                                   ;818DEC|C220    |      ;
+    ; index * 4: [word x][word y] rows
     ASL A                                                      ;818DEE|0A      |      ;
     ASL A                                                      ;818DEF|0A      |      ;
     TAX                                                        ;818DF0|AA      |      ;
@@ -3030,6 +3053,7 @@ fItemCarried_StartDropAtTarget:
     INX                                                        ;818DF9|E8      |      ;
     LDA.L aFixedDropPositionsXY,X                                    ;818DFA|BF63A381|81A363;
     STA.W nUnknownY                                            ;818DFE|8D8209  |000982;
+    ; sprite shown while the item flies to the target
     LDA.W #$00CA                                               ;818E01|A9CA00  |      ;
     STA.W $097A+!RAM_SHIFT                                 ;818E04|8D7A09  |00097A;
     SEP #$20                                                   ;818E07|E220    |      ;
@@ -3069,6 +3093,7 @@ fItemCarried_ReturnShared:
 fItemCarriedAnimal_PutDown:
     SEP #$20                                                   ;818E1B|E220    |      ;
     LDA.W strcPlayerData.carryItemId                           ;818E1D|AD1D09  |00091D;
+    ; $29 = mole: no chicken record
     CMP.B #$29                                                 ;818E20|C929    |      ;
     BEQ +                                                      ;818E22|F033    |818E57;
     SEP #$20                                                   ;818E24|E220    |      ;
@@ -3076,6 +3101,7 @@ fItemCarriedAnimal_PutDown:
     XBA                                                        ;818E28|EB      |      ;
     LDA.W strcPlayerData.nAiArg                                ;818E29|AD2009  |000920;
     SEC                                                        ;818E2C|38      |      ;
+    ; nAiArg - $24 = chicken index
     SBC.B #$24                                                 ;818E2D|E924    |      ;
     JSL.L fGameEngine_GetChickenData                           ;818E2F|2295C983|83C995;
     SEP #$20                                                   ;818E33|E220    |      ;
@@ -3084,6 +3110,7 @@ fItemCarriedAnimal_PutDown:
     STA.B [ptrTemp0x72],Y                                      ;818E3A|9772    |000072;
     LDY.W #$0000                                               ;818E3C|A00000  |      ;
     LDA.B [ptrTemp0x72],Y                                      ;818E3F|B772    |000072;
+    ; clear bit $20 of the chicken flags
     AND.B #$DF                                                 ;818E41|29DF    |      ;
     STA.B [ptrTemp0x72],Y                                      ;818E43|9772    |000072;
     REP #$20                                                   ;818E45|C220    |      ;
@@ -3150,6 +3177,7 @@ fItemCarriedFeed_PutDown:
     SEP #$20                                                   ;818EBB|E220    |      ;
     REP #$10                                                   ;818EBD|C210    |      ;
     LDA.B strcMap.loadAreaId                                   ;818EBF|A522    |000022;
+    ; cow barn
     CMP.B #$27                                                 ;818EC1|C927    |      ;
     BEQ +                                                      ;818EC3|F007    |818ECC;
     CMP.B #$28                                                 ;818EC5|C928    |      ;
@@ -3157,6 +3185,7 @@ fItemCarriedFeed_PutDown:
     JMP.W fItemCarried_PutDown                                      ;818EC9|4C7993  |819379;
  
  
+  ; tile properties $E2-$EE are the trough spots
   + CPX.W #$00E2                                               ;818ECC|E0E200  |      ;
     BCS +                                                      ;818ECF|B003    |818ED4;
     JMP.W fItemCarried_PutDown                                      ;818ED1|4C7993  |819379;
@@ -3279,6 +3308,7 @@ fItemSell_HandleAnswer:
     ADC.B strcVariables.n16Temp1                               ;818F7A|657E    |00007E;
     TAX                                                        ;818F7C|AA      |      ;
     LDA.L aDialogData_SellItems,X                              ;818F7D|BF94A081|81A094;
+    ; dialog $0313: "Sorry but we can't accept that" = item not sellable
     CMP.W #$0313                                               ;818F81|C91303  |      ; Sorry but we can't accept that
     BEQ fItemSell_ResumeCarry                                        ;818F84|F064    |818FEA;
     SEP #$20                                                   ;818F86|E220    |      ;
@@ -3495,6 +3525,7 @@ fItemCarried_HandleDropAction:
  
   + SEP #$20                                                   ;8190D9|E220    |      ;
     LDA.B strcMap.loadAreaId                                   ;8190DB|A522    |000022;
+    ; area < 4 (farm) or >= 8: never the Sunday market
     CMP.B #$04                                                 ;8190DD|C904    |      ;
     BCS +                                                      ;8190DF|B003    |8190E4;
     JMP.W fItemCarried_BeginPutDown                                      ;8190E1|4C7E91  |81917E;
@@ -3505,12 +3536,14 @@ fItemCarried_HandleDropAction:
     JMP.W fItemCarried_BeginPutDown                                      ;8190E8|4C7E91  |81917E;
  
  
+  ; market only on Sunday (weekday 0)
   + LDA.L nCurrentWeekdayID                                    ;8190EB|AF1A1F7F|7F1F1A;
     BEQ +                                                      ;8190EF|F003    |8190F4;
     JMP.W fItemCarried_BeginPutDown                                      ;8190F1|4C7E91  |81917E;
  
  
   + LDA.L nCurrentTimeID                                       ;8190F4|AF1C1F7F|7F1F1C;
+    ; only before time id $11
     CMP.B #$11                                                 ;8190F8|C911    |      ;
     BCC +                                                      ;8190FA|9003    |8190FF;
     JMP.W fItemCarried_BeginPutDown                                      ;8190FC|4C7E91  |81917E;
@@ -3533,6 +3566,7 @@ fItemCarried_HandleDropAction:
     LDX.W nTileInFrontOfPlayerX                                ;819120|AE8509  |000985;
     LDY.W nTileInFrontOfPlayerY                                ;819123|AC8709  |000987;
     JSL.L fObjectEngine_GetObjectPropertyByDirSeason                                      ;819126|2261AC82|82AC61;
+    ; tile property $F0 = market stall
     CPX.W #$00F0                                               ;81912A|E0F000  |      ;
     BEQ +                                                      ;81912D|F003    |819132;
     JMP.W fItemCarried_BeginPutDown                                      ;81912F|4C7E91  |81917E;
@@ -3561,6 +3595,7 @@ fItemCarried_HandleDropAction:
     LDY.W #$0000                                               ;81915A|A00000  |      ;
     JSL.L fItemCarried_LoadPoseData                                      ;81915D|22B78081|8180B7;
     SEP #$20                                                   ;819161|E220    |      ;
+    ; phase 5: price dialog
     LDA.B #$05                                                 ;819163|A905    |      ;
     STA.W $0976+!RAM_SHIFT                                 ;819165|8D7609  |000976;
     %SetPlayerAction(!PACTION_NONE)
@@ -3652,6 +3687,7 @@ fItemShipped_AddProfit:
     LDA.L aDialogData_ShippingProfit,X                         ;8191EB|BFDE9F81|819FDE;
     REP #$20                                                   ;8191EF|C220    |      ;
     CLC                                                        ;8191F1|18      |      ;
+    ; 24-bit add into nShippingProfit
     ADC.L nShippingProfit                                      ;8191F2|6F071F7F|7F1F07;
     STA.L nShippingProfit                                      ;8191F6|8F071F7F|7F1F07;
     SEP #$20                                                   ;8191FA|E220    |      ;
@@ -3758,6 +3794,7 @@ fItemCarriedAnimal_CarryLoop:
  
   + REP #$20                                                   ;8192B8|C220    |      ;
     LDA.W #$0000                                               ;8192BA|A90000  |      ;
+    ; drop test 1: tile 7 steps ahead must be free
     LDX.W #$0007                                               ;8192BD|A20700  |      ;
     LDY.W #$0007                                               ;8192C0|A00700  |      ;
     JSL.L fStoreTileOnFrontOfPlayerAtDistance                  ;8192C3|224ED181|81D14E;
@@ -3779,6 +3816,7 @@ fItemCarriedAnimal_CarryLoop:
  
   + REP #$20                                                   ;8192E7|C220    |      ;
     LDA.W #$0001                                               ;8192E9|A90100  |      ;
+    ; drop test 2: tile 10 steps ahead must be free
     LDX.W #$000A                                               ;8192EC|A20A00  |      ;
     LDY.W #$000A                                               ;8192EF|A00A00  |      ;
     JSL.L fStoreTileOnFrontOfPlayerAtDistance                  ;8192F2|224ED181|81D14E;
@@ -3904,6 +3942,7 @@ fItemShipped_InFarmCoopOrBarn:
     LDX.W nTileInFrontOfPlayerX                                ;8193AB|AE8509  |000985;
     LDY.W nTileInFrontOfPlayerY                                ;8193AE|AC8709  |000987;
     JSL.L fObjectEngine_GetObjectPropertyByDirSeason                                      ;8193B1|2261AC82|82AC61;
+    ; tile property $F2 = shipping spot
     CPX.W #$00F2                                               ;8193B5|E0F200  |      ;
     BEQ +                                                      ;8193B8|F003    |8193BD;
     JMP.W fItemCarried_PlaceEggInIncubator                                      ;8193BA|4C9794  |819497;
@@ -3962,6 +4001,7 @@ fItemShipped_InFarmCoopOrBarn:
  
  
   + REP #$20                                                   ;81942B|C220    |      ;
+    ; tile script $24 (farm bin animation)
     LDA.W #$0024                                               ;81942D|A92400  |      ;
     JSL.L fTileScript_Start                                ;819430|22E1A581|81A5E1;
     SEP #$20                                                   ;819434|E220    |      ;
@@ -4049,6 +4089,7 @@ fItemCarried_PlaceEggInIncubator:
     LDX.W nTileInFrontOfPlayerX                                ;8194C2|AE8509  |000985;
     LDY.W nTileInFrontOfPlayerY                                ;8194C5|AC8709  |000987;
     JSL.L fObjectEngine_GetObjectPropertyByDirSeason                                      ;8194C8|2261AC82|82AC61;
+    ; tile property $F7 = incubator
     CPX.W #$00F7                                               ;8194CC|E0F700  |      ;
     BEQ +                                                      ;8194CF|F003    |8194D4;
     JMP.W fItemCarried_PutDown_Outdoor                                      ;8194D1|4C3F95  |81953F;
@@ -4061,6 +4102,7 @@ fItemCarried_PlaceEggInIncubator:
  
  
   + REP #$30                                                   ;8194E2|C230    |      ;
+    ; AI script slot $14: hatching chick
     LDA.W #$0014                                               ;8194E4|A91400  |      ;
     LDX.W #$0000                                               ;8194E7|A20000  |      ;
     LDY.W #$0000                                               ;8194EA|A00000  |      ;
@@ -4087,6 +4129,7 @@ fItemCarried_PlaceEggInIncubator:
     SEP #$20                                                   ;81952E|E220    |      ;
     STZ.W strcPlayerData.carryItemId                           ;819530|9C1D09  |00091D;
     REP #$30                                                   ;819533|C230    |      ;
+    ; +5 happiness
     LDA.W #$0005                                               ;819535|A90500  |      ;
     JSL.L fGameEngine_AddHappiness                             ;819538|2282B283|83B282;
     JMP.W fItemCarried_ReturnFromPhase                                       ;81953C|4CAE96  |8196AE;
@@ -4107,6 +4150,7 @@ fItemCarried_PutDown_Outdoor:
     LDA.B strcMap.loadAreaId                                   ;819543|A522    |000022;
     CMP.B #!AREA_TOWNSPRING                                                 
     BCC fItemCarried_PutDown_LowAreas                                        ;819547|9047    |819590;
+    ; only areas $10-$14 (woods) reach the tile checks
     CMP.B #$10                                                 ;819549|C910    |      ;
     BCS +                                                      ;81954B|B003    |819550;
     JMP.W fItemCarried_DropInFront                                      ;81954D|4C5B96  |81965B;
@@ -4216,6 +4260,7 @@ fEvent_FreedImpFish:
     CMP.B #!CITEM_FISH                                                 
     BNE +                                                      ;8195FB|D02F    |81962C;
     LDA.L nCurrentTimeID                                       ;8195FD|AF1C1F7F|7F1F1C;
+    ; only before time id $11
     CMP.B #$11                                                 ;819601|C911    |      ;
     BCS +                                                      ;819603|B027    |81962C;
     REP #$30                                                   ;819605|C230    |      ;
@@ -4272,6 +4317,7 @@ fItemCarried_DropInFront:
     REP #$10                                                   ;81965D|C210    |      ;
     STZ.W strcPlayerData.carryItemId                           ;81965F|9C1D09  |00091D;
     REP #$20                                                   ;819662|C220    |      ;
+    ; pose $0A = dropped on the ground
     LDY.W #$000A                                               ;819664|A00A00  |      ;
     JSL.L fItemCarried_LoadPoseData                                      ;819667|22B78081|8180B7;
     REP #$20                                                   ;81966B|C220    |      ;

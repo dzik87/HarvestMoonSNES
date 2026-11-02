@@ -40,6 +40,7 @@ fObjectSlots_UpdateAll:
 .loop:
     PHX                                                        ;81A393|DA      |      ;
     SEP #$20                                                   ;81A394|E220    |      ;
+    ; slot flags: bit 0 = in use
     LDA.B [ptrUnknown0x07]                                     ;81A396|A707    |000007;
     AND.B #$01                                                 ;81A398|2901    |      ;
     BNE +                                                      ;81A39A|D003    |81A39F;
@@ -82,6 +83,7 @@ fObjectSlots_UpdateAll:
     JSL.L fObject_GetSingleObjectData                          ;81A3F5|22CB8185|8581CB;
     REP #$20                                                   ;81A3F9|C220    |      ;
     LDA.B strcObject.exists                                    ;81A3FB|A5A7    |0000A7;
+    ; $FFFD: object destroyed(?)
     CMP.W #$FFFD                                               ;81A3FD|C9FDFF  |      ;
     BNE +                                                      ;81A400|D003    |81A405;
     JMP.W .allOther                                            ;81A402|4C19A4  |81A419;
@@ -121,6 +123,7 @@ fObjectSlots_UpdateAll:
     TAX                                                        ;81A43E|AA      |      ;
     CPX.W #$0000                                               ;81A43F|E00000  |      ;
     BEQ .caseFFFD                                              ;81A442|F06E    |81A4B2;
+    ; handler index 0 = none, 1 = fItemCarried_RunHandler
     JSR.W (pItemCarriedSlotHandlerTable,X)                           ;81A444|FC8BA5  |81A58B;
     SEP #$20                                                   ;81A447|E220    |      ;
     LDY.W #$0000                                               ;81A449|A00000  |      ;
@@ -172,6 +175,7 @@ fObjectSlots_UpdateAll:
     ADC.W #$0010                                               ;81A4B8|691000  |      ;
     STA.B ptrUnknown0x07                                       ;81A4BB|8507    |000007;
     INX                                                        ;81A4BD|E8      |      ;
+    ; 10 slots
     CPX.W #$000A                                               ;81A4BE|E00A00  |      ;
     BEQ +                                                      ;81A4C1|F003    |81A4C6;
     JMP.W .loop                                                ;81A4C3|4C93A3  |81A393;
@@ -338,6 +342,7 @@ fPlayer_LeaveSnowFootprint:
     SEP #$20                                                   ;81A58F|E220    |      ;
     REP #$10                                                   ;81A591|C210    |      ;
     LDA.L nCurrentSeasonID                                     ;81A593|AF191F7F|7F1F19;
+    ; winter only
     CMP.B #$03                                                 ;81A597|C903    |      ;
     BNE .return                                                ;81A599|D045    |81A5E0;
     LDA.B strcMap.loadAreaId                                   ;81A59B|A522    |000022;
@@ -367,6 +372,7 @@ fPlayer_LeaveSnowFootprint:
  
  
   + REP #$30                                                   ;81A5D1|C230    |      ;
+    ; tile pattern $11: footprint
     LDA.W #$0011                                               ;81A5D3|A91100  |      ;
     LDX.W strcObjectData.playerX                               ;81A5D6|AE0709  |000907;
     LDY.W strcObjectData.playerY                               ;81A5D9|AC0909  |000909;
@@ -437,6 +443,7 @@ fTileScript_Update:
     JMP.W .dataEnd                                             ;81A61E|4C5DA6  |81A65D;
  
  
+  ; $FFFE: jump to the ptr24 that follows
   + CMP.W #$FFFE                                               ;81A621|C9FEFF  |      ;
     BNE .loop                                                  ;81A624|D003    |81A629;
     JMP.W .readFFFEPointer                                     ;81A626|4C67A6  |81A667;
@@ -468,6 +475,7 @@ fTileScript_Update:
     REP #$30                                                   ;81A64D|C230    |      ;
     LDA.B ptrUnknown0xCF                                       ;81A64F|A5CF    |0000CF;
     CLC                                                        ;81A651|18      |      ;
+    ; a step is 7 bytes
     ADC.W #$0007                                               ;81A652|690700  |      ;
     STA.B ptrUnknown0xCF                                       ;81A655|85CF    |0000CF;
     BRA .return                                                ;81A657|8003    |81A65C;
@@ -592,6 +600,7 @@ fMap_QueueTilePatternVRAMUpload:
     LSR A                                                      ;81A6CE|4A      |      ;
     LSR A                                                      ;81A6CF|4A      |      ;
     STA.B strcVariables.n16Temp2                               ;81A6D0|8580    |000080;
+    ; VRAM word address of the BG1 tilemap
     LDA.W #$6000                                               ;81A6D2|A90060  |      ;
     STA.B strcVariables.n16Unk86                               ;81A6D5|8586    |000086;
     LDA.B strcVariables.n16Temp1                               ;81A6D7|A57E    |00007E;
@@ -704,6 +713,7 @@ fMap_QueueTilePatternVRAMUpload:
     ADC.B strcVariables.n16Unk86                               ;81A77D|6586    |000086;
     TAX                                                        ;81A77F|AA      |      ;
     REP #$20                                                   ;81A780|C220    |      ;
+    ; $80 bytes = one row of 2 x 16-pixel tiles
     LDA.W #$0080                                               ;81A782|A98000  |      ;
     JSL.L fCore_PrepareTransfer                                ;81A785|22338A80|808A33;
     REP #$20                                                   ;81A789|C220    |      ;
@@ -810,6 +820,7 @@ fMap_GetTilePatternInfo:
     ASL A                                                      ;81A805|0A      |      ;
     ASL A                                                      ;81A806|0A      |      ;
     CLC                                                        ;81A807|18      |      ;
+    ; A * 6
     ADC.B strcVariables.n16Temp1                               ;81A808|657E    |00007E;
     ADC.B strcVariables.n16Temp1                               ;81A80A|657E    |00007E;
     TAX                                                        ;81A80C|AA      |      ;
@@ -1055,6 +1066,7 @@ fShed_PlaceEquippedTool:
  
   + LDA.W strcPlayerData.toolEquipped                          ;81A956|AD2109  |000921;
     BEQ .mark_shed_slot                                                ;81A959|F053    |81A9AE;
+    ; tool $19 (chicken feed) lives in the coop
     CMP.B #$19                                                 ;81A95B|C919    |      ;
     BCC .check_area_for_low_tools                                                ;81A95D|901A    |81A979;
     CMP.B #$19                                                 ;81A95F|C919    |      ;
@@ -1077,6 +1089,7 @@ fShed_PlaceEquippedTool:
 .check_area_for_low_tools:
     SEP #$20                                                   ;81A979|E220    |      ;
     LDA.W strcMap.loadAreaId                                   ;81A97B|AD2200  |000022;
+    ; shed area
     CMP.B #$26                                                 ;81A97E|C926    |      ;
     BNE .mark_shed_slot                                                ;81A980|D02C    |81A9AE;
  
@@ -1087,6 +1100,7 @@ fShed_PlaceEquippedTool:
     XBA                                                        ;81A988|EB      |      ;
     LDA.W strcPlayerData.toolEquipped                          ;81A989|AD2109  |000921;
     REP #$20                                                   ;81A98C|C220    |      ;
+    ; tool * 8: row of nShedToolPlacementTable
     ASL A                                                      ;81A98E|0A      |      ;
     ASL A                                                      ;81A98F|0A      |      ;
     ASL A                                                      ;81A990|0A      |      ;
@@ -3070,6 +3084,7 @@ fShed_DrawItemPatternByFlag:
 .continue:
     REP #$20                                                   ;81B30F|C220    |      ;
     PLA                                                        ;81B311|68      |      ;
+    ; entry * 8
     ASL A                                                      ;81B312|0A      |      ;
     ASL A                                                      ;81B313|0A      |      ;
     ASL A                                                      ;81B314|0A      |      ;
@@ -3092,6 +3107,7 @@ fShed_DrawItemPatternByFlag:
     PLY                                                        ;81B32A|7A      |      ;
     REP #$20                                                   ;81B32B|C220    |      ;
     PLA                                                        ;81B32D|68      |      ;
+    ; mode 2: always draw
     CMP.W #$0002                                               ;81B32E|C90200  |      ;
     BEQ .draw_pattern                                                ;81B331|F01B    |81B34E;
     CMP.W #$0001                                               ;81B333|C90100  |      ;
