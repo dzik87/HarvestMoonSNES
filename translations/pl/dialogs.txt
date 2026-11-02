@@ -710,7 +710,7 @@ Nie lubię być sama.<END>
 Czasem chodzę w góry po leśne owoce.<END>
 
 @@ sDialog_0x00ED @@
-Zmarzłeś, co? Wtedy najlepiej się napić i rozgrzać od środka.<END>
+Zmarzłeś, co? Wtedy najlepiej się napić i rozgrzać od środka♥<END>
 
 @@ sDialog_0x00EE @@
 Widziałam cię niedawno na farmie. Chyba mnie nie zauważyłeś, bo pracowałeś.<END>
@@ -771,7 +771,7 @@ I rozmawiał!<NEXT>
 C-cześć.<END>
 
 @@ sDialog_0x00FD @@
-Witaj, jestem księdzem w tym kościele.<NEXT>
+Witaj, jestem pastorem w tym kościele.<NEXT>
 Gdy czegoś nie wiesz, najlepiej zapytać ludzi ze sklepów.<NEXT>
 Poza tym warto dobrze przyjrzeć się napisom na tablicach.<END>
 
@@ -806,7 +806,7 @@ To konewka. Nabierasz wodę ze stawu i podlewasz. Podrzucę ci ją do szopy.<END
 Nasiona warzyw też niedługo sprowadzę, więc wpadnij kiedyś.<END>
 
 @@ sDialog_0x0107 @@
-Miło mi. Jestem Nina.<NEXT>
+Miło mi. Jestem Nina♥<NEXT>
 Każda uprawa ma swoją porę siewu.<NEXT>
 Jeśli nie zasiejesz jej w odpowiedniej porze roku, nie wykiełkuje.<END>
 
@@ -871,10 +871,10 @@ Wracasz już na farmę?<NEXT>
 
 @@ sDialog_0x0118 @@
 No to cię odwiozę. Ja też się szkolę w wysyłce.<NEXT>
-Dążmy każdy do swojego celu! Z hartem ducha!!<END>
+Dążmy, szefie, każdy do swojego celu! Z hartem ducha!!<END>
 
 @@ sDialog_0x0119 @@
-A tak, Jak będziesz wracać,<NEXT>daj znać.<END>
+Aha, rozumiem.<NEXT>Jak będziesz wracać, szefie, daj znać.<END>
 
 @@ sDialog_0x011A @@
 Myślę, że warto jeszcze trochę posłuchać, co mówią ludzie!<END>
@@ -882,7 +882,7 @@ Myślę, że warto jeszcze trochę posłuchać, co mówią ludzie!<END>
 @@ sDialog_0x011B @@
 Przyjechałeś na tę zaniedbaną farmę? Hihi, powodzenia.<NEXT>
 Jestem Eve, miło mi.<NEXT>
-Proszę, to na koszt firmy.<END>
+Proszę, to na koszt firmy♥<END>
 
 @@ sDialog_0x011C @@
 Na zmęczenie po pracy najlepiej coś wypić.<END>
@@ -2254,7 +2254,7 @@ Wiesz, idę tam, gdzie jest najbliżej do gwiazd.<END>
 Będziemy się modlić na placu. Jak romantycznie!<END>
 
 @@ sDialog_0x02B3 @@
-Jutro się zabawimy! Czekam na ciebie.<END>
+Jutro się zabawimy! Czekam na ciebie.♥<END>
 
 @@ sDialog_0x02B4 @@
 Jutro Festiwal Gwiezdnej Nocy. Pójdę tam, gdzie zawsze.<END>
@@ -2320,7 +2320,7 @@ Ja tu tylko przypadkiem, no…<NEXT>zbiegiem okoliczności, a ona też jest tu z
 Oj, dobry wieczór. Nina?<NEXT>Ta dziewczyna zawsze gdzieś znika sama. Ciekawe, dokąd chodzi?<END>
 
 @@ sDialog_0x02C9 @@
-Na zdrowie, pod pięknym nocnym niebem! No, pij do dna!<END>
+Na zdrowie, pod pięknym nocnym niebem! No, pij do dna!♥<END>
 
 @@ sDialog_0x02CA @@
 Hej! Dobrze się bawisz?<NEXT>Wypijmy za gwiazdy, które nas ze sobą spotkały!<END>
@@ -2329,7 +2329,7 @@ Hej! Dobrze się bawisz?<NEXT>Wypijmy za gwiazdy, które nas ze sobą spotkały!
 Widziałeś? Co roku tu spada gwiazda. To miejsce to nasza tajemnica, tylko we dwoje.<END>
 
 @@ sDialog_0x02CC @@
-Wypowiedziałeś jakieś życzenie? A Nina… hihi… to tajemnica.<END>
+Wypowiedziałeś jakieś życzenie? A Nina… hihi… to tajemnica.♥<END>
 
 @@ sDialog_0x02CD @@
 Tak właśnie kąpię się w gorącym źródle i patrzę na gwiazdy.<NEXT>Mmm, raj!<END>
@@ -2536,7 +2536,7 @@ OK! No to ją zabieram!<END>
 Tej nie przyjmę, póki nie podrośnie.<END>
 
 @@ sDialog_0x0311 @@
-Czeka na zewnątrz, zabierz ją. Na dworze sama zje trawę.<NEXT>Ale w zagrodzie karm ją porządnie!<END>
+Czeka na zewnątrz, zabierz ją. Na dworze sama zje trawę.<NEXT>Ale w oborze karm ją porządnie!<END>
 
 @@ sDialog_0x0312 @@
 To dojarka. Użyta na krowie, wydoi mleko. Kosztuje 1800G.<NEXT><OPTLBL 1>Kup<OPTLBL 2>Nie kupuj<POS 58>Kasa <NUM 7 28>0G<OPT 2>
@@ -2980,7 +2980,7 @@ Co?! To… to kurze pióro?!<END>
 "Sekretna rabata"<BR>Wstęp wzbroniony!!<END>
 
 @@ sDialog_0x03A5 @@
-Festiwale w roku<BR>Wiosna, dzień 1:<BR>Festiwal Nowego Roku Wiosna,<NEXT>dzień 23:<BR>Festiwal Kwiatów Jesień,<NEXT>dzień 12:<BR>Festiwal Zbiorów Jesień,<NEXT>dzień 20:<BR>Festiwal Jajek Zima,<NEXT>dzień 10:<BR>Festiwal Dziękczynienia Zima,<NEXT>dzień 24:<BR>Festiwal Gwiezdnej Nocy<END>
+Festiwale w roku<BR>Wiosna, dzień 1:<BR>Festiwal Nowego Roku<NEXT>Wiosna, dzień 23:<BR>Festiwal Kwiatów<NEXT>Jesień, dzień 12:<BR>Festiwal Zbiorów<NEXT>Jesień, dzień 20:<BR>Festiwal Jajek<NEXT>Zima, dzień 10:<BR>Festiwal Dziękczynienia<NEXT>Zima, dzień 24:<BR>Festiwal Gwiezdnej Nocy<END>
 
 @@ sDialog_0x03A6 @@
 ♥<END>
@@ -3262,7 +3262,7 @@ Przezwyciężanie trudności to coś bardzo ważnego dla człowieka.<END>
 Ciężko było, co? Ale w życiu każde doświadczenie się liczy! Doświadczenie!<END>
 
 @@ sDialog_0x0403 @@
-Mężczyzna ma być czynu! Trzeba na nim polegać, kiedy przyjdzie co do czego!<END>
+Mężczyzna musi być człowiekiem czynu! Trzeba na nim polegać, kiedy przyjdzie co do czego!<END>
 
 @@ sDialog_0x0404 @@
 Sklep otwieramy o 5, więc wpadnij ♥<END>
