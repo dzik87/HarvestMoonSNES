@@ -30,9 +30,9 @@ pAIScripting0x13_Farm_Actor01:
     %AICMD0x1A_SpawnNpc($0078, $01A8, aAIScriptingData_L060, $02)                     ;B4895D
     %AICMD0x0C_WaitForScriptFlag($00)                                            ;B48965
     %AICMD0x1D_ShowDialog($014D, $00)                          ;B48967
-    %AICMD0x20_JumpIfChoice(0, pAIScripting0x13_L002)                        ;B4896B
+    %AICMD0x20_JumpIfChoice(0, pAIScripting0x13_Farm_Actor01_Choice0)                        ;B4896B
     %AICMD0x20_JumpIfChoice(1, pAIScripting0x13_Farm_Actor01_Say_014F)                        ;B4896F
-pAIScripting0x13_L002:
+pAIScripting0x13_Farm_Actor01_Choice0:
     %AICMD0x1B_SetSprite($02BD, $00)                                     ;B48973
     %AICMD0x0D_MoveObject($00, $FF, $30, $01)                             ;B48977
     %AICMD0x1B_SetSprite($02C3, $01)                                     ;B4897C

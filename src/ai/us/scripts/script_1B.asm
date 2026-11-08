@@ -79,10 +79,10 @@ pAIScripting0x1B_Mine_Actor01_Nina_OnInteract_2:
     %AICMD0x12_Jump(pAIScripting0x1B_Mine_Actor01_Nina_WaitInteract_2)                                   ;B49247
 ; Handler for A pressed while carrying an item.
 pAIScripting0x1B_Mine_Actor01_Nina_OnItemOffered:
-    %AICMD0x43_JumpIfEqual16(wram80(strcPlayerData.carryItemIdPrev), 24, pAIScripting0x1B_L009)             ;B4924A
+    %AICMD0x43_JumpIfEqual16(wram80(strcPlayerData.carryItemIdPrev), 24, pAIScripting0x1B_Mine_Actor01_Nina_IfCarryItemIdPrevIs24)             ;B4924A
     %AICMD0x1C_ShowDialog($01E8, $00)                          ;B49252
     %AICMD0x12_Jump(pAIScripting0x1B_Mine_Actor01_Nina_WaitInteract_2)                                   ;B49256
-pAIScripting0x1B_L009:
+pAIScripting0x1B_Mine_Actor01_Nina_IfCarryItemIdPrevIs24:
     %AICMD0x08_EnableAIControl()                               ;B49259
     %AICMD0x1B_SetSprite($024F, $01)                                     ;B4925A
     %AICMD0x1C_ShowDialog($01E7, $00)                          ;B4925E

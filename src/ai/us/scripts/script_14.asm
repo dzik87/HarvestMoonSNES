@@ -42,9 +42,9 @@ pAIScripting0x14_Data01_Actor01:
     %AICMD0x0C_WaitForScriptFlag($00)                                            ;B48A23
     %AICMD0x0D_MoveObject($01, $00, $60, $01)                             ;B48A25
     %AICMD0x1D_ShowDialog($0149, $00)                          ;B48A2A
-    %AICMD0x20_JumpIfChoice(0, pAIScripting0x14_L002)                        ;B48A2E
+    %AICMD0x20_JumpIfChoice(0, pAIScripting0x14_Data01_Actor01_Choice0)                        ;B48A2E
     %AICMD0x20_JumpIfChoice(1, pAIScripting0x14_Data01_Actor01_Say_014C)                        ;B48A32
-pAIScripting0x14_L002:
+pAIScripting0x14_Data01_Actor01_Choice0:
     %AICMD0x0B_SetScriptFlag($01)                                            ;B48A36
     %AICMD0x0C_WaitForScriptFlag($02)                                            ;B48A38
     %AICMD0x1B_SetSprite($02BB, $00)                                     ;B48A3A
@@ -161,7 +161,7 @@ pAIScripting0x14_GoldChicken_Actor01_WaitTalk_2:
 ; Conversation handler: dialog $0336.
 pAIScripting0x14_GoldChicken_Actor01_Talk_0336:
     %AICMD0x1D_ShowDialog($0336, $00)                          ;B48B37
-    %AICMD0x20_JumpIfChoice(1, pAIScripting0x14_L013)                        ;B48B3B
+    %AICMD0x20_JumpIfChoice(1, pAIScripting0x14_GoldChicken_Actor01_Choice1)                        ;B48B3B
     %AICMD0x08_EnableAIControl()                               ;B48B3F
     %AICMD0x1B_SetSprite($021B, $00)                                     ;B48B40
     %AICMD0x09_StartScript($02, pAIScripting0x14_GoldChicken_Actor01_Actor02)                                   ;B48B44
@@ -179,7 +179,7 @@ pAIScripting0x14_GoldChicken_Actor01_Talk_0336:
     %AICMD0x28_ClearBit($8000D2, $01)                                   ;B48B71
     %AICMD0x11_EnableUserControl()                             ;B48B76
     %AICMD0x12_Jump(pAIScripting0x14_GoldChicken_Actor01_WaitTalk_2)                                   ;B48B77
-pAIScripting0x14_L013:
+pAIScripting0x14_GoldChicken_Actor01_Choice1:
     %AICMD0x2A_StartTileSequence($0043)                                          ;B48B7A
     %AICMD0x4B_ReplaceMapTile($C3, $0040, $0080)                              ;B48B7D
     %AICMD0x23_OrWithIndexedValue(strcFlags.daily2, $0C)       ;B48B83
@@ -240,20 +240,20 @@ pAIScripting0x14_L020:
     %AICMD0x23_OrWithIndexedValue(strcFlags.daily4, $09)       ;B48BE0
     %AICMD0x05_SetTransferPosition(136, 456)                   ;B48BE5
     %AICMD0x08_EnableAIControl()                               ;B48BEA
-    %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 0, pAIScripting0x14_L021)     ;B48BEB
-    %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 1, pAIScripting0x14_L022)     ;B48BF2
-    %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 2, pAIScripting0x14_L023)     ;B48BF9
-    %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 3, pAIScripting0x14_L024)     ;B48C00
-pAIScripting0x14_L021:
+    %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 0, pAIScripting0x14_L020_IfCurrentSeasonIDIs0)     ;B48BEB
+    %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 1, pAIScripting0x14_L020_IfCurrentSeasonIDIs1)     ;B48BF2
+    %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 2, pAIScripting0x14_L020_IfCurrentSeasonIDIs2)     ;B48BF9
+    %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 3, pAIScripting0x14_L020_IfCurrentSeasonIDIs3)     ;B48C00
+pAIScripting0x14_L020_IfCurrentSeasonIDIs0:
     %AICMD0x06_SetDestinationArea(!AREA_FARMSPRING)            ;B48C07
     %AICMD0x12_Jump(pAIScripting0x14_L025)                                   ;B48C09
-pAIScripting0x14_L022:
+pAIScripting0x14_L020_IfCurrentSeasonIDIs1:
     %AICMD0x06_SetDestinationArea(!AREA_FARMSUMMER)            ;B48C0C
     %AICMD0x12_Jump(pAIScripting0x14_L025)                                   ;B48C0E
-pAIScripting0x14_L023:
+pAIScripting0x14_L020_IfCurrentSeasonIDIs2:
     %AICMD0x06_SetDestinationArea(!AREA_FARMFALL)              ;B48C11
     %AICMD0x12_Jump(pAIScripting0x14_L025)                                   ;B48C13
-pAIScripting0x14_L024:
+pAIScripting0x14_L020_IfCurrentSeasonIDIs3:
     %AICMD0x06_SetDestinationArea(!AREA_FARMWINTER)            ;B48C16
     %AICMD0x12_Jump(pAIScripting0x14_L025)                                   ;B48C18
 pAIScripting0x14_L025:

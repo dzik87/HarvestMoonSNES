@@ -121,8 +121,8 @@ pAIScripting0x0A_Data04:
     %AICMD0x07_SetPlayerDirection(!PDIR_UP)                    ;B3E91D
     %AICMD0x08_EnableAIControl()                               ;B3E91F
     %AICMD0x38_WaitForFadeIn()                                               ;B3E920
-    %AICMD0x14_JumpIfFlagSet(strcFlags.event1, $07, pAIScripting0x0A_L005)   ;B3E921
-    %AICMD0x14_JumpIfFlagSet(strcFlags.event1, $06, pAIScripting0x0A_L004)   ;B3E928
+    %AICMD0x14_JumpIfFlagSet(strcFlags.event1, $07, pAIScripting0x0A_Data04_IfEvent1Bit07)   ;B3E921
+    %AICMD0x14_JumpIfFlagSet(strcFlags.event1, $06, pAIScripting0x0A_Data04_IfEvent1Bit06)   ;B3E928
     %AICMD0x39_WalkForTime(!AIINPUT_UP, 16)                    ;B3E92F
     %AICMD0x39_WalkForTime(!AIINPUT_LEFT, 40)                  ;B3E933
     %AICMD0x39_WalkForTime(!AIINPUT_UP, 96)                    ;B3E937
@@ -132,7 +132,7 @@ pAIScripting0x0A_Data04:
     %AICMD0x50_ReleaseCarried()                                               ;B3E945
     %AICMD0x47_SetValue8(wram80(nTimeState), 3)                           ;B3E946
     %AICMD0x10_End()                                           ;B3E94B
-pAIScripting0x0A_L004:
+pAIScripting0x0A_Data04_IfEvent1Bit06:
     %AICMD0x39_WalkForTime(!AIINPUT_UP, 16)                    ;B3E94C
     %AICMD0x39_WalkForTime(!AIINPUT_LEFT, 56)                  ;B3E950
     %AICMD0x39_WalkForTime(!AIINPUT_UP, 96)                    ;B3E954
@@ -142,7 +142,7 @@ pAIScripting0x0A_L004:
     %AICMD0x50_ReleaseCarried()                                               ;B3E962
     %AICMD0x47_SetValue8(wram80(nTimeState), 3)                           ;B3E963
     %AICMD0x10_End()                                           ;B3E968
-pAIScripting0x0A_L005:
+pAIScripting0x0A_Data04_IfEvent1Bit07:
     %AICMD0x39_WalkForTime(!AIINPUT_UP, 16)                    ;B3E969
     %AICMD0x39_WalkForTime(!AIINPUT_RIGHT, 166)                ;B3E96D
     %AICMD0x39_WalkForTime(!AIINPUT_UP, 96)                    ;B3E971

@@ -328,9 +328,9 @@ pAIScripting0x04_Toolshop_Idle:
     %AICMD0x13_Wait(1)                                         ;B3C818
     %AICMD0x12_Jump(pAIScripting0x04_Toolshop_Idle)                                   ;B3C81B
 pAIScripting0x04_L061:
-    %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $01, pAIScripting0x04_L062)   ;B3C81E
+    %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $01, pAIScripting0x04_Toolshop_IfEvent2Bit01)   ;B3C81E
     %AICMD0x09_StartScript($02, pAIScripting0x04_Toolshop_Actor02_Ann)                                   ;B3C825
-pAIScripting0x04_L062:
+pAIScripting0x04_Toolshop_IfEvent2Bit01:
     %AICMD0x12_Jump(pAIScripting0x04_Toolshop_Idle)                                   ;B3C829
 ; Child script (slot $01) of Toolshop: actor. Spawns at (40,360). Waits for the player to press A. Dialogs $01CA, $0200,
 ; $0049, $0079, $01DC.
@@ -441,9 +441,9 @@ pAIScripting0x04_Restaurant_Idle:
     %AICMD0x13_Wait(1)                                         ;B3C948
     %AICMD0x12_Jump(pAIScripting0x04_Restaurant_Idle)                                   ;B3C94B
 pAIScripting0x04_L082:
-    %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $03, pAIScripting0x04_L083)   ;B3C94E
+    %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $03, pAIScripting0x04_Restaurant_IfEvent2Bit03)   ;B3C94E
     %AICMD0x09_StartScript($03, pAIScripting0x04_Restaurant_Actor03_Ellen)                                   ;B3C955
-pAIScripting0x04_L083:
+pAIScripting0x04_Restaurant_IfEvent2Bit03:
     %AICMD0x12_Jump(pAIScripting0x04_Restaurant_Idle)                                   ;B3C959
 ; Child script (slot $04) of Restaurant: actor. Spawns at (135,151).
 pAIScripting0x04_Restaurant_Actor04:
@@ -763,10 +763,10 @@ pAIScripting0x04_WorksmanHouse_Actor01_OnInteract:
     %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $06, pAIScripting0x04_WorksmanHouse_Actor01_Talk_0139)   ;B3CC33
     %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $07, pAIScripting0x04_WorksmanHouse_Actor01_Talk_0139)   ;B3CC3A
     %AICMD0x1D_ShowDialog($0130, $00)                          ;B3CC41
-    %AICMD0x20_JumpIfChoice(0, pAIScripting0x04_L147)                        ;B3CC45
+    %AICMD0x20_JumpIfChoice(0, pAIScripting0x04_WorksmanHouse_Actor01_Choice0)                        ;B3CC45
     %AICMD0x20_JumpIfChoice(1, pAIScripting0x04_WorksmanHouse_Actor01_Say_0132)                        ;B3CC49
     %AICMD0x12_Jump(pAIScripting0x04_L141)                                   ;B3CC4D
-pAIScripting0x04_L147:
+pAIScripting0x04_WorksmanHouse_Actor01_Choice0:
     %AICMD0x23_OrWithIndexedValue(strcFlags.event2, $05)       ;B3CC50
     %AICMD0x1C_ShowDialog($0131, $00)                          ;B3CC55
     %AICMD0x12_Jump(pAIScripting0x04_L142)                                   ;B3CC59

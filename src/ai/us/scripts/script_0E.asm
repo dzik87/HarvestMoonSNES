@@ -46,44 +46,44 @@ pAIScripting0x0E_Town:
     %AICMD0x0C_WaitForScriptFlag($00)                                            ;B3F157
     %AICMD0x3D_TeleportToArea(!AREA_DANCINGS1)                 ;B3F159
     %AICMD0x10_End()                                           ;B3F15B
-pAIScripting0x0E_L001:
-    %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $00, pAIScripting0x0E_L006)   ;B3F15C
+pAIScripting0x0E_Town_IfUnknown1Bit00:
+    %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $00, pAIScripting0x0E_Town_IfEvent2Bit00)   ;B3F15C
     %AICMD0x09_StartScript($07, pAIScripting0x0E_Town_Actor07_Maria)                                   ;B3F163
     %AICMD0x41_AddValue16(nLove_Maria, 30)                     ;B3F167
     %AICMD0x12_Jump(pAIScripting0x0E_L173)                                   ;B3F16D
-pAIScripting0x0E_L002:
-    %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $01, pAIScripting0x0E_L007)   ;B3F170
+pAIScripting0x0E_Town_IfUnknown1Bit01:
+    %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $01, pAIScripting0x0E_Town_IfEvent2Bit01)   ;B3F170
     %AICMD0x09_StartScript($07, pAIScripting0x0E_Town_Actor07_Ann)                                   ;B3F177
     %AICMD0x41_AddValue16(nLove_Ann, 30)                       ;B3F17B
     %AICMD0x12_Jump(pAIScripting0x0E_L173)                                   ;B3F181
-pAIScripting0x0E_L003:
-    %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $02, pAIScripting0x0E_L008)   ;B3F184
+pAIScripting0x0E_Town_IfUnknown1Bit02:
+    %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $02, pAIScripting0x0E_Town_IfEvent2Bit02)   ;B3F184
     %AICMD0x09_StartScript($07, pAIScripting0x0E_Town_Actor07_Nina)                                   ;B3F18B
     %AICMD0x41_AddValue16(nLove_Nina, 30)                      ;B3F18F
     %AICMD0x12_Jump(pAIScripting0x0E_L173)                                   ;B3F195
-pAIScripting0x0E_L004:
-    %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $03, pAIScripting0x0E_L009)   ;B3F198
+pAIScripting0x0E_Town_IfUnknown1Bit03:
+    %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $03, pAIScripting0x0E_Town_IfEvent2Bit03)   ;B3F198
     %AICMD0x09_StartScript($07, pAIScripting0x0E_Town_Actor07_Ellen)                                   ;B3F19F
     %AICMD0x41_AddValue16(nLove_Ellen, 30)                     ;B3F1A3
     %AICMD0x12_Jump(pAIScripting0x0E_L173)                                   ;B3F1A9
-pAIScripting0x0E_L005:
-    %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $04, pAIScripting0x0E_L010)   ;B3F1AC
+pAIScripting0x0E_Town_IfUnknown1Bit04:
+    %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $04, pAIScripting0x0E_Town_IfEvent2Bit04)   ;B3F1AC
     %AICMD0x09_StartScript($07, pAIScripting0x0E_Town_Actor07_Eve)                                   ;B3F1B3
     %AICMD0x41_AddValue16(nLove_Eve, 30)                       ;B3F1B7
     %AICMD0x12_Jump(pAIScripting0x0E_L173)                                   ;B3F1BD
-pAIScripting0x0E_L006:
+pAIScripting0x0E_Town_IfEvent2Bit00:
     %AICMD0x41_AddValue16(nLove_Maria, 30)                     ;B3F1C0
     %AICMD0x12_Jump(pAIScripting0x0E_L011)                                   ;B3F1C6
-pAIScripting0x0E_L007:
+pAIScripting0x0E_Town_IfEvent2Bit01:
     %AICMD0x41_AddValue16(nLove_Ann, 30)                       ;B3F1C9
     %AICMD0x12_Jump(pAIScripting0x0E_L011)                                   ;B3F1CF
-pAIScripting0x0E_L008:
+pAIScripting0x0E_Town_IfEvent2Bit02:
     %AICMD0x41_AddValue16(nLove_Nina, 30)                      ;B3F1D2
     %AICMD0x12_Jump(pAIScripting0x0E_L011)                                   ;B3F1D8
-pAIScripting0x0E_L009:
+pAIScripting0x0E_Town_IfEvent2Bit03:
     %AICMD0x41_AddValue16(nLove_Ellen, 30)                     ;B3F1DB
     %AICMD0x12_Jump(pAIScripting0x0E_L011)                                   ;B3F1E1
-pAIScripting0x0E_L010:
+pAIScripting0x0E_Town_IfEvent2Bit04:
     %AICMD0x41_AddValue16(nLove_Eve, 30)                       ;B3F1E4
 pAIScripting0x0E_L011:
     %AICMD0x09_StartScript($07, pAIScripting0x0E_Town_Actor07_2)                                   ;B3F1EA
@@ -123,14 +123,14 @@ pAIScripting0x0E_Town_Actor02_Talk_0214:
     %AICMD0x28_ClearBit(strcFlags.unknown1, $01)                        ;B3F231
     %AICMD0x14_JumpIfFlagSet(strcFlags.event6, $0B, pAIScripting0x0E_Town_Actor02_Say_024E)   ;B3F236
     %AICMD0x1D_ShowDialog($0214, $00)                          ;B3F23D
-    %AICMD0x20_JumpIfChoice(0, pAIScripting0x0E_L021)                        ;B3F241
+    %AICMD0x20_JumpIfChoice(0, pAIScripting0x0E_Town_Actor02_Choice0)                        ;B3F241
     %AICMD0x20_JumpIfChoice(1, pAIScripting0x0E_Town_Actor02_Say_0216)                        ;B3F245
     %AICMD0x12_Jump(pAIScripting0x0E_Town_Actor02_WaitTalk)                                   ;B3F249
 ; Shows dialog $024E.
 pAIScripting0x0E_Town_Actor02_Say_024E:
     %AICMD0x1C_ShowDialog($024E, $00)                          ;B3F24C
     %AICMD0x12_Jump(pAIScripting0x0E_Town_Actor02_WaitTalk)                                   ;B3F250
-pAIScripting0x0E_L021:
+pAIScripting0x0E_Town_Actor02_Choice0:
     %AICMD0x46_JumpIfBetween24(nMoney, 0, 199, pAIScripting0x0E_Town_Actor02_Say_0213)        ;B3F253
     %AICMD0x12_Jump(pAIScripting0x0E_Town_Actor02_Say_0215)                                   ;B3F25F
 ; Shows dialog $0213.
@@ -242,7 +242,7 @@ pAIScripting0x0E_Town_Actor06_WaitTalk:
     %AICMD0x12_Jump(pAIScripting0x0E_Town_Actor06_WaitTalk)                                   ;B3F386
 ; Conversation handler: dialog $021C.
 pAIScripting0x0E_Town_Actor06_Talk_021C:
-    %AICMD0x14_JumpIfFlagSet(strcFlags.unknown1, $0B, pAIScripting0x0E_L045) ;B3F389
+    %AICMD0x14_JumpIfFlagSet(strcFlags.unknown1, $0B, pAIScripting0x0E_Town_Actor06_IfUnknown1Bit0B) ;B3F389
     %AICMD0x28_ClearBit(strcFlags.unknown1, $04)                        ;B3F390
     %AICMD0x15_JumpIfEquals8(nCurrentYearID, 0, pAIScripting0x0E_Town_Actor06_Say_021A)       ;B3F395
     %AICMD0x1C_ShowDialog($021C, $00)                          ;B3F39C
@@ -251,7 +251,7 @@ pAIScripting0x0E_Town_Actor06_Talk_021C:
 pAIScripting0x0E_Town_Actor06_Say_021A:
     %AICMD0x1C_ShowDialog($021A, $00)                          ;B3F3A3
     %AICMD0x12_Jump(pAIScripting0x0E_Town_Actor06_WaitTalk)                                   ;B3F3A7
-pAIScripting0x0E_L045:
+pAIScripting0x0E_Town_Actor06_IfUnknown1Bit0B:
     %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $00, pAIScripting0x0E_Town_Actor06_Say_0250)   ;B3F3AA
     %AICMD0x1C_ShowDialog($0288, $00)                          ;B3F3B1
     %AICMD0x12_Jump(pAIScripting0x0E_Town_Actor06_WaitTalk)                                   ;B3F3B5
@@ -269,7 +269,7 @@ pAIScripting0x0E_Town_Actor07_WaitTalk:
     %AICMD0x12_Jump(pAIScripting0x0E_Town_Actor07_WaitTalk)                                   ;B3F3CA
 ; Conversation handler: dialog $021E.
 pAIScripting0x0E_Town_Actor07_Talk_021E:
-    %AICMD0x14_JumpIfFlagSet(strcFlags.unknown1, $0B, pAIScripting0x0E_L051) ;B3F3CD
+    %AICMD0x14_JumpIfFlagSet(strcFlags.unknown1, $0B, pAIScripting0x0E_Town_Actor07_IfUnknown1Bit0B) ;B3F3CD
     %AICMD0x28_ClearBit(strcFlags.unknown1, $05)                        ;B3F3D4
     %AICMD0x15_JumpIfEquals8(nCurrentYearID, 0, pAIScripting0x0E_Town_Actor07_Say_021D)       ;B3F3D9
     %AICMD0x1C_ShowDialog($021E, $00)                          ;B3F3E0
@@ -278,7 +278,7 @@ pAIScripting0x0E_Town_Actor07_Talk_021E:
 pAIScripting0x0E_Town_Actor07_Say_021D:
     %AICMD0x1C_ShowDialog($021D, $00)                          ;B3F3E7
     %AICMD0x12_Jump(pAIScripting0x0E_Town_Actor07_WaitTalk)                                   ;B3F3EB
-pAIScripting0x0E_L051:
+pAIScripting0x0E_Town_Actor07_IfUnknown1Bit0B:
     %AICMD0x1C_ShowDialog($0287, $00)                          ;B3F3EE
     %AICMD0x12_Jump(pAIScripting0x0E_Town_Actor07_WaitTalk)                                   ;B3F3F2
     %AICMD0x1A_SpawnNpc($0158, $0138, aAIScriptingData_L042, $00)                     ;B3F3F5
@@ -328,11 +328,11 @@ pAIScripting0x0E_Town_Actor07_Talk_021E_3:
 ; Child script (slot $0D) of Town: actor. Spawns at (328,184). Waits for the player to press A. Dialogs $0220, $0221, $0222,
 ; $0223, $027A, $01DA ....
 pAIScripting0x0E_Town_Actor0D_Maria:
-    %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $00, pAIScripting0x0E_L061)   ;B3F465
+    %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $00, pAIScripting0x0E_Town_Actor0D_Maria_IfEvent2Bit00)   ;B3F465
     %AICMD0x1A_SpawnNpc($0148, $00B8, aAIScriptingData_L011, $00)                     ;B3F46C
     %AICMD0x12_Jump(pAIScripting0x0E_Town_Actor0D_Maria_WaitInteract)                                   ;B3F474
-pAIScripting0x0E_L061:
-    %AICMD0x14_JumpIfFlagSet(strcFlags.event6, $04, pAIScripting0x0E_L075)   ;B3F477
+pAIScripting0x0E_Town_Actor0D_Maria_IfEvent2Bit00:
+    %AICMD0x14_JumpIfFlagSet(strcFlags.event6, $04, pAIScripting0x0E_Town_Actor0D_Maria_IfEvent6Bit04)   ;B3F477
     %AICMD0x1A_SpawnNpc($0148, $00B8, aAIScriptingData_L071, $00)                     ;B3F47E
 ; Idle until the player presses A at the NPC (AICMD0x2D): jumps to OnInteract, or to OnItemOffered while an item is carried.
 pAIScripting0x0E_Town_Actor0D_Maria_WaitInteract:
@@ -402,17 +402,17 @@ pAIScripting0x0E_Town_Actor0D_Maria_Say_0212:
     %AICMD0x1C_ShowDialog($0212, $00)                          ;B3F54D
     %AICMD0x41_AddValue16(nLove_Maria, 8)                      ;B3F551
     %AICMD0x12_Jump(pAIScripting0x0E_Town_Actor0D_Maria_WaitInteract)                                   ;B3F557
-pAIScripting0x0E_L075:
+pAIScripting0x0E_Town_Actor0D_Maria_IfEvent6Bit04:
     %AICMD0x28_ClearBit(strcFlags.unknown1, $06)                        ;B3F55A
     %AICMD0x10_End()                                           ;B3F55F
 ; Child script (slot $0E) of Town: actor. Spawns at (200,296). Waits for the player to press A. Dialogs $0224, $0225, $0226,
 ; $0227, $0200, $01DA ....
 pAIScripting0x0E_Town_Actor0E_Ann:
-    %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $01, pAIScripting0x0E_L077)   ;B3F560
+    %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $01, pAIScripting0x0E_Town_Actor0E_Ann_IfEvent2Bit01)   ;B3F560
     %AICMD0x1A_SpawnNpc($00C8, $0128, aAIScriptingData_L015, $02)                     ;B3F567
     %AICMD0x12_Jump(pAIScripting0x0E_Town_Actor0E_Ann_WaitInteract)                                   ;B3F56F
-pAIScripting0x0E_L077:
-    %AICMD0x14_JumpIfFlagSet(strcFlags.event6, $04, pAIScripting0x0E_L091)   ;B3F572
+pAIScripting0x0E_Town_Actor0E_Ann_IfEvent2Bit01:
+    %AICMD0x14_JumpIfFlagSet(strcFlags.event6, $04, pAIScripting0x0E_Town_Actor0E_Ann_IfEvent6Bit04)   ;B3F572
     %AICMD0x1A_SpawnNpc($00C8, $0128, aAIScriptingData_L071, $00)                     ;B3F579
 ; Idle until the player presses A at the NPC (AICMD0x2D): jumps to OnInteract, or to OnItemOffered while an item is carried.
 pAIScripting0x0E_Town_Actor0E_Ann_WaitInteract:
@@ -483,17 +483,17 @@ pAIScripting0x0E_Town_Actor0E_Ann_OnInteract_2:
     %AICMD0x28_ClearBit(strcFlags.unknown1, $07)                        ;B3F64D
     %AICMD0x1C_ShowDialog($0362, $00)                          ;B3F652
     %AICMD0x12_Jump(pAIScripting0x0E_Town_Actor0E_Ann_WaitInteract_2)                                   ;B3F656
-pAIScripting0x0E_L091:
+pAIScripting0x0E_Town_Actor0E_Ann_IfEvent6Bit04:
     %AICMD0x28_ClearBit(strcFlags.unknown1, $07)                        ;B3F659
     %AICMD0x10_End()                                           ;B3F65E
 ; Child script (slot $0F) of Town: actor. Spawns at (232,136). Waits for the player to press A. Dialogs $0228, $0229, $022A,
 ; $022B, $026D, $0212.
 pAIScripting0x0E_Town_Actor0F_Nina:
-    %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $02, pAIScripting0x0E_L093)   ;B3F65F
+    %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $02, pAIScripting0x0E_Town_Actor0F_Nina_IfEvent2Bit02)   ;B3F65F
     %AICMD0x1A_SpawnNpc($00E8, $0088, aAIScriptingData_L019, $00)                     ;B3F666
     %AICMD0x12_Jump(pAIScripting0x0E_Town_Actor0F_Nina_WaitInteract)                                   ;B3F66E
-pAIScripting0x0E_L093:
-    %AICMD0x14_JumpIfFlagSet(strcFlags.event6, $04, pAIScripting0x0E_L108)   ;B3F671
+pAIScripting0x0E_Town_Actor0F_Nina_IfEvent2Bit02:
+    %AICMD0x14_JumpIfFlagSet(strcFlags.event6, $04, pAIScripting0x0E_Town_Actor0F_Nina_IfEvent6Bit04)   ;B3F671
     %AICMD0x1A_SpawnNpc($00E8, $0088, aAIScriptingData_L071, $00)                     ;B3F678
 ; Idle until the player presses A at the NPC (AICMD0x2D): jumps to OnInteract, or to OnItemOffered while an item is carried.
 pAIScripting0x0E_Town_Actor0F_Nina_WaitInteract:
@@ -569,17 +569,17 @@ pAIScripting0x0E_Town_Actor0F_Nina_Say_0212_3:
     %AICMD0x1C_ShowDialog($0212, $00)                          ;B3F75B
     %AICMD0x41_AddValue16(nLove_Nina, 8)                       ;B3F75F
     %AICMD0x12_Jump(pAIScripting0x0E_Town_Actor0F_Nina_WaitInteract)                                   ;B3F765
-pAIScripting0x0E_L108:
+pAIScripting0x0E_Town_Actor0F_Nina_IfEvent6Bit04:
     %AICMD0x28_ClearBit(strcFlags.unknown1, $08)                        ;B3F768
     %AICMD0x10_End()                                           ;B3F76D
 ; Child script (slot $10) of Town: actor. Spawns at (312,328). Waits for the player to press A. Dialogs $022C, $022D, $022E,
 ; $022F, $0200, $0212 ....
 pAIScripting0x0E_Town_Actor10_Ellen:
-    %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $03, pAIScripting0x0E_L110)   ;B3F76E
+    %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $03, pAIScripting0x0E_Town_Actor10_Ellen_IfEvent2Bit03)   ;B3F76E
     %AICMD0x1A_SpawnNpc($0138, $0148, aAIScriptingData_L021, $03)                     ;B3F775
     %AICMD0x12_Jump(pAIScripting0x0E_Town_Actor10_Ellen_WaitInteract)                                   ;B3F77D
-pAIScripting0x0E_L110:
-    %AICMD0x14_JumpIfFlagSet(strcFlags.event6, $04, pAIScripting0x0E_L125)   ;B3F780
+pAIScripting0x0E_Town_Actor10_Ellen_IfEvent2Bit03:
+    %AICMD0x14_JumpIfFlagSet(strcFlags.event6, $04, pAIScripting0x0E_Town_Actor10_Ellen_IfEvent6Bit04)   ;B3F780
     %AICMD0x1A_SpawnNpc($0138, $0148, aAIScriptingData_L071, $03)                     ;B3F787
 ; Idle until the player presses A at the NPC (AICMD0x2D): jumps to OnInteract, or to OnItemOffered while an item is carried.
 pAIScripting0x0E_Town_Actor10_Ellen_WaitInteract:
@@ -656,17 +656,17 @@ pAIScripting0x0E_Town_Actor10_Ellen_OnInteract_3:
     %AICMD0x28_ClearBit(strcFlags.unknown1, $09)                        ;B3F86F
     %AICMD0x1C_ShowDialog($0364, $00)                          ;B3F874
     %AICMD0x12_Jump(pAIScripting0x0E_Town_Actor10_Ellen_WaitInteract_2)                                   ;B3F878
-pAIScripting0x0E_L125:
+pAIScripting0x0E_Town_Actor10_Ellen_IfEvent6Bit04:
     %AICMD0x28_ClearBit(strcFlags.unknown1, $09)                        ;B3F87B
     %AICMD0x10_End()                                           ;B3F880
 ; Child script (slot $11) of Town: actor. Spawns at (280,344). Waits for the player to press A. Dialogs $0230, $0231, $0232,
 ; $0233, $0212, $01DA ....
 pAIScripting0x0E_Town_Actor11_Eve:
-    %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $04, pAIScripting0x0E_L127)   ;B3F881
+    %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $04, pAIScripting0x0E_Town_Actor11_Eve_IfEvent2Bit04)   ;B3F881
     %AICMD0x1A_SpawnNpc($0118, $0158, aAIScriptingData_L024, $00)                     ;B3F888
     %AICMD0x12_Jump(pAIScripting0x0E_Town_Actor11_Eve_WaitInteract)                                   ;B3F890
-pAIScripting0x0E_L127:
-    %AICMD0x14_JumpIfFlagSet(strcFlags.event6, $04, pAIScripting0x0E_L142)   ;B3F893
+pAIScripting0x0E_Town_Actor11_Eve_IfEvent2Bit04:
+    %AICMD0x14_JumpIfFlagSet(strcFlags.event6, $04, pAIScripting0x0E_Town_Actor11_Eve_IfEvent6Bit04)   ;B3F893
     %AICMD0x1A_SpawnNpc($0118, $0158, aAIScriptingData_L071, $00)                     ;B3F89A
 ; Idle until the player presses A at the NPC (AICMD0x2D): jumps to OnInteract, or to OnItemOffered while an item is carried.
 pAIScripting0x0E_Town_Actor11_Eve_WaitInteract:
@@ -741,7 +741,7 @@ pAIScripting0x0E_Town_Actor11_Eve_OnInteract_3:
     %AICMD0x28_ClearBit(strcFlags.unknown1, $0A)                        ;B3F978
     %AICMD0x1C_ShowDialog($0365, $00)                          ;B3F97D
     %AICMD0x12_Jump(pAIScripting0x0E_Town_Actor11_Eve_WaitInteract_2)                                   ;B3F981
-pAIScripting0x0E_L142:
+pAIScripting0x0E_Town_Actor11_Eve_IfEvent6Bit04:
     %AICMD0x28_ClearBit(strcFlags.unknown1, $0A)                        ;B3F984
     %AICMD0x10_End()                                           ;B3F989
 ; Child script (slot $0B) of Town: actor. Spawns at (88,232). Waits for the player to talk. Dialogs $0234, $0235, $0236.
@@ -1096,11 +1096,11 @@ pAIScripting0x0E_FlowerFestivalDance:
     %AICMD0x09_StartScript($05, pAIScripting0x0E_FlowerFestivalDance_Actor05)                                   ;B3FDFD
     %AICMD0x09_StartScript($06, pAIScripting0x0E_FlowerFestivalDance_Actor06)                                   ;B3FE01
     %AICMD0x09_StartScript($08, pAIScripting0x0E_FlowerFestivalDance_Actor08)                                   ;B3FE05
-    %AICMD0x14_JumpIfFlagSet(strcFlags.unknown1, $00, pAIScripting0x0E_L001) ;B3FE09
-    %AICMD0x14_JumpIfFlagSet(strcFlags.unknown1, $01, pAIScripting0x0E_L002) ;B3FE10
-    %AICMD0x14_JumpIfFlagSet(strcFlags.unknown1, $02, pAIScripting0x0E_L003) ;B3FE17
-    %AICMD0x14_JumpIfFlagSet(strcFlags.unknown1, $03, pAIScripting0x0E_L004) ;B3FE1E
-    %AICMD0x14_JumpIfFlagSet(strcFlags.unknown1, $04, pAIScripting0x0E_L005) ;B3FE25
+    %AICMD0x14_JumpIfFlagSet(strcFlags.unknown1, $00, pAIScripting0x0E_Town_IfUnknown1Bit00) ;B3FE09
+    %AICMD0x14_JumpIfFlagSet(strcFlags.unknown1, $01, pAIScripting0x0E_Town_IfUnknown1Bit01) ;B3FE10
+    %AICMD0x14_JumpIfFlagSet(strcFlags.unknown1, $02, pAIScripting0x0E_Town_IfUnknown1Bit02) ;B3FE17
+    %AICMD0x14_JumpIfFlagSet(strcFlags.unknown1, $03, pAIScripting0x0E_Town_IfUnknown1Bit03) ;B3FE1E
+    %AICMD0x14_JumpIfFlagSet(strcFlags.unknown1, $04, pAIScripting0x0E_Town_IfUnknown1Bit04) ;B3FE25
 pAIScripting0x0E_L173:
     %AICMD0x06_SetDestinationArea(!AREA_DANCINGS1)             ;B3FE2C
     %AICMD0x38_WaitForFadeIn()                                               ;B3FE2E

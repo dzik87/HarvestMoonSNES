@@ -31,9 +31,9 @@ pAIScripting0x05_Bar_Idle:
     %AICMD0x13_Wait(1)                                         ;B3CCB5
     %AICMD0x12_Jump(pAIScripting0x05_Bar_Idle)                                   ;B3CCB8
 pAIScripting0x05_L002:
-    %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $03, pAIScripting0x05_L003)   ;B3CCBB
+    %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $03, pAIScripting0x05_Bar_IfEvent2Bit03)   ;B3CCBB
     %AICMD0x09_StartScript($09, pAIScripting0x05_Bar_Actor09_Ellen)                                   ;B3CCC2
-pAIScripting0x05_L003:
+pAIScripting0x05_Bar_IfEvent2Bit03:
     %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $04, pAIScripting0x05_L004)   ;B3CCC6
     %AICMD0x14_JumpIfFlagSet(strcFlags.event5, $04, pAIScripting0x05_L004)   ;B3CCCD
     %AICMD0x09_StartScript($0A, pAIScripting0x05_Bar_Actor0A_Eve)                                   ;B3CCD4
@@ -63,7 +63,7 @@ pAIScripting0x05_Bar_Actor01_Say_03BB:
 ; Handler for A pressed with empty hands.
 pAIScripting0x05_Bar_Actor01_OnInteract:
     %AICMD0x14_JumpIfFlagSet(strcFlags.event5, $04, pAIScripting0x05_Bar_Actor01_Say_01FB)   ;B3CD0B
-    %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 3, pAIScripting0x05_L014)     ;B3CD12
+    %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 3, pAIScripting0x05_Bar_Actor01_IfCurrentSeasonIDIs3)     ;B3CD12
     %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $04, pAIScripting0x05_Bar_Actor01_Say_03DE)   ;B3CD19
     %AICMD0x17_RollRandom($02)                                            ;B3CD20
     %AICMD0x18_JumpIfRandomEquals($00, pAIScripting0x05_Bar_Actor01_Say_0069)                                   ;B3CD22
@@ -84,7 +84,7 @@ pAIScripting0x05_Bar_Actor01_Say_03DE:
     %AICMD0x1C_ShowDialog($03DE, $00)                          ;B3CD43
     %AICMD0x1B_SetSprite($0285, $00)                                     ;B3CD47
     %AICMD0x12_Jump(pAIScripting0x05_L006)                                   ;B3CD4B
-pAIScripting0x05_L014:
+pAIScripting0x05_Bar_Actor01_IfCurrentSeasonIDIs3:
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 30, pAIScripting0x05_Bar_Actor01_Say_03F6)         ;B3CD4E
     %AICMD0x1C_ShowDialog($0069, $00)                          ;B3CD55
     %AICMD0x1B_SetSprite($0285, $00)                                     ;B3CD59
@@ -113,10 +113,10 @@ pAIScripting0x05_Bar_Actor02_OnItemOffered:
     %AICMD0x12_Jump(pAIScripting0x05_Bar_Actor02_WaitInteract)                                   ;B3CD90
 ; Handler for A pressed with empty hands.
 pAIScripting0x05_Bar_Actor02_OnInteract:
-    %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 3, pAIScripting0x05_L021)     ;B3CD93
+    %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 3, pAIScripting0x05_Bar_Actor02_IfCurrentSeasonIDIs3)     ;B3CD93
     %AICMD0x1C_ShowDialog($0056, $00)                          ;B3CD9A
     %AICMD0x12_Jump(pAIScripting0x05_Bar_Actor02_WaitInteract)                                   ;B3CD9E
-pAIScripting0x05_L021:
+pAIScripting0x05_Bar_Actor02_IfCurrentSeasonIDIs3:
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 30, pAIScripting0x05_Bar_Actor02_Say_03FD)         ;B3CDA1
     %AICMD0x1C_ShowDialog($0056, $00)                          ;B3CDA8
     %AICMD0x12_Jump(pAIScripting0x05_Bar_Actor02_WaitInteract)                                   ;B3CDAC
@@ -223,7 +223,7 @@ pAIScripting0x05_Bar_Actor05_Say_0049:
 ; Handler for A pressed with empty hands.
 pAIScripting0x05_Bar_Actor05_OnInteract:
     %AICMD0x14_JumpIfFlagSet(strcFlags.event5, $04, pAIScripting0x05_Bar_Actor05_Say_013E)   ;B3CED6
-    %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 3, pAIScripting0x05_L042)     ;B3CEDD
+    %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 3, pAIScripting0x05_Bar_Actor05_IfCurrentSeasonIDIs3)     ;B3CEDD
     %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $00, pAIScripting0x05_Bar_Actor05_Say_03E1)   ;B3CEE4
     %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $01, pAIScripting0x05_Bar_Actor05_Say_03E1)   ;B3CEEB
     %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $02, pAIScripting0x05_Bar_Actor05_Say_03E1)   ;B3CEF2
@@ -232,7 +232,7 @@ pAIScripting0x05_Bar_Actor05_OnInteract:
     %AICMD0x1C_ShowDialog($0045, $00)                          ;B3CF07
     %AICMD0x1B_SetSprite($0296, $00)                                     ;B3CF0B
     %AICMD0x12_Jump(pAIScripting0x05_Bar_Actor05_WaitInteract)                                   ;B3CF0F
-pAIScripting0x05_L042:
+pAIScripting0x05_Bar_Actor05_IfCurrentSeasonIDIs3:
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 30, pAIScripting0x05_Bar_Actor05_Say_03FE)         ;B3CF12
     %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $00, pAIScripting0x05_Bar_Actor05_Say_03E1)   ;B3CF19
     %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $01, pAIScripting0x05_Bar_Actor05_Say_03E1)   ;B3CF20
@@ -284,7 +284,7 @@ pAIScripting0x05_Bar_Actor06_Say_03BB:
 pAIScripting0x05_Bar_Actor06_OnInteract:
     %AICMD0x14_JumpIfFlagSet(strcFlags.event5, $02, pAIScripting0x05_Bar_Actor06_Say_01F0)   ;B3CFA5
     %AICMD0x14_JumpIfFlagSet(strcFlags.event5, $04, pAIScripting0x05_Bar_Actor06_Say_013E)   ;B3CFAC
-    %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 3, pAIScripting0x05_L052)     ;B3CFB3
+    %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 3, pAIScripting0x05_Bar_Actor06_IfCurrentSeasonIDIs3)     ;B3CFB3
     %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $00, pAIScripting0x05_Bar_Actor06_Say_03D8)   ;B3CFBA
     %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $01, pAIScripting0x05_Bar_Actor06_Say_03D8)   ;B3CFC1
     %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $02, pAIScripting0x05_Bar_Actor06_Say_03D8)   ;B3CFC8
@@ -293,7 +293,7 @@ pAIScripting0x05_Bar_Actor06_OnInteract:
     %AICMD0x1C_ShowDialog($005F, $00)                          ;B3CFDD
     %AICMD0x1B_SetSprite($02AB, $00)                                     ;B3CFE1
     %AICMD0x12_Jump(pAIScripting0x05_Bar_Actor06_WaitInteract)                                   ;B3CFE5
-pAIScripting0x05_L052:
+pAIScripting0x05_Bar_Actor06_IfCurrentSeasonIDIs3:
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 30, pAIScripting0x05_Bar_Actor06_Say_0146)         ;B3CFE8
     %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $00, pAIScripting0x05_Bar_Actor06_Say_03D8)   ;B3CFEF
     %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $01, pAIScripting0x05_Bar_Actor06_Say_03D8)   ;B3CFF6
@@ -328,7 +328,7 @@ pAIScripting0x05_L057:
 ; Child script (slot $07) of Bar: actor. Spawns at (136,368). Waits for the player to press A. Dialogs $03BC, $03BB, $006F,
 ; $006E, $0070, $03EC ....
 pAIScripting0x05_Bar_Actor07:
-    %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 1, pAIScripting0x05_L068)     ;B3D04A
+    %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 1, pAIScripting0x05_Bar_Actor07_IfCurrentSeasonIDIs1)     ;B3D04A
     %AICMD0x1A_SpawnNpc($0088, $0170, aAIScriptingData_L035, $00)                     ;B3D051
 ; Idle until the player presses A at the NPC (AICMD0x2D): jumps to OnInteract, or to OnItemOffered while an item is carried.
 pAIScripting0x05_Bar_Actor07_WaitInteract:
@@ -384,12 +384,12 @@ pAIScripting0x05_Bar_Actor07_Say_013E:
     %AICMD0x1C_ShowDialog($013E, $00)                          ;B3D0FE
     %AICMD0x1B_SetSprite($0270, $00)                                     ;B3D102
     %AICMD0x12_Jump(pAIScripting0x05_Bar_Actor07_WaitInteract)                                   ;B3D106
-pAIScripting0x05_L068:
+pAIScripting0x05_Bar_Actor07_IfCurrentSeasonIDIs1:
     %AICMD0x10_End()                                           ;B3D109
 ; Child script (slot $08) of Bar: actor. Spawns at (216,440). Waits for the player to press A. Dialogs $0200, $0049, $0071,
 ; $0072, $0073, $03FF ....
 pAIScripting0x05_Bar_Actor08:
-    %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 1, pAIScripting0x05_L080)     ;B3D10A
+    %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 1, pAIScripting0x05_Bar_Actor08_IfCurrentSeasonIDIs1)     ;B3D10A
     %AICMD0x1A_SpawnNpc($00D8, $01B8, aAIScriptingData_L037, $00)                     ;B3D111
 ; Idle until the player presses A at the NPC (AICMD0x2D): jumps to OnInteract, or to OnItemOffered while an item is carried.
 pAIScripting0x05_Bar_Actor08_WaitInteract:
@@ -412,7 +412,7 @@ pAIScripting0x05_Bar_Actor08_OnInteract:
     %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $03, pAIScripting0x05_L079)   ;B3D14C
     %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $04, pAIScripting0x05_L079)   ;B3D153
     %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 3, pAIScripting0x05_L077)     ;B3D15A
-pAIScripting0x05_L074:
+pAIScripting0x05_Bar_Actor08_Random00:
     %AICMD0x17_RollRandom($02)                                            ;B3D161
     %AICMD0x18_JumpIfRandomEquals($00, pAIScripting0x05_Bar_Actor08_Say_0071)                                   ;B3D163
     %AICMD0x18_JumpIfRandomEquals($01, pAIScripting0x05_Bar_Actor08_Say_0072)                                   ;B3D167
@@ -438,10 +438,10 @@ pAIScripting0x05_Bar_Actor08_Say_03FF:
 pAIScripting0x05_L079:
     %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 3, pAIScripting0x05_L077)     ;B3D19B
     %AICMD0x17_RollRandom($02)                                            ;B3D1A2
-    %AICMD0x18_JumpIfRandomEquals($00, pAIScripting0x05_L074)                                   ;B3D1A4
+    %AICMD0x18_JumpIfRandomEquals($00, pAIScripting0x05_Bar_Actor08_Random00)                                   ;B3D1A4
     %AICMD0x1C_ShowDialog($03E4, $00)                          ;B3D1A8
     %AICMD0x12_Jump(pAIScripting0x05_Bar_Actor08_WaitInteract)                                   ;B3D1AC
-pAIScripting0x05_L080:
+pAIScripting0x05_Bar_Actor08_IfCurrentSeasonIDIs1:
     %AICMD0x10_End()                                           ;B3D1AF
 ; Child script (slot $09) of Bar: actor. Spawns at (88,416). Waits for the player to press A. Dialogs $0440, $017A, $0200,
 ; $00D6, $00D7.
@@ -486,7 +486,7 @@ pAIScripting0x05_L089:
 ; Child script (slot $0A) of Bar: actor. Spawns at (56,448). Walks randomly. Waits for the player to talk. Waits for the
 ; player to press A. Dialogs $0441, $017C, $0200, $03B4, $03B2, $0212 ....
 pAIScripting0x05_Bar_Actor0A_Eve:
-    %AICMD0x14_JumpIfFlagSet(strcFlags.event5, $04, pAIScripting0x05_L126)   ;B3D213
+    %AICMD0x14_JumpIfFlagSet(strcFlags.event5, $04, pAIScripting0x05_Bar_Actor0A_Eve_IfEvent5Bit04)   ;B3D213
     %AICMD0x1A_SpawnNpc($0038, $01C0, aAIScriptingData_L024, $00)                     ;B3D21A
     %AICMD0x22_StartRandomWalk($18, $08, $01, aAIScriptingData_L025, $08)                    ;B3D222
 pAIScripting0x05_L091:
@@ -547,12 +547,12 @@ pAIScripting0x05_Bar_Actor0A_Eve_OnInteract:
     %AICMD0x45_JumpIfBetween16(nLove_Eve, 120, 149, pAIScripting0x05_Bar_Actor0A_Eve_Say_00EE)   ;B3D2D4
     %AICMD0x45_JumpIfBetween16(nLove_Eve, 150, 200, pAIScripting0x05_Bar_Actor0A_Eve_Say_00EF)   ;B3D2DE
     %AICMD0x14_JumpIfFlagSet($800196, $03, pAIScripting0x05_L125)            ;B3D2E8
-    %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 0, pAIScripting0x05_L102)     ;B3D2EF
-    %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 1, pAIScripting0x05_L108)     ;B3D2F6
-    %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 2, pAIScripting0x05_L111)     ;B3D2FD
-    %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 3, pAIScripting0x05_L115)     ;B3D304
+    %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 0, pAIScripting0x05_Bar_Actor0A_Eve_IfCurrentSeasonIDIs0)     ;B3D2EF
+    %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 1, pAIScripting0x05_Bar_Actor0A_Eve_IfCurrentSeasonIDIs1)     ;B3D2F6
+    %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 2, pAIScripting0x05_Bar_Actor0A_Eve_IfCurrentSeasonIDIs2)     ;B3D2FD
+    %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 3, pAIScripting0x05_Bar_Actor0A_Eve_IfCurrentSeasonIDIs3)     ;B3D304
     %AICMD0x12_Jump(pAIScripting0x05_L091)                                   ;B3D30B
-pAIScripting0x05_L102:
+pAIScripting0x05_Bar_Actor0A_Eve_IfCurrentSeasonIDIs0:
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 22, pAIScripting0x05_Bar_Actor0A_Eve_Say_020A)         ;B3D30E
     %AICMD0x14_JumpIfFlagSet($800196, $01, pAIScripting0x05_Bar_Actor0A_Eve_Say_00E0)            ;B3D315
     %AICMD0x17_RollRandom($02)                                            ;B3D31C
@@ -584,7 +584,7 @@ pAIScripting0x05_Bar_Actor0A_Eve_Say_00E8:
 pAIScripting0x05_Bar_Actor0A_Eve_Say_020A:
     %AICMD0x1C_ShowDialog($020A, $00)                          ;B3D35F
     %AICMD0x12_Jump(pAIScripting0x05_L091)                                   ;B3D363
-pAIScripting0x05_L108:
+pAIScripting0x05_Bar_Actor0A_Eve_IfCurrentSeasonIDIs1:
     %AICMD0x17_RollRandom($02)                                            ;B3D366
     %AICMD0x18_JumpIfRandomEquals($00, pAIScripting0x05_Bar_Actor0A_Eve_Say_00E9)                                   ;B3D368
     %AICMD0x18_JumpIfRandomEquals($01, pAIScripting0x05_Bar_Actor0A_Eve_Say_00EA)                                   ;B3D36C
@@ -597,7 +597,7 @@ pAIScripting0x05_Bar_Actor0A_Eve_Say_00E9:
 pAIScripting0x05_Bar_Actor0A_Eve_Say_00EA:
     %AICMD0x1C_ShowDialog($00EA, $00)                          ;B3D37A
     %AICMD0x12_Jump(pAIScripting0x05_L091)                                   ;B3D37E
-pAIScripting0x05_L111:
+pAIScripting0x05_Bar_Actor0A_Eve_IfCurrentSeasonIDIs2:
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 11, pAIScripting0x05_Bar_Actor0A_Eve_Say_023C)         ;B3D381
     %AICMD0x14_JumpIfFlagSet($800196, $01, pAIScripting0x05_Bar_Actor0A_Eve_Say_00E0)            ;B3D388
     %AICMD0x17_RollRandom($02)                                            ;B3D38F
@@ -616,7 +616,7 @@ pAIScripting0x05_Bar_Actor0A_Eve_Say_00EC:
 pAIScripting0x05_Bar_Actor0A_Eve_Say_023C:
     %AICMD0x1C_ShowDialog($023C, $00)                          ;B3D3AA
     %AICMD0x12_Jump(pAIScripting0x05_L091)                                   ;B3D3AE
-pAIScripting0x05_L115:
+pAIScripting0x05_Bar_Actor0A_Eve_IfCurrentSeasonIDIs3:
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 23, pAIScripting0x05_Bar_Actor0A_Eve_Say_02B3)         ;B3D3B1
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 30, pAIScripting0x05_Bar_Actor0A_Eve_Say_03FC)         ;B3D3B8
     %AICMD0x1C_ShowDialog($00ED, $00)                          ;B3D3BF
@@ -670,5 +670,5 @@ pAIScripting0x05_L125:
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 30, pAIScripting0x05_Bar_Actor0A_Eve_Say_03FC)         ;B3D438
     %AICMD0x1C_ShowDialog($039E, $00)                          ;B3D43F
     %AICMD0x12_Jump(pAIScripting0x05_L091)                                   ;B3D443
-pAIScripting0x05_L126:
+pAIScripting0x05_Bar_Actor0A_Eve_IfEvent5Bit04:
     %AICMD0x10_End()                                           ;B3D446

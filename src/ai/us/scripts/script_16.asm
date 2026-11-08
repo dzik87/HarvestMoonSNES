@@ -30,7 +30,7 @@ pAIScripting0x16_Farm_Actor01:
     %AICMD0x1A_SpawnNpc($0078, $01A8, aAIScriptingData_L027, $02)                     ;B48D6B
     %AICMD0x0C_WaitForScriptFlag($00)                                            ;B48D73
     %AICMD0x1D_ShowDialog($0321, $00)                          ;B48D75
-    %AICMD0x20_JumpIfChoice(0, pAIScripting0x16_L003)                        ;B48D79
+    %AICMD0x20_JumpIfChoice(0, pAIScripting0x16_Farm_Actor01_Choice0)                        ;B48D79
     %AICMD0x20_JumpIfChoice(1, pAIScripting0x16_Farm_Actor01_Say_0323)                        ;B48D7D
     %AICMD0x12_Jump(pAIScripting0x16_L002)                                   ;B48D81
 pAIScripting0x16_L002:
@@ -38,7 +38,7 @@ pAIScripting0x16_L002:
     %AICMD0x0D_MoveObject($FF, $00, $90, $01)                             ;B48D88
     %AICMD0x0B_SetScriptFlag($01)                                            ;B48D8D
     %AICMD0x10_End()                                           ;B48D8F
-pAIScripting0x16_L003:
+pAIScripting0x16_Farm_Actor01_Choice0:
     %AICMD0x1B_SetSprite($025D, $00)                                     ;B48D90
     %AICMD0x0D_MoveObject($00, $FF, $30, $01)                             ;B48D94
     %AICMD0x1B_SetSprite($025F, $01)                                     ;B48D99
@@ -50,13 +50,13 @@ pAIScripting0x16_L003:
     %AICMD0x0D_MoveObject($00, $01, $30, $01)                             ;B48DB2
     %AICMD0x1B_SetSprite($025E, $01)                                     ;B48DB7
     %AICMD0x1C_ShowDialog($0322, $00)                          ;B48DBB
-    %AICMD0x15_JumpIfEquals8(wram80(strcPlayerData.toolEquipped), 3, pAIScripting0x16_L004)              ;B48DBF
-    %AICMD0x15_JumpIfEquals8(wram80(strcPlayerData.toolSecond), 3, pAIScripting0x16_L005)              ;B48DC6
+    %AICMD0x15_JumpIfEquals8(wram80(strcPlayerData.toolEquipped), 3, pAIScripting0x16_Farm_Actor01_IfToolEquippedIs3)              ;B48DBF
+    %AICMD0x15_JumpIfEquals8(wram80(strcPlayerData.toolSecond), 3, pAIScripting0x16_Farm_Actor01_IfToolSecondIs3)              ;B48DC6
     %AICMD0x12_Jump(pAIScripting0x16_L006)                                   ;B48DCD
-pAIScripting0x16_L004:
+pAIScripting0x16_Farm_Actor01_IfToolEquippedIs3:
     %AICMD0x47_SetValue8(wram80(strcPlayerData.toolEquipped), 0)                           ;B48DD0
     %AICMD0x12_Jump(pAIScripting0x16_L006)                                   ;B48DD5
-pAIScripting0x16_L005:
+pAIScripting0x16_Farm_Actor01_IfToolSecondIs3:
     %AICMD0x47_SetValue8(wram80(strcPlayerData.toolSecond), 0)                           ;B48DD8
     %AICMD0x12_Jump(pAIScripting0x16_L006)                                   ;B48DDD
 pAIScripting0x16_L006:

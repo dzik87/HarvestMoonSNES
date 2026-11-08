@@ -20,15 +20,15 @@ pAIScripting0x18_Farm:
     %AICMD0x38_WaitForFadeIn()                                               ;B48EE9
     %AICMD0x10_End()                                           ;B48EEA
 pAIScripting0x18_L001:
-    %AICMD0x15_JumpIfEquals8(nCurrentTimeID, 18, pAIScripting0x18_L002)      ;B48EEB
+    %AICMD0x15_JumpIfEquals8(nCurrentTimeID, 18, pAIScripting0x18_Farm_IfCurrentTimeIDIs18)      ;B48EEB
     %AICMD0x13_Wait(1)                                         ;B48EF2
     %AICMD0x12_Jump(pAIScripting0x18_L001)                                   ;B48EF5
-pAIScripting0x18_L002:
+pAIScripting0x18_Farm_IfCurrentTimeIDIs18:
     %AICMD0x10_End()                                           ;B48EF8
 ; Child script (slot $01) of Farm: actor. Spawns at (152,424). Waits for the player to press A. Dialogs $032B, $032F, $032D,
 ; $032E, $032C.
 pAIScripting0x18_Farm_Actor01:
-    %AICMD0x15_JumpIfEquals8(nCurrentTimeID, 18, pAIScripting0x18_L012)      ;B48EF9
+    %AICMD0x15_JumpIfEquals8(nCurrentTimeID, 18, pAIScripting0x18_Farm_Actor01_IfCurrentTimeIDIs18)      ;B48EF9
     %AICMD0x1A_SpawnNpc($0098, $01A8, aAIScriptingData_L082, $01)                     ;B48F00
 pAIScripting0x18_L004:
     %AICMD0x2D_JumpOnInteract(pAIScripting0x18_Farm_Actor01_OnInteract, pAIScripting0x18_Farm_Actor01_OnItemOffered)                               ;B48F08
@@ -44,11 +44,11 @@ pAIScripting0x18_Farm_Actor01_OnInteract:
     %AICMD0x12_Jump(pAIScripting0x18_L005)                                   ;B48F2C
 ; Handler for A pressed while carrying an item.
 pAIScripting0x18_Farm_Actor01_OnItemOffered:
-    %AICMD0x15_JumpIfEquals8(wram80(strcPlayerData.carryItemIdPrev), 1, pAIScripting0x18_L008)              ;B48F2F
+    %AICMD0x15_JumpIfEquals8(wram80(strcPlayerData.carryItemIdPrev), 1, pAIScripting0x18_Farm_Actor01_IfCarryItemIdPrevIs1)              ;B48F2F
     %AICMD0x15_JumpIfEquals8(wram80(strcPlayerData.carryItemIdPrev), 2, pAIScripting0x18_Farm_Actor01_Say_032E)              ;B48F36
     %AICMD0x1C_ShowDialog($032F, $00)                          ;B48F3D
     %AICMD0x12_Jump(pAIScripting0x18_L004)                                   ;B48F41
-pAIScripting0x18_L008:
+pAIScripting0x18_Farm_Actor01_IfCarryItemIdPrevIs1:
     %AICMD0x1B_SetSprite($0309, $01)                                     ;B48F44
     %AICMD0x1C_ShowDialog($032D, $00)                          ;B48F48
     %AICMD0x23_OrWithIndexedValue(strcFlags.event4, $08)       ;B48F4C
@@ -73,5 +73,5 @@ pAIScripting0x18_L011:
     %AICMD0x0D_MoveObject($02, $FE, $06, $01)                             ;B48F89
     %AICMD0x0D_MoveObject($02, $02, $04, $01)                             ;B48F8E
     %AICMD0x37_RemoveObject()                                               ;B48F93
-pAIScripting0x18_L012:
+pAIScripting0x18_Farm_Actor01_IfCurrentTimeIDIs18:
     %AICMD0x10_End()                                           ;B48F94

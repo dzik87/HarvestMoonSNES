@@ -54,13 +54,13 @@ pAIScripting0x15_ImpsUnderground_Actor01_Talk_0327:
 ; Shows dialog $0328.
 pAIScripting0x15_ImpsUnderground_Actor01_Say_0328:
     %AICMD0x1C_ShowDialog($0328, $00)                          ;B48C8F
-    %AICMD0x15_JumpIfEquals8(wram80(strcPlayerData.toolEquipped), 1, pAIScripting0x15_L007)              ;B48C93
-    %AICMD0x15_JumpIfEquals8(wram80(strcPlayerData.toolSecond), 1, pAIScripting0x15_L008)              ;B48C9A
+    %AICMD0x15_JumpIfEquals8(wram80(strcPlayerData.toolEquipped), 1, pAIScripting0x15_ImpsUnderground_Actor01_IfToolEquippedIs1)              ;B48C93
+    %AICMD0x15_JumpIfEquals8(wram80(strcPlayerData.toolSecond), 1, pAIScripting0x15_ImpsUnderground_Actor01_IfToolSecondIs1)              ;B48C9A
     %AICMD0x12_Jump(pAIScripting0x15_L009)                                   ;B48CA1
-pAIScripting0x15_L007:
+pAIScripting0x15_ImpsUnderground_Actor01_IfToolEquippedIs1:
     %AICMD0x47_SetValue8(wram80(strcPlayerData.toolEquipped), 0)                           ;B48CA4
     %AICMD0x12_Jump(pAIScripting0x15_L009)                                   ;B48CA9
-pAIScripting0x15_L008:
+pAIScripting0x15_ImpsUnderground_Actor01_IfToolSecondIs1:
     %AICMD0x47_SetValue8(wram80(strcPlayerData.toolSecond), 0)                           ;B48CAC
     %AICMD0x12_Jump(pAIScripting0x15_L009)                                   ;B48CB1
 pAIScripting0x15_L009:

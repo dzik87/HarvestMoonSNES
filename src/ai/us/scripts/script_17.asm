@@ -30,10 +30,10 @@ pAIScripting0x17_Data01_Actor01:
     %AICMD0x09_StartScript($02, pAIScripting0x17_Data01_Actor01_Actor02)                                   ;B48E44
     %AICMD0x13_Wait(30)                                        ;B48E48
     %AICMD0x1D_ShowDialog($031E, $00)                          ;B48E4B
-    %AICMD0x20_JumpIfChoice(0, pAIScripting0x17_L002)                        ;B48E4F
+    %AICMD0x20_JumpIfChoice(0, pAIScripting0x17_Data01_Actor01_Choice0)                        ;B48E4F
     %AICMD0x20_JumpIfChoice(1, pAIScripting0x17_Data01_Actor01_Say_0320)                        ;B48E53
     %AICMD0x12_Jump(pAIScripting0x17_L004)                                   ;B48E57
-pAIScripting0x17_L002:
+pAIScripting0x17_Data01_Actor01_Choice0:
     %AICMD0x25_RemoveActor($02)                                            ;B48E5A
     %AICMD0x09_StartScript($02, pAIScripting0x17_Data01_Actor01_Actor02_2)                                   ;B48E5C
     %AICMD0x1C_ShowDialog($031F, $00)                          ;B48E60

@@ -37,20 +37,20 @@ pAIScripting0x1E_Wedding:
     %AICMD0x09_StartScript($08, pAIScripting0x1E_Wedding_Actor08)                                   ;B496CE
     %AICMD0x09_StartScript($09, pAIScripting0x1E_Wedding_Actor09)                                   ;B496D2
     %AICMD0x09_StartScript($0A, pAIScripting0x1E_Wedding_Actor0A)                                   ;B496D6
-    %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 0, pAIScripting0x1E_L001)     ;B496DA
-    %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 1, pAIScripting0x1E_L002)     ;B496E1
-    %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 2, pAIScripting0x1E_L003)     ;B496E8
-    %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 3, pAIScripting0x1E_L004)     ;B496EF
-pAIScripting0x1E_L001:
+    %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 0, pAIScripting0x1E_Wedding_IfCurrentSeasonIDIs0)     ;B496DA
+    %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 1, pAIScripting0x1E_Wedding_IfCurrentSeasonIDIs1)     ;B496E1
+    %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 2, pAIScripting0x1E_Wedding_IfCurrentSeasonIDIs2)     ;B496E8
+    %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 3, pAIScripting0x1E_Wedding_IfCurrentSeasonIDIs3)     ;B496EF
+pAIScripting0x1E_Wedding_IfCurrentSeasonIDIs0:
     %AICMD0x06_SetDestinationArea(!AREA_TOWNSPRING)            ;B496F6
     %AICMD0x12_Jump(pAIScripting0x1E_L005)                                   ;B496F8
-pAIScripting0x1E_L002:
+pAIScripting0x1E_Wedding_IfCurrentSeasonIDIs1:
     %AICMD0x06_SetDestinationArea(!AREA_TOWNSUMMER)            ;B496FB
     %AICMD0x12_Jump(pAIScripting0x1E_L005)                                   ;B496FD
-pAIScripting0x1E_L003:
+pAIScripting0x1E_Wedding_IfCurrentSeasonIDIs2:
     %AICMD0x06_SetDestinationArea(!AREA_TOWNFALL)              ;B49700
     %AICMD0x12_Jump(pAIScripting0x1E_L005)                                   ;B49702
-pAIScripting0x1E_L004:
+pAIScripting0x1E_Wedding_IfCurrentSeasonIDIs3:
     %AICMD0x06_SetDestinationArea(!AREA_TOWNWINTER)            ;B49705
     %AICMD0x12_Jump(pAIScripting0x1E_L005)                                   ;B49707
 pAIScripting0x1E_L005:
@@ -101,12 +101,12 @@ pAIScripting0x1E_Wedding_Actor0A_Actor10:
     %AICMD0x10_End()                                           ;B4979B
 ; Child script (slot $01) of Wedding: actor. Spawns at (376,152).
 pAIScripting0x1E_Wedding_Actor01:
-    %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $00, pAIScripting0x1E_L009)   ;B4979C
-    %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $01, pAIScripting0x1E_L011)   ;B497A3
-    %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $02, pAIScripting0x1E_L013)   ;B497AA
-    %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $03, pAIScripting0x1E_L015)   ;B497B1
-    %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $04, pAIScripting0x1E_L017)   ;B497B8
-pAIScripting0x1E_L009:
+    %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $00, pAIScripting0x1E_Wedding_Actor01_IfEvent2Bit00)   ;B4979C
+    %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $01, pAIScripting0x1E_Wedding_Actor01_IfEvent2Bit01)   ;B497A3
+    %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $02, pAIScripting0x1E_Wedding_Actor01_IfEvent2Bit02)   ;B497AA
+    %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $03, pAIScripting0x1E_Wedding_Actor01_IfEvent2Bit03)   ;B497B1
+    %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $04, pAIScripting0x1E_Wedding_Actor01_IfEvent2Bit04)   ;B497B8
+pAIScripting0x1E_Wedding_Actor01_IfEvent2Bit00:
     %AICMD0x1A_SpawnNpc($0178, $0098, aAIScriptingData_L108, $00)                     ;B497BF
     %AICMD0x13_Wait(180)                                       ;B497C7
     %AICMD0x1B_SetSprite($0331, $00)                                     ;B497CA
@@ -126,7 +126,7 @@ pAIScripting0x1E_L009:
 pAIScripting0x1E_Wedding_Actor01_Idle:
     %AICMD0x13_Wait(1)                                         ;B497FA
     %AICMD0x12_Jump(pAIScripting0x1E_Wedding_Actor01_Idle)                                   ;B497FD
-pAIScripting0x1E_L011:
+pAIScripting0x1E_Wedding_Actor01_IfEvent2Bit01:
     %AICMD0x1A_SpawnNpc($0178, $0098, aAIScriptingData_L109, $00)                     ;B49800
     %AICMD0x1B_SetSprite($0335, $00)                                     ;B49808
     %AICMD0x13_Wait(180)                                       ;B4980C
@@ -146,7 +146,7 @@ pAIScripting0x1E_L011:
 pAIScripting0x1E_Wedding_Actor01_Idle_2:
     %AICMD0x13_Wait(1)                                         ;B4983B
     %AICMD0x12_Jump(pAIScripting0x1E_Wedding_Actor01_Idle_2)                                   ;B4983E
-pAIScripting0x1E_L013:
+pAIScripting0x1E_Wedding_Actor01_IfEvent2Bit02:
     %AICMD0x1A_SpawnNpc($0178, $0098, aAIScriptingData_L110, $00)                     ;B49841
     %AICMD0x1B_SetSprite($0341, $00)                                     ;B49849
     %AICMD0x13_Wait(180)                                       ;B4984D
@@ -166,7 +166,7 @@ pAIScripting0x1E_L013:
 pAIScripting0x1E_Wedding_Actor01_Idle_3:
     %AICMD0x13_Wait(1)                                         ;B4987C
     %AICMD0x12_Jump(pAIScripting0x1E_Wedding_Actor01_Idle_3)                                   ;B4987F
-pAIScripting0x1E_L015:
+pAIScripting0x1E_Wedding_Actor01_IfEvent2Bit03:
     %AICMD0x1A_SpawnNpc($0178, $0098, aAIScriptingData_L111, $00)                     ;B49882
     %AICMD0x1B_SetSprite($0339, $00)                                     ;B4988A
     %AICMD0x13_Wait(180)                                       ;B4988E
@@ -186,7 +186,7 @@ pAIScripting0x1E_L015:
 pAIScripting0x1E_Wedding_Actor01_Idle_4:
     %AICMD0x13_Wait(1)                                         ;B498BD
     %AICMD0x12_Jump(pAIScripting0x1E_Wedding_Actor01_Idle_4)                                   ;B498C0
-pAIScripting0x1E_L017:
+pAIScripting0x1E_Wedding_Actor01_IfEvent2Bit04:
     %AICMD0x1A_SpawnNpc($0178, $0098, aAIScriptingData_L112, $00)                     ;B498C3
     %AICMD0x1B_SetSprite($033D, $00)                                     ;B498CB
     %AICMD0x13_Wait(180)                                       ;B498CF

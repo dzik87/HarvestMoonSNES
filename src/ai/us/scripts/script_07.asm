@@ -321,9 +321,9 @@ pAIScripting0x07_Toolshop_Idle:
     %AICMD0x13_Wait(1)                                         ;B3DCD9
     %AICMD0x12_Jump(pAIScripting0x07_Toolshop_Idle)                                   ;B3DCDC
 pAIScripting0x07_L060:
-    %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $01, pAIScripting0x07_L061)   ;B3DCDF
+    %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $01, pAIScripting0x07_Toolshop_IfEvent2Bit01)   ;B3DCDF
     %AICMD0x09_StartScript($02, pAIScripting0x07_Toolshop_Actor02_Ann)                                   ;B3DCE6
-pAIScripting0x07_L061:
+pAIScripting0x07_Toolshop_IfEvent2Bit01:
     %AICMD0x12_Jump(pAIScripting0x07_Toolshop_Idle)                                   ;B3DCEA
 ; Child script (slot $01) of Toolshop: actor. Spawns at (40,360). Waits for the player to press A. Dialogs $0200, $01CA,
 ; $0079, $01DC, $03EE.
@@ -427,9 +427,9 @@ pAIScripting0x07_Restaurant_Idle:
     %AICMD0x13_Wait(1)                                         ;B3DDE5
     %AICMD0x12_Jump(pAIScripting0x07_Restaurant_Idle)                                   ;B3DDE8
 pAIScripting0x07_L080:
-    %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $03, pAIScripting0x07_L081)   ;B3DDEB
+    %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $03, pAIScripting0x07_Restaurant_IfEvent2Bit03)   ;B3DDEB
     %AICMD0x09_StartScript($02, pAIScripting0x07_Restaurant_Actor02_Ellen)                                   ;B3DDF2
-pAIScripting0x07_L081:
+pAIScripting0x07_Restaurant_IfEvent2Bit03:
     %AICMD0x12_Jump(pAIScripting0x07_Restaurant_Idle)                                   ;B3DDF6
 ; Child script (slot $03) of Restaurant: actor. Spawns at (135,151).
 pAIScripting0x07_Restaurant_Actor03:

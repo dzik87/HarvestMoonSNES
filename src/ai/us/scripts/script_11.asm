@@ -21,9 +21,9 @@ pAIScripting0x11_Data01:
     %AICMD0x39_WalkForTime(!AIINPUT_DOWN, 80)                  ;B4883E
     %AICMD0x07_SetPlayerDirection(!PDIR_RIGHT)                 ;B48842
     %AICMD0x1D_ShowDialog($0148, $00)                          ;B48844
-    %AICMD0x20_JumpIfChoice(0, pAIScripting0x11_L001)                        ;B48848
+    %AICMD0x20_JumpIfChoice(0, pAIScripting0x11_Data01_Choice0)                        ;B48848
     %AICMD0x20_JumpIfChoice(1, pAIScripting0x11_Data01_Say_014C)                        ;B4884C
-pAIScripting0x11_L001:
+pAIScripting0x11_Data01_Choice0:
     %AICMD0x0F_ScreenFadeout($01)                              ;B48850
     %AICMD0x09_StartScript($02, pAIScripting0x11_Data01_Actor02_Chicken)                                   ;B48852
     %AICMD0x0A_ScreenFadein($01)                                            ;B48856

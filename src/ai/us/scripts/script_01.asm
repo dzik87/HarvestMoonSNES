@@ -36,9 +36,9 @@ pAIScripting0x01_L003:
     %AICMD0x14_JumpIfFlagSet(strcFlags.event5, $00, pAIScripting0x01_L004)   ;B393A3
     %AICMD0x09_StartScript($04, pAIScripting0x01_Town_Actor04_Nina)                                   ;B393AA
 pAIScripting0x01_L004:
-    %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $03, pAIScripting0x01_L005)   ;B393AE
+    %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $03, pAIScripting0x01_Town_IfEvent2Bit03)   ;B393AE
     %AICMD0x09_StartScript($05, pAIScripting0x01_Town_Actor05_Ellen)                                   ;B393B5
-pAIScripting0x01_L005:
+pAIScripting0x01_Town_IfEvent2Bit03:
     %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $04, pAIScripting0x01_L006)   ;B393B9
     %AICMD0x14_JumpIfFlagSet(strcFlags.event5, $04, pAIScripting0x01_L006)   ;B393C0
     %AICMD0x09_StartScript($06, pAIScripting0x01_Town_Actor06_Eve)                                   ;B393C7
@@ -47,7 +47,7 @@ pAIScripting0x01_L006:
 ; Child script (slot $01) of Town: actor. Spawns at (344,184). Walks randomly. Waits for the player to talk. Waits for the
 ; player to press A. Dialogs $01CB, $0200, $03B8, $006A, $006B, $03DF ....
 pAIScripting0x01_Town_Actor01:
-    %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 17, 18, pAIScripting0x01_L023) ;B393CE
+    %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 17, 18, pAIScripting0x01_Town_Actor01_IfCurrentTimeID17to18) ;B393CE
     %AICMD0x1A_SpawnNpc($0158, $00B8, aAIScriptingData_L067, $00)                     ;B393D6
     %AICMD0x22_StartRandomWalk($18, $18, $01, aAIScriptingData_L068, $0C)                    ;B393DE
 pAIScripting0x01_L008:
@@ -78,7 +78,7 @@ pAIScripting0x01_Town_Actor01_OnInteract:
     %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $00, pAIScripting0x01_Town_Actor01_Talk_03E0)   ;B39425
     %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 0, pAIScripting0x01_Town_Actor01_Say_006A)     ;B3942C
     %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 1, pAIScripting0x01_Town_Actor01_Say_006B)     ;B39433
-    %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 2, pAIScripting0x01_L016)     ;B3943A
+    %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 2, pAIScripting0x01_Town_Actor01_IfCurrentSeasonIDIs2)     ;B3943A
     %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 3, pAIScripting0x01_Town_Actor01_Say_006B_2)     ;B39441
     %AICMD0x12_Jump(pAIScripting0x01_L008)                                   ;B39448
 ; Shows dialog $006A.
@@ -89,7 +89,7 @@ pAIScripting0x01_Town_Actor01_Say_006A:
 pAIScripting0x01_Town_Actor01_Say_006B:
     %AICMD0x1C_ShowDialog($006B, $00)                          ;B39452
     %AICMD0x12_Jump(pAIScripting0x01_L008)                                   ;B39456
-pAIScripting0x01_L016:
+pAIScripting0x01_Town_Actor01_IfCurrentSeasonIDIs2:
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 19, pAIScripting0x01_Town_Actor01_Say_03F3)         ;B39459
     %AICMD0x17_RollRandom($02)                                            ;B39460
     %AICMD0x18_JumpIfRandomEquals($00, pAIScripting0x01_Town_Actor01_Say_00FB)                                   ;B39462
@@ -119,7 +119,7 @@ pAIScripting0x01_Town_Actor01_Say_01D0:
 pAIScripting0x01_Town_Actor01_Say_03F3:
     %AICMD0x1C_ShowDialog($03F3, $00)                          ;B39490
     %AICMD0x12_Jump(pAIScripting0x01_L008)                                   ;B39494
-pAIScripting0x01_L023:
+pAIScripting0x01_Town_Actor01_IfCurrentTimeID17to18:
     %AICMD0x10_End()                                           ;B39497
 ; Child script (slot $02) of Town: actor. Spawns at (552,616). Waits for the player to press A. Dialogs $01CB, $0200, $03BA,
 ; $03CE, $0064, $0065 ....
@@ -147,10 +147,10 @@ pAIScripting0x01_Town_Actor02_Say_03BA:
 ; Handler for A pressed with empty hands.
 pAIScripting0x01_Town_Actor02_OnInteract:
     %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 17, 18, pAIScripting0x01_Town_Actor02_Say_0391) ;B394D7
-    %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 0, pAIScripting0x01_L031)     ;B394DF
-    %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 1, pAIScripting0x01_L032)     ;B394E6
-    %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 2, pAIScripting0x01_L033)     ;B394ED
-    %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 3, pAIScripting0x01_L036)     ;B394F4
+    %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 0, pAIScripting0x01_Town_Actor02_IfCurrentSeasonIDIs0)     ;B394DF
+    %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 1, pAIScripting0x01_Town_Actor02_IfCurrentSeasonIDIs1)     ;B394E6
+    %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 2, pAIScripting0x01_Town_Actor02_IfCurrentSeasonIDIs2)     ;B394ED
+    %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 3, pAIScripting0x01_Town_Actor02_IfCurrentSeasonIDIs3)     ;B394F4
 pAIScripting0x01_L030:
     %AICMD0x45_JumpIfBetween16(nLove_Maria, 200, 249, pAIScripting0x01_Town_Actor02_Say_03CD) ;B394FB
     %AICMD0x45_JumpIfBetween16(nLove_Ann, 200, 249, pAIScripting0x01_Town_Actor02_Say_03CD)   ;B39505
@@ -159,17 +159,17 @@ pAIScripting0x01_L030:
     %AICMD0x45_JumpIfBetween16(nLove_Eve, 200, 249, pAIScripting0x01_Town_Actor02_Say_03CD)   ;B39523
     %AICMD0x1C_ShowDialog($03CE, $00)                          ;B3952D
     %AICMD0x12_Jump(pAIScripting0x01_L025)                                   ;B39531
-pAIScripting0x01_L031:
+pAIScripting0x01_Town_Actor02_IfCurrentSeasonIDIs0:
     %AICMD0x17_RollRandom($02)                                            ;B39534
     %AICMD0x18_JumpIfRandomEquals($00, pAIScripting0x01_L030)                                   ;B39536
     %AICMD0x1C_ShowDialog($0064, $00)                          ;B3953A
     %AICMD0x12_Jump(pAIScripting0x01_L025)                                   ;B3953E
-pAIScripting0x01_L032:
+pAIScripting0x01_Town_Actor02_IfCurrentSeasonIDIs1:
     %AICMD0x17_RollRandom($02)                                            ;B39541
     %AICMD0x18_JumpIfRandomEquals($00, pAIScripting0x01_L030)                                   ;B39543
     %AICMD0x1C_ShowDialog($0065, $00)                          ;B39547
     %AICMD0x12_Jump(pAIScripting0x01_L025)                                   ;B3954B
-pAIScripting0x01_L033:
+pAIScripting0x01_Town_Actor02_IfCurrentSeasonIDIs2:
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 19, pAIScripting0x01_Town_Actor02_Say_03F2)         ;B3954E
     %AICMD0x17_RollRandom($02)                                            ;B39555
     %AICMD0x18_JumpIfRandomEquals($00, pAIScripting0x01_L030)                                   ;B39557
@@ -183,7 +183,7 @@ pAIScripting0x01_Town_Actor02_Say_0391:
 pAIScripting0x01_Town_Actor02_Say_03CD:
     %AICMD0x1C_ShowDialog($03CD, $00)                          ;B39569
     %AICMD0x12_Jump(pAIScripting0x01_L025)                                   ;B3956D
-pAIScripting0x01_L036:
+pAIScripting0x01_Town_Actor02_IfCurrentSeasonIDIs3:
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 30, pAIScripting0x01_Town_Actor02_Say_0324)         ;B39570
     %AICMD0x17_RollRandom($02)                                            ;B39577
     %AICMD0x18_JumpIfRandomEquals($00, pAIScripting0x01_L030)                                   ;B39579
@@ -203,7 +203,7 @@ pAIScripting0x01_L039:
 ; Child script (slot $03) of Town: actor. Spawns at (312,280). Waits for the player to talk. Waits for the player to press
 ; A. Dialogs $043D, $0174, $0200, $03B0, $0212, $03B5 ....
 pAIScripting0x01_Town_Actor03_Maria:
-    %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 17, 18, pAIScripting0x01_L074) ;B39599
+    %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 17, 18, pAIScripting0x01_Town_Actor03_Maria_IfCurrentTimeID17to18) ;B39599
     %AICMD0x1A_SpawnNpc($0138, $0118, aAIScriptingData_L014, $01)                     ;B395A1
 pAIScripting0x01_L041:
     %AICMD0x4D_JumpIfBlueFeatherUsed(pAIScripting0x01_Town_Actor03_Maria_OnBlueFeather)                                        ;B395A9
@@ -261,12 +261,12 @@ pAIScripting0x01_Town_Actor03_Maria_Say_01D9:
 ; Handler for A pressed with empty hands.
 pAIScripting0x01_Town_Actor03_Maria_OnInteract:
     %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 17, 18, pAIScripting0x01_Town_Actor03_Maria_Say_0391) ;B39651
-    %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 0, pAIScripting0x01_L052)     ;B39659
-    %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 1, pAIScripting0x01_L058)     ;B39660
-    %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 2, pAIScripting0x01_L061)     ;B39667
-    %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 3, pAIScripting0x01_L067)     ;B3966E
+    %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 0, pAIScripting0x01_Town_Actor03_Maria_IfCurrentSeasonIDIs0)     ;B39659
+    %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 1, pAIScripting0x01_Town_Actor03_Maria_IfCurrentSeasonIDIs1)     ;B39660
+    %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 2, pAIScripting0x01_Town_Actor03_Maria_IfCurrentSeasonIDIs2)     ;B39667
+    %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 3, pAIScripting0x01_Town_Actor03_Maria_IfCurrentSeasonIDIs3)     ;B3966E
     %AICMD0x12_Jump(pAIScripting0x01_L041)                                   ;B39675
-pAIScripting0x01_L052:
+pAIScripting0x01_Town_Actor03_Maria_IfCurrentSeasonIDIs0:
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 22, pAIScripting0x01_Town_Actor03_Maria_Say_00BF)         ;B39678
     %AICMD0x17_RollRandom($02)                                            ;B3967F
     %AICMD0x18_JumpIfRandomEquals($00, pAIScripting0x01_Town_Actor03_Maria_Say_0082)                                   ;B39681
@@ -296,7 +296,7 @@ pAIScripting0x01_Town_Actor03_Maria_Say_0088:
 pAIScripting0x01_Town_Actor03_Maria_Say_00BF:
     %AICMD0x1C_ShowDialog($00BF, $00)                          ;B396BC
     %AICMD0x12_Jump(pAIScripting0x01_L041)                                   ;B396C0
-pAIScripting0x01_L058:
+pAIScripting0x01_Town_Actor03_Maria_IfCurrentSeasonIDIs1:
     %AICMD0x17_RollRandom($02)                                            ;B396C3
     %AICMD0x18_JumpIfRandomEquals($00, pAIScripting0x01_Town_Actor03_Maria_Say_0083)                                   ;B396C5
     %AICMD0x18_JumpIfRandomEquals($01, pAIScripting0x01_Town_Actor03_Maria_Say_0089)                                   ;B396C9
@@ -309,7 +309,7 @@ pAIScripting0x01_Town_Actor03_Maria_Say_0083:
 pAIScripting0x01_Town_Actor03_Maria_Say_0089:
     %AICMD0x1C_ShowDialog($0089, $00)                          ;B396D7
     %AICMD0x12_Jump(pAIScripting0x01_L041)                                   ;B396DB
-pAIScripting0x01_L061:
+pAIScripting0x01_Town_Actor03_Maria_IfCurrentSeasonIDIs2:
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 11, pAIScripting0x01_Town_Actor03_Maria_Say_0238)         ;B396DE
     %AICMD0x17_RollRandom($02)                                            ;B396E5
     %AICMD0x18_JumpIfRandomEquals($00, pAIScripting0x01_Town_Actor03_Maria_Say_0084)                                   ;B396E7
@@ -339,7 +339,7 @@ pAIScripting0x01_Town_Actor03_Maria_Say_008C:
 pAIScripting0x01_Town_Actor03_Maria_Say_0238:
     %AICMD0x1C_ShowDialog($0238, $00)                          ;B39722
     %AICMD0x12_Jump(pAIScripting0x01_L041)                                   ;B39726
-pAIScripting0x01_L067:
+pAIScripting0x01_Town_Actor03_Maria_IfCurrentSeasonIDIs3:
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 23, pAIScripting0x01_Town_Actor03_Maria_Say_02AF)         ;B39729
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 30, pAIScripting0x01_Town_Actor03_Maria_Say_03F8)         ;B39730
     %AICMD0x17_RollRandom($02)                                            ;B39737
@@ -371,12 +371,12 @@ pAIScripting0x01_Town_Actor03_Maria_Talk_0410:
 pAIScripting0x01_Town_Actor03_Maria_Say_0391:
     %AICMD0x1C_ShowDialog($0391, $00)                          ;B3976D
     %AICMD0x12_Jump(pAIScripting0x01_L041)                                   ;B39771
-pAIScripting0x01_L074:
+pAIScripting0x01_Town_Actor03_Maria_IfCurrentTimeID17to18:
     %AICMD0x10_End()                                           ;B39774
 ; Child script (slot $04) of Town: actor. Spawns at (520,264). Walks randomly. Waits for the player to talk. Waits for the
 ; player to press A. Dialogs $043F, $0178, $0200, $03B2, $0212, $03B1 ....
 pAIScripting0x01_Town_Actor04_Nina:
-    %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 17, 18, pAIScripting0x01_L112) ;B39775
+    %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 17, 18, pAIScripting0x01_Town_Actor04_Nina_IfCurrentTimeID17to18) ;B39775
     %AICMD0x1A_SpawnNpc($0208, $0108, aAIScriptingData_L019, $00)                     ;B3977D
     %AICMD0x22_StartRandomWalk($08, $20, $01, aAIScriptingData_L020, $10)                    ;B39785
 pAIScripting0x01_L076:
@@ -440,12 +440,12 @@ pAIScripting0x01_Town_Actor04_Nina_Say_0143:
 ; Handler for A pressed with empty hands.
 pAIScripting0x01_Town_Actor04_Nina_OnInteract:
     %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 17, 18, pAIScripting0x01_Town_Actor04_Nina_Say_0391) ;B39844
-    %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 0, pAIScripting0x01_L088)     ;B3984C
-    %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 1, pAIScripting0x01_L092)     ;B39853
-    %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 2, pAIScripting0x01_L097)     ;B3985A
-    %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 3, pAIScripting0x01_L102)     ;B39861
+    %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 0, pAIScripting0x01_Town_Actor04_Nina_IfCurrentSeasonIDIs0)     ;B3984C
+    %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 1, pAIScripting0x01_Town_Actor04_Nina_IfCurrentSeasonIDIs1)     ;B39853
+    %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 2, pAIScripting0x01_Town_Actor04_Nina_IfCurrentSeasonIDIs2)     ;B3985A
+    %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 3, pAIScripting0x01_Town_Actor04_Nina_IfCurrentSeasonIDIs3)     ;B39861
     %AICMD0x12_Jump(pAIScripting0x01_L076)                                   ;B39868
-pAIScripting0x01_L088:
+pAIScripting0x01_Town_Actor04_Nina_IfCurrentSeasonIDIs0:
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 22, pAIScripting0x01_Town_Actor04_Nina_Say_0208)         ;B3986B
     %AICMD0x17_RollRandom($02)                                            ;B39872
     %AICMD0x18_JumpIfRandomEquals($00, pAIScripting0x01_Town_Actor04_Nina_Say_00AE)                                   ;B39874
@@ -463,7 +463,7 @@ pAIScripting0x01_Town_Actor04_Nina_Say_00B5:
 pAIScripting0x01_Town_Actor04_Nina_Say_0208:
     %AICMD0x1C_ShowDialog($0208, $00)                          ;B3988D
     %AICMD0x12_Jump(pAIScripting0x01_L076)                                   ;B39891
-pAIScripting0x01_L092:
+pAIScripting0x01_Town_Actor04_Nina_IfCurrentSeasonIDIs1:
     %AICMD0x17_RollRandom($02)                                            ;B39894
     %AICMD0x18_JumpIfRandomEquals($00, pAIScripting0x01_Town_Actor04_Nina_Say_00AF)                                   ;B39896
     %AICMD0x18_JumpIfRandomEquals($01, pAIScripting0x01_Town_Actor04_Nina_Say_00B6)                                   ;B3989A
@@ -488,7 +488,7 @@ pAIScripting0x01_Town_Actor04_Nina_Say_00B1:
 pAIScripting0x01_Town_Actor04_Nina_Say_00B6:
     %AICMD0x1C_ShowDialog($00B6, $00)                          ;B398CA
     %AICMD0x12_Jump(pAIScripting0x01_L076)                                   ;B398CE
-pAIScripting0x01_L097:
+pAIScripting0x01_Town_Actor04_Nina_IfCurrentSeasonIDIs2:
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 11, pAIScripting0x01_Town_Actor04_Nina_Say_023A)         ;B398D1
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 19, pAIScripting0x01_Town_Actor04_Nina_Say_03F2)         ;B398D8
     %AICMD0x17_RollRandom($02)                                            ;B398DF
@@ -511,7 +511,7 @@ pAIScripting0x01_Town_Actor04_Nina_Say_023A:
 pAIScripting0x01_Town_Actor04_Nina_Say_03F2:
     %AICMD0x1C_ShowDialog($03F2, $00)                          ;B39901
     %AICMD0x12_Jump(pAIScripting0x01_L076)                                   ;B39905
-pAIScripting0x01_L102:
+pAIScripting0x01_Town_Actor04_Nina_IfCurrentSeasonIDIs3:
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 23, pAIScripting0x01_Town_Actor04_Nina_Say_02B1)         ;B39908
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 30, pAIScripting0x01_Town_Actor04_Nina_Say_03FA)         ;B3990F
     %AICMD0x17_RollRandom($02)                                            ;B39916
@@ -559,12 +559,12 @@ pAIScripting0x01_Town_Actor04_Nina_Talk_00B1:
 pAIScripting0x01_Town_Actor04_Nina_Say_0391:
     %AICMD0x1C_ShowDialog($0391, $00)                          ;B39975
     %AICMD0x12_Jump(pAIScripting0x01_L076)                                   ;B39979
-pAIScripting0x01_L112:
+pAIScripting0x01_Town_Actor04_Nina_IfCurrentTimeID17to18:
     %AICMD0x10_End()                                           ;B3997C
 ; Child script (slot $05) of Town: actor. Spawns at (648,904). Walks randomly. Waits for the player to talk. Waits for the
 ; player to press A. Dialogs $0440, $017A, $0200, $03B0, $03B2, $03B3 ....
 pAIScripting0x01_Town_Actor05_Ellen:
-    %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 17, 18, pAIScripting0x01_L125) ;B3997D
+    %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 17, 18, pAIScripting0x01_Town_Actor05_Ellen_IfCurrentTimeID17to18) ;B3997D
     %AICMD0x1A_SpawnNpc($0288, $0388, aAIScriptingData_L021, $00)                     ;B39985
     %AICMD0x22_StartRandomWalk($20, $10, $01, aAIScriptingData_L022, $10)                    ;B3998D
 pAIScripting0x01_L114:
@@ -625,18 +625,18 @@ pAIScripting0x01_Town_Actor05_Ellen_Say_01D9:
     %AICMD0x1C_ShowDialog($01D9, $00)                          ;B39A40
     %AICMD0x41_AddValue16(nLove_Ellen, -4)                     ;B39A44
     %AICMD0x12_Jump(pAIScripting0x01_L114)                                   ;B39A4A
-pAIScripting0x01_L125:
+pAIScripting0x01_Town_Actor05_Ellen_IfCurrentTimeID17to18:
     %AICMD0x10_End()                                           ;B39A4D
 ; Handler for A pressed with empty hands.
 pAIScripting0x01_Town_Actor05_Ellen_OnInteract:
     %AICMD0x14_JumpIfFlagSet(strcFlags.event5, $02, pAIScripting0x01_Town_Actor05_Ellen_Say_01EE)   ;B39A4E
     %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 17, 18, pAIScripting0x01_Town_Actor05_Ellen_Say_0391) ;B39A55
-    %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 0, pAIScripting0x01_L127)     ;B39A5D
-    %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 1, pAIScripting0x01_L133)     ;B39A64
-    %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 2, pAIScripting0x01_L137)     ;B39A6B
-    %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 3, pAIScripting0x01_L143)     ;B39A72
+    %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 0, pAIScripting0x01_Town_Actor05_Ellen_IfCurrentSeasonIDIs0)     ;B39A5D
+    %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 1, pAIScripting0x01_Town_Actor05_Ellen_IfCurrentSeasonIDIs1)     ;B39A64
+    %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 2, pAIScripting0x01_Town_Actor05_Ellen_IfCurrentSeasonIDIs2)     ;B39A6B
+    %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 3, pAIScripting0x01_Town_Actor05_Ellen_IfCurrentSeasonIDIs3)     ;B39A72
     %AICMD0x12_Jump(pAIScripting0x01_L114)                                   ;B39A79
-pAIScripting0x01_L127:
+pAIScripting0x01_Town_Actor05_Ellen_IfCurrentSeasonIDIs0:
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 22, pAIScripting0x01_Town_Actor05_Ellen_Say_0209)         ;B39A7C
     %AICMD0x17_RollRandom($02)                                            ;B39A83
     %AICMD0x18_JumpIfRandomEquals($00, pAIScripting0x01_Town_Actor05_Ellen_Say_00CB)                                   ;B39A85
@@ -666,12 +666,12 @@ pAIScripting0x01_Town_Actor05_Ellen_Say_00C5:
 pAIScripting0x01_Town_Actor05_Ellen_Say_0209:
     %AICMD0x1C_ShowDialog($0209, $00)                          ;B39AC0
     %AICMD0x12_Jump(pAIScripting0x01_L114)                                   ;B39AC4
-pAIScripting0x01_L133:
+pAIScripting0x01_Town_Actor05_Ellen_IfCurrentSeasonIDIs1:
     %AICMD0x17_RollRandom($02)                                            ;B39AC7
-    %AICMD0x18_JumpIfRandomEquals($00, pAIScripting0x01_L134)                                   ;B39AC9
+    %AICMD0x18_JumpIfRandomEquals($00, pAIScripting0x01_Town_Actor05_Ellen_Random00)                                   ;B39AC9
     %AICMD0x18_JumpIfRandomEquals($01, pAIScripting0x01_Town_Actor05_Ellen_Say_00CE)                                   ;B39ACD
     %AICMD0x12_Jump(pAIScripting0x01_L114)                                   ;B39AD1
-pAIScripting0x01_L134:
+pAIScripting0x01_Town_Actor05_Ellen_Random00:
     %AICMD0x14_JumpIfFlagSet(strcFlags.event5, $03, pAIScripting0x01_Town_Actor05_Ellen_Say_048D)   ;B39AD4
     %AICMD0x1D_ShowDialog($00C6, $00)                          ;B39ADB
     %AICMD0x12_Jump(pAIScripting0x01_L114)                                   ;B39ADF
@@ -683,7 +683,7 @@ pAIScripting0x01_Town_Actor05_Ellen_Say_00CE:
 pAIScripting0x01_Town_Actor05_Ellen_Say_048D:
     %AICMD0x1C_ShowDialog($048D, $00)                          ;B39AE9
     %AICMD0x12_Jump(pAIScripting0x01_L114)                                   ;B39AED
-pAIScripting0x01_L137:
+pAIScripting0x01_Town_Actor05_Ellen_IfCurrentSeasonIDIs2:
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 11, pAIScripting0x01_Town_Actor05_Ellen_Say_023B)         ;B39AF0
     %AICMD0x17_RollRandom($02)                                            ;B39AF7
     %AICMD0x18_JumpIfRandomEquals($00, pAIScripting0x01_Town_Actor05_Ellen_Say_00C7)                                   ;B39AF9
@@ -713,7 +713,7 @@ pAIScripting0x01_Town_Actor05_Ellen_Say_00CF:
 pAIScripting0x01_Town_Actor05_Ellen_Say_023B:
     %AICMD0x1C_ShowDialog($023B, $00)                          ;B39B34
     %AICMD0x12_Jump(pAIScripting0x01_L114)                                   ;B39B38
-pAIScripting0x01_L143:
+pAIScripting0x01_Town_Actor05_Ellen_IfCurrentSeasonIDIs3:
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 23, pAIScripting0x01_Town_Actor05_Ellen_Say_02B2)         ;B39B3B
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 30, pAIScripting0x01_Town_Actor05_Ellen_Say_03FB)         ;B39B42
     %AICMD0x17_RollRandom($02)                                            ;B39B49
@@ -867,9 +867,9 @@ pAIScripting0x01_Town_Actor06_Eve_Idle:
     %AICMD0x12_Jump(pAIScripting0x01_Town_Actor06_Eve_Idle)                                   ;B39CE5
 ; Child script (slot $07) of Town: actor. Spawns at (408,872). Waits for the player to talk. Dialogs $013F.
 pAIScripting0x01_Town_Actor07_Ann:
-    %AICMD0x14_JumpIfFlagSet(strcFlags.event5, $00, pAIScripting0x01_L173)   ;B39CE8
+    %AICMD0x14_JumpIfFlagSet(strcFlags.event5, $00, pAIScripting0x01_Town_Actor07_Ann_IfEvent5Bit00)   ;B39CE8
     %AICMD0x10_End()                                           ;B39CEF
-pAIScripting0x01_L173:
+pAIScripting0x01_Town_Actor07_Ann_IfEvent5Bit00:
     %AICMD0x1A_SpawnNpc($0198, $0368, aAIScriptingData_L015, $00)                     ;B39CF0
 ; Idle until the player talks to the NPC (AICMD0x1F_JumpIfTalkedTo polls A near the actor), then jump to the conversation.
 pAIScripting0x01_Town_Actor07_Ann_WaitTalk:
@@ -927,16 +927,16 @@ pAIScripting0x01_MajorHouse_Actor01_Say_03B8:
 ; Handler for A pressed with empty hands.
 pAIScripting0x01_MajorHouse_Actor01_OnInteract:
     %AICMD0x14_JumpIfFlagSet(strcFlags.event4, $0C, pAIScripting0x01_MajorHouse_Actor01_OnInteract_3)   ;B39D5E
-    %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $00, pAIScripting0x01_L197)   ;B39D65
+    %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $00, pAIScripting0x01_MajorHouse_Actor01_IfEvent2Bit00)   ;B39D65
     %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $01, pAIScripting0x01_L185)   ;B39D6C
     %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $02, pAIScripting0x01_L185)   ;B39D73
     %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $03, pAIScripting0x01_L185)   ;B39D7A
     %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $04, pAIScripting0x01_L185)   ;B39D81
-    %AICMD0x45_JumpIfBetween16(nLove_Maria, 200, 300, pAIScripting0x01_L198) ;B39D88
+    %AICMD0x45_JumpIfBetween16(nLove_Maria, 200, 300, pAIScripting0x01_MajorHouse_Actor01_IfMaria200to300) ;B39D88
 pAIScripting0x01_L185:
-    %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 0, pAIScripting0x01_L189)     ;B39D92
-    %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 2, pAIScripting0x01_L190)     ;B39D99
-    %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 3, pAIScripting0x01_L191)     ;B39DA0
+    %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 0, pAIScripting0x01_MajorHouse_Actor01_IfCurrentSeasonIDIs0)     ;B39D92
+    %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 2, pAIScripting0x01_MajorHouse_Actor01_IfCurrentSeasonIDIs2)     ;B39D99
+    %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 3, pAIScripting0x01_MajorHouse_Actor01_IfCurrentSeasonIDIs3)     ;B39DA0
 pAIScripting0x01_L186:
     %AICMD0x17_RollRandom($02)                                            ;B39DA7
     %AICMD0x18_JumpIfRandomEquals($00, pAIScripting0x01_MajorHouse_Actor01_Say_0035)                                   ;B39DA9
@@ -950,13 +950,13 @@ pAIScripting0x01_MajorHouse_Actor01_Say_0035:
 pAIScripting0x01_MajorHouse_Actor01_OnInteract_2:
     %AICMD0x1C_ShowDialog($0036, $00)                          ;B39DBB
     %AICMD0x12_Jump(pAIScripting0x01_L179)                                   ;B39DBF
-pAIScripting0x01_L189:
+pAIScripting0x01_MajorHouse_Actor01_IfCurrentSeasonIDIs0:
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 22, pAIScripting0x01_MajorHouse_Actor01_Say_020B)         ;B39DC2
     %AICMD0x12_Jump(pAIScripting0x01_L186)                                   ;B39DC9
-pAIScripting0x01_L190:
+pAIScripting0x01_MajorHouse_Actor01_IfCurrentSeasonIDIs2:
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 11, pAIScripting0x01_MajorHouse_Actor01_Say_023D)         ;B39DCC
     %AICMD0x12_Jump(pAIScripting0x01_L186)                                   ;B39DD3
-pAIScripting0x01_L191:
+pAIScripting0x01_MajorHouse_Actor01_IfCurrentSeasonIDIs3:
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 23, pAIScripting0x01_MajorHouse_Actor01_Say_02AD)         ;B39DD6
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 30, pAIScripting0x01_MajorHouse_Actor01_Say_03EC)         ;B39DDD
     %AICMD0x12_Jump(pAIScripting0x01_L186)                                   ;B39DE4
@@ -981,12 +981,12 @@ pAIScripting0x01_MajorHouse_Actor01_Say_03EC:
 pAIScripting0x01_MajorHouse_Actor01_OnInteract_3:
     %AICMD0x1C_ShowDialog($01CD, $00)                          ;B39E09
     %AICMD0x12_Jump(pAIScripting0x01_L178)                                   ;B39E0D
-pAIScripting0x01_L197:
+pAIScripting0x01_MajorHouse_Actor01_IfEvent2Bit00:
     %AICMD0x17_RollRandom($02)                                            ;B39E10
     %AICMD0x18_JumpIfRandomEquals($00, pAIScripting0x01_L185)                                   ;B39E12
     %AICMD0x1C_ShowDialog($03C0, $00)                          ;B39E16
     %AICMD0x12_Jump(pAIScripting0x01_L178)                                   ;B39E1A
-pAIScripting0x01_L198:
+pAIScripting0x01_MajorHouse_Actor01_IfMaria200to300:
     %AICMD0x17_RollRandom($02)                                            ;B39E1D
     %AICMD0x18_JumpIfRandomEquals($00, pAIScripting0x01_L185)                                   ;B39E1F
     %AICMD0x1C_ShowDialog($03BF, $00)                          ;B39E23
@@ -1023,16 +1023,16 @@ pAIScripting0x01_MajorHouse_Actor02_Say_03B9:
 ; Handler for A pressed with empty hands.
 pAIScripting0x01_MajorHouse_Actor02_OnInteract:
     %AICMD0x14_JumpIfFlagSet(strcFlags.event4, $0C, pAIScripting0x01_MajorHouse_Actor02_OnInteract_2)   ;B39E6E
-    %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $00, pAIScripting0x01_L219)   ;B39E75
+    %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $00, pAIScripting0x01_MajorHouse_Actor02_IfEvent2Bit00)   ;B39E75
     %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $01, pAIScripting0x01_L207)   ;B39E7C
     %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $02, pAIScripting0x01_L207)   ;B39E83
     %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $03, pAIScripting0x01_L207)   ;B39E8A
     %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $04, pAIScripting0x01_L207)   ;B39E91
-    %AICMD0x45_JumpIfBetween16(nLove_Maria, 200, 300, pAIScripting0x01_L220) ;B39E98
+    %AICMD0x45_JumpIfBetween16(nLove_Maria, 200, 300, pAIScripting0x01_MajorHouse_Actor02_IfMaria200to300) ;B39E98
 pAIScripting0x01_L207:
-    %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 0, pAIScripting0x01_L211)     ;B39EA2
-    %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 2, pAIScripting0x01_L212)     ;B39EA9
-    %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 3, pAIScripting0x01_L213)     ;B39EB0
+    %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 0, pAIScripting0x01_MajorHouse_Actor02_IfCurrentSeasonIDIs0)     ;B39EA2
+    %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 2, pAIScripting0x01_MajorHouse_Actor02_IfCurrentSeasonIDIs2)     ;B39EA9
+    %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 3, pAIScripting0x01_MajorHouse_Actor02_IfCurrentSeasonIDIs3)     ;B39EB0
 pAIScripting0x01_L208:
     %AICMD0x17_RollRandom($02)                                            ;B39EB7
     %AICMD0x18_JumpIfRandomEquals($00, pAIScripting0x01_MajorHouse_Actor02_Say_003A)                                   ;B39EB9
@@ -1046,13 +1046,13 @@ pAIScripting0x01_MajorHouse_Actor02_Say_003A:
 pAIScripting0x01_MajorHouse_Actor02_Talk_003B:
     %AICMD0x1C_ShowDialog($003B, $00)                          ;B39ECB
     %AICMD0x12_Jump(pAIScripting0x01_L201)                                   ;B39ECF
-pAIScripting0x01_L211:
+pAIScripting0x01_MajorHouse_Actor02_IfCurrentSeasonIDIs0:
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 22, pAIScripting0x01_MajorHouse_Actor02_Say_0202)         ;B39ED2
     %AICMD0x12_Jump(pAIScripting0x01_L208)                                   ;B39ED9
-pAIScripting0x01_L212:
+pAIScripting0x01_MajorHouse_Actor02_IfCurrentSeasonIDIs2:
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 11, pAIScripting0x01_MajorHouse_Actor02_Say_023E)         ;B39EDC
     %AICMD0x12_Jump(pAIScripting0x01_L208)                                   ;B39EE3
-pAIScripting0x01_L213:
+pAIScripting0x01_MajorHouse_Actor02_IfCurrentSeasonIDIs3:
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 23, pAIScripting0x01_MajorHouse_Actor02_Say_02AE)         ;B39EE6
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 30, pAIScripting0x01_MajorHouse_Actor02_Say_03ED)         ;B39EED
     %AICMD0x1C_ShowDialog($003F, $00)                          ;B39EF4
@@ -1078,12 +1078,12 @@ pAIScripting0x01_MajorHouse_Actor02_Say_03ED:
 pAIScripting0x01_MajorHouse_Actor02_OnInteract_2:
     %AICMD0x1C_ShowDialog($01CE, $00)                          ;B39F1D
     %AICMD0x12_Jump(pAIScripting0x01_L202)                                   ;B39F21
-pAIScripting0x01_L219:
+pAIScripting0x01_MajorHouse_Actor02_IfEvent2Bit00:
     %AICMD0x17_RollRandom($02)                                            ;B39F24
     %AICMD0x18_JumpIfRandomEquals($00, pAIScripting0x01_L207)                                   ;B39F26
     %AICMD0x1C_ShowDialog($03C2, $00)                          ;B39F2A
     %AICMD0x12_Jump(pAIScripting0x01_L200)                                   ;B39F2E
-pAIScripting0x01_L220:
+pAIScripting0x01_MajorHouse_Actor02_IfMaria200to300:
     %AICMD0x17_RollRandom($02)                                            ;B39F31
     %AICMD0x18_JumpIfRandomEquals($00, pAIScripting0x01_L207)                                   ;B39F33
     %AICMD0x1C_ShowDialog($03C1, $00)                          ;B39F37
@@ -1138,9 +1138,9 @@ pAIScripting0x01_Church_Actor01_Say_03B0:
 ; Handler for A pressed with empty hands.
 pAIScripting0x01_Church_Actor01_OnInteract:
     %AICMD0x14_JumpIfFlagSet(strcFlags.event4, $0C, pAIScripting0x01_Church_Actor01_OnInteract_2)   ;B39F9A
-    %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 0, pAIScripting0x01_L236)     ;B39FA1
-    %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 2, pAIScripting0x01_L237)     ;B39FA8
-    %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 3, pAIScripting0x01_L241)     ;B39FAF
+    %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 0, pAIScripting0x01_Church_Actor01_IfCurrentSeasonIDIs0)     ;B39FA1
+    %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 2, pAIScripting0x01_Church_Actor01_IfCurrentSeasonIDIs2)     ;B39FA8
+    %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 3, pAIScripting0x01_Church_Actor01_IfCurrentSeasonIDIs3)     ;B39FAF
 pAIScripting0x01_L231:
     %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $00, pAIScripting0x01_L245)   ;B39FB6
     %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $01, pAIScripting0x01_L245)   ;B39FBD
@@ -1166,13 +1166,13 @@ pAIScripting0x01_Church_Actor01_Say_0058:
 pAIScripting0x01_Church_Actor01_Say_03CB:
     %AICMD0x1C_ShowDialog($03CB, $00)                          ;B39FFA
     %AICMD0x12_Jump(pAIScripting0x01_L225)                                   ;B39FFE
-pAIScripting0x01_L236:
+pAIScripting0x01_Church_Actor01_IfCurrentSeasonIDIs0:
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 22, pAIScripting0x01_Church_Actor01_Say_0205)         ;B3A001
     %AICMD0x17_RollRandom($02)                                            ;B3A008
     %AICMD0x18_JumpIfRandomEquals($00, pAIScripting0x01_L231)                                   ;B3A00A
     %AICMD0x18_JumpIfRandomEquals($01, pAIScripting0x01_L232)                                   ;B3A00E
     %AICMD0x12_Jump(pAIScripting0x01_L232)                                   ;B3A012
-pAIScripting0x01_L237:
+pAIScripting0x01_Church_Actor01_IfCurrentSeasonIDIs2:
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 11, pAIScripting0x01_Church_Actor01_Say_03DC)         ;B3A015
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 19, pAIScripting0x01_Church_Actor01_Say_03DC_2)         ;B3A01C
     %AICMD0x17_RollRandom($02)                                            ;B3A023
@@ -1191,7 +1191,7 @@ pAIScripting0x01_Church_Actor01_Say_03DC:
 pAIScripting0x01_Church_Actor01_Say_03DC_2:
     %AICMD0x1C_ShowDialog($03DC, $00)                          ;B3A03E
     %AICMD0x12_Jump(pAIScripting0x01_L223)                                   ;B3A042
-pAIScripting0x01_L241:
+pAIScripting0x01_Church_Actor01_IfCurrentSeasonIDIs3:
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 23, pAIScripting0x01_Church_Actor01_Say_0405)         ;B3A045
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 30, pAIScripting0x01_Church_Actor01_Say_03F0)         ;B3A04C
     %AICMD0x17_RollRandom($02)                                            ;B3A053
@@ -1256,12 +1256,12 @@ pAIScripting0x01_Florist_Actor01_Say_03B9:
 ; Handler for A pressed with empty hands.
 pAIScripting0x01_Florist_Actor01_OnInteract:
     %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $02, pAIScripting0x01_Florist_Actor01_Say_03C6)   ;B3A0C9
-    %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 0, pAIScripting0x01_L253)     ;B3A0D0
+    %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 0, pAIScripting0x01_Florist_Actor01_IfCurrentSeasonIDIs0)     ;B3A0D0
     %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 1, pAIScripting0x01_Florist_Actor01_Say_0047)     ;B3A0D7
     %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 2, pAIScripting0x01_Florist_Actor01_Say_03C5)     ;B3A0DE
-    %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 3, pAIScripting0x01_L257)     ;B3A0E5
+    %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 3, pAIScripting0x01_Florist_Actor01_IfCurrentSeasonIDIs3)     ;B3A0E5
     %AICMD0x12_Jump(pAIScripting0x01_L248)                                   ;B3A0EC
-pAIScripting0x01_L253:
+pAIScripting0x01_Florist_Actor01_IfCurrentSeasonIDIs0:
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 22, pAIScripting0x01_Florist_Actor01_Say_0203)         ;B3A0EF
     %AICMD0x1C_ShowDialog($0046, $00)                          ;B3A0F6
     %AICMD0x1B_SetSprite($02D0, $01)                                     ;B3A0FA
@@ -1281,7 +1281,7 @@ pAIScripting0x01_Florist_Actor01_Say_0203:
     %AICMD0x1C_ShowDialog($0203, $00)                          ;B3A117
     %AICMD0x1B_SetSprite($02D0, $01)                                     ;B3A11B
     %AICMD0x12_Jump(pAIScripting0x01_L248)                                   ;B3A11F
-pAIScripting0x01_L257:
+pAIScripting0x01_Florist_Actor01_IfCurrentSeasonIDIs3:
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 23, pAIScripting0x01_Florist_Actor01_Say_02AE)         ;B3A122
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 30, pAIScripting0x01_Florist_Actor01_Say_03EF)         ;B3A129
     %AICMD0x1C_ShowDialog($0047, $00)                          ;B3A130
@@ -1319,9 +1319,9 @@ pAIScripting0x01_Toolshop_Idle:
     %AICMD0x13_Wait(1)                                         ;B3A16A
     %AICMD0x12_Jump(pAIScripting0x01_Toolshop_Idle)                                   ;B3A16D
 pAIScripting0x01_L262:
-    %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $01, pAIScripting0x01_L263)   ;B3A170
+    %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $01, pAIScripting0x01_Toolshop_IfEvent2Bit01)   ;B3A170
     %AICMD0x09_StartScript($02, pAIScripting0x01_Toolshop_Actor02_Ann)                                   ;B3A177
-pAIScripting0x01_L263:
+pAIScripting0x01_Toolshop_IfEvent2Bit01:
     %AICMD0x12_Jump(pAIScripting0x01_Toolshop_Idle)                                   ;B3A17B
 ; Child script (slot $01) of Toolshop: actor. Spawns at (40,360). Waits for the player to talk. Waits for the player to
 ; press A. Dialogs $01CA, $0200, $0049, $0041, $0040, $03DC ....
@@ -1354,12 +1354,12 @@ pAIScripting0x01_Toolshop_Actor01_Say_0049:
 pAIScripting0x01_Toolshop_Actor01_OnInteract:
     %AICMD0x14_JumpIfFlagSet(strcFlags.event4, $0E, pAIScripting0x01_Toolshop_Actor01_Talk_01DC)   ;B3A1BC
     %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $01, pAIScripting0x01_Toolshop_Actor01_Say_03C4)   ;B3A1C3
-    %AICMD0x45_JumpIfBetween16(nLove_Ann, 200, 300, pAIScripting0x01_L278)   ;B3A1CA
-pAIScripting0x01_L271:
+    %AICMD0x45_JumpIfBetween16(nLove_Ann, 200, 300, pAIScripting0x01_Toolshop_Actor01_IfAnn200to300)   ;B3A1CA
+pAIScripting0x01_Toolshop_Actor01_Random00:
     %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 0, pAIScripting0x01_Toolshop_Actor01_Say_0041)     ;B3A1D4
     %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 1, pAIScripting0x01_Toolshop_Actor01_Say_0040)     ;B3A1DB
-    %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 2, pAIScripting0x01_L274)     ;B3A1E2
-    %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 3, pAIScripting0x01_L276)     ;B3A1E9
+    %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 2, pAIScripting0x01_Toolshop_Actor01_IfCurrentSeasonIDIs2)     ;B3A1E2
+    %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 3, pAIScripting0x01_Toolshop_Actor01_IfCurrentSeasonIDIs3)     ;B3A1E9
 ; Shows dialog $0041.
 pAIScripting0x01_Toolshop_Actor01_Say_0041:
     %AICMD0x1C_ShowDialog($0041, $00)                          ;B3A1F0
@@ -1370,7 +1370,7 @@ pAIScripting0x01_Toolshop_Actor01_Say_0040:
     %AICMD0x1C_ShowDialog($0040, $00)                          ;B3A1FB
     %AICMD0x1B_SetSprite($029A, $01)                                     ;B3A1FF
     %AICMD0x12_Jump(pAIScripting0x01_L265)                                   ;B3A203
-pAIScripting0x01_L274:
+pAIScripting0x01_Toolshop_Actor01_IfCurrentSeasonIDIs2:
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 11, pAIScripting0x01_Toolshop_Actor01_Say_03DC)         ;B3A206
     %AICMD0x1C_ShowDialog($0040, $00)                          ;B3A20D
     %AICMD0x1B_SetSprite($029A, $01)                                     ;B3A211
@@ -1380,7 +1380,7 @@ pAIScripting0x01_Toolshop_Actor01_Say_03DC:
     %AICMD0x1C_ShowDialog($03DC, $00)                          ;B3A218
     %AICMD0x1B_SetSprite($029A, $01)                                     ;B3A21C
     %AICMD0x12_Jump(pAIScripting0x01_L265)                                   ;B3A220
-pAIScripting0x01_L276:
+pAIScripting0x01_Toolshop_Actor01_IfCurrentSeasonIDIs3:
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 30, pAIScripting0x01_Toolshop_Actor01_Say_03EE)         ;B3A223
     %AICMD0x1C_ShowDialog($0416, $00)                          ;B3A22A
     %AICMD0x1B_SetSprite($029A, $01)                                     ;B3A22E
@@ -1391,9 +1391,9 @@ pAIScripting0x01_Toolshop_Actor01_Say_03EE:
     %AICMD0x1B_SetSprite($029A, $01)                                     ;B3A239
     %AICMD0x41_AddValue16(nPlayerHappiness, 5)                 ;B3A23D
     %AICMD0x12_Jump(pAIScripting0x01_L265)                                   ;B3A243
-pAIScripting0x01_L278:
+pAIScripting0x01_Toolshop_Actor01_IfAnn200to300:
     %AICMD0x17_RollRandom($02)                                            ;B3A246
-    %AICMD0x18_JumpIfRandomEquals($00, pAIScripting0x01_L271)                                   ;B3A248
+    %AICMD0x18_JumpIfRandomEquals($00, pAIScripting0x01_Toolshop_Actor01_Random00)                                   ;B3A248
     %AICMD0x1C_ShowDialog($03C3, $00)                          ;B3A24C
     %AICMD0x1B_SetSprite($029A, $01)                                     ;B3A250
     %AICMD0x12_Jump(pAIScripting0x01_L265)                                   ;B3A254
@@ -1466,12 +1466,12 @@ pAIScripting0x01_Toolshop_Actor02_Ann_Say_03B4_2:
 ; Handler for A pressed with empty hands.
 pAIScripting0x01_Toolshop_Actor02_Ann_OnInteract:
     %AICMD0x14_JumpIfFlagSet(strcFlags.event4, $0E, pAIScripting0x01_Toolshop_Actor02_Ann_Talk_01DE)   ;B3A316
-    %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 0, pAIScripting0x01_L293)     ;B3A31D
-    %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 1, pAIScripting0x01_L297)     ;B3A324
-    %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 2, pAIScripting0x01_L302)     ;B3A32B
-    %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 3, pAIScripting0x01_L306)     ;B3A332
+    %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 0, pAIScripting0x01_Toolshop_Actor02_Ann_IfCurrentSeasonIDIs0)     ;B3A31D
+    %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 1, pAIScripting0x01_Toolshop_Actor02_Ann_IfCurrentSeasonIDIs1)     ;B3A324
+    %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 2, pAIScripting0x01_Toolshop_Actor02_Ann_IfCurrentSeasonIDIs2)     ;B3A32B
+    %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 3, pAIScripting0x01_Toolshop_Actor02_Ann_IfCurrentSeasonIDIs3)     ;B3A332
     %AICMD0x12_Jump(pAIScripting0x01_L282)                                   ;B3A339
-pAIScripting0x01_L293:
+pAIScripting0x01_Toolshop_Actor02_Ann_IfCurrentSeasonIDIs0:
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 22, pAIScripting0x01_Toolshop_Actor02_Ann_Say_0207)         ;B3A33C
     %AICMD0x17_RollRandom($02)                                            ;B3A343
     %AICMD0x18_JumpIfRandomEquals($00, pAIScripting0x01_Toolshop_Actor02_Ann_Say_0096)                                   ;B3A345
@@ -1489,7 +1489,7 @@ pAIScripting0x01_Toolshop_Actor02_Ann_Say_009E:
 pAIScripting0x01_Toolshop_Actor02_Ann_Say_0207:
     %AICMD0x1C_ShowDialog($0207, $00)                          ;B3A35E
     %AICMD0x12_Jump(pAIScripting0x01_L282)                                   ;B3A362
-pAIScripting0x01_L297:
+pAIScripting0x01_Toolshop_Actor02_Ann_IfCurrentSeasonIDIs1:
     %AICMD0x17_RollRandom($02)                                            ;B3A365
     %AICMD0x18_JumpIfRandomEquals($00, pAIScripting0x01_Toolshop_Actor02_Ann_Say_0097)                                   ;B3A367
     %AICMD0x18_JumpIfRandomEquals($01, pAIScripting0x01_Toolshop_Actor02_Ann_Say_009F)                                   ;B3A36B
@@ -1514,7 +1514,7 @@ pAIScripting0x01_Toolshop_Actor02_Ann_Say_0099:
 pAIScripting0x01_Toolshop_Actor02_Ann_Say_009F:
     %AICMD0x1C_ShowDialog($009F, $00)                          ;B3A39B
     %AICMD0x12_Jump(pAIScripting0x01_L282)                                   ;B3A39F
-pAIScripting0x01_L302:
+pAIScripting0x01_Toolshop_Actor02_Ann_IfCurrentSeasonIDIs2:
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 11, pAIScripting0x01_Toolshop_Actor02_Ann_Say_0239)         ;B3A3A2
     %AICMD0x17_RollRandom($02)                                            ;B3A3A9
     %AICMD0x18_JumpIfRandomEquals($00, pAIScripting0x01_Toolshop_Actor02_Ann_Say_009A)                                   ;B3A3AB
@@ -1532,7 +1532,7 @@ pAIScripting0x01_Toolshop_Actor02_Ann_Say_00A0:
 pAIScripting0x01_Toolshop_Actor02_Ann_Say_0239:
     %AICMD0x1C_ShowDialog($0239, $00)                          ;B3A3C4
     %AICMD0x12_Jump(pAIScripting0x01_L282)                                   ;B3A3C8
-pAIScripting0x01_L306:
+pAIScripting0x01_Toolshop_Actor02_Ann_IfCurrentSeasonIDIs3:
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 23, pAIScripting0x01_Toolshop_Actor02_Ann_Say_02B0)         ;B3A3CB
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 30, pAIScripting0x01_Toolshop_Actor02_Ann_Say_03F9)         ;B3A3D2
     %AICMD0x17_RollRandom($02)                                            ;B3A3D9
@@ -1623,8 +1623,8 @@ pAIScripting0x01_Restaurant_Actor01_Say_03BB:
     %AICMD0x12_Jump(pAIScripting0x01_L317)                                   ;B3A497
 ; Handler for A pressed with empty hands.
 pAIScripting0x01_Restaurant_Actor01_OnInteract:
-    %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 2, pAIScripting0x01_L326)     ;B3A49A
-    %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 3, pAIScripting0x01_L328)     ;B3A4A1
+    %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 2, pAIScripting0x01_Restaurant_Actor01_IfCurrentSeasonIDIs2)     ;B3A49A
+    %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 3, pAIScripting0x01_Restaurant_Actor01_IfCurrentSeasonIDIs3)     ;B3A4A1
 ; Conversation handler.
 pAIScripting0x01_Restaurant_Actor01_Talk:
     %AICMD0x14_JumpIfFlagSet(strcFlags.event5, $02, pAIScripting0x01_Restaurant_Actor01_Say_01ED)   ;B3A4A8
@@ -1644,7 +1644,7 @@ pAIScripting0x01_Restaurant_Actor01_Say_004D:
     %AICMD0x1C_ShowDialog($004D, $00)                          ;B3A4D8
     %AICMD0x1B_SetSprite($02A1, $01)                                     ;B3A4DC
     %AICMD0x12_Jump(pAIScripting0x01_L318)                                   ;B3A4E0
-pAIScripting0x01_L326:
+pAIScripting0x01_Restaurant_Actor01_IfCurrentSeasonIDIs2:
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 11, pAIScripting0x01_Restaurant_Actor01_Say_023F)         ;B3A4E3
     %AICMD0x12_Jump(pAIScripting0x01_Restaurant_Actor01_Talk)                                   ;B3A4EA
 ; Shows dialog $023F.
@@ -1652,7 +1652,7 @@ pAIScripting0x01_Restaurant_Actor01_Say_023F:
     %AICMD0x1C_ShowDialog($023F, $00)                          ;B3A4ED
     %AICMD0x1B_SetSprite($02A1, $01)                                     ;B3A4F1
     %AICMD0x12_Jump(pAIScripting0x01_L317)                                   ;B3A4F5
-pAIScripting0x01_L328:
+pAIScripting0x01_Restaurant_Actor01_IfCurrentSeasonIDIs3:
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 30, pAIScripting0x01_Restaurant_Actor01_Say_03EC)         ;B3A4F8
     %AICMD0x12_Jump(pAIScripting0x01_Restaurant_Actor01_Talk)                                   ;B3A4FF
 ; Shows dialog $03EC.
@@ -1695,7 +1695,7 @@ pAIScripting0x01_Restaurant_Actor02_OnItemOffered:
     %AICMD0x12_Jump(pAIScripting0x01_L334)                                   ;B3A556
 ; Handler for A pressed with empty hands.
 pAIScripting0x01_Restaurant_Actor02_OnInteract:
-    %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 3, pAIScripting0x01_L341)     ;B3A559
+    %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 3, pAIScripting0x01_Restaurant_Actor02_IfCurrentSeasonIDIs3)     ;B3A559
     %AICMD0x17_RollRandom($08)                                            ;B3A560
     %AICMD0x18_JumpIfRandomEquals($00, pAIScripting0x01_Restaurant_Actor02_Say_03C9)                                   ;B3A562
     %AICMD0x17_RollRandom($02)                                            ;B3A566
@@ -1714,7 +1714,7 @@ pAIScripting0x01_Restaurant_Actor02_Say_0052:
 pAIScripting0x01_Restaurant_Actor02_Say_03C9:
     %AICMD0x1C_ShowDialog($03C9, $00)                          ;B3A581
     %AICMD0x12_Jump(pAIScripting0x01_L334)                                   ;B3A585
-pAIScripting0x01_L341:
+pAIScripting0x01_Restaurant_Actor02_IfCurrentSeasonIDIs3:
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 30, pAIScripting0x01_Restaurant_Actor02_Say_03FD)         ;B3A588
     %AICMD0x1C_ShowDialog($03C9, $00)                          ;B3A58F
     %AICMD0x12_Jump(pAIScripting0x01_L334)                                   ;B3A593
@@ -1788,7 +1788,7 @@ pAIScripting0x01_FortuneTeller_Actor01_OnInteract:
     %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $03, pAIScripting0x01_L356)   ;B3A63B
     %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $04, pAIScripting0x01_L356)   ;B3A642
     %AICMD0x17_RollRandom($04)                                            ;B3A649
-    %AICMD0x18_JumpIfRandomEquals($00, pAIScripting0x01_L358)                                   ;B3A64B
+    %AICMD0x18_JumpIfRandomEquals($00, pAIScripting0x01_FortuneTeller_Actor01_Random00)                                   ;B3A64B
     %AICMD0x17_RollRandom($02)                                            ;B3A64F
     %AICMD0x18_JumpIfRandomEquals($00, pAIScripting0x01_FortuneTeller_Actor01_Talk_0062)                                   ;B3A651
     %AICMD0x18_JumpIfRandomEquals($01, pAIScripting0x01_FortuneTeller_Actor01_Talk_0060)                                   ;B3A655
@@ -1814,7 +1814,7 @@ pAIScripting0x01_FortuneTeller_Actor01_Say_03E9:
     %AICMD0x1C_ShowDialog($03E9, $00)                          ;B3A683
     %AICMD0x1B_SetSprite($0288, $00)                                     ;B3A687
     %AICMD0x12_Jump(pAIScripting0x01_L347)                                   ;B3A68B
-pAIScripting0x01_L358:
+pAIScripting0x01_FortuneTeller_Actor01_Random00:
     %AICMD0x1D_ShowDialog($03E5, $00)                          ;B3A68E
     %AICMD0x20_JumpIfChoice(0, pAIScripting0x01_FortuneTeller_Actor01_Say_03E6)                        ;B3A692
     %AICMD0x20_JumpIfChoice(1, pAIScripting0x01_FortuneTeller_Actor01_Say_03E8)                        ;B3A696
@@ -1916,9 +1916,9 @@ pAIScripting0x01_AnimalShop_Actor01_Say_03BB:
 ; Handler for A pressed with empty hands.
 pAIScripting0x01_AnimalShop_Actor01_OnInteract:
     %AICMD0x14_JumpIfFlagSet(strcFlags.event5, $02, pAIScripting0x01_AnimalShop_Actor01_Say_01F0)   ;B3A777
-    %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 2, pAIScripting0x01_L379)     ;B3A77E
-    %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 3, pAIScripting0x01_L380)     ;B3A785
-pAIScripting0x01_L376:
+    %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 2, pAIScripting0x01_AnimalShop_Actor01_IfCurrentSeasonIDIs2)     ;B3A77E
+    %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 3, pAIScripting0x01_AnimalShop_Actor01_IfCurrentSeasonIDIs3)     ;B3A785
+pAIScripting0x01_AnimalShop_Actor01_Random00:
     %AICMD0x17_RollRandom($02)                                            ;B3A78C
     %AICMD0x18_JumpIfRandomEquals($00, pAIScripting0x01_AnimalShop_Actor01_Say_005C)                                   ;B3A78E
     %AICMD0x18_JumpIfRandomEquals($01, pAIScripting0x01_AnimalShop_Actor01_Talk_005D)                                   ;B3A792
@@ -1933,13 +1933,13 @@ pAIScripting0x01_AnimalShop_Actor01_Talk_005D:
     %AICMD0x1C_ShowDialog($005D, $00)                          ;B3A7A4
     %AICMD0x1B_SetSprite($02AF, $00)                                     ;B3A7A8
     %AICMD0x12_Jump(pAIScripting0x01_L371)                                   ;B3A7AC
-pAIScripting0x01_L379:
+pAIScripting0x01_AnimalShop_Actor01_IfCurrentSeasonIDIs2:
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 19, pAIScripting0x01_AnimalShop_Actor01_Say_03F4)         ;B3A7AF
     %AICMD0x16_JumpIfBetween8(nOwnedCows, 1, 12, pAIScripting0x01_L383)      ;B3A7B6
     %AICMD0x1C_ShowDialog($005D, $00)                          ;B3A7BE
     %AICMD0x1B_SetSprite($02AF, $00)                                     ;B3A7C2
     %AICMD0x12_Jump(pAIScripting0x01_L370)                                   ;B3A7C6
-pAIScripting0x01_L380:
+pAIScripting0x01_AnimalShop_Actor01_IfCurrentSeasonIDIs3:
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 30, pAIScripting0x01_AnimalShop_Actor01_Say_0146)         ;B3A7C9
     %AICMD0x16_JumpIfBetween8(nOwnedCows, 1, 12, pAIScripting0x01_L383)      ;B3A7D0
     %AICMD0x1C_ShowDialog($0407, $00)                          ;B3A7D8
@@ -1958,7 +1958,7 @@ pAIScripting0x01_AnimalShop_Actor01_Say_0146:
     %AICMD0x12_Jump(pAIScripting0x01_L370)                                   ;B3A7FC
 pAIScripting0x01_L383:
     %AICMD0x17_RollRandom($02)                                            ;B3A7FF
-    %AICMD0x18_JumpIfRandomEquals($00, pAIScripting0x01_L376)                                   ;B3A801
+    %AICMD0x18_JumpIfRandomEquals($00, pAIScripting0x01_AnimalShop_Actor01_Random00)                                   ;B3A801
     %AICMD0x1C_ShowDialog($03CF, $00)                          ;B3A805
     %AICMD0x1B_SetSprite($02AF, $00)                                     ;B3A809
     %AICMD0x12_Jump(pAIScripting0x01_L370)                                   ;B3A80D
@@ -2094,10 +2094,10 @@ pAIScripting0x01_Woods_Actor01_OnInteract:
     %AICMD0x14_JumpIfFlagSet(strcFlags.event5, $02, pAIScripting0x01_Woods_Actor01_Say_01EC)   ;B3A9B2
     %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 17, 18, pAIScripting0x01_Woods_Actor01_Say_0081) ;B3A9B9
     %AICMD0x1D_ShowDialog($007E, $00)                          ;B3A9C1
-    %AICMD0x20_JumpIfChoice(0, pAIScripting0x01_L405)                        ;B3A9C5
+    %AICMD0x20_JumpIfChoice(0, pAIScripting0x01_Woods_Actor01_Choice0)                        ;B3A9C5
     %AICMD0x20_JumpIfChoice(1, pAIScripting0x01_Woods_Actor01_Say_0080)                        ;B3A9C9
     %AICMD0x12_Jump(pAIScripting0x01_L399)                                   ;B3A9CD
-pAIScripting0x01_L405:
+pAIScripting0x01_Woods_Actor01_Choice0:
     %AICMD0x23_OrWithIndexedValue(strcFlags.daily1, $09)       ;B3A9D0
     %AICMD0x1C_ShowDialog($007F, $00)                          ;B3A9D5
     %AICMD0x12_Jump(pAIScripting0x01_L400)                                   ;B3A9D9
@@ -2123,7 +2123,7 @@ pAIScripting0x01_L410:
 ; Child script (slot $02) of Woods: actor. Spawns at (288,512). Waits for the player to press A. Dialogs $01C9, $03BC,
 ; $0049, $007A, $007C, $007D ....
 pAIScripting0x01_Woods_Actor02:
-    %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 17, 18, pAIScripting0x01_L424) ;B3A9FE
+    %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 17, 18, pAIScripting0x01_Woods_Actor02_IfCurrentTimeID17to18) ;B3A9FE
     %AICMD0x1A_SpawnNpc($0120, $0200, aAIScriptingData_L040, $00)                     ;B3AA06
 pAIScripting0x01_L412:
     %AICMD0x4D_JumpIfBlueFeatherUsed(pAIScripting0x01_Woods_Actor02_OnBlueFeather)                                        ;B3AA0E
@@ -2149,7 +2149,7 @@ pAIScripting0x01_Woods_Actor02_OnInteract:
     %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 0, pAIScripting0x01_Woods_Actor02_Say_007A)     ;B3AA47
     %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 1, pAIScripting0x01_Woods_Actor02_Say_007C)     ;B3AA4E
     %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 2, pAIScripting0x01_Woods_Actor02_Say_007D)     ;B3AA55
-    %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 3, pAIScripting0x01_L420)     ;B3AA5C
+    %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 3, pAIScripting0x01_Woods_Actor02_IfCurrentSeasonIDIs3)     ;B3AA5C
     %AICMD0x12_Jump(pAIScripting0x01_L412)                                   ;B3AA63
 ; Shows dialog $007A.
 pAIScripting0x01_Woods_Actor02_Say_007A:
@@ -2163,7 +2163,7 @@ pAIScripting0x01_Woods_Actor02_Say_007C:
 pAIScripting0x01_Woods_Actor02_Say_007D:
     %AICMD0x1C_ShowDialog($007D, $00)                          ;B3AA74
     %AICMD0x12_Jump(pAIScripting0x01_L412)                                   ;B3AA78
-pAIScripting0x01_L420:
+pAIScripting0x01_Woods_Actor02_IfCurrentSeasonIDIs3:
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 30, pAIScripting0x01_Woods_Actor02_Say_03F5)         ;B3AA7B
     %AICMD0x1C_ShowDialog($0408, $00)                          ;B3AA82
     %AICMD0x12_Jump(pAIScripting0x01_L412)                                   ;B3AA86
@@ -2180,12 +2180,12 @@ pAIScripting0x01_Woods_Actor02_Say_03D3:
 pAIScripting0x01_Woods_Actor02_Say_03D2:
     %AICMD0x1C_ShowDialog($03D2, $00)                          ;B3AA9D
     %AICMD0x12_Jump(pAIScripting0x01_L412)                                   ;B3AAA1
-pAIScripting0x01_L424:
+pAIScripting0x01_Woods_Actor02_IfCurrentTimeID17to18:
     %AICMD0x10_End()                                           ;B3AAA4
 ; Child script (slot $03) of Woods: actor. Spawns at (504,600). Walks randomly. Waits for the player to press A. Dialogs
 ; $01C8, $03BC, $03BB, $012D, $03D5, $03D6 ....
 pAIScripting0x01_Woods_Actor03:
-    %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 17, 18, pAIScripting0x01_L440) ;B3AAA5
+    %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 17, 18, pAIScripting0x01_Woods_Actor03_IfCurrentTimeID17to18) ;B3AAA5
     %AICMD0x1A_SpawnNpc($01F8, $0258, aAIScriptingData_L027, $00)                     ;B3AAAD
     %AICMD0x22_StartRandomWalk($10, $18, $01, aAIScriptingData_L028, $0C)                    ;B3AAB5
 pAIScripting0x01_L426:
@@ -2212,17 +2212,17 @@ pAIScripting0x01_Woods_Actor03_OnInteract:
     %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $02, pAIScripting0x01_L437)   ;B3AAF2
     %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $03, pAIScripting0x01_L437)   ;B3AAF9
     %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $04, pAIScripting0x01_L437)   ;B3AB00
-pAIScripting0x01_L431:
+pAIScripting0x01_Woods_Actor03_Random00:
     %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 0, pAIScripting0x01_Woods_Actor03_Say_012D)     ;B3AB07
-    %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 1, pAIScripting0x01_L433)     ;B3AB0E
+    %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 1, pAIScripting0x01_Woods_Actor03_IfCurrentSeasonIDIs1)     ;B3AB0E
     %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 2, pAIScripting0x01_Woods_Actor03_Say_03D6)     ;B3AB15
-    %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 3, pAIScripting0x01_L435)     ;B3AB1C
+    %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 3, pAIScripting0x01_Woods_Actor03_IfCurrentSeasonIDIs3)     ;B3AB1C
     %AICMD0x12_Jump(pAIScripting0x01_L426)                                   ;B3AB23
 ; Shows dialog $012D.
 pAIScripting0x01_Woods_Actor03_Say_012D:
     %AICMD0x1C_ShowDialog($012D, $00)                          ;B3AB26
     %AICMD0x12_Jump(pAIScripting0x01_L426)                                   ;B3AB2A
-pAIScripting0x01_L433:
+pAIScripting0x01_Woods_Actor03_IfCurrentSeasonIDIs1:
     %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $00, pAIScripting0x01_Woods_Actor03_Say_0415)   ;B3AB2D
     %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $01, pAIScripting0x01_Woods_Actor03_Say_0415)   ;B3AB34
     %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $02, pAIScripting0x01_Woods_Actor03_Say_0415)   ;B3AB3B
@@ -2234,7 +2234,7 @@ pAIScripting0x01_L433:
 pAIScripting0x01_Woods_Actor03_Say_03D6:
     %AICMD0x1C_ShowDialog($03D6, $00)                          ;B3AB57
     %AICMD0x12_Jump(pAIScripting0x01_L426)                                   ;B3AB5B
-pAIScripting0x01_L435:
+pAIScripting0x01_Woods_Actor03_IfCurrentSeasonIDIs3:
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 30, pAIScripting0x01_Woods_Actor03_Say_03F6)         ;B3AB5E
     %AICMD0x1C_ShowDialog($0409, $00)                          ;B3AB65
     %AICMD0x12_Jump(pAIScripting0x01_L426)                                   ;B3AB69
@@ -2245,7 +2245,7 @@ pAIScripting0x01_Woods_Actor03_Say_03F6:
     %AICMD0x12_Jump(pAIScripting0x01_L426)                                   ;B3AB76
 pAIScripting0x01_L437:
     %AICMD0x17_RollRandom($02)                                            ;B3AB79
-    %AICMD0x18_JumpIfRandomEquals($00, pAIScripting0x01_L431)                                   ;B3AB7B
+    %AICMD0x18_JumpIfRandomEquals($00, pAIScripting0x01_Woods_Actor03_Random00)                                   ;B3AB7B
     %AICMD0x14_JumpIfFlagSet(strcFlags.event1, $07, pAIScripting0x01_Woods_Actor03_Say_03D7)   ;B3AB7F
     %AICMD0x1C_ShowDialog($03DA, $00)                          ;B3AB86
     %AICMD0x12_Jump(pAIScripting0x01_L426)                                   ;B3AB8A
@@ -2257,12 +2257,12 @@ pAIScripting0x01_Woods_Actor03_Say_0415:
 pAIScripting0x01_Woods_Actor03_Say_03D7:
     %AICMD0x1C_ShowDialog($03D7, $00)                          ;B3AB94
     %AICMD0x12_Jump(pAIScripting0x01_L426)                                   ;B3AB98
-pAIScripting0x01_L440:
+pAIScripting0x01_Woods_Actor03_IfCurrentTimeID17to18:
     %AICMD0x10_End()                                           ;B3AB9B
 ; Child script (slot $04) of Woods: actor. Spawns at (664,504). Walks randomly. Waits for the player to press A. Dialogs
 ; $01C8, $03BC, $03BB, $012E, $03D4, $03D7 ....
 pAIScripting0x01_Woods_Actor04:
-    %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 17, 18, pAIScripting0x01_L454) ;B3AB9C
+    %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 17, 18, pAIScripting0x01_Woods_Actor04_IfCurrentTimeID17to18) ;B3AB9C
     %AICMD0x1A_SpawnNpc($0298, $01F8, aAIScriptingData_L027, $00)                     ;B3ABA4
     %AICMD0x22_StartRandomWalk($18, $18, $01, aAIScriptingData_L028, $0C)                    ;B3ABAC
 pAIScripting0x01_L442:
@@ -2289,11 +2289,11 @@ pAIScripting0x01_Woods_Actor04_OnInteract:
     %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $02, pAIScripting0x01_L453)   ;B3ABE9
     %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $03, pAIScripting0x01_L453)   ;B3ABF0
     %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $04, pAIScripting0x01_L453)   ;B3ABF7
-pAIScripting0x01_L447:
+pAIScripting0x01_Woods_Actor04_Random00:
     %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 0, pAIScripting0x01_Woods_Actor04_Say_012E)     ;B3ABFE
     %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 1, pAIScripting0x01_Woods_Actor04_Say_03D4)     ;B3AC05
     %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 2, pAIScripting0x01_Woods_Actor04_Say_03D7)     ;B3AC0C
-    %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 3, pAIScripting0x01_L451)     ;B3AC13
+    %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 3, pAIScripting0x01_Woods_Actor04_IfCurrentSeasonIDIs3)     ;B3AC13
     %AICMD0x12_Jump(pAIScripting0x01_L442)                                   ;B3AC1A
 ; Shows dialog $012E.
 pAIScripting0x01_Woods_Actor04_Say_012E:
@@ -2307,7 +2307,7 @@ pAIScripting0x01_Woods_Actor04_Say_03D4:
 pAIScripting0x01_Woods_Actor04_Say_03D7:
     %AICMD0x1C_ShowDialog($03D7, $00)                          ;B3AC2B
     %AICMD0x12_Jump(pAIScripting0x01_L442)                                   ;B3AC2F
-pAIScripting0x01_L451:
+pAIScripting0x01_Woods_Actor04_IfCurrentSeasonIDIs3:
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 30, pAIScripting0x01_Woods_Actor04_Say_03F7)         ;B3AC32
     %AICMD0x1C_ShowDialog($03D6, $00)                          ;B3AC39
     %AICMD0x12_Jump(pAIScripting0x01_L442)                                   ;B3AC3D
@@ -2318,15 +2318,15 @@ pAIScripting0x01_Woods_Actor04_Say_03F7:
     %AICMD0x12_Jump(pAIScripting0x01_L442)                                   ;B3AC4A
 pAIScripting0x01_L453:
     %AICMD0x17_RollRandom($02)                                            ;B3AC4D
-    %AICMD0x18_JumpIfRandomEquals($00, pAIScripting0x01_L447)                                   ;B3AC4F
+    %AICMD0x18_JumpIfRandomEquals($00, pAIScripting0x01_Woods_Actor04_Random00)                                   ;B3AC4F
     %AICMD0x1C_ShowDialog($03D8, $00)                          ;B3AC53
     %AICMD0x12_Jump(pAIScripting0x01_L442)                                   ;B3AC57
-pAIScripting0x01_L454:
+pAIScripting0x01_Woods_Actor04_IfCurrentTimeID17to18:
     %AICMD0x10_End()                                           ;B3AC5A
 ; Child script (slot $05) of Woods: actor. Spawns at (376,520). Walks randomly. Waits for the player to press A. Dialogs
 ; $01C8, $03BC, $03BB, $012F, $03D6, $03DB ....
 pAIScripting0x01_Woods_Actor05:
-    %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 17, 18, pAIScripting0x01_L468) ;B3AC5B
+    %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 17, 18, pAIScripting0x01_Woods_Actor05_IfCurrentTimeID17to18) ;B3AC5B
     %AICMD0x1A_SpawnNpc($0178, $0208, aAIScriptingData_L027, $00)                     ;B3AC63
     %AICMD0x22_StartRandomWalk($18, $18, $01, aAIScriptingData_L028, $0C)                    ;B3AC6B
 pAIScripting0x01_L456:
@@ -2353,11 +2353,11 @@ pAIScripting0x01_Woods_Actor05_OnInteract:
     %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $02, pAIScripting0x01_L467)   ;B3ACA8
     %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $03, pAIScripting0x01_L467)   ;B3ACAF
     %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $04, pAIScripting0x01_L467)   ;B3ACB6
-pAIScripting0x01_L461:
+pAIScripting0x01_Woods_Actor05_Random00:
     %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 0, pAIScripting0x01_Woods_Actor05_Say_012F)     ;B3ACBD
     %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 1, pAIScripting0x01_Woods_Actor05_Say_03D6)     ;B3ACC4
     %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 2, pAIScripting0x01_Woods_Actor05_Say_03DB)     ;B3ACCB
-    %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 3, pAIScripting0x01_L465)     ;B3ACD2
+    %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 3, pAIScripting0x01_Woods_Actor05_IfCurrentSeasonIDIs3)     ;B3ACD2
     %AICMD0x17_RollRandom($02)                                            ;B3ACD9
     %AICMD0x18_JumpIfRandomEquals($00, pAIScripting0x01_Woods_Actor05_Say_012F)                                   ;B3ACDB
     %AICMD0x18_JumpIfRandomEquals($01, pAIScripting0x01_Woods_Actor05_Say_03D6)                                   ;B3ACDF
@@ -2374,7 +2374,7 @@ pAIScripting0x01_Woods_Actor05_Say_03D6:
 pAIScripting0x01_Woods_Actor05_Say_03DB:
     %AICMD0x1C_ShowDialog($03DB, $00)                          ;B3ACF4
     %AICMD0x12_Jump(pAIScripting0x01_L456)                                   ;B3ACF8
-pAIScripting0x01_L465:
+pAIScripting0x01_Woods_Actor05_IfCurrentSeasonIDIs3:
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 30, pAIScripting0x01_Woods_Actor05_Say_03F6)         ;B3ACFB
     %AICMD0x1C_ShowDialog($03A0, $00)                          ;B3AD02
     %AICMD0x12_Jump(pAIScripting0x01_L456)                                   ;B3AD06
@@ -2385,10 +2385,10 @@ pAIScripting0x01_Woods_Actor05_Say_03F6:
     %AICMD0x12_Jump(pAIScripting0x01_L456)                                   ;B3AD13
 pAIScripting0x01_L467:
     %AICMD0x17_RollRandom($02)                                            ;B3AD16
-    %AICMD0x18_JumpIfRandomEquals($00, pAIScripting0x01_L461)                                   ;B3AD18
+    %AICMD0x18_JumpIfRandomEquals($00, pAIScripting0x01_Woods_Actor05_Random00)                                   ;B3AD18
     %AICMD0x1C_ShowDialog($03D9, $00)                          ;B3AD1C
     %AICMD0x12_Jump(pAIScripting0x01_L456)                                   ;B3AD20
-pAIScripting0x01_L468:
+pAIScripting0x01_Woods_Actor05_IfCurrentTimeID17to18:
     %AICMD0x10_End()                                           ;B3AD23
 
 
@@ -2436,10 +2436,10 @@ pAIScripting0x01_WorksmanHouse_Actor01_OnInteract:
     %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $06, pAIScripting0x01_WorksmanHouse_Actor01_Talk_0139)   ;B3AD73
     %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $07, pAIScripting0x01_WorksmanHouse_Actor01_Talk_0139)   ;B3AD7A
     %AICMD0x1D_ShowDialog($0130, $00)                          ;B3AD81
-    %AICMD0x20_JumpIfChoice(0, pAIScripting0x01_L477)                        ;B3AD85
+    %AICMD0x20_JumpIfChoice(0, pAIScripting0x01_WorksmanHouse_Actor01_Choice0)                        ;B3AD85
     %AICMD0x20_JumpIfChoice(1, pAIScripting0x01_WorksmanHouse_Actor01_Say_0132)                        ;B3AD89
     %AICMD0x12_Jump(pAIScripting0x01_WorksmanHouse_Actor01_WaitInteract)                                   ;B3AD8D
-pAIScripting0x01_L477:
+pAIScripting0x01_WorksmanHouse_Actor01_Choice0:
     %AICMD0x23_OrWithIndexedValue(strcFlags.event2, $05)       ;B3AD90
     %AICMD0x1C_ShowDialog($0131, $00)                          ;B3AD95
     %AICMD0x12_Jump(pAIScripting0x01_L472)                                   ;B3AD99

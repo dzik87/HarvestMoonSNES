@@ -583,7 +583,7 @@ pAIScripting0x0B_Woods_Idle:
     %AICMD0x12_Jump(pAIScripting0x0B_Woods_Idle)                                   ;B3EE36
 ; Child script (slot $01) of Woods: actor. Spawns at (600,376). Waits for the player to talk. Dialogs $012B, $012C.
 pAIScripting0x0B_Woods_Actor01:
-    %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 17, 18, pAIScripting0x0B_L113) ;B3EE39
+    %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 17, 18, pAIScripting0x0B_Woods_Actor01_IfCurrentTimeID17to18) ;B3EE39
     %AICMD0x1A_SpawnNpc($0258, $0178, aAIScriptingData_L032, $00)                     ;B3EE41
 ; Idle until the player talks to the NPC (AICMD0x1F_JumpIfTalkedTo polls A near the actor), then jump to the conversation.
 pAIScripting0x0B_Woods_Actor01_WaitTalk:
@@ -601,11 +601,11 @@ pAIScripting0x0B_Woods_Actor01_Talk_012B:
 pAIScripting0x0B_Woods_Actor01_Talk_012C:
     %AICMD0x1C_ShowDialog($012C, $00)                          ;B3EE5C
     %AICMD0x12_Jump(pAIScripting0x0B_Woods_Actor01_WaitTalk_2)                                   ;B3EE60
-pAIScripting0x0B_L113:
+pAIScripting0x0B_Woods_Actor01_IfCurrentTimeID17to18:
     %AICMD0x10_End()                                           ;B3EE63
 ; Child script (slot $02) of Woods: actor. Spawns at (504,600). Waits for the player to talk. Dialogs $0127.
 pAIScripting0x0B_Woods_Actor02:
-    %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 17, 18, pAIScripting0x0B_L117) ;B3EE64
+    %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 17, 18, pAIScripting0x0B_Woods_Actor02_IfCurrentTimeID17to18) ;B3EE64
     %AICMD0x1A_SpawnNpc($01F8, $0258, aAIScriptingData_L028, $00)                     ;B3EE6C
 ; Idle until the player talks to the NPC (AICMD0x1F_JumpIfTalkedTo polls A near the actor), then jump to the conversation.
 pAIScripting0x0B_Woods_Actor02_WaitTalk:
@@ -615,11 +615,11 @@ pAIScripting0x0B_Woods_Actor02_WaitTalk:
 pAIScripting0x0B_Woods_Actor02_Talk_0127:
     %AICMD0x1C_ShowDialog($0127, $00)                          ;B3EE7A
     %AICMD0x12_Jump(pAIScripting0x0B_Woods_Actor02_WaitTalk)                                   ;B3EE7E
-pAIScripting0x0B_L117:
+pAIScripting0x0B_Woods_Actor02_IfCurrentTimeID17to18:
     %AICMD0x10_End()                                           ;B3EE81
 ; Child script (slot $03) of Woods: actor. Spawns at (664,504). Walks randomly. Waits for the player to talk. Dialogs $0128.
 pAIScripting0x0B_Woods_Actor03:
-    %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 17, 18, pAIScripting0x0B_L121) ;B3EE82
+    %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 17, 18, pAIScripting0x0B_Woods_Actor03_IfCurrentTimeID17to18) ;B3EE82
     %AICMD0x1A_SpawnNpc($0298, $01F8, aAIScriptingData_L027, $00)                     ;B3EE8A
     %AICMD0x22_StartRandomWalk($18, $18, $01, aAIScriptingData_L028, $0C)                    ;B3EE92
 ; Idle until the player talks to the NPC (AICMD0x1F_JumpIfTalkedTo polls A near the actor), then jump to the conversation.
@@ -630,11 +630,11 @@ pAIScripting0x0B_Woods_Actor03_WaitTalk:
 pAIScripting0x0B_Woods_Actor03_Talk_0128:
     %AICMD0x1C_ShowDialog($0128, $00)                          ;B3EE9F
     %AICMD0x12_Jump(pAIScripting0x0B_Woods_Actor03_WaitTalk)                                   ;B3EEA3
-pAIScripting0x0B_L121:
+pAIScripting0x0B_Woods_Actor03_IfCurrentTimeID17to18:
     %AICMD0x10_End()                                           ;B3EEA6
 ; Child script (slot $04) of Woods: actor. Spawns at (376,520). Walks randomly. Waits for the player to talk. Dialogs $0129.
 pAIScripting0x0B_Woods_Actor04:
-    %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 17, 18, pAIScripting0x0B_L125) ;B3EEA7
+    %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 17, 18, pAIScripting0x0B_Woods_Actor04_IfCurrentTimeID17to18) ;B3EEA7
     %AICMD0x1A_SpawnNpc($0178, $0208, aAIScriptingData_L027, $00)                     ;B3EEAF
     %AICMD0x22_StartRandomWalk($18, $18, $01, aAIScriptingData_L028, $0C)                    ;B3EEB7
 ; Idle until the player talks to the NPC (AICMD0x1F_JumpIfTalkedTo polls A near the actor), then jump to the conversation.
@@ -645,11 +645,11 @@ pAIScripting0x0B_Woods_Actor04_WaitTalk:
 pAIScripting0x0B_Woods_Actor04_Talk_0129:
     %AICMD0x1C_ShowDialog($0129, $00)                          ;B3EEC4
     %AICMD0x12_Jump(pAIScripting0x0B_Woods_Actor04_WaitTalk)                                   ;B3EEC8
-pAIScripting0x0B_L125:
+pAIScripting0x0B_Woods_Actor04_IfCurrentTimeID17to18:
     %AICMD0x10_End()                                           ;B3EECB
 ; Child script (slot $05) of Woods: actor. Spawns at (288,512). Waits for the player to talk. Dialogs $0115.
 pAIScripting0x0B_Woods_Actor05:
-    %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 17, 18, pAIScripting0x0B_L129) ;B3EECC
+    %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 17, 18, pAIScripting0x0B_Woods_Actor05_IfCurrentTimeID17to18) ;B3EECC
     %AICMD0x1A_SpawnNpc($0120, $0200, aAIScriptingData_L040, $00)                     ;B3EED4
 ; Idle until the player talks to the NPC (AICMD0x1F_JumpIfTalkedTo polls A near the actor), then jump to the conversation.
 pAIScripting0x0B_Woods_Actor05_WaitTalk:
@@ -659,7 +659,7 @@ pAIScripting0x0B_Woods_Actor05_WaitTalk:
 pAIScripting0x0B_Woods_Actor05_Talk_0115:
     %AICMD0x1C_ShowDialog($0115, $00)                          ;B3EEE2
     %AICMD0x12_Jump(pAIScripting0x0B_Woods_Actor05_WaitTalk)                                   ;B3EEE6
-pAIScripting0x0B_L129:
+pAIScripting0x0B_Woods_Actor05_IfCurrentTimeID17to18:
     %AICMD0x10_End()                                           ;B3EEE9
 
 

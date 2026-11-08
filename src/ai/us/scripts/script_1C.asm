@@ -61,20 +61,20 @@ pAIScripting0x1C_Data02_Actor0A_Talk:
     %AICMD0x0D_MoveObject($01, $FF, $18, $02)                             ;B49339
     %AICMD0x0D_MoveObject($01, $00, $10, $04)                             ;B4933E
     %AICMD0x23_OrWithIndexedValue(strcFlags.daily3, $03)       ;B49343
-    %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 0, pAIScripting0x1C_L005)     ;B49348
-    %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 1, pAIScripting0x1C_L006)     ;B4934F
-    %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 2, pAIScripting0x1C_L007)     ;B49356
-    %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 3, pAIScripting0x1C_L008)     ;B4935D
-pAIScripting0x1C_L005:
+    %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 0, pAIScripting0x1C_Data02_Actor0A_IfCurrentSeasonIDIs0)     ;B49348
+    %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 1, pAIScripting0x1C_Data02_Actor0A_IfCurrentSeasonIDIs1)     ;B4934F
+    %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 2, pAIScripting0x1C_Data02_Actor0A_IfCurrentSeasonIDIs2)     ;B49356
+    %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 3, pAIScripting0x1C_Data02_Actor0A_IfCurrentSeasonIDIs3)     ;B4935D
+pAIScripting0x1C_Data02_Actor0A_IfCurrentSeasonIDIs0:
     %AICMD0x3D_TeleportToArea(!AREA_WOODSSPRING)               ;B49364
     %AICMD0x12_Jump(pAIScripting0x1C_L009)                                   ;B49366
-pAIScripting0x1C_L006:
+pAIScripting0x1C_Data02_Actor0A_IfCurrentSeasonIDIs1:
     %AICMD0x3D_TeleportToArea(!AREA_WOODSSUMMER)               ;B49369
     %AICMD0x12_Jump(pAIScripting0x1C_L009)                                   ;B4936B
-pAIScripting0x1C_L007:
+pAIScripting0x1C_Data02_Actor0A_IfCurrentSeasonIDIs2:
     %AICMD0x3D_TeleportToArea(!AREA_WOODSFALL)                 ;B4936E
     %AICMD0x12_Jump(pAIScripting0x1C_L009)                                   ;B49370
-pAIScripting0x1C_L008:
+pAIScripting0x1C_Data02_Actor0A_IfCurrentSeasonIDIs3:
     %AICMD0x3D_TeleportToArea(!AREA_WOODSWINTER)               ;B49373
     %AICMD0x12_Jump(pAIScripting0x1C_L009)                                   ;B49375
 pAIScripting0x1C_L009:

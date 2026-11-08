@@ -287,9 +287,9 @@ pAIScripting0x06_Toolshop_Idle:
     %AICMD0x13_Wait(1)                                         ;B3D6D7
     %AICMD0x12_Jump(pAIScripting0x06_Toolshop_Idle)                                   ;B3D6DA
 pAIScripting0x06_L053:
-    %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $01, pAIScripting0x06_L054)   ;B3D6DD
+    %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $01, pAIScripting0x06_Toolshop_IfEvent2Bit01)   ;B3D6DD
     %AICMD0x09_StartScript($02, pAIScripting0x06_Toolshop_Actor02_Ann)                                   ;B3D6E4
-pAIScripting0x06_L054:
+pAIScripting0x06_Toolshop_IfEvent2Bit01:
     %AICMD0x12_Jump(pAIScripting0x06_Toolshop_Idle)                                   ;B3D6E8
 ; Child script (slot $01) of Toolshop: actor. Spawns at (40,360). Waits for the player to press A. Dialogs $0200, $0049,
 ; $0156, $016F.
@@ -389,9 +389,9 @@ pAIScripting0x06_Restaurant_Idle:
     %AICMD0x13_Wait(1)                                         ;B3D7E3
     %AICMD0x12_Jump(pAIScripting0x06_Restaurant_Idle)                                   ;B3D7E6
 pAIScripting0x06_L072:
-    %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $03, pAIScripting0x06_L073)   ;B3D7E9
+    %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $03, pAIScripting0x06_Restaurant_IfEvent2Bit03)   ;B3D7E9
     %AICMD0x09_StartScript($02, pAIScripting0x06_Restaurant_Actor02_Ellen)                                   ;B3D7F0
-pAIScripting0x06_L073:
+pAIScripting0x06_Restaurant_IfEvent2Bit03:
     %AICMD0x12_Jump(pAIScripting0x06_Restaurant_Idle)                                   ;B3D7F4
 ; Child script (slot $03) of Restaurant: actor. Spawns at (135,151).
 pAIScripting0x06_Restaurant_Actor03:
@@ -419,10 +419,10 @@ pAIScripting0x06_Restaurant_Actor01_Say_03BB:
     %AICMD0x12_Jump(pAIScripting0x06_Restaurant_Actor01_WaitInteract)                                   ;B3D828
 ; Handler for A pressed with empty hands.
 pAIScripting0x06_Restaurant_Actor01_OnInteract:
-    %AICMD0x14_JumpIfFlagSet(strcFlags.event1, $05, pAIScripting0x06_L081)   ;B3D82B
+    %AICMD0x14_JumpIfFlagSet(strcFlags.event1, $05, pAIScripting0x06_Restaurant_Actor01_IfEvent1Bit05)   ;B3D82B
     %AICMD0x1C_ShowDialog($015E, $00)                          ;B3D832
     %AICMD0x12_Jump(pAIScripting0x06_Restaurant_Actor01_WaitInteract)                                   ;B3D836
-pAIScripting0x06_L081:
+pAIScripting0x06_Restaurant_Actor01_IfEvent1Bit05:
     %AICMD0x1C_ShowDialog($0402, $00)                          ;B3D839
     %AICMD0x12_Jump(pAIScripting0x06_Restaurant_Actor01_WaitInteract)                                   ;B3D83D
     %AICMD0x1A_SpawnNpc($0098, $0158, aAIScriptingData_L050, $00)                     ;B3D840
@@ -539,7 +539,7 @@ pAIScripting0x06_FortuneTeller_Actor01_Say_0168:
 ; Child script (slot $02) of FortuneTeller: actor. Spawns at (56,152). Waits for the player to press A. Dialogs $0200,
 ; $03BA, $0154, $0403.
 pAIScripting0x06_FortuneTeller_Actor02:
-    %AICMD0x14_JumpIfFlagSet(strcFlags.event4, $0A, pAIScripting0x06_L109)   ;B3D958
+    %AICMD0x14_JumpIfFlagSet(strcFlags.event4, $0A, pAIScripting0x06_FortuneTeller_Actor02_IfEvent4Bit0A)   ;B3D958
     %AICMD0x1A_SpawnNpc($0038, $0098, aAIScriptingData_L056, $00)                     ;B3D95F
 ; Idle until the player presses A at the NPC (AICMD0x2D): jumps to OnInteract, or to OnItemOffered while an item is carried.
 pAIScripting0x06_FortuneTeller_Actor02_WaitInteract:
@@ -563,7 +563,7 @@ pAIScripting0x06_FortuneTeller_Actor02_OnInteract:
 pAIScripting0x06_FortuneTeller_Actor02_Say_0403:
     %AICMD0x1C_ShowDialog($0403, $00)                          ;B3D993
     %AICMD0x12_Jump(pAIScripting0x06_FortuneTeller_Actor02_WaitInteract)                                   ;B3D997
-pAIScripting0x06_L109:
+pAIScripting0x06_FortuneTeller_Actor02_IfEvent4Bit0A:
     %AICMD0x10_End()                                           ;B3D99A
 
 

@@ -18,11 +18,11 @@
 pAIScripting0x02_Town:
  
     %AICMD0x11_EnableUserControl()                             ;B3AE23
-    %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 2, pAIScripting0x02_L001)     ;B3AE24
+    %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 2, pAIScripting0x02_Town_IfCurrentSeasonIDIs2)     ;B3AE24
     %AICMD0x09_StartScript($01, pAIScripting0x02_Town_Actor01)                                   ;B3AE2B
     %AICMD0x09_StartScript($02, pAIScripting0x02_Town_Actor02)                                   ;B3AE2F
     %AICMD0x12_Jump(pAIScripting0x02_L002)                                   ;B3AE33
-pAIScripting0x02_L001:
+pAIScripting0x02_Town_IfCurrentSeasonIDIs2:
     %AICMD0x09_StartScript($01, pAIScripting0x02_Town_Actor01_2)                                   ;B3AE36
     %AICMD0x09_StartScript($02, pAIScripting0x02_Town_Actor02_2)                                   ;B3AE3A
 pAIScripting0x02_L002:
@@ -35,17 +35,17 @@ pAIScripting0x02_Town_Idle:
     %AICMD0x13_Wait(1)                                         ;B3AE4D
     %AICMD0x12_Jump(pAIScripting0x02_Town_Idle)                                   ;B3AE50
 pAIScripting0x02_L004:
-    %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $01, pAIScripting0x02_L005)   ;B3AE53
+    %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $01, pAIScripting0x02_Town_IfEvent2Bit01)   ;B3AE53
     %AICMD0x09_StartScript($06, pAIScripting0x02_Town_Actor06_Ann)                                   ;B3AE5A
-pAIScripting0x02_L005:
-    %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $03, pAIScripting0x02_L006)   ;B3AE5E
+pAIScripting0x02_Town_IfEvent2Bit01:
+    %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $03, pAIScripting0x02_Town_IfEvent2Bit03)   ;B3AE5E
     %AICMD0x09_StartScript($07, pAIScripting0x02_Town_Actor07_Ellen)                                   ;B3AE65
-pAIScripting0x02_L006:
+pAIScripting0x02_Town_IfEvent2Bit03:
     %AICMD0x12_Jump(pAIScripting0x02_Town_Idle)                                   ;B3AE69
 ; Child script (slot $01) of Town: actor. Spawns at (296,440). Walks randomly. Waits for the player to press A. Dialogs
 ; $01CA, $0200, $0049, $0043, $0392.
 pAIScripting0x02_Town_Actor01_2:
-    %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 17, 18, pAIScripting0x02_L013) ;B3AE6C
+    %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 17, 18, pAIScripting0x02_Town_Actor01_2_IfCurrentTimeID17to18) ;B3AE6C
     %AICMD0x1A_SpawnNpc($0128, $01B8, aAIScriptingData_L046, $00)                     ;B3AE74
     %AICMD0x22_StartRandomWalk($20, $10, $01, aAIScriptingData_L047, $10)                    ;B3AE7C
 pAIScripting0x02_L008:
@@ -70,7 +70,7 @@ pAIScripting0x02_Town_Actor01_2_OnInteract:
     %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 7, 16, pAIScripting0x02_Town_Actor01_2_Say_0043)  ;B3AEAB
     %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 17, 18, pAIScripting0x02_Town_Actor01_2_Say_0392) ;B3AEB3
     %AICMD0x12_Jump(pAIScripting0x02_L008)                                   ;B3AEBB
-pAIScripting0x02_L013:
+pAIScripting0x02_Town_Actor01_2_IfCurrentTimeID17to18:
     %AICMD0x10_End()                                           ;B3AEBE
 ; Shows dialog $0043.
 pAIScripting0x02_Town_Actor01_2_Say_0043:
@@ -82,7 +82,7 @@ pAIScripting0x02_Town_Actor01_2_Say_0392:
     %AICMD0x12_Jump(pAIScripting0x02_L008)                                   ;B3AECA
 ; Child script (slot $01) of Town: actor. Spawns at (296,424). Waits for the player to talk. Dialogs $01CA, $0044, $0392.
 pAIScripting0x02_Town_Actor01:
-    %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 17, 18, pAIScripting0x02_L020) ;B3AECD
+    %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 17, 18, pAIScripting0x02_Town_Actor01_IfCurrentTimeID17to18) ;B3AECD
     %AICMD0x1A_SpawnNpc($0128, $01A8, aAIScriptingData_L047, $02)                     ;B3AED5
 pAIScripting0x02_L017:
     %AICMD0x4D_JumpIfBlueFeatherUsed(pAIScripting0x02_Town_Actor01_OnBlueFeather)                                        ;B3AEDD
@@ -97,7 +97,7 @@ pAIScripting0x02_Town_Actor01_Talk:
     %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 7, 16, pAIScripting0x02_Town_Actor01_Say_0044)  ;B3AEED
     %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 17, 18, pAIScripting0x02_Town_Actor01_Say_0392) ;B3AEF5
     %AICMD0x12_Jump(pAIScripting0x02_L017)                                   ;B3AEFD
-pAIScripting0x02_L020:
+pAIScripting0x02_Town_Actor01_IfCurrentTimeID17to18:
     %AICMD0x10_End()                                           ;B3AF00
 ; Shows dialog $0044.
 pAIScripting0x02_Town_Actor01_Say_0044:
@@ -110,7 +110,7 @@ pAIScripting0x02_Town_Actor01_Say_0392:
 ; Child script (slot $02) of Town: actor. Spawns at (424,136). Waits for the player to press A. Dialogs $01C6, $0200, $03B9,
 ; $0049.
 pAIScripting0x02_Town_Actor02_2:
-    %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 17, 18, pAIScripting0x02_L029) ;B3AF0F
+    %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 17, 18, pAIScripting0x02_Town_Actor02_2_IfCurrentTimeID17to18) ;B3AF0F
     %AICMD0x1A_SpawnNpc($01A8, $0088, aAIScriptingData_L066, $00)                     ;B3AF17
 pAIScripting0x02_L024:
     %AICMD0x4D_JumpIfBlueFeatherUsed(pAIScripting0x02_Town_Actor02_2_OnBlueFeather)                                        ;B3AF1F
@@ -133,7 +133,7 @@ pAIScripting0x02_Town_Actor02_2_Say_03B9:
 pAIScripting0x02_Town_Actor02_2_OnInteract:
     %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 7, 18, pAIScripting0x02_Town_Actor02_2_Say_0049)  ;B3AF47
     %AICMD0x12_Jump(pAIScripting0x02_L024)                                   ;B3AF4F
-pAIScripting0x02_L029:
+pAIScripting0x02_Town_Actor02_2_IfCurrentTimeID17to18:
     %AICMD0x10_End()                                           ;B3AF52
 ; Shows dialog $0049.
 pAIScripting0x02_Town_Actor02_2_Say_0049:
@@ -141,7 +141,7 @@ pAIScripting0x02_Town_Actor02_2_Say_0049:
     %AICMD0x12_Jump(pAIScripting0x02_L024)                                   ;B3AF57
 ; Child script (slot $02) of Town: actor. Spawns at (312,424). Waits for the player to talk. Dialogs $01C6, $004A, $0391.
 pAIScripting0x02_Town_Actor02:
-    %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 17, 18, pAIScripting0x02_L035) ;B3AF5A
+    %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 17, 18, pAIScripting0x02_Town_Actor02_IfCurrentTimeID17to18) ;B3AF5A
     %AICMD0x1A_SpawnNpc($0138, $01A8, aAIScriptingData_L065, $03)                     ;B3AF62
 pAIScripting0x02_L032:
     %AICMD0x4D_JumpIfBlueFeatherUsed(pAIScripting0x02_Town_Actor02_OnBlueFeather)                                        ;B3AF6A
@@ -156,7 +156,7 @@ pAIScripting0x02_Town_Actor02_Talk:
     %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 7, 16, pAIScripting0x02_Town_Actor02_Say_004A)  ;B3AF7A
     %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 17, 18, pAIScripting0x02_Town_Actor02_Say_0391) ;B3AF82
     %AICMD0x12_Jump(pAIScripting0x02_L032)                                   ;B3AF8A
-pAIScripting0x02_L035:
+pAIScripting0x02_Town_Actor02_IfCurrentTimeID17to18:
     %AICMD0x10_End()                                           ;B3AF8D
 ; Shows dialog $004A.
 pAIScripting0x02_Town_Actor02_Say_004A:
@@ -169,7 +169,7 @@ pAIScripting0x02_Town_Actor02_Say_0391:
 ; Child script (slot $03) of Town: actor. Spawns at (184,392). Waits for the player to press A. Dialogs $01C7, $0200, $03BB,
 ; $004F, $0392, $01ED.
 pAIScripting0x02_Town_Actor03:
-    %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 17, 18, pAIScripting0x02_L044) ;B3AF9C
+    %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 17, 18, pAIScripting0x02_Town_Actor03_IfCurrentTimeID17to18) ;B3AF9C
     %AICMD0x1A_SpawnNpc($00B8, $0188, aAIScriptingData_L049, $02)                     ;B3AFA4
 pAIScripting0x02_L039:
     %AICMD0x4D_JumpIfBlueFeatherUsed(pAIScripting0x02_Town_Actor03_OnBlueFeather)                                        ;B3AFAC
@@ -194,7 +194,7 @@ pAIScripting0x02_Town_Actor03_OnInteract:
     %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 7, 16, pAIScripting0x02_Town_Actor03_Say_004F)  ;B3AFDB
     %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 17, 18, pAIScripting0x02_Town_Actor03_Say_0392) ;B3AFE3
     %AICMD0x12_Jump(pAIScripting0x02_L039)                                   ;B3AFEB
-pAIScripting0x02_L044:
+pAIScripting0x02_Town_Actor03_IfCurrentTimeID17to18:
     %AICMD0x10_End()                                           ;B3AFEE
 ; Shows dialog $004F.
 pAIScripting0x02_Town_Actor03_Say_004F:
@@ -212,7 +212,7 @@ pAIScripting0x02_Town_Actor03_Say_01ED:
 ; Child script (slot $04) of Town: actor. Spawns at (392,552). Waits for the player to press A. Dialogs $01CB, $0200, $03B8,
 ; $006C, $006D, $0392 ....
 pAIScripting0x02_Town_Actor04:
-    %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 17, 18, pAIScripting0x02_L054) ;B3B008
+    %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 17, 18, pAIScripting0x02_Town_Actor04_IfCurrentTimeID17to18) ;B3B008
     %AICMD0x1A_SpawnNpc($0188, $0228, aAIScriptingData_L068, $01)                     ;B3B010
 pAIScripting0x02_L049:
     %AICMD0x4D_JumpIfBlueFeatherUsed(pAIScripting0x02_Town_Actor04_OnBlueFeather)                                        ;B3B018
@@ -234,12 +234,12 @@ pAIScripting0x02_Town_Actor04_Say_03B8:
 ; Handler for A pressed with empty hands.
 pAIScripting0x02_Town_Actor04_OnInteract:
     %AICMD0x14_JumpIfFlagSet(strcFlags.event4, $0C, pAIScripting0x02_Town_Actor04_Say_01D0)   ;B3B040
-    %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 7, 16, pAIScripting0x02_L055)  ;B3B047
+    %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 7, 16, pAIScripting0x02_Town_Actor04_IfCurrentTimeID7to16)  ;B3B047
     %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 17, 18, pAIScripting0x02_Town_Actor04_Say_0392) ;B3B04F
     %AICMD0x12_Jump(pAIScripting0x02_L049)                                   ;B3B057
-pAIScripting0x02_L054:
+pAIScripting0x02_Town_Actor04_IfCurrentTimeID17to18:
     %AICMD0x10_End()                                           ;B3B05A
-pAIScripting0x02_L055:
+pAIScripting0x02_Town_Actor04_IfCurrentTimeID7to16:
     %AICMD0x16_JumpIfBetween8(nCurrentSeasonID, 0, 1, pAIScripting0x02_Town_Actor04_Say_006D) ;B3B05B
     %AICMD0x1C_ShowDialog($006C, $00)                          ;B3B063
     %AICMD0x12_Jump(pAIScripting0x02_L049)                                   ;B3B067
@@ -280,12 +280,12 @@ pAIScripting0x02_Town_Actor05_Say_03BA:
     %AICMD0x12_Jump(pAIScripting0x02_L060)                                   ;B3B0BB
 ; Handler for A pressed with empty hands.
 pAIScripting0x02_Town_Actor05_OnInteract:
-    %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 7, 16, pAIScripting0x02_L066)  ;B3B0BE
+    %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 7, 16, pAIScripting0x02_Town_Actor05_IfCurrentTimeID7to16)  ;B3B0BE
     %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 17, 18, pAIScripting0x02_Town_Actor05_Say_0391) ;B3B0C6
     %AICMD0x12_Jump(pAIScripting0x02_L060)                                   ;B3B0CE
 pAIScripting0x02_L065:
     %AICMD0x10_End()                                           ;B3B0D1
-pAIScripting0x02_L066:
+pAIScripting0x02_Town_Actor05_IfCurrentTimeID7to16:
     %AICMD0x16_JumpIfBetween8(nCurrentSeasonID, 0, 1, pAIScripting0x02_Town_Actor05_Say_0067) ;B3B0D2
     %AICMD0x1C_ShowDialog($0066, $00)                          ;B3B0DA
     %AICMD0x12_Jump(pAIScripting0x02_L060)                                   ;B3B0DE
@@ -300,8 +300,8 @@ pAIScripting0x02_Town_Actor05_Say_0391:
 ; Child script (slot $06) of Town: actor. Spawns at (376,888). Walks randomly. Waits for the player to talk. Waits for the
 ; player to press A. Dialogs $0175, $0176, $0200, $03B4, $03B2, $0212 ....
 pAIScripting0x02_Town_Actor06_Ann:
-    %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 17, 18, pAIScripting0x02_L084) ;B3B0EF
-    %AICMD0x45_JumpIfBetween16(nLove_Ann, 150, 200, pAIScripting0x02_L079)   ;B3B0F7
+    %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 17, 18, pAIScripting0x02_Town_Actor06_Ann_IfCurrentTimeID17to18) ;B3B0EF
+    %AICMD0x45_JumpIfBetween16(nLove_Ann, 150, 200, pAIScripting0x02_Town_Actor06_Ann_IfAnn150to200)   ;B3B0F7
     %AICMD0x1A_SpawnNpc($0178, $0378, aAIScriptingData_L015, $00)                     ;B3B101
     %AICMD0x22_StartRandomWalk($20, $14, $01, aAIScriptingData_L016, $10)                    ;B3B109
 pAIScripting0x02_L070:
@@ -356,7 +356,7 @@ pAIScripting0x02_Town_Actor06_Ann_Say_03B4_2:
     %AICMD0x1C_ShowDialog($03B4, $00)                          ;B3B1AD
     %AICMD0x41_AddValue16(nLove_Ann, -2)                       ;B3B1B1
     %AICMD0x12_Jump(pAIScripting0x02_L070)                                   ;B3B1B7
-pAIScripting0x02_L079:
+pAIScripting0x02_Town_Actor06_Ann_IfAnn150to200:
     %AICMD0x09_StartScript($09, pAIScripting0x02_Town_Actor06_Ann_Actor09)                                   ;B3B1BA
     %AICMD0x1A_SpawnNpc($0178, $0368, aAIScriptingData_L015, $00)                     ;B3B1BE
 ; Idle until the player presses A at the NPC (AICMD0x2D): jumps to OnInteract, or to OnItemOffered while an item is carried.
@@ -378,7 +378,7 @@ pAIScripting0x02_Town_Actor06_Ann_OnInteract:
     %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 7, 16, pAIScripting0x02_Town_Actor06_Ann_Talk)  ;B3B1EB
     %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 17, 18, pAIScripting0x02_Town_Actor06_Ann_Say_0391) ;B3B1F3
     %AICMD0x12_Jump(pAIScripting0x02_L070)                                   ;B3B1FB
-pAIScripting0x02_L084:
+pAIScripting0x02_Town_Actor06_Ann_IfCurrentTimeID17to18:
     %AICMD0x10_End()                                           ;B3B1FE
 ; Conversation handler.
 pAIScripting0x02_Town_Actor06_Ann_Talk:
@@ -420,10 +420,10 @@ pAIScripting0x02_Town_Actor06_Ann_Say_03B4_3:
 ; Handler for A pressed with empty hands.
 pAIScripting0x02_Town_Actor06_Ann_OnInteract_2:
     %AICMD0x1D_ShowDialog($00AB, $00)                          ;B3B25D
-    %AICMD0x20_JumpIfChoice(0, pAIScripting0x02_L094)                        ;B3B261
+    %AICMD0x20_JumpIfChoice(0, pAIScripting0x02_Town_Actor06_Ann_Choice0)                        ;B3B261
     %AICMD0x20_JumpIfChoice(1, pAIScripting0x02_Town_Actor06_Ann_Say_00AD)                        ;B3B265
     %AICMD0x12_Jump(pAIScripting0x02_Town_Actor06_Ann_WaitInteract)                                   ;B3B269
-pAIScripting0x02_L094:
+pAIScripting0x02_Town_Actor06_Ann_Choice0:
     %AICMD0x08_EnableAIControl()                               ;B3B26C
     %AICMD0x19_SetPlayerSprite($00E9, $00)                                     ;B3B26D
     %AICMD0x13_Wait(120)                                       ;B3B271
@@ -462,7 +462,7 @@ pAIScripting0x02_Town_Actor06_Ann_Actor09_Idle:
 ; Child script (slot $07) of Town: actor. Spawns at (536,792). Waits for the player to talk. Waits for the player to press
 ; A. Dialogs $0179, $017A, $0200, $03B0, $03B2, $03B3 ....
 pAIScripting0x02_Town_Actor07_Ellen:
-    %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 17, 18, pAIScripting0x02_L115) ;B3B2B9
+    %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 17, 18, pAIScripting0x02_Town_Actor07_Ellen_IfCurrentTimeID17to18) ;B3B2B9
     %AICMD0x1A_SpawnNpc($0218, $0318, aAIScriptingData_L021, $00)                     ;B3B2C1
 pAIScripting0x02_L103:
     %AICMD0x4D_JumpIfBlueFeatherUsed(pAIScripting0x02_Town_Actor07_Ellen_OnBlueFeather)                                        ;B3B2C9
@@ -529,11 +529,11 @@ pAIScripting0x02_Town_Actor07_Ellen_Say_01DA:
 pAIScripting0x02_Town_Actor07_Ellen_OnInteract:
     %AICMD0x14_JumpIfFlagSet(strcFlags.event5, $02, pAIScripting0x02_Town_Actor07_Ellen_Say_01EE)   ;B3B38C
     %AICMD0x45_JumpIfBetween16(nLove_Ellen, 120, 149, pAIScripting0x02_Town_Actor07_Ellen_Say_00D8) ;B3B393
-    %AICMD0x45_JumpIfBetween16(nLove_Ellen, 150, 200, pAIScripting0x02_L121) ;B3B39D
+    %AICMD0x45_JumpIfBetween16(nLove_Ellen, 150, 200, pAIScripting0x02_Town_Actor07_Ellen_IfEllen150to200) ;B3B39D
     %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 7, 16, pAIScripting0x02_Town_Actor07_Ellen_Say_00D2)  ;B3B3A7
     %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 17, 18, pAIScripting0x02_Town_Actor07_Ellen_Say_0391) ;B3B3AF
     %AICMD0x12_Jump(pAIScripting0x02_L103)                                   ;B3B3B7
-pAIScripting0x02_L115:
+pAIScripting0x02_Town_Actor07_Ellen_IfCurrentTimeID17to18:
     %AICMD0x10_End()                                           ;B3B3BA
 ; Shows dialog $00D2.
 pAIScripting0x02_Town_Actor07_Ellen_Say_00D2:
@@ -559,13 +559,13 @@ pAIScripting0x02_Town_Actor07_Ellen_OnInteract_2:
 pAIScripting0x02_Town_Actor07_Ellen_Say_00D8:
     %AICMD0x1C_ShowDialog($00D8, $00)                          ;B3B3EB
     %AICMD0x12_Jump(pAIScripting0x02_L104)                                   ;B3B3EF
-pAIScripting0x02_L121:
+pAIScripting0x02_Town_Actor07_Ellen_IfEllen150to200:
     %AICMD0x09_StartScript($0A, pAIScripting0x02_Town_Actor07_Ellen_Actor0A)                                   ;B3B3F2
     %AICMD0x1D_ShowDialog($00D9, $00)                          ;B3B3F6
-    %AICMD0x20_JumpIfChoice(0, pAIScripting0x02_L122)                        ;B3B3FA
+    %AICMD0x20_JumpIfChoice(0, pAIScripting0x02_Town_Actor07_Ellen_Choice0)                        ;B3B3FA
     %AICMD0x20_JumpIfChoice(1, pAIScripting0x02_Town_Actor07_Ellen_Say_025B)                        ;B3B3FE
     %AICMD0x12_Jump(pAIScripting0x02_L104)                                   ;B3B402
-pAIScripting0x02_L122:
+pAIScripting0x02_Town_Actor07_Ellen_Choice0:
     %AICMD0x08_EnableAIControl()                               ;B3B405
     %AICMD0x19_SetPlayerSprite($0039, $00)                                     ;B3B406
     %AICMD0x13_Wait(120)                                       ;B3B40A
@@ -917,10 +917,10 @@ pAIScripting0x02_Woods_Actor01_Say_03B8:
 pAIScripting0x02_Woods_Actor01_OnInteract:
     %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 17, 18, pAIScripting0x02_Woods_Actor01_Say_0392) ;B3B759
     %AICMD0x1D_ShowDialog($007E, $00)                          ;B3B761
-    %AICMD0x20_JumpIfChoice(0, pAIScripting0x02_L190)                        ;B3B765
+    %AICMD0x20_JumpIfChoice(0, pAIScripting0x02_Woods_Actor01_Choice0)                        ;B3B765
     %AICMD0x20_JumpIfChoice(1, pAIScripting0x02_Woods_Actor01_Say_0080)                        ;B3B769
     %AICMD0x12_Jump(pAIScripting0x02_L184)                                   ;B3B76D
-pAIScripting0x02_L190:
+pAIScripting0x02_Woods_Actor01_Choice0:
     %AICMD0x23_OrWithIndexedValue(strcFlags.daily1, $09)       ;B3B770
     %AICMD0x1C_ShowDialog($007F, $00)                          ;B3B775
     %AICMD0x12_Jump(pAIScripting0x02_L185)                                   ;B3B779
@@ -944,7 +944,7 @@ pAIScripting0x02_L194:
 ; Child script (slot $02) of Woods: actor. Spawns at (104,56). Waits for the player to press A. Dialogs $01C9, $03BC, $0049,
 ; $007B.
 pAIScripting0x02_Woods_Actor02:
-    %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 17, 18, pAIScripting0x02_L201) ;B3B79E
+    %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 17, 18, pAIScripting0x02_Woods_Actor02_IfCurrentTimeID17to18) ;B3B79E
     %AICMD0x1A_SpawnNpc($0068, $0038, aAIScriptingData_L040, $00)                     ;B3B7A6
 pAIScripting0x02_L196:
     %AICMD0x4D_JumpIfBlueFeatherUsed(pAIScripting0x02_Woods_Actor02_OnBlueFeather)                                        ;B3B7AE
@@ -967,12 +967,12 @@ pAIScripting0x02_Woods_Actor02_Say_0049:
 pAIScripting0x02_Woods_Actor02_OnInteract:
     %AICMD0x1C_ShowDialog($007B, $00)                          ;B3B7D6
     %AICMD0x12_Jump(pAIScripting0x02_L196)                                   ;B3B7DA
-pAIScripting0x02_L201:
+pAIScripting0x02_Woods_Actor02_IfCurrentTimeID17to18:
     %AICMD0x10_End()                                           ;B3B7DD
 ; Child script (slot $03) of Woods: actor. Spawns at (504,216). Waits for the player to press A. Dialogs $017B, $017C,
 ; $0200, $03B4, $03B2, $0212 ....
 pAIScripting0x02_Woods_Actor03_Eve:
-    %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 17, 18, pAIScripting0x02_L216) ;B3B7DE
+    %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 17, 18, pAIScripting0x02_Woods_Actor03_Eve_IfCurrentTimeID17to18) ;B3B7DE
     %AICMD0x1A_SpawnNpc($01F8, $00D8, aAIScriptingData_L025, $00)                     ;B3B7E6
 pAIScripting0x02_L203:
     %AICMD0x4D_JumpIfBlueFeatherUsed(pAIScripting0x02_Woods_Actor03_Eve_OnBlueFeather)                                        ;B3B7EE
@@ -1047,7 +1047,7 @@ pAIScripting0x02_Woods_Actor03_Eve_Say_00DE:
 pAIScripting0x02_Woods_Actor03_Eve_OnInteract_2:
     %AICMD0x1C_ShowDialog($00DD, $00)                          ;B3B8CA
     %AICMD0x12_Jump(pAIScripting0x02_L204)                                   ;B3B8CE
-pAIScripting0x02_L216:
+pAIScripting0x02_Woods_Actor03_Eve_IfCurrentTimeID17to18:
     %AICMD0x10_End()                                           ;B3B8D1
 
 
@@ -1071,7 +1071,7 @@ pAIScripting0x02_L219:
 ; Child script (slot $01) of Mine: actor. Spawns at (88,424). Walks randomly. Waits for the player to talk. Waits for the
 ; player to press A. Dialogs $043F, $0178, $0200, $03B2, $0212, $03B1 ....
 pAIScripting0x02_Mine_Actor01_Nina:
-    %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 17, 18, pAIScripting0x02_L241) ;B3B8F1
+    %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 17, 18, pAIScripting0x02_Mine_Actor01_Nina_IfCurrentTimeID17to18) ;B3B8F1
     %AICMD0x1A_SpawnNpc($0058, $01A8, aAIScriptingData_L020, $00)                     ;B3B8F9
     %AICMD0x22_StartRandomWalk($18, $10, $01, aAIScriptingData_L020, $10)                    ;B3B901
 pAIScripting0x02_L221:
@@ -1179,5 +1179,5 @@ pAIScripting0x02_Mine_Actor01_Nina_Talk_00B1:
     %AICMD0x12_Jump(pAIScripting0x02_L223)                                   ;B3BA2E
     %AICMD0x1C_ShowDialog($0391, $00)                          ;B3BA31
     %AICMD0x12_Jump(pAIScripting0x02_L221)                                   ;B3BA35
-pAIScripting0x02_L241:
+pAIScripting0x02_Mine_Actor01_Nina_IfCurrentTimeID17to18:
     %AICMD0x10_End()                                           ;B3BA38

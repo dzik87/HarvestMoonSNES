@@ -35,25 +35,25 @@ pAIScripting0x1F_L002:
     %AICMD0x3D_TeleportToArea(!AREA_HOUSE3)                    ;B49A94
     %AICMD0x10_End()                                           ;B49A96
 pAIScripting0x1F_L003:
-    %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $00, pAIScripting0x1F_L004)   ;B49A97
-    %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $01, pAIScripting0x1F_L005)   ;B49A9E
-    %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $02, pAIScripting0x1F_L006)   ;B49AA5
-    %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $03, pAIScripting0x1F_L007)   ;B49AAC
-    %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $04, pAIScripting0x1F_L008)   ;B49AB3
+    %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $00, pAIScripting0x1F_Data01_IfEvent2Bit00)   ;B49A97
+    %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $01, pAIScripting0x1F_Data01_IfEvent2Bit01)   ;B49A9E
+    %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $02, pAIScripting0x1F_Data01_IfEvent2Bit02)   ;B49AA5
+    %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $03, pAIScripting0x1F_Data01_IfEvent2Bit03)   ;B49AAC
+    %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $04, pAIScripting0x1F_Data01_IfEvent2Bit04)   ;B49AB3
     %AICMD0x12_Jump(pAIScripting0x1F_L001)                                   ;B49ABA
-pAIScripting0x1F_L004:
+pAIScripting0x1F_Data01_IfEvent2Bit00:
     %AICMD0x09_StartScript($04, pAIScripting0x1F_Data01_Actor04)                                   ;B49ABD
     %AICMD0x12_Jump(pAIScripting0x1F_L001)                                   ;B49AC1
-pAIScripting0x1F_L005:
+pAIScripting0x1F_Data01_IfEvent2Bit01:
     %AICMD0x09_StartScript($04, pAIScripting0x1F_Data01_Actor04_2)                                   ;B49AC4
     %AICMD0x12_Jump(pAIScripting0x1F_L001)                                   ;B49AC8
-pAIScripting0x1F_L006:
+pAIScripting0x1F_Data01_IfEvent2Bit02:
     %AICMD0x09_StartScript($04, pAIScripting0x1F_Data01_Actor04_3)                                   ;B49ACB
     %AICMD0x12_Jump(pAIScripting0x1F_L001)                                   ;B49ACF
-pAIScripting0x1F_L007:
+pAIScripting0x1F_Data01_IfEvent2Bit03:
     %AICMD0x09_StartScript($04, pAIScripting0x1F_Data01_Actor04_4)                                   ;B49AD2
     %AICMD0x12_Jump(pAIScripting0x1F_L001)                                   ;B49AD6
-pAIScripting0x1F_L008:
+pAIScripting0x1F_Data01_IfEvent2Bit04:
     %AICMD0x09_StartScript($04, pAIScripting0x1F_Data01_Actor04_5)                                   ;B49AD9
     %AICMD0x12_Jump(pAIScripting0x1F_L001)                                   ;B49ADD
 ; Child script (slot $01) of Data01: actor. Spawns at (281,99). Waits for the player to talk. Dialogs $01AA, $01AB, $01AC,
@@ -73,7 +73,7 @@ pAIScripting0x1F_Data01_Actor01_Talk_01AA:
     %AICMD0x0B_SetScriptFlag($00)                                            ;B49AF4
     %AICMD0x1D_ShowDialog($01AA, $00)                          ;B49AF6
     %AICMD0x20_JumpIfChoice(0, pAIScripting0x1F_Data01_Actor01_Say_01AB)                        ;B49AFA
-    %AICMD0x20_JumpIfChoice(1, pAIScripting0x1F_L014)                        ;B49AFE
+    %AICMD0x20_JumpIfChoice(1, pAIScripting0x1F_Data01_Actor01_Choice1)                        ;B49AFE
     %AICMD0x12_Jump(pAIScripting0x1F_Data01_Actor01_WaitTalk)                                   ;B49B02
 ; Shows dialog $01AB.
 pAIScripting0x1F_Data01_Actor01_Say_01AB:
@@ -81,13 +81,13 @@ pAIScripting0x1F_Data01_Actor01_Say_01AB:
     %AICMD0x25_RemoveActor($03)                                            ;B49B09
     %AICMD0x09_StartScript($03, pAIScripting0x1F_Data01_Actor01_Actor03)                                   ;B49B0B
     %AICMD0x12_Jump(pAIScripting0x1F_Data01_Actor01_WaitTalk_2)                                   ;B49B0F
-pAIScripting0x1F_L014:
+pAIScripting0x1F_Data01_Actor01_Choice1:
     %AICMD0x1C_ShowDialog($01AC, $00)                          ;B49B12
-    %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $00, pAIScripting0x1F_L017)   ;B49B16
-    %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $01, pAIScripting0x1F_L018)   ;B49B1D
-    %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $02, pAIScripting0x1F_L019)   ;B49B24
-    %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $03, pAIScripting0x1F_L020)   ;B49B2B
-    %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $04, pAIScripting0x1F_L021)   ;B49B32
+    %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $00, pAIScripting0x1F_Data01_Actor01_IfEvent2Bit00)   ;B49B16
+    %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $01, pAIScripting0x1F_Data01_Actor01_IfEvent2Bit01)   ;B49B1D
+    %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $02, pAIScripting0x1F_Data01_Actor01_IfEvent2Bit02)   ;B49B24
+    %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $03, pAIScripting0x1F_Data01_Actor01_IfEvent2Bit03)   ;B49B2B
+    %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $04, pAIScripting0x1F_Data01_Actor01_IfEvent2Bit04)   ;B49B32
 pAIScripting0x1F_L015:
     %AICMD0x1B_SetSprite($02E9, $00)                                     ;B49B39
     %AICMD0x12_Jump(pAIScripting0x1F_Data01_Actor01_WaitTalk_2)                                   ;B49B3D
@@ -95,19 +95,19 @@ pAIScripting0x1F_L015:
 pAIScripting0x1F_Data01_Actor01_Talk_01AD:
     %AICMD0x1C_ShowDialog($01AD, $00)                          ;B49B40
     %AICMD0x12_Jump(pAIScripting0x1F_Data01_Actor01_WaitTalk_2)                                   ;B49B44
-pAIScripting0x1F_L017:
+pAIScripting0x1F_Data01_Actor01_IfEvent2Bit00:
     %AICMD0x41_AddValue16(nLove_Maria, 50)                     ;B49B47
     %AICMD0x12_Jump(pAIScripting0x1F_L015)                                   ;B49B4D
-pAIScripting0x1F_L018:
+pAIScripting0x1F_Data01_Actor01_IfEvent2Bit01:
     %AICMD0x41_AddValue16(nLove_Ann, 50)                       ;B49B50
     %AICMD0x12_Jump(pAIScripting0x1F_L015)                                   ;B49B56
-pAIScripting0x1F_L019:
+pAIScripting0x1F_Data01_Actor01_IfEvent2Bit02:
     %AICMD0x41_AddValue16(nLove_Nina, 50)                      ;B49B59
     %AICMD0x12_Jump(pAIScripting0x1F_L015)                                   ;B49B5F
-pAIScripting0x1F_L020:
+pAIScripting0x1F_Data01_Actor01_IfEvent2Bit03:
     %AICMD0x41_AddValue16(nLove_Ellen, 50)                     ;B49B62
     %AICMD0x12_Jump(pAIScripting0x1F_L015)                                   ;B49B68
-pAIScripting0x1F_L021:
+pAIScripting0x1F_Data01_Actor01_IfEvent2Bit04:
     %AICMD0x41_AddValue16(nLove_Eve, 50)                       ;B49B6B
     %AICMD0x12_Jump(pAIScripting0x1F_L015)                                   ;B49B71
 ; Child script (slot $03) of Data01: actor. Spawns at (128,200). Waits for the player to talk. Dialogs $0280.
@@ -231,25 +231,25 @@ pAIScripting0x1F_L045:
     %AICMD0x23_OrWithIndexedValue(strcFlags.daily3, $0E)       ;B49C6E
     %AICMD0x10_End()                                           ;B49C73
 pAIScripting0x1F_L046:
-    %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $00, pAIScripting0x1F_L047)   ;B49C74
-    %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $01, pAIScripting0x1F_L048)   ;B49C7B
-    %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $02, pAIScripting0x1F_L049)   ;B49C82
-    %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $03, pAIScripting0x1F_L050)   ;B49C89
-    %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $04, pAIScripting0x1F_L051)   ;B49C90
+    %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $00, pAIScripting0x1F_Data02_IfEvent2Bit00)   ;B49C74
+    %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $01, pAIScripting0x1F_Data02_IfEvent2Bit01)   ;B49C7B
+    %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $02, pAIScripting0x1F_Data02_IfEvent2Bit02)   ;B49C82
+    %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $03, pAIScripting0x1F_Data02_IfEvent2Bit03)   ;B49C89
+    %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $04, pAIScripting0x1F_Data02_IfEvent2Bit04)   ;B49C90
     %AICMD0x12_Jump(pAIScripting0x1F_L044)                                   ;B49C97
-pAIScripting0x1F_L047:
+pAIScripting0x1F_Data02_IfEvent2Bit00:
     %AICMD0x09_StartScript($06, pAIScripting0x1F_Data02_Actor06)                                   ;B49C9A
     %AICMD0x12_Jump(pAIScripting0x1F_L044)                                   ;B49C9E
-pAIScripting0x1F_L048:
+pAIScripting0x1F_Data02_IfEvent2Bit01:
     %AICMD0x09_StartScript($06, pAIScripting0x1F_Data02_Actor06_2)                                   ;B49CA1
     %AICMD0x12_Jump(pAIScripting0x1F_L044)                                   ;B49CA5
-pAIScripting0x1F_L049:
+pAIScripting0x1F_Data02_IfEvent2Bit02:
     %AICMD0x09_StartScript($06, pAIScripting0x1F_Data02_Actor06_3)                                   ;B49CA8
     %AICMD0x12_Jump(pAIScripting0x1F_L044)                                   ;B49CAC
-pAIScripting0x1F_L050:
+pAIScripting0x1F_Data02_IfEvent2Bit03:
     %AICMD0x09_StartScript($06, pAIScripting0x1F_Data02_Actor06_4)                                   ;B49CAF
     %AICMD0x12_Jump(pAIScripting0x1F_L044)                                   ;B49CB3
-pAIScripting0x1F_L051:
+pAIScripting0x1F_Data02_IfEvent2Bit04:
     %AICMD0x09_StartScript($06, pAIScripting0x1F_Data02_Actor06_5)                                   ;B49CB6
     %AICMD0x12_Jump(pAIScripting0x1F_L044)                                   ;B49CBA
 ; Child script (slot $01) of Data02: actor. Spawns at (281,99). Waits for the player to talk. Dialogs $01BA.

@@ -121,20 +121,20 @@ pAIScripting0x1D_Mine:
     %AICMD0x38_WaitForFadeIn()                                               ;B4951F
     %AICMD0x0C_WaitForScriptFlag($00)                                            ;B49520
     %AICMD0x23_OrWithIndexedValue(strcFlags.daily3, $05)       ;B49522
-    %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 0, pAIScripting0x1D_L015)     ;B49527
-    %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 1, pAIScripting0x1D_L016)     ;B4952E
-    %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 2, pAIScripting0x1D_L017)     ;B49535
-    %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 3, pAIScripting0x1D_L018)     ;B4953C
-pAIScripting0x1D_L015:
+    %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 0, pAIScripting0x1D_Mine_IfCurrentSeasonIDIs0)     ;B49527
+    %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 1, pAIScripting0x1D_Mine_IfCurrentSeasonIDIs1)     ;B4952E
+    %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 2, pAIScripting0x1D_Mine_IfCurrentSeasonIDIs2)     ;B49535
+    %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 3, pAIScripting0x1D_Mine_IfCurrentSeasonIDIs3)     ;B4953C
+pAIScripting0x1D_Mine_IfCurrentSeasonIDIs0:
     %AICMD0x3D_TeleportToArea(!AREA_WOODSSPRING)               ;B49543
     %AICMD0x12_Jump(pAIScripting0x1D_L019)                                   ;B49545
-pAIScripting0x1D_L016:
+pAIScripting0x1D_Mine_IfCurrentSeasonIDIs1:
     %AICMD0x3D_TeleportToArea(!AREA_WOODSSUMMER)               ;B49548
     %AICMD0x12_Jump(pAIScripting0x1D_L019)                                   ;B4954A
-pAIScripting0x1D_L017:
+pAIScripting0x1D_Mine_IfCurrentSeasonIDIs2:
     %AICMD0x3D_TeleportToArea(!AREA_WOODSFALL)                 ;B4954D
     %AICMD0x12_Jump(pAIScripting0x1D_L019)                                   ;B4954F
-pAIScripting0x1D_L018:
+pAIScripting0x1D_Mine_IfCurrentSeasonIDIs3:
     %AICMD0x3D_TeleportToArea(!AREA_WOODSWINTER)               ;B49552
     %AICMD0x12_Jump(pAIScripting0x1D_L019)                                   ;B49554
 pAIScripting0x1D_L019:
