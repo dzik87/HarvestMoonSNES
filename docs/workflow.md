@@ -24,7 +24,7 @@ Tools: `tools/analysis/align_regions.py` (coverage report, `--md docs/regions.md
 check all regions; regenerating with the tool is also possible (it starts from the US text).
 
 ## Translations
-Translated ROMs are a separate build on the US engine: `python tools/build.py --region US --translation <lang>` ([translation.md](translation.md)). Source: `translations/<lang>/`; tools: `tools/translate/` (`export`, `import`, `check`, `stats`, `glyphs`, `build`); tests: `python3 tests/test_translate.py` (fast, synthetic fixtures; with `HM_ROM_DIR` it also proves that the identity translation reproduces the US ROM). The four original releases do not change.
+Translated ROMs are a separate build on the US engine: `python tools/build.py --region US --translation <lang>` ([translation.md](translation.md)). Source: `translations/<lang>/`; tools: `tools/translate/` (`export`, `import`, `check`, `preview`, `reflow`, `status`, `glossary`, `stats`, `glyphs`, `gfx`, `make_patch`, `build`; entry point `translate.py`, quick start in `tools/translate/README.md`); distribution = a BPS patch (`tools/build.py --translation <lang> --patch bps`); tests: `python3 tests/test_translate.py`, `tests/test_translate_tools.py`, `tests/test_make_patch.py` (fast, synthetic fixtures; with `HM_ROM_DIR` it also proves that the identity translation reproduces the US ROM). The four original releases do not change.
 
 ## Audio preview (`.github/workflows/audio.yml`)
 

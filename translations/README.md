@@ -10,6 +10,8 @@ extraction into the git-ignored `build/translate/` (see [docs/translation.md](..
 | `name_grids.txt` | optional override of name entry grid 0 (`table aNameInputGrid0`, rows `NN: x y down up right left char action`) that adds the letters of the language; capacity 204 rows |
 | `dialogs.txt` | translated dialogs only: `@@ sDialog_0xNNNN @@` followed by the text with `<tokens>` |
 | `status.csv` | status per dialog id (`todo` / `draft` / `reviewed`), translator, note |
+| `glossary.csv` | optional terminology list: `term,preferred,forbidden,note` (`tools/translate/glossary.py check`) |
+| `gfx/<Screen>.png` | optional picture overrides for text in graphics (indexed PNG, 255 = keep; `tools/translate/gfx.py`); `lang.json` `"gfx": {"name_grid": true}` draws the name entry letters |
 | `font/glyph_<ID>.png` | optional hand drawn glyph (8x16 or 16x16 indexed PNG, same format as `assets/fonts/<region>/`) that replaces the generated letter |
 
 ## Adding a language

@@ -50,6 +50,39 @@ python tools/translate/make_patch.py info    pl.bps
 * `--patch` finds your original through `--patch-source FILE`, `$HM_ROM_US` or `$HM_ROM_DIR/US/*.sfc`, checks it against `tests/expected.json` (US) and verifies the patch by applying it before writing.
 * Pure standard library Python, binary file access only, paths with spaces work on Windows.
 
+## Support tools
+
+All tools: [tools/translate/README.md](../tools/translate/README.md) (quick start with Windows commands; `translate.py` / `translate.bat` is one entry point). They print ids, counts and positions, never dialog text.
+
+* **`check.py`** reports every problem with its place: `0x0123 error layout-marker (screen 2, line 3, cell 83): ...`. Severities `error` / `warning` / `info` (`--min-severity`), stable codes
+  (`var-missing`, `numbers`, `answers`, `answer-cell`, `layout-marker`, `layout-word`, `layout-overflow`, `layout-pos`, `syntax`, `glyph-id`, `capacity`, ...), `--ids 0x0100-0x01FF` / `--range A B`
+  to check a part (the file level checks still run, `--no-global` skips them), `--json` for scripts, a summary per severity and code. The file is parsed once.
+* **`preview.py`** draws the dialog box: 28 x 3 cells of 8 x 16 px, the `<NEXT>` marker (blue triangle, cell 83), answer cursors (green), variables and numbers as tinted hatched cells with their full width, the
+  generated letters of the language. Red frame / rows: layout error or more than 84 cells; magenta cross: a glyph without pixels. `--sheet` makes a contact sheet. Output: `build/translate/preview/` (git-ignored).
+* **`reflow.py`** suggests line breaks (`<BR>`) and page breaks (`<NEXT>`) that satisfy the engine rules, with the same words (verified); modes `--breaks keep|pages|free`; reports the ids that cannot be laid out
+  and by how many cells (`--max-screens N`, `--fit us` = no more screens than the US text). Dialogs with `<OPT>`/`<POS>` are manual. It writes `build/translate/<lang>_reflow.txt`; `--apply` rewrites only the
+  chosen dialogs in `dialogs.txt` (backup in `build/translate/backup/`); nothing runs it implicitly.
+* **`status.py`**: `list`, `set <status> --ids ...`, `coverage` (per bank), `validate` on `status.csv`.
+* **`glossary.py`**: `translations/<lang>/glossary.csv` (`term,preferred,forbidden,note`; `|` separates forms, `stem*`, `re:PATTERN`): forbidden forms are errors, `--source us|jp` also warns where the source
+  uses a term but no preferred form appears; `names` lists the variables / numbers per id (`--proper`: capitalised word candidates).
+* **`gfx.py`** and **`make_patch.py`**: next sections.
+
+## Text in graphics (`translations/<lang>/gfx/`)
+
+Words that are baked into background pictures (menu, title, signs, the name entry grid) are changed with override pictures. `python tools/translate/gfx.py list` names the candidate screens
+(the name tables that other releases replace); `gfx.py template Screen_X` writes an empty canvas of the right size.
+
+* An override is an **indexed PNG** `translations/<lang>/gfx/<Screen>.png` with the size of the screen picture (`assets/gfx/png/screens/<Screen>.png`; 8 px per name table cell). Pixel value = palette row << 4 | colour index
+  (0-127), exactly as in the composed pictures ([formats/graphics-png.md](formats/graphics-png.md)). Pixel value **255 = KEEP**: a cell that is completely 255 is not touched, so the file needs only the
+  cells you change and holds none of the original pixels. Keep the full 256 entry palette when you save (an optimising PNG writer may renumber the indices).
+* For every changed 8x8 cell the tool reuses an existing tile with the same pixels (also mirrored) or writes the pixels into a free tile (all zero, not used by any name table of these tile sets, never tile 0)
+  and points the name table entry at it. Shared tiles are never edited, so other screens cannot change by accident. One palette row per cell; the priority bit is kept.
+* `python tools/translate/gfx.py check pl` prints the counts (changed cells, reused tiles, new tiles) and refuses a wrong size, a palette index above 127, no free tile, or a bank that would exceed $8000 bytes.
+* The build (`tools/build.py --translation pl`) writes the changed blobs to `assets/gfx/{tiles,characters}/translation/` (plus copies of the other shared blobs) and assembles with `-DTRANSLATION_GFX=1`,
+  which switches `!{REGDIR}` to `translation/` (`src/common/region.asm`). Without overrides nothing changes and the identity translation still reproduces the US ROM.
+* **Name entry grid letters**: `"gfx": {"name_grid": true}` in `lang.json` draws the letters of `name_grids.txt` into the picture (`Screen_Menu_Characters`): the grid uses the dialog font, so each new letter is the
+  generated glyph of the language (or your hand drawn `font/glyph_<ID>.png`), cut into its two 8x8 tiles. No picture is stored in the repository.
+
 ## Text syntax (`translations/<lang>/dialogs.txt`)
 
     @@ sDialog_0x0123 @@
@@ -145,8 +178,8 @@ place until it runs. Rules checked by `check.py` / `python tools/translate/nameg
 
 Capacity of the **picture**: the grid is a background tilemap (`Screen_Menu_Characters`, text in graphics) with exactly **18 free cell positions** next to the letters (4 + 4 in the row of Z / z,
 2 in the last letter row of the right block, 5 + 3 in the row of `OK`): exactly the 18 Polish letters. Their positions are used by the Polish override. The cells are selectable and enter their letter
-(it appears in the name box, which uses the dialog font), but the letter is **not drawn in the grid** until the graphics override exists (later phase: the tiles of the new letters and their tilemap
-entries). Languages that need more than 18 letters need extra rows in the picture (a new row of cells) as well.
+(it appears in the name box, which uses the dialog font). With `"gfx": {"name_grid": true}` in `lang.json` the build also draws the letters into the picture (see "Text in graphics"). Languages that
+need more than 18 letters need extra rows in the picture (a new row of cells) as well.
 
 ## Adding another language
 
@@ -155,5 +188,5 @@ Languages that need more than 18 extra letters or other marks add them to `defs/
 
 ## Not covered yet
 
-Text baked into graphics (menu words such as `year`, intro, signs, ending/credits screens, the letters of the name entry picture): [translation-analysis.md](translation-analysis.md), section 6.B.
-Until the graphics override exists those parts of a translated ROM stay English.
+Text baked into graphics beyond the name entry grid (menu words such as `year`, intro, signs, ending/credits screens): the mechanism exists (see "Text in graphics"), the pictures are the translator's work
+([translation-analysis.md](translation-analysis.md), section 6.B lists the screens). Until a picture override is supplied those parts of a translated ROM stay English.
