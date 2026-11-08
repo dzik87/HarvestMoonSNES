@@ -14,7 +14,7 @@ Extracted from the ROMs by `tools/extract_steps/menu.py`; the table labels, rele
 The text file has one `table <label> [US EU DE JP]` block per grid; a grid that differs per release is split into blocks that name their releases (the block
 with US becomes the `else` branch). `tools/menu/nameinput.py build` writes `build/gen/menu/name_input.asm`, `check` verifies the row numbering and that every
 neighbour index points into the table. Only grid 0 is reachable on the US/EU/DE engine (grids 1 and 2 are dead kana data there, [../translation-analysis.md](../translation-analysis.md) section 6.1);
-a translation overrides grid 0 with `translations/<lang>/name_grids.txt` (same syntax, one `table aNameInputGrid0` block), see [../translation.md](../translation.md).
+a translation overrides grid 0 with `translate/<lang>/name_grids.txt` (same syntax, one `table aNameInputGrid0` block), see [../translation.md](../translation.md).
 
 ## Small tables - `assets/tables/*.json`
 

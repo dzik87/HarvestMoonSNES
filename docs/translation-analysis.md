@@ -1,7 +1,7 @@
 # Translation analysis (Japanese base text, Latin engine)
 
 Findings that the translation infrastructure ([translation.md](translation.md), `tools/translate/`) is built on. Everything here was
-measured on the extracted assets of the four releases (`assets/dialogs/<region>/`) and on the sources in `src/`. The document names dialog ids,
+measured on the extracted assets of the four releases (`translate/<region>/`) and on the sources in `src/`. The document names dialog ids,
 counts and addresses only; it never quotes game text. The tables are reproducible:
 
     python tools/translate/analyze.py varmap     # variable map vs defs/translation/var_map_jp_us.json
@@ -119,20 +119,20 @@ Required additional letters: ĄĆĘŁŃÓŚŹŻ ąćęłńóśźż = **18**.
 * Glyph id = dialog word; table = id >> 6, 64 glyphs per 4096-byte table (`docs/formats/font.md`). Latin letters are `$00-$19` (a-z), `$1A-$33` (A-Z), `$34-$41` punctuation, `$42` heart.
 * Free ids: the 50 "blank" ids per region are not usable: `$76` (plain dither), `$B1`/`$270` (spaces) and `$281-$2AF` (the VRAM tile area of table 10, not glyph slots).
   Free in practice are the **leftover Japanese glyphs** of the US font in `$43-$A1` and `$A3-$B0`: no US dialog uses them (the 75 ids used by US dialogs are all in `$00-$42`, `$A2`, `$B1-$BB`).
-* The DE release used exactly this: `$43-$4A` (ä ö ü Ä Ö Ü ß +) and `$AB-$AE` (arrow cursors) overwritten in table 1/2. Mechanism to reuse: `EXTRA` in `tools/dialogs/dialog.py` maps ids to characters,
-  the font tables are rebuilt from `assets/fonts/<region>/glyph_*.png`.
+* The DE release used exactly this: `$43-$4A` (ä ö ü Ä Ö Ü ß +) and `$AB-$AE` (arrow cursors) overwritten in table 1/2. Mechanism to reuse: the glyph map `translate/de/glyphs/glyph_map.json` maps ids to characters,
+  the font tables are rebuilt from `translate/<lang>/glyphs/glyph_*.png`.
 * **Decision**: Polish uses `$43-$54` (18 consecutive ids, all in table 1 = `sFontGlyphs_0x01`). `$43-$4A` are proven safe by DE; `$4B-$54` are leftover JP glyphs that US
   text, the US string tables and the reachable US name grid do not use (grid 0 enters `$00-$33`, `$38 $39 $3B-$3D $40-$42` and `$B2-$BB` only).
 * **Resolved: no collision with name grid 1.** Grid 1 lists ids `$50-$A0` (and grid 2 `$A5-$AE`, `$C6-$DF`), so `$50-$54` would collide *if* grid 1 could be selected. It cannot on the
   US/EU/DE engine (evidence in section 6.1): the grid is selected only by the switch action of a selected cell, and grid 0 has no cell with action 2 or 3. The ids stay as they are and no
   fallback ids (`$A3 $A4 $AF $B0`) were needed. The guard is permanent: `check.py` verifies that no glyph id of a language is used by the US dialog text (the untranslated fallback) or
   entered by a cell of a *reachable* grid (`tools/translate/namegrid.py`, also `python tools/translate/namegrid.py reach`), and the tests assert it for Polish.
-* Other characters: the US charmap has `' ! . ? " / , ( ) % - & : … ♥` and digits; missing for Polish text: typographic quotation marks (use `"`), the dash (use `-`).
+* Other characters: the US glyph map has `' ! . ? " / , ( ) % - & : … ♥` and digits; missing for Polish text: typographic quotation marks (use `"`), the dash (use `-`).
   `„` can be added as a glyph if wanted (spare ids exist).
-* A language gets its charmap through `translations/<lang>/lang.json` (`glyphs`): character -> glyph id plus the diacritic recipe. The tools merge it over `src/common/charmap.asm` (+ `EXTRA`).
-  Glyph pixels are generated at build time from the extracted US font plus a mark overlay (`defs/translation/marks.json`), so no font pixels are committed.
+* A language gets its characters through its glyph map `translate/<lang>/glyphs/glyph_map.json` (every glyph id with its character and PNG); the language folder holds a PNG for every id.
+  `python tools/translate/glyphs.py init <lang>` creates the initial PNGs once from the extracted US font plus a mark overlay (`defs/translation/marks.json`, letters in `defs/translation/glyph_overlays.json`); afterwards the PNGs are plain editable files and the build only reads them.
 * Name entry: the grid (`aNameInputGrid0`, 71 rows in US) has no Polish letters; DE added 7 rows for its 7 extra letters. The Polish translation overrides grid 0 with 89 rows
-  (71 + 18 letters, `translations/pl/name_grids.txt`, docs/translation.md "Name entry grid"); section 6.1 explains where the 18 free cell positions are.
+  (71 + 18 letters, `translate/pl/name_grids.txt`, docs/translation.md "Name entry grid"); section 6.1 explains where the 18 free cell positions are.
 
 ## 5. Capacity
 
@@ -195,4 +195,4 @@ Evidence (static, `src/code/bank_82/screen_text.asm`, `menu.asm`, `src/code/bank
 * JP only: `Screen_Title_NatsumeLogo`, `Tiles_Credits_0`, `Screen_Credits_0to3`, credits and end-screen text, `Screen_Credits4_DriveToTown__*`, `Screen_Credits_StaffRollJp__*`
 * Candidate unlocalised screens of the US release to inspect: `Screen_Intro`, ending screens `Screen_Ending00-13`, credits `Tiles_Credits_0-3`, HUD/menu tiles, shop and building signs.
 
-A PNG override mechanism like `assets/gfx/png/<region>/` (regional versions) with a `translations/<lang>/gfx/` directory is the next phase; it also draws the 18 name grid letters.
+A PNG override mechanism like `assets/gfx/png/<region>/` (regional versions) with a `translate/<lang>/gfx/` directory is the next phase; it also draws the 18 name grid letters.

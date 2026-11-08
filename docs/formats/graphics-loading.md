@@ -37,7 +37,7 @@ ordinary map entries, only without graphic preset byte. Their BG keeps the chara
 * `ScreenRaw_Unk_A6A096`: raw 64x32 name table without any reference (hidden under bank padding).
 
 Blobs reached through an index (sprite banks, glyph tables, palettes) are marked `indexed`; whether every index is used is checked by
-`tools/objects/objdata.py` (frames) and `tools/fonts/font.py` (glyph tables), not here.
+`tools/objects/objdata.py` (frames) and `tools/translate/font.py` (glyph tables), not here.
 
 ## Open questions
 

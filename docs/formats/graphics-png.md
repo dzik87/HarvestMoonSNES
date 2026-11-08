@@ -14,7 +14,7 @@ bit-identical to the original ROM data. Converter: `tools/gfx/pngsync.py` (+ `to
 | `tilemaps` | 64 | `assets/gfx/characters/sCompressedTilemap_*.bin` (60, LZSS) and `sCharactermap_*.bin` (4, raw) | `assets/gfx/tilemaps/<label>.map.txt` | BG name tables (not graphics) |
 
 Every blob has a `<label>.json` next to its remainder sheet / text file (the sidecar). Palettes were already PNG/JSON before
-(`assets/gfx/palettes/`), fonts are per-glyph PNGs (`assets/fonts/`, `docs/formats/font.md`).
+(`assets/gfx/palettes/`), fonts are per-glyph PNGs (`translate/<lang>/glyphs/`, `docs/formats/font.md`).
 
 ## Composed images: edit whole pictures, the build splits them into tiles and sprite blocks
 
@@ -307,7 +307,7 @@ PNG looks: the conversion is lossless for any bytes and any bpp.
 
 | Item | Why / plan |
 |---|---|
-| `sFontGlyphs_*` (11 x 4096 bytes in `assets/gfx/tiles/`) | already PNG through the font pipeline (`assets/fonts/us/glyph_*.png`, `tools/fonts/font.py`), not duplicated here |
+| `sFontGlyphs_*` (11 x 4096 bytes in `assets/gfx/tiles/`) | already PNG through the font pipeline (`translate/us/glyphs/glyph_*.png`, `tools/translate/font.py`), not duplicated here |
 | Palettes | already PNG + JSON + `.pal` (`assets/gfx/palettes/`) |
 | Region-specific graphics of EU, DE, JP | only the US ROM is in the repository. `docs/regions.md` shows graphics that differ per language in banks $94, $95 (JP), $9A, $9B, $9E (JP), $9F, $A5, $A6 and palettes $A9 (JP). They become `assets/gfx/png/<kind>/<region>/` entries in the region unification step (the sidecar format already fits; labels would get a region suffix). |
 | Title/menu/text graphics inside code or object data | graphics not stored as the blobs above (e.g. anything generated at run time, object animation data in banks $86/$87 which only references sprite tiles) have no image form |

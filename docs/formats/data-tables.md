@@ -2,7 +2,7 @@
 
 `tools/data/tabledata.py` (`build`, `check`) turns `assets/tables/data/<name>.csv` into `build/gen/blocks/<name>.asm`; the code includes each table with one `incsrc` at the place of the former
 data (same labels and offsets, so pointers and the ROM bytes are unchanged). `defs/tables/data/manifest.json` lists the tables and the source file that includes each (`check` requires exactly one include).
-Tables with other sources: `assets/areas/` (`area-data.md`), `assets/tables/*.json` (`menu-data.md`), `assets/gfx/presets.csv` (below), `assets/dialogs/` (`dialog-tables.md`), `assets/ai/` (AI scripts).
+Tables with other sources: `assets/areas/` (`area-data.md`), `assets/tables/*.json` (`menu-data.md`), `assets/gfx/presets.csv` (below), `translate/` (`dialog-tables.md`), `assets/ai/` (AI scripts).
 
 ## Structure and content
 

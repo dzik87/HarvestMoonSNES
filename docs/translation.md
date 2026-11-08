@@ -9,24 +9,24 @@ Analysis and evidence for the rules below: [translation-analysis.md](translation
 * **Target engine: the US engine.** The Japanese engine draws fixed 16x16 kana/kanji cells; the Latin engine of the US/EU/DE releases draws 8x16 cells (28 per line, 3 lines per screen) and
   can show letters. A translated ROM is therefore the US release (code, graphics, tables) with translated dialog banks and extra letters. The Japanese structure (which variables, numbers and
   answers a dialog has) is mapped to the US engine through `defs/translation/var_map_jp_us.json`.
-* **Everything ROM-derived is generated locally.** `tools/extract.py` fills `assets/` from your own dumps (`docs/extraction.md`); the worksheet, the check reference and the glyph bases come from there. The
+* **Everything ROM-derived is generated locally.** `tools/extract.py` fills `assets/` and `translate/{us,eu,de,jp}` from your own dumps (`docs/extraction.md`); the worksheet, the check reference and the US glyph bases come from there. The
   worksheet lives in the git-ignored `build/translate/` and **must never be committed**. Your translation text is your own work.
 * Untranslated ids fall back to the US text, so the ROM builds and runs at every stage.
 
 ## Workflow
 
 ```sh
-python tools/extract.py --rom-dir <folder with your dumps>      # once: assets/ from your ROMs
+python tools/extract.py --rom-dir <folder with your dumps>      # once: assets/ and translate/{us,eu,de,jp} from your ROMs
 python tools/translate/export.py pl                              # build/translate/pl_worksheet.txt  (or --format tsv for a spreadsheet)
 #   edit the worksheet: write the Polish text below the comment lines of a dialog
-python tools/translate/import.py pl build/translate/pl_worksheet.txt   # validates, merges into translations/pl/dialogs.txt, sets status draft
+python tools/translate/import.py pl build/translate/pl_worksheet.txt   # validates, merges into translate/pl/dialogs.txt, sets status draft
 python tools/translate/check.py pl                               # full validation (dialogs, strings, name grid, glyph ids), coverage, capacity
 python tools/translate/stats.py pl                               # progress per bank / status
 python tools/build.py --region US --translation pl               # build/HarvestMoon_US_pl.sfc  (open it in an emulator)
 ```
 
 `export.py` options: `--bank B6`, `--status todo`, `--format tsv`, `--out FILE`. `import.py` options: `--status reviewed`, `--skip-invalid`.
-You can also edit `translations/pl/dialogs.txt` directly (same block syntax) and run `check.py`.
+You can also edit `translate/pl/dialogs.txt` directly (same block syntax) and run `check.py`.
 
 The translated ROM is written to `build/HarvestMoon_US_<lang>.sfc` (plus its asar symbol file `.sym`, used to verify the table addresses); there is no reference hash for it. The build prints the coverage, the string
 tables and the name grid it patched, and the header checksum (recomputed). The four original
@@ -81,9 +81,9 @@ Words that are baked into background pictures (menu, title, signs, the name entr
 * The build (`tools/build.py --translation pl`) writes the changed blobs to `assets/gfx/{tiles,characters}/translation/` (plus copies of the other shared blobs) and assembles with `-DTRANSLATION_GFX=1`,
   which switches `!{REGDIR}` to `translation/` (`src/common/region.asm`). Without overrides nothing changes and the identity translation still reproduces the US ROM.
 * **Name entry grid letters**: `"gfx": {"name_grid": true}` in `lang.json` draws the letters of `name_grids.txt` into the picture (`Screen_Menu_Characters`): the grid uses the dialog font, so each new letter is the
-  generated glyph of the language (or your hand drawn `font/glyph_<ID>.png`), cut into its two 8x8 tiles. No picture is stored in the repository.
+  generated glyph of the language (or your hand drawn `glyphs/glyph_<ID>.png`), cut into its two 8x8 tiles. No picture is stored in the repository.
 
-## Text syntax (`translations/<lang>/dialogs.txt`)
+## Text syntax (`translate/<lang>/dialogs.txt`)
 
     @@ sDialog_0x0123 @@
     Text of the dialog.<NEXT>Second screen of the same dialog.<END>
@@ -92,7 +92,7 @@ A block starts with `@@ sDialog_0xNNNN @@` (the id of the Japanese dialog, hex).
 
 | Token | Meaning |
 |---|---|
-| plain text | letters of the language charmap; a space or a line break in the source is one space |
+| plain text | letters of the glyph map of the language; a space or a line break in the source is one space |
 | `<NEXT>` | wait for the A button, clear the box (a new screen). Optional: with `autopage` the tools insert it when a screen is full |
 | `<END>` | end of the dialog (appended automatically if missing) |
 | `<OPT n>` | selection menu with n answers (1-5); must equal the Japanese dialog. Ends the text |
@@ -109,7 +109,7 @@ Rules checked by `check.py`:
   Latin releases differ from Japanese are listed in the analysis (section 1.3) and flagged `diff` in the worksheet; `num` marks dialogs whose literal numbers differ between JP and US: check the number
   against the Japanese text and the code. `unref` marks ids that no code or table references statically (lowest priority).
 * **Numbers and answers**: `<NUM>` indices/digits and `<OPT n>` equal the Japanese dialog.
-* **Characters**: only characters of the charmap (`src/common/charmap.asm` plus the letters of `lang.json`). Typographic quotes and dashes: use `"` and `-`.
+* **Characters**: only characters of the glyph map of the language (`translate/<lang>/glyphs/glyph_map.json`). Typographic quotes and dashes: use `"` and `-`.
 * **Layout** (engine rules, `defs/translation/engine.json`): 28 cells per line, 3 lines = 84 cells per screen, no wrapping in the engine. The tools wrap words and pad lines with spaces; a word longer than a line
   is an error. A screen that continues with `<NEXT>` must leave cell 83 free (the blinking arrow); a variable counts with its full width (names: 4 characters, girl 5, season 6, weekday 9, ordinal 2).
   Set the block flag `raw` (`@@ sDialog_0x0001 @@ raw`) to write a dialog cell by cell without any layout (needed only for special cases).
@@ -119,12 +119,20 @@ Rules checked by `check.py`:
 
 ## Letters (glyphs)
 
-The Latin font has no Polish letters. `lang.json` maps each extra letter to a free glyph id (`$43-$54` for Polish; they are free in the US text and cannot collide with the
-name entry grids, see the analysis section 4), a base letter and a mark (`acute`, `dot`, `ogonek`, `stroke`). Names are one byte per character, so a letter that is entered in a
-name needs an id below `$100`. The build **generates**
-the glyphs from the extracted US font plus the mark pixels of `defs/translation/marks.json` and writes them into the font table of the ROM, so no font pixels are committed. To hand draw a letter put
-`translations/<lang>/font/glyph_<ID>.png` (8x16 or 16x16 indexed PNG, palette index = pixel value, see `docs/formats/font.md`) next to it; it replaces the generated one. Preview:
-`python tools/translate/glyphs.py sheet pl` writes `build/translate/pl_glyphs.png`.
+Every language folder has a `glyphs/` directory: one PNG for **every** glyph id of the font (`glyph_0000.png` ... `glyph_02BF.png`, 704 files for a translation, so the whole sheet is
+visible and editable) and the glyph map `glyph_map.json` (format and rules: [formats/font.md](formats/font.md)). The map lists each id with its character (`"char"`), the PNG, the engine
+width (8 px on the US engine) and the font table addresses. It is the single source of truth: `check.py` and the converters read the characters of `dialogs.txt` from it, the build reads
+the pixels from the PNGs. The Latin font has no Polish letters, so the Polish map has `"char": "Ą"` ... at the free ids `$43-$54` (free in the US text, they cannot collide with the name
+entry grids, see the analysis section 4). Names are one byte per character, so a letter that is entered in a name needs an id below `$100`.
+
+* Creating the PNGs of a language (once): `python tools/translate/glyphs.py init <lang>` copies the US font PNGs, writes plain-dither PNGs for the blank ids and paints the extra letters from the
+  base letter of the US font plus a mark (`acute`, `dot`, `ogonek`, `stroke` of `defs/translation/marks.json`; letters listed in `defs/translation/glyph_overlays.json`). Afterwards the PNGs are plain files: the build
+  no longer generates anything.
+* Hand drawing a letter: edit `translate/<lang>/glyphs/glyph_<ID>.png` (8x16 or 16x16 indexed PNG, palette index = pixel value, 4 colours), then `python tools/translate/font.py seal --lang <lang>`.
+  Check: `python tools/translate/font.py check --lang <lang>`. A character that is not in the map is rejected by `check.py` (`character ... is not in the character map`); two ids with the same
+  character, a PNG that is not in the map, a missing PNG, a wrong size or a pixel index above 3 are rejected by the build.
+* Build: `tools/build.py --translation <lang>` builds the font tables from `glyphs/` and writes them into the ROM (`tools/translate/build.py post`).
+* Preview: `python tools/translate/glyphs.py sheet pl` writes `build/translate/pl_glyphs.png` (the letters of the language), `python tools/translate/font.py sheet --lang pl` the whole font.
 
 ## Strings outside the dialogs (`strings` in `lang.json`)
 
@@ -146,7 +154,7 @@ sources and the four original releases do not change. The tables are described i
 }
 ```
 
-* A key is the label above or the slot index (`"2"`). A slot that is not listed keeps the US text. Characters: the language charmap (including its extra letters); `<XXXX>` is a raw glyph id.
+* A key is the label above or the slot index (`"2"`). A slot that is not listed keeps the US text. Characters: the glyph map of the language (including its extra letters); `<XXXX>` is a raw glyph id.
 * A text may be **shorter** than the maximum: it is padded with the space glyph (the engine prints every cell of the field, so a short word leaves a gap behind it in a dialog, as in the
   original). It may **not be longer** (the readers copy exactly that many words); `check.py` reports it, the build stops. Abbreviate (`Poniedz.`) when a word does not fit.
 * **Date line**: the dialogs that announce the date (ids listed in the analysis, section 1.3) are normal dialogs: write the date in the grammar of the language with `<VAR weekday>`, `<NUM ...>`,
@@ -167,7 +175,7 @@ A language adds its letters by overriding grid 0:
 "grids": {"file": "name_grids.txt"}            ("enabled": false, or no "grids" key = the original grid)
 ```
 
-`translations/<lang>/name_grids.txt` holds one `table aNameInputGrid0` block in the syntax of `assets/menu/name_input.txt` (`NN: x y down up right left char action`, see
+`translate/<lang>/name_grids.txt` holds one `table aNameInputGrid0` block in the syntax of `assets/menu/name_input.txt` (`NN: x y down up right left char action`, see
 [formats/menu-data.md](formats/menu-data.md)). The build writes the rows over the start of the dead grid area at the address of `aNameInputGrid0`, so no code changes; the original rows stay in
 place until it runs. Rules checked by `check.py` / `python tools/translate/namegrid.py check pl`:
 
@@ -183,8 +191,8 @@ need more than 18 letters need extra rows in the picture (a new row of cells) as
 
 ## Adding another language
 
-See [../translations/README.md](../translations/README.md): a new `translations/<code>/` with `lang.json` (letters, `strings`, optional `grids`), `dialogs.txt`, `status.csv`, then the same commands with `<code>`.
-Languages that need more than 18 extra letters or other marks add them to `defs/translation/marks.json` and take free glyph ids.
+See [../translate/README.md](../translate/README.md): a new `translate/<code>/` with `lang.json` (`strings`, optional `grids`), `dialogs.txt`, `status.csv` and the font created by `glyphs.py init <code>`, then the same commands with `<code>`.
+Languages that need other marks add them to `defs/translation/marks.json` and take free glyph ids.
 
 ## Not covered yet
 

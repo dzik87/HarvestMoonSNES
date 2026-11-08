@@ -1,8 +1,43 @@
 # Font format (dialog glyph tables)
 
-Tool: `tools/fonts/font.py`. Editable source: `assets/fonts/<region>/glyph_<ID>.png` + `glyphs.json`
-(regions `us`, `eu`, `de`, `jp`). Binary output: `sFontGlyphs_0x00..0x09.bin` and `sFontGlyphs_Dialog.bin`
-(US: `assets/gfx/tiles/`).
+Tool: `tools/translate/font.py` (map handling: `tools/translate/glyphmap.py`). Editable source of every language: `translate/<lang>/glyphs/glyph_<ID>.png` +
+`translate/<lang>/glyphs/glyph_map.json` (languages `us`, `eu`, `de`, `jp` = the original releases, `pl` = a translation, ...). Binary output: `sFontGlyphs_0x00..0x09.bin` and
+`sFontGlyphs_Dialog.bin` (original releases: `assets/gfx/tiles/`, `assets/gfx/tiles/<region>/`; a translation patches the tables into the ROM image after the assembly,
+`tools/translate/build.py post`).
+
+## The glyph map (`glyph_map.json`)
+
+One file per language, the **single source of truth** for glyph id <-> character <-> PNG file. The dialog converters (`tools/translate/dialog.py`, the translation tools) read their
+characters from it, `font.py build` builds the font from it and the PNGs. Format (JSON, one glyph per line so that diffs stay small):
+
+```
+{
+ "_doc": "...", "lang": "pl", "kind": "translation", "engine_region": "us", "source": "...",
+ "tables": [ {"table": 0, "label": "sFontGlyphs_0x00", "file": "sFontGlyphs_0x00.bin", "cpu_address": "$949843", "first_id": "0x0000", "last_id": "0x003F",
+              "referenced_by_engine": true, "sha256": "..."}, ... 11 entries ],
+ "glyphs": [ {"id": "0x0043", "char": "Ą", "png": "glyph_0043.png", "width": 8, "note": "A + ogonek"}, ... 704 entries, ids 0x0000-0x02BF in order ]
+}
+```
+
+| Field | Meaning |
+|---|---|
+| `id` | glyph id = the dialog word that shows the glyph (`0x0000`-`0x02BF`; table = id >> 6, 64 glyphs per table) |
+| `char` | the Unicode character the glyph stands for in the dialog text of the language, or `null` (the text writes the id as `<XXXX>`). One character per id, no character twice, never `<` or `>` |
+| `label` | only for glyphs without a character: `blank` (plain dither), `unmapped` (a glyph that has no reading, e.g. a leftover Japanese glyph in US/EU/DE), `duplicate` (JP: repeats the character of another id; `display` holds the reading), `window` (ids `$0280`-`$02BF`, dialog window tile data), `<NEXT>` (the next-screen marker, US/EU/DE; the control word `$00A2` is written `<NEXT>`) |
+| `png` | file name `glyph_XXXX.png` in the same folder, or `null` = the id is the plain dither and has no PNG. A glyph without PNG must have the label `blank` (it may still have a character: the space `$B1`) |
+| `width` | width in pixels with which the engine of the language draws the glyph: 8 for US/EU/DE and every translation (US engine); JP 16, or 8 for the narrow ids `$BC`-`$C5`, `$270` |
+| `display` | optional (JP): reading used only to show the Japanese reference text in the translation worksheet, never by a converter |
+| `note` | optional, region specific remark (next marker, JP blanks, the base letter + mark of a generated Polish letter) |
+| `tables` | the 11 font tables: label, `.bin` file name, CPU address, glyph id range and the SHA-256 of the built 4096 bytes (`font.py seal` recomputes it after an edit; `check` verifies it) |
+
+Rules enforced by `font.py build/check` and `glyphmap.py` (every violation is an error that names the glyph): exactly 704 entries in id order; `png` is `glyph_<id>.png` or `null`; `null` only
+with the label `blank`; every listed PNG exists and no `glyph_*.png` is left out of the map; a PNG is an indexed (palette) image of 16x16 or 8x16 pixels with indices 0..3; `width` is 8 or 16;
+characters are unique single characters. For a translation the map must not replace a character of its engine release (`check.py`, `Lang`).
+
+Translations have a PNG for **all** 704 ids (plain-dither PNGs for the blank ids), so the whole font is visible and editable; the original releases omit the PNG of an id that is
+exactly the plain dither (50 ids, 49 in JP). `glyphs.py init <lang>` creates the files of a translation (US font + overlays), see `docs/translation.md`. The characters of the four original
+releases are not in the ROM: the extraction takes them from `defs/translation/charmaps.json` (the extraction seed; `font.py check` verifies that the committed maps agree with it) and writes them
+into the maps; the maps are what everything else reads.
 
 ## Storage
 
@@ -18,7 +53,7 @@ a ROM in which this table is not found). File offset = `(bank & $7F) * $8000 + (
 
 ## Addressing a glyph (evidence: `fDialog_GetGlyphPointer` $839862, `src/code/bank_83/dialog.asm`)
 
-The glyph id is the 16-bit dialog word (see `tools/dialogs/dialog.py`).
+The glyph id is the 16-bit dialog word (see `tools/translate/dialog.py`).
 
     table = id >> 6                       ; 6x LSR, x3 -> index into aLetterGlyphsPointers (ptr24)
     idx   = id & $3F
@@ -76,21 +111,20 @@ VRAM advance (`fDialog_AdvanceGlyphDestination` $839838: `type*8+8` words).
   `LDX #$0000` (bytes `A2 00 00`), so the type is always 0: only the left half (TL and BL) is ever transferred and
   every character is 8 px wide. The right half (TR/BR) of ids `$00`-`$3D` (Latin letters, punctuation) is plain
   dither. In US the remaining ids still hold the unchanged Japanese 16x16 kana/kanji/symbols
-  (see `glyphs.json`: their right halves are real data but never displayed). `glyphs.json`
-  records the width as `engine_glyph_width_px`.
+  (see `glyph_map.json`: their right halves are real data but never displayed). The map
+  records the width of every glyph in `width`.
 
 ## Character mapping
 
-`glyphs.json` -> `chars` lists id -> character as used by `tools/dialogs/dialog.py` (`src/common/charmap.asm` plus
-the per-region extras). US: `$00`-`$19` a-z, `$1A`-`$33` A-Z, `$34`-`$41` punctuation, `$42` heart, `$A2` next
-marker, `$B1` space, `$B2`-`$BB` digits (dialog text), `$BC`-`$C5` digits for number variables. JP: kana,
-see `defs/dialogs/charmap_jp.json` (first occurrence of each character only; the table contains duplicates). The 20 glyph ids of the text range ($0000-$027F) that this table leaves out (digit cells $00BC-$00C5, kanji $01E7 $01F0 $0208 $0219 $0221 $0260, the heart $0274, the cow and chicken icons $027E/$027F, `_` $00A8) are listed in `defs/translation/jp_display_extra.json`; the translation worksheet uses it to show the Japanese text without `<XXXX>` placeholders (display only, the dialog converter still writes these ids as `<XXXX>`).
+The `char` fields of the glyph map list id -> character as used by `tools/translate/dialog.py`. US: `$00`-`$19` a-z, `$1A`-`$33` A-Z, `$34`-`$41` punctuation, `$42` heart, `$A2` next
+marker, `$B1` space, `$B2`-`$BB` digits (dialog text), `$BC`-`$C5` digits for number variables. JP: kana (first occurrence of each character only; the font repeats some characters,
+those ids have `char` null, label `duplicate` and the reading in `display`). The 20 glyph ids of the text range ($0000-$027F) that have no `char` in the JP map (digit cells $00BC-$00C5, kanji $01E7 $01F0 $0208 $0219 $0221 $0260, the heart $0274, the cow and chicken icons $027E/$027F, `_` $00A8) carry such a `display` reading; the translation worksheet uses it to show the Japanese text without `<XXXX>` placeholders (display only, the dialog converter still writes these ids as `<XXXX>`).
 JP blank glyphs: `$00B1` and `$0270` are plain dither (so they have no PNG) but are real spaces. They are not duplicates:
 `$00B1` is type 1 (16 px, full-width space, written `U+3000` in the dialog sources) and `$0270` is type 0 (8 px,
 half-width space, written as an ASCII space). `$00B1` is by far the most used code in JP text (about 6000 uses).
 In US/EU/DE the engine draws every glyph 8 px wide, so `$B1` is the only space there.
 
-Add new letters by drawing them into a free glyph id and registering the character in the dialog tool's map.
+Add new letters by drawing them into a free glyph id and registering the character (`char`) of that id in the glyph map of the language, then `font.py seal`.
 
 ## Differences between regions
 
@@ -109,15 +143,17 @@ $94/$95 differ; bank $9C is identical).
 
 ## Workflow
 
-    python3 tools/extract.py --rom-dir <your dumps> --only fonts   # ROM -> assets/fonts/<region>/ (all four releases)
-    python3 tools/fonts/font.py extract --region eu --rom ROM/EU/<file>.sfc   # one release from one ROM file
-    python3 tools/fonts/font.py build   --region us --write-assets   # PNGs -> assets/gfx/tiles/sFontGlyphs_*.bin
-    python3 tools/fonts/font.py build   --region de --out build/fonts/de
-    python3 tools/fonts/font.py seal    --region de            # after an intentional edit: refresh SHA-256 values
-    python3 tools/fonts/font.py check [--rom-dir ROMDIR]       # CI: byte-exact round trip
+    python3 tools/extract.py --rom-dir <your dumps> --only fonts   # ROM -> translate/<region>/glyphs/ (all four releases)
+    python3 tools/translate/font.py extract --lang eu --rom ROM/EU/<file>.sfc   # one release from one ROM file
+    python3 tools/translate/font.py build   --lang us --write-assets   # PNGs + map -> assets/gfx/tiles/sFontGlyphs_*.bin
+    python3 tools/translate/font.py build   --lang pl --out build/fonts/pl   # any language into a directory (--region is the old name of --lang)
+    python3 tools/translate/font.py seal    --lang de            # after an intentional edit: refresh SHA-256 values
+    python3 tools/translate/font.py check [--lang L]... [--rom-dir ROMDIR]       # CI: map consistent, byte-exact round trip
+    python3 tools/translate/font.py sheet   --lang pl            # contact sheet of the whole font
+    python3 tools/translate/glyphs.py init  pl                  # create the glyph PNGs of a translation (once)
 
-`check` always verifies that the committed PNGs of every region rebuild to the SHA-256 values recorded in
-`glyphs.json` (no ROM needed) and, for US, that they equal `assets/gfx/tiles/sFontGlyphs_*.bin`. With ROMs
+`check` always verifies that the glyph map is consistent with the PNG files, that the committed PNGs of every language rebuild to the SHA-256 values recorded in
+the map (no ROM needed) and, for US, that they equal `assets/gfx/tiles/sFontGlyphs_*.bin`. With ROMs
 (`--rom-dir`, `HM_ROM_DIR`, or `HM_ROM_<REGION>`) it also checks extract -> build against the ROM bytes.
 
 ## PNG sizes: 8x16 and 16x16
@@ -131,5 +167,5 @@ dither, so the ROM bytes are unchanged (checked by `font.py check`, `tests/test_
 * The leftover Japanese glyphs in US/EU/DE (kana/kanji from the original font) keep 16x16 PNGs: their right half
   holds real data that the 8 px engine never shows. These are the candidates for replacement by proper Latin glyphs
   (the original translation reused the Japanese font data and only patched the glyph routines).
-* Counts of 8x16 files are stored in `glyphs.json` (`png_files_8x16`).
+* The width in the map (`width`) is the engine width; the PNG size follows from the pixels (8x16 when the right half is plain dither and the engine draws 8 px).
 * `font.py extract` writes the narrow form directly.
