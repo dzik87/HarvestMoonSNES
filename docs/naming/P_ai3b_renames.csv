@@ -1,0 +1,517 @@
+old,new,confidence,reason
+pAIScripting0x19_Data01,pAIScripting0x19_Farm,high,AI slot entry named after the caller (fAreaEvents_Farm)
+pAIScripting0x19_Data02,pAIScripting0x19_WorksmanHouse,high,AI slot entry named after the caller (fAreaEvents_WorksmanHouse)
+pAIScripting0x19_L001,pAIScripting0x19_Farm_Actor01,medium,"Target of AICMD0x09_StartScript (child script, AI slot $01)"
+pAIScripting0x19_L008,pAIScripting0x19_WorksmanHouse_Actor01_Maria,high,"Target of AICMD0x09_StartScript (child script, AI slot $01); sprite table of Maria"
+pAIScripting0x19_L002,pAIScripting0x19_WorksmanHouse_Actor02,medium,"Target of AICMD0x09_StartScript (child script, AI slot $02)"
+pAIScripting0x19_L004,pAIScripting0x19_WorksmanHouse_Actor03,medium,"Target of AICMD0x09_StartScript (child script, AI slot $03)"
+pAIScripting0x19_L006,pAIScripting0x19_WorksmanHouse_Actor04,medium,"Target of AICMD0x09_StartScript (child script, AI slot $04)"
+pAIScripting0x19_L003,pAIScripting0x19_WorksmanHouse_Actor02_Idle,high,Wait + jump to itself (idle loop)
+pAIScripting0x19_L005,pAIScripting0x19_WorksmanHouse_Actor03_Idle,high,Wait + jump to itself (idle loop)
+pAIScripting0x19_L007,pAIScripting0x19_WorksmanHouse_Actor04_Idle,high,Wait + jump to itself (idle loop)
+pAIScripting0x1A_Data01,pAIScripting0x1A_Farm,high,AI slot entry named after the caller (fAreaEvents_Farm)
+pAIScripting0x1A_Data02,pAIScripting0x1A_Toolshop,high,AI slot entry named after the caller (fAreaEvents_Toolshop)
+pAIScripting0x1A_L001,pAIScripting0x1A_Farm_Actor01_Ann,high,"Target of AICMD0x09_StartScript (child script, AI slot $01); sprite table of Ann"
+pAIScripting0x1A_L002,pAIScripting0x1A_Toolshop_Actor01_Ann,high,"Target of AICMD0x09_StartScript (child script, AI slot $01); sprite table of Ann"
+pAIScripting0x1A_L003,pAIScripting0x1A_Toolshop_Actor02,medium,"Target of AICMD0x09_StartScript (child script, AI slot $02)"
+pAIScripting0x1A_L004,pAIScripting0x1A_Toolshop_Actor02_Idle,high,Wait + jump to itself (idle loop)
+pAIScripting0x1B_Data01,pAIScripting0x1B_Farm,high,AI slot entry named after the caller (fAreaEvents_Farm)
+pAIScripting0x1B_Data02,pAIScripting0x1B_Mine,high,AI slot entry named after the caller (fAreaEvents_Mine)
+pAIScripting0x1B_L001,pAIScripting0x1B_Farm_Actor01,medium,"Target of AICMD0x09_StartScript (child script, AI slot $01)"
+pAIScripting0x1B_L003,pAIScripting0x1B_Mine_Actor01_Nina,high,"Target of AICMD0x09_StartScript (child script, AI slot $01); sprite table of Nina"
+pAIScripting0x1B_L004,pAIScripting0x1B_Mine_Actor01_Nina_WaitInteract,high,"Polls AICMD0x2D (player presses A, with or without item) and loops"
+pAIScripting0x1B_L005,pAIScripting0x1B_Mine_Actor01_Nina_WaitInteract_2,high,"Polls AICMD0x2D (player presses A, with or without item) and loops"
+pAIScripting0x1B_L006,pAIScripting0x1B_Mine_Actor01_Nina_OnInteract,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x1B_L007,pAIScripting0x1B_Mine_Actor01_Nina_OnInteract_2,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x1B_L008,pAIScripting0x1B_Mine_Actor01_Nina_OnItemOffered,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x1C_Data01,pAIScripting0x1C_Farm,high,AI slot entry named after the caller (fAreaEvents_Farm)
+pAIScripting0x1C_L001,pAIScripting0x1C_Farm_Actor01_Ellen,high,"Target of AICMD0x09_StartScript (child script, AI slot $01); sprite table of Ellen"
+pAIScripting0x1C_L002,pAIScripting0x1C_Data02_Actor0A,medium,"Target of AICMD0x09_StartScript (child script, AI slot $0A)"
+pAIScripting0x1C_L011,pAIScripting0x1C_Data03_Actor0A_Ellen,high,"Target of AICMD0x09_StartScript (child script, AI slot $0A); sprite table of Ellen"
+pAIScripting0x1C_L010,pAIScripting0x1C_Data03_Actor0B,medium,"Target of AICMD0x09_StartScript (child script, AI slot $0B)"
+pAIScripting0x1C_L003,pAIScripting0x1C_Data02_Actor0A_WaitTalk,high,Polls AICMD0x1F (player talks to the NPC) and loops
+pAIScripting0x1C_L004,pAIScripting0x1C_Data02_Actor0A_Talk,medium,Jump target of AICMD0x1F (conversation handler)
+pAIScripting0x1D_Data01,pAIScripting0x1D_Farm,high,AI slot entry named after the caller (fAreaEvents_Farm)
+pAIScripting0x1D_Data03,pAIScripting0x1D_Mine,high,AI slot entry named after the caller (fAreaEvents_Mine)
+pAIScripting0x1D_L001,pAIScripting0x1D_Farm_Actor01,medium,"Target of AICMD0x09_StartScript (child script, AI slot $01)"
+pAIScripting0x1D_L003,pAIScripting0x1D_Data02_Actor01,medium,"Target of AICMD0x09_StartScript (child script, AI slot $01)"
+pAIScripting0x1D_L006,pAIScripting0x1D_Data02_Actor02,medium,"Target of AICMD0x09_StartScript (child script, AI slot $02)"
+pAIScripting0x1D_L009,pAIScripting0x1D_Data02_Actor03,medium,"Target of AICMD0x09_StartScript (child script, AI slot $03)"
+pAIScripting0x1D_L012,pAIScripting0x1D_Data02_Actor04,medium,"Target of AICMD0x09_StartScript (child script, AI slot $04)"
+pAIScripting0x1D_L023,pAIScripting0x1D_Mine_Actor01,medium,"Target of AICMD0x09_StartScript (child script, AI slot $01)"
+pAIScripting0x1D_L020,pAIScripting0x1D_Mine_Actor02_Eve,high,"Target of AICMD0x09_StartScript (child script, AI slot $02); sprite table of Eve"
+pAIScripting0x1D_L026,pAIScripting0x1D_Data04_Actor01_Eve,high,"Target of AICMD0x09_StartScript (child script, AI slot $01); sprite table of Eve"
+pAIScripting0x1D_L028,pAIScripting0x1D_Data04_Actor02,medium,"Target of AICMD0x09_StartScript (child script, AI slot $02)"
+pAIScripting0x1D_L027,pAIScripting0x1D_Data04_Actor03,medium,"Target of AICMD0x09_StartScript (child script, AI slot $03)"
+pAIScripting0x1D_L002,pAIScripting0x1D_Data02_Idle,high,Wait + jump to itself (idle loop)
+pAIScripting0x1D_L004,pAIScripting0x1D_Data02_Actor01_WaitTalk,high,Polls AICMD0x1F (player talks to the NPC) and loops
+pAIScripting0x1D_L005,pAIScripting0x1D_Data02_Actor01_Talk_01F7,high,"Jump target of AICMD0x1F (conversation handler), first dialog $01F7"
+pAIScripting0x1D_L007,pAIScripting0x1D_Data02_Actor02_WaitTalk,high,Polls AICMD0x1F (player talks to the NPC) and loops
+pAIScripting0x1D_L008,pAIScripting0x1D_Data02_Actor02_Talk_01F8,high,"Jump target of AICMD0x1F (conversation handler), first dialog $01F8"
+pAIScripting0x1D_L010,pAIScripting0x1D_Data02_Actor03_WaitTalk,high,Polls AICMD0x1F (player talks to the NPC) and loops
+pAIScripting0x1D_L011,pAIScripting0x1D_Data02_Actor03_Talk_01F7,high,"Jump target of AICMD0x1F (conversation handler), first dialog $01F7"
+pAIScripting0x1D_L013,pAIScripting0x1D_Data02_Actor04_WaitTalk,high,Polls AICMD0x1F (player talks to the NPC) and loops
+pAIScripting0x1D_L014,pAIScripting0x1D_Data02_Actor04_Talk_01FA,high,"Jump target of AICMD0x1F (conversation handler), first dialog $01FA"
+pAIScripting0x1D_L021,pAIScripting0x1D_Mine_Actor02_Eve_WaitTalk,high,Polls AICMD0x1F (player talks to the NPC) and loops
+pAIScripting0x1D_L022,pAIScripting0x1D_Mine_Actor02_Eve_Talk_01F6,high,"Jump target of AICMD0x1F (conversation handler), first dialog $01F6"
+pAIScripting0x1D_L024,pAIScripting0x1D_Mine_Actor01_WaitTalk,high,Polls AICMD0x1F (player talks to the NPC) and loops
+pAIScripting0x1D_L025,pAIScripting0x1D_Mine_Actor01_Talk_01FC,high,"Jump target of AICMD0x1F (conversation handler), first dialog $01FC"
+pAIScripting0x1E_Data01,pAIScripting0x1E_Wedding,high,AI slot entry named after the caller (fAreaEvents_Wedding)
+pAIScripting0x1E_L008,pAIScripting0x1E_Wedding_Actor01,medium,"Target of AICMD0x09_StartScript (child script, AI slot $01)"
+pAIScripting0x1E_L024,pAIScripting0x1E_Wedding_Actor02,medium,"Target of AICMD0x09_StartScript (child script, AI slot $02)"
+pAIScripting0x1E_L026,pAIScripting0x1E_Wedding_Actor03,medium,"Target of AICMD0x09_StartScript (child script, AI slot $03)"
+pAIScripting0x1E_L028,pAIScripting0x1E_Wedding_Actor04,medium,"Target of AICMD0x09_StartScript (child script, AI slot $04)"
+pAIScripting0x1E_L030,pAIScripting0x1E_Wedding_Actor05,medium,"Target of AICMD0x09_StartScript (child script, AI slot $05)"
+pAIScripting0x1E_L034,pAIScripting0x1E_Wedding_Actor06,medium,"Target of AICMD0x09_StartScript (child script, AI slot $06)"
+pAIScripting0x1E_L032,pAIScripting0x1E_Wedding_Actor07,medium,"Target of AICMD0x09_StartScript (child script, AI slot $07)"
+pAIScripting0x1E_L036,pAIScripting0x1E_Wedding_Actor08,medium,"Target of AICMD0x09_StartScript (child script, AI slot $08)"
+pAIScripting0x1E_L038,pAIScripting0x1E_Wedding_Actor09,medium,"Target of AICMD0x09_StartScript (child script, AI slot $09)"
+pAIScripting0x1E_L006,pAIScripting0x1E_Wedding_Actor0A,medium,"Target of AICMD0x09_StartScript (child script, AI slot $0A)"
+pAIScripting0x1E_L019,pAIScripting0x1E_Wedding_Actor0B,medium,"Target of AICMD0x09_StartScript (child script, AI slot $0B)"
+pAIScripting0x1E_L020,pAIScripting0x1E_Wedding_Actor0C,medium,"Target of AICMD0x09_StartScript (child script, AI slot $0C)"
+pAIScripting0x1E_L021,pAIScripting0x1E_Wedding_Actor0D,medium,"Target of AICMD0x09_StartScript (child script, AI slot $0D)"
+pAIScripting0x1E_L022,pAIScripting0x1E_Wedding_Actor0E,medium,"Target of AICMD0x09_StartScript (child script, AI slot $0E)"
+pAIScripting0x1E_L023,pAIScripting0x1E_Wedding_Actor0F,medium,"Target of AICMD0x09_StartScript (child script, AI slot $0F)"
+pAIScripting0x1E_L007,pAIScripting0x1E_Wedding_Actor0A_Actor10,medium,"Target of AICMD0x09_StartScript (child script, AI slot $10)"
+pAIScripting0x1E_L010,pAIScripting0x1E_Wedding_Actor01_Idle,high,Wait + jump to itself (idle loop)
+pAIScripting0x1E_L012,pAIScripting0x1E_Wedding_Actor01_Idle_2,high,Wait + jump to itself (idle loop)
+pAIScripting0x1E_L014,pAIScripting0x1E_Wedding_Actor01_Idle_3,high,Wait + jump to itself (idle loop)
+pAIScripting0x1E_L016,pAIScripting0x1E_Wedding_Actor01_Idle_4,high,Wait + jump to itself (idle loop)
+pAIScripting0x1E_L025,pAIScripting0x1E_Wedding_Actor02_Idle,high,Wait + jump to itself (idle loop)
+pAIScripting0x1E_L027,pAIScripting0x1E_Wedding_Actor03_Idle,high,Wait + jump to itself (idle loop)
+pAIScripting0x1E_L029,pAIScripting0x1E_Wedding_Actor04_Idle,high,Wait + jump to itself (idle loop)
+pAIScripting0x1E_L031,pAIScripting0x1E_Wedding_Actor05_Idle,high,Wait + jump to itself (idle loop)
+pAIScripting0x1E_L033,pAIScripting0x1E_Wedding_Actor07_Idle,high,Wait + jump to itself (idle loop)
+pAIScripting0x1E_L035,pAIScripting0x1E_Wedding_Actor06_Idle,high,Wait + jump to itself (idle loop)
+pAIScripting0x1E_L037,pAIScripting0x1E_Wedding_Actor08_Idle,high,Wait + jump to itself (idle loop)
+pAIScripting0x1E_L039,pAIScripting0x1E_Wedding_Actor09_Idle,high,Wait + jump to itself (idle loop)
+pAIScripting0x1F_L009,pAIScripting0x1F_Data01_Actor01,medium,"Target of AICMD0x09_StartScript (child script, AI slot $01)"
+pAIScripting0x1F_L026,pAIScripting0x1F_Data01_Actor02,medium,"Target of AICMD0x09_StartScript (child script, AI slot $02)"
+pAIScripting0x1F_L022,pAIScripting0x1F_Data01_Actor03,medium,"Target of AICMD0x09_StartScript (child script, AI slot $03)"
+pAIScripting0x1F_L069,pAIScripting0x1F_Data01_Actor05,medium,"Target of AICMD0x09_StartScript (child script, AI slot $05)"
+pAIScripting0x1F_L029,pAIScripting0x1F_Data01_Actor04,medium,"Target of AICMD0x09_StartScript (child script, AI slot $04)"
+pAIScripting0x1F_L032,pAIScripting0x1F_Data01_Actor04_2,medium,"Target of AICMD0x09_StartScript (child script, AI slot $04)"
+pAIScripting0x1F_L035,pAIScripting0x1F_Data01_Actor04_3,medium,"Target of AICMD0x09_StartScript (child script, AI slot $04)"
+pAIScripting0x1F_L038,pAIScripting0x1F_Data01_Actor04_4,medium,"Target of AICMD0x09_StartScript (child script, AI slot $04)"
+pAIScripting0x1F_L041,pAIScripting0x1F_Data01_Actor04_5,medium,"Target of AICMD0x09_StartScript (child script, AI slot $04)"
+pAIScripting0x1F_L025,pAIScripting0x1F_Data01_Actor01_Actor03,medium,"Target of AICMD0x09_StartScript (child script, AI slot $03)"
+pAIScripting0x1F_L052,pAIScripting0x1F_Data02_Actor01,medium,"Target of AICMD0x09_StartScript (child script, AI slot $01)"
+pAIScripting0x1F_L055,pAIScripting0x1F_Data02_Actor02,medium,"Target of AICMD0x09_StartScript (child script, AI slot $02)"
+pAIScripting0x1F_L064,pAIScripting0x1F_Data02_Actor03,medium,"Target of AICMD0x09_StartScript (child script, AI slot $03)"
+pAIScripting0x1F_L067,pAIScripting0x1F_Data02_Actor04,medium,"Target of AICMD0x09_StartScript (child script, AI slot $04)"
+pAIScripting0x1F_L072,pAIScripting0x1F_Data02_Actor06,medium,"Target of AICMD0x09_StartScript (child script, AI slot $06)"
+pAIScripting0x1F_L075,pAIScripting0x1F_Data02_Actor06_2,medium,"Target of AICMD0x09_StartScript (child script, AI slot $06)"
+pAIScripting0x1F_L078,pAIScripting0x1F_Data02_Actor06_3,medium,"Target of AICMD0x09_StartScript (child script, AI slot $06)"
+pAIScripting0x1F_L081,pAIScripting0x1F_Data02_Actor06_4,medium,"Target of AICMD0x09_StartScript (child script, AI slot $06)"
+pAIScripting0x1F_L084,pAIScripting0x1F_Data02_Actor06_5,medium,"Target of AICMD0x09_StartScript (child script, AI slot $06)"
+pAIScripting0x1F_L088,pAIScripting0x1F_Data03_Actor01,medium,"Target of AICMD0x09_StartScript (child script, AI slot $01)"
+pAIScripting0x1F_L090,pAIScripting0x1F_Data03_Actor02,medium,"Target of AICMD0x09_StartScript (child script, AI slot $02)"
+pAIScripting0x1F_L010,pAIScripting0x1F_Data01_Actor01_WaitTalk,high,Polls AICMD0x1F (player talks to the NPC) and loops
+pAIScripting0x1F_L011,pAIScripting0x1F_Data01_Actor01_WaitTalk_2,high,Polls AICMD0x1F (player talks to the NPC) and loops
+pAIScripting0x1F_L012,pAIScripting0x1F_Data01_Actor01_Talk_01AA,high,"Jump target of AICMD0x1F (conversation handler), first dialog $01AA"
+pAIScripting0x1F_L013,pAIScripting0x1F_Data01_Actor01_Say_01AB,medium,Short block that shows dialog $01AB and ends/jumps
+pAIScripting0x1F_L016,pAIScripting0x1F_Data01_Actor01_Talk_01AD,high,"Jump target of AICMD0x1F (conversation handler), first dialog $01AD"
+pAIScripting0x1F_L023,pAIScripting0x1F_Data01_Actor03_WaitTalk,high,Polls AICMD0x1F (player talks to the NPC) and loops
+pAIScripting0x1F_L024,pAIScripting0x1F_Data01_Actor03_Talk_0280,high,"Jump target of AICMD0x1F (conversation handler), first dialog $0280"
+pAIScripting0x1F_L027,pAIScripting0x1F_Data01_Actor02_WaitTalk,high,Polls AICMD0x1F (player talks to the NPC) and loops
+pAIScripting0x1F_L028,pAIScripting0x1F_Data01_Actor02_Talk_01A9,high,"Jump target of AICMD0x1F (conversation handler), first dialog $01A9"
+pAIScripting0x1F_L030,pAIScripting0x1F_Data01_Actor04_WaitTalk,high,Polls AICMD0x1F (player talks to the NPC) and loops
+pAIScripting0x1F_L031,pAIScripting0x1F_Data01_Actor04_Talk_01AE,high,"Jump target of AICMD0x1F (conversation handler), first dialog $01AE"
+pAIScripting0x1F_L033,pAIScripting0x1F_Data01_Actor04_2_WaitTalk,high,Polls AICMD0x1F (player talks to the NPC) and loops
+pAIScripting0x1F_L034,pAIScripting0x1F_Data01_Actor04_2_Talk_01AF,high,"Jump target of AICMD0x1F (conversation handler), first dialog $01AF"
+pAIScripting0x1F_L036,pAIScripting0x1F_Data01_Actor04_3_WaitTalk,high,Polls AICMD0x1F (player talks to the NPC) and loops
+pAIScripting0x1F_L037,pAIScripting0x1F_Data01_Actor04_3_Talk_01B0,high,"Jump target of AICMD0x1F (conversation handler), first dialog $01B0"
+pAIScripting0x1F_L039,pAIScripting0x1F_Data01_Actor04_4_WaitTalk,high,Polls AICMD0x1F (player talks to the NPC) and loops
+pAIScripting0x1F_L040,pAIScripting0x1F_Data01_Actor04_4_Talk_01B1,high,"Jump target of AICMD0x1F (conversation handler), first dialog $01B1"
+pAIScripting0x1F_L042,pAIScripting0x1F_Data01_Actor04_5_WaitTalk,high,Polls AICMD0x1F (player talks to the NPC) and loops
+pAIScripting0x1F_L043,pAIScripting0x1F_Data01_Actor04_5_Talk_01B2,high,"Jump target of AICMD0x1F (conversation handler), first dialog $01B2"
+pAIScripting0x1F_L053,pAIScripting0x1F_Data02_Actor01_WaitTalk,high,Polls AICMD0x1F (player talks to the NPC) and loops
+pAIScripting0x1F_L054,pAIScripting0x1F_Data02_Actor01_Talk_01BA,high,"Jump target of AICMD0x1F (conversation handler), first dialog $01BA"
+pAIScripting0x1F_L056,pAIScripting0x1F_Data02_Actor02_WaitTalk,high,Polls AICMD0x1F (player talks to the NPC) and loops
+pAIScripting0x1F_L057,pAIScripting0x1F_Data02_Actor02_WaitTalk_2,high,Polls AICMD0x1F (player talks to the NPC) and loops
+pAIScripting0x1F_L058,pAIScripting0x1F_Data02_Actor02_Talk_0281,high,"Jump target of AICMD0x1F (conversation handler), first dialog $0281"
+pAIScripting0x1F_L059,pAIScripting0x1F_Data02_Actor02_Say_01B4,medium,Short block that shows dialog $01B4 and ends/jumps
+pAIScripting0x1F_L060,pAIScripting0x1F_Data02_Actor02_Talk,medium,Jump target of AICMD0x1F (conversation handler)
+pAIScripting0x1F_L061,pAIScripting0x1F_Data02_Actor02_Say_01B4_2,medium,Short block that shows dialog $01B4 and ends/jumps
+pAIScripting0x1F_L062,pAIScripting0x1F_Data02_Actor02_Say_0281,medium,Short block that shows dialog $0281 and ends/jumps
+pAIScripting0x1F_L065,pAIScripting0x1F_Data02_Actor03_WaitTalk,high,Polls AICMD0x1F (player talks to the NPC) and loops
+pAIScripting0x1F_L066,pAIScripting0x1F_Data02_Actor03_Talk_027F,high,"Jump target of AICMD0x1F (conversation handler), first dialog $027F"
+pAIScripting0x1F_L068,pAIScripting0x1F_Data02_Actor04_Idle,high,Wait + jump to itself (idle loop)
+pAIScripting0x1F_L070,pAIScripting0x1F_Data01_Actor05_WaitTalk,high,Polls AICMD0x1F (player talks to the NPC) and loops
+pAIScripting0x1F_L071,pAIScripting0x1F_Data01_Actor05_Talk_01C1,high,"Jump target of AICMD0x1F (conversation handler), first dialog $01C1"
+pAIScripting0x1F_L073,pAIScripting0x1F_Data02_Actor06_WaitTalk,high,Polls AICMD0x1F (player talks to the NPC) and loops
+pAIScripting0x1F_L074,pAIScripting0x1F_Data02_Actor06_Talk_01B5,high,"Jump target of AICMD0x1F (conversation handler), first dialog $01B5"
+pAIScripting0x1F_L076,pAIScripting0x1F_Data02_Actor06_2_WaitTalk,high,Polls AICMD0x1F (player talks to the NPC) and loops
+pAIScripting0x1F_L077,pAIScripting0x1F_Data02_Actor06_2_Talk_01B6,high,"Jump target of AICMD0x1F (conversation handler), first dialog $01B6"
+pAIScripting0x1F_L079,pAIScripting0x1F_Data02_Actor06_3_WaitTalk,high,Polls AICMD0x1F (player talks to the NPC) and loops
+pAIScripting0x1F_L080,pAIScripting0x1F_Data02_Actor06_3_Talk_01B7,high,"Jump target of AICMD0x1F (conversation handler), first dialog $01B7"
+pAIScripting0x1F_L082,pAIScripting0x1F_Data02_Actor06_4_WaitTalk,high,Polls AICMD0x1F (player talks to the NPC) and loops
+pAIScripting0x1F_L083,pAIScripting0x1F_Data02_Actor06_4_Talk_01B8,high,"Jump target of AICMD0x1F (conversation handler), first dialog $01B8"
+pAIScripting0x1F_L085,pAIScripting0x1F_Data02_Actor06_5_WaitTalk,high,Polls AICMD0x1F (player talks to the NPC) and loops
+pAIScripting0x1F_L086,pAIScripting0x1F_Data02_Actor06_5_Talk_01B9,high,"Jump target of AICMD0x1F (conversation handler), first dialog $01B9"
+pAIScripting0x1F_L089,pAIScripting0x1F_Data03_Actor01_Idle,high,Wait + jump to itself (idle loop)
+pAIScripting0x1F_L091,pAIScripting0x1F_Data03_Actor02_Idle,high,Wait + jump to itself (idle loop)
+pAIScripting0x0B_Data01,pAIScripting0x0B_Town,high,AI slot entry named after the caller (fAreaEvents_Town)
+pAIScripting0x0B_Data02,pAIScripting0x0B_MajorHouse,high,AI slot entry named after the caller (fAreaEvents_MajorHouse)
+pAIScripting0x0B_Data03,pAIScripting0x0B_Toolshop,high,AI slot entry named after the caller (fAreaEvents_Toolshop)
+pAIScripting0x0B_Data04,pAIScripting0x0B_Florist,high,AI slot entry named after the caller (fAreaEvents_Florist)
+pAIScripting0x0B_Data05,pAIScripting0x0B_Restaurant,high,AI slot entry named after the caller (fAreaEvents_Restaurant)
+pAIScripting0x0B_Data06,pAIScripting0x0B_FortuneTeller,high,AI slot entry named after the caller (fAreaEvents_FortuneTeller)
+pAIScripting0x0B_Data07,pAIScripting0x0B_AnimalShop,high,AI slot entry named after the caller (fAreaEvents_AnimalShop)
+pAIScripting0x0B_Data08,pAIScripting0x0B_Bar,high,AI slot entry named after the caller (fAreaEvents_Bar)
+pAIScripting0x0B_Data09,pAIScripting0x0B_Woods,high,AI slot entry named after the caller (fAreaEvents_Woods)
+pAIScripting0x0B_Data10,pAIScripting0x0B_CrossRoad,high,AI slot entry named after the caller (fAreaEvents_CrossRoad)
+pAIScripting0x0B_Data11,pAIScripting0x0B_Church,high,AI slot entry named after the caller (fAreaEvents_Church)
+pAIScripting0x0B_L001,pAIScripting0x0B_Town_Actor01,medium,"Target of AICMD0x09_StartScript (child script, AI slot $01)"
+pAIScripting0x0B_L004,pAIScripting0x0B_Town_Actor02,medium,"Target of AICMD0x09_StartScript (child script, AI slot $02)"
+pAIScripting0x0B_L009,pAIScripting0x0B_Town_Actor03,medium,"Target of AICMD0x09_StartScript (child script, AI slot $03)"
+pAIScripting0x0B_L012,pAIScripting0x0B_Town_Actor04,medium,"Target of AICMD0x09_StartScript (child script, AI slot $04)"
+pAIScripting0x0B_L017,pAIScripting0x0B_Town_Actor05_Ann,high,"Target of AICMD0x09_StartScript (child script, AI slot $05); sprite table of Ann"
+pAIScripting0x0B_L022,pAIScripting0x0B_Town_Actor06,medium,"Target of AICMD0x09_StartScript (child script, AI slot $06)"
+pAIScripting0x0B_L025,pAIScripting0x0B_Town_Actor07_Eve,high,"Target of AICMD0x09_StartScript (child script, AI slot $07); sprite table of Eve"
+pAIScripting0x0B_L028,pAIScripting0x0B_Town_Actor08,medium,"Target of AICMD0x09_StartScript (child script, AI slot $08)"
+pAIScripting0x0B_L034,pAIScripting0x0B_MajorHouse_Actor01,medium,"Target of AICMD0x09_StartScript (child script, AI slot $01)"
+pAIScripting0x0B_L039,pAIScripting0x0B_Toolshop_Actor01,medium,"Target of AICMD0x09_StartScript (child script, AI slot $01)"
+pAIScripting0x0B_L044,pAIScripting0x0B_Florist_Actor01_Nina,high,"Target of AICMD0x09_StartScript (child script, AI slot $01); sprite table of Nina"
+pAIScripting0x0B_L049,pAIScripting0x0B_Florist_Actor02,medium,"Target of AICMD0x09_StartScript (child script, AI slot $02)"
+pAIScripting0x0B_L054,pAIScripting0x0B_Florist_Actor02_Actor03,medium,"Target of AICMD0x09_StartScript (child script, AI slot $03)"
+pAIScripting0x0B_L055,pAIScripting0x0B_Restaurant_Actor01,medium,"Target of AICMD0x09_StartScript (child script, AI slot $01)"
+pAIScripting0x0B_L060,pAIScripting0x0B_Restaurant_Actor02,medium,"Target of AICMD0x09_StartScript (child script, AI slot $02)"
+pAIScripting0x0B_L063,pAIScripting0x0B_Restaurant_Actor03,medium,"Target of AICMD0x09_StartScript (child script, AI slot $03)"
+pAIScripting0x0B_L065,pAIScripting0x0B_FortuneTeller_Actor01,medium,"Target of AICMD0x09_StartScript (child script, AI slot $01)"
+pAIScripting0x0B_L070,pAIScripting0x0B_FortuneTeller_Actor02,medium,"Target of AICMD0x09_StartScript (child script, AI slot $02)"
+pAIScripting0x0B_L075,pAIScripting0x0B_AnimalShop_Actor01,medium,"Target of AICMD0x09_StartScript (child script, AI slot $01)"
+pAIScripting0x0B_L080,pAIScripting0x0B_AnimalShop_Actor01_Actor03,medium,"Target of AICMD0x09_StartScript (child script, AI slot $03)"
+pAIScripting0x0B_L081,pAIScripting0x0B_Bar_Actor01_Eve,high,"Target of AICMD0x09_StartScript (child script, AI slot $01); sprite table of Eve"
+pAIScripting0x0B_L086,pAIScripting0x0B_Bar_Actor02,medium,"Target of AICMD0x09_StartScript (child script, AI slot $02)"
+pAIScripting0x0B_L101,pAIScripting0x0B_Bar_Actor03,medium,"Target of AICMD0x09_StartScript (child script, AI slot $03)"
+pAIScripting0x0B_L091,pAIScripting0x0B_Bar_Actor04,medium,"Target of AICMD0x09_StartScript (child script, AI slot $04)"
+pAIScripting0x0B_L096,pAIScripting0x0B_Bar_Actor05,medium,"Target of AICMD0x09_StartScript (child script, AI slot $05)"
+pAIScripting0x0B_L104,pAIScripting0x0B_Bar_Actor06,medium,"Target of AICMD0x09_StartScript (child script, AI slot $06)"
+pAIScripting0x0B_L108,pAIScripting0x0B_Woods_Actor01,medium,"Target of AICMD0x09_StartScript (child script, AI slot $01)"
+pAIScripting0x0B_L114,pAIScripting0x0B_Woods_Actor02,medium,"Target of AICMD0x09_StartScript (child script, AI slot $02)"
+pAIScripting0x0B_L118,pAIScripting0x0B_Woods_Actor03,medium,"Target of AICMD0x09_StartScript (child script, AI slot $03)"
+pAIScripting0x0B_L122,pAIScripting0x0B_Woods_Actor04,medium,"Target of AICMD0x09_StartScript (child script, AI slot $04)"
+pAIScripting0x0B_L126,pAIScripting0x0B_Woods_Actor05,medium,"Target of AICMD0x09_StartScript (child script, AI slot $05)"
+AI_HouseExtensionCampain_L002,AI_HouseExtensionCampain_Actor01,medium,"Target of AICMD0x09_StartScript (child script, AI slot $01)"
+AI_HouseExtensionCampain_L005,pAIScripting0x0B_CrossRoad_Actor01,medium,"Target of AICMD0x09_StartScript (child script, AI slot $01)"
+AI_HouseExtensionCampain_L006,pAIScripting0x0B_Church_Actor01_Maria,high,"Target of AICMD0x09_StartScript (child script, AI slot $01); sprite table of Maria"
+pAIScripting0x0B_L002,pAIScripting0x0B_Town_Actor01_WaitTalk,high,Polls AICMD0x1F (player talks to the NPC) and loops
+pAIScripting0x0B_L003,pAIScripting0x0B_Town_Actor01_Talk_00F4,high,"Jump target of AICMD0x1F (conversation handler), first dialog $00F4"
+pAIScripting0x0B_L005,pAIScripting0x0B_Town_Actor02_WaitTalk,high,Polls AICMD0x1F (player talks to the NPC) and loops
+pAIScripting0x0B_L006,pAIScripting0x0B_Town_Actor02_WaitTalk_2,high,Polls AICMD0x1F (player talks to the NPC) and loops
+pAIScripting0x0B_L007,pAIScripting0x0B_Town_Actor02_Talk_00F5,high,"Jump target of AICMD0x1F (conversation handler), first dialog $00F5"
+pAIScripting0x0B_L008,pAIScripting0x0B_Town_Actor02_Talk_00F6,high,"Jump target of AICMD0x1F (conversation handler), first dialog $00F6"
+pAIScripting0x0B_L010,pAIScripting0x0B_Town_Actor03_WaitTalk,high,Polls AICMD0x1F (player talks to the NPC) and loops
+pAIScripting0x0B_L011,pAIScripting0x0B_Town_Actor03_Talk_00FC,high,"Jump target of AICMD0x1F (conversation handler), first dialog $00FC"
+pAIScripting0x0B_L013,pAIScripting0x0B_Town_Actor04_WaitTalk,high,Polls AICMD0x1F (player talks to the NPC) and loops
+pAIScripting0x0B_L014,pAIScripting0x0B_Town_Actor04_WaitTalk_2,high,Polls AICMD0x1F (player talks to the NPC) and loops
+pAIScripting0x0B_L015,pAIScripting0x0B_Town_Actor04_Talk_00FD,high,"Jump target of AICMD0x1F (conversation handler), first dialog $00FD"
+pAIScripting0x0B_L016,pAIScripting0x0B_Town_Actor04_Talk_00FE,high,"Jump target of AICMD0x1F (conversation handler), first dialog $00FE"
+pAIScripting0x0B_L018,pAIScripting0x0B_Town_Actor05_Ann_WaitTalk,high,Polls AICMD0x1F (player talks to the NPC) and loops
+pAIScripting0x0B_L019,pAIScripting0x0B_Town_Actor05_Ann_WaitTalk_2,high,Polls AICMD0x1F (player talks to the NPC) and loops
+pAIScripting0x0B_L020,pAIScripting0x0B_Town_Actor05_Ann_Talk_0103,high,"Jump target of AICMD0x1F (conversation handler), first dialog $0103"
+pAIScripting0x0B_L021,pAIScripting0x0B_Town_Actor05_Ann_Talk_0104,high,"Jump target of AICMD0x1F (conversation handler), first dialog $0104"
+pAIScripting0x0B_L023,pAIScripting0x0B_Town_Actor06_WaitTalk,high,Polls AICMD0x1F (player talks to the NPC) and loops
+pAIScripting0x0B_L024,pAIScripting0x0B_Town_Actor06_Talk_010F,high,"Jump target of AICMD0x1F (conversation handler), first dialog $010F"
+pAIScripting0x0B_L026,pAIScripting0x0B_Town_Actor07_Eve_WaitTalk,high,Polls AICMD0x1F (player talks to the NPC) and loops
+pAIScripting0x0B_L027,pAIScripting0x0B_Town_Actor07_Eve_Talk_0116,high,"Jump target of AICMD0x1F (conversation handler), first dialog $0116"
+pAIScripting0x0B_L029,pAIScripting0x0B_Town_Actor08_WaitTalk,high,Polls AICMD0x1F (player talks to the NPC) and loops
+pAIScripting0x0B_L030,pAIScripting0x0B_Town_Actor08_Talk_0117,high,"Jump target of AICMD0x1F (conversation handler), first dialog $0117"
+pAIScripting0x0B_L031,pAIScripting0x0B_Town_Actor08_Say_0118,medium,Short block that shows dialog $0118 and ends/jumps
+pAIScripting0x0B_L032,pAIScripting0x0B_Town_Actor08_Say_0119,medium,Short block that shows dialog $0119 and ends/jumps
+pAIScripting0x0B_L033,pAIScripting0x0B_Town_Actor08_Say_011A,medium,Short block that shows dialog $011A and ends/jumps
+pAIScripting0x0B_L035,pAIScripting0x0B_MajorHouse_Actor01_WaitTalk,high,Polls AICMD0x1F (player talks to the NPC) and loops
+pAIScripting0x0B_L036,pAIScripting0x0B_MajorHouse_Actor01_WaitTalk_2,high,Polls AICMD0x1F (player talks to the NPC) and loops
+pAIScripting0x0B_L037,pAIScripting0x0B_MajorHouse_Actor01_Talk_00F7,high,"Jump target of AICMD0x1F (conversation handler), first dialog $00F7"
+pAIScripting0x0B_L038,pAIScripting0x0B_MajorHouse_Actor01_Talk_00F8,high,"Jump target of AICMD0x1F (conversation handler), first dialog $00F8"
+pAIScripting0x0B_L040,pAIScripting0x0B_Toolshop_Actor01_WaitTalk,high,Polls AICMD0x1F (player talks to the NPC) and loops
+pAIScripting0x0B_L041,pAIScripting0x0B_Toolshop_Actor01_WaitTalk_2,high,Polls AICMD0x1F (player talks to the NPC) and loops
+pAIScripting0x0B_L042,pAIScripting0x0B_Toolshop_Actor01_Talk_0101,high,"Jump target of AICMD0x1F (conversation handler), first dialog $0101"
+pAIScripting0x0B_L043,pAIScripting0x0B_Toolshop_Actor01_Talk_0102,high,"Jump target of AICMD0x1F (conversation handler), first dialog $0102"
+pAIScripting0x0B_L045,pAIScripting0x0B_Florist_Actor01_Nina_WaitTalk,high,Polls AICMD0x1F (player talks to the NPC) and loops
+pAIScripting0x0B_L046,pAIScripting0x0B_Florist_Actor01_Nina_WaitTalk_2,high,Polls AICMD0x1F (player talks to the NPC) and loops
+pAIScripting0x0B_L047,pAIScripting0x0B_Florist_Actor01_Nina_Talk_0107,high,"Jump target of AICMD0x1F (conversation handler), first dialog $0107"
+pAIScripting0x0B_L048,pAIScripting0x0B_Florist_Actor01_Nina_Talk_0108,high,"Jump target of AICMD0x1F (conversation handler), first dialog $0108"
+pAIScripting0x0B_L050,pAIScripting0x0B_Florist_Actor02_WaitTalk,high,Polls AICMD0x1F (player talks to the NPC) and loops
+pAIScripting0x0B_L051,pAIScripting0x0B_Florist_Actor02_WaitTalk_2,high,Polls AICMD0x1F (player talks to the NPC) and loops
+pAIScripting0x0B_L052,pAIScripting0x0B_Florist_Actor02_Talk_0105,high,"Jump target of AICMD0x1F (conversation handler), first dialog $0105"
+pAIScripting0x0B_L053,pAIScripting0x0B_Florist_Actor02_Talk_0106,high,"Jump target of AICMD0x1F (conversation handler), first dialog $0106"
+pAIScripting0x0B_L056,pAIScripting0x0B_Restaurant_Actor01_WaitTalk,high,Polls AICMD0x1F (player talks to the NPC) and loops
+pAIScripting0x0B_L057,pAIScripting0x0B_Restaurant_Actor01_WaitTalk_2,high,Polls AICMD0x1F (player talks to the NPC) and loops
+pAIScripting0x0B_L058,pAIScripting0x0B_Restaurant_Actor01_Talk_0109,high,"Jump target of AICMD0x1F (conversation handler), first dialog $0109"
+pAIScripting0x0B_L059,pAIScripting0x0B_Restaurant_Actor01_Talk_010A,high,"Jump target of AICMD0x1F (conversation handler), first dialog $010A"
+pAIScripting0x0B_L061,pAIScripting0x0B_Restaurant_Actor02_WaitTalk,high,Polls AICMD0x1F (player talks to the NPC) and loops
+pAIScripting0x0B_L062,pAIScripting0x0B_Restaurant_Actor02_Talk_010B,high,"Jump target of AICMD0x1F (conversation handler), first dialog $010B"
+pAIScripting0x0B_L064,pAIScripting0x0B_Restaurant_Actor03_Idle,high,Wait + jump to itself (idle loop)
+pAIScripting0x0B_L066,pAIScripting0x0B_FortuneTeller_Actor01_WaitTalk,high,Polls AICMD0x1F (player talks to the NPC) and loops
+pAIScripting0x0B_L067,pAIScripting0x0B_FortuneTeller_Actor01_WaitTalk_2,high,Polls AICMD0x1F (player talks to the NPC) and loops
+pAIScripting0x0B_L068,pAIScripting0x0B_FortuneTeller_Actor01_Talk_0111,high,"Jump target of AICMD0x1F (conversation handler), first dialog $0111"
+pAIScripting0x0B_L069,pAIScripting0x0B_FortuneTeller_Actor01_Talk_0112,high,"Jump target of AICMD0x1F (conversation handler), first dialog $0112"
+pAIScripting0x0B_L071,pAIScripting0x0B_FortuneTeller_Actor02_WaitTalk,high,Polls AICMD0x1F (player talks to the NPC) and loops
+pAIScripting0x0B_L073,pAIScripting0x0B_FortuneTeller_Actor02_Talk_0113,high,"Jump target of AICMD0x1F (conversation handler), first dialog $0113"
+pAIScripting0x0B_L074,pAIScripting0x0B_FortuneTeller_Actor02_Talk_0114,high,"Jump target of AICMD0x1F (conversation handler), first dialog $0114"
+pAIScripting0x0B_L076,pAIScripting0x0B_AnimalShop_Actor01_WaitTalk,high,Polls AICMD0x1F (player talks to the NPC) and loops
+pAIScripting0x0B_L077,pAIScripting0x0B_AnimalShop_Actor01_WaitTalk_2,high,Polls AICMD0x1F (player talks to the NPC) and loops
+pAIScripting0x0B_L078,pAIScripting0x0B_AnimalShop_Actor01_Talk_010C,high,"Jump target of AICMD0x1F (conversation handler), first dialog $010C"
+pAIScripting0x0B_L079,pAIScripting0x0B_AnimalShop_Actor01_Talk_010D,high,"Jump target of AICMD0x1F (conversation handler), first dialog $010D"
+pAIScripting0x0B_L082,pAIScripting0x0B_Bar_Actor01_Eve_WaitTalk,high,Polls AICMD0x1F (player talks to the NPC) and loops
+pAIScripting0x0B_L083,pAIScripting0x0B_Bar_Actor01_Eve_WaitTalk_2,high,Polls AICMD0x1F (player talks to the NPC) and loops
+pAIScripting0x0B_L084,pAIScripting0x0B_Bar_Actor01_Eve_Talk_011B,high,"Jump target of AICMD0x1F (conversation handler), first dialog $011B"
+pAIScripting0x0B_L085,pAIScripting0x0B_Bar_Actor01_Eve_Talk_011C,high,"Jump target of AICMD0x1F (conversation handler), first dialog $011C"
+pAIScripting0x0B_L087,pAIScripting0x0B_Bar_Actor02_WaitTalk,high,Polls AICMD0x1F (player talks to the NPC) and loops
+pAIScripting0x0B_L088,pAIScripting0x0B_Bar_Actor02_WaitTalk_2,high,Polls AICMD0x1F (player talks to the NPC) and loops
+pAIScripting0x0B_L089,pAIScripting0x0B_Bar_Actor02_Talk_011D,high,"Jump target of AICMD0x1F (conversation handler), first dialog $011D"
+pAIScripting0x0B_L090,pAIScripting0x0B_Bar_Actor02_Talk_011E,high,"Jump target of AICMD0x1F (conversation handler), first dialog $011E"
+pAIScripting0x0B_L092,pAIScripting0x0B_Bar_Actor04_WaitTalk,high,Polls AICMD0x1F (player talks to the NPC) and loops
+pAIScripting0x0B_L093,pAIScripting0x0B_Bar_Actor04_WaitTalk_2,high,Polls AICMD0x1F (player talks to the NPC) and loops
+pAIScripting0x0B_L094,pAIScripting0x0B_Bar_Actor04_Talk_0120,high,"Jump target of AICMD0x1F (conversation handler), first dialog $0120"
+pAIScripting0x0B_L095,pAIScripting0x0B_Bar_Actor04_Talk_0121,high,"Jump target of AICMD0x1F (conversation handler), first dialog $0121"
+pAIScripting0x0B_L097,pAIScripting0x0B_Bar_Actor05_WaitTalk,high,Polls AICMD0x1F (player talks to the NPC) and loops
+pAIScripting0x0B_L098,pAIScripting0x0B_Bar_Actor05_WaitTalk_2,high,Polls AICMD0x1F (player talks to the NPC) and loops
+pAIScripting0x0B_L099,pAIScripting0x0B_Bar_Actor05_Talk_0122,high,"Jump target of AICMD0x1F (conversation handler), first dialog $0122"
+pAIScripting0x0B_L100,pAIScripting0x0B_Bar_Actor05_Talk_0123,high,"Jump target of AICMD0x1F (conversation handler), first dialog $0123"
+pAIScripting0x0B_L102,pAIScripting0x0B_Bar_Actor03_WaitTalk,high,Polls AICMD0x1F (player talks to the NPC) and loops
+pAIScripting0x0B_L103,pAIScripting0x0B_Bar_Actor03_Talk_011F,high,"Jump target of AICMD0x1F (conversation handler), first dialog $011F"
+pAIScripting0x0B_L105,pAIScripting0x0B_Bar_Actor06_WaitTalk,high,Polls AICMD0x1F (player talks to the NPC) and loops
+pAIScripting0x0B_L106,pAIScripting0x0B_Bar_Actor06_Talk_0072,high,"Jump target of AICMD0x1F (conversation handler), first dialog $0072"
+pAIScripting0x0B_L107,pAIScripting0x0B_Woods_Idle,high,Wait + jump to itself (idle loop)
+pAIScripting0x0B_L109,pAIScripting0x0B_Woods_Actor01_WaitTalk,high,Polls AICMD0x1F (player talks to the NPC) and loops
+pAIScripting0x0B_L110,pAIScripting0x0B_Woods_Actor01_WaitTalk_2,high,Polls AICMD0x1F (player talks to the NPC) and loops
+pAIScripting0x0B_L111,pAIScripting0x0B_Woods_Actor01_Talk_012B,high,"Jump target of AICMD0x1F (conversation handler), first dialog $012B"
+pAIScripting0x0B_L112,pAIScripting0x0B_Woods_Actor01_Talk_012C,high,"Jump target of AICMD0x1F (conversation handler), first dialog $012C"
+pAIScripting0x0B_L115,pAIScripting0x0B_Woods_Actor02_WaitTalk,high,Polls AICMD0x1F (player talks to the NPC) and loops
+pAIScripting0x0B_L116,pAIScripting0x0B_Woods_Actor02_Talk_0127,high,"Jump target of AICMD0x1F (conversation handler), first dialog $0127"
+pAIScripting0x0B_L119,pAIScripting0x0B_Woods_Actor03_WaitTalk,high,Polls AICMD0x1F (player talks to the NPC) and loops
+pAIScripting0x0B_L120,pAIScripting0x0B_Woods_Actor03_Talk_0128,high,"Jump target of AICMD0x1F (conversation handler), first dialog $0128"
+pAIScripting0x0B_L123,pAIScripting0x0B_Woods_Actor04_WaitTalk,high,Polls AICMD0x1F (player talks to the NPC) and loops
+pAIScripting0x0B_L124,pAIScripting0x0B_Woods_Actor04_Talk_0129,high,"Jump target of AICMD0x1F (conversation handler), first dialog $0129"
+pAIScripting0x0B_L127,pAIScripting0x0B_Woods_Actor05_WaitTalk,high,Polls AICMD0x1F (player talks to the NPC) and loops
+pAIScripting0x0B_L128,pAIScripting0x0B_Woods_Actor05_Talk_0115,high,"Jump target of AICMD0x1F (conversation handler), first dialog $0115"
+AI_HouseExtensionCampain_L001,AI_HouseExtensionCampain_Idle,high,Wait + jump to itself (idle loop)
+AI_HouseExtensionCampain_L003,AI_HouseExtensionCampain_Actor01_WaitTalk,high,Polls AICMD0x1F (player talks to the NPC) and loops
+AI_HouseExtensionCampain_L004,AI_HouseExtensionCampain_Actor01_Talk_012A,high,"Jump target of AICMD0x1F (conversation handler), first dialog $012A"
+AI_HouseExtensionCampain_L007,pAIScripting0x0B_Church_Actor01_Maria_WaitTalk,high,Polls AICMD0x1F (player talks to the NPC) and loops
+AI_HouseExtensionCampain_L008,pAIScripting0x0B_Church_Actor01_Maria_WaitTalk_2,high,Polls AICMD0x1F (player talks to the NPC) and loops
+AI_HouseExtensionCampain_L009,pAIScripting0x0B_Church_Actor01_Maria_Talk_00F9,high,"Jump target of AICMD0x1F (conversation handler), first dialog $00F9"
+AI_HouseExtensionCampain_L010,pAIScripting0x0B_Church_Actor01_Maria_Talk_00FA,high,"Jump target of AICMD0x1F (conversation handler), first dialog $00FA"
+pAIScripting0x0E_Data01,pAIScripting0x0E_Town,high,AI slot entry named after the caller (fAreaEvents_Town)
+pAIScripting0x0E_Data02,pAIScripting0x0E_FlowerFestivalDance,high,AI slot entry named after the caller (fAreaEvents_FlowerFestivalDance)
+pAIScripting0x0E_L012,pAIScripting0x0E_Town_Actor01,medium,"Target of AICMD0x09_StartScript (child script, AI slot $01)"
+pAIScripting0x0E_L016,pAIScripting0x0E_Town_Actor02,medium,"Target of AICMD0x09_StartScript (child script, AI slot $02)"
+pAIScripting0x0E_L026,pAIScripting0x0E_Town_Actor03,medium,"Target of AICMD0x09_StartScript (child script, AI slot $03)"
+pAIScripting0x0E_L032,pAIScripting0x0E_Town_Actor04,medium,"Target of AICMD0x09_StartScript (child script, AI slot $04)"
+pAIScripting0x0E_L036,pAIScripting0x0E_Town_Actor05,medium,"Target of AICMD0x09_StartScript (child script, AI slot $05)"
+pAIScripting0x0E_L041,pAIScripting0x0E_Town_Actor06,medium,"Target of AICMD0x09_StartScript (child script, AI slot $06)"
+pAIScripting0x0E_L047,pAIScripting0x0E_Town_Actor07,medium,"Target of AICMD0x09_StartScript (child script, AI slot $07)"
+pAIScripting0x0E_L143,pAIScripting0x0E_Town_Actor0B,medium,"Target of AICMD0x09_StartScript (child script, AI slot $0B)"
+pAIScripting0x0E_L060,pAIScripting0x0E_Town_Actor0D_Maria,high,"Target of AICMD0x09_StartScript (child script, AI slot $0D); sprite table of Maria"
+pAIScripting0x0E_L076,pAIScripting0x0E_Town_Actor0E_Ann,high,"Target of AICMD0x09_StartScript (child script, AI slot $0E); sprite table of Ann"
+pAIScripting0x0E_L092,pAIScripting0x0E_Town_Actor0F_Nina,high,"Target of AICMD0x09_StartScript (child script, AI slot $0F); sprite table of Nina"
+pAIScripting0x0E_L109,pAIScripting0x0E_Town_Actor10_Ellen,high,"Target of AICMD0x09_StartScript (child script, AI slot $10); sprite table of Ellen"
+pAIScripting0x0E_L126,pAIScripting0x0E_Town_Actor11_Eve,high,"Target of AICMD0x09_StartScript (child script, AI slot $11); sprite table of Eve"
+pAIScripting0x0E_L161,pAIScripting0x0E_Town_Actor07_Maria,high,"Target of AICMD0x09_StartScript (child script, AI slot $07); sprite table of Maria"
+pAIScripting0x0E_L163,pAIScripting0x0E_Town_Actor07_Ann,high,"Target of AICMD0x09_StartScript (child script, AI slot $07); sprite table of Ann"
+pAIScripting0x0E_L165,pAIScripting0x0E_Town_Actor07_Nina,high,"Target of AICMD0x09_StartScript (child script, AI slot $07); sprite table of Nina"
+pAIScripting0x0E_L167,pAIScripting0x0E_Town_Actor07_Ellen,high,"Target of AICMD0x09_StartScript (child script, AI slot $07); sprite table of Ellen"
+pAIScripting0x0E_L169,pAIScripting0x0E_Town_Actor07_Eve,high,"Target of AICMD0x09_StartScript (child script, AI slot $07); sprite table of Eve"
+pAIScripting0x0E_L171,pAIScripting0x0E_Town_Actor07_2,medium,"Target of AICMD0x09_StartScript (child script, AI slot $07)"
+pAIScripting0x0E_L149,pAIScripting0x0E_FlowerFestivalDance_Actor01,medium,"Target of AICMD0x09_StartScript (child script, AI slot $01)"
+pAIScripting0x0E_L151,pAIScripting0x0E_FlowerFestivalDance_Actor02,medium,"Target of AICMD0x09_StartScript (child script, AI slot $02)"
+pAIScripting0x0E_L153,pAIScripting0x0E_FlowerFestivalDance_Actor03,medium,"Target of AICMD0x09_StartScript (child script, AI slot $03)"
+pAIScripting0x0E_L155,pAIScripting0x0E_FlowerFestivalDance_Actor04,medium,"Target of AICMD0x09_StartScript (child script, AI slot $04)"
+pAIScripting0x0E_L157,pAIScripting0x0E_FlowerFestivalDance_Actor05,medium,"Target of AICMD0x09_StartScript (child script, AI slot $05)"
+pAIScripting0x0E_L159,pAIScripting0x0E_FlowerFestivalDance_Actor06,medium,"Target of AICMD0x09_StartScript (child script, AI slot $06)"
+pAIScripting0x0E_L174,pAIScripting0x0E_FlowerFestivalDance_Actor08,medium,"Target of AICMD0x09_StartScript (child script, AI slot $08)"
+pAIScripting0x0E_L013,pAIScripting0x0E_Town_Actor01_WaitTalk,high,Polls AICMD0x1F (player talks to the NPC) and loops
+pAIScripting0x0E_L014,pAIScripting0x0E_Town_Actor01_Talk_020C,high,"Jump target of AICMD0x1F (conversation handler), first dialog $020C"
+pAIScripting0x0E_L015,pAIScripting0x0E_Town_Actor01_Say_0284,medium,Short block that shows dialog $0284 and ends/jumps
+pAIScripting0x0E_L017,pAIScripting0x0E_Town_Actor02_WaitTalk,high,Polls AICMD0x1F (player talks to the NPC) and loops
+pAIScripting0x0E_L018,pAIScripting0x0E_Town_Actor02_WaitTalk_2,high,Polls AICMD0x1F (player talks to the NPC) and loops
+pAIScripting0x0E_L019,pAIScripting0x0E_Town_Actor02_Talk_0214,high,"Jump target of AICMD0x1F (conversation handler), first dialog $0214"
+pAIScripting0x0E_L020,pAIScripting0x0E_Town_Actor02_Say_024E,medium,Short block that shows dialog $024E and ends/jumps
+pAIScripting0x0E_L022,pAIScripting0x0E_Town_Actor02_Say_0213,medium,Short block that shows dialog $0213 and ends/jumps
+pAIScripting0x0E_L023,pAIScripting0x0E_Town_Actor02_Say_0215,medium,Short block that shows dialog $0215 and ends/jumps
+pAIScripting0x0E_L024,pAIScripting0x0E_Town_Actor02_Say_0216,medium,Short block that shows dialog $0216 and ends/jumps
+pAIScripting0x0E_L025,pAIScripting0x0E_Town_Actor02_Talk_0081,high,"Jump target of AICMD0x1F (conversation handler), first dialog $0081"
+pAIScripting0x0E_L027,pAIScripting0x0E_Town_Actor03_WaitTalk,high,Polls AICMD0x1F (player talks to the NPC) and loops
+pAIScripting0x0E_L028,pAIScripting0x0E_Town_Actor03_WaitTalk_2,high,Polls AICMD0x1F (player talks to the NPC) and loops
+pAIScripting0x0E_L029,pAIScripting0x0E_Town_Actor03_Talk_021F,high,"Jump target of AICMD0x1F (conversation handler), first dialog $021F"
+pAIScripting0x0E_L030,pAIScripting0x0E_Town_Actor03_Talk_0217,high,"Jump target of AICMD0x1F (conversation handler), first dialog $0217"
+pAIScripting0x0E_L031,pAIScripting0x0E_Town_Actor03_Say_0282,medium,Short block that shows dialog $0282 and ends/jumps
+pAIScripting0x0E_L033,pAIScripting0x0E_Town_Actor04_WaitTalk,high,Polls AICMD0x1F (player talks to the NPC) and loops
+pAIScripting0x0E_L034,pAIScripting0x0E_Town_Actor04_Talk_0218,high,"Jump target of AICMD0x1F (conversation handler), first dialog $0218"
+pAIScripting0x0E_L035,pAIScripting0x0E_Town_Actor04_Say_0283,medium,Short block that shows dialog $0283 and ends/jumps
+pAIScripting0x0E_L037,pAIScripting0x0E_Town_Actor05_WaitTalk,high,Polls AICMD0x1F (player talks to the NPC) and loops
+pAIScripting0x0E_L038,pAIScripting0x0E_Town_Actor05_Talk_0219,high,"Jump target of AICMD0x1F (conversation handler), first dialog $0219"
+pAIScripting0x0E_L039,pAIScripting0x0E_Town_Actor05_Say_0205,medium,Short block that shows dialog $0205 and ends/jumps
+pAIScripting0x0E_L040,pAIScripting0x0E_Town_Actor05_Say_028A,medium,Short block that shows dialog $028A and ends/jumps
+pAIScripting0x0E_L042,pAIScripting0x0E_Town_Actor06_WaitTalk,high,Polls AICMD0x1F (player talks to the NPC) and loops
+pAIScripting0x0E_L043,pAIScripting0x0E_Town_Actor06_Talk_021C,high,"Jump target of AICMD0x1F (conversation handler), first dialog $021C"
+pAIScripting0x0E_L044,pAIScripting0x0E_Town_Actor06_Say_021A,medium,Short block that shows dialog $021A and ends/jumps
+pAIScripting0x0E_L046,pAIScripting0x0E_Town_Actor06_Say_0250,medium,Short block that shows dialog $0250 and ends/jumps
+pAIScripting0x0E_L048,pAIScripting0x0E_Town_Actor07_WaitTalk,high,Polls AICMD0x1F (player talks to the NPC) and loops
+pAIScripting0x0E_L049,pAIScripting0x0E_Town_Actor07_Talk_021E,high,"Jump target of AICMD0x1F (conversation handler), first dialog $021E"
+pAIScripting0x0E_L050,pAIScripting0x0E_Town_Actor07_Say_021D,medium,Short block that shows dialog $021D and ends/jumps
+pAIScripting0x0E_L052,pAIScripting0x0E_Town_Actor07_WaitTalk_2,high,Polls AICMD0x1F (player talks to the NPC) and loops
+pAIScripting0x0E_L053,pAIScripting0x0E_Town_Actor07_Talk_021C,high,"Jump target of AICMD0x1F (conversation handler), first dialog $021C"
+pAIScripting0x0E_L054,pAIScripting0x0E_Town_Actor07_WaitTalk_3,high,Polls AICMD0x1F (player talks to the NPC) and loops
+pAIScripting0x0E_L055,pAIScripting0x0E_Town_Actor07_Talk_021D,high,"Jump target of AICMD0x1F (conversation handler), first dialog $021D"
+pAIScripting0x0E_L056,pAIScripting0x0E_Town_Actor07_WaitTalk_4,high,Polls AICMD0x1F (player talks to the NPC) and loops
+pAIScripting0x0E_L057,pAIScripting0x0E_Town_Actor07_Talk_021E_2,high,"Jump target of AICMD0x1F (conversation handler), first dialog $021E"
+pAIScripting0x0E_L058,pAIScripting0x0E_Town_Actor07_WaitTalk_5,high,Polls AICMD0x1F (player talks to the NPC) and loops
+pAIScripting0x0E_L059,pAIScripting0x0E_Town_Actor07_Talk_021E_3,high,"Jump target of AICMD0x1F (conversation handler), first dialog $021E"
+pAIScripting0x0E_L062,pAIScripting0x0E_Town_Actor0D_Maria_WaitInteract,high,"Polls AICMD0x2D (player presses A, with or without item) and loops"
+pAIScripting0x0E_L063,pAIScripting0x0E_Town_Actor0D_Maria_WaitInteract_2,high,"Polls AICMD0x2D (player presses A, with or without item) and loops"
+pAIScripting0x0E_L064,pAIScripting0x0E_Town_Actor0D_Maria_OnInteract,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x0E_L066,pAIScripting0x0E_Town_Actor0D_Maria_Say_0220,medium,Short block that shows dialog $0220 and ends/jumps
+pAIScripting0x0E_L067,pAIScripting0x0E_Town_Actor0D_Maria_Say_0221,medium,Short block that shows dialog $0221 and ends/jumps
+pAIScripting0x0E_L068,pAIScripting0x0E_Town_Actor0D_Maria_Say_0222,medium,Short block that shows dialog $0222 and ends/jumps
+pAIScripting0x0E_L069,pAIScripting0x0E_Town_Actor0D_Maria_Say_0223,medium,Short block that shows dialog $0223 and ends/jumps
+pAIScripting0x0E_L070,pAIScripting0x0E_Town_Actor0D_Maria_OnInteract_2,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x0E_L071,pAIScripting0x0E_Town_Actor0D_Maria_OnItemOffered,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x0E_L072,pAIScripting0x0E_Town_Actor0D_Maria_Say_01DA,medium,Short block that shows dialog $01DA and ends/jumps
+pAIScripting0x0E_L073,pAIScripting0x0E_Town_Actor0D_Maria_Say_03B5,medium,Short block that shows dialog $03B5 and ends/jumps
+pAIScripting0x0E_L074,pAIScripting0x0E_Town_Actor0D_Maria_Say_0212,medium,Short block that shows dialog $0212 and ends/jumps
+pAIScripting0x0E_L078,pAIScripting0x0E_Town_Actor0E_Ann_WaitInteract,high,"Polls AICMD0x2D (player presses A, with or without item) and loops"
+pAIScripting0x0E_L079,pAIScripting0x0E_Town_Actor0E_Ann_WaitInteract_2,high,"Polls AICMD0x2D (player presses A, with or without item) and loops"
+pAIScripting0x0E_L080,pAIScripting0x0E_Town_Actor0E_Ann_OnInteract,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x0E_L082,pAIScripting0x0E_Town_Actor0E_Ann_Say_0224,medium,Short block that shows dialog $0224 and ends/jumps
+pAIScripting0x0E_L083,pAIScripting0x0E_Town_Actor0E_Ann_Say_0225,medium,Short block that shows dialog $0225 and ends/jumps
+pAIScripting0x0E_L084,pAIScripting0x0E_Town_Actor0E_Ann_Say_0226,medium,Short block that shows dialog $0226 and ends/jumps
+pAIScripting0x0E_L085,pAIScripting0x0E_Town_Actor0E_Ann_Say_0227,medium,Short block that shows dialog $0227 and ends/jumps
+pAIScripting0x0E_L086,pAIScripting0x0E_Town_Actor0E_Ann_OnItemOffered,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x0E_L087,pAIScripting0x0E_Town_Actor0E_Ann_Say_01DA,medium,Short block that shows dialog $01DA and ends/jumps
+pAIScripting0x0E_L088,pAIScripting0x0E_Town_Actor0E_Ann_Say_0200,medium,Short block that shows dialog $0200 and ends/jumps
+pAIScripting0x0E_L089,pAIScripting0x0E_Town_Actor0E_Ann_Say_0212,medium,Short block that shows dialog $0212 and ends/jumps
+pAIScripting0x0E_L090,pAIScripting0x0E_Town_Actor0E_Ann_OnInteract_2,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x0E_L094,pAIScripting0x0E_Town_Actor0F_Nina_WaitInteract,high,"Polls AICMD0x2D (player presses A, with or without item) and loops"
+pAIScripting0x0E_L095,pAIScripting0x0E_Town_Actor0F_Nina_WaitInteract_2,high,"Polls AICMD0x2D (player presses A, with or without item) and loops"
+pAIScripting0x0E_L096,pAIScripting0x0E_Town_Actor0F_Nina_WaitInteract_3,high,"Polls AICMD0x2D (player presses A, with or without item) and loops"
+pAIScripting0x0E_L097,pAIScripting0x0E_Town_Actor0F_Nina_OnInteract,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x0E_L099,pAIScripting0x0E_Town_Actor0F_Nina_Say_0228,medium,Short block that shows dialog $0228 and ends/jumps
+pAIScripting0x0E_L100,pAIScripting0x0E_Town_Actor0F_Nina_Say_0229,medium,Short block that shows dialog $0229 and ends/jumps
+pAIScripting0x0E_L101,pAIScripting0x0E_Town_Actor0F_Nina_Say_022A,medium,Short block that shows dialog $022A and ends/jumps
+pAIScripting0x0E_L102,pAIScripting0x0E_Town_Actor0F_Nina_OnInteract_2,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x0E_L103,pAIScripting0x0E_Town_Actor0F_Nina_OnInteract_3,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x0E_L104,pAIScripting0x0E_Town_Actor0F_Nina_OnItemOffered,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x0E_L105,pAIScripting0x0E_Town_Actor0F_Nina_Say_0212,medium,Short block that shows dialog $0212 and ends/jumps
+pAIScripting0x0E_L106,pAIScripting0x0E_Town_Actor0F_Nina_Say_0212_2,medium,Short block that shows dialog $0212 and ends/jumps
+pAIScripting0x0E_L107,pAIScripting0x0E_Town_Actor0F_Nina_Say_0212_3,medium,Short block that shows dialog $0212 and ends/jumps
+pAIScripting0x0E_L111,pAIScripting0x0E_Town_Actor10_Ellen_WaitInteract,high,"Polls AICMD0x2D (player presses A, with or without item) and loops"
+pAIScripting0x0E_L112,pAIScripting0x0E_Town_Actor10_Ellen_WaitInteract_2,high,"Polls AICMD0x2D (player presses A, with or without item) and loops"
+pAIScripting0x0E_L113,pAIScripting0x0E_Town_Actor10_Ellen_WaitInteract_3,high,"Polls AICMD0x2D (player presses A, with or without item) and loops"
+pAIScripting0x0E_L114,pAIScripting0x0E_Town_Actor10_Ellen_OnInteract,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x0E_L116,pAIScripting0x0E_Town_Actor10_Ellen_Say_022C,medium,Short block that shows dialog $022C and ends/jumps
+pAIScripting0x0E_L117,pAIScripting0x0E_Town_Actor10_Ellen_Say_022D,medium,Short block that shows dialog $022D and ends/jumps
+pAIScripting0x0E_L118,pAIScripting0x0E_Town_Actor10_Ellen_Say_022E,medium,Short block that shows dialog $022E and ends/jumps
+pAIScripting0x0E_L119,pAIScripting0x0E_Town_Actor10_Ellen_OnInteract_2,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x0E_L120,pAIScripting0x0E_Town_Actor10_Ellen_OnItemOffered,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x0E_L121,pAIScripting0x0E_Town_Actor10_Ellen_Say_0212,medium,Short block that shows dialog $0212 and ends/jumps
+pAIScripting0x0E_L122,pAIScripting0x0E_Town_Actor10_Ellen_Say_0200,medium,Short block that shows dialog $0200 and ends/jumps
+pAIScripting0x0E_L123,pAIScripting0x0E_Town_Actor10_Ellen_Say_01DA,medium,Short block that shows dialog $01DA and ends/jumps
+pAIScripting0x0E_L124,pAIScripting0x0E_Town_Actor10_Ellen_OnInteract_3,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x0E_L128,pAIScripting0x0E_Town_Actor11_Eve_WaitInteract,high,"Polls AICMD0x2D (player presses A, with or without item) and loops"
+pAIScripting0x0E_L129,pAIScripting0x0E_Town_Actor11_Eve_WaitInteract_2,high,"Polls AICMD0x2D (player presses A, with or without item) and loops"
+pAIScripting0x0E_L130,pAIScripting0x0E_Town_Actor11_Eve_WaitInteract_3,high,"Polls AICMD0x2D (player presses A, with or without item) and loops"
+pAIScripting0x0E_L131,pAIScripting0x0E_Town_Actor11_Eve_OnInteract,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x0E_L133,pAIScripting0x0E_Town_Actor11_Eve_Say_0230,medium,Short block that shows dialog $0230 and ends/jumps
+pAIScripting0x0E_L134,pAIScripting0x0E_Town_Actor11_Eve_Say_0231,medium,Short block that shows dialog $0231 and ends/jumps
+pAIScripting0x0E_L135,pAIScripting0x0E_Town_Actor11_Eve_Say_0232,medium,Short block that shows dialog $0232 and ends/jumps
+pAIScripting0x0E_L136,pAIScripting0x0E_Town_Actor11_Eve_OnInteract_2,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x0E_L137,pAIScripting0x0E_Town_Actor11_Eve_OnItemOffered,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x0E_L138,pAIScripting0x0E_Town_Actor11_Eve_Say_0212,medium,Short block that shows dialog $0212 and ends/jumps
+pAIScripting0x0E_L139,pAIScripting0x0E_Town_Actor11_Eve_Say_01DA,medium,Short block that shows dialog $01DA and ends/jumps
+pAIScripting0x0E_L140,pAIScripting0x0E_Town_Actor11_Eve_Say_0200,medium,Short block that shows dialog $0200 and ends/jumps
+pAIScripting0x0E_L141,pAIScripting0x0E_Town_Actor11_Eve_OnInteract_3,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x0E_L144,pAIScripting0x0E_Town_Actor0B_WaitTalk,high,Polls AICMD0x1F (player talks to the NPC) and loops
+pAIScripting0x0E_L145,pAIScripting0x0E_Town_Actor0B_WaitTalk_2,high,Polls AICMD0x1F (player talks to the NPC) and loops
+pAIScripting0x0E_L146,pAIScripting0x0E_Town_Actor0B_Talk_0234,high,"Jump target of AICMD0x1F (conversation handler), first dialog $0234"
+pAIScripting0x0E_L147,pAIScripting0x0E_Town_Actor0B_Talk_0235,high,"Jump target of AICMD0x1F (conversation handler), first dialog $0235"
+pAIScripting0x0E_L148,pAIScripting0x0E_Town_Actor0B_Say_0236,medium,Short block that shows dialog $0236 and ends/jumps
+pAIScripting0x0F_StarNightFestival_Data01,pAIScripting0x0F_StarNightFestival_House,high,AI slot entry named after the caller (fAreaEvents_House)
+pAIScripting0x0F_StarNightFestival_Data03,pAIScripting0x0F_StarNightFestival_Church,high,AI slot entry named after the caller (fAreaEvents_Church)
+pAIScripting0x0F_StarNightFestival_Data04,pAIScripting0x0F_StarNightFestival_Bar,high,AI slot entry named after the caller (fAreaEvents_Bar)
+pAIScripting0x0F_StarNightFestival_L006,pAIScripting0x0F_StarNightFestival_Data02_Actor01,medium,"Target of AICMD0x09_StartScript (child script, AI slot $01)"
+pAIScripting0x0F_StarNightFestival_L009,pAIScripting0x0F_StarNightFestival_Data02_Actor02,medium,"Target of AICMD0x09_StartScript (child script, AI slot $02)"
+pAIScripting0x0F_StarNightFestival_L012,pAIScripting0x0F_StarNightFestival_Data02_Actor03,medium,"Target of AICMD0x09_StartScript (child script, AI slot $03)"
+pAIScripting0x0F_StarNightFestival_L019,pAIScripting0x0F_StarNightFestival_Data02_Actor05,medium,"Target of AICMD0x09_StartScript (child script, AI slot $05)"
+pAIScripting0x0F_StarNightFestival_L027,pAIScripting0x0F_StarNightFestival_Data02_Actor06_Ellen,high,"Target of AICMD0x09_StartScript (child script, AI slot $06); sprite table of Ellen"
+pAIScripting0x0F_StarNightFestival_L037,pAIScripting0x0F_StarNightFestival_Church_Actor01,medium,"Target of AICMD0x09_StartScript (child script, AI slot $01)"
+pAIScripting0x0F_StarNightFestival_L040,pAIScripting0x0F_StarNightFestival_Church_Actor02,medium,"Target of AICMD0x09_StartScript (child script, AI slot $02)"
+pAIScripting0x0F_StarNightFestival_L043,pAIScripting0x0F_StarNightFestival_Church_Actor03,medium,"Target of AICMD0x09_StartScript (child script, AI slot $03)"
+pAIScripting0x0F_StarNightFestival_L046,pAIScripting0x0F_StarNightFestival_Church_Actor04,medium,"Target of AICMD0x09_StartScript (child script, AI slot $04)"
+pAIScripting0x0F_StarNightFestival_L049,pAIScripting0x0F_StarNightFestival_Church_Actor05,medium,"Target of AICMD0x09_StartScript (child script, AI slot $05)"
+pAIScripting0x0F_StarNightFestival_L052,pAIScripting0x0F_StarNightFestival_Church_Actor06,medium,"Target of AICMD0x09_StartScript (child script, AI slot $06)"
+pAIScripting0x0F_StarNightFestival_L060,pAIScripting0x0F_StarNightFestival_Church_Actor07_Maria,high,"Target of AICMD0x09_StartScript (child script, AI slot $07); sprite table of Maria"
+pAIScripting0x0F_StarNightFestival_L069,pAIScripting0x0F_StarNightFestival_Bar_Actor01,medium,"Target of AICMD0x09_StartScript (child script, AI slot $01)"
+pAIScripting0x0F_StarNightFestival_L072,pAIScripting0x0F_StarNightFestival_Bar_Actor02,medium,"Target of AICMD0x09_StartScript (child script, AI slot $02)"
+pAIScripting0x0F_StarNightFestival_L075,pAIScripting0x0F_StarNightFestival_Bar_Actor03,medium,"Target of AICMD0x09_StartScript (child script, AI slot $03)"
+pAIScripting0x0F_StarNightFestival_L078,pAIScripting0x0F_StarNightFestival_Bar_Actor04,medium,"Target of AICMD0x09_StartScript (child script, AI slot $04)"
+pAIScripting0x0F_StarNightFestival_L092,pAIScripting0x0F_StarNightFestival_Bar_Actor05_Eve,high,"Target of AICMD0x09_StartScript (child script, AI slot $05); sprite table of Eve"
+pAIScripting0x0F_StarNightFestival_L081,pAIScripting0x0F_StarNightFestival_Bar_Actor06,medium,"Target of AICMD0x09_StartScript (child script, AI slot $06)"
+pAIScripting0x0F_StarNightFestival_L084,pAIScripting0x0F_StarNightFestival_Bar_Actor07,medium,"Target of AICMD0x09_StartScript (child script, AI slot $07)"
+pAIScripting0x0F_StarNightFestival_L108,pAIScripting0x0F_StarNightFestival_Data05_Actor01_Nina,high,"Target of AICMD0x09_StartScript (child script, AI slot $01); sprite table of Nina"
+pAIScripting0x0F_StarNightFestival_L102,pAIScripting0x0F_StarNightFestival_Data05_Actor02,medium,"Target of AICMD0x09_StartScript (child script, AI slot $02)"
+pAIScripting0x0F_StarNightFestival_L121,pAIScripting0x0F_StarNightFestival_Data06_Actor01_Ann,high,"Target of AICMD0x09_StartScript (child script, AI slot $01); sprite table of Ann"
+pAIScripting0x0F_StarNightFestival_L007,pAIScripting0x0F_StarNightFestival_Data02_Actor01_WaitTalk,high,Polls AICMD0x1F (player talks to the NPC) and loops
+pAIScripting0x0F_StarNightFestival_L008,pAIScripting0x0F_StarNightFestival_Data02_Actor01_Talk_02B7,high,"Jump target of AICMD0x1F (conversation handler), first dialog $02B7"
+pAIScripting0x0F_StarNightFestival_L010,pAIScripting0x0F_StarNightFestival_Data02_Actor02_WaitTalk,high,Polls AICMD0x1F (player talks to the NPC) and loops
+pAIScripting0x0F_StarNightFestival_L011,pAIScripting0x0F_StarNightFestival_Data02_Actor02_Talk_02B8,high,"Jump target of AICMD0x1F (conversation handler), first dialog $02B8"
+pAIScripting0x0F_StarNightFestival_L013,pAIScripting0x0F_StarNightFestival_Data02_Actor03_WaitTalk,high,Polls AICMD0x1F (player talks to the NPC) and loops
+pAIScripting0x0F_StarNightFestival_L014,pAIScripting0x0F_StarNightFestival_Data02_Actor03_WaitTalk_2,high,Polls AICMD0x1F (player talks to the NPC) and loops
+pAIScripting0x0F_StarNightFestival_L015,pAIScripting0x0F_StarNightFestival_Data02_Actor03_Talk_02BA,high,"Jump target of AICMD0x1F (conversation handler), first dialog $02BA"
+pAIScripting0x0F_StarNightFestival_L016,pAIScripting0x0F_StarNightFestival_Data02_Actor03_Say_02BB,medium,Short block that shows dialog $02BB and ends/jumps
+pAIScripting0x0F_StarNightFestival_L017,pAIScripting0x0F_StarNightFestival_Data02_Actor03_Say_02BC,medium,Short block that shows dialog $02BC and ends/jumps
+pAIScripting0x0F_StarNightFestival_L018,pAIScripting0x0F_StarNightFestival_Data02_Actor03_Talk_02DC,high,"Jump target of AICMD0x1F (conversation handler), first dialog $02DC"
+pAIScripting0x0F_StarNightFestival_L020,pAIScripting0x0F_StarNightFestival_Data02_Actor05_WaitTalk,high,Polls AICMD0x1F (player talks to the NPC) and loops
+pAIScripting0x0F_StarNightFestival_L021,pAIScripting0x0F_StarNightFestival_Data02_Actor05_Talk_02B9,high,"Jump target of AICMD0x1F (conversation handler), first dialog $02B9"
+pAIScripting0x0F_StarNightFestival_L031,pAIScripting0x0F_StarNightFestival_Data02_Actor06_Ellen_WaitTalk,high,Polls AICMD0x1F (player talks to the NPC) and loops
+pAIScripting0x0F_StarNightFestival_L032,pAIScripting0x0F_StarNightFestival_Data02_Actor06_Ellen_Talk,medium,Jump target of AICMD0x1F (conversation handler)
+pAIScripting0x0F_StarNightFestival_L033,pAIScripting0x0F_StarNightFestival_Data02_Actor06_Ellen_Say_02BD,medium,Short block that shows dialog $02BD and ends/jumps
+pAIScripting0x0F_StarNightFestival_L034,pAIScripting0x0F_StarNightFestival_Data02_Actor06_Ellen_Say_02BE,medium,Short block that shows dialog $02BE and ends/jumps
+pAIScripting0x0F_StarNightFestival_L035,pAIScripting0x0F_StarNightFestival_Data02_Actor06_Ellen_Say_0433,medium,Short block that shows dialog $0433 and ends/jumps
+pAIScripting0x0F_StarNightFestival_L036,pAIScripting0x0F_StarNightFestival_Data02_Actor06_Ellen_Say_0434,medium,Short block that shows dialog $0434 and ends/jumps
+pAIScripting0x0F_StarNightFestival_L038,pAIScripting0x0F_StarNightFestival_Church_Actor01_WaitTalk,high,Polls AICMD0x1F (player talks to the NPC) and loops
+pAIScripting0x0F_StarNightFestival_L039,pAIScripting0x0F_StarNightFestival_Church_Actor01_Talk_02BF,high,"Jump target of AICMD0x1F (conversation handler), first dialog $02BF"
+pAIScripting0x0F_StarNightFestival_L041,pAIScripting0x0F_StarNightFestival_Church_Actor02_WaitTalk,high,Polls AICMD0x1F (player talks to the NPC) and loops
+pAIScripting0x0F_StarNightFestival_L042,pAIScripting0x0F_StarNightFestival_Church_Actor02_Talk_02C1,high,"Jump target of AICMD0x1F (conversation handler), first dialog $02C1"
+pAIScripting0x0F_StarNightFestival_L044,pAIScripting0x0F_StarNightFestival_Church_Actor03_WaitTalk,high,Polls AICMD0x1F (player talks to the NPC) and loops
+pAIScripting0x0F_StarNightFestival_L045,pAIScripting0x0F_StarNightFestival_Church_Actor03_Talk_02C2,high,"Jump target of AICMD0x1F (conversation handler), first dialog $02C2"
+pAIScripting0x0F_StarNightFestival_L047,pAIScripting0x0F_StarNightFestival_Church_Actor04_WaitTalk,high,Polls AICMD0x1F (player talks to the NPC) and loops
+pAIScripting0x0F_StarNightFestival_L048,pAIScripting0x0F_StarNightFestival_Church_Actor04_Talk_037A,high,"Jump target of AICMD0x1F (conversation handler), first dialog $037A"
+pAIScripting0x0F_StarNightFestival_L050,pAIScripting0x0F_StarNightFestival_Church_Actor05_WaitTalk,high,Polls AICMD0x1F (player talks to the NPC) and loops
+pAIScripting0x0F_StarNightFestival_L051,pAIScripting0x0F_StarNightFestival_Church_Actor05_Talk_035F,high,"Jump target of AICMD0x1F (conversation handler), first dialog $035F"
+pAIScripting0x0F_StarNightFestival_L053,pAIScripting0x0F_StarNightFestival_Church_Actor06_WaitTalk,high,Polls AICMD0x1F (player talks to the NPC) and loops
+pAIScripting0x0F_StarNightFestival_L054,pAIScripting0x0F_StarNightFestival_Church_Actor06_Talk_02C0,high,"Jump target of AICMD0x1F (conversation handler), first dialog $02C0"
+pAIScripting0x0F_StarNightFestival_L063,pAIScripting0x0F_StarNightFestival_Church_Actor07_Maria_WaitTalk,high,Polls AICMD0x1F (player talks to the NPC) and loops
+pAIScripting0x0F_StarNightFestival_L064,pAIScripting0x0F_StarNightFestival_Church_Actor07_Maria_Talk,medium,Jump target of AICMD0x1F (conversation handler)
+pAIScripting0x0F_StarNightFestival_L070,pAIScripting0x0F_StarNightFestival_Bar_Actor01_WaitTalk,high,Polls AICMD0x1F (player talks to the NPC) and loops
+pAIScripting0x0F_StarNightFestival_L071,pAIScripting0x0F_StarNightFestival_Bar_Actor01_Talk_02C5,high,"Jump target of AICMD0x1F (conversation handler), first dialog $02C5"
+pAIScripting0x0F_StarNightFestival_L073,pAIScripting0x0F_StarNightFestival_Bar_Actor02_WaitTalk,high,Polls AICMD0x1F (player talks to the NPC) and loops
+pAIScripting0x0F_StarNightFestival_L074,pAIScripting0x0F_StarNightFestival_Bar_Actor02_Talk_02C6,high,"Jump target of AICMD0x1F (conversation handler), first dialog $02C6"
+pAIScripting0x0F_StarNightFestival_L076,pAIScripting0x0F_StarNightFestival_Bar_Actor03_WaitTalk,high,Polls AICMD0x1F (player talks to the NPC) and loops
+pAIScripting0x0F_StarNightFestival_L077,pAIScripting0x0F_StarNightFestival_Bar_Actor03_Talk_02C7,high,"Jump target of AICMD0x1F (conversation handler), first dialog $02C7"
+pAIScripting0x0F_StarNightFestival_L079,pAIScripting0x0F_StarNightFestival_Bar_Actor04_WaitTalk,high,Polls AICMD0x1F (player talks to the NPC) and loops
+pAIScripting0x0F_StarNightFestival_L080,pAIScripting0x0F_StarNightFestival_Bar_Actor04_Talk_02C8,high,"Jump target of AICMD0x1F (conversation handler), first dialog $02C8"
+pAIScripting0x0F_StarNightFestival_L082,pAIScripting0x0F_StarNightFestival_Bar_Actor06_WaitTalk,high,Polls AICMD0x1F (player talks to the NPC) and loops
+pAIScripting0x0F_StarNightFestival_L083,pAIScripting0x0F_StarNightFestival_Bar_Actor06_Talk_0407,high,"Jump target of AICMD0x1F (conversation handler), first dialog $0407"
+pAIScripting0x0F_StarNightFestival_L085,pAIScripting0x0F_StarNightFestival_Bar_Actor07_WaitTalk,high,Polls AICMD0x1F (player talks to the NPC) and loops
+pAIScripting0x0F_StarNightFestival_L086,pAIScripting0x0F_StarNightFestival_Bar_Actor07_Talk_03D9,high,"Jump target of AICMD0x1F (conversation handler), first dialog $03D9"
+pAIScripting0x0F_StarNightFestival_L095,pAIScripting0x0F_StarNightFestival_Bar_Actor05_Eve_WaitTalk,high,Polls AICMD0x1F (player talks to the NPC) and loops
+pAIScripting0x0F_StarNightFestival_L096,pAIScripting0x0F_StarNightFestival_Bar_Actor05_Eve_Talk_0151,high,"Jump target of AICMD0x1F (conversation handler), first dialog $0151"
+pAIScripting0x0F_StarNightFestival_L098,pAIScripting0x0F_StarNightFestival_Bar_Actor05_Eve_Say_02C9,medium,Short block that shows dialog $02C9 and ends/jumps
+pAIScripting0x0F_StarNightFestival_L099,pAIScripting0x0F_StarNightFestival_Bar_Actor05_Eve_Say_02CA,medium,Short block that shows dialog $02CA and ends/jumps
+pAIScripting0x0F_StarNightFestival_L100,pAIScripting0x0F_StarNightFestival_Bar_Actor05_Eve_Say_0437,medium,Short block that shows dialog $0437 and ends/jumps
+pAIScripting0x0F_StarNightFestival_L101,pAIScripting0x0F_StarNightFestival_Bar_Actor05_Eve_Say_0438,medium,Short block that shows dialog $0438 and ends/jumps
+pAIScripting0x0F_StarNightFestival_L111,pAIScripting0x0F_StarNightFestival_Data05_Actor01_Nina_Idle,high,Wait + jump to itself (idle loop)
+pAIScripting0x0F_StarNightFestival_L112,pAIScripting0x0F_StarNightFestival_Data05_Actor01_Nina_Say_02CB,medium,Short block that shows dialog $02CB and ends/jumps
+pAIScripting0x0F_StarNightFestival_L113,pAIScripting0x0F_StarNightFestival_Data05_Actor01_Nina_Say_02CC,medium,Short block that shows dialog $02CC and ends/jumps
+pAIScripting0x0F_StarNightFestival_L114,pAIScripting0x0F_StarNightFestival_Data05_Actor01_Nina_Say_0439,medium,Short block that shows dialog $0439 and ends/jumps
+pAIScripting0x0F_StarNightFestival_L115,pAIScripting0x0F_StarNightFestival_Data05_Actor01_Nina_Say_043A,medium,Short block that shows dialog $043A and ends/jumps
+pAIScripting0x0F_StarNightFestival_L123,pAIScripting0x0F_StarNightFestival_Data06_Actor01_Ann_WaitTalk,high,Polls AICMD0x1F (player talks to the NPC) and loops
+pAIScripting0x0F_StarNightFestival_L124,pAIScripting0x0F_StarNightFestival_Data06_Actor01_Ann_Talk,medium,Jump target of AICMD0x1F (conversation handler)
+pAIScripting0x0F_StarNightFestival_L125,pAIScripting0x0F_StarNightFestival_Data06_Actor01_Ann_Say_02CD,medium,Short block that shows dialog $02CD and ends/jumps
+pAIScripting0x0F_StarNightFestival_L126,pAIScripting0x0F_StarNightFestival_Data06_Actor01_Ann_Say_02A9,medium,Short block that shows dialog $02A9 and ends/jumps
+pAIScripting0x0F_StarNightFestival_L127,pAIScripting0x0F_StarNightFestival_Data06_Actor01_Ann_Say_043B,medium,Short block that shows dialog $043B and ends/jumps
+pAIScripting0x0F_StarNightFestival_L128,pAIScripting0x0F_StarNightFestival_Data06_Actor01_Ann_Say_043C,medium,Short block that shows dialog $043C and ends/jumps
