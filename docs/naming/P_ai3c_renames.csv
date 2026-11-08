@@ -1,0 +1,1472 @@
+old,new,confidence,reason
+pAIScripting0x00_General_Data21,pAIScripting0x00_General_CrossRoad,high,AI slot entry named after the caller (fAreaEvents_CrossRoad)
+pAIScripting0x00_General_Data31,pAIScripting0x00_General_House,high,AI slot entry named after the caller (fAreaEvents_House)
+pAIScripting0x00_General_Data36,pAIScripting0x00_General_CowBarn,high,AI slot entry named after the caller (fAreaEvents_CowBarn)
+pAIScripting0x00_General_Data124,pAIScripting0x00_General_Town,high,AI slot entry named after the caller (fAreaEvents_Town)
+pAIScripting0x00_General_Data125,pAIScripting0x00_General_Coop,high,AI slot entry named after the caller (fAreaEvents_Coop)
+pAIScripting0x00_General_L001,pAIScripting0x00_General_Chicken00,medium,"AI slot 0 of the general object script: behaviour pattern Chicken (command signature, callers in the engine)"
+pAIScripting0x00_General_Data01,pAIScripting0x00_General_Chicken01,medium,"AI slot 1 of the general object script: behaviour pattern Chicken (command signature, callers in the engine)"
+pAIScripting0x00_General_Data02,pAIScripting0x00_General_Chicken02,medium,"AI slot 2 of the general object script: behaviour pattern Chicken (command signature, callers in the engine)"
+pAIScripting0x00_General_Data03,pAIScripting0x00_General_Cow03,medium,"AI slot 3 of the general object script: behaviour pattern Cow (command signature, callers in the engine)"
+pAIScripting0x00_General_Data04,pAIScripting0x00_General_Cow04,medium,"AI slot 4 of the general object script: behaviour pattern Cow (command signature, callers in the engine)"
+pAIScripting0x00_General_Data05,pAIScripting0x00_General_Cow05,medium,"AI slot 5 of the general object script: behaviour pattern Cow (command signature, callers in the engine)"
+pAIScripting0x00_General_Data06,pAIScripting0x00_General_Cow06,medium,"AI slot 6 of the general object script: behaviour pattern Cow (command signature, callers in the engine)"
+pAIScripting0x00_General_Data07,pAIScripting0x00_General_Cow07,medium,"AI slot 7 of the general object script: behaviour pattern Cow (command signature, callers in the engine)"
+pAIScripting0x00_General_Data08,pAIScripting0x00_General_Cow08,medium,"AI slot 8 of the general object script: behaviour pattern Cow (command signature, callers in the engine)"
+pAIScripting0x00_General_Data09,pAIScripting0x00_General_Cow09,medium,"AI slot 9 of the general object script: behaviour pattern Cow (command signature, callers in the engine)"
+pAIScripting0x00_General_Data10,pAIScripting0x00_General_SpriteAnim0A,medium,"AI slot 10 of the general object script: behaviour pattern SpriteAnim (command signature, callers in the engine)"
+pAIScripting0x00_General_Data11,pAIScripting0x00_General_SpriteAnim0B,medium,"AI slot 11 of the general object script: behaviour pattern SpriteAnim (command signature, callers in the engine)"
+pAIScripting0x00_General_Data12,pAIScripting0x00_General_SpriteAnim0C,medium,"AI slot 12 of the general object script: behaviour pattern SpriteAnim (command signature, callers in the engine)"
+pAIScripting0x00_General_Data13,pAIScripting0x00_General_SpriteAnim0D,medium,"AI slot 13 of the general object script: behaviour pattern SpriteAnim (command signature, callers in the engine)"
+pAIScripting0x00_General_Data14,pAIScripting0x00_General_SpriteAnim0E,medium,"AI slot 14 of the general object script: behaviour pattern SpriteAnim (command signature, callers in the engine)"
+pAIScripting0x00_General_Data15,pAIScripting0x00_General_SpriteAnim0F,medium,"AI slot 15 of the general object script: behaviour pattern SpriteAnim (command signature, callers in the engine)"
+pAIScripting0x00_General_Data16,pAIScripting0x00_General_Horse10,medium,"AI slot 16 of the general object script: behaviour pattern Horse (command signature, callers in the engine)"
+pAIScripting0x00_General_Data17,pAIScripting0x00_General_Dog11,medium,"AI slot 17 of the general object script: behaviour pattern Dog (command signature, callers in the engine)"
+pAIScripting0x00_General_Data18,pAIScripting0x00_General_Dog12,medium,"AI slot 18 of the general object script: behaviour pattern Dog (command signature, callers in the engine)"
+pAIScripting0x00_General_Data19,pAIScripting0x00_General_Horse13,medium,"AI slot 19 of the general object script: behaviour pattern Horse (command signature, callers in the engine)"
+pAIScripting0x00_General_Data20,pAIScripting0x00_General_Horse14,medium,"AI slot 20 of the general object script: behaviour pattern Horse (command signature, callers in the engine)"
+pAIScripting0x00_General_Data22,pAIScripting0x00_General_OneShot16,medium,"AI slot 22 of the general object script: behaviour pattern OneShot (command signature, callers in the engine)"
+pAIScripting0x00_General_Data23,pAIScripting0x00_General_Cow17,medium,"AI slot 23 of the general object script: behaviour pattern Cow (command signature, callers in the engine)"
+pAIScripting0x00_General_Data24,pAIScripting0x00_General_Npc18,medium,"AI slot 24 of the general object script: behaviour pattern Npc (command signature, callers in the engine)"
+pAIScripting0x00_General_Data25,pAIScripting0x00_General_Npc19,medium,"AI slot 25 of the general object script: behaviour pattern Npc (command signature, callers in the engine)"
+pAIScripting0x00_General_Data26,pAIScripting0x00_General_Npc1A,medium,"AI slot 26 of the general object script: behaviour pattern Npc (command signature, callers in the engine)"
+pAIScripting0x00_General_Data27,pAIScripting0x00_General_Npc1B,medium,"AI slot 27 of the general object script: behaviour pattern Npc (command signature, callers in the engine)"
+pAIScripting0x00_General_Data28,pAIScripting0x00_General_Npc1C,medium,"AI slot 28 of the general object script: behaviour pattern Npc (command signature, callers in the engine)"
+pAIScripting0x00_General_Data29,pAIScripting0x00_General_Npc1D,medium,"AI slot 29 of the general object script: behaviour pattern Npc (command signature, callers in the engine)"
+pAIScripting0x00_General_Data30,pAIScripting0x00_General_OneShot1E,medium,"AI slot 30 of the general object script: behaviour pattern OneShot (command signature, callers in the engine)"
+pAIScripting0x00_General_Data32,pAIScripting0x00_General_Npc20,medium,"AI slot 32 of the general object script: behaviour pattern Npc (command signature, callers in the engine)"
+pAIScripting0x00_General_Data33,pAIScripting0x00_General_OneShot22,medium,"AI slot 34 of the general object script: behaviour pattern OneShot (command signature, callers in the engine)"
+pAIScripting0x00_General_Data34,pAIScripting0x00_General_OneShot23,medium,"AI slot 35 of the general object script: behaviour pattern OneShot (command signature, callers in the engine)"
+pAIScripting0x00_General_Data35,pAIScripting0x00_General_OneShot24,medium,"AI slot 36 of the general object script: behaviour pattern OneShot (command signature, callers in the engine)"
+pAIScripting0x00_General_Data37,pAIScripting0x00_General_OneShot27,medium,"AI slot 39 of the general object script: behaviour pattern OneShot (command signature, callers in the engine)"
+pAIScripting0x00_General_Data38,pAIScripting0x00_General_SpriteAnim28,medium,"AI slot 40 of the general object script: behaviour pattern SpriteAnim (command signature, callers in the engine)"
+pAIScripting0x00_General_Data39,pAIScripting0x00_General_SpriteAnim29,medium,"AI slot 41 of the general object script: behaviour pattern SpriteAnim (command signature, callers in the engine)"
+pAIScripting0x00_General_Data40,pAIScripting0x00_General_SpriteAnim2A,medium,"AI slot 42 of the general object script: behaviour pattern SpriteAnim (command signature, callers in the engine)"
+pAIScripting0x00_General_Data41,pAIScripting0x00_General_SpriteAnim2B,medium,"AI slot 43 of the general object script: behaviour pattern SpriteAnim (command signature, callers in the engine)"
+pAIScripting0x00_General_Data42,pAIScripting0x00_General_Npc2C,medium,"AI slot 44 of the general object script: behaviour pattern Npc (command signature, callers in the engine)"
+pAIScripting0x00_General_Data43,pAIScripting0x00_General_OneShot2D,medium,"AI slot 45 of the general object script: behaviour pattern OneShot (command signature, callers in the engine)"
+pAIScripting0x00_General_Data45,pAIScripting0x00_General_Cow2F,medium,"AI slot 47 of the general object script: behaviour pattern Cow (command signature, callers in the engine)"
+pAIScripting0x00_General_Data46,pAIScripting0x00_General_Mole30,medium,"AI slot 48 of the general object script: behaviour pattern Mole (command signature, callers in the engine)"
+pAIScripting0x00_General_Data47,pAIScripting0x00_General_Mole31,medium,"AI slot 49 of the general object script: behaviour pattern Mole (command signature, callers in the engine)"
+pAIScripting0x00_General_Data48,pAIScripting0x00_General_OneShot32,medium,"AI slot 50 of the general object script: behaviour pattern OneShot (command signature, callers in the engine)"
+pAIScripting0x00_General_Data49,pAIScripting0x00_General_OneShot33,medium,"AI slot 51 of the general object script: behaviour pattern OneShot (command signature, callers in the engine)"
+pAIScripting0x00_General_Data50,pAIScripting0x00_General_OneShot34,medium,"AI slot 52 of the general object script: behaviour pattern OneShot (command signature, callers in the engine)"
+pAIScripting0x00_General_Data51,pAIScripting0x00_General_Pickup35,medium,"AI slot 53 of the general object script: behaviour pattern Pickup (command signature, callers in the engine)"
+pAIScripting0x00_General_Data52,pAIScripting0x00_General_Npc36,medium,"AI slot 54 of the general object script: behaviour pattern Npc (command signature, callers in the engine)"
+pAIScripting0x00_General_Data53,pAIScripting0x00_General_Npc37,medium,"AI slot 55 of the general object script: behaviour pattern Npc (command signature, callers in the engine)"
+pAIScripting0x00_General_Data54,pAIScripting0x00_General_OneShot38,medium,"AI slot 56 of the general object script: behaviour pattern OneShot (command signature, callers in the engine)"
+pAIScripting0x00_General_Data55,pAIScripting0x00_General_OneShot39,medium,"AI slot 57 of the general object script: behaviour pattern OneShot (command signature, callers in the engine)"
+pAIScripting0x00_General_Data56,pAIScripting0x00_General_OneShot3A,medium,"AI slot 58 of the general object script: behaviour pattern OneShot (command signature, callers in the engine)"
+pAIScripting0x00_General_Data57,pAIScripting0x00_General_OneShot3B,medium,"AI slot 59 of the general object script: behaviour pattern OneShot (command signature, callers in the engine)"
+pAIScripting0x00_General_Data58,pAIScripting0x00_General_SpriteTable3C,medium,"AI slot 60 of the general object script: behaviour pattern SpriteTable (command signature, callers in the engine)"
+pAIScripting0x00_General_Data59,pAIScripting0x00_General_SpriteTable3D,medium,"AI slot 61 of the general object script: behaviour pattern SpriteTable (command signature, callers in the engine)"
+pAIScripting0x00_General_Data60,pAIScripting0x00_General_SpriteTable3E,medium,"AI slot 62 of the general object script: behaviour pattern SpriteTable (command signature, callers in the engine)"
+pAIScripting0x00_General_Data61,pAIScripting0x00_General_SpriteTable3F,medium,"AI slot 63 of the general object script: behaviour pattern SpriteTable (command signature, callers in the engine)"
+pAIScripting0x00_General_Data62,pAIScripting0x00_General_SpriteTable40,medium,"AI slot 64 of the general object script: behaviour pattern SpriteTable (command signature, callers in the engine)"
+pAIScripting0x00_General_Data63,pAIScripting0x00_General_SpriteTable41,medium,"AI slot 65 of the general object script: behaviour pattern SpriteTable (command signature, callers in the engine)"
+pAIScripting0x00_General_Data64,pAIScripting0x00_General_SpriteTable42,medium,"AI slot 66 of the general object script: behaviour pattern SpriteTable (command signature, callers in the engine)"
+pAIScripting0x00_General_Data65,pAIScripting0x00_General_SpriteTable43,medium,"AI slot 67 of the general object script: behaviour pattern SpriteTable (command signature, callers in the engine)"
+pAIScripting0x00_General_Data66,pAIScripting0x00_General_SpriteTable44,medium,"AI slot 68 of the general object script: behaviour pattern SpriteTable (command signature, callers in the engine)"
+pAIScripting0x00_General_Data67,pAIScripting0x00_General_SpriteTable45,medium,"AI slot 69 of the general object script: behaviour pattern SpriteTable (command signature, callers in the engine)"
+pAIScripting0x00_General_Data68,pAIScripting0x00_General_SpriteTable46,medium,"AI slot 70 of the general object script: behaviour pattern SpriteTable (command signature, callers in the engine)"
+pAIScripting0x00_General_Data69,pAIScripting0x00_General_SpriteTable47,medium,"AI slot 71 of the general object script: behaviour pattern SpriteTable (command signature, callers in the engine)"
+pAIScripting0x00_General_Data70,pAIScripting0x00_General_SpriteTable48,medium,"AI slot 72 of the general object script: behaviour pattern SpriteTable (command signature, callers in the engine)"
+pAIScripting0x00_General_Data71,pAIScripting0x00_General_SpriteTable49,medium,"AI slot 73 of the general object script: behaviour pattern SpriteTable (command signature, callers in the engine)"
+pAIScripting0x00_General_Data72,pAIScripting0x00_General_SpriteTable4A,medium,"AI slot 74 of the general object script: behaviour pattern SpriteTable (command signature, callers in the engine)"
+pAIScripting0x00_General_Data73,pAIScripting0x00_General_SpriteTable4B,medium,"AI slot 75 of the general object script: behaviour pattern SpriteTable (command signature, callers in the engine)"
+pAIScripting0x00_General_Data74,pAIScripting0x00_General_SpriteTable4C,medium,"AI slot 76 of the general object script: behaviour pattern SpriteTable (command signature, callers in the engine)"
+pAIScripting0x00_General_Data75,pAIScripting0x00_General_SpriteTable4D,medium,"AI slot 77 of the general object script: behaviour pattern SpriteTable (command signature, callers in the engine)"
+pAIScripting0x00_General_Data76,pAIScripting0x00_General_SpriteTable4E,medium,"AI slot 78 of the general object script: behaviour pattern SpriteTable (command signature, callers in the engine)"
+pAIScripting0x00_General_Data77,pAIScripting0x00_General_SpriteTable4F,medium,"AI slot 79 of the general object script: behaviour pattern SpriteTable (command signature, callers in the engine)"
+pAIScripting0x00_General_Data78,pAIScripting0x00_General_SpriteTable50,medium,"AI slot 80 of the general object script: behaviour pattern SpriteTable (command signature, callers in the engine)"
+pAIScripting0x00_General_Data79,pAIScripting0x00_General_SpriteTable51,medium,"AI slot 81 of the general object script: behaviour pattern SpriteTable (command signature, callers in the engine)"
+pAIScripting0x00_General_Data80,pAIScripting0x00_General_SpriteTable52,medium,"AI slot 82 of the general object script: behaviour pattern SpriteTable (command signature, callers in the engine)"
+pAIScripting0x00_General_Data81,pAIScripting0x00_General_SpriteTable53,medium,"AI slot 83 of the general object script: behaviour pattern SpriteTable (command signature, callers in the engine)"
+pAIScripting0x00_General_Data82,pAIScripting0x00_General_SpriteTable54,medium,"AI slot 84 of the general object script: behaviour pattern SpriteTable (command signature, callers in the engine)"
+pAIScripting0x00_General_Data83,pAIScripting0x00_General_SpriteTable55,medium,"AI slot 85 of the general object script: behaviour pattern SpriteTable (command signature, callers in the engine)"
+pAIScripting0x00_General_Data84,pAIScripting0x00_General_SpriteTable56,medium,"AI slot 86 of the general object script: behaviour pattern SpriteTable (command signature, callers in the engine)"
+pAIScripting0x00_General_Data85,pAIScripting0x00_General_SpriteTable57,medium,"AI slot 87 of the general object script: behaviour pattern SpriteTable (command signature, callers in the engine)"
+pAIScripting0x00_General_Data86,pAIScripting0x00_General_SpriteTable58,medium,"AI slot 88 of the general object script: behaviour pattern SpriteTable (command signature, callers in the engine)"
+pAIScripting0x00_General_Data87,pAIScripting0x00_General_SpriteTable59,medium,"AI slot 89 of the general object script: behaviour pattern SpriteTable (command signature, callers in the engine)"
+pAIScripting0x00_General_Data88,pAIScripting0x00_General_SpriteTable5A,medium,"AI slot 90 of the general object script: behaviour pattern SpriteTable (command signature, callers in the engine)"
+pAIScripting0x00_General_Data89,pAIScripting0x00_General_SpriteTable5B,medium,"AI slot 91 of the general object script: behaviour pattern SpriteTable (command signature, callers in the engine)"
+pAIScripting0x00_General_Data90,pAIScripting0x00_General_SpriteTable5C,medium,"AI slot 92 of the general object script: behaviour pattern SpriteTable (command signature, callers in the engine)"
+pAIScripting0x00_General_Data91,pAIScripting0x00_General_SpriteTable5D,medium,"AI slot 93 of the general object script: behaviour pattern SpriteTable (command signature, callers in the engine)"
+pAIScripting0x00_General_Data92,pAIScripting0x00_General_SpriteTable5E,medium,"AI slot 94 of the general object script: behaviour pattern SpriteTable (command signature, callers in the engine)"
+pAIScripting0x00_General_Data93,pAIScripting0x00_General_TalkNpc5F,medium,"AI slot 95 of the general object script: behaviour pattern TalkNpc (command signature, callers in the engine)"
+pAIScripting0x00_General_Data94,pAIScripting0x00_General_SpriteAnim60,medium,"AI slot 96 of the general object script: behaviour pattern SpriteAnim (command signature, callers in the engine)"
+pAIScripting0x00_General_Data95,pAIScripting0x00_General_SpriteAnim61,medium,"AI slot 97 of the general object script: behaviour pattern SpriteAnim (command signature, callers in the engine)"
+pAIScripting0x00_General_Data96,pAIScripting0x00_General_SpriteAnim62,medium,"AI slot 98 of the general object script: behaviour pattern SpriteAnim (command signature, callers in the engine)"
+pAIScripting0x00_General_Data97,pAIScripting0x00_General_SpriteAnim63,medium,"AI slot 99 of the general object script: behaviour pattern SpriteAnim (command signature, callers in the engine)"
+pAIScripting0x00_General_Data98,pAIScripting0x00_General_SpriteAnim64,medium,"AI slot 100 of the general object script: behaviour pattern SpriteAnim (command signature, callers in the engine)"
+pAIScripting0x00_General_Data99,pAIScripting0x00_General_SpriteAnim65,medium,"AI slot 101 of the general object script: behaviour pattern SpriteAnim (command signature, callers in the engine)"
+pAIScripting0x00_General_Data100,pAIScripting0x00_General_SpriteAnim66,medium,"AI slot 102 of the general object script: behaviour pattern SpriteAnim (command signature, callers in the engine)"
+pAIScripting0x00_General_Data101,pAIScripting0x00_General_SpriteAnim67,medium,"AI slot 103 of the general object script: behaviour pattern SpriteAnim (command signature, callers in the engine)"
+pAIScripting0x00_General_Data102,pAIScripting0x00_General_SpriteAnim68,medium,"AI slot 104 of the general object script: behaviour pattern SpriteAnim (command signature, callers in the engine)"
+pAIScripting0x00_General_Data103,pAIScripting0x00_General_SpriteAnim69,medium,"AI slot 105 of the general object script: behaviour pattern SpriteAnim (command signature, callers in the engine)"
+pAIScripting0x00_General_Data104,pAIScripting0x00_General_SpriteAnim6A,medium,"AI slot 106 of the general object script: behaviour pattern SpriteAnim (command signature, callers in the engine)"
+pAIScripting0x00_General_Data105,pAIScripting0x00_General_SpriteAnim6B,medium,"AI slot 107 of the general object script: behaviour pattern SpriteAnim (command signature, callers in the engine)"
+pAIScripting0x00_General_Data106,pAIScripting0x00_General_SpriteTable6C,medium,"AI slot 108 of the general object script: behaviour pattern SpriteTable (command signature, callers in the engine)"
+pAIScripting0x00_General_Data107,pAIScripting0x00_General_SpriteTable6D,medium,"AI slot 109 of the general object script: behaviour pattern SpriteTable (command signature, callers in the engine)"
+pAIScripting0x00_General_Data108,pAIScripting0x00_General_SpriteTable6E,medium,"AI slot 110 of the general object script: behaviour pattern SpriteTable (command signature, callers in the engine)"
+pAIScripting0x00_General_Data109,pAIScripting0x00_General_SpriteTable6F,medium,"AI slot 111 of the general object script: behaviour pattern SpriteTable (command signature, callers in the engine)"
+pAIScripting0x00_General_Data110,pAIScripting0x00_General_SpriteTable70,medium,"AI slot 112 of the general object script: behaviour pattern SpriteTable (command signature, callers in the engine)"
+pAIScripting0x00_General_Data111,pAIScripting0x00_General_SpriteTable71,medium,"AI slot 113 of the general object script: behaviour pattern SpriteTable (command signature, callers in the engine)"
+pAIScripting0x00_General_Data112,pAIScripting0x00_General_SpriteTable72,medium,"AI slot 114 of the general object script: behaviour pattern SpriteTable (command signature, callers in the engine)"
+pAIScripting0x00_General_Data113,pAIScripting0x00_General_SpriteTable73,medium,"AI slot 115 of the general object script: behaviour pattern SpriteTable (command signature, callers in the engine)"
+pAIScripting0x00_General_Data114,pAIScripting0x00_General_SpriteTable74,medium,"AI slot 116 of the general object script: behaviour pattern SpriteTable (command signature, callers in the engine)"
+pAIScripting0x00_General_Data115,pAIScripting0x00_General_SpriteTable75,medium,"AI slot 117 of the general object script: behaviour pattern SpriteTable (command signature, callers in the engine)"
+pAIScripting0x00_General_Data116,pAIScripting0x00_General_SpriteTable76,medium,"AI slot 118 of the general object script: behaviour pattern SpriteTable (command signature, callers in the engine)"
+pAIScripting0x00_General_Data117,pAIScripting0x00_General_SpriteTable77,medium,"AI slot 119 of the general object script: behaviour pattern SpriteTable (command signature, callers in the engine)"
+pAIScripting0x00_General_Data118,pAIScripting0x00_General_SpriteTable78,medium,"AI slot 120 of the general object script: behaviour pattern SpriteTable (command signature, callers in the engine)"
+pAIScripting0x00_General_Data119,pAIScripting0x00_General_SpriteTable79,medium,"AI slot 121 of the general object script: behaviour pattern SpriteTable (command signature, callers in the engine)"
+pAIScripting0x00_General_Data120,pAIScripting0x00_General_SpriteTable7A,medium,"AI slot 122 of the general object script: behaviour pattern SpriteTable (command signature, callers in the engine)"
+pAIScripting0x00_General_Data121,pAIScripting0x00_General_SpriteTable7B,medium,"AI slot 123 of the general object script: behaviour pattern SpriteTable (command signature, callers in the engine)"
+pAIScripting0x00_General_Data122,pAIScripting0x00_General_Npc7C,medium,"AI slot 124 of the general object script: behaviour pattern Npc (command signature, callers in the engine)"
+pAIScripting0x00_General_Data123,pAIScripting0x00_General_OneShot7D,medium,"AI slot 125 of the general object script: behaviour pattern OneShot (command signature, callers in the engine)"
+pAIScripting0x00_General_Data126,pAIScripting0x00_General_SpriteTable80,medium,"AI slot 128 of the general object script: behaviour pattern SpriteTable (command signature, callers in the engine)"
+pAIScripting0x00_General_Data127,pAIScripting0x00_General_OneShot81,medium,"AI slot 129 of the general object script: behaviour pattern OneShot (command signature, callers in the engine)"
+pAIScripting0x00_General_Data128,pAIScripting0x00_General_SpriteAnim82,medium,"AI slot 130 of the general object script: behaviour pattern SpriteAnim (command signature, callers in the engine)"
+pAIScripting0x00_General_Data129,pAIScripting0x00_General_SpriteAnim83,medium,"AI slot 131 of the general object script: behaviour pattern SpriteAnim (command signature, callers in the engine)"
+pAIScripting0x00_General_Data130,pAIScripting0x00_General_SpriteAnim84,medium,"AI slot 132 of the general object script: behaviour pattern SpriteAnim (command signature, callers in the engine)"
+pAIScripting0x00_General_Data131,pAIScripting0x00_General_SpriteAnim85,medium,"AI slot 133 of the general object script: behaviour pattern SpriteAnim (command signature, callers in the engine)"
+pAIScripting0x00_General_L061,pAIScripting0x00_General_TalkNpc86,medium,"AI slot 134 of the general object script: behaviour pattern TalkNpc (command signature, callers in the engine)"
+pAIScripting0x00_General_L066,pAIScripting0x00_General_Data44_Actor0A,medium,"Target of AICMD0x09_StartScript (child script, AI slot $0A)"
+pAIScripting0x00_General_L002,pAIScripting0x00_General_Chicken00_Update,high,Per-frame update command (UpdateChicken) + jump to itself
+pAIScripting0x00_General_L003,pAIScripting0x00_General_Chicken01_Update,high,Per-frame update command (UpdateChicken) + jump to itself
+pAIScripting0x00_General_L005,pAIScripting0x00_General_Chicken02_Update,high,Per-frame update command (UpdateChicken) + jump to itself
+pAIScripting0x00_General_L007,pAIScripting0x00_General_Cow03_Update,high,Per-frame update command (UpdateCow) + jump to itself
+pAIScripting0x00_General_L009,pAIScripting0x00_General_Cow04_Update,high,Per-frame update command (UpdateCow) + jump to itself
+pAIScripting0x00_General_L011,pAIScripting0x00_General_Cow05_Update,high,Per-frame update command (UpdateCow) + jump to itself
+pAIScripting0x00_General_L013,pAIScripting0x00_General_Cow06_Update,high,Per-frame update command (UpdateCow) + jump to itself
+pAIScripting0x00_General_L015,pAIScripting0x00_General_Cow07_Update,high,Per-frame update command (UpdateCow) + jump to itself
+pAIScripting0x00_General_L017,pAIScripting0x00_General_Cow08_Update,high,Per-frame update command (UpdateCow) + jump to itself
+pAIScripting0x00_General_L018,pAIScripting0x00_General_Cow09_Update,high,Per-frame update command (UpdateCow) + jump to itself
+pAIScripting0x00_General_L019,pAIScripting0x00_General_Horse10_Update,high,Per-frame update command (UpdateHorse) + jump to itself
+pAIScripting0x00_General_L022,pAIScripting0x00_General_Dog11_Update,high,Per-frame update command (UpdateDog) + jump to itself
+pAIScripting0x00_General_L023,pAIScripting0x00_General_Dog12_Update,high,Per-frame update command (UpdateDog) + jump to itself
+pAIScripting0x00_General_L026,pAIScripting0x00_General_Horse13_Update,high,Per-frame update command (UpdateHorse) + jump to itself
+pAIScripting0x00_General_L029,pAIScripting0x00_General_Horse14_Update,high,Per-frame update command (UpdateHorse) + jump to itself
+pAIScripting0x00_General_L030,pAIScripting0x00_General_CrossRoad_Idle,high,Wait + jump to itself (idle loop)
+pAIScripting0x00_General_L031,pAIScripting0x00_General_Cow17_Update,high,Per-frame update command (UpdateCow) + jump to itself
+pAIScripting0x00_General_L032,pAIScripting0x00_General_Npc18_Idle,high,Wait + jump to itself (idle loop)
+pAIScripting0x00_General_L033,pAIScripting0x00_General_Npc19_Idle,high,Wait + jump to itself (idle loop)
+pAIScripting0x00_General_L034,pAIScripting0x00_General_Npc1A_Idle,high,Wait + jump to itself (idle loop)
+pAIScripting0x00_General_L035,pAIScripting0x00_General_Npc1B_Idle,high,Wait + jump to itself (idle loop)
+pAIScripting0x00_General_L036,pAIScripting0x00_General_Npc1C_Idle,high,Wait + jump to itself (idle loop)
+pAIScripting0x00_General_L037,pAIScripting0x00_General_Npc1D_Idle,high,Wait + jump to itself (idle loop)
+pAIScripting0x00_General_L039,pAIScripting0x00_General_Npc20_Idle,high,Wait + jump to itself (idle loop)
+pAIScripting0x00_General_L041,pAIScripting0x00_General_L040_Idle,high,Wait + jump to itself (idle loop)
+pAIScripting0x00_General_L042,pAIScripting0x00_General_CowBarn_Idle,high,Wait + jump to itself (idle loop)
+pAIScripting0x00_General_L044,pAIScripting0x00_General_L043_Idle,high,Wait + jump to itself (idle loop)
+pAIScripting0x00_General_L045,pAIScripting0x00_General_Npc2C_Idle,high,Wait + jump to itself (idle loop)
+pAIScripting0x00_General_L046,pAIScripting0x00_General_Cow2F_Update,high,Per-frame update command (UpdateCow) + jump to itself
+pAIScripting0x00_General_L047,pAIScripting0x00_General_Mole30_Update,high,Per-frame update command (UpdateMole) + jump to itself
+pAIScripting0x00_General_L048,pAIScripting0x00_General_Mole31_Update,high,Per-frame update command (UpdateMole) + jump to itself
+pAIScripting0x00_General_L049,pAIScripting0x00_General_Pickup35_Update,high,Per-frame update command (UpdatePickup) + jump to itself
+pAIScripting0x00_General_L050,pAIScripting0x00_General_Npc36_Idle,high,Wait + jump to itself (idle loop)
+pAIScripting0x00_General_L051,pAIScripting0x00_General_Npc37_Idle,high,Wait + jump to itself (idle loop)
+pAIScripting0x00_General_L052,pAIScripting0x00_General_TalkNpc5F_WaitTalk,high,Polls AICMD0x1F (player talks to the NPC) and loops
+pAIScripting0x00_General_L053,pAIScripting0x00_General_TalkNpc5F_Talk_03A3,high,"Jump target of AICMD0x1F (conversation handler), first dialog $03A3"
+pAIScripting0x00_General_L054,pAIScripting0x00_General_Npc7C_Idle,high,Wait + jump to itself (idle loop)
+pAIScripting0x00_General_L058,pAIScripting0x00_General_Town_Idle,high,Wait + jump to itself (idle loop)
+pAIScripting0x00_General_L059,pAIScripting0x00_General_Coop_WaitTalk,high,Polls AICMD0x1F (player talks to the NPC) and loops
+pAIScripting0x00_General_L060,pAIScripting0x00_General_Coop_Talk,medium,Jump target of AICMD0x1F (conversation handler)
+pAIScripting0x00_General_L062,pAIScripting0x00_General_TalkNpc86_WaitTalk,high,Polls AICMD0x1F (player talks to the NPC) and loops
+pAIScripting0x00_General_L063,pAIScripting0x00_General_TalkNpc86_Talk_013A,high,"Jump target of AICMD0x1F (conversation handler), first dialog $013A"
+pAIScripting0x00_General_L064,pAIScripting0x00_General_TalkNpc86_WaitTalk_2,high,Polls AICMD0x1F (player talks to the NPC) and loops
+pAIScripting0x00_General_L065,pAIScripting0x00_General_TalkNpc86_Talk_013B,high,"Jump target of AICMD0x1F (conversation handler), first dialog $013B"
+pAIScripting0x00_General_L067,pAIScripting0x00_General_Data44_Actor0A_WaitTalk,high,Polls AICMD0x1F (player talks to the NPC) and loops
+pAIScripting0x00_General_L068,pAIScripting0x00_General_Data44_Actor0A_Talk_013C,high,"Jump target of AICMD0x1F (conversation handler), first dialog $013C"
+pAIScripting0x01_Data01,pAIScripting0x01_Town,high,AI slot entry named after the caller (fAreaEvents_Town)
+pAIScripting0x01_Data02,pAIScripting0x01_MajorHouse,high,AI slot entry named after the caller (fAreaEvents_MajorHouse)
+pAIScripting0x01_Data03,pAIScripting0x01_Church,high,AI slot entry named after the caller (fAreaEvents_Church)
+pAIScripting0x01_Data04,pAIScripting0x01_Florist,high,AI slot entry named after the caller (fAreaEvents_Florist)
+pAIScripting0x01_Data05,pAIScripting0x01_Toolshop,high,AI slot entry named after the caller (fAreaEvents_Toolshop)
+pAIScripting0x01_Data06,pAIScripting0x01_Restaurant,high,AI slot entry named after the caller (fAreaEvents_Restaurant)
+pAIScripting0x01_Data07,pAIScripting0x01_FortuneTeller,high,AI slot entry named after the caller (fAreaEvents_FortuneTeller)
+pAIScripting0x01_Data08,pAIScripting0x01_AnimalShop,high,AI slot entry named after the caller (fAreaEvents_AnimalShop)
+pAIScripting0x01_Data09,pAIScripting0x01_Woods,high,AI slot entry named after the caller (fAreaEvents_Woods)
+pAIScripting0x01_Data10,pAIScripting0x01_WorksmanHouse,high,AI slot entry named after the caller (fAreaEvents_WorksmanHouse)
+pAIScripting0x01_Data11,pAIScripting0x01_ImpsUnderground,high,AI slot entry named after the caller (fAreaEvents_ImpsUnderground)
+pAIScripting0x01_L007,pAIScripting0x01_Town_Actor01,medium,"Target of AICMD0x09_StartScript (child script, AI slot $01)"
+pAIScripting0x01_L024,pAIScripting0x01_Town_Actor02,medium,"Target of AICMD0x09_StartScript (child script, AI slot $02)"
+pAIScripting0x01_L172,pAIScripting0x01_Town_Actor07_Ann,high,"Target of AICMD0x09_StartScript (child script, AI slot $07); sprite table of Ann"
+pAIScripting0x01_L040,pAIScripting0x01_Town_Actor03_Maria,high,"Target of AICMD0x09_StartScript (child script, AI slot $03); sprite table of Maria"
+pAIScripting0x01_L075,pAIScripting0x01_Town_Actor04_Nina,high,"Target of AICMD0x09_StartScript (child script, AI slot $04); sprite table of Nina"
+pAIScripting0x01_L113,pAIScripting0x01_Town_Actor05_Ellen,high,"Target of AICMD0x09_StartScript (child script, AI slot $05); sprite table of Ellen"
+pAIScripting0x01_L152,pAIScripting0x01_Town_Actor06_Eve,high,"Target of AICMD0x09_StartScript (child script, AI slot $06); sprite table of Eve"
+pAIScripting0x01_L177,pAIScripting0x01_MajorHouse_Actor01,medium,"Target of AICMD0x09_StartScript (child script, AI slot $01)"
+pAIScripting0x01_L199,pAIScripting0x01_MajorHouse_Actor02,medium,"Target of AICMD0x09_StartScript (child script, AI slot $02)"
+pAIScripting0x01_L222,pAIScripting0x01_Church_Actor01,medium,"Target of AICMD0x09_StartScript (child script, AI slot $01)"
+pAIScripting0x01_L247,pAIScripting0x01_Florist_Actor01,medium,"Target of AICMD0x09_StartScript (child script, AI slot $01)"
+pAIScripting0x01_L264,pAIScripting0x01_Toolshop_Actor01,medium,"Target of AICMD0x09_StartScript (child script, AI slot $01)"
+pAIScripting0x01_L281,pAIScripting0x01_Toolshop_Actor02_Ann,high,"Target of AICMD0x09_StartScript (child script, AI slot $02); sprite table of Ann"
+pAIScripting0x01_L316,pAIScripting0x01_Restaurant_Actor01,medium,"Target of AICMD0x09_StartScript (child script, AI slot $01)"
+pAIScripting0x01_L333,pAIScripting0x01_Restaurant_Actor02,medium,"Target of AICMD0x09_StartScript (child script, AI slot $02)"
+pAIScripting0x01_L343,pAIScripting0x01_Restaurant_Actor03,medium,"Target of AICMD0x09_StartScript (child script, AI slot $03)"
+pAIScripting0x01_L346,pAIScripting0x01_FortuneTeller_Actor01,medium,"Target of AICMD0x09_StartScript (child script, AI slot $01)"
+pAIScripting0x01_L369,pAIScripting0x01_AnimalShop_Actor01,medium,"Target of AICMD0x09_StartScript (child script, AI slot $01)"
+pAIScripting0x01_L411,pAIScripting0x01_Woods_Actor02,medium,"Target of AICMD0x09_StartScript (child script, AI slot $02)"
+pAIScripting0x01_L398,pAIScripting0x01_Woods_Actor01,medium,"Target of AICMD0x09_StartScript (child script, AI slot $01)"
+pAIScripting0x01_L394,pAIScripting0x01_Woods_Actor06,medium,"Target of AICMD0x09_StartScript (child script, AI slot $06)"
+pAIScripting0x01_L388,pAIScripting0x01_Woods_Actor07,medium,"Target of AICMD0x09_StartScript (child script, AI slot $07)"
+pAIScripting0x01_L391,pAIScripting0x01_Woods_Actor08,medium,"Target of AICMD0x09_StartScript (child script, AI slot $08)"
+pAIScripting0x01_L425,pAIScripting0x01_Woods_Actor03,medium,"Target of AICMD0x09_StartScript (child script, AI slot $03)"
+pAIScripting0x01_L441,pAIScripting0x01_Woods_Actor04,medium,"Target of AICMD0x09_StartScript (child script, AI slot $04)"
+pAIScripting0x01_L455,pAIScripting0x01_Woods_Actor05,medium,"Target of AICMD0x09_StartScript (child script, AI slot $05)"
+pAIScripting0x01_L470,pAIScripting0x01_WorksmanHouse_Actor01,medium,"Target of AICMD0x09_StartScript (child script, AI slot $01)"
+pAIScripting0x01_L482,pAIScripting0x01_ImpsUnderground_Actor01,medium,"Target of AICMD0x09_StartScript (child script, AI slot $01)"
+pAIScripting0x01_L485,pAIScripting0x01_ImpsUnderground_Actor02,medium,"Target of AICMD0x09_StartScript (child script, AI slot $02)"
+pAIScripting0x01_L488,pAIScripting0x01_ImpsUnderground_Actor03,medium,"Target of AICMD0x09_StartScript (child script, AI slot $03)"
+pAIScripting0x01_L010,pAIScripting0x01_Town_Actor01_OnBlueFeather,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x01_L011,pAIScripting0x01_Town_Actor01_OnItemOffered,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x01_L012,pAIScripting0x01_Town_Actor01_Say_03B8,medium,Short block that shows dialog $03B8 and ends/jumps
+pAIScripting0x01_L013,pAIScripting0x01_Town_Actor01_OnInteract,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x01_L014,pAIScripting0x01_Town_Actor01_Say_006A,medium,Short block that shows dialog $006A and ends/jumps
+pAIScripting0x01_L015,pAIScripting0x01_Town_Actor01_Say_006B,medium,Short block that shows dialog $006B and ends/jumps
+pAIScripting0x01_L017,pAIScripting0x01_Town_Actor01_Say_00FB,medium,Short block that shows dialog $00FB and ends/jumps
+pAIScripting0x01_L018,pAIScripting0x01_Town_Actor01_Say_0392,medium,Short block that shows dialog $0392 and ends/jumps
+pAIScripting0x01_L019,pAIScripting0x01_Town_Actor01_Talk_03E0,high,"Jump target of AICMD0x1F (conversation handler), first dialog $03E0"
+pAIScripting0x01_L020,pAIScripting0x01_Town_Actor01_Say_006B_2,medium,Short block that shows dialog $006B and ends/jumps
+pAIScripting0x01_L021,pAIScripting0x01_Town_Actor01_Say_01D0,medium,Short block that shows dialog $01D0 and ends/jumps
+pAIScripting0x01_L022,pAIScripting0x01_Town_Actor01_Say_03F3,medium,Short block that shows dialog $03F3 and ends/jumps
+pAIScripting0x01_L026,pAIScripting0x01_Town_Actor02_OnBlueFeather,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x01_L027,pAIScripting0x01_Town_Actor02_OnItemOffered,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x01_L028,pAIScripting0x01_Town_Actor02_Say_03BA,medium,Short block that shows dialog $03BA and ends/jumps
+pAIScripting0x01_L029,pAIScripting0x01_Town_Actor02_OnInteract,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x01_L034,pAIScripting0x01_Town_Actor02_Say_0391,medium,Short block that shows dialog $0391 and ends/jumps
+pAIScripting0x01_L035,pAIScripting0x01_Town_Actor02_Say_03CD,medium,Short block that shows dialog $03CD and ends/jumps
+pAIScripting0x01_L037,pAIScripting0x01_Town_Actor02_Say_03F2,medium,Short block that shows dialog $03F2 and ends/jumps
+pAIScripting0x01_L038,pAIScripting0x01_Town_Actor02_Say_0324,medium,Short block that shows dialog $0324 and ends/jumps
+pAIScripting0x01_L043,pAIScripting0x01_Town_Actor03_Maria_OnBlueFeather,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x01_L044,pAIScripting0x01_Town_Actor03_Maria_Say_0174,medium,Short block that shows dialog $0174 and ends/jumps
+pAIScripting0x01_L045,pAIScripting0x01_Town_Actor03_Maria_OnItemOffered,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x01_L046,pAIScripting0x01_Town_Actor03_Maria_Say_03B0,medium,Short block that shows dialog $03B0 and ends/jumps
+pAIScripting0x01_L047,pAIScripting0x01_Town_Actor03_Maria_Say_0212,medium,Short block that shows dialog $0212 and ends/jumps
+pAIScripting0x01_L048,pAIScripting0x01_Town_Actor03_Maria_Say_03B5,medium,Short block that shows dialog $03B5 and ends/jumps
+pAIScripting0x01_L049,pAIScripting0x01_Town_Actor03_Maria_Say_03B2,medium,Short block that shows dialog $03B2 and ends/jumps
+pAIScripting0x01_L050,pAIScripting0x01_Town_Actor03_Maria_Say_01D9,medium,Short block that shows dialog $01D9 and ends/jumps
+pAIScripting0x01_L051,pAIScripting0x01_Town_Actor03_Maria_OnInteract,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x01_L053,pAIScripting0x01_Town_Actor03_Maria_Say_0082,medium,Short block that shows dialog $0082 and ends/jumps
+pAIScripting0x01_L054,pAIScripting0x01_Town_Actor03_Maria_Say_0086,medium,Short block that shows dialog $0086 and ends/jumps
+pAIScripting0x01_L055,pAIScripting0x01_Town_Actor03_Maria_Say_0087,medium,Short block that shows dialog $0087 and ends/jumps
+pAIScripting0x01_L056,pAIScripting0x01_Town_Actor03_Maria_Say_0088,medium,Short block that shows dialog $0088 and ends/jumps
+pAIScripting0x01_L057,pAIScripting0x01_Town_Actor03_Maria_Say_00BF,medium,Short block that shows dialog $00BF and ends/jumps
+pAIScripting0x01_L059,pAIScripting0x01_Town_Actor03_Maria_Say_0083,medium,Short block that shows dialog $0083 and ends/jumps
+pAIScripting0x01_L060,pAIScripting0x01_Town_Actor03_Maria_Say_0089,medium,Short block that shows dialog $0089 and ends/jumps
+pAIScripting0x01_L062,pAIScripting0x01_Town_Actor03_Maria_Say_0084,medium,Short block that shows dialog $0084 and ends/jumps
+pAIScripting0x01_L063,pAIScripting0x01_Town_Actor03_Maria_Say_008A,medium,Short block that shows dialog $008A and ends/jumps
+pAIScripting0x01_L064,pAIScripting0x01_Town_Actor03_Maria_Say_008B,medium,Short block that shows dialog $008B and ends/jumps
+pAIScripting0x01_L065,pAIScripting0x01_Town_Actor03_Maria_Say_008C,medium,Short block that shows dialog $008C and ends/jumps
+pAIScripting0x01_L066,pAIScripting0x01_Town_Actor03_Maria_Say_0238,medium,Short block that shows dialog $0238 and ends/jumps
+pAIScripting0x01_L068,pAIScripting0x01_Town_Actor03_Maria_Say_0085,medium,Short block that shows dialog $0085 and ends/jumps
+pAIScripting0x01_L069,pAIScripting0x01_Town_Actor03_Maria_Say_008D,medium,Short block that shows dialog $008D and ends/jumps
+pAIScripting0x01_L070,pAIScripting0x01_Town_Actor03_Maria_Say_02AF,medium,Short block that shows dialog $02AF and ends/jumps
+pAIScripting0x01_L071,pAIScripting0x01_Town_Actor03_Maria_Say_03F8,medium,Short block that shows dialog $03F8 and ends/jumps
+pAIScripting0x01_L072,pAIScripting0x01_Town_Actor03_Maria_Talk_0410,high,"Jump target of AICMD0x1F (conversation handler), first dialog $0410"
+pAIScripting0x01_L073,pAIScripting0x01_Town_Actor03_Maria_Say_0391,medium,Short block that shows dialog $0391 and ends/jumps
+pAIScripting0x01_L079,pAIScripting0x01_Town_Actor04_Nina_OnBlueFeather,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x01_L080,pAIScripting0x01_Town_Actor04_Nina_Say_0178,medium,Short block that shows dialog $0178 and ends/jumps
+pAIScripting0x01_L081,pAIScripting0x01_Town_Actor04_Nina_OnItemOffered,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x01_L082,pAIScripting0x01_Town_Actor04_Nina_Say_03B2,medium,Short block that shows dialog $03B2 and ends/jumps
+pAIScripting0x01_L083,pAIScripting0x01_Town_Actor04_Nina_Say_0212,medium,Short block that shows dialog $0212 and ends/jumps
+pAIScripting0x01_L084,pAIScripting0x01_Town_Actor04_Nina_Say_03B1,medium,Short block that shows dialog $03B1 and ends/jumps
+pAIScripting0x01_L085,pAIScripting0x01_Town_Actor04_Nina_Say_01D9,medium,Short block that shows dialog $01D9 and ends/jumps
+pAIScripting0x01_L086,pAIScripting0x01_Town_Actor04_Nina_Say_0143,medium,Short block that shows dialog $0143 and ends/jumps
+pAIScripting0x01_L087,pAIScripting0x01_Town_Actor04_Nina_OnInteract,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x01_L089,pAIScripting0x01_Town_Actor04_Nina_Say_00AE,medium,Short block that shows dialog $00AE and ends/jumps
+pAIScripting0x01_L090,pAIScripting0x01_Town_Actor04_Nina_Say_00B5,medium,Short block that shows dialog $00B5 and ends/jumps
+pAIScripting0x01_L091,pAIScripting0x01_Town_Actor04_Nina_Say_0208,medium,Short block that shows dialog $0208 and ends/jumps
+pAIScripting0x01_L093,pAIScripting0x01_Town_Actor04_Nina_Say_00AF,medium,Short block that shows dialog $00AF and ends/jumps
+pAIScripting0x01_L094,pAIScripting0x01_Town_Actor04_Nina_Say_00B0,medium,Short block that shows dialog $00B0 and ends/jumps
+pAIScripting0x01_L095,pAIScripting0x01_Town_Actor04_Nina_Say_00B1,medium,Short block that shows dialog $00B1 and ends/jumps
+pAIScripting0x01_L096,pAIScripting0x01_Town_Actor04_Nina_Say_00B6,medium,Short block that shows dialog $00B6 and ends/jumps
+pAIScripting0x01_L098,pAIScripting0x01_Town_Actor04_Nina_Say_00B2,medium,Short block that shows dialog $00B2 and ends/jumps
+pAIScripting0x01_L099,pAIScripting0x01_Town_Actor04_Nina_Say_00B7,medium,Short block that shows dialog $00B7 and ends/jumps
+pAIScripting0x01_L100,pAIScripting0x01_Town_Actor04_Nina_Say_023A,medium,Short block that shows dialog $023A and ends/jumps
+pAIScripting0x01_L101,pAIScripting0x01_Town_Actor04_Nina_Say_03F2,medium,Short block that shows dialog $03F2 and ends/jumps
+pAIScripting0x01_L103,pAIScripting0x01_Town_Actor04_Nina_Say_00B3,medium,Short block that shows dialog $00B3 and ends/jumps
+pAIScripting0x01_L104,pAIScripting0x01_Town_Actor04_Nina_Say_00B4,medium,Short block that shows dialog $00B4 and ends/jumps
+pAIScripting0x01_L105,pAIScripting0x01_Town_Actor04_Nina_Say_00B1_2,medium,Short block that shows dialog $00B1 and ends/jumps
+pAIScripting0x01_L106,pAIScripting0x01_Town_Actor04_Nina_Say_00B8,medium,Short block that shows dialog $00B8 and ends/jumps
+pAIScripting0x01_L107,pAIScripting0x01_Town_Actor04_Nina_Say_02B1,medium,Short block that shows dialog $02B1 and ends/jumps
+pAIScripting0x01_L108,pAIScripting0x01_Town_Actor04_Nina_Say_03FA,medium,Short block that shows dialog $03FA and ends/jumps
+pAIScripting0x01_L109,pAIScripting0x01_Town_Actor04_Nina_Talk_040D,high,"Jump target of AICMD0x1F (conversation handler), first dialog $040D"
+pAIScripting0x01_L110,pAIScripting0x01_Town_Actor04_Nina_Talk_00B1,high,"Jump target of AICMD0x1F (conversation handler), first dialog $00B1"
+pAIScripting0x01_L111,pAIScripting0x01_Town_Actor04_Nina_Say_0391,medium,Short block that shows dialog $0391 and ends/jumps
+pAIScripting0x01_L117,pAIScripting0x01_Town_Actor05_Ellen_OnBlueFeather,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x01_L118,pAIScripting0x01_Town_Actor05_Ellen_Say_017A,medium,Short block that shows dialog $017A and ends/jumps
+pAIScripting0x01_L119,pAIScripting0x01_Town_Actor05_Ellen_OnItemOffered,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x01_L120,pAIScripting0x01_Town_Actor05_Ellen_Say_03B0,medium,Short block that shows dialog $03B0 and ends/jumps
+pAIScripting0x01_L121,pAIScripting0x01_Town_Actor05_Ellen_Say_03B2,medium,Short block that shows dialog $03B2 and ends/jumps
+pAIScripting0x01_L122,pAIScripting0x01_Town_Actor05_Ellen_Say_03B3,medium,Short block that shows dialog $03B3 and ends/jumps
+pAIScripting0x01_L123,pAIScripting0x01_Town_Actor05_Ellen_Say_0212,medium,Short block that shows dialog $0212 and ends/jumps
+pAIScripting0x01_L124,pAIScripting0x01_Town_Actor05_Ellen_Say_01D9,medium,Short block that shows dialog $01D9 and ends/jumps
+pAIScripting0x01_L126,pAIScripting0x01_Town_Actor05_Ellen_OnInteract,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x01_L128,pAIScripting0x01_Town_Actor05_Ellen_Say_00CB,medium,Short block that shows dialog $00CB and ends/jumps
+pAIScripting0x01_L129,pAIScripting0x01_Town_Actor05_Ellen_Say_00CC,medium,Short block that shows dialog $00CC and ends/jumps
+pAIScripting0x01_L130,pAIScripting0x01_Town_Actor05_Ellen_Say_00CD,medium,Short block that shows dialog $00CD and ends/jumps
+pAIScripting0x01_L131,pAIScripting0x01_Town_Actor05_Ellen_Say_00C5,medium,Short block that shows dialog $00C5 and ends/jumps
+pAIScripting0x01_L132,pAIScripting0x01_Town_Actor05_Ellen_Say_0209,medium,Short block that shows dialog $0209 and ends/jumps
+pAIScripting0x01_L135,pAIScripting0x01_Town_Actor05_Ellen_Say_00CE,medium,Short block that shows dialog $00CE and ends/jumps
+pAIScripting0x01_L136,pAIScripting0x01_Town_Actor05_Ellen_Say_048D,medium,Short block that shows dialog $048D and ends/jumps
+pAIScripting0x01_L138,pAIScripting0x01_Town_Actor05_Ellen_Say_00C7,medium,Short block that shows dialog $00C7 and ends/jumps
+pAIScripting0x01_L139,pAIScripting0x01_Town_Actor05_Ellen_Say_00C8,medium,Short block that shows dialog $00C8 and ends/jumps
+pAIScripting0x01_L140,pAIScripting0x01_Town_Actor05_Ellen_Say_00C9,medium,Short block that shows dialog $00C9 and ends/jumps
+pAIScripting0x01_L141,pAIScripting0x01_Town_Actor05_Ellen_Say_00CF,medium,Short block that shows dialog $00CF and ends/jumps
+pAIScripting0x01_L142,pAIScripting0x01_Town_Actor05_Ellen_Say_023B,medium,Short block that shows dialog $023B and ends/jumps
+pAIScripting0x01_L144,pAIScripting0x01_Town_Actor05_Ellen_Say_00CA,medium,Short block that shows dialog $00CA and ends/jumps
+pAIScripting0x01_L145,pAIScripting0x01_Town_Actor05_Ellen_Say_00D0,medium,Short block that shows dialog $00D0 and ends/jumps
+pAIScripting0x01_L146,pAIScripting0x01_Town_Actor05_Ellen_Say_02B2,medium,Short block that shows dialog $02B2 and ends/jumps
+pAIScripting0x01_L147,pAIScripting0x01_Town_Actor05_Ellen_Say_03FB,medium,Short block that shows dialog $03FB and ends/jumps
+pAIScripting0x01_L148,pAIScripting0x01_Town_Actor05_Ellen_Talk_00DB,high,"Jump target of AICMD0x1F (conversation handler), first dialog $00DB"
+pAIScripting0x01_L149,pAIScripting0x01_Town_Actor05_Ellen_Talk_00C9,high,"Jump target of AICMD0x1F (conversation handler), first dialog $00C9"
+pAIScripting0x01_L150,pAIScripting0x01_Town_Actor05_Ellen_Say_0391,medium,Short block that shows dialog $0391 and ends/jumps
+pAIScripting0x01_L151,pAIScripting0x01_Town_Actor05_Ellen_Say_01EE,medium,Short block that shows dialog $01EE and ends/jumps
+pAIScripting0x01_L155,pAIScripting0x01_Town_Actor06_Eve_OnBlueFeather,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x01_L156,pAIScripting0x01_Town_Actor06_Eve_Say_017B,medium,Short block that shows dialog $017B and ends/jumps
+pAIScripting0x01_L157,pAIScripting0x01_Town_Actor06_Eve_OnInteract,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x01_L158,pAIScripting0x01_Town_Actor06_Eve_Say_00E1,medium,Short block that shows dialog $00E1 and ends/jumps
+pAIScripting0x01_L159,pAIScripting0x01_Town_Actor06_Eve_Say_00DF,medium,Short block that shows dialog $00DF and ends/jumps
+pAIScripting0x01_L160,pAIScripting0x01_Town_Actor06_Eve_Talk_0404,high,"Jump target of AICMD0x1F (conversation handler), first dialog $0404"
+pAIScripting0x01_L161,pAIScripting0x01_Town_Actor06_Eve_OnItemOffered,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x01_L162,pAIScripting0x01_Town_Actor06_Eve_Say_03B4,medium,Short block that shows dialog $03B4 and ends/jumps
+pAIScripting0x01_L163,pAIScripting0x01_Town_Actor06_Eve_Say_03B2,medium,Short block that shows dialog $03B2 and ends/jumps
+pAIScripting0x01_L164,pAIScripting0x01_Town_Actor06_Eve_Say_0212,medium,Short block that shows dialog $0212 and ends/jumps
+pAIScripting0x01_L165,pAIScripting0x01_Town_Actor06_Eve_Say_03BA,medium,Short block that shows dialog $03BA and ends/jumps
+pAIScripting0x01_L166,pAIScripting0x01_Town_Actor06_Eve_Say_0391,medium,Short block that shows dialog $0391 and ends/jumps
+pAIScripting0x01_L171,pAIScripting0x01_Town_Actor06_Eve_Idle,high,Wait + jump to itself (idle loop)
+pAIScripting0x01_L174,pAIScripting0x01_Town_Actor07_Ann_WaitTalk,high,Polls AICMD0x1F (player talks to the NPC) and loops
+pAIScripting0x01_L175,pAIScripting0x01_Town_Actor07_Ann_Talk_013F,high,"Jump target of AICMD0x1F (conversation handler), first dialog $013F"
+pAIScripting0x01_L176,pAIScripting0x01_MajorHouse_Idle,high,Wait + jump to itself (idle loop)
+pAIScripting0x01_L180,pAIScripting0x01_MajorHouse_Actor01_WaitInteract,high,"Polls AICMD0x2D (player presses A, with or without item) and loops"
+pAIScripting0x01_L181,pAIScripting0x01_MajorHouse_Actor01_OnBlueFeather,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x01_L182,pAIScripting0x01_MajorHouse_Actor01_OnItemOffered,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x01_L183,pAIScripting0x01_MajorHouse_Actor01_Say_03B8,medium,Short block that shows dialog $03B8 and ends/jumps
+pAIScripting0x01_L184,pAIScripting0x01_MajorHouse_Actor01_OnInteract,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x01_L187,pAIScripting0x01_MajorHouse_Actor01_Say_0035,medium,Short block that shows dialog $0035 and ends/jumps
+pAIScripting0x01_L188,pAIScripting0x01_MajorHouse_Actor01_OnInteract_2,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x01_L192,pAIScripting0x01_MajorHouse_Actor01_Say_020B,medium,Short block that shows dialog $020B and ends/jumps
+pAIScripting0x01_L193,pAIScripting0x01_MajorHouse_Actor01_Say_023D,medium,Short block that shows dialog $023D and ends/jumps
+pAIScripting0x01_L194,pAIScripting0x01_MajorHouse_Actor01_Say_02AD,medium,Short block that shows dialog $02AD and ends/jumps
+pAIScripting0x01_L195,pAIScripting0x01_MajorHouse_Actor01_Say_03EC,medium,Short block that shows dialog $03EC and ends/jumps
+pAIScripting0x01_L196,pAIScripting0x01_MajorHouse_Actor01_OnInteract_3,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x01_L203,pAIScripting0x01_MajorHouse_Actor02_OnBlueFeather,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x01_L204,pAIScripting0x01_MajorHouse_Actor02_OnItemOffered,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x01_L205,pAIScripting0x01_MajorHouse_Actor02_Say_03B9,medium,Short block that shows dialog $03B9 and ends/jumps
+pAIScripting0x01_L206,pAIScripting0x01_MajorHouse_Actor02_OnInteract,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x01_L209,pAIScripting0x01_MajorHouse_Actor02_Say_003A,medium,Short block that shows dialog $003A and ends/jumps
+pAIScripting0x01_L210,pAIScripting0x01_MajorHouse_Actor02_Talk_003B,high,"Jump target of AICMD0x1F (conversation handler), first dialog $003B"
+pAIScripting0x01_L214,pAIScripting0x01_MajorHouse_Actor02_Say_0202,medium,Short block that shows dialog $0202 and ends/jumps
+pAIScripting0x01_L215,pAIScripting0x01_MajorHouse_Actor02_Say_023E,medium,Short block that shows dialog $023E and ends/jumps
+pAIScripting0x01_L216,pAIScripting0x01_MajorHouse_Actor02_Say_02AE,medium,Short block that shows dialog $02AE and ends/jumps
+pAIScripting0x01_L217,pAIScripting0x01_MajorHouse_Actor02_Say_03ED,medium,Short block that shows dialog $03ED and ends/jumps
+pAIScripting0x01_L218,pAIScripting0x01_MajorHouse_Actor02_OnInteract_2,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x01_L221,pAIScripting0x01_Church_Idle,high,Wait + jump to itself (idle loop)
+pAIScripting0x01_L227,pAIScripting0x01_Church_Actor01_OnBlueFeather,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x01_L228,pAIScripting0x01_Church_Actor01_OnItemOffered,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x01_L229,pAIScripting0x01_Church_Actor01_Say_03B0,medium,Short block that shows dialog $03B0 and ends/jumps
+pAIScripting0x01_L230,pAIScripting0x01_Church_Actor01_OnInteract,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x01_L233,pAIScripting0x01_Church_Actor01_Say_0057,medium,Short block that shows dialog $0057 and ends/jumps
+pAIScripting0x01_L234,pAIScripting0x01_Church_Actor01_Say_0058,medium,Short block that shows dialog $0058 and ends/jumps
+pAIScripting0x01_L235,pAIScripting0x01_Church_Actor01_Say_03CB,medium,Short block that shows dialog $03CB and ends/jumps
+pAIScripting0x01_L238,pAIScripting0x01_Church_Actor01_Say_0205,medium,Short block that shows dialog $0205 and ends/jumps
+pAIScripting0x01_L239,pAIScripting0x01_Church_Actor01_Say_03DC,medium,Short block that shows dialog $03DC and ends/jumps
+pAIScripting0x01_L240,pAIScripting0x01_Church_Actor01_Say_03DC_2,medium,Short block that shows dialog $03DC and ends/jumps
+pAIScripting0x01_L242,pAIScripting0x01_Church_Actor01_Say_0405,medium,Short block that shows dialog $0405 and ends/jumps
+pAIScripting0x01_L243,pAIScripting0x01_Church_Actor01_Say_03F0,medium,Short block that shows dialog $03F0 and ends/jumps
+pAIScripting0x01_L244,pAIScripting0x01_Church_Actor01_OnInteract_2,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x01_L246,pAIScripting0x01_Florist_Idle,high,Wait + jump to itself (idle loop)
+pAIScripting0x01_L249,pAIScripting0x01_Florist_Actor01_OnBlueFeather,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x01_L250,pAIScripting0x01_Florist_Actor01_OnItemOffered,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x01_L251,pAIScripting0x01_Florist_Actor01_Say_03B9,medium,Short block that shows dialog $03B9 and ends/jumps
+pAIScripting0x01_L252,pAIScripting0x01_Florist_Actor01_OnInteract,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x01_L254,pAIScripting0x01_Florist_Actor01_Say_0047,medium,Short block that shows dialog $0047 and ends/jumps
+pAIScripting0x01_L255,pAIScripting0x01_Florist_Actor01_Say_03C5,medium,Short block that shows dialog $03C5 and ends/jumps
+pAIScripting0x01_L256,pAIScripting0x01_Florist_Actor01_Say_0203,medium,Short block that shows dialog $0203 and ends/jumps
+pAIScripting0x01_L258,pAIScripting0x01_Florist_Actor01_Say_02AE,medium,Short block that shows dialog $02AE and ends/jumps
+pAIScripting0x01_L259,pAIScripting0x01_Florist_Actor01_Say_03EF,medium,Short block that shows dialog $03EF and ends/jumps
+pAIScripting0x01_L260,pAIScripting0x01_Florist_Actor01_Say_03C6,medium,Short block that shows dialog $03C6 and ends/jumps
+pAIScripting0x01_L261,pAIScripting0x01_Toolshop_Idle,high,Wait + jump to itself (idle loop)
+pAIScripting0x01_L266,pAIScripting0x01_Toolshop_Actor01_WaitTalk,high,Polls AICMD0x1F (player talks to the NPC) and loops
+pAIScripting0x01_L267,pAIScripting0x01_Toolshop_Actor01_OnBlueFeather,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x01_L268,pAIScripting0x01_Toolshop_Actor01_OnItemOffered,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x01_L269,pAIScripting0x01_Toolshop_Actor01_Say_0049,medium,Short block that shows dialog $0049 and ends/jumps
+pAIScripting0x01_L270,pAIScripting0x01_Toolshop_Actor01_OnInteract,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x01_L272,pAIScripting0x01_Toolshop_Actor01_Say_0041,medium,Short block that shows dialog $0041 and ends/jumps
+pAIScripting0x01_L273,pAIScripting0x01_Toolshop_Actor01_Say_0040,medium,Short block that shows dialog $0040 and ends/jumps
+pAIScripting0x01_L275,pAIScripting0x01_Toolshop_Actor01_Say_03DC,medium,Short block that shows dialog $03DC and ends/jumps
+pAIScripting0x01_L277,pAIScripting0x01_Toolshop_Actor01_Say_03EE,medium,Short block that shows dialog $03EE and ends/jumps
+pAIScripting0x01_L279,pAIScripting0x01_Toolshop_Actor01_Say_03C4,medium,Short block that shows dialog $03C4 and ends/jumps
+pAIScripting0x01_L280,pAIScripting0x01_Toolshop_Actor01_Talk_01DC,high,"Jump target of AICMD0x1F (conversation handler), first dialog $01DC"
+pAIScripting0x01_L284,pAIScripting0x01_Toolshop_Actor02_Ann_WaitTalk,high,Polls AICMD0x1F (player talks to the NPC) and loops
+pAIScripting0x01_L285,pAIScripting0x01_Toolshop_Actor02_Ann_OnBlueFeather,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x01_L286,pAIScripting0x01_Toolshop_Actor02_Ann_Say_0176,medium,Short block that shows dialog $0176 and ends/jumps
+pAIScripting0x01_L287,pAIScripting0x01_Toolshop_Actor02_Ann_OnItemOffered,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x01_L288,pAIScripting0x01_Toolshop_Actor02_Ann_Say_03B4,medium,Short block that shows dialog $03B4 and ends/jumps
+pAIScripting0x01_L289,pAIScripting0x01_Toolshop_Actor02_Ann_Say_03B2,medium,Short block that shows dialog $03B2 and ends/jumps
+pAIScripting0x01_L290,pAIScripting0x01_Toolshop_Actor02_Ann_Say_0212,medium,Short block that shows dialog $0212 and ends/jumps
+pAIScripting0x01_L291,pAIScripting0x01_Toolshop_Actor02_Ann_Say_03B4_2,medium,Short block that shows dialog $03B4 and ends/jumps
+pAIScripting0x01_L292,pAIScripting0x01_Toolshop_Actor02_Ann_OnInteract,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x01_L294,pAIScripting0x01_Toolshop_Actor02_Ann_Say_0096,medium,Short block that shows dialog $0096 and ends/jumps
+pAIScripting0x01_L295,pAIScripting0x01_Toolshop_Actor02_Ann_Say_009E,medium,Short block that shows dialog $009E and ends/jumps
+pAIScripting0x01_L296,pAIScripting0x01_Toolshop_Actor02_Ann_Say_0207,medium,Short block that shows dialog $0207 and ends/jumps
+pAIScripting0x01_L298,pAIScripting0x01_Toolshop_Actor02_Ann_Say_0097,medium,Short block that shows dialog $0097 and ends/jumps
+pAIScripting0x01_L299,pAIScripting0x01_Toolshop_Actor02_Ann_Say_0098,medium,Short block that shows dialog $0098 and ends/jumps
+pAIScripting0x01_L300,pAIScripting0x01_Toolshop_Actor02_Ann_Say_0099,medium,Short block that shows dialog $0099 and ends/jumps
+pAIScripting0x01_L301,pAIScripting0x01_Toolshop_Actor02_Ann_Say_009F,medium,Short block that shows dialog $009F and ends/jumps
+pAIScripting0x01_L303,pAIScripting0x01_Toolshop_Actor02_Ann_Say_009A,medium,Short block that shows dialog $009A and ends/jumps
+pAIScripting0x01_L304,pAIScripting0x01_Toolshop_Actor02_Ann_Say_00A0,medium,Short block that shows dialog $00A0 and ends/jumps
+pAIScripting0x01_L305,pAIScripting0x01_Toolshop_Actor02_Ann_Say_0239,medium,Short block that shows dialog $0239 and ends/jumps
+pAIScripting0x01_L307,pAIScripting0x01_Toolshop_Actor02_Ann_Say_009B,medium,Short block that shows dialog $009B and ends/jumps
+pAIScripting0x01_L308,pAIScripting0x01_Toolshop_Actor02_Ann_Say_009C,medium,Short block that shows dialog $009C and ends/jumps
+pAIScripting0x01_L309,pAIScripting0x01_Toolshop_Actor02_Ann_Say_009D,medium,Short block that shows dialog $009D and ends/jumps
+pAIScripting0x01_L310,pAIScripting0x01_Toolshop_Actor02_Ann_Say_00A1,medium,Short block that shows dialog $00A1 and ends/jumps
+pAIScripting0x01_L311,pAIScripting0x01_Toolshop_Actor02_Ann_Say_02B0,medium,Short block that shows dialog $02B0 and ends/jumps
+pAIScripting0x01_L312,pAIScripting0x01_Toolshop_Actor02_Ann_Say_03F9,medium,Short block that shows dialog $03F9 and ends/jumps
+pAIScripting0x01_L313,pAIScripting0x01_Toolshop_Actor02_Ann_Talk_00A7,high,"Jump target of AICMD0x1F (conversation handler), first dialog $00A7"
+pAIScripting0x01_L314,pAIScripting0x01_Toolshop_Actor02_Ann_Talk_01DE,high,"Jump target of AICMD0x1F (conversation handler), first dialog $01DE"
+pAIScripting0x01_L315,pAIScripting0x01_Restaurant_Idle,high,Wait + jump to itself (idle loop)
+pAIScripting0x01_L319,pAIScripting0x01_Restaurant_Actor01_OnBlueFeather,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x01_L320,pAIScripting0x01_Restaurant_Actor01_OnItemOffered,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x01_L321,pAIScripting0x01_Restaurant_Actor01_Say_03BB,medium,Short block that shows dialog $03BB and ends/jumps
+pAIScripting0x01_L322,pAIScripting0x01_Restaurant_Actor01_OnInteract,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x01_L323,pAIScripting0x01_Restaurant_Actor01_Talk,medium,Jump target of AICMD0x1F (conversation handler)
+pAIScripting0x01_L324,pAIScripting0x01_Restaurant_Actor01_Say_004C,medium,Short block that shows dialog $004C and ends/jumps
+pAIScripting0x01_L325,pAIScripting0x01_Restaurant_Actor01_Say_004D,medium,Short block that shows dialog $004D and ends/jumps
+pAIScripting0x01_L327,pAIScripting0x01_Restaurant_Actor01_Say_023F,medium,Short block that shows dialog $023F and ends/jumps
+pAIScripting0x01_L329,pAIScripting0x01_Restaurant_Actor01_Say_03EC,medium,Short block that shows dialog $03EC and ends/jumps
+pAIScripting0x01_L330,pAIScripting0x01_Restaurant_Actor01_Say_03C7,medium,Short block that shows dialog $03C7 and ends/jumps
+pAIScripting0x01_L331,pAIScripting0x01_Restaurant_Actor01_Say_03C8,medium,Short block that shows dialog $03C8 and ends/jumps
+pAIScripting0x01_L332,pAIScripting0x01_Restaurant_Actor01_Say_01ED,medium,Short block that shows dialog $01ED and ends/jumps
+pAIScripting0x01_L335,pAIScripting0x01_Restaurant_Actor02_OnBlueFeather,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x01_L336,pAIScripting0x01_Restaurant_Actor02_OnItemOffered,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x01_L337,pAIScripting0x01_Restaurant_Actor02_OnInteract,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x01_L338,pAIScripting0x01_Restaurant_Actor02_Say_0051,medium,Short block that shows dialog $0051 and ends/jumps
+pAIScripting0x01_L339,pAIScripting0x01_Restaurant_Actor02_Say_0052,medium,Short block that shows dialog $0052 and ends/jumps
+pAIScripting0x01_L340,pAIScripting0x01_Restaurant_Actor02_Say_03C9,medium,Short block that shows dialog $03C9 and ends/jumps
+pAIScripting0x01_L342,pAIScripting0x01_Restaurant_Actor02_Say_03FD,medium,Short block that shows dialog $03FD and ends/jumps
+pAIScripting0x01_L344,pAIScripting0x01_Restaurant_Actor03_Idle,high,Wait + jump to itself (idle loop)
+pAIScripting0x01_L345,pAIScripting0x01_FortuneTeller_Idle,high,Wait + jump to itself (idle loop)
+pAIScripting0x01_L350,pAIScripting0x01_FortuneTeller_Actor01_OnBlueFeather,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x01_L351,pAIScripting0x01_FortuneTeller_Actor01_OnItemOffered,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x01_L352,pAIScripting0x01_FortuneTeller_Actor01_Say_03BB,medium,Short block that shows dialog $03BB and ends/jumps
+pAIScripting0x01_L353,pAIScripting0x01_FortuneTeller_Actor01_OnInteract,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x01_L354,pAIScripting0x01_FortuneTeller_Actor01_Talk_0062,high,"Jump target of AICMD0x1F (conversation handler), first dialog $0062"
+pAIScripting0x01_L355,pAIScripting0x01_FortuneTeller_Actor01_Talk_0060,high,"Jump target of AICMD0x1F (conversation handler), first dialog $0060"
+pAIScripting0x01_L357,pAIScripting0x01_FortuneTeller_Actor01_Say_03E9,medium,Short block that shows dialog $03E9 and ends/jumps
+pAIScripting0x01_L359,pAIScripting0x01_FortuneTeller_Actor01_Say_03E6,medium,Short block that shows dialog $03E6 and ends/jumps
+pAIScripting0x01_L360,pAIScripting0x01_FortuneTeller_Actor01_Say_03E7,medium,Short block that shows dialog $03E7 and ends/jumps
+pAIScripting0x01_L361,pAIScripting0x01_FortuneTeller_Actor01_Say_03E8,medium,Short block that shows dialog $03E8 and ends/jumps
+pAIScripting0x01_L362,pAIScripting0x01_FortuneTeller_Actor01_Say_0465,medium,Short block that shows dialog $0465 and ends/jumps
+pAIScripting0x01_L363,pAIScripting0x01_FortuneTeller_Actor01_Say_0466,medium,Short block that shows dialog $0466 and ends/jumps
+pAIScripting0x01_L364,pAIScripting0x01_FortuneTeller_Actor01_Say_01D1,medium,Short block that shows dialog $01D1 and ends/jumps
+pAIScripting0x01_L365,pAIScripting0x01_FortuneTeller_Actor01_Say_01DD,medium,Short block that shows dialog $01DD and ends/jumps
+pAIScripting0x01_L366,pAIScripting0x01_FortuneTeller_Actor01_Say_01E6,medium,Short block that shows dialog $01E6 and ends/jumps
+pAIScripting0x01_L367,pAIScripting0x01_FortuneTeller_Actor01_Say_01EF,medium,Short block that shows dialog $01EF and ends/jumps
+pAIScripting0x01_L368,pAIScripting0x01_AnimalShop_Idle,high,Wait + jump to itself (idle loop)
+pAIScripting0x01_L372,pAIScripting0x01_AnimalShop_Actor01_OnBlueFeather,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x01_L373,pAIScripting0x01_AnimalShop_Actor01_OnItemOffered,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x01_L374,pAIScripting0x01_AnimalShop_Actor01_Say_03BB,medium,Short block that shows dialog $03BB and ends/jumps
+pAIScripting0x01_L375,pAIScripting0x01_AnimalShop_Actor01_OnInteract,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x01_L377,pAIScripting0x01_AnimalShop_Actor01_Say_005C,medium,Short block that shows dialog $005C and ends/jumps
+pAIScripting0x01_L378,pAIScripting0x01_AnimalShop_Actor01_Talk_005D,high,"Jump target of AICMD0x1F (conversation handler), first dialog $005D"
+pAIScripting0x01_L381,pAIScripting0x01_AnimalShop_Actor01_Say_03F4,medium,Short block that shows dialog $03F4 and ends/jumps
+pAIScripting0x01_L382,pAIScripting0x01_AnimalShop_Actor01_Say_0146,medium,Short block that shows dialog $0146 and ends/jumps
+pAIScripting0x01_L384,pAIScripting0x01_AnimalShop_Actor01_Say_01F0,medium,Short block that shows dialog $01F0 and ends/jumps
+pAIScripting0x01_L387,pAIScripting0x01_Woods_Idle,high,Wait + jump to itself (idle loop)
+pAIScripting0x01_L395,pAIScripting0x01_Woods_Actor06_WaitTalk,high,Polls AICMD0x1F (player talks to the NPC) and loops
+pAIScripting0x01_L396,pAIScripting0x01_Woods_Actor06_Talk_01BE,high,"Jump target of AICMD0x1F (conversation handler), first dialog $01BE"
+pAIScripting0x01_L401,pAIScripting0x01_Woods_Actor01_OnBlueFeather,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x01_L402,pAIScripting0x01_Woods_Actor01_OnItemOffered,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x01_L403,pAIScripting0x01_Woods_Actor01_Say_03B8,medium,Short block that shows dialog $03B8 and ends/jumps
+pAIScripting0x01_L404,pAIScripting0x01_Woods_Actor01_OnInteract,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x01_L406,pAIScripting0x01_Woods_Actor01_Say_0080,medium,Short block that shows dialog $0080 and ends/jumps
+pAIScripting0x01_L407,pAIScripting0x01_Woods_Actor01_Talk_0081,high,"Jump target of AICMD0x1F (conversation handler), first dialog $0081"
+pAIScripting0x01_L408,pAIScripting0x01_Woods_Actor01_Say_0081,medium,Short block that shows dialog $0081 and ends/jumps
+pAIScripting0x01_L409,pAIScripting0x01_Woods_Actor01_Say_01EC,medium,Short block that shows dialog $01EC and ends/jumps
+pAIScripting0x01_L413,pAIScripting0x01_Woods_Actor02_OnBlueFeather,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x01_L414,pAIScripting0x01_Woods_Actor02_OnItemOffered,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x01_L415,pAIScripting0x01_Woods_Actor02_Say_0049,medium,Short block that shows dialog $0049 and ends/jumps
+pAIScripting0x01_L416,pAIScripting0x01_Woods_Actor02_OnInteract,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x01_L417,pAIScripting0x01_Woods_Actor02_Say_007A,medium,Short block that shows dialog $007A and ends/jumps
+pAIScripting0x01_L418,pAIScripting0x01_Woods_Actor02_Say_007C,medium,Short block that shows dialog $007C and ends/jumps
+pAIScripting0x01_L419,pAIScripting0x01_Woods_Actor02_Say_007D,medium,Short block that shows dialog $007D and ends/jumps
+pAIScripting0x01_L421,pAIScripting0x01_Woods_Actor02_Say_03F5,medium,Short block that shows dialog $03F5 and ends/jumps
+pAIScripting0x01_L422,pAIScripting0x01_Woods_Actor02_Say_03D3,medium,Short block that shows dialog $03D3 and ends/jumps
+pAIScripting0x01_L423,pAIScripting0x01_Woods_Actor02_Say_03D2,medium,Short block that shows dialog $03D2 and ends/jumps
+pAIScripting0x01_L427,pAIScripting0x01_Woods_Actor03_OnBlueFeather,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x01_L428,pAIScripting0x01_Woods_Actor03_OnItemOffered,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x01_L429,pAIScripting0x01_Woods_Actor03_Say_03BB,medium,Short block that shows dialog $03BB and ends/jumps
+pAIScripting0x01_L430,pAIScripting0x01_Woods_Actor03_OnInteract,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x01_L432,pAIScripting0x01_Woods_Actor03_Say_012D,medium,Short block that shows dialog $012D and ends/jumps
+pAIScripting0x01_L434,pAIScripting0x01_Woods_Actor03_Say_03D6,medium,Short block that shows dialog $03D6 and ends/jumps
+pAIScripting0x01_L436,pAIScripting0x01_Woods_Actor03_Say_03F6,medium,Short block that shows dialog $03F6 and ends/jumps
+pAIScripting0x01_L438,pAIScripting0x01_Woods_Actor03_Say_0415,medium,Short block that shows dialog $0415 and ends/jumps
+pAIScripting0x01_L439,pAIScripting0x01_Woods_Actor03_Say_03D7,medium,Short block that shows dialog $03D7 and ends/jumps
+pAIScripting0x01_L443,pAIScripting0x01_Woods_Actor04_OnBlueFeather,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x01_L444,pAIScripting0x01_Woods_Actor04_OnItemOffered,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x01_L445,pAIScripting0x01_Woods_Actor04_Say_03BB,medium,Short block that shows dialog $03BB and ends/jumps
+pAIScripting0x01_L446,pAIScripting0x01_Woods_Actor04_OnInteract,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x01_L448,pAIScripting0x01_Woods_Actor04_Say_012E,medium,Short block that shows dialog $012E and ends/jumps
+pAIScripting0x01_L449,pAIScripting0x01_Woods_Actor04_Say_03D4,medium,Short block that shows dialog $03D4 and ends/jumps
+pAIScripting0x01_L450,pAIScripting0x01_Woods_Actor04_Say_03D7,medium,Short block that shows dialog $03D7 and ends/jumps
+pAIScripting0x01_L452,pAIScripting0x01_Woods_Actor04_Say_03F7,medium,Short block that shows dialog $03F7 and ends/jumps
+pAIScripting0x01_L457,pAIScripting0x01_Woods_Actor05_OnBlueFeather,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x01_L458,pAIScripting0x01_Woods_Actor05_OnItemOffered,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x01_L459,pAIScripting0x01_Woods_Actor05_Say_03BB,medium,Short block that shows dialog $03BB and ends/jumps
+pAIScripting0x01_L460,pAIScripting0x01_Woods_Actor05_OnInteract,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x01_L462,pAIScripting0x01_Woods_Actor05_Say_012F,medium,Short block that shows dialog $012F and ends/jumps
+pAIScripting0x01_L463,pAIScripting0x01_Woods_Actor05_Say_03D6,medium,Short block that shows dialog $03D6 and ends/jumps
+pAIScripting0x01_L464,pAIScripting0x01_Woods_Actor05_Say_03DB,medium,Short block that shows dialog $03DB and ends/jumps
+pAIScripting0x01_L466,pAIScripting0x01_Woods_Actor05_Say_03F6,medium,Short block that shows dialog $03F6 and ends/jumps
+pAIScripting0x01_L469,pAIScripting0x01_WorksmanHouse_Idle,high,Wait + jump to itself (idle loop)
+pAIScripting0x01_L471,pAIScripting0x01_WorksmanHouse_Actor01_WaitInteract,high,"Polls AICMD0x2D (player presses A, with or without item) and loops"
+pAIScripting0x01_L473,pAIScripting0x01_WorksmanHouse_Actor01_OnBlueFeather,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x01_L474,pAIScripting0x01_WorksmanHouse_Actor01_OnItemOffered,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x01_L475,pAIScripting0x01_WorksmanHouse_Actor01_Say_03BB,medium,Short block that shows dialog $03BB and ends/jumps
+pAIScripting0x01_L476,pAIScripting0x01_WorksmanHouse_Actor01_OnInteract,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x01_L478,pAIScripting0x01_WorksmanHouse_Actor01_Say_0132,medium,Short block that shows dialog $0132 and ends/jumps
+pAIScripting0x01_L479,pAIScripting0x01_WorksmanHouse_Actor01_Talk_0139,high,"Jump target of AICMD0x1F (conversation handler), first dialog $0139"
+pAIScripting0x01_L480,pAIScripting0x01_WorksmanHouse_Actor01_Say_0133,medium,Short block that shows dialog $0133 and ends/jumps
+pAIScripting0x01_L481,pAIScripting0x01_ImpsUnderground_Idle,high,Wait + jump to itself (idle loop)
+pAIScripting0x01_L483,pAIScripting0x01_ImpsUnderground_Actor01_WaitTalk,high,Polls AICMD0x1F (player talks to the NPC) and loops
+pAIScripting0x01_L484,pAIScripting0x01_ImpsUnderground_Actor01_Talk_0170,high,"Jump target of AICMD0x1F (conversation handler), first dialog $0170"
+pAIScripting0x01_L486,pAIScripting0x01_ImpsUnderground_Actor02_WaitTalk,high,Polls AICMD0x1F (player talks to the NPC) and loops
+pAIScripting0x01_L487,pAIScripting0x01_ImpsUnderground_Actor02_Talk_0171,high,"Jump target of AICMD0x1F (conversation handler), first dialog $0171"
+pAIScripting0x01_L489,pAIScripting0x01_ImpsUnderground_Actor03_WaitTalk,high,Polls AICMD0x1F (player talks to the NPC) and loops
+pAIScripting0x01_L490,pAIScripting0x01_ImpsUnderground_Actor03_Talk_0172,high,"Jump target of AICMD0x1F (conversation handler), first dialog $0172"
+pAIScripting0x02_Data01,pAIScripting0x02_Town,high,AI slot entry named after the caller (fAreaEvents_Town)
+pAIScripting0x02_Data02,pAIScripting0x02_MajorHouse,high,AI slot entry named after the caller (fAreaEvents_MajorHouse)
+pAIScripting0x02_Data03,pAIScripting0x02_Church,high,AI slot entry named after the caller (fAreaEvents_Church)
+pAIScripting0x02_Data04,pAIScripting0x02_Woods,high,AI slot entry named after the caller (fAreaEvents_Woods)
+pAIScripting0x02_Data05,pAIScripting0x02_Mine,high,AI slot entry named after the caller (fAreaEvents_Mine)
+pAIScripting0x02_L016,pAIScripting0x02_Town_Actor01,medium,"Target of AICMD0x09_StartScript (child script, AI slot $01)"
+pAIScripting0x02_L031,pAIScripting0x02_Town_Actor02,medium,"Target of AICMD0x09_StartScript (child script, AI slot $02)"
+pAIScripting0x02_L007,pAIScripting0x02_Town_Actor01_2,medium,"Target of AICMD0x09_StartScript (child script, AI slot $01)"
+pAIScripting0x02_L023,pAIScripting0x02_Town_Actor02_2,medium,"Target of AICMD0x09_StartScript (child script, AI slot $02)"
+pAIScripting0x02_L038,pAIScripting0x02_Town_Actor03,medium,"Target of AICMD0x09_StartScript (child script, AI slot $03)"
+pAIScripting0x02_L048,pAIScripting0x02_Town_Actor04,medium,"Target of AICMD0x09_StartScript (child script, AI slot $04)"
+pAIScripting0x02_L059,pAIScripting0x02_Town_Actor05,medium,"Target of AICMD0x09_StartScript (child script, AI slot $05)"
+pAIScripting0x02_L069,pAIScripting0x02_Town_Actor06_Ann,high,"Target of AICMD0x09_StartScript (child script, AI slot $06); sprite table of Ann"
+pAIScripting0x02_L102,pAIScripting0x02_Town_Actor07_Ellen,high,"Target of AICMD0x09_StartScript (child script, AI slot $07); sprite table of Ellen"
+pAIScripting0x02_L100,pAIScripting0x02_Town_Actor06_Ann_Actor09,medium,"Target of AICMD0x09_StartScript (child script, AI slot $09)"
+pAIScripting0x02_L127,pAIScripting0x02_Town_Actor07_Ellen_Actor0A,medium,"Target of AICMD0x09_StartScript (child script, AI slot $0A)"
+pAIScripting0x02_L129,pAIScripting0x02_MajorHouse_Actor01,medium,"Target of AICMD0x09_StartScript (child script, AI slot $01)"
+pAIScripting0x02_L136,pAIScripting0x02_MajorHouse_Actor02,medium,"Target of AICMD0x09_StartScript (child script, AI slot $02)"
+pAIScripting0x02_L146,pAIScripting0x02_Church_Actor01,medium,"Target of AICMD0x09_StartScript (child script, AI slot $01)"
+pAIScripting0x02_L153,pAIScripting0x02_Church_Actor02,medium,"Target of AICMD0x09_StartScript (child script, AI slot $02)"
+pAIScripting0x02_L163,pAIScripting0x02_Church_Actor03_Maria,high,"Target of AICMD0x09_StartScript (child script, AI slot $03); sprite table of Maria"
+pAIScripting0x02_L183,pAIScripting0x02_Woods_Actor01,medium,"Target of AICMD0x09_StartScript (child script, AI slot $01)"
+pAIScripting0x02_L195,pAIScripting0x02_Woods_Actor02,medium,"Target of AICMD0x09_StartScript (child script, AI slot $02)"
+pAIScripting0x02_L202,pAIScripting0x02_Woods_Actor03_Eve,high,"Target of AICMD0x09_StartScript (child script, AI slot $03); sprite table of Eve"
+pAIScripting0x02_L220,pAIScripting0x02_Mine_Actor01_Nina,high,"Target of AICMD0x09_StartScript (child script, AI slot $01); sprite table of Nina"
+pAIScripting0x02_L003,pAIScripting0x02_Town_Idle,high,Wait + jump to itself (idle loop)
+pAIScripting0x02_L009,pAIScripting0x02_Town_Actor01_2_OnBlueFeather,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x02_L010,pAIScripting0x02_Town_Actor01_2_OnItemOffered,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x02_L011,pAIScripting0x02_Town_Actor01_2_Say_0049,medium,Short block that shows dialog $0049 and ends/jumps
+pAIScripting0x02_L012,pAIScripting0x02_Town_Actor01_2_OnInteract,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x02_L014,pAIScripting0x02_Town_Actor01_2_Say_0043,medium,Short block that shows dialog $0043 and ends/jumps
+pAIScripting0x02_L015,pAIScripting0x02_Town_Actor01_2_Say_0392,medium,Short block that shows dialog $0392 and ends/jumps
+pAIScripting0x02_L018,pAIScripting0x02_Town_Actor01_OnBlueFeather,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x02_L019,pAIScripting0x02_Town_Actor01_Talk,medium,Jump target of AICMD0x1F (conversation handler)
+pAIScripting0x02_L021,pAIScripting0x02_Town_Actor01_Say_0044,medium,Short block that shows dialog $0044 and ends/jumps
+pAIScripting0x02_L022,pAIScripting0x02_Town_Actor01_Say_0392,medium,Short block that shows dialog $0392 and ends/jumps
+pAIScripting0x02_L025,pAIScripting0x02_Town_Actor02_2_OnBlueFeather,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x02_L026,pAIScripting0x02_Town_Actor02_2_OnItemOffered,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x02_L027,pAIScripting0x02_Town_Actor02_2_Say_03B9,medium,Short block that shows dialog $03B9 and ends/jumps
+pAIScripting0x02_L028,pAIScripting0x02_Town_Actor02_2_OnInteract,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x02_L030,pAIScripting0x02_Town_Actor02_2_Say_0049,medium,Short block that shows dialog $0049 and ends/jumps
+pAIScripting0x02_L033,pAIScripting0x02_Town_Actor02_OnBlueFeather,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x02_L034,pAIScripting0x02_Town_Actor02_Talk,medium,Jump target of AICMD0x1F (conversation handler)
+pAIScripting0x02_L036,pAIScripting0x02_Town_Actor02_Say_004A,medium,Short block that shows dialog $004A and ends/jumps
+pAIScripting0x02_L037,pAIScripting0x02_Town_Actor02_Say_0391,medium,Short block that shows dialog $0391 and ends/jumps
+pAIScripting0x02_L040,pAIScripting0x02_Town_Actor03_OnBlueFeather,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x02_L041,pAIScripting0x02_Town_Actor03_OnItemOffered,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x02_L042,pAIScripting0x02_Town_Actor03_Say_03BB,medium,Short block that shows dialog $03BB and ends/jumps
+pAIScripting0x02_L043,pAIScripting0x02_Town_Actor03_OnInteract,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x02_L045,pAIScripting0x02_Town_Actor03_Say_004F,medium,Short block that shows dialog $004F and ends/jumps
+pAIScripting0x02_L046,pAIScripting0x02_Town_Actor03_Say_0392,medium,Short block that shows dialog $0392 and ends/jumps
+pAIScripting0x02_L047,pAIScripting0x02_Town_Actor03_Say_01ED,medium,Short block that shows dialog $01ED and ends/jumps
+pAIScripting0x02_L050,pAIScripting0x02_Town_Actor04_OnBlueFeather,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x02_L051,pAIScripting0x02_Town_Actor04_OnItemOffered,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x02_L052,pAIScripting0x02_Town_Actor04_Say_03B8,medium,Short block that shows dialog $03B8 and ends/jumps
+pAIScripting0x02_L053,pAIScripting0x02_Town_Actor04_OnInteract,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x02_L056,pAIScripting0x02_Town_Actor04_Say_006D,medium,Short block that shows dialog $006D and ends/jumps
+pAIScripting0x02_L057,pAIScripting0x02_Town_Actor04_Say_0392,medium,Short block that shows dialog $0392 and ends/jumps
+pAIScripting0x02_L058,pAIScripting0x02_Town_Actor04_Say_01D0,medium,Short block that shows dialog $01D0 and ends/jumps
+pAIScripting0x02_L061,pAIScripting0x02_Town_Actor05_OnBlueFeather,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x02_L062,pAIScripting0x02_Town_Actor05_OnItemOffered,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x02_L063,pAIScripting0x02_Town_Actor05_Say_03BA,medium,Short block that shows dialog $03BA and ends/jumps
+pAIScripting0x02_L064,pAIScripting0x02_Town_Actor05_OnInteract,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x02_L067,pAIScripting0x02_Town_Actor05_Say_0067,medium,Short block that shows dialog $0067 and ends/jumps
+pAIScripting0x02_L068,pAIScripting0x02_Town_Actor05_Say_0391,medium,Short block that shows dialog $0391 and ends/jumps
+pAIScripting0x02_L072,pAIScripting0x02_Town_Actor06_Ann_OnBlueFeather,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x02_L073,pAIScripting0x02_Town_Actor06_Ann_Say_0176,medium,Short block that shows dialog $0176 and ends/jumps
+pAIScripting0x02_L074,pAIScripting0x02_Town_Actor06_Ann_OnItemOffered,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x02_L075,pAIScripting0x02_Town_Actor06_Ann_Say_03B4,medium,Short block that shows dialog $03B4 and ends/jumps
+pAIScripting0x02_L076,pAIScripting0x02_Town_Actor06_Ann_Say_03B2,medium,Short block that shows dialog $03B2 and ends/jumps
+pAIScripting0x02_L077,pAIScripting0x02_Town_Actor06_Ann_Say_0212,medium,Short block that shows dialog $0212 and ends/jumps
+pAIScripting0x02_L078,pAIScripting0x02_Town_Actor06_Ann_Say_03B4_2,medium,Short block that shows dialog $03B4 and ends/jumps
+pAIScripting0x02_L080,pAIScripting0x02_Town_Actor06_Ann_WaitInteract,high,"Polls AICMD0x2D (player presses A, with or without item) and loops"
+pAIScripting0x02_L081,pAIScripting0x02_Town_Actor06_Ann_WaitTalk,high,Polls AICMD0x1F (player talks to the NPC) and loops
+pAIScripting0x02_L082,pAIScripting0x02_Town_Actor06_Ann_WaitTalk_2,high,Polls AICMD0x1F (player talks to the NPC) and loops
+pAIScripting0x02_L083,pAIScripting0x02_Town_Actor06_Ann_OnInteract,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x02_L085,pAIScripting0x02_Town_Actor06_Ann_Talk,medium,Jump target of AICMD0x1F (conversation handler)
+pAIScripting0x02_L086,pAIScripting0x02_Town_Actor06_Ann_Say_00A5,medium,Short block that shows dialog $00A5 and ends/jumps
+pAIScripting0x02_L087,pAIScripting0x02_Town_Actor06_Ann_Say_00A6,medium,Short block that shows dialog $00A6 and ends/jumps
+pAIScripting0x02_L088,pAIScripting0x02_Town_Actor06_Ann_Say_00A7,medium,Short block that shows dialog $00A7 and ends/jumps
+pAIScripting0x02_L089,pAIScripting0x02_Town_Actor06_Ann_Say_00A8,medium,Short block that shows dialog $00A8 and ends/jumps
+pAIScripting0x02_L090,pAIScripting0x02_Town_Actor06_Ann_Say_00AA,medium,Short block that shows dialog $00AA and ends/jumps
+pAIScripting0x02_L091,pAIScripting0x02_Town_Actor06_Ann_OnItemOffered_2,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x02_L092,pAIScripting0x02_Town_Actor06_Ann_Say_03B4_3,medium,Short block that shows dialog $03B4 and ends/jumps
+pAIScripting0x02_L093,pAIScripting0x02_Town_Actor06_Ann_OnInteract_2,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x02_L095,pAIScripting0x02_Town_Actor06_Ann_Say_00AD,medium,Short block that shows dialog $00AD and ends/jumps
+pAIScripting0x02_L096,pAIScripting0x02_Town_Actor06_Ann_Talk_026C,high,"Jump target of AICMD0x1F (conversation handler), first dialog $026C"
+pAIScripting0x02_L097,pAIScripting0x02_Town_Actor06_Ann_Talk_0099,high,"Jump target of AICMD0x1F (conversation handler), first dialog $0099"
+pAIScripting0x02_L098,pAIScripting0x02_Town_Actor06_Ann_Say_0391,medium,Short block that shows dialog $0391 and ends/jumps
+pAIScripting0x02_L099,pAIScripting0x02_Town_Actor06_Ann_Say_01DE,medium,Short block that shows dialog $01DE and ends/jumps
+pAIScripting0x02_L101,pAIScripting0x02_Town_Actor06_Ann_Actor09_Idle,high,Wait + jump to itself (idle loop)
+pAIScripting0x02_L106,pAIScripting0x02_Town_Actor07_Ellen_OnBlueFeather,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x02_L107,pAIScripting0x02_Town_Actor07_Ellen_Say_017A,medium,Short block that shows dialog $017A and ends/jumps
+pAIScripting0x02_L108,pAIScripting0x02_Town_Actor07_Ellen_OnItemOffered,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x02_L109,pAIScripting0x02_Town_Actor07_Ellen_Say_03B0,medium,Short block that shows dialog $03B0 and ends/jumps
+pAIScripting0x02_L110,pAIScripting0x02_Town_Actor07_Ellen_Say_03B2,medium,Short block that shows dialog $03B2 and ends/jumps
+pAIScripting0x02_L111,pAIScripting0x02_Town_Actor07_Ellen_Say_03B3,medium,Short block that shows dialog $03B3 and ends/jumps
+pAIScripting0x02_L112,pAIScripting0x02_Town_Actor07_Ellen_Say_0212,medium,Short block that shows dialog $0212 and ends/jumps
+pAIScripting0x02_L113,pAIScripting0x02_Town_Actor07_Ellen_Say_01DA,medium,Short block that shows dialog $01DA and ends/jumps
+pAIScripting0x02_L114,pAIScripting0x02_Town_Actor07_Ellen_OnInteract,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x02_L116,pAIScripting0x02_Town_Actor07_Ellen_Say_00D2,medium,Short block that shows dialog $00D2 and ends/jumps
+pAIScripting0x02_L117,pAIScripting0x02_Town_Actor07_Ellen_Say_00D3,medium,Short block that shows dialog $00D3 and ends/jumps
+pAIScripting0x02_L118,pAIScripting0x02_Town_Actor07_Ellen_Say_00D4,medium,Short block that shows dialog $00D4 and ends/jumps
+pAIScripting0x02_L119,pAIScripting0x02_Town_Actor07_Ellen_OnInteract_2,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x02_L120,pAIScripting0x02_Town_Actor07_Ellen_Say_00D8,medium,Short block that shows dialog $00D8 and ends/jumps
+pAIScripting0x02_L123,pAIScripting0x02_Town_Actor07_Ellen_Say_025B,medium,Short block that shows dialog $025B and ends/jumps
+pAIScripting0x02_L124,pAIScripting0x02_Town_Actor07_Ellen_Talk_00DB,high,"Jump target of AICMD0x1F (conversation handler), first dialog $00DB"
+pAIScripting0x02_L125,pAIScripting0x02_Town_Actor07_Ellen_Say_0391,medium,Short block that shows dialog $0391 and ends/jumps
+pAIScripting0x02_L126,pAIScripting0x02_Town_Actor07_Ellen_Say_01EE,medium,Short block that shows dialog $01EE and ends/jumps
+pAIScripting0x02_L128,pAIScripting0x02_MajorHouse_Idle,high,Wait + jump to itself (idle loop)
+pAIScripting0x02_L131,pAIScripting0x02_MajorHouse_Actor01_OnBlueFeather,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x02_L132,pAIScripting0x02_MajorHouse_Actor01_OnItemOffered,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x02_L133,pAIScripting0x02_MajorHouse_Actor01_Say_03B8,medium,Short block that shows dialog $03B8 and ends/jumps
+pAIScripting0x02_L134,pAIScripting0x02_MajorHouse_Actor01_OnInteract,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x02_L135,pAIScripting0x02_MajorHouse_Actor01_Say_01CD,medium,Short block that shows dialog $01CD and ends/jumps
+pAIScripting0x02_L138,pAIScripting0x02_MajorHouse_Actor02_OnBlueFeather,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x02_L139,pAIScripting0x02_MajorHouse_Actor02_OnItemOffered,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x02_L140,pAIScripting0x02_MajorHouse_Actor02_Say_03B9,medium,Short block that shows dialog $03B9 and ends/jumps
+pAIScripting0x02_L141,pAIScripting0x02_MajorHouse_Actor02_OnInteract,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x02_L142,pAIScripting0x02_MajorHouse_Actor02_Say_01CE,medium,Short block that shows dialog $01CE and ends/jumps
+pAIScripting0x02_L143,pAIScripting0x02_Church_Idle,high,Wait + jump to itself (idle loop)
+pAIScripting0x02_L148,pAIScripting0x02_Church_Actor01_OnBlueFeather,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x02_L149,pAIScripting0x02_Church_Actor01_OnItemOffered,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x02_L150,pAIScripting0x02_Church_Actor01_Say_03B0,medium,Short block that shows dialog $03B0 and ends/jumps
+pAIScripting0x02_L151,pAIScripting0x02_Church_Actor01_OnInteract,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x02_L152,pAIScripting0x02_Church_Actor01_Say_01CF,medium,Short block that shows dialog $01CF and ends/jumps
+pAIScripting0x02_L155,pAIScripting0x02_Church_Actor02_OnBlueFeather,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x02_L156,pAIScripting0x02_Church_Actor02_OnItemOffered,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x02_L157,pAIScripting0x02_Church_Actor02_Say_03BB,medium,Short block that shows dialog $03BB and ends/jumps
+pAIScripting0x02_L158,pAIScripting0x02_Church_Actor02_OnInteract,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x02_L159,pAIScripting0x02_Church_Actor02_Say_01D1,medium,Short block that shows dialog $01D1 and ends/jumps
+pAIScripting0x02_L160,pAIScripting0x02_Church_Actor02_Say_01DD,medium,Short block that shows dialog $01DD and ends/jumps
+pAIScripting0x02_L161,pAIScripting0x02_Church_Actor02_Say_01E6,medium,Short block that shows dialog $01E6 and ends/jumps
+pAIScripting0x02_L162,pAIScripting0x02_Church_Actor02_Say_01EF,medium,Short block that shows dialog $01EF and ends/jumps
+pAIScripting0x02_L166,pAIScripting0x02_Church_Actor03_Maria_OnBlueFeather,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x02_L167,pAIScripting0x02_Church_Actor03_Maria_Say_0174,medium,Short block that shows dialog $0174 and ends/jumps
+pAIScripting0x02_L168,pAIScripting0x02_Church_Actor03_Maria_OnItemOffered,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x02_L169,pAIScripting0x02_Church_Actor03_Maria_Say_03B0,medium,Short block that shows dialog $03B0 and ends/jumps
+pAIScripting0x02_L170,pAIScripting0x02_Church_Actor03_Maria_Say_0212,medium,Short block that shows dialog $0212 and ends/jumps
+pAIScripting0x02_L171,pAIScripting0x02_Church_Actor03_Maria_Say_03B5,medium,Short block that shows dialog $03B5 and ends/jumps
+pAIScripting0x02_L172,pAIScripting0x02_Church_Actor03_Maria_Say_03B2,medium,Short block that shows dialog $03B2 and ends/jumps
+pAIScripting0x02_L173,pAIScripting0x02_Church_Actor03_Maria_Say_01DA,medium,Short block that shows dialog $01DA and ends/jumps
+pAIScripting0x02_L174,pAIScripting0x02_Church_Actor03_Maria_OnInteract,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x02_L175,pAIScripting0x02_Church_Actor03_Maria_Say_0092,medium,Short block that shows dialog $0092 and ends/jumps
+pAIScripting0x02_L176,pAIScripting0x02_Church_Actor03_Maria_Say_0093,medium,Short block that shows dialog $0093 and ends/jumps
+pAIScripting0x02_L177,pAIScripting0x02_Church_Actor03_Maria_Say_0094,medium,Short block that shows dialog $0094 and ends/jumps
+pAIScripting0x02_L178,pAIScripting0x02_Church_Actor03_Maria_Say_0095,medium,Short block that shows dialog $0095 and ends/jumps
+pAIScripting0x02_L179,pAIScripting0x02_Church_Actor03_Maria_OnInteract_2,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x02_L180,pAIScripting0x02_Woods_Idle,high,Wait + jump to itself (idle loop)
+pAIScripting0x02_L186,pAIScripting0x02_Woods_Actor01_OnBlueFeather,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x02_L187,pAIScripting0x02_Woods_Actor01_OnItemOffered,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x02_L188,pAIScripting0x02_Woods_Actor01_Say_03B8,medium,Short block that shows dialog $03B8 and ends/jumps
+pAIScripting0x02_L189,pAIScripting0x02_Woods_Actor01_OnInteract,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x02_L191,pAIScripting0x02_Woods_Actor01_Say_0080,medium,Short block that shows dialog $0080 and ends/jumps
+pAIScripting0x02_L192,pAIScripting0x02_Woods_Actor01_OnInteract_2,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x02_L193,pAIScripting0x02_Woods_Actor01_Say_0392,medium,Short block that shows dialog $0392 and ends/jumps
+pAIScripting0x02_L197,pAIScripting0x02_Woods_Actor02_OnBlueFeather,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x02_L198,pAIScripting0x02_Woods_Actor02_OnItemOffered,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x02_L199,pAIScripting0x02_Woods_Actor02_Say_0049,medium,Short block that shows dialog $0049 and ends/jumps
+pAIScripting0x02_L200,pAIScripting0x02_Woods_Actor02_OnInteract,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x02_L205,pAIScripting0x02_Woods_Actor03_Eve_OnBlueFeather,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x02_L206,pAIScripting0x02_Woods_Actor03_Eve_Say_017C,medium,Short block that shows dialog $017C and ends/jumps
+pAIScripting0x02_L207,pAIScripting0x02_Woods_Actor03_Eve_OnItemOffered,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x02_L208,pAIScripting0x02_Woods_Actor03_Eve_Say_03B4,medium,Short block that shows dialog $03B4 and ends/jumps
+pAIScripting0x02_L209,pAIScripting0x02_Woods_Actor03_Eve_Say_03B2,medium,Short block that shows dialog $03B2 and ends/jumps
+pAIScripting0x02_L210,pAIScripting0x02_Woods_Actor03_Eve_Say_0212,medium,Short block that shows dialog $0212 and ends/jumps
+pAIScripting0x02_L211,pAIScripting0x02_Woods_Actor03_Eve_Say_03BA,medium,Short block that shows dialog $03BA and ends/jumps
+pAIScripting0x02_L212,pAIScripting0x02_Woods_Actor03_Eve_OnInteract,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x02_L213,pAIScripting0x02_Woods_Actor03_Eve_Say_00DD,medium,Short block that shows dialog $00DD and ends/jumps
+pAIScripting0x02_L214,pAIScripting0x02_Woods_Actor03_Eve_Say_00DE,medium,Short block that shows dialog $00DE and ends/jumps
+pAIScripting0x02_L215,pAIScripting0x02_Woods_Actor03_Eve_OnInteract_2,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x02_L217,pAIScripting0x02_Mine_Idle,high,Wait + jump to itself (idle loop)
+pAIScripting0x02_L224,pAIScripting0x02_Mine_Actor01_Nina_OnBlueFeather,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x02_L225,pAIScripting0x02_Mine_Actor01_Nina_Say_0178,medium,Short block that shows dialog $0178 and ends/jumps
+pAIScripting0x02_L226,pAIScripting0x02_Mine_Actor01_Nina_OnItemOffered,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x02_L227,pAIScripting0x02_Mine_Actor01_Nina_Say_03B2,medium,Short block that shows dialog $03B2 and ends/jumps
+pAIScripting0x02_L228,pAIScripting0x02_Mine_Actor01_Nina_Say_0212,medium,Short block that shows dialog $0212 and ends/jumps
+pAIScripting0x02_L229,pAIScripting0x02_Mine_Actor01_Nina_Say_03B1,medium,Short block that shows dialog $03B1 and ends/jumps
+pAIScripting0x02_L230,pAIScripting0x02_Mine_Actor01_Nina_Say_01D9,medium,Short block that shows dialog $01D9 and ends/jumps
+pAIScripting0x02_L231,pAIScripting0x02_Mine_Actor01_Nina_Say_0143,medium,Short block that shows dialog $0143 and ends/jumps
+pAIScripting0x02_L232,pAIScripting0x02_Mine_Actor01_Nina_OnInteract,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x02_L233,pAIScripting0x02_Mine_Actor01_Nina_Say_040C,medium,Short block that shows dialog $040C and ends/jumps
+pAIScripting0x02_L234,pAIScripting0x02_Mine_Actor01_Nina_Say_040D,medium,Short block that shows dialog $040D and ends/jumps
+pAIScripting0x02_L235,pAIScripting0x02_Mine_Actor01_Nina_Talk_040E,high,"Jump target of AICMD0x1F (conversation handler), first dialog $040E"
+pAIScripting0x02_L236,pAIScripting0x02_Mine_Actor01_Nina_Say_00C1,medium,Short block that shows dialog $00C1 and ends/jumps
+pAIScripting0x02_L237,pAIScripting0x02_Mine_Actor01_Nina_Say_00C2,medium,Short block that shows dialog $00C2 and ends/jumps
+pAIScripting0x02_L238,pAIScripting0x02_Mine_Actor01_Nina_Say_00C3,medium,Short block that shows dialog $00C3 and ends/jumps
+pAIScripting0x02_L239,pAIScripting0x02_Mine_Actor01_Nina_Say_00C4,medium,Short block that shows dialog $00C4 and ends/jumps
+pAIScripting0x02_L240,pAIScripting0x02_Mine_Actor01_Nina_Talk_00B1,high,"Jump target of AICMD0x1F (conversation handler), first dialog $00B1"
+pAIScripting0x03_Data01,pAIScripting0x03_Town,high,AI slot entry named after the caller (fAreaEvents_Town)
+pAIScripting0x03_Data02,pAIScripting0x03_Church,high,AI slot entry named after the caller (fAreaEvents_Church)
+pAIScripting0x03_Data03,pAIScripting0x03_Woods,high,AI slot entry named after the caller (fAreaEvents_Woods)
+pAIScripting0x03_L011,pAIScripting0x03_Town_Actor01,medium,"Target of AICMD0x09_StartScript (child script, AI slot $01)"
+pAIScripting0x03_L024,pAIScripting0x03_Town_Actor02,medium,"Target of AICMD0x09_StartScript (child script, AI slot $02)"
+pAIScripting0x03_L032,pAIScripting0x03_Town_Actor03,medium,"Target of AICMD0x09_StartScript (child script, AI slot $03)"
+pAIScripting0x03_L040,pAIScripting0x03_Town_Actor04,medium,"Target of AICMD0x09_StartScript (child script, AI slot $04)"
+pAIScripting0x03_L050,pAIScripting0x03_Town_Actor05,medium,"Target of AICMD0x09_StartScript (child script, AI slot $05)"
+pAIScripting0x03_L004,pAIScripting0x03_Town_Actor06,medium,"Target of AICMD0x09_StartScript (child script, AI slot $06)"
+pAIScripting0x03_L065,pAIScripting0x03_Church_Actor01,medium,"Target of AICMD0x09_StartScript (child script, AI slot $01)"
+pAIScripting0x03_L072,pAIScripting0x03_Church_Actor02,medium,"Target of AICMD0x09_StartScript (child script, AI slot $02)"
+pAIScripting0x03_L079,pAIScripting0x03_Church_Actor03,medium,"Target of AICMD0x09_StartScript (child script, AI slot $03)"
+pAIScripting0x03_L086,pAIScripting0x03_Church_Actor04,medium,"Target of AICMD0x09_StartScript (child script, AI slot $04)"
+pAIScripting0x03_L093,pAIScripting0x03_Church_Actor05,medium,"Target of AICMD0x09_StartScript (child script, AI slot $05)"
+pAIScripting0x03_L099,pAIScripting0x03_Church_Actor06,medium,"Target of AICMD0x09_StartScript (child script, AI slot $06)"
+pAIScripting0x03_L106,pAIScripting0x03_Church_Actor09_Maria,high,"Target of AICMD0x09_StartScript (child script, AI slot $09); sprite table of Maria"
+pAIScripting0x03_L121,pAIScripting0x03_Church_Actor0A_Ann,high,"Target of AICMD0x09_StartScript (child script, AI slot $0A); sprite table of Ann"
+pAIScripting0x03_L136,pAIScripting0x03_Church_Actor0B_Ellen,high,"Target of AICMD0x09_StartScript (child script, AI slot $0B); sprite table of Ellen"
+pAIScripting0x03_L199,pAIScripting0x03_Woods_Actor01,medium,"Target of AICMD0x09_StartScript (child script, AI slot $01)"
+pAIScripting0x03_L152,pAIScripting0x03_Woods_Actor02,medium,"Target of AICMD0x09_StartScript (child script, AI slot $02)"
+pAIScripting0x03_L160,pAIScripting0x03_Woods_Actor03_Eve,high,"Target of AICMD0x09_StartScript (child script, AI slot $03); sprite table of Eve"
+pAIScripting0x03_L171,pAIScripting0x03_Woods_Actor04_Nina,high,"Target of AICMD0x09_StartScript (child script, AI slot $04); sprite table of Nina"
+pAIScripting0x03_L005,pAIScripting0x03_Town_Actor06_WaitTalk,high,Polls AICMD0x1F (player talks to the NPC) and loops
+pAIScripting0x03_L006,pAIScripting0x03_Town_Actor06_Talk_01C3,high,"Jump target of AICMD0x1F (conversation handler), first dialog $01C3"
+pAIScripting0x03_L008,pAIScripting0x03_Town_Actor06_Say_01C5,medium,Short block that shows dialog $01C5 and ends/jumps
+pAIScripting0x03_L009,pAIScripting0x03_Town_Actor06_Say_02FF,medium,Short block that shows dialog $02FF and ends/jumps
+pAIScripting0x03_L013,pAIScripting0x03_Town_Actor01_OnBlueFeather,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x03_L014,pAIScripting0x03_Town_Actor01_OnItemOffered,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x03_L015,pAIScripting0x03_Town_Actor01_Say_03BB,medium,Short block that shows dialog $03BB and ends/jumps
+pAIScripting0x03_L016,pAIScripting0x03_Town_Actor01_OnInteract,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x03_L018,pAIScripting0x03_Town_Actor01_Say_0061,medium,Short block that shows dialog $0061 and ends/jumps
+pAIScripting0x03_L019,pAIScripting0x03_Town_Actor01_Say_0392,medium,Short block that shows dialog $0392 and ends/jumps
+pAIScripting0x03_L020,pAIScripting0x03_Town_Actor01_Say_01D1,medium,Short block that shows dialog $01D1 and ends/jumps
+pAIScripting0x03_L021,pAIScripting0x03_Town_Actor01_Say_01DD,medium,Short block that shows dialog $01DD and ends/jumps
+pAIScripting0x03_L022,pAIScripting0x03_Town_Actor01_Say_01E6,medium,Short block that shows dialog $01E6 and ends/jumps
+pAIScripting0x03_L023,pAIScripting0x03_Town_Actor01_Say_01EF,medium,Short block that shows dialog $01EF and ends/jumps
+pAIScripting0x03_L026,pAIScripting0x03_Town_Actor02_OnBlueFeather,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x03_L027,pAIScripting0x03_Town_Actor02_OnItemOffered,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x03_L028,pAIScripting0x03_Town_Actor02_OnInteract,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x03_L030,pAIScripting0x03_Town_Actor02_Say_0078,medium,Short block that shows dialog $0078 and ends/jumps
+pAIScripting0x03_L031,pAIScripting0x03_Town_Actor02_Say_0081,medium,Short block that shows dialog $0081 and ends/jumps
+pAIScripting0x03_L034,pAIScripting0x03_Town_Actor03_OnBlueFeather,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x03_L035,pAIScripting0x03_Town_Actor03_OnItemOffered,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x03_L036,pAIScripting0x03_Town_Actor03_OnInteract,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x03_L038,pAIScripting0x03_Town_Actor03_Say_0053,medium,Short block that shows dialog $0053 and ends/jumps
+pAIScripting0x03_L039,pAIScripting0x03_Town_Actor03_Say_0051,medium,Short block that shows dialog $0051 and ends/jumps
+pAIScripting0x03_L042,pAIScripting0x03_Town_Actor04_OnBlueFeather,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x03_L043,pAIScripting0x03_Town_Actor04_OnItemOffered,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x03_L044,pAIScripting0x03_Town_Actor04_Say_03B8,medium,Short block that shows dialog $03B8 and ends/jumps
+pAIScripting0x03_L045,pAIScripting0x03_Town_Actor04_OnInteract,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x03_L048,pAIScripting0x03_Town_Actor04_Say_0075,medium,Short block that shows dialog $0075 and ends/jumps
+pAIScripting0x03_L049,pAIScripting0x03_Town_Actor04_Say_0392,medium,Short block that shows dialog $0392 and ends/jumps
+pAIScripting0x03_L052,pAIScripting0x03_Town_Actor05_OnBlueFeather,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x03_L053,pAIScripting0x03_Town_Actor05_OnItemOffered,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x03_L054,pAIScripting0x03_Town_Actor05_Say_03BB,medium,Short block that shows dialog $03BB and ends/jumps
+pAIScripting0x03_L056,pAIScripting0x03_Town_Actor05_OnInteract,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x03_L057,pAIScripting0x03_Town_Actor05_Say_005D,medium,Short block that shows dialog $005D and ends/jumps
+pAIScripting0x03_L060,pAIScripting0x03_Church_Idle,high,Wait + jump to itself (idle loop)
+pAIScripting0x03_L067,pAIScripting0x03_Church_Actor01_OnBlueFeather,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x03_L068,pAIScripting0x03_Church_Actor01_OnItemOffered,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x03_L069,pAIScripting0x03_Church_Actor01_Say_03B0,medium,Short block that shows dialog $03B0 and ends/jumps
+pAIScripting0x03_L070,pAIScripting0x03_Church_Actor01_OnInteract,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x03_L071,pAIScripting0x03_Church_Actor01_Say_01CF,medium,Short block that shows dialog $01CF and ends/jumps
+pAIScripting0x03_L074,pAIScripting0x03_Church_Actor02_OnBlueFeather,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x03_L075,pAIScripting0x03_Church_Actor02_OnItemOffered,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x03_L076,pAIScripting0x03_Church_Actor02_Say_03B8,medium,Short block that shows dialog $03B8 and ends/jumps
+pAIScripting0x03_L077,pAIScripting0x03_Church_Actor02_OnInteract,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x03_L078,pAIScripting0x03_Church_Actor02_Say_01CD,medium,Short block that shows dialog $01CD and ends/jumps
+pAIScripting0x03_L081,pAIScripting0x03_Church_Actor03_OnBlueFeather,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x03_L082,pAIScripting0x03_Church_Actor03_OnItemOffered,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x03_L083,pAIScripting0x03_Church_Actor03_Say_03B9,medium,Short block that shows dialog $03B9 and ends/jumps
+pAIScripting0x03_L084,pAIScripting0x03_Church_Actor03_OnInteract,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x03_L085,pAIScripting0x03_Church_Actor03_Say_01CE,medium,Short block that shows dialog $01CE and ends/jumps
+pAIScripting0x03_L088,pAIScripting0x03_Church_Actor04_OnBlueFeather,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x03_L089,pAIScripting0x03_Church_Actor04_OnItemOffered,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x03_L090,pAIScripting0x03_Church_Actor04_Say_0049,medium,Short block that shows dialog $0049 and ends/jumps
+pAIScripting0x03_L091,pAIScripting0x03_Church_Actor04_OnInteract,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x03_L092,pAIScripting0x03_Church_Actor04_Say_01DC,medium,Short block that shows dialog $01DC and ends/jumps
+pAIScripting0x03_L095,pAIScripting0x03_Church_Actor05_OnBlueFeather,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x03_L096,pAIScripting0x03_Church_Actor05_OnItemOffered,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x03_L097,pAIScripting0x03_Church_Actor05_Say_03B9,medium,Short block that shows dialog $03B9 and ends/jumps
+pAIScripting0x03_L098,pAIScripting0x03_Church_Actor05_OnInteract,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x03_L101,pAIScripting0x03_Church_Actor06_OnBlueFeather,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x03_L102,pAIScripting0x03_Church_Actor06_OnItemOffered,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x03_L103,pAIScripting0x03_Church_Actor06_Say_03BB,medium,Short block that shows dialog $03BB and ends/jumps
+pAIScripting0x03_L104,pAIScripting0x03_Church_Actor06_OnInteract,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x03_L105,pAIScripting0x03_Church_Actor06_Say_01ED,medium,Short block that shows dialog $01ED and ends/jumps
+pAIScripting0x03_L109,pAIScripting0x03_Church_Actor09_Maria_OnBlueFeather,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x03_L110,pAIScripting0x03_Church_Actor09_Maria_Say_0174,medium,Short block that shows dialog $0174 and ends/jumps
+pAIScripting0x03_L111,pAIScripting0x03_Church_Actor09_Maria_OnItemOffered,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x03_L112,pAIScripting0x03_Church_Actor09_Maria_Say_03B0,medium,Short block that shows dialog $03B0 and ends/jumps
+pAIScripting0x03_L113,pAIScripting0x03_Church_Actor09_Maria_Say_0212,medium,Short block that shows dialog $0212 and ends/jumps
+pAIScripting0x03_L114,pAIScripting0x03_Church_Actor09_Maria_Say_03B5,medium,Short block that shows dialog $03B5 and ends/jumps
+pAIScripting0x03_L115,pAIScripting0x03_Church_Actor09_Maria_Say_03B2,medium,Short block that shows dialog $03B2 and ends/jumps
+pAIScripting0x03_L116,pAIScripting0x03_Church_Actor09_Maria_Say_01DA,medium,Short block that shows dialog $01DA and ends/jumps
+pAIScripting0x03_L117,pAIScripting0x03_Church_Actor09_Maria_OnInteract,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x03_L118,pAIScripting0x03_Church_Actor09_Maria_Say_008F,medium,Short block that shows dialog $008F and ends/jumps
+pAIScripting0x03_L119,pAIScripting0x03_Church_Actor09_Maria_Say_0090,medium,Short block that shows dialog $0090 and ends/jumps
+pAIScripting0x03_L120,pAIScripting0x03_Church_Actor09_Maria_Talk_0088,high,"Jump target of AICMD0x1F (conversation handler), first dialog $0088"
+pAIScripting0x03_L124,pAIScripting0x03_Church_Actor0A_Ann_OnBlueFeather,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x03_L125,pAIScripting0x03_Church_Actor0A_Ann_Say_0176,medium,Short block that shows dialog $0176 and ends/jumps
+pAIScripting0x03_L126,pAIScripting0x03_Church_Actor0A_Ann_OnItemOffered,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x03_L127,pAIScripting0x03_Church_Actor0A_Ann_Say_03B4,medium,Short block that shows dialog $03B4 and ends/jumps
+pAIScripting0x03_L128,pAIScripting0x03_Church_Actor0A_Ann_Say_03B2,medium,Short block that shows dialog $03B2 and ends/jumps
+pAIScripting0x03_L129,pAIScripting0x03_Church_Actor0A_Ann_Say_0212,medium,Short block that shows dialog $0212 and ends/jumps
+pAIScripting0x03_L130,pAIScripting0x03_Church_Actor0A_Ann_Say_03B4_2,medium,Short block that shows dialog $03B4 and ends/jumps
+pAIScripting0x03_L131,pAIScripting0x03_Church_Actor0A_Ann_OnInteract,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x03_L132,pAIScripting0x03_Church_Actor0A_Ann_Say_00A3,medium,Short block that shows dialog $00A3 and ends/jumps
+pAIScripting0x03_L133,pAIScripting0x03_Church_Actor0A_Ann_Say_00A4,medium,Short block that shows dialog $00A4 and ends/jumps
+pAIScripting0x03_L134,pAIScripting0x03_Church_Actor0A_Ann_Talk_02C2,high,"Jump target of AICMD0x1F (conversation handler), first dialog $02C2"
+pAIScripting0x03_L135,pAIScripting0x03_Church_Actor0A_Ann_Say_01DE,medium,Short block that shows dialog $01DE and ends/jumps
+pAIScripting0x03_L138,pAIScripting0x03_Church_Actor0B_Ellen_OnBlueFeather,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x03_L139,pAIScripting0x03_Church_Actor0B_Ellen_Say_017A,medium,Short block that shows dialog $017A and ends/jumps
+pAIScripting0x03_L140,pAIScripting0x03_Church_Actor0B_Ellen_OnItemOffered,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x03_L141,pAIScripting0x03_Church_Actor0B_Ellen_Say_03B0,medium,Short block that shows dialog $03B0 and ends/jumps
+pAIScripting0x03_L142,pAIScripting0x03_Church_Actor0B_Ellen_Say_03B2,medium,Short block that shows dialog $03B2 and ends/jumps
+pAIScripting0x03_L143,pAIScripting0x03_Church_Actor0B_Ellen_Say_03B3,medium,Short block that shows dialog $03B3 and ends/jumps
+pAIScripting0x03_L144,pAIScripting0x03_Church_Actor0B_Ellen_Say_0212,medium,Short block that shows dialog $0212 and ends/jumps
+pAIScripting0x03_L145,pAIScripting0x03_Church_Actor0B_Ellen_Say_01DA,medium,Short block that shows dialog $01DA and ends/jumps
+pAIScripting0x03_L146,pAIScripting0x03_Church_Actor0B_Ellen_OnInteract,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x03_L147,pAIScripting0x03_Church_Actor0B_Ellen_Say_01EE,medium,Short block that shows dialog $01EE and ends/jumps
+pAIScripting0x03_L148,pAIScripting0x03_Woods_Idle,high,Wait + jump to itself (idle loop)
+pAIScripting0x03_L154,pAIScripting0x03_Woods_Actor02_OnBlueFeather,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x03_L155,pAIScripting0x03_Woods_Actor02_OnItemOffered,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x03_L156,pAIScripting0x03_Woods_Actor02_Say_0049,medium,Short block that shows dialog $0049 and ends/jumps
+pAIScripting0x03_L157,pAIScripting0x03_Woods_Actor02_OnInteract,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x03_L159,pAIScripting0x03_Woods_Actor02_Say_0392,medium,Short block that shows dialog $0392 and ends/jumps
+pAIScripting0x03_L161,pAIScripting0x03_Woods_Actor03_Eve_WaitTalk,high,Polls AICMD0x1F (player talks to the NPC) and loops
+pAIScripting0x03_L162,pAIScripting0x03_Woods_Actor03_Eve_WaitTalk_2,high,Polls AICMD0x1F (player talks to the NPC) and loops
+pAIScripting0x03_L163,pAIScripting0x03_Woods_Actor03_Eve_Talk,medium,Jump target of AICMD0x1F (conversation handler)
+pAIScripting0x03_L164,pAIScripting0x03_Woods_Actor03_Eve_Say_00E2,medium,Short block that shows dialog $00E2 and ends/jumps
+pAIScripting0x03_L165,pAIScripting0x03_Woods_Actor03_Eve_Say_00E3,medium,Short block that shows dialog $00E3 and ends/jumps
+pAIScripting0x03_L166,pAIScripting0x03_Woods_Actor03_Eve_Say_00E4,medium,Short block that shows dialog $00E4 and ends/jumps
+pAIScripting0x03_L167,pAIScripting0x03_Woods_Actor03_Eve_Talk_00DD,high,"Jump target of AICMD0x1F (conversation handler), first dialog $00DD"
+pAIScripting0x03_L168,pAIScripting0x03_Woods_Actor03_Eve_Say_040A,medium,Short block that shows dialog $040A and ends/jumps
+pAIScripting0x03_L169,pAIScripting0x03_Woods_Actor03_Eve_Say_040B,medium,Short block that shows dialog $040B and ends/jumps
+pAIScripting0x03_L175,pAIScripting0x03_Woods_Actor04_Nina_OnBlueFeather,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x03_L176,pAIScripting0x03_Woods_Actor04_Nina_Say_0178,medium,Short block that shows dialog $0178 and ends/jumps
+pAIScripting0x03_L177,pAIScripting0x03_Woods_Actor04_Nina_OnItemOffered,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x03_L178,pAIScripting0x03_Woods_Actor04_Nina_Say_03B2,medium,Short block that shows dialog $03B2 and ends/jumps
+pAIScripting0x03_L179,pAIScripting0x03_Woods_Actor04_Nina_Say_0212,medium,Short block that shows dialog $0212 and ends/jumps
+pAIScripting0x03_L180,pAIScripting0x03_Woods_Actor04_Nina_Say_03B1,medium,Short block that shows dialog $03B1 and ends/jumps
+pAIScripting0x03_L181,pAIScripting0x03_Woods_Actor04_Nina_Say_01D9,medium,Short block that shows dialog $01D9 and ends/jumps
+pAIScripting0x03_L182,pAIScripting0x03_Woods_Actor04_Nina_Say_0143,medium,Short block that shows dialog $0143 and ends/jumps
+pAIScripting0x03_L183,pAIScripting0x03_Woods_Actor04_Nina_OnInteract,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x03_L186,pAIScripting0x03_Woods_Actor04_Nina_Say_00B9,medium,Short block that shows dialog $00B9 and ends/jumps
+pAIScripting0x03_L187,pAIScripting0x03_Woods_Actor04_Nina_Say_00BA,medium,Short block that shows dialog $00BA and ends/jumps
+pAIScripting0x03_L188,pAIScripting0x03_Woods_Actor04_Nina_Say_00BB,medium,Short block that shows dialog $00BB and ends/jumps
+pAIScripting0x03_L189,pAIScripting0x03_Woods_Actor04_Nina_Say_00BC,medium,Short block that shows dialog $00BC and ends/jumps
+pAIScripting0x03_L190,pAIScripting0x03_Woods_Actor04_Nina_Say_00BD,medium,Short block that shows dialog $00BD and ends/jumps
+pAIScripting0x03_L191,pAIScripting0x03_Woods_Actor04_Nina_Say_00BE,medium,Short block that shows dialog $00BE and ends/jumps
+pAIScripting0x03_L192,pAIScripting0x03_Woods_Actor04_Nina_OnInteract_2,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x03_L193,pAIScripting0x03_Woods_Actor04_Nina_Say_00C1,medium,Short block that shows dialog $00C1 and ends/jumps
+pAIScripting0x03_L194,pAIScripting0x03_Woods_Actor04_Nina_Say_00C2,medium,Short block that shows dialog $00C2 and ends/jumps
+pAIScripting0x03_L195,pAIScripting0x03_Woods_Actor04_Nina_Say_00C3,medium,Short block that shows dialog $00C3 and ends/jumps
+pAIScripting0x03_L196,pAIScripting0x03_Woods_Actor04_Nina_Say_00C4,medium,Short block that shows dialog $00C4 and ends/jumps
+pAIScripting0x03_L197,pAIScripting0x03_Woods_Actor04_Nina_Talk_00B1,high,"Jump target of AICMD0x1F (conversation handler), first dialog $00B1"
+pAIScripting0x03_L198,pAIScripting0x03_Woods_Actor04_Nina_Say_0391,medium,Short block that shows dialog $0391 and ends/jumps
+pAIScripting0x03_L200,pAIScripting0x03_Woods_Actor01_WaitInteract,high,"Polls AICMD0x2D (player presses A, with or without item) and loops"
+pAIScripting0x03_L202,pAIScripting0x03_Woods_Actor01_OnBlueFeather,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x03_L203,pAIScripting0x03_Woods_Actor01_OnItemOffered,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x03_L204,pAIScripting0x03_Woods_Actor01_Say_03B8,medium,Short block that shows dialog $03B8 and ends/jumps
+pAIScripting0x03_L205,pAIScripting0x03_Woods_Actor01_OnInteract,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x03_L207,pAIScripting0x03_Woods_Actor01_Say_0080,medium,Short block that shows dialog $0080 and ends/jumps
+pAIScripting0x03_L208,pAIScripting0x03_Woods_Actor01_OnInteract_2,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x03_L209,pAIScripting0x03_Woods_Actor01_Say_0081,medium,Short block that shows dialog $0081 and ends/jumps
+pAIScripting0x04_Data01,pAIScripting0x04_MajorHouse,high,AI slot entry named after the caller (fAreaEvents_MajorHouse)
+pAIScripting0x04_Data02,pAIScripting0x04_Church,high,AI slot entry named after the caller (fAreaEvents_Church)
+pAIScripting0x04_Data03,pAIScripting0x04_Florist,high,AI slot entry named after the caller (fAreaEvents_Florist)
+pAIScripting0x04_Data04,pAIScripting0x04_Toolshop,high,AI slot entry named after the caller (fAreaEvents_Toolshop)
+pAIScripting0x04_Data05,pAIScripting0x04_Restaurant,high,AI slot entry named after the caller (fAreaEvents_Restaurant)
+pAIScripting0x04_Data06,pAIScripting0x04_FortuneTeller,high,AI slot entry named after the caller (fAreaEvents_FortuneTeller)
+pAIScripting0x04_Data07,pAIScripting0x04_AnimalShop,high,AI slot entry named after the caller (fAreaEvents_AnimalShop)
+pAIScripting0x04_Data08,pAIScripting0x04_WorksmanHouse,high,AI slot entry named after the caller (fAreaEvents_WorksmanHouse)
+pAIScripting0x04_L004,pAIScripting0x04_MajorHouse_Actor01,medium,"Target of AICMD0x09_StartScript (child script, AI slot $01)"
+pAIScripting0x04_L012,pAIScripting0x04_MajorHouse_Actor02,medium,"Target of AICMD0x09_StartScript (child script, AI slot $02)"
+pAIScripting0x04_L021,pAIScripting0x04_MajorHouse_Actor03_Maria,high,"Target of AICMD0x09_StartScript (child script, AI slot $03); sprite table of Maria"
+pAIScripting0x04_L033,pAIScripting0x04_Church_Actor01,medium,"Target of AICMD0x09_StartScript (child script, AI slot $01)"
+pAIScripting0x04_L043,pAIScripting0x04_Florist_Actor01,medium,"Target of AICMD0x09_StartScript (child script, AI slot $01)"
+pAIScripting0x04_L049,pAIScripting0x04_Florist_Actor02_Nina,high,"Target of AICMD0x09_StartScript (child script, AI slot $02); sprite table of Nina"
+pAIScripting0x04_L063,pAIScripting0x04_Toolshop_Actor01,medium,"Target of AICMD0x09_StartScript (child script, AI slot $01)"
+pAIScripting0x04_L070,pAIScripting0x04_Toolshop_Actor02_Ann,high,"Target of AICMD0x09_StartScript (child script, AI slot $02); sprite table of Ann"
+pAIScripting0x04_L086,pAIScripting0x04_Restaurant_Actor01,medium,"Target of AICMD0x09_StartScript (child script, AI slot $01)"
+pAIScripting0x04_L093,pAIScripting0x04_Restaurant_Actor02,medium,"Target of AICMD0x09_StartScript (child script, AI slot $02)"
+pAIScripting0x04_L084,pAIScripting0x04_Restaurant_Actor04,medium,"Target of AICMD0x09_StartScript (child script, AI slot $04)"
+pAIScripting0x04_L097,pAIScripting0x04_Restaurant_Actor03_Ellen,high,"Target of AICMD0x09_StartScript (child script, AI slot $03); sprite table of Ellen"
+pAIScripting0x04_L110,pAIScripting0x04_FortuneTeller_Actor01,medium,"Target of AICMD0x09_StartScript (child script, AI slot $01)"
+pAIScripting0x04_L120,pAIScripting0x04_FortuneTeller_Actor02,medium,"Target of AICMD0x09_StartScript (child script, AI slot $02)"
+pAIScripting0x04_L127,pAIScripting0x04_AnimalShop_Actor01,medium,"Target of AICMD0x09_StartScript (child script, AI slot $01)"
+pAIScripting0x04_L140,pAIScripting0x04_WorksmanHouse_Actor01,medium,"Target of AICMD0x09_StartScript (child script, AI slot $01)"
+pAIScripting0x04_L134,pAIScripting0x04_WorksmanHouse_Actor02,medium,"Target of AICMD0x09_StartScript (child script, AI slot $02)"
+pAIScripting0x04_L001,pAIScripting0x04_MajorHouse_Idle,high,Wait + jump to itself (idle loop)
+pAIScripting0x04_L006,pAIScripting0x04_MajorHouse_Actor01_OnBlueFeather,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x04_L007,pAIScripting0x04_MajorHouse_Actor01_OnItemOffered,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x04_L008,pAIScripting0x04_MajorHouse_Actor01_Say_03B8,medium,Short block that shows dialog $03B8 and ends/jumps
+pAIScripting0x04_L009,pAIScripting0x04_MajorHouse_Actor01_OnInteract,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x04_L010,pAIScripting0x04_MajorHouse_Actor01_Say_03BE,medium,Short block that shows dialog $03BE and ends/jumps
+pAIScripting0x04_L011,pAIScripting0x04_MajorHouse_Actor01_Say_01CD,medium,Short block that shows dialog $01CD and ends/jumps
+pAIScripting0x04_L014,pAIScripting0x04_MajorHouse_Actor02_OnBlueFeather,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x04_L015,pAIScripting0x04_MajorHouse_Actor02_OnItemOffered,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x04_L016,pAIScripting0x04_MajorHouse_Actor02_Say_03B9,medium,Short block that shows dialog $03B9 and ends/jumps
+pAIScripting0x04_L017,pAIScripting0x04_MajorHouse_Actor02_OnInteract,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x04_L018,pAIScripting0x04_MajorHouse_Actor02_Say_003E,medium,Short block that shows dialog $003E and ends/jumps
+pAIScripting0x04_L019,pAIScripting0x04_MajorHouse_Actor02_Say_003F,medium,Short block that shows dialog $003F and ends/jumps
+pAIScripting0x04_L020,pAIScripting0x04_MajorHouse_Actor02_Say_01CE,medium,Short block that shows dialog $01CE and ends/jumps
+pAIScripting0x04_L023,pAIScripting0x04_MajorHouse_Actor03_Maria_OnBlueFeather,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x04_L024,pAIScripting0x04_MajorHouse_Actor03_Maria_Say_0174,medium,Short block that shows dialog $0174 and ends/jumps
+pAIScripting0x04_L025,pAIScripting0x04_MajorHouse_Actor03_Maria_OnItemOffered,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x04_L026,pAIScripting0x04_MajorHouse_Actor03_Maria_Say_03B0,medium,Short block that shows dialog $03B0 and ends/jumps
+pAIScripting0x04_L027,pAIScripting0x04_MajorHouse_Actor03_Maria_Say_0212,medium,Short block that shows dialog $0212 and ends/jumps
+pAIScripting0x04_L028,pAIScripting0x04_MajorHouse_Actor03_Maria_Say_03B5,medium,Short block that shows dialog $03B5 and ends/jumps
+pAIScripting0x04_L029,pAIScripting0x04_MajorHouse_Actor03_Maria_Say_03B2,medium,Short block that shows dialog $03B2 and ends/jumps
+pAIScripting0x04_L030,pAIScripting0x04_MajorHouse_Actor03_Maria_Say_01D9,medium,Short block that shows dialog $01D9 and ends/jumps
+pAIScripting0x04_L031,pAIScripting0x04_MajorHouse_Actor03_Maria_OnInteract,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x04_L032,pAIScripting0x04_Church_Idle,high,Wait + jump to itself (idle loop)
+pAIScripting0x04_L035,pAIScripting0x04_Church_Actor01_OnBlueFeather,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x04_L036,pAIScripting0x04_Church_Actor01_OnItemOffered,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x04_L037,pAIScripting0x04_Church_Actor01_Say_03B0,medium,Short block that shows dialog $03B0 and ends/jumps
+pAIScripting0x04_L038,pAIScripting0x04_Church_Actor01_OnInteract,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x04_L039,pAIScripting0x04_Church_Actor01_Say_01CF,medium,Short block that shows dialog $01CF and ends/jumps
+pAIScripting0x04_L040,pAIScripting0x04_Florist_Idle,high,Wait + jump to itself (idle loop)
+pAIScripting0x04_L045,pAIScripting0x04_Florist_Actor01_OnBlueFeather,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x04_L046,pAIScripting0x04_Florist_Actor01_OnItemOffered,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x04_L047,pAIScripting0x04_Florist_Actor01_Say_03B9,medium,Short block that shows dialog $03B9 and ends/jumps
+pAIScripting0x04_L048,pAIScripting0x04_Florist_Actor01_OnInteract,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x04_L051,pAIScripting0x04_Florist_Actor02_Nina_OnBlueFeather,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x04_L052,pAIScripting0x04_Florist_Actor02_Nina_Say_0178,medium,Short block that shows dialog $0178 and ends/jumps
+pAIScripting0x04_L053,pAIScripting0x04_Florist_Actor02_Nina_OnItemOffered,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x04_L054,pAIScripting0x04_Florist_Actor02_Nina_Say_03B2,medium,Short block that shows dialog $03B2 and ends/jumps
+pAIScripting0x04_L055,pAIScripting0x04_Florist_Actor02_Nina_Say_0212,medium,Short block that shows dialog $0212 and ends/jumps
+pAIScripting0x04_L056,pAIScripting0x04_Florist_Actor02_Nina_Say_03B1,medium,Short block that shows dialog $03B1 and ends/jumps
+pAIScripting0x04_L057,pAIScripting0x04_Florist_Actor02_Nina_Say_01D9,medium,Short block that shows dialog $01D9 and ends/jumps
+pAIScripting0x04_L058,pAIScripting0x04_Florist_Actor02_Nina_Say_0143,medium,Short block that shows dialog $0143 and ends/jumps
+pAIScripting0x04_L059,pAIScripting0x04_Florist_Actor02_Nina_OnInteract,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x04_L060,pAIScripting0x04_Toolshop_Idle,high,Wait + jump to itself (idle loop)
+pAIScripting0x04_L065,pAIScripting0x04_Toolshop_Actor01_OnBlueFeather,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x04_L066,pAIScripting0x04_Toolshop_Actor01_OnItemOffered,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x04_L067,pAIScripting0x04_Toolshop_Actor01_Say_0049,medium,Short block that shows dialog $0049 and ends/jumps
+pAIScripting0x04_L068,pAIScripting0x04_Toolshop_Actor01_OnInteract,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x04_L069,pAIScripting0x04_Toolshop_Actor01_Say_01DC,medium,Short block that shows dialog $01DC and ends/jumps
+pAIScripting0x04_L072,pAIScripting0x04_Toolshop_Actor02_Ann_OnBlueFeather,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x04_L073,pAIScripting0x04_Toolshop_Actor02_Ann_Say_0176,medium,Short block that shows dialog $0176 and ends/jumps
+pAIScripting0x04_L074,pAIScripting0x04_Toolshop_Actor02_Ann_OnItemOffered,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x04_L075,pAIScripting0x04_Toolshop_Actor02_Ann_Say_03B4,medium,Short block that shows dialog $03B4 and ends/jumps
+pAIScripting0x04_L076,pAIScripting0x04_Toolshop_Actor02_Ann_Say_03B2,medium,Short block that shows dialog $03B2 and ends/jumps
+pAIScripting0x04_L077,pAIScripting0x04_Toolshop_Actor02_Ann_Say_0212,medium,Short block that shows dialog $0212 and ends/jumps
+pAIScripting0x04_L078,pAIScripting0x04_Toolshop_Actor02_Ann_Say_03B4_2,medium,Short block that shows dialog $03B4 and ends/jumps
+pAIScripting0x04_L079,pAIScripting0x04_Toolshop_Actor02_Ann_OnInteract,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x04_L080,pAIScripting0x04_Toolshop_Actor02_Ann_Say_01DE,medium,Short block that shows dialog $01DE and ends/jumps
+pAIScripting0x04_L081,pAIScripting0x04_Restaurant_Idle,high,Wait + jump to itself (idle loop)
+pAIScripting0x04_L085,pAIScripting0x04_Restaurant_Actor04_Idle,high,Wait + jump to itself (idle loop)
+pAIScripting0x04_L088,pAIScripting0x04_Restaurant_Actor01_OnBlueFeather,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x04_L089,pAIScripting0x04_Restaurant_Actor01_OnItemOffered,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x04_L090,pAIScripting0x04_Restaurant_Actor01_Say_03BB,medium,Short block that shows dialog $03BB and ends/jumps
+pAIScripting0x04_L091,pAIScripting0x04_Restaurant_Actor01_OnInteract,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x04_L092,pAIScripting0x04_Restaurant_Actor01_Say_01ED,medium,Short block that shows dialog $01ED and ends/jumps
+pAIScripting0x04_L094,pAIScripting0x04_Restaurant_Actor02_WaitInteract,high,"Polls AICMD0x2D (player presses A, with or without item) and loops"
+pAIScripting0x04_L095,pAIScripting0x04_Restaurant_Actor02_OnItemOffered,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x04_L096,pAIScripting0x04_Restaurant_Actor02_OnInteract,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x04_L099,pAIScripting0x04_Restaurant_Actor03_Ellen_OnBlueFeather,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x04_L100,pAIScripting0x04_Restaurant_Actor03_Ellen_Say_017A,medium,Short block that shows dialog $017A and ends/jumps
+pAIScripting0x04_L101,pAIScripting0x04_Restaurant_Actor03_Ellen_OnItemOffered,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x04_L102,pAIScripting0x04_Restaurant_Actor03_Ellen_Say_03B0,medium,Short block that shows dialog $03B0 and ends/jumps
+pAIScripting0x04_L103,pAIScripting0x04_Restaurant_Actor03_Ellen_Say_03B2,medium,Short block that shows dialog $03B2 and ends/jumps
+pAIScripting0x04_L104,pAIScripting0x04_Restaurant_Actor03_Ellen_Say_03B3,medium,Short block that shows dialog $03B3 and ends/jumps
+pAIScripting0x04_L105,pAIScripting0x04_Restaurant_Actor03_Ellen_Say_0212,medium,Short block that shows dialog $0212 and ends/jumps
+pAIScripting0x04_L106,pAIScripting0x04_Restaurant_Actor03_Ellen_Say_01DA,medium,Short block that shows dialog $01DA and ends/jumps
+pAIScripting0x04_L107,pAIScripting0x04_Restaurant_Actor03_Ellen_OnInteract,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x04_L108,pAIScripting0x04_Restaurant_Actor03_Ellen_Say_01EE,medium,Short block that shows dialog $01EE and ends/jumps
+pAIScripting0x04_L109,pAIScripting0x04_FortuneTeller_Idle,high,Wait + jump to itself (idle loop)
+pAIScripting0x04_L112,pAIScripting0x04_FortuneTeller_Actor01_OnBlueFeather,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x04_L113,pAIScripting0x04_FortuneTeller_Actor01_OnItemOffered,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x04_L114,pAIScripting0x04_FortuneTeller_Actor01_Say_03BB,medium,Short block that shows dialog $03BB and ends/jumps
+pAIScripting0x04_L115,pAIScripting0x04_FortuneTeller_Actor01_OnInteract,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x04_L116,pAIScripting0x04_FortuneTeller_Actor01_Say_01D1,medium,Short block that shows dialog $01D1 and ends/jumps
+pAIScripting0x04_L117,pAIScripting0x04_FortuneTeller_Actor01_Say_01DD,medium,Short block that shows dialog $01DD and ends/jumps
+pAIScripting0x04_L118,pAIScripting0x04_FortuneTeller_Actor01_Say_01E6,medium,Short block that shows dialog $01E6 and ends/jumps
+pAIScripting0x04_L119,pAIScripting0x04_FortuneTeller_Actor01_Say_01EF,medium,Short block that shows dialog $01EF and ends/jumps
+pAIScripting0x04_L122,pAIScripting0x04_FortuneTeller_Actor02_OnBlueFeather,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x04_L123,pAIScripting0x04_FortuneTeller_Actor02_OnItemOffered,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x04_L124,pAIScripting0x04_FortuneTeller_Actor02_Say_03BA,medium,Short block that shows dialog $03BA and ends/jumps
+pAIScripting0x04_L125,pAIScripting0x04_FortuneTeller_Actor02_OnInteract,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x04_L126,pAIScripting0x04_AnimalShop_Idle,high,Wait + jump to itself (idle loop)
+pAIScripting0x04_L129,pAIScripting0x04_AnimalShop_Actor01_OnBlueFeather,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x04_L130,pAIScripting0x04_AnimalShop_Actor01_OnItemOffered,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x04_L131,pAIScripting0x04_AnimalShop_Actor01_Say_03BB,medium,Short block that shows dialog $03BB and ends/jumps
+pAIScripting0x04_L132,pAIScripting0x04_AnimalShop_Actor01_OnInteract,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x04_L133,pAIScripting0x04_WorksmanHouse_Idle,high,Wait + jump to itself (idle loop)
+pAIScripting0x04_L136,pAIScripting0x04_WorksmanHouse_Actor02_OnBlueFeather,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x04_L137,pAIScripting0x04_WorksmanHouse_Actor02_OnItemOffered,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x04_L138,pAIScripting0x04_WorksmanHouse_Actor02_Say_03BB,medium,Short block that shows dialog $03BB and ends/jumps
+pAIScripting0x04_L139,pAIScripting0x04_WorksmanHouse_Actor02_OnInteract,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x04_L143,pAIScripting0x04_WorksmanHouse_Actor01_OnBlueFeather,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x04_L144,pAIScripting0x04_WorksmanHouse_Actor01_OnItemOffered,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x04_L145,pAIScripting0x04_WorksmanHouse_Actor01_Say_03BB,medium,Short block that shows dialog $03BB and ends/jumps
+pAIScripting0x04_L146,pAIScripting0x04_WorksmanHouse_Actor01_OnInteract,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x04_L148,pAIScripting0x04_WorksmanHouse_Actor01_Say_0132,medium,Short block that shows dialog $0132 and ends/jumps
+pAIScripting0x04_L149,pAIScripting0x04_WorksmanHouse_Actor01_Talk_0139,high,"Jump target of AICMD0x1F (conversation handler), first dialog $0139"
+pAIScripting0x04_L150,pAIScripting0x04_WorksmanHouse_Actor01_Say_0133,medium,Short block that shows dialog $0133 and ends/jumps
+pAIScripting0x05_Data01,pAIScripting0x05_Bar,high,AI slot entry named after the caller (fAreaEvents_Bar)
+pAIScripting0x05_L005,pAIScripting0x05_Bar_Actor01,medium,"Target of AICMD0x09_StartScript (child script, AI slot $01)"
+pAIScripting0x05_L017,pAIScripting0x05_Bar_Actor02,medium,"Target of AICMD0x09_StartScript (child script, AI slot $02)"
+pAIScripting0x05_L023,pAIScripting0x05_Bar_Actor03,medium,"Target of AICMD0x09_StartScript (child script, AI slot $03)"
+pAIScripting0x05_L030,pAIScripting0x05_Bar_Actor04,medium,"Target of AICMD0x09_StartScript (child script, AI slot $04)"
+pAIScripting0x05_L037,pAIScripting0x05_Bar_Actor05,medium,"Target of AICMD0x09_StartScript (child script, AI slot $05)"
+pAIScripting0x05_L047,pAIScripting0x05_Bar_Actor06,medium,"Target of AICMD0x09_StartScript (child script, AI slot $06)"
+pAIScripting0x05_L058,pAIScripting0x05_Bar_Actor07,medium,"Target of AICMD0x09_StartScript (child script, AI slot $07)"
+pAIScripting0x05_L069,pAIScripting0x05_Bar_Actor08,medium,"Target of AICMD0x09_StartScript (child script, AI slot $08)"
+pAIScripting0x05_L081,pAIScripting0x05_Bar_Actor09_Ellen,high,"Target of AICMD0x09_StartScript (child script, AI slot $09); sprite table of Ellen"
+pAIScripting0x05_L090,pAIScripting0x05_Bar_Actor0A_Eve,high,"Target of AICMD0x09_StartScript (child script, AI slot $0A); sprite table of Eve"
+pAIScripting0x05_L001,pAIScripting0x05_Bar_Idle,high,Wait + jump to itself (idle loop)
+pAIScripting0x05_L007,pAIScripting0x05_Bar_Actor01_OnBlueFeather,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x05_L008,pAIScripting0x05_Bar_Actor01_OnItemOffered,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x05_L009,pAIScripting0x05_Bar_Actor01_Say_03BB,medium,Short block that shows dialog $03BB and ends/jumps
+pAIScripting0x05_L010,pAIScripting0x05_Bar_Actor01_OnInteract,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x05_L011,pAIScripting0x05_Bar_Actor01_Say_0069,medium,Short block that shows dialog $0069 and ends/jumps
+pAIScripting0x05_L012,pAIScripting0x05_Bar_Actor01_Say_03DD,medium,Short block that shows dialog $03DD and ends/jumps
+pAIScripting0x05_L013,pAIScripting0x05_Bar_Actor01_Say_03DE,medium,Short block that shows dialog $03DE and ends/jumps
+pAIScripting0x05_L015,pAIScripting0x05_Bar_Actor01_Say_03F6,medium,Short block that shows dialog $03F6 and ends/jumps
+pAIScripting0x05_L016,pAIScripting0x05_Bar_Actor01_Say_01FB,medium,Short block that shows dialog $01FB and ends/jumps
+pAIScripting0x05_L018,pAIScripting0x05_Bar_Actor02_WaitInteract,high,"Polls AICMD0x2D (player presses A, with or without item) and loops"
+pAIScripting0x05_L019,pAIScripting0x05_Bar_Actor02_OnItemOffered,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x05_L020,pAIScripting0x05_Bar_Actor02_OnInteract,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x05_L022,pAIScripting0x05_Bar_Actor02_Say_03FD,medium,Short block that shows dialog $03FD and ends/jumps
+pAIScripting0x05_L024,pAIScripting0x05_Bar_Actor03_WaitInteract,high,"Polls AICMD0x2D (player presses A, with or without item) and loops"
+pAIScripting0x05_L025,pAIScripting0x05_Bar_Actor03_OnItemOffered,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x05_L026,pAIScripting0x05_Bar_Actor03_Say_03B8,medium,Short block that shows dialog $03B8 and ends/jumps
+pAIScripting0x05_L027,pAIScripting0x05_Bar_Actor03_OnInteract,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x05_L028,pAIScripting0x05_Bar_Actor03_Say_03E2,medium,Short block that shows dialog $03E2 and ends/jumps
+pAIScripting0x05_L031,pAIScripting0x05_Bar_Actor04_WaitInteract,high,"Polls AICMD0x2D (player presses A, with or without item) and loops"
+pAIScripting0x05_L032,pAIScripting0x05_Bar_Actor04_OnItemOffered,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x05_L033,pAIScripting0x05_Bar_Actor04_Say_03BB,medium,Short block that shows dialog $03BB and ends/jumps
+pAIScripting0x05_L034,pAIScripting0x05_Bar_Actor04_OnInteract,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x05_L035,pAIScripting0x05_Bar_Actor04_Say_0406,medium,Short block that shows dialog $0406 and ends/jumps
+pAIScripting0x05_L038,pAIScripting0x05_Bar_Actor05_WaitInteract,high,"Polls AICMD0x2D (player presses A, with or without item) and loops"
+pAIScripting0x05_L039,pAIScripting0x05_Bar_Actor05_OnItemOffered,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x05_L040,pAIScripting0x05_Bar_Actor05_Say_0049,medium,Short block that shows dialog $0049 and ends/jumps
+pAIScripting0x05_L041,pAIScripting0x05_Bar_Actor05_OnInteract,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x05_L043,pAIScripting0x05_Bar_Actor05_Say_03FE,medium,Short block that shows dialog $03FE and ends/jumps
+pAIScripting0x05_L044,pAIScripting0x05_Bar_Actor05_Say_03E1,medium,Short block that shows dialog $03E1 and ends/jumps
+pAIScripting0x05_L045,pAIScripting0x05_Bar_Actor05_Say_013E,medium,Short block that shows dialog $013E and ends/jumps
+pAIScripting0x05_L048,pAIScripting0x05_Bar_Actor06_WaitInteract,high,"Polls AICMD0x2D (player presses A, with or without item) and loops"
+pAIScripting0x05_L049,pAIScripting0x05_Bar_Actor06_OnItemOffered,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x05_L050,pAIScripting0x05_Bar_Actor06_Say_03BB,medium,Short block that shows dialog $03BB and ends/jumps
+pAIScripting0x05_L051,pAIScripting0x05_Bar_Actor06_OnInteract,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x05_L053,pAIScripting0x05_Bar_Actor06_Say_03D8,medium,Short block that shows dialog $03D8 and ends/jumps
+pAIScripting0x05_L054,pAIScripting0x05_Bar_Actor06_Say_01F0,medium,Short block that shows dialog $01F0 and ends/jumps
+pAIScripting0x05_L055,pAIScripting0x05_Bar_Actor06_Say_013E,medium,Short block that shows dialog $013E and ends/jumps
+pAIScripting0x05_L056,pAIScripting0x05_Bar_Actor06_Say_0146,medium,Short block that shows dialog $0146 and ends/jumps
+pAIScripting0x05_L059,pAIScripting0x05_Bar_Actor07_WaitInteract,high,"Polls AICMD0x2D (player presses A, with or without item) and loops"
+pAIScripting0x05_L060,pAIScripting0x05_Bar_Actor07_OnItemOffered,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x05_L061,pAIScripting0x05_Bar_Actor07_Say_03BB,medium,Short block that shows dialog $03BB and ends/jumps
+pAIScripting0x05_L062,pAIScripting0x05_Bar_Actor07_OnInteract,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x05_L063,pAIScripting0x05_Bar_Actor07_Say_006E,medium,Short block that shows dialog $006E and ends/jumps
+pAIScripting0x05_L065,pAIScripting0x05_Bar_Actor07_Say_03EC,medium,Short block that shows dialog $03EC and ends/jumps
+pAIScripting0x05_L067,pAIScripting0x05_Bar_Actor07_Say_013E,medium,Short block that shows dialog $013E and ends/jumps
+pAIScripting0x05_L070,pAIScripting0x05_Bar_Actor08_WaitInteract,high,"Polls AICMD0x2D (player presses A, with or without item) and loops"
+pAIScripting0x05_L071,pAIScripting0x05_Bar_Actor08_OnItemOffered,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x05_L072,pAIScripting0x05_Bar_Actor08_Say_0049,medium,Short block that shows dialog $0049 and ends/jumps
+pAIScripting0x05_L073,pAIScripting0x05_Bar_Actor08_OnInteract,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x05_L075,pAIScripting0x05_Bar_Actor08_Say_0071,medium,Short block that shows dialog $0071 and ends/jumps
+pAIScripting0x05_L076,pAIScripting0x05_Bar_Actor08_Say_0072,medium,Short block that shows dialog $0072 and ends/jumps
+pAIScripting0x05_L078,pAIScripting0x05_Bar_Actor08_Say_03FF,medium,Short block that shows dialog $03FF and ends/jumps
+pAIScripting0x05_L083,pAIScripting0x05_Bar_Actor09_Ellen_OnBlueFeather,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x05_L084,pAIScripting0x05_Bar_Actor09_Ellen_Say_017A,medium,Short block that shows dialog $017A and ends/jumps
+pAIScripting0x05_L085,pAIScripting0x05_Bar_Actor09_Ellen_OnItemOffered,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x05_L086,pAIScripting0x05_Bar_Actor09_Ellen_OnInteract,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x05_L087,pAIScripting0x05_Bar_Actor09_Ellen_Say_00D6,medium,Short block that shows dialog $00D6 and ends/jumps
+pAIScripting0x05_L088,pAIScripting0x05_Bar_Actor09_Ellen_Say_00D7,medium,Short block that shows dialog $00D7 and ends/jumps
+pAIScripting0x05_L094,pAIScripting0x05_Bar_Actor0A_Eve_OnBlueFeather,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x05_L095,pAIScripting0x05_Bar_Actor0A_Eve_Say_017C,medium,Short block that shows dialog $017C and ends/jumps
+pAIScripting0x05_L096,pAIScripting0x05_Bar_Actor0A_Eve_OnItemOffered,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x05_L097,pAIScripting0x05_Bar_Actor0A_Eve_Say_03B4,medium,Short block that shows dialog $03B4 and ends/jumps
+pAIScripting0x05_L098,pAIScripting0x05_Bar_Actor0A_Eve_Say_03B2,medium,Short block that shows dialog $03B2 and ends/jumps
+pAIScripting0x05_L099,pAIScripting0x05_Bar_Actor0A_Eve_Say_0212,medium,Short block that shows dialog $0212 and ends/jumps
+pAIScripting0x05_L100,pAIScripting0x05_Bar_Actor0A_Eve_Say_03BA,medium,Short block that shows dialog $03BA and ends/jumps
+pAIScripting0x05_L101,pAIScripting0x05_Bar_Actor0A_Eve_OnInteract,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x05_L103,pAIScripting0x05_Bar_Actor0A_Eve_Say_00E5,medium,Short block that shows dialog $00E5 and ends/jumps
+pAIScripting0x05_L104,pAIScripting0x05_Bar_Actor0A_Eve_Say_00E6,medium,Short block that shows dialog $00E6 and ends/jumps
+pAIScripting0x05_L105,pAIScripting0x05_Bar_Actor0A_Eve_Say_00E7,medium,Short block that shows dialog $00E7 and ends/jumps
+pAIScripting0x05_L106,pAIScripting0x05_Bar_Actor0A_Eve_Say_00E8,medium,Short block that shows dialog $00E8 and ends/jumps
+pAIScripting0x05_L107,pAIScripting0x05_Bar_Actor0A_Eve_Say_020A,medium,Short block that shows dialog $020A and ends/jumps
+pAIScripting0x05_L109,pAIScripting0x05_Bar_Actor0A_Eve_Say_00E9,medium,Short block that shows dialog $00E9 and ends/jumps
+pAIScripting0x05_L110,pAIScripting0x05_Bar_Actor0A_Eve_Say_00EA,medium,Short block that shows dialog $00EA and ends/jumps
+pAIScripting0x05_L112,pAIScripting0x05_Bar_Actor0A_Eve_Say_00EB,medium,Short block that shows dialog $00EB and ends/jumps
+pAIScripting0x05_L113,pAIScripting0x05_Bar_Actor0A_Eve_Say_00EC,medium,Short block that shows dialog $00EC and ends/jumps
+pAIScripting0x05_L114,pAIScripting0x05_Bar_Actor0A_Eve_Say_023C,medium,Short block that shows dialog $023C and ends/jumps
+pAIScripting0x05_L116,pAIScripting0x05_Bar_Actor0A_Eve_Say_02B3,medium,Short block that shows dialog $02B3 and ends/jumps
+pAIScripting0x05_L117,pAIScripting0x05_Bar_Actor0A_Eve_Say_03FC,medium,Short block that shows dialog $03FC and ends/jumps
+pAIScripting0x05_L118,pAIScripting0x05_Bar_Actor0A_Eve_Say_00EE,medium,Short block that shows dialog $00EE and ends/jumps
+pAIScripting0x05_L119,pAIScripting0x05_Bar_Actor0A_Eve_Say_00EF,medium,Short block that shows dialog $00EF and ends/jumps
+pAIScripting0x05_L120,pAIScripting0x05_Bar_Actor0A_Eve_Say_00F0,medium,Short block that shows dialog $00F0 and ends/jumps
+pAIScripting0x05_L121,pAIScripting0x05_Bar_Actor0A_Eve_Say_00F1,medium,Short block that shows dialog $00F1 and ends/jumps
+pAIScripting0x05_L122,pAIScripting0x05_Bar_Actor0A_Eve_Talk_00E3,high,"Jump target of AICMD0x1F (conversation handler), first dialog $00E3"
+pAIScripting0x05_L123,pAIScripting0x05_Bar_Actor0A_Eve_Talk_0049,high,"Jump target of AICMD0x1F (conversation handler), first dialog $0049"
+pAIScripting0x05_L124,pAIScripting0x05_Bar_Actor0A_Eve_Say_00E0,medium,Short block that shows dialog $00E0 and ends/jumps
+pAIScripting0x06_Data01,pAIScripting0x06_MajorHouse,high,AI slot entry named after the caller (fAreaEvents_MajorHouse)
+pAIScripting0x06_Data02,pAIScripting0x06_Church,high,AI slot entry named after the caller (fAreaEvents_Church)
+pAIScripting0x06_Data03,pAIScripting0x06_Florist,high,AI slot entry named after the caller (fAreaEvents_Florist)
+pAIScripting0x06_Data04,pAIScripting0x06_Toolshop,high,AI slot entry named after the caller (fAreaEvents_Toolshop)
+pAIScripting0x06_Data05,pAIScripting0x06_Restaurant,high,AI slot entry named after the caller (fAreaEvents_Restaurant)
+pAIScripting0x06_Data06,pAIScripting0x06_FortuneTeller,high,AI slot entry named after the caller (fAreaEvents_FortuneTeller)
+pAIScripting0x06_Data07,pAIScripting0x06_AnimalShop,high,AI slot entry named after the caller (fAreaEvents_AnimalShop)
+pAIScripting0x06_L004,pAIScripting0x06_MajorHouse_Actor01,medium,"Target of AICMD0x09_StartScript (child script, AI slot $01)"
+pAIScripting0x06_L010,pAIScripting0x06_MajorHouse_Actor02,medium,"Target of AICMD0x09_StartScript (child script, AI slot $02)"
+pAIScripting0x06_L016,pAIScripting0x06_MajorHouse_Actor03_Maria,high,"Target of AICMD0x09_StartScript (child script, AI slot $03); sprite table of Maria"
+pAIScripting0x06_L027,pAIScripting0x06_Church_Actor01,medium,"Target of AICMD0x09_StartScript (child script, AI slot $01)"
+pAIScripting0x06_L036,pAIScripting0x06_Florist_Actor01,medium,"Target of AICMD0x09_StartScript (child script, AI slot $01)"
+pAIScripting0x06_L042,pAIScripting0x06_Florist_Actor02_Nina,high,"Target of AICMD0x09_StartScript (child script, AI slot $02); sprite table of Nina"
+pAIScripting0x06_L055,pAIScripting0x06_Toolshop_Actor01,medium,"Target of AICMD0x09_StartScript (child script, AI slot $01)"
+pAIScripting0x06_L061,pAIScripting0x06_Toolshop_Actor02_Ann,high,"Target of AICMD0x09_StartScript (child script, AI slot $02); sprite table of Ann"
+pAIScripting0x06_L076,pAIScripting0x06_Restaurant_Actor01,medium,"Target of AICMD0x09_StartScript (child script, AI slot $01)"
+pAIScripting0x06_L074,pAIScripting0x06_Restaurant_Actor03,medium,"Target of AICMD0x09_StartScript (child script, AI slot $03)"
+pAIScripting0x06_L085,pAIScripting0x06_Restaurant_Actor02_Ellen,high,"Target of AICMD0x09_StartScript (child script, AI slot $02); sprite table of Ellen"
+pAIScripting0x06_L097,pAIScripting0x06_FortuneTeller_Actor01,medium,"Target of AICMD0x09_StartScript (child script, AI slot $01)"
+pAIScripting0x06_L103,pAIScripting0x06_FortuneTeller_Actor02,medium,"Target of AICMD0x09_StartScript (child script, AI slot $02)"
+pAIScripting0x06_L111,pAIScripting0x06_AnimalShop_Actor01,medium,"Target of AICMD0x09_StartScript (child script, AI slot $01)"
+pAIScripting0x06_L001,pAIScripting0x06_MajorHouse_Idle,high,Wait + jump to itself (idle loop)
+pAIScripting0x06_L005,pAIScripting0x06_MajorHouse_Actor01_WaitInteract,high,"Polls AICMD0x2D (player presses A, with or without item) and loops"
+pAIScripting0x06_L006,pAIScripting0x06_MajorHouse_Actor01_OnItemOffered,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x06_L007,pAIScripting0x06_MajorHouse_Actor01_Say_03B8,medium,Short block that shows dialog $03B8 and ends/jumps
+pAIScripting0x06_L008,pAIScripting0x06_MajorHouse_Actor01_OnInteract,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x06_L009,pAIScripting0x06_MajorHouse_Actor01_Say_0400,medium,Short block that shows dialog $0400 and ends/jumps
+pAIScripting0x06_L011,pAIScripting0x06_MajorHouse_Actor02_WaitInteract,high,"Polls AICMD0x2D (player presses A, with or without item) and loops"
+pAIScripting0x06_L012,pAIScripting0x06_MajorHouse_Actor02_OnItemOffered,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x06_L013,pAIScripting0x06_MajorHouse_Actor02_Say_03B9,medium,Short block that shows dialog $03B9 and ends/jumps
+pAIScripting0x06_L014,pAIScripting0x06_MajorHouse_Actor02_OnInteract,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x06_L015,pAIScripting0x06_MajorHouse_Actor02_Say_0401,medium,Short block that shows dialog $0401 and ends/jumps
+pAIScripting0x06_L018,pAIScripting0x06_MajorHouse_Actor03_Maria_OnBlueFeather,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x06_L019,pAIScripting0x06_MajorHouse_Actor03_Maria_Say_0174,medium,Short block that shows dialog $0174 and ends/jumps
+pAIScripting0x06_L020,pAIScripting0x06_MajorHouse_Actor03_Maria_OnInteract,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x06_L021,pAIScripting0x06_MajorHouse_Actor03_Maria_Say_0161,medium,Short block that shows dialog $0161 and ends/jumps
+pAIScripting0x06_L022,pAIScripting0x06_MajorHouse_Actor03_Maria_OnItemOffered,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x06_L023,pAIScripting0x06_MajorHouse_Actor03_Maria_Say_03B0,medium,Short block that shows dialog $03B0 and ends/jumps
+pAIScripting0x06_L024,pAIScripting0x06_MajorHouse_Actor03_Maria_Say_0212,medium,Short block that shows dialog $0212 and ends/jumps
+pAIScripting0x06_L025,pAIScripting0x06_MajorHouse_Actor03_Maria_Say_03B5,medium,Short block that shows dialog $03B5 and ends/jumps
+pAIScripting0x06_L026,pAIScripting0x06_Church_Idle,high,Wait + jump to itself (idle loop)
+pAIScripting0x06_L028,pAIScripting0x06_Church_Actor01_WaitInteract,high,"Polls AICMD0x2D (player presses A, with or without item) and loops"
+pAIScripting0x06_L029,pAIScripting0x06_Church_Actor01_OnItemOffered,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x06_L030,pAIScripting0x06_Church_Actor01_Say_03B0,medium,Short block that shows dialog $03B0 and ends/jumps
+pAIScripting0x06_L031,pAIScripting0x06_Church_Actor01_OnInteract,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x06_L032,pAIScripting0x06_Church_Actor01_Say_016F,medium,Short block that shows dialog $016F and ends/jumps
+pAIScripting0x06_L033,pAIScripting0x06_Florist_Idle,high,Wait + jump to itself (idle loop)
+pAIScripting0x06_L037,pAIScripting0x06_Florist_Actor01_WaitInteract,high,"Polls AICMD0x2D (player presses A, with or without item) and loops"
+pAIScripting0x06_L038,pAIScripting0x06_Florist_Actor01_OnItemOffered,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x06_L039,pAIScripting0x06_Florist_Actor01_Say_03B9,medium,Short block that shows dialog $03B9 and ends/jumps
+pAIScripting0x06_L040,pAIScripting0x06_Florist_Actor01_OnInteract,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x06_L041,pAIScripting0x06_Florist_Actor01_Say_016B,medium,Short block that shows dialog $016B and ends/jumps
+pAIScripting0x06_L044,pAIScripting0x06_Florist_Actor02_Nina_OnBlueFeather,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x06_L045,pAIScripting0x06_Florist_Actor02_Nina_Say_0178,medium,Short block that shows dialog $0178 and ends/jumps
+pAIScripting0x06_L046,pAIScripting0x06_Florist_Actor02_Nina_OnItemOffered,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x06_L047,pAIScripting0x06_Florist_Actor02_Nina_Say_03B2,medium,Short block that shows dialog $03B2 and ends/jumps
+pAIScripting0x06_L048,pAIScripting0x06_Florist_Actor02_Nina_Say_0212,medium,Short block that shows dialog $0212 and ends/jumps
+pAIScripting0x06_L049,pAIScripting0x06_Florist_Actor02_Nina_Say_03B1,medium,Short block that shows dialog $03B1 and ends/jumps
+pAIScripting0x06_L050,pAIScripting0x06_Florist_Actor02_Nina_OnInteract,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x06_L051,pAIScripting0x06_Florist_Actor02_Nina_Say_0163,medium,Short block that shows dialog $0163 and ends/jumps
+pAIScripting0x06_L052,pAIScripting0x06_Toolshop_Idle,high,Wait + jump to itself (idle loop)
+pAIScripting0x06_L056,pAIScripting0x06_Toolshop_Actor01_WaitInteract,high,"Polls AICMD0x2D (player presses A, with or without item) and loops"
+pAIScripting0x06_L057,pAIScripting0x06_Toolshop_Actor01_OnItemOffered,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x06_L058,pAIScripting0x06_Toolshop_Actor01_Say_0049,medium,Short block that shows dialog $0049 and ends/jumps
+pAIScripting0x06_L059,pAIScripting0x06_Toolshop_Actor01_OnInteract,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x06_L060,pAIScripting0x06_Toolshop_Actor01_Say_016F,medium,Short block that shows dialog $016F and ends/jumps
+pAIScripting0x06_L063,pAIScripting0x06_Toolshop_Actor02_Ann_OnBlueFeather,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x06_L064,pAIScripting0x06_Toolshop_Actor02_Ann_Say_0176,medium,Short block that shows dialog $0176 and ends/jumps
+pAIScripting0x06_L065,pAIScripting0x06_Toolshop_Actor02_Ann_OnItemOffered,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x06_L066,pAIScripting0x06_Toolshop_Actor02_Ann_Say_03B4,medium,Short block that shows dialog $03B4 and ends/jumps
+pAIScripting0x06_L067,pAIScripting0x06_Toolshop_Actor02_Ann_Say_03B2,medium,Short block that shows dialog $03B2 and ends/jumps
+pAIScripting0x06_L068,pAIScripting0x06_Toolshop_Actor02_Ann_Say_0212,medium,Short block that shows dialog $0212 and ends/jumps
+pAIScripting0x06_L069,pAIScripting0x06_Toolshop_Actor02_Ann_OnInteract,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x06_L070,pAIScripting0x06_Toolshop_Actor02_Ann_Say_0162,medium,Short block that shows dialog $0162 and ends/jumps
+pAIScripting0x06_L071,pAIScripting0x06_Restaurant_Idle,high,Wait + jump to itself (idle loop)
+pAIScripting0x06_L075,pAIScripting0x06_Restaurant_Actor03_Idle,high,Wait + jump to itself (idle loop)
+pAIScripting0x06_L077,pAIScripting0x06_Restaurant_Actor01_WaitInteract,high,"Polls AICMD0x2D (player presses A, with or without item) and loops"
+pAIScripting0x06_L078,pAIScripting0x06_Restaurant_Actor01_OnItemOffered,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x06_L079,pAIScripting0x06_Restaurant_Actor01_Say_03BB,medium,Short block that shows dialog $03BB and ends/jumps
+pAIScripting0x06_L080,pAIScripting0x06_Restaurant_Actor01_OnInteract,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x06_L082,pAIScripting0x06_Restaurant_Actor01_WaitInteract_2,high,"Polls AICMD0x2D (player presses A, with or without item) and loops"
+pAIScripting0x06_L083,pAIScripting0x06_Restaurant_Actor01_OnItemOffered_2,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x06_L084,pAIScripting0x06_Restaurant_Actor01_OnInteract_2,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x06_L087,pAIScripting0x06_Restaurant_Actor02_Ellen_OnBlueFeather,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x06_L088,pAIScripting0x06_Restaurant_Actor02_Ellen_Say_017A,medium,Short block that shows dialog $017A and ends/jumps
+pAIScripting0x06_L089,pAIScripting0x06_Restaurant_Actor02_Ellen_OnItemOffered,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x06_L090,pAIScripting0x06_Restaurant_Actor02_Ellen_Say_03B2,medium,Short block that shows dialog $03B2 and ends/jumps
+pAIScripting0x06_L091,pAIScripting0x06_Restaurant_Actor02_Ellen_Say_03B3,medium,Short block that shows dialog $03B3 and ends/jumps
+pAIScripting0x06_L092,pAIScripting0x06_Restaurant_Actor02_Ellen_Say_0212,medium,Short block that shows dialog $0212 and ends/jumps
+pAIScripting0x06_L093,pAIScripting0x06_Restaurant_Actor02_Ellen_Say_01DA,medium,Short block that shows dialog $01DA and ends/jumps
+pAIScripting0x06_L094,pAIScripting0x06_Restaurant_Actor02_Ellen_OnInteract,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x06_L095,pAIScripting0x06_Restaurant_Actor02_Ellen_Say_0164,medium,Short block that shows dialog $0164 and ends/jumps
+pAIScripting0x06_L096,pAIScripting0x06_FortuneTeller_Idle,high,Wait + jump to itself (idle loop)
+pAIScripting0x06_L098,pAIScripting0x06_FortuneTeller_Actor01_WaitInteract,high,"Polls AICMD0x2D (player presses A, with or without item) and loops"
+pAIScripting0x06_L099,pAIScripting0x06_FortuneTeller_Actor01_OnItemOffered,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x06_L100,pAIScripting0x06_FortuneTeller_Actor01_Say_03BB,medium,Short block that shows dialog $03BB and ends/jumps
+pAIScripting0x06_L101,pAIScripting0x06_FortuneTeller_Actor01_OnInteract,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x06_L102,pAIScripting0x06_FortuneTeller_Actor01_Say_0168,medium,Short block that shows dialog $0168 and ends/jumps
+pAIScripting0x06_L104,pAIScripting0x06_FortuneTeller_Actor02_WaitInteract,high,"Polls AICMD0x2D (player presses A, with or without item) and loops"
+pAIScripting0x06_L105,pAIScripting0x06_FortuneTeller_Actor02_OnItemOffered,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x06_L106,pAIScripting0x06_FortuneTeller_Actor02_Say_03BA,medium,Short block that shows dialog $03BA and ends/jumps
+pAIScripting0x06_L107,pAIScripting0x06_FortuneTeller_Actor02_OnInteract,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x06_L108,pAIScripting0x06_FortuneTeller_Actor02_Say_0403,medium,Short block that shows dialog $0403 and ends/jumps
+pAIScripting0x06_L110,pAIScripting0x06_AnimalShop_Idle,high,Wait + jump to itself (idle loop)
+pAIScripting0x06_L112,pAIScripting0x06_AnimalShop_Actor01_WaitInteract,high,"Polls AICMD0x2D (player presses A, with or without item) and loops"
+pAIScripting0x06_L113,pAIScripting0x06_AnimalShop_Actor01_OnItemOffered,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x06_L114,pAIScripting0x06_AnimalShop_Actor01_Say_03BB,medium,Short block that shows dialog $03BB and ends/jumps
+pAIScripting0x06_L115,pAIScripting0x06_AnimalShop_Actor01_OnInteract,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x06_L116,pAIScripting0x06_AnimalShop_Actor01_Say_015C,medium,Short block that shows dialog $015C and ends/jumps
+pAIScripting0x06_L117,pAIScripting0x06_AnimalShop_Actor01_Say_015D,medium,Short block that shows dialog $015D and ends/jumps
+pAIScripting0x06_L118,pAIScripting0x06_AnimalShop_Actor01_Say_016C,medium,Short block that shows dialog $016C and ends/jumps
+pAIScripting0x07_Data01,pAIScripting0x07_MajorHouse,high,AI slot entry named after the caller (fAreaEvents_MajorHouse)
+pAIScripting0x07_Data02,pAIScripting0x07_Church,high,AI slot entry named after the caller (fAreaEvents_Church)
+pAIScripting0x07_Data03,pAIScripting0x07_Florist,high,AI slot entry named after the caller (fAreaEvents_Florist)
+pAIScripting0x07_Data04,pAIScripting0x07_Toolshop,high,AI slot entry named after the caller (fAreaEvents_Toolshop)
+pAIScripting0x07_Data05,pAIScripting0x07_Restaurant,high,AI slot entry named after the caller (fAreaEvents_Restaurant)
+pAIScripting0x07_Data06,pAIScripting0x07_FortuneTeller,high,AI slot entry named after the caller (fAreaEvents_FortuneTeller)
+pAIScripting0x07_Data07,pAIScripting0x07_AnimalShop,high,AI slot entry named after the caller (fAreaEvents_AnimalShop)
+pAIScripting0x07_Data08,pAIScripting0x07_WorksmanHouse,high,AI slot entry named after the caller (fAreaEvents_WorksmanHouse)
+pAIScripting0x07_L004,pAIScripting0x07_MajorHouse_Actor01,medium,"Target of AICMD0x09_StartScript (child script, AI slot $01)"
+pAIScripting0x07_L012,pAIScripting0x07_MajorHouse_Actor02,medium,"Target of AICMD0x09_StartScript (child script, AI slot $02)"
+pAIScripting0x07_L020,pAIScripting0x07_MajorHouse_Actor03_Maria,high,"Target of AICMD0x09_StartScript (child script, AI slot $03); sprite table of Maria"
+pAIScripting0x07_L031,pAIScripting0x07_Church_Actor01,medium,"Target of AICMD0x09_StartScript (child script, AI slot $01)"
+pAIScripting0x07_L042,pAIScripting0x07_Florist_Actor01,medium,"Target of AICMD0x09_StartScript (child script, AI slot $01)"
+pAIScripting0x07_L049,pAIScripting0x07_Florist_Actor02_Nina,high,"Target of AICMD0x09_StartScript (child script, AI slot $02); sprite table of Nina"
+pAIScripting0x07_L062,pAIScripting0x07_Toolshop_Actor01,medium,"Target of AICMD0x09_StartScript (child script, AI slot $01)"
+pAIScripting0x07_L069,pAIScripting0x07_Toolshop_Actor02_Ann,high,"Target of AICMD0x09_StartScript (child script, AI slot $02); sprite table of Ann"
+pAIScripting0x07_L084,pAIScripting0x07_Restaurant_Actor01,medium,"Target of AICMD0x09_StartScript (child script, AI slot $01)"
+pAIScripting0x07_L082,pAIScripting0x07_Restaurant_Actor03,medium,"Target of AICMD0x09_StartScript (child script, AI slot $03)"
+pAIScripting0x07_L091,pAIScripting0x07_Restaurant_Actor04,medium,"Target of AICMD0x09_StartScript (child script, AI slot $04)"
+pAIScripting0x07_L097,pAIScripting0x07_Restaurant_Actor02_Ellen,high,"Target of AICMD0x09_StartScript (child script, AI slot $02); sprite table of Ellen"
+pAIScripting0x07_L108,pAIScripting0x07_FortuneTeller_Actor01,medium,"Target of AICMD0x09_StartScript (child script, AI slot $01)"
+pAIScripting0x07_L117,pAIScripting0x07_FortuneTeller_Actor02,medium,"Target of AICMD0x09_StartScript (child script, AI slot $02)"
+pAIScripting0x07_L124,pAIScripting0x07_AnimalShop_Actor01,medium,"Target of AICMD0x09_StartScript (child script, AI slot $01)"
+pAIScripting0x07_L138,pAIScripting0x07_WorksmanHouse_Actor01,medium,"Target of AICMD0x09_StartScript (child script, AI slot $01)"
+pAIScripting0x07_L132,pAIScripting0x07_WorksmanHouse_Actor02,medium,"Target of AICMD0x09_StartScript (child script, AI slot $02)"
+pAIScripting0x07_L001,pAIScripting0x07_MajorHouse_Idle,high,Wait + jump to itself (idle loop)
+pAIScripting0x07_L006,pAIScripting0x07_MajorHouse_Actor01_OnItemOffered,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x07_L007,pAIScripting0x07_MajorHouse_Actor01_OnBlueFeather,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x07_L008,pAIScripting0x07_MajorHouse_Actor01_OnInteract,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x07_L009,pAIScripting0x07_MajorHouse_Actor01_Say_01CD,medium,Short block that shows dialog $01CD and ends/jumps
+pAIScripting0x07_L010,pAIScripting0x07_MajorHouse_Actor01_Say_02AD,medium,Short block that shows dialog $02AD and ends/jumps
+pAIScripting0x07_L011,pAIScripting0x07_MajorHouse_Actor01_Say_03EC,medium,Short block that shows dialog $03EC and ends/jumps
+pAIScripting0x07_L014,pAIScripting0x07_MajorHouse_Actor02_OnItemOffered,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x07_L015,pAIScripting0x07_MajorHouse_Actor02_OnBlueFeather,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x07_L016,pAIScripting0x07_MajorHouse_Actor02_OnInteract,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x07_L017,pAIScripting0x07_MajorHouse_Actor02_Say_01CE,medium,Short block that shows dialog $01CE and ends/jumps
+pAIScripting0x07_L018,pAIScripting0x07_MajorHouse_Actor02_Say_02AE,medium,Short block that shows dialog $02AE and ends/jumps
+pAIScripting0x07_L019,pAIScripting0x07_MajorHouse_Actor02_Say_03ED,medium,Short block that shows dialog $03ED and ends/jumps
+pAIScripting0x07_L022,pAIScripting0x07_MajorHouse_Actor03_Maria_OnBlueFeather,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x07_L023,pAIScripting0x07_MajorHouse_Actor03_Maria_Say_0174,medium,Short block that shows dialog $0174 and ends/jumps
+pAIScripting0x07_L024,pAIScripting0x07_MajorHouse_Actor03_Maria_OnInteract,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x07_L025,pAIScripting0x07_MajorHouse_Actor03_Maria_Say_02AF,medium,Short block that shows dialog $02AF and ends/jumps
+pAIScripting0x07_L026,pAIScripting0x07_MajorHouse_Actor03_Maria_Say_03F8,medium,Short block that shows dialog $03F8 and ends/jumps
+pAIScripting0x07_L027,pAIScripting0x07_MajorHouse_Actor03_Maria_OnItemOffered,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x07_L028,pAIScripting0x07_MajorHouse_Actor03_Maria_Say_03B5,medium,Short block that shows dialog $03B5 and ends/jumps
+pAIScripting0x07_L029,pAIScripting0x07_MajorHouse_Actor03_Maria_Say_03B2,medium,Short block that shows dialog $03B2 and ends/jumps
+pAIScripting0x07_L030,pAIScripting0x07_Church_Idle,high,Wait + jump to itself (idle loop)
+pAIScripting0x07_L033,pAIScripting0x07_Church_Actor01_OnItemOffered,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x07_L034,pAIScripting0x07_Church_Actor01_OnBlueFeather,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x07_L035,pAIScripting0x07_Church_Actor01_OnInteract,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x07_L036,pAIScripting0x07_Church_Actor01_Say_01CF,medium,Short block that shows dialog $01CF and ends/jumps
+pAIScripting0x07_L037,pAIScripting0x07_Church_Actor01_Say_0405,medium,Short block that shows dialog $0405 and ends/jumps
+pAIScripting0x07_L038,pAIScripting0x07_Church_Actor01_Say_03F0,medium,Short block that shows dialog $03F0 and ends/jumps
+pAIScripting0x07_L039,pAIScripting0x07_Florist_Idle,high,Wait + jump to itself (idle loop)
+pAIScripting0x07_L044,pAIScripting0x07_Florist_Actor01_OnItemOffered,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x07_L045,pAIScripting0x07_Florist_Actor01_OnBlueFeather,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x07_L046,pAIScripting0x07_Florist_Actor01_OnInteract,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x07_L047,pAIScripting0x07_Florist_Actor01_Say_02AE,medium,Short block that shows dialog $02AE and ends/jumps
+pAIScripting0x07_L048,pAIScripting0x07_Florist_Actor01_Say_03EF,medium,Short block that shows dialog $03EF and ends/jumps
+pAIScripting0x07_L051,pAIScripting0x07_Florist_Actor02_Nina_OnBlueFeather,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x07_L052,pAIScripting0x07_Florist_Actor02_Nina_Say_0178,medium,Short block that shows dialog $0178 and ends/jumps
+pAIScripting0x07_L053,pAIScripting0x07_Florist_Actor02_Nina_OnItemOffered,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x07_L054,pAIScripting0x07_Florist_Actor02_Nina_Say_03B2,medium,Short block that shows dialog $03B2 and ends/jumps
+pAIScripting0x07_L055,pAIScripting0x07_Florist_Actor02_Nina_Say_0212,medium,Short block that shows dialog $0212 and ends/jumps
+pAIScripting0x07_L056,pAIScripting0x07_Florist_Actor02_Nina_OnInteract,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x07_L057,pAIScripting0x07_Florist_Actor02_Nina_Say_02B1,medium,Short block that shows dialog $02B1 and ends/jumps
+pAIScripting0x07_L058,pAIScripting0x07_Florist_Actor02_Nina_Say_03FA,medium,Short block that shows dialog $03FA and ends/jumps
+pAIScripting0x07_L059,pAIScripting0x07_Toolshop_Idle,high,Wait + jump to itself (idle loop)
+pAIScripting0x07_L064,pAIScripting0x07_Toolshop_Actor01_OnItemOffered,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x07_L065,pAIScripting0x07_Toolshop_Actor01_OnBlueFeather,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x07_L066,pAIScripting0x07_Toolshop_Actor01_OnInteract,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x07_L067,pAIScripting0x07_Toolshop_Actor01_Say_01DC,medium,Short block that shows dialog $01DC and ends/jumps
+pAIScripting0x07_L068,pAIScripting0x07_Toolshop_Actor01_Say_03EE,medium,Short block that shows dialog $03EE and ends/jumps
+pAIScripting0x07_L071,pAIScripting0x07_Toolshop_Actor02_Ann_OnBlueFeather,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x07_L072,pAIScripting0x07_Toolshop_Actor02_Ann_Say_0176,medium,Short block that shows dialog $0176 and ends/jumps
+pAIScripting0x07_L073,pAIScripting0x07_Toolshop_Actor02_Ann_OnItemOffered,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x07_L074,pAIScripting0x07_Toolshop_Actor02_Ann_Say_03B2,medium,Short block that shows dialog $03B2 and ends/jumps
+pAIScripting0x07_L075,pAIScripting0x07_Toolshop_Actor02_Ann_OnInteract,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x07_L076,pAIScripting0x07_Toolshop_Actor02_Ann_Say_01DE,medium,Short block that shows dialog $01DE and ends/jumps
+pAIScripting0x07_L077,pAIScripting0x07_Toolshop_Actor02_Ann_Say_02B0,medium,Short block that shows dialog $02B0 and ends/jumps
+pAIScripting0x07_L078,pAIScripting0x07_Toolshop_Actor02_Ann_Say_03F9,medium,Short block that shows dialog $03F9 and ends/jumps
+pAIScripting0x07_L079,pAIScripting0x07_Restaurant_Idle,high,Wait + jump to itself (idle loop)
+pAIScripting0x07_L083,pAIScripting0x07_Restaurant_Actor03_Idle,high,Wait + jump to itself (idle loop)
+pAIScripting0x07_L086,pAIScripting0x07_Restaurant_Actor01_OnItemOffered,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x07_L087,pAIScripting0x07_Restaurant_Actor01_OnBlueFeather,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x07_L088,pAIScripting0x07_Restaurant_Actor01_OnInteract,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x07_L089,pAIScripting0x07_Restaurant_Actor01_Say_01ED,medium,Short block that shows dialog $01ED and ends/jumps
+pAIScripting0x07_L090,pAIScripting0x07_Restaurant_Actor01_Say_03EC,medium,Short block that shows dialog $03EC and ends/jumps
+pAIScripting0x07_L093,pAIScripting0x07_Restaurant_Actor04_OnBlueFeather,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x07_L094,pAIScripting0x07_Restaurant_Actor04_OnItemOffered,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x07_L095,pAIScripting0x07_Restaurant_Actor04_OnInteract,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x07_L096,pAIScripting0x07_Restaurant_Actor04_Say_03FD,medium,Short block that shows dialog $03FD and ends/jumps
+pAIScripting0x07_L099,pAIScripting0x07_Restaurant_Actor02_Ellen_OnBlueFeather,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x07_L100,pAIScripting0x07_Restaurant_Actor02_Ellen_Say_017A,medium,Short block that shows dialog $017A and ends/jumps
+pAIScripting0x07_L101,pAIScripting0x07_Restaurant_Actor02_Ellen_OnItemOffered,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x07_L102,pAIScripting0x07_Restaurant_Actor02_Ellen_Say_03B3,medium,Short block that shows dialog $03B3 and ends/jumps
+pAIScripting0x07_L103,pAIScripting0x07_Restaurant_Actor02_Ellen_OnInteract,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x07_L104,pAIScripting0x07_Restaurant_Actor02_Ellen_Say_02B2,medium,Short block that shows dialog $02B2 and ends/jumps
+pAIScripting0x07_L105,pAIScripting0x07_Restaurant_Actor02_Ellen_Say_03FB,medium,Short block that shows dialog $03FB and ends/jumps
+pAIScripting0x07_L106,pAIScripting0x07_Restaurant_Actor02_Ellen_Say_01EE,medium,Short block that shows dialog $01EE and ends/jumps
+pAIScripting0x07_L107,pAIScripting0x07_FortuneTeller_Idle,high,Wait + jump to itself (idle loop)
+pAIScripting0x07_L110,pAIScripting0x07_FortuneTeller_Actor01_OnItemOffered,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x07_L111,pAIScripting0x07_FortuneTeller_Actor01_OnBlueFeather,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x07_L112,pAIScripting0x07_FortuneTeller_Actor01_OnInteract,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x07_L113,pAIScripting0x07_FortuneTeller_Actor01_Say_01D1,medium,Short block that shows dialog $01D1 and ends/jumps
+pAIScripting0x07_L114,pAIScripting0x07_FortuneTeller_Actor01_Say_01DD,medium,Short block that shows dialog $01DD and ends/jumps
+pAIScripting0x07_L115,pAIScripting0x07_FortuneTeller_Actor01_Say_01E6,medium,Short block that shows dialog $01E6 and ends/jumps
+pAIScripting0x07_L116,pAIScripting0x07_FortuneTeller_Actor01_Say_01EF,medium,Short block that shows dialog $01EF and ends/jumps
+pAIScripting0x07_L119,pAIScripting0x07_FortuneTeller_Actor02_OnBlueFeather,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x07_L120,pAIScripting0x07_FortuneTeller_Actor02_OnItemOffered,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x07_L121,pAIScripting0x07_FortuneTeller_Actor02_OnInteract,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x07_L122,pAIScripting0x07_FortuneTeller_Actor02_Say_0324,medium,Short block that shows dialog $0324 and ends/jumps
+pAIScripting0x07_L123,pAIScripting0x07_AnimalShop_Idle,high,Wait + jump to itself (idle loop)
+pAIScripting0x07_L126,pAIScripting0x07_AnimalShop_Actor01_OnItemOffered,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x07_L127,pAIScripting0x07_AnimalShop_Actor01_OnBlueFeather,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x07_L128,pAIScripting0x07_AnimalShop_Actor01_OnInteract,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x07_L129,pAIScripting0x07_AnimalShop_Actor01_Say_01F0,medium,Short block that shows dialog $01F0 and ends/jumps
+pAIScripting0x07_L130,pAIScripting0x07_AnimalShop_Actor01_Say_0146,medium,Short block that shows dialog $0146 and ends/jumps
+pAIScripting0x07_L131,pAIScripting0x07_WorksmanHouse_Idle,high,Wait + jump to itself (idle loop)
+pAIScripting0x07_L134,pAIScripting0x07_WorksmanHouse_Actor02_OnItemOffered,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x07_L135,pAIScripting0x07_WorksmanHouse_Actor02_OnBlueFeather,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x07_L136,pAIScripting0x07_WorksmanHouse_Actor02_OnInteract,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x07_L137,pAIScripting0x07_WorksmanHouse_Actor02_Say_03F6,medium,Short block that shows dialog $03F6 and ends/jumps
+pAIScripting0x07_L140,pAIScripting0x07_WorksmanHouse_Actor01_OnItemOffered,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x07_L141,pAIScripting0x07_WorksmanHouse_Actor01_OnBlueFeather,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x07_L142,pAIScripting0x07_WorksmanHouse_Actor01_OnInteract,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x07_L143,pAIScripting0x07_WorksmanHouse_Actor01_Say_03F7,medium,Short block that shows dialog $03F7 and ends/jumps
+pAIScripting0x08_Data01,pAIScripting0x08_MajorHouse,high,AI slot entry named after the caller (fAreaEvents_MajorHouse)
+pAIScripting0x08_Data02,pAIScripting0x08_Church,high,AI slot entry named after the caller (fAreaEvents_Church)
+pAIScripting0x08_Data03,pAIScripting0x08_Florist,high,AI slot entry named after the caller (fAreaEvents_Florist)
+pAIScripting0x08_Data04,pAIScripting0x08_Toolshop,high,AI slot entry named after the caller (fAreaEvents_Toolshop)
+pAIScripting0x08_Data05,pAIScripting0x08_Restaurant,high,AI slot entry named after the caller (fAreaEvents_Restaurant)
+pAIScripting0x08_Data06,pAIScripting0x08_FortuneTeller,high,AI slot entry named after the caller (fAreaEvents_FortuneTeller)
+pAIScripting0x08_Data07,pAIScripting0x08_AnimalShop,high,AI slot entry named after the caller (fAreaEvents_AnimalShop)
+pAIScripting0x08_Data08,pAIScripting0x08_WorksmanHouse,high,AI slot entry named after the caller (fAreaEvents_WorksmanHouse)
+pAIScripting0x08_L004,pAIScripting0x08_MajorHouse_Actor01,medium,"Target of AICMD0x09_StartScript (child script, AI slot $01)"
+pAIScripting0x08_L009,pAIScripting0x08_MajorHouse_Actor02_Maria,high,"Target of AICMD0x09_StartScript (child script, AI slot $02); sprite table of Maria"
+pAIScripting0x08_L020,pAIScripting0x08_Church_Actor01,medium,"Target of AICMD0x09_StartScript (child script, AI slot $01)"
+pAIScripting0x08_L025,pAIScripting0x08_Church_Actor02,medium,"Target of AICMD0x09_StartScript (child script, AI slot $02)"
+pAIScripting0x08_L033,pAIScripting0x08_Florist_Actor01,medium,"Target of AICMD0x09_StartScript (child script, AI slot $01)"
+pAIScripting0x08_L038,pAIScripting0x08_Florist_Actor02_Nina,high,"Target of AICMD0x09_StartScript (child script, AI slot $02); sprite table of Nina"
+pAIScripting0x08_L051,pAIScripting0x08_Toolshop_Actor01,medium,"Target of AICMD0x09_StartScript (child script, AI slot $01)"
+pAIScripting0x08_L056,pAIScripting0x08_Toolshop_Actor02_Ann,high,"Target of AICMD0x09_StartScript (child script, AI slot $02); sprite table of Ann"
+pAIScripting0x08_L071,pAIScripting0x08_Restaurant_Actor01,medium,"Target of AICMD0x09_StartScript (child script, AI slot $01)"
+pAIScripting0x08_L076,pAIScripting0x08_Restaurant_Actor02,medium,"Target of AICMD0x09_StartScript (child script, AI slot $02)"
+pAIScripting0x08_L069,pAIScripting0x08_Restaurant_Actor04,medium,"Target of AICMD0x09_StartScript (child script, AI slot $04)"
+pAIScripting0x08_L080,pAIScripting0x08_Restaurant_Actor03_Ellen,high,"Target of AICMD0x09_StartScript (child script, AI slot $03); sprite table of Ellen"
+pAIScripting0x08_L088,pAIScripting0x08_FortuneTeller_Actor01,medium,"Target of AICMD0x09_StartScript (child script, AI slot $01)"
+pAIScripting0x08_L093,pAIScripting0x08_FortuneTeller_Actor02,medium,"Target of AICMD0x09_StartScript (child script, AI slot $02)"
+pAIScripting0x08_L100,pAIScripting0x08_AnimalShop_Actor01,medium,"Target of AICMD0x09_StartScript (child script, AI slot $01)"
+pAIScripting0x08_L111,pAIScripting0x08_WorksmanHouse_Actor01,medium,"Target of AICMD0x09_StartScript (child script, AI slot $01)"
+pAIScripting0x08_L106,pAIScripting0x08_WorksmanHouse_Actor02,medium,"Target of AICMD0x09_StartScript (child script, AI slot $02)"
+pAIScripting0x08_L001,pAIScripting0x08_MajorHouse_Idle,high,Wait + jump to itself (idle loop)
+pAIScripting0x08_L005,pAIScripting0x08_MajorHouse_Actor01_WaitInteract,high,"Polls AICMD0x2D (player presses A, with or without item) and loops"
+pAIScripting0x08_L006,pAIScripting0x08_MajorHouse_Actor01_OnItemOffered,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x08_L007,pAIScripting0x08_MajorHouse_Actor01_Say_03B9,medium,Short block that shows dialog $03B9 and ends/jumps
+pAIScripting0x08_L008,pAIScripting0x08_MajorHouse_Actor01_OnInteract,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x08_L011,pAIScripting0x08_MajorHouse_Actor02_Maria_OnBlueFeather,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x08_L012,pAIScripting0x08_MajorHouse_Actor02_Maria_Say_0174,medium,Short block that shows dialog $0174 and ends/jumps
+pAIScripting0x08_L013,pAIScripting0x08_MajorHouse_Actor02_Maria_OnInteract,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x08_L014,pAIScripting0x08_MajorHouse_Actor02_Maria_OnItemOffered,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x08_L015,pAIScripting0x08_MajorHouse_Actor02_Maria_Say_0212,medium,Short block that shows dialog $0212 and ends/jumps
+pAIScripting0x08_L016,pAIScripting0x08_MajorHouse_Actor02_Maria_Say_03B5,medium,Short block that shows dialog $03B5 and ends/jumps
+pAIScripting0x08_L017,pAIScripting0x08_MajorHouse_Actor02_Maria_Say_03B2,medium,Short block that shows dialog $03B2 and ends/jumps
+pAIScripting0x08_L018,pAIScripting0x08_MajorHouse_Actor02_Maria_Say_01DA,medium,Short block that shows dialog $01DA and ends/jumps
+pAIScripting0x08_L019,pAIScripting0x08_Church_Idle,high,Wait + jump to itself (idle loop)
+pAIScripting0x08_L021,pAIScripting0x08_Church_Actor01_WaitInteract,high,"Polls AICMD0x2D (player presses A, with or without item) and loops"
+pAIScripting0x08_L022,pAIScripting0x08_Church_Actor01_OnItemOffered,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x08_L023,pAIScripting0x08_Church_Actor01_Say_03B0,medium,Short block that shows dialog $03B0 and ends/jumps
+pAIScripting0x08_L024,pAIScripting0x08_Church_Actor01_OnInteract,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x08_L026,pAIScripting0x08_Church_Actor02_WaitInteract,high,"Polls AICMD0x2D (player presses A, with or without item) and loops"
+pAIScripting0x08_L027,pAIScripting0x08_Church_Actor02_OnItemOffered,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x08_L028,pAIScripting0x08_Church_Actor02_Say_03B8,medium,Short block that shows dialog $03B8 and ends/jumps
+pAIScripting0x08_L029,pAIScripting0x08_Church_Actor02_OnInteract,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x08_L030,pAIScripting0x08_Florist_Idle,high,Wait + jump to itself (idle loop)
+pAIScripting0x08_L034,pAIScripting0x08_Florist_Actor01_WaitInteract,high,"Polls AICMD0x2D (player presses A, with or without item) and loops"
+pAIScripting0x08_L035,pAIScripting0x08_Florist_Actor01_OnItemOffered,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x08_L036,pAIScripting0x08_Florist_Actor01_Say_03B9,medium,Short block that shows dialog $03B9 and ends/jumps
+pAIScripting0x08_L037,pAIScripting0x08_Florist_Actor01_OnInteract,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x08_L040,pAIScripting0x08_Florist_Actor02_Nina_OnBlueFeather,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x08_L041,pAIScripting0x08_Florist_Actor02_Nina_Say_0178,medium,Short block that shows dialog $0178 and ends/jumps
+pAIScripting0x08_L042,pAIScripting0x08_Florist_Actor02_Nina_OnItemOffered,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x08_L043,pAIScripting0x08_Florist_Actor02_Nina_Say_03B2,medium,Short block that shows dialog $03B2 and ends/jumps
+pAIScripting0x08_L044,pAIScripting0x08_Florist_Actor02_Nina_Say_0212,medium,Short block that shows dialog $0212 and ends/jumps
+pAIScripting0x08_L045,pAIScripting0x08_Florist_Actor02_Nina_Say_03B1,medium,Short block that shows dialog $03B1 and ends/jumps
+pAIScripting0x08_L046,pAIScripting0x08_Florist_Actor02_Nina_Say_03BA,medium,Short block that shows dialog $03BA and ends/jumps
+pAIScripting0x08_L047,pAIScripting0x08_Florist_Actor02_Nina_OnInteract,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x08_L048,pAIScripting0x08_Toolshop_Idle,high,Wait + jump to itself (idle loop)
+pAIScripting0x08_L052,pAIScripting0x08_Toolshop_Actor01_WaitInteract,high,"Polls AICMD0x2D (player presses A, with or without item) and loops"
+pAIScripting0x08_L053,pAIScripting0x08_Toolshop_Actor01_OnItemOffered,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x08_L054,pAIScripting0x08_Toolshop_Actor01_Say_0049,medium,Short block that shows dialog $0049 and ends/jumps
+pAIScripting0x08_L055,pAIScripting0x08_Toolshop_Actor01_OnInteract,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x08_L058,pAIScripting0x08_Toolshop_Actor02_Ann_OnBlueFeather,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x08_L059,pAIScripting0x08_Toolshop_Actor02_Ann_Say_0176,medium,Short block that shows dialog $0176 and ends/jumps
+pAIScripting0x08_L060,pAIScripting0x08_Toolshop_Actor02_Ann_OnItemOffered,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x08_L061,pAIScripting0x08_Toolshop_Actor02_Ann_Say_03B4,medium,Short block that shows dialog $03B4 and ends/jumps
+pAIScripting0x08_L062,pAIScripting0x08_Toolshop_Actor02_Ann_Say_03B2,medium,Short block that shows dialog $03B2 and ends/jumps
+pAIScripting0x08_L063,pAIScripting0x08_Toolshop_Actor02_Ann_Say_0212,medium,Short block that shows dialog $0212 and ends/jumps
+pAIScripting0x08_L064,pAIScripting0x08_Toolshop_Actor02_Ann_Say_03B4_2,medium,Short block that shows dialog $03B4 and ends/jumps
+pAIScripting0x08_L065,pAIScripting0x08_Toolshop_Actor02_Ann_OnInteract,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x08_L066,pAIScripting0x08_Restaurant_Idle,high,Wait + jump to itself (idle loop)
+pAIScripting0x08_L070,pAIScripting0x08_Restaurant_Actor04_Idle,high,Wait + jump to itself (idle loop)
+pAIScripting0x08_L072,pAIScripting0x08_Restaurant_Actor01_WaitInteract,high,"Polls AICMD0x2D (player presses A, with or without item) and loops"
+pAIScripting0x08_L073,pAIScripting0x08_Restaurant_Actor01_OnItemOffered,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x08_L074,pAIScripting0x08_Restaurant_Actor01_Say_03BB,medium,Short block that shows dialog $03BB and ends/jumps
+pAIScripting0x08_L075,pAIScripting0x08_Restaurant_Actor01_OnInteract,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x08_L077,pAIScripting0x08_Restaurant_Actor02_WaitInteract,high,"Polls AICMD0x2D (player presses A, with or without item) and loops"
+pAIScripting0x08_L078,pAIScripting0x08_Restaurant_Actor02_OnItemOffered,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x08_L079,pAIScripting0x08_Restaurant_Actor02_OnInteract,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x08_L082,pAIScripting0x08_Restaurant_Actor03_Ellen_OnBlueFeather,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x08_L083,pAIScripting0x08_Restaurant_Actor03_Ellen_Say_017A,medium,Short block that shows dialog $017A and ends/jumps
+pAIScripting0x08_L084,pAIScripting0x08_Restaurant_Actor03_Ellen_OnItemOffered,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x08_L085,pAIScripting0x08_Restaurant_Actor03_Ellen_Say_03B0,medium,Short block that shows dialog $03B0 and ends/jumps
+pAIScripting0x08_L086,pAIScripting0x08_Restaurant_Actor03_Ellen_OnInteract,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x08_L087,pAIScripting0x08_FortuneTeller_Idle,high,Wait + jump to itself (idle loop)
+pAIScripting0x08_L089,pAIScripting0x08_FortuneTeller_Actor01_WaitInteract,high,"Polls AICMD0x2D (player presses A, with or without item) and loops"
+pAIScripting0x08_L090,pAIScripting0x08_FortuneTeller_Actor01_OnItemOffered,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x08_L091,pAIScripting0x08_FortuneTeller_Actor01_Say_03BB,medium,Short block that shows dialog $03BB and ends/jumps
+pAIScripting0x08_L092,pAIScripting0x08_FortuneTeller_Actor01_OnInteract,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x08_L094,pAIScripting0x08_FortuneTeller_Actor02_WaitInteract,high,"Polls AICMD0x2D (player presses A, with or without item) and loops"
+pAIScripting0x08_L095,pAIScripting0x08_FortuneTeller_Actor02_OnItemOffered,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x08_L096,pAIScripting0x08_FortuneTeller_Actor02_Say_03BA,medium,Short block that shows dialog $03BA and ends/jumps
+pAIScripting0x08_L097,pAIScripting0x08_FortuneTeller_Actor02_OnInteract,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x08_L099,pAIScripting0x08_AnimalShop_Idle,high,Wait + jump to itself (idle loop)
+pAIScripting0x08_L101,pAIScripting0x08_AnimalShop_Actor01_WaitInteract,high,"Polls AICMD0x2D (player presses A, with or without item) and loops"
+pAIScripting0x08_L102,pAIScripting0x08_AnimalShop_Actor01_OnItemOffered,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x08_L103,pAIScripting0x08_AnimalShop_Actor01_Say_03BB,medium,Short block that shows dialog $03BB and ends/jumps
+pAIScripting0x08_L104,pAIScripting0x08_AnimalShop_Actor01_OnInteract,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x08_L105,pAIScripting0x08_WorksmanHouse_Idle,high,Wait + jump to itself (idle loop)
+pAIScripting0x08_L107,pAIScripting0x08_WorksmanHouse_Actor02_WaitInteract,high,"Polls AICMD0x2D (player presses A, with or without item) and loops"
+pAIScripting0x08_L108,pAIScripting0x08_WorksmanHouse_Actor02_OnItemOffered,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x08_L109,pAIScripting0x08_WorksmanHouse_Actor02_Say_03BB,medium,Short block that shows dialog $03BB and ends/jumps
+pAIScripting0x08_L110,pAIScripting0x08_WorksmanHouse_Actor02_OnInteract,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x08_L112,pAIScripting0x08_WorksmanHouse_Actor01_WaitInteract,high,"Polls AICMD0x2D (player presses A, with or without item) and loops"
+pAIScripting0x08_L113,pAIScripting0x08_WorksmanHouse_Actor01_OnItemOffered,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x08_L114,pAIScripting0x08_WorksmanHouse_Actor01_Say_03BB,medium,Short block that shows dialog $03BB and ends/jumps
+pAIScripting0x08_L115,pAIScripting0x08_WorksmanHouse_Actor01_OnInteract,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)

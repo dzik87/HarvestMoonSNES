@@ -1,5 +1,13 @@
-; AI scripts - the file order is the ROM order.  The bank heads (ORG, script pointer list, NPC sprite tables) and the slot table
-; at the start of every script are generated from assets/ai/ (tools/ai/aidata.py) into build/gen/ai/.
+;;
+; @file   scripts.asm
+; @brief  Include list of the US AI script banks ($B3-$B5): the file order is the ROM order of the 72 byte-code scripts.
+; @details The bank heads (ORG, the script pointer list ppAIScriptingList at $B38000, the NPC sprite tables) and the slot table
+;         at the start of every script are generated from assets/ai/ by tools/ai/aidata.py into build/gen/ai/. The script
+;         bodies are the macro sequences in src/ai/us/scripts/script_XX*.asm, written with the %AICMD0xNN_* macros of
+;         src/ai/commands.asm. The EU/DE/JP banks reuse these files with `if !REGION_xx` blocks (src/ai/region.asm).
+; @bank   $B3-$B5   @range $B38000-$B5FFFF
+; @see    src/ai/commands.asm, src/ai/region.asm, docs/regions-ai.md, docs/ai/commands.md
+;;
     incsrc "../../../build/gen/ai/head_B3.asm"
     incsrc "scripts/script_00_General.asm"
     incsrc "scripts/script_01.asm"
