@@ -71,7 +71,7 @@ def load_ops(path=None):
     for m in re.finditer(r"macro (AICMD0x(?P<op>[0-9A-F]{2})\w*)\((?P<params>[^)]*)\)(?P<body>.*?)endmacro", text, re.S):
         body = [l.split(";")[0].strip() for l in m.group("body").split("\n")]
         body = [l for l in body if l]
-        code = int(body[0].split("$")[1], 16)            # the byte the macro really emits (0x26/0x27 emit $28)
+        code = int(body[0].split("$")[1], 16)            # the byte the macro really emits
         params = []
         for l in body[1:]:
             mm = re.match(r"(db|dw|dl)\s+<(\w+)>(&\$FFFF)?", l)

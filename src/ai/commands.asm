@@ -7,7 +7,7 @@
 ;         apply, see region.asm). The scripts in src/ai/us/scripts/ are sequences of these macro calls; the interpreter is
 ;         fAI_HowToPlaySetup / fAI_ExecuteAiAction in src/code/bank_84/ai_engine.asm (handlers `fAIAction0xNN_*`, dispatch
 ;         table aAIActions). The 90 commands are described in more detail in docs/ai/commands.md (generated from
-;         docs/ai/commands/*.yml); a macro name ending in a plain opcode (`AICMD0x26_ClearBitAs0x28`) marks an alias
+;         docs/ai/commands/*.yml); a macro name ending in `Alias` (`AICMD0x26_ClearBitAlias`) marks an opcode
 ;         whose table entry shares the handler of another opcode.
 ; @bank   $B3-$B5   @range $B38000-$B5FFFF
 ; @see    docs/ai/commands.md, docs/regions-ai.md, src/code/bank_84/ai_engine.asm, tools/analysis/aidiff.py
@@ -791,20 +791,18 @@ endmacro
 ; @brief      Alias of opcode 0x28 (clear bit) - in the aAIActions table the entry 0x26 points to
 ;             fAIAction0x28_ClearBit.
 ; @details    The aAIActions table entries for 0x26 and 0x27 are identical to the one for 0x28 (84946B-84946F:
-;             fAIAction0x28_ClearBit three times), so a $26 byte would execute exactly ClearBit. However, the macro
-;             AICMD0x26 emits the byte $28, not $26, and is not used anywhere in the US scripts.
-; @case       $26 (the macro emits $28: the table entry for $26 points to the same handler); 5 byte(s) including the
-;             opcode
+;             fAIAction0x28_ClearBit three times), so a $26 byte executes exactly ClearBit. The macro emits $26 (the
+;             opcode of its own table entry); it is not used anywhere in the US scripts.
+; @case       $26 (same handler as $28); 5 byte(s) including the opcode
 ; @param      pAddress  long: 24-bit address of a 16-bit word in RAM in which a bit is cleared.
 ; @param      nBitIndex  byte: Bit number 0-15 (index into aAIResetMask).
 ; @see        fAIAction0x28_ClearBit
 ; @confidence high
 ; @modifies   ptrTemp0x72, strcVariables.n16Temp1, ptrAIActionData
-; @note       The macro AICMD0x26 should emit db $26 (or be removed/made an alias of 0x28). The original game most
-;             likely does not use this opcode.
+; @note       The original game most likely does not use this opcode.
 ;;
-macro AICMD0x26_ClearBitAs0x28(pAddress, nBitIndex)
-    db $28
+macro AICMD0x26_ClearBitAlias(pAddress, nBitIndex)
+    db $26
     dl <pAddress>
     db <nBitIndex>
     
@@ -813,20 +811,18 @@ endmacro
 ;;
 ; @brief      Alias of opcode 0x28 (clear bit) - in the aAIActions table the entry 0x27 points to
 ;             fAIAction0x28_ClearBit.
-; @details    Like 0x26: the table entry points to fAIAction0x28_ClearBit, the macro AICMD0x27 emits the byte $28
-;             instead of $27 and there are no uses in the US scripts.
-; @case       $27 (the macro emits $28: the table entry for $27 points to the same handler); 5 byte(s) including the
-;             opcode
+; @details    Like 0x26: the table entry points to fAIAction0x28_ClearBit, the macro emits $27 and there are no uses
+;             in the US scripts.
+; @case       $27 (same handler as $28); 5 byte(s) including the opcode
 ; @param      pAddress  long: 24-bit address of a 16-bit word in RAM in which a bit is cleared.
 ; @param      nBitIndex  byte: Bit number 0-15 (index into aAIResetMask).
 ; @see        fAIAction0x28_ClearBit
 ; @confidence high
 ; @modifies   ptrTemp0x72, strcVariables.n16Temp1, ptrAIActionData
-; @note       The macro AICMD0x27 should emit db $27 (or be removed). The original game most likely does not use this
-;             opcode.
+; @note       The original game most likely does not use this opcode.
 ;;
-macro AICMD0x27_ClearBitAs0x28(pAddress, nBitIndex)
-    db $28
+macro AICMD0x27_ClearBitAlias(pAddress, nBitIndex)
+    db $27
     dl <pAddress>
     db <nBitIndex>
     

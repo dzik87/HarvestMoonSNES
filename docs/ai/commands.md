@@ -46,8 +46,8 @@ Description confidence: confirmed: 56, probable: 34
 | 0x23 | `AICMD0x23_OrWithIndexedValue` | SetBit | confirmed | 5 | 0 | 0 |
 | 0x24 | `AICMD0x24_NextHourPalette` | SetNextPalette | confirmed | 2 | 0 | 0 |
 | 0x25 | `AICMD0x25_RemoveActor` | RemoveActor | confirmed | 2 | 0 | 0 |
-| 0x26 | `AICMD0x26_ClearBitAs0x28` | ClearBit | confirmed | 5 | 0 | 0 |
-| 0x27 | `AICMD0x27_ClearBitAs0x28` | ClearBit | confirmed | 5 | 0 | 0 |
+| 0x26 | `AICMD0x26_ClearBitAlias` | ClearBit | confirmed | 5 | 0 | 0 |
+| 0x27 | `AICMD0x27_ClearBitAlias` | ClearBit | confirmed | 5 | 0 | 0 |
 | 0x28 | `AICMD0x28_ClearBit` | ClearBit | confirmed | 5 | 0 | 0 |
 | 0x29 | `AICMD0x29_SetMapScrolling` | SetMapScroll | confirmed | 6 | 0 | 0 |
 | 0x2A | `AICMD0x2A_StartTileSequence` | StartTileSequence | probable | 3 | 0 | 0 |
@@ -749,7 +749,7 @@ Calls: `fAI_SelectSlot`, `fObject_Destroy`
 
 ## 0x26 — ClearBit
 
-- Macro: `AICMD0x26_ClearBitAs0x28` · handler: `fAIAction0x28_ClearBit` ($8493C9) · confidence: **confirmed**
+- Macro: `AICMD0x26_ClearBitAlias` · handler: `fAIAction0x28_ClearBit` ($8493C9) · confidence: **confirmed**
 - Length: 5 B · usage: 0 calls in 0 scripts
 
 Alias of opcode 0x28 (clear bit) - in the aAIActions table the entry 0x26 points to fAIAction0x28_ClearBit.
@@ -759,15 +759,15 @@ Alias of opcode 0x28 (clear bit) - in the aAIActions table the entry 0x26 points
 | `pAddress` | 1 | 3 | ram_ptr | 24-bit address of a 16-bit word in RAM in which a bit is cleared (the macro calls it nUnknown1). |
 | `nBitIndex` | 4 | 1 | n8 | Bit number 0-15 (index into aAIResetMask, the macro calls it nUnknown2). |
 
-The aAIActions table entries for 0x26 and 0x27 are identical to the one for 0x28 (84946B-84946F: fAIAction0x28_ClearBit three times), so a $26 byte would execute exactly ClearBit. However, the macro AICMD0x26 emits the byte $28, not $26, and is not used anywhere in the US scripts. Format and behavior as in 0x28.
+The aAIActions table entries for 0x26 and 0x27 are identical to the one for 0x28 (84946B-84946F: fAIAction0x28_ClearBit three times), so a $26 byte executes exactly ClearBit. The macro emits $26 (the opcode of its own table entry); it is not used anywhere in the US scripts. Format and behavior as in 0x28.
 
 RAM: `ptrTemp0x72`, `strcVariables.n16Temp1`, `ptrAIActionData`
 
-> Open questions: The macro AICMD0x26 should emit db $26 (or be removed/made an alias of 0x28). The original game most likely does not use this opcode.
+> Open questions: The original game most likely does not use this opcode.
 
 ## 0x27 — ClearBit
 
-- Macro: `AICMD0x27_ClearBitAs0x28` · handler: `fAIAction0x28_ClearBit` ($8493C9) · confidence: **confirmed**
+- Macro: `AICMD0x27_ClearBitAlias` · handler: `fAIAction0x28_ClearBit` ($8493C9) · confidence: **confirmed**
 - Length: 5 B · usage: 0 calls in 0 scripts
 
 Alias of opcode 0x28 (clear bit) - in the aAIActions table the entry 0x27 points to fAIAction0x28_ClearBit.
@@ -777,11 +777,11 @@ Alias of opcode 0x28 (clear bit) - in the aAIActions table the entry 0x27 points
 | `pAddress` | 1 | 3 | ram_ptr | 24-bit address of a 16-bit word in RAM in which a bit is cleared (the macro calls it nUnknown1). |
 | `nBitIndex` | 4 | 1 | n8 | Bit number 0-15 (index into aAIResetMask, the macro calls it nUnknown2). |
 
-Like 0x26: the table entry points to fAIAction0x28_ClearBit, the macro AICMD0x27 emits the byte $28 instead of $27 and there are no uses in the US scripts.
+Like 0x26: the table entry points to fAIAction0x28_ClearBit, the macro emits $27 and there are no uses in the US scripts.
 
 RAM: `ptrTemp0x72`, `strcVariables.n16Temp1`, `ptrAIActionData`
 
-> Open questions: The macro AICMD0x27 should emit db $27 (or be removed). The original game most likely does not use this opcode.
+> Open questions: The original game most likely does not use this opcode.
 
 ## 0x28 — ClearBit
 

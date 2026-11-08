@@ -18,7 +18,7 @@ from aidiff import OPS, BANK, off  # noqa: E402
 
 
 def test_ops():
-    assert set(OPS) == set(range(0x5A)) - {0x26, 0x27}      # 0x26/0x27 are macro aliases that emit $28
+    assert set(OPS) == set(range(0x5A))
     sizes = {0x00: 3, 0x10: 1, 0x12: 3, 0x15: 7, 0x1A: 8, 0x42: 7, 0x46: 12, 0x4B: 6, 0x59: 1}
     for op, n in sizes.items():
         assert OPS[op].size == n, (hex(op), OPS[op].size, n)

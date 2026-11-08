@@ -29,7 +29,7 @@
   open_questions: "The call to fObject_Destroy contains a known bug (a jump to fObject_ReturnLong instead of RTL) - it does not affect the command. It was not checked what happens to the other slot fields (they are not cleared)."
 
 - opcode: 0x26
-  macro: AICMD0x26_ClearBitAs0x28
+  macro: AICMD0x26_ClearBitAlias
   handler: fAIAction0x28_ClearBit
   handler_addr: "8493C9"
   suggested_name: ClearBit
@@ -39,13 +39,13 @@
     - {name: pAddress, offset: 1, size: 3, type: ram_ptr, meaning: "24-bit address of a 16-bit word in RAM in which a bit is cleared (the macro calls it nUnknown1)."}
     - {name: nBitIndex, offset: 4, size: 1, type: n8, meaning: "Bit number 0-15 (index into aAIResetMask, the macro calls it nUnknown2)."}
   summary: "Alias of opcode 0x28 (clear bit) - in the aAIActions table the entry 0x26 points to fAIAction0x28_ClearBit."
-  details: "The aAIActions table entries for 0x26 and 0x27 are identical to the one for 0x28 (84946B-84946F: fAIAction0x28_ClearBit three times), so a $26 byte would execute exactly ClearBit. However, the macro AICMD0x26 emits the byte $28, not $26, and is not used anywhere in the US scripts. Format and behavior as in 0x28."
+  details: "The aAIActions table entries for 0x26 and 0x27 are identical to the one for 0x28 (84946B-84946F: fAIAction0x28_ClearBit three times), so a $26 byte executes exactly ClearBit. The macro emits $26 (the opcode of its own table entry); it is not used anywhere in the US scripts. Format and behavior as in 0x28."
   ram_touched: [ptrTemp0x72, strcVariables.n16Temp1, ptrAIActionData]
   calls: []
-  open_questions: "The macro AICMD0x26 should emit db $26 (or be removed/made an alias of 0x28). The original game most likely does not use this opcode."
+  open_questions: "The original game most likely does not use this opcode."
 
 - opcode: 0x27
-  macro: AICMD0x27_ClearBitAs0x28
+  macro: AICMD0x27_ClearBitAlias
   handler: fAIAction0x28_ClearBit
   handler_addr: "8493C9"
   suggested_name: ClearBit
@@ -55,10 +55,10 @@
     - {name: pAddress, offset: 1, size: 3, type: ram_ptr, meaning: "24-bit address of a 16-bit word in RAM in which a bit is cleared (the macro calls it nUnknown1)."}
     - {name: nBitIndex, offset: 4, size: 1, type: n8, meaning: "Bit number 0-15 (index into aAIResetMask, the macro calls it nUnknown2)."}
   summary: "Alias of opcode 0x28 (clear bit) - in the aAIActions table the entry 0x27 points to fAIAction0x28_ClearBit."
-  details: "Like 0x26: the table entry points to fAIAction0x28_ClearBit, the macro AICMD0x27 emits the byte $28 instead of $27 and there are no uses in the US scripts."
+  details: "Like 0x26: the table entry points to fAIAction0x28_ClearBit, the macro emits $27 and there are no uses in the US scripts."
   ram_touched: [ptrTemp0x72, strcVariables.n16Temp1, ptrAIActionData]
   calls: []
-  open_questions: "The macro AICMD0x27 should emit db $27 (or be removed). The original game most likely does not use this opcode."
+  open_questions: "The original game most likely does not use this opcode."
 
 - opcode: 0x28
   macro: AICMD0x28_ClearBit
