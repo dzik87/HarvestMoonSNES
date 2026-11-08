@@ -1,0 +1,83 @@
+old,new,confidence,reason
+pAIScripting0x09_L002,pAIScripting0x09_Data01_Actor01,medium,"Target of AICMD0x09_StartScript (child script, AI slot $01)"
+pAIScripting0x09_L001,pAIScripting0x09_Data01_Actor02,medium,"Target of AICMD0x09_StartScript (child script, AI slot $02)"
+pAIScripting0x09_L003,pAIScripting0x09_Data01_Actor01_Cow,high,"Target of AICMD0x09_StartScript (child script, AI slot $01); sprite table of Cow"
+pAIScripting0x09_L005,pAIScripting0x09_Data01_Actor02_Chicken,high,"Target of AICMD0x09_StartScript (child script, AI slot $02); sprite table of Chicken"
+pAIScripting0x09_L007,pAIScripting0x09_Data01_Actor03_Chick,high,"Target of AICMD0x09_StartScript (child script, AI slot $03); sprite table of Chick"
+pAIScripting0x09_L004,pAIScripting0x09_Data01_Actor04,medium,"Target of AICMD0x09_StartScript (child script, AI slot $04)"
+pAIScripting0x09_L009,pAIScripting0x09_Data01_Actor05,medium,"Target of AICMD0x09_StartScript (child script, AI slot $05)"
+pAIScripting0x09_L011,pAIScripting0x09_Data01_Actor06,medium,"Target of AICMD0x09_StartScript (child script, AI slot $06)"
+pAIScripting0x09_L006,pAIScripting0x09_Data01_Actor02_Chicken_Idle,high,Wait + jump to itself (idle loop)
+pAIScripting0x09_L008,pAIScripting0x09_Data01_Actor03_Chick_Idle,high,Wait + jump to itself (idle loop)
+pAIScripting0x0A_Data02,pAIScripting0x0A_CrossRoad,high,AI slot entry named after the caller (fAreaEvents_CrossRoad)
+pAIScripting0x0A_Data03,pAIScripting0x0A_Farm,high,AI slot entry named after the caller (fAreaEvents_Farm)
+pAIScripting0x0A_L001,pAIScripting0x0A_Data01_Actor01,medium,"Target of AICMD0x09_StartScript (child script, AI slot $01)"
+pAIScripting0x0A_L002,pAIScripting0x0A_CrossRoad_Actor01,medium,"Target of AICMD0x09_StartScript (child script, AI slot $01)"
+pAIScripting0x0A_L003,pAIScripting0x0A_Farm_Actor01,medium,"Target of AICMD0x09_StartScript (child script, AI slot $01)"
+pAIScripting0x0A_L006,pAIScripting0x0A_Data05_Actor01,medium,"Target of AICMD0x09_StartScript (child script, AI slot $01)"
+pAIScripting0x0A_L007,pAIScripting0x0A_Data06_Actor01,medium,"Target of AICMD0x09_StartScript (child script, AI slot $01)"
+AI_ObtainDog_L001,AI_ObtainDog_Actor16,medium,"Target of AICMD0x09_StartScript (child script, AI slot $16)"
+AI_ObtainDog_L002,AI_ObtainDog_Actor02_Ellen,high,"Target of AICMD0x09_StartScript (child script, AI slot $02); sprite table of Ellen"
+AI_EllenSayGoodbye_L001,AI_EllenSayGoodbye_Actor16_Dog,high,"Target of AICMD0x09_StartScript (child script, AI slot $16); sprite table of Dog"
+AI_EllenSayGoodbye_L003,AI_EllenSayGoodbye_Actor01_Ellen,high,"Target of AICMD0x09_StartScript (child script, AI slot $01); sprite table of Ellen"
+AI_ObtainDog_L003,AI_ObtainDog_Actor02_Ellen_Idle,high,Wait + jump to itself (idle loop)
+AI_ObtainHorse_L001,AI_ObtainHorse_Actor17,medium,"Target of AICMD0x09_StartScript (child script, AI slot $17)"
+AI_ObtainHorse_L002,pAIScripting0x0D_CrossRoadsEvents_Data01_Actor17,medium,"Target of AICMD0x09_StartScript (child script, AI slot $17)"
+AI_WaterImp_L001,AI_WaterImp_Actor07,medium,"Target of AICMD0x09_StartScript (child script, AI slot $07)"
+AI_WaterImp_L002,AI_WaterImp_Actor15,medium,"Target of AICMD0x09_StartScript (child script, AI slot $15)"
+pAIScripting0x11_L003,pAIScripting0x11_Data01_Actor01,medium,"Target of AICMD0x09_StartScript (child script, AI slot $01)"
+pAIScripting0x11_L004,pAIScripting0x11_Data01_Actor02_Chicken,high,"Target of AICMD0x09_StartScript (child script, AI slot $02); sprite table of Chicken"
+pAIScripting0x11_L002,pAIScripting0x11_Data01_Say_014C,medium,Short block that shows dialog $014C and ends/jumps
+pAIScripting0x12_L001,pAIScripting0x12_Data01_Actor01,medium,"Target of AICMD0x09_StartScript (child script, AI slot $01)"
+pAIScripting0x12_L002,pAIScripting0x12_Data01_Actor10,medium,"Target of AICMD0x09_StartScript (child script, AI slot $10)"
+pAIScripting0x13_Data01,pAIScripting0x13_Farm,high,AI slot entry named after the caller (fAreaEvents_Farm)
+pAIScripting0x13_L001,pAIScripting0x13_Farm_Actor01,medium,"Target of AICMD0x09_StartScript (child script, AI slot $01)"
+pAIScripting0x13_L003,pAIScripting0x13_Farm_Actor01_Say_014F,medium,Short block that shows dialog $014F and ends/jumps
+pAIScripting0x14_Data02,pAIScripting0x14_MountainTop,high,AI slot entry named after the caller (fAreaEvents_MountainTop)
+pAIScripting0x14_Data03,pAIScripting0x14_GoldChicken,high,AI slot entry named after the caller (fAreaEvents_GoldChicken)
+pAIScripting0x14_Data04,pAIScripting0x14_Town,high,AI slot entry named after the caller (fAreaEvents_Town)
+pAIScripting0x14_L001,pAIScripting0x14_Data01_Actor01,medium,"Target of AICMD0x09_StartScript (child script, AI slot $01)"
+pAIScripting0x14_L006,pAIScripting0x14_Data01_Actor02_Cow,high,"Target of AICMD0x09_StartScript (child script, AI slot $02); sprite table of Cow"
+pAIScripting0x14_L007,pAIScripting0x14_MountainTop_Actor01,medium,"Target of AICMD0x09_StartScript (child script, AI slot $01)"
+pAIScripting0x14_L009,pAIScripting0x14_GoldChicken_Actor01,medium,"Target of AICMD0x09_StartScript (child script, AI slot $01)"
+pAIScripting0x14_L015,pAIScripting0x14_GoldChicken_Actor01_Actor02,medium,"Target of AICMD0x09_StartScript (child script, AI slot $02)"
+pAIScripting0x14_L016,pAIScripting0x14_Town_Actor01,medium,"Target of AICMD0x09_StartScript (child script, AI slot $01)"
+pAIScripting0x14_L018,pAIScripting0x14_Town_Actor02,medium,"Target of AICMD0x09_StartScript (child script, AI slot $02)"
+pAIScripting0x14_L003,pAIScripting0x14_Data01_Actor01_Say_014C,medium,Short block that shows dialog $014C and ends/jumps
+pAIScripting0x14_L008,pAIScripting0x14_MountainTop_Actor01_Idle,high,Wait + jump to itself (idle loop)
+pAIScripting0x14_L010,pAIScripting0x14_GoldChicken_Actor01_WaitTalk,high,Polls AICMD0x1F (player talks to the NPC) and loops
+pAIScripting0x14_L011,pAIScripting0x14_GoldChicken_Actor01_WaitTalk_2,high,Polls AICMD0x1F (player talks to the NPC) and loops
+pAIScripting0x14_L012,pAIScripting0x14_GoldChicken_Actor01_Talk_0336,high,"Jump target of AICMD0x1F (conversation handler), first dialog $0336"
+pAIScripting0x14_L014,pAIScripting0x14_GoldChicken_Actor01_Talk_0338,high,"Jump target of AICMD0x1F (conversation handler), first dialog $0338"
+pAIScripting0x14_L017,pAIScripting0x14_Town_Actor01_Idle,high,Wait + jump to itself (idle loop)
+pAIScripting0x14_L019,pAIScripting0x14_Town_Actor02_Idle,high,Wait + jump to itself (idle loop)
+pAIScripting0x15_Data01,pAIScripting0x15_ImpsUnderground,high,AI slot entry named after the caller (fAreaEvents_ImpsUnderground)
+pAIScripting0x15_L002,pAIScripting0x15_ImpsUnderground_Actor01,medium,"Target of AICMD0x09_StartScript (child script, AI slot $01)"
+pAIScripting0x15_L013,pAIScripting0x15_ImpsUnderground_Actor02,medium,"Target of AICMD0x09_StartScript (child script, AI slot $02)"
+pAIScripting0x15_L018,pAIScripting0x15_ImpsUnderground_Actor03,medium,"Target of AICMD0x09_StartScript (child script, AI slot $03)"
+pAIScripting0x15_L001,pAIScripting0x15_ImpsUnderground_Idle,high,Wait + jump to itself (idle loop)
+pAIScripting0x15_L003,pAIScripting0x15_ImpsUnderground_Actor01_WaitTalk,high,Polls AICMD0x1F (player talks to the NPC) and loops
+pAIScripting0x15_L004,pAIScripting0x15_ImpsUnderground_Actor01_WaitTalk_2,high,Polls AICMD0x1F (player talks to the NPC) and loops
+pAIScripting0x15_L005,pAIScripting0x15_ImpsUnderground_Actor01_Talk_0327,high,"Jump target of AICMD0x1F (conversation handler), first dialog $0327"
+pAIScripting0x15_L006,pAIScripting0x15_ImpsUnderground_Actor01_Say_0328,medium,Short block that shows dialog $0328 and ends/jumps
+pAIScripting0x15_L010,pAIScripting0x15_ImpsUnderground_Actor01_Say_0329,medium,Short block that shows dialog $0329 and ends/jumps
+pAIScripting0x15_L011,pAIScripting0x15_ImpsUnderground_Actor01_Talk_032A,high,"Jump target of AICMD0x1F (conversation handler), first dialog $032A"
+pAIScripting0x15_L014,pAIScripting0x15_ImpsUnderground_Actor02_WaitTalk,high,Polls AICMD0x1F (player talks to the NPC) and loops
+pAIScripting0x15_L015,pAIScripting0x15_ImpsUnderground_Actor02_WaitTalk_2,high,Polls AICMD0x1F (player talks to the NPC) and loops
+pAIScripting0x15_L016,pAIScripting0x15_ImpsUnderground_Actor02_Talk_0325,high,"Jump target of AICMD0x1F (conversation handler), first dialog $0325"
+pAIScripting0x15_L017,pAIScripting0x15_ImpsUnderground_Actor02_Talk_032A,high,"Jump target of AICMD0x1F (conversation handler), first dialog $032A"
+pAIScripting0x15_L019,pAIScripting0x15_ImpsUnderground_Actor03_WaitTalk,high,Polls AICMD0x1F (player talks to the NPC) and loops
+pAIScripting0x15_L020,pAIScripting0x15_ImpsUnderground_Actor03_Talk_0326,high,"Jump target of AICMD0x1F (conversation handler), first dialog $0326"
+pAIScripting0x16_Data01,pAIScripting0x16_Farm,high,AI slot entry named after the caller (fAreaEvents_Farm)
+pAIScripting0x16_L001,pAIScripting0x16_Farm_Actor01,medium,"Target of AICMD0x09_StartScript (child script, AI slot $01)"
+pAIScripting0x16_L007,pAIScripting0x16_Farm_Actor01_Say_0323,medium,Short block that shows dialog $0323 and ends/jumps
+pAIScripting0x17_L001,pAIScripting0x17_Data01_Actor01,medium,"Target of AICMD0x09_StartScript (child script, AI slot $01)"
+pAIScripting0x17_L005,pAIScripting0x17_Data01_Actor01_Actor02,medium,"Target of AICMD0x09_StartScript (child script, AI slot $02)"
+pAIScripting0x17_L006,pAIScripting0x17_Data01_Actor01_Actor02_2,medium,"Target of AICMD0x09_StartScript (child script, AI slot $02)"
+pAIScripting0x17_L003,pAIScripting0x17_Data01_Actor01_Say_0320,medium,Short block that shows dialog $0320 and ends/jumps
+pAIScripting0x18_Data01,pAIScripting0x18_Farm,high,AI slot entry named after the caller (fAreaEvents_Farm)
+pAIScripting0x18_L003,pAIScripting0x18_Farm_Actor01,medium,"Target of AICMD0x09_StartScript (child script, AI slot $01)"
+pAIScripting0x18_L006,pAIScripting0x18_Farm_Actor01_OnInteract,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x18_L007,pAIScripting0x18_Farm_Actor01_OnItemOffered,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
+pAIScripting0x18_L009,pAIScripting0x18_Farm_Actor01_Say_032E,medium,Short block that shows dialog $032E and ends/jumps
+pAIScripting0x18_L010,pAIScripting0x18_Farm_Actor01_OnInteract_2,medium,Jump target of the interaction commands (AICMD0x2D/0x4D)
