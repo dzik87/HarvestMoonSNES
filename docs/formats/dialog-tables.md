@@ -6,10 +6,10 @@
 | Label | Content | Source |
 |---|---|---|
 | `aLetterGlyphsPointers` | 10 x ptr24 to the font glyph pages `sFontGlyphs_0x00-09` | derived from `defs/gfx/banks.json` |
-| `aTextDataTableFFFE` | 5 words: VRAM address of the option cursor per answer of an `<OPT n>` menu (`strcDialogDisplay.glyphVramAddr`) | `translate/<region>/text_tables.json` (`option_vram`) |
+| `aTextDataTableFFFE` | 5 words: VRAM address of the option cursor per answer of an `<OPT n>` menu (`strcDialogDisplay.glyphVramAddr`) | `translate/<lang>/text_tables.json` (`option_vram`; a translation reads its own copy) |
 | `pTextAmmountTable` | 10^0 .. 10^7 as 24-bit values (digit extraction of `<NUM>`) | derived |
 | `aTextDataTableFFFC` | 112 x [ptr24 address, size] of the numeric variables (`<NUM digits index>`) | `translate/number_vars.csv` (same in all releases; `+!RAM_SHIFT` marks WRAM that moves with the RAM layout) |
-| `aTextDataTableFFFD` | N x [ptr24 address, size] of the text variables (`<VAR length index>`: player and animal names, ...) | `translate/<region>/text_vars.csv` (US 82, EU 82, DE 63, JP 61 entries) |
+| `aTextDataTableFFFD` | N x [ptr24 address, size] of the text variables (`<VAR length index>`: player and animal names, ...) | `translate/<lang>/text_vars.csv` (US 82, EU 82, DE 63, JP 61 entries; a translation owns a copy of its engine release's table) |
 | `aDialogPointers` | 1176 x ptr24 `sDialog_0xNNNN` | derived from the dialog texts (`translate/<region>/dialogs.txt`), ids must be contiguous |
 
 `aDialogPointers` follows the texts: a new dialog needs only its `@@ sDialog_0xNNNN @@` block. `check` verifies that all four releases have the same

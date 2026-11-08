@@ -84,8 +84,8 @@ Banks whose content differs per release ($94 $95 $9A $9B $9E $9F $A5 $A6 $A9 $AA
 
 | Path | Contents |
 |---|---|
-| `translate/<lang>/` | one directory per language. The four original releases (`us`, `eu`, `de`, `jp`): dialog text `dialogs.txt` (same file name and block syntax as a translation), `text_tables.json`, `text_vars.csv`, `glyphs/` (extractable like `assets/`). Translations (`pl`): `lang.json`, `dialogs.txt`, `status.csv`, `name_grids.txt`. Every language has `glyphs/` (glyph PNGs + `glyph_map.json`). See `translate/README.md` |
+| `translate/<lang>/` | one directory per language. The four original releases (`us`, `eu`, `de`, `jp`): dialog text `dialogs.txt` (same file name and block syntax as a translation), `text_tables.json`, `text_vars.csv`, `glyphs/` (extractable like `assets/`). Translations (`pl`): the same required files (`lang.json`, `dialogs.txt`, `text_tables.json`, `text_vars.csv`, `glyphs/`) plus the optional `status.csv`, `name_grids.txt`, `glossary.csv`, `gfx/`. Every language has `glyphs/` (glyph PNGs + `glyph_map.json`). Contract and `lang.json` schema: `translate/README.md`; `translate.py check-layout` verifies it, `translate.py new` creates a folder |
 | `defs/translation/` | structure: `engine.json` (text layout numbers), `var_map_jp_us.json` (variables JP <-> US), `marks.json` (diacritics), `glyph_overlays.json` (letters of `glyphs.py init`), `charmaps.json` (characters of the glyph ids: extraction seed), `tables.json`, `text_vars_shifted.json` (dialog table layout for the extraction) |
-| `tools/translate/` | `dialog`, `texttables`, `font`, `glyphmap` (text and font converters), `export`, `import`, `check`, `stats`, `glyphs`, `build`, `analyze` (docs/translation.md) |
+| `tools/translate/` | `dialog`, `texttables`, `font`, `glyphmap` (text and font converters), `export`, `import`, `check`, `stats`, `glyphs`, `layout` (folder contract, `new` scaffold), `build`, `analyze` (docs/translation.md) |
 | `build/translate/` | worksheets with game text (git-ignored, never commit) |
 | `build/gen/text/translation/` | generated dialog banks of the translation build |

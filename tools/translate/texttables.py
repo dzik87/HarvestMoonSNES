@@ -48,18 +48,20 @@ def entries(rows):
     return [f"    dl {r['address']} : db ${int(r['size']):02X}" for r in rows]
 
 
-def render(root, region):
+def render(root, region, lang=None):
+    """Tables of the engine release `region`.  A translation passes its Lang: option_vram, the text variables and the numeric variables then
+    come from translate/<lang>/ (text_tables.json, text_vars.csv, lang.json "number_vars"), the dialog count from the engine release."""
     root = Path(root)
     ids = dialog_ids(root, region)
-    tj = json.loads((root / DLG / region / "text_tables.json").read_text(encoding="utf-8"))
+    tj = lang.text_tables() if lang else json.loads((root / DLG / region / "text_tables.json").read_text(encoding="utf-8"))
     out = [HDR, "", "aLetterGlyphsPointers:"]
     out += [f"    dl {l}" for l in font_labels(root)[0]]
     out += ["", "aTextDataTableFFFE:", "    dw " + ",".join(tj["option_vram"]),
             "", "pTextAmmountTable:", "    dl " + ",".join("$%06X" % 10 ** i for i in range(4)), "    dl " + ",".join("$%06X" % 10 ** i for i in range(4, 8)),
             "", "aTextDataTableFFFC:"]
-    out += entries(read_csv(root / DLG / "number_vars.csv"))
+    out += entries(read_csv(lang.path_number_vars if lang else root / DLG / "number_vars.csv"))
     out += ["", "aTextDataTableFFFD:"]
-    out += entries(read_csv(root / DLG / region / "text_vars.csv"))
+    out += entries(read_csv(lang.path_text_vars if lang else root / DLG / region / "text_vars.csv"))
     out += ["", "aDialogPointers:"]
     out += [f"    dl sDialog_0x{i:04X}" for i in range(len(ids))]
     out.append("")

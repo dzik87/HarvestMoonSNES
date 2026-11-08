@@ -190,7 +190,10 @@ def bank_plan(sizes_by_id, ids, banks, bank_size=0x8000):
     return where, used
 
 
-def bank_list():
+def bank_list(lang=None):
+    """ROM banks a translation may use for its dialogs: translate/<lang>/text_tables.json "dialog_banks" (a list), else the engine default (engine.json)."""
+    if lang is not None:
+        return lang.dialog_banks()
     eng = C.engine()
     lo, hi = int(eng["dialog_bank_range"][0], 16), int(eng["dialog_bank_range"][1], 16)
     return ["%02X" % b for b in range(lo, hi + 1)] + list(eng["extra_free_banks"])
@@ -244,8 +247,8 @@ def main(argv=None):
     capacity, cap_err = None, None
     if not a.no_global and only is None:
         try:
-            _, used = bank_plan(final_sizes(lang, ctx, rep), ctx.ids, bank_list())
-            capacity = {"bytes": sum(used.values()), "banks_used": len(used), "banks_available": len(bank_list()), "per_bank": used}
+            _, used = bank_plan(final_sizes(lang, ctx, rep), ctx.ids, bank_list(lang))
+            capacity = {"bytes": sum(used.values()), "banks_used": len(used), "banks_available": len(bank_list(lang)), "per_bank": used}
         except OverflowError as e:
             cap_err = str(e)
             rep.add(-1, "error", "capacity: %s" % e)

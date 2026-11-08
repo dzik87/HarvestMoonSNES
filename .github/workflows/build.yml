@@ -59,7 +59,9 @@ jobs:
           python3 tools/gfx/graphics_loads.py check
           python3 tools/gfx/gfxpipe.py verify
           python3 tools/translate/font.py check
+          python3 tools/translate/layout.py check   # every translate/<lang>/ has the required files and a consistent lang.json
           python3 tests/test_font.py
+          python3 tests/test_layout.py   # folder contract and the `new` scaffold (temporary languages)
           python3 tests/test_make_patch.py   # BPS/IPS patch tool on invented byte arrays
           python3 tests/test_translate_tools.py   # preview, reflow, check diagnostics, status, glossary, graphics overrides, Windows IO (invented fixtures)
           python3 tests/test_translate.py   # synthetic fixtures; the ROM identity part needs the dumps (HM_ROM_DIR)

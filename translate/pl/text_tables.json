@@ -1,0 +1,25 @@
+{
+ "_doc": "Release specific values of the dialog text tables of this language (tools/translate/texttables.py).  option_vram: aTextDataTableFFFE, the VRAM word address stored in strcDialogDisplay.glyphVramAddr for the selected answer (0-4) of an <OPT n> selection menu (a copy of the engine release's values).  dialog_banks: the ROM banks the dialog packer may fill, in order (a list of bank names; \"auto\" = defs/translation/engine.json dialog_bank_range + extra_free_banks, the same list).",
+ "option_vram": [
+  "$5010",
+  "$5170",
+  "$5350",
+  "$5108",
+  "$5268"
+ ],
+ "dialog_banks": [
+  "B6",
+  "B7",
+  "B8",
+  "B9",
+  "BA",
+  "BB",
+  "BC",
+  "BD",
+  "BE",
+  "BF",
+  "AA",
+  "AB",
+  "AC"
+ ]
+}

@@ -1,7 +1,7 @@
 # Name entry grid 0 of the Polish translation (override of aNameInputGrid0, docs/translation.md, "Name entry grid").
 # Same row syntax as assets/menu/name_input.txt: `NN: x y down up right left char action`, row number = cell index (cell 00 is the start cell).
 # Rows 00-46 are the cells of the US grid; the rows with the new links (down/up/right/left) are the cells next to the added letters.
-# Rows 47-58 add the 18 Polish letters at the 18 free cell positions of the US grid picture (glyph ids of translations/pl/lang.json):
+# Rows 47-58 add the 18 Polish letters at the 18 free cell positions of the US grid picture (glyph ids of translate/pl/glyphs/glyph_map.json):
 #   upper case  47-4A at x 56-104 / y 148 (row of Z), 4B-4F at x 40-104 / y 196 (row of OK)
 #   lower case  50-53 at x 152-200 / y 148 (row of z), 54-55 at x 184-200 / y 180, 56-58 at x 136-168 / y 196
 # Rows 47-58 are selectable and enter their letter; their picture is not drawn yet (graphics override, later phase).

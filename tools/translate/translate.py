@@ -4,6 +4,8 @@
   python tools/translate/translate.py <command> [arguments of that tool]
 
   export | import | check | stats | status | preview | reflow | glossary | strings | namegrid | glyphs | analyze    the tools of tools/translate/ with the same name
+  new CODE --name NAME [--base us|pl|...]                   create a complete language folder translate/CODE from a base language (layout.py new)
+  check-layout                                              every translate/<lang>/ has the required files and a consistent lang.json (layout.py check)
   gfx-list | gfx-template | gfx-check | gfx-build           text in graphics (gfx.py list / template / check / build)
   patch-create | patch-apply | patch-verify | patch-info   BPS / IPS patches (make_patch.py create / apply / verify / info)
   build [LANG] [options]                                    tools/build.py --region US --translation LANG [options]   (LANG defaults to pl)
@@ -21,7 +23,7 @@ from pathlib import Path
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[1]
 TOOLS = {"export", "import", "check", "stats", "status", "preview", "reflow", "glossary", "strings", "namegrid", "glyphs", "analyze"}
-SUB = {"gfx-list": ("gfx", "list"), "gfx-template": ("gfx", "template"), "gfx-check": ("gfx", "check"), "gfx-build": ("gfx", "build"),
+SUB = {"new": ("layout", "new"), "check-layout": ("layout", "check"), "gfx-list": ("gfx", "list"), "gfx-template": ("gfx", "template"), "gfx-check": ("gfx", "check"), "gfx-build": ("gfx", "build"),
        "patch-create": ("make_patch", "create"), "patch-apply": ("make_patch", "apply"), "patch-verify": ("make_patch", "verify"), "patch-info": ("make_patch", "info")}
 
 

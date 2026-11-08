@@ -16,6 +16,13 @@ python tools\extract.py --rom-dir "C:\Users\you\Desktop\project\SNES - Harvest M
 `--rom-dir` is the folder that holds `US`, `EU`, `DE` and `JP` with your own dumps. Set `HM_ROM_DIR` to the same folder (`set HM_ROM_DIR=...`, PowerShell: `$env:HM_ROM_DIR="..."`)
 for the tools that need a dump later (patches, tests).
 
+## A new language
+
+```bat
+tools\translate\translate.bat new <code> --name "<Name>" --base us    rem complete folder translate\<code>\ (glyphs, tables, empty dialogs.txt with all ids, status, glossary, gfx)
+tools\translate\translate.bat check-layout                           rem every language folder has the required files and a consistent lang.json
+```
+
 ## Every day
 
 ```bat
@@ -44,6 +51,7 @@ tools\translate\translate.bat patch-apply build\HarvestMoon_US_pl.bps "C:\path\H
 | `glossary.py` | term consistency (`translate/<lang>/glossary.csv`), names report |
 | `stats.py` | progress per bank with byte counts |
 | `strings.py`, `namegrid.py`, `glyphs.py` | season / weekday tables, name entry grid, letter generation |
+| `layout.py` | folder contract of `translate/<lang>/` (`check-layout`) and the scaffold of a new language (`new`) |
 | `gfx.py` | text in graphics: override pictures, name entry grid letters |
 | `make_patch.py` | BPS / IPS patches (create, apply, verify, info) |
 | `build.py` | translation build steps used by `tools/build.py --translation` |

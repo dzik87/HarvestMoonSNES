@@ -3,9 +3,13 @@
  "name": "Polish",
  "kind": "translation",
  "engine_region": "us",
+ "text": "dialogs.txt",
+ "text_tables": "text_tables.json",
+ "text_vars": "text_vars.csv",
+ "number_vars": "../number_vars.csv",
+ "glyphs": "glyphs/glyph_map.json",
  "layout": "wrap",
  "autopage": true,
- "dialogs": "dialogs.txt",
  "status": "status.csv",
  "grids": {
   "file": "name_grids.txt"

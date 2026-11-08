@@ -191,7 +191,7 @@ need more than 18 letters need extra rows in the picture (a new row of cells) as
 
 ## Adding another language
 
-See [../translate/README.md](../translate/README.md): a new `translate/<code>/` with `lang.json` (`strings`, optional `grids`), `dialogs.txt`, `status.csv` and the font created by `glyphs.py init <code>`, then the same commands with `<code>`.
+`python tools/translate/translate.py new <code> --name "<Name>" [--base us|pl]` creates a complete `translate/<code>/` (`lang.json`, `dialogs.txt` skeleton with all ids and empty bodies, `text_tables.json`, `text_vars.csv`, `glyphs/`, `status.csv`, `glossary.csv`, `gfx/`); `translate.py check-layout` verifies that every language folder has the same structure and a consistent `lang.json`. Then add the letters (`glyphs.py init <code> --force` or draw the PNGs), fill `strings` and use the same commands with `<code>`. The folder contract and the `lang.json` schema are in [../translate/README.md](../translate/README.md). A language owns its `text_tables.json` (`option_vram`, `dialog_banks` = the ROM banks the packer may fill) and `text_vars.csv` (e.g. longer name fields); the build reads them from `translate/<code>/`.
 Languages that need other marks add them to `defs/translation/marks.json` and take free glyph ids.
 
 ## Not covered yet

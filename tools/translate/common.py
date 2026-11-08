@@ -101,11 +101,40 @@ class Lang:
 
     @property
     def path_dialogs(self):
-        return self.dir / self.cfg.get("dialogs", "dialogs.txt")
+        return self.dir / self.cfg.get("text", "dialogs.txt")
 
     @property
     def path_status(self):
         return self.dir / self.cfg.get("status", "status.csv")
+
+    @property
+    def path_text_tables(self):
+        return self.dir / self.cfg.get("text_tables", "text_tables.json")
+
+    @property
+    def path_text_vars(self):
+        p = self.dir / self.cfg.get("text_vars", "text_vars.csv")
+        return p if p.is_file() else lang_dir(self.engine_region) / "text_vars.csv"       # folders outside translate/ (test fixtures) use their engine release's table
+
+    @property
+    def path_number_vars(self):
+        p = (self.dir / self.cfg.get("number_vars", "../number_vars.csv")).resolve()
+        return p if p.is_file() else TRANSLATIONS / "number_vars.csv"       # a language outside translate/ (test fixtures) uses the shared file
+
+    def text_tables(self):
+        """translate/<lang>/text_tables.json (option_vram, dialog_banks); a language without the file uses the one of its engine release."""
+        p = self.path_text_tables
+        return read_json(p if p.is_file() else lang_dir(self.engine_region) / "text_tables.json")
+
+    def dialog_banks(self):
+        """ROM banks the packer of a translation may fill with dialogs, in order.  text_tables.json "dialog_banks": a list of bank names,
+        or "auto" / missing = defs/translation/engine.json (dialog_bank_range + extra_free_banks)."""
+        v = self.text_tables().get("dialog_banks", "auto")
+        if isinstance(v, list):
+            return [str(b).upper() for b in v]
+        eng = engine()
+        lo, hi = int(eng["dialog_bank_range"][0], 16), int(eng["dialog_bank_range"][1], 16)
+        return ["%02X" % b for b in range(lo, hi + 1)] + list(eng["extra_free_banks"])
 
 
 def lang_dir(code_or_path):
@@ -628,14 +657,15 @@ def asset_banks(region, root=None):
 
 
 def load_translation(lang):
-    """-> {id: (flags, text)} from translate/<lang>/dialogs.txt (duplicate ids are an error)."""
+    """-> {id: (flags, text)} from translate/<lang>/dialogs.txt (duplicate ids are an error; blocks with an empty body count as not translated)."""
     out = {}
     if not lang.path_dialogs.exists():
         return out
     for i, flags, text in read_blocks(lang.path_dialogs):
         if i in out:
             raise SyntaxError_("%s: dialog 0x%04X appears twice" % (lang.path_dialogs, i))
-        out[i] = (flags, text)
+        if text.strip():                    # an empty block (the skeleton of `translate.py new`) is a dialog that is not translated yet
+            out[i] = (flags, text)
     return out
 
 

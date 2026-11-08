@@ -109,3 +109,7 @@ releases run the same scripts, see `docs/regions-ai.md`.
   `build/gen/text/` (formerly `build/gen/dialogs/`). The dialog control-word constants of the former `src/data/dialogs/macros.asm` moved to `src/common/enums.asm`; the unused `Dialog*` macros of that file were dropped.
 - `tools/extract.py --out DIR` writes `DIR/assets/` and `DIR/translate/{us,eu,de,jp}` and `--compare` takes a repository root; the four original language folders are extractable like `assets/`, other languages are never touched.
 - Verified bit-identical: the four ROMs ("ROM MATCHES ORIGINAL"), the Polish build (same SHA-256 as before the move) and the identity translation.
+- Every language folder has the same structure: `lang.json`, `dialogs.txt`, `text_tables.json`, `text_vars.csv`, `glyphs/` (translations may add `status.csv`, `name_grids.txt`, `glossary.csv`, `gfx/`).
+  `translate/pl/` got its own `text_tables.json` (`option_vram`, `dialog_banks` = explicit list of the packer banks) and `text_vars.csv`; the build of a translation reads them from the language folder.
+  `lang.json` uses one key set (`code`, `name`, `kind`, `engine_region`, `text`, `text_tables`, `text_vars`, `number_vars`, `glyphs`; translations: `layout`, `autopage`, `status`, `grids`, `gfx`, `strings`);
+  the Polish `dialogs` key became `text`. New commands: `tools/translate/translate.py new` and `check-layout` (`tools/translate/layout.py`, `tests/test_layout.py`). Polish ROM SHA-256 and the four original ROMs unchanged.

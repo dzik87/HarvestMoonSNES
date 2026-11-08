@@ -63,7 +63,7 @@ def generate(lang, ctx, fallback="us", allow_errors=False, gen_dir=GEN_DIR, tabl
     if rep.errors and not allow_errors:
         raise SystemExit("the translation has %d error(s); fix them (tools/translate/check.py %s) or build with --allow-errors" % (len(rep.errors), lang.code))
     words = dialog_words(lang, ctx, rep, fallback)
-    banks = check.bank_list()
+    banks = check.bank_list(lang)
     try:
         where, used = check.bank_plan({i: len(w) * 2 for i, w in words.items()}, ctx.ids, banks)
     except OverflowError as e:
@@ -78,7 +78,7 @@ def generate(lang, ctx, fallback="us", allow_errors=False, gen_dir=GEN_DIR, tabl
             text = "; Dialog bank $%s - unused by this translation\n\n    ORG $%s8000\n" % (b, b)
         (gen_dir / ("bank_%s.asm" % b)).write_text(text, encoding="utf-8", newline="\n")
     if tables:
-        (gen_dir / "text_tables.asm").write_text(texttables.render(C.ROOT, lang.engine_region), encoding="utf-8", newline="\n")
+        (gen_dir / "text_tables.asm").write_text(texttables.render(C.ROOT, lang.engine_region, lang), encoding="utf-8", newline="\n")
     n_tr = len(rep.words)
     return {"translated": n_tr, "total": len(ctx.ids), "fallback": len(ctx.ids) - n_tr, "bytes": sum(used.values()), "banks": used,
             "errors": len(rep.errors), "warnings": len(rep.warnings)}
