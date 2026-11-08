@@ -95,7 +95,7 @@ def load_override(lang):
         return None
     f = g["file"]
     p = lang.dir / f
-    tables = nameinput.parse(p.read_text(encoding="utf-8"), str(p.name))
+    tables = nameinput.parse(C.read_text(p), str(p.name))
     for label in tables:
         if label != GRID_LABELS[0]:
             raise ValueError("%s: only %s can be overridden (grids 1 and 2 are not reachable on the US engine), found %s" % (p.name, GRID_LABELS[0], label))

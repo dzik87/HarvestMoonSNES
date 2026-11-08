@@ -164,7 +164,7 @@ def patch_rom(rom, lang, symbols=None, sp=None):
 def read_symbols(path):
     """asar `--symbols=nocash` file -> {label: address}"""
     out = {}
-    for line in Path(path).read_text(encoding="utf-8", errors="replace").splitlines():
+    for line in Path(path).read_bytes().decode("utf-8", errors="replace").splitlines():
         parts = line.split(None, 1)
         if len(parts) == 2 and len(parts[0]) == 8 and all(c in "0123456789ABCDEFabcdef" for c in parts[0]):
             out.setdefault(parts[1].strip(), int(parts[0], 16))

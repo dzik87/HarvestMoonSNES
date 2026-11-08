@@ -14,6 +14,7 @@ Nothing in this module (or in the files it reads from git) contains game text.
 import importlib.util
 import json
 import re
+import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -36,8 +37,33 @@ def _load_dialog_module():
 dialog = _load_dialog_module()
 
 
+def _console_safe():
+    """Windows consoles (cp1250 / cp852 / cp437) cannot print every character: replace instead of raising UnicodeEncodeError (the encoding itself is kept)."""
+    for stream in (sys.stdout, sys.stderr):
+        try:
+            stream.reconfigure(errors="replace")
+        except (AttributeError, ValueError):
+            pass
+
+
+_console_safe()
+
+
+def read_text(path):
+    """UTF-8 text of a translation file: a BOM (Notepad) is dropped, CRLF / CR line ends become LF."""
+    return Path(path).read_bytes().decode("utf-8-sig").replace("\r\n", "\n").replace("\r", "\n")
+
+
+def write_text(path, text, keep_eol=True):
+    """Write UTF-8 without BOM.  Line ends stay CRLF when the existing file uses them (keep_eol), LF otherwise: a file that the translator edits on Windows is not converted."""
+    p = Path(path)
+    crlf = keep_eol and p.exists() and b"\r\n" in p.read_bytes()
+    p.parent.mkdir(parents=True, exist_ok=True)
+    p.write_bytes((text.replace("\n", "\r\n") if crlf else text).encode("utf-8"))
+
+
 def read_json(path):
-    return json.loads(Path(path).read_text(encoding="utf-8"))
+    return json.loads(read_text(path))
 
 
 def engine():
@@ -198,7 +224,7 @@ class SyntaxError_(ValueError):
 def read_blocks(path):
     """translation source -> [(id, flags:set, text)] (file order).  Header: `@@ sDialog_0xNNNN @@ [flag ...]`."""
     blocks, cur, buf = [], None, []
-    for n, line in enumerate(Path(path).read_text(encoding="utf-8").split("\n"), 1):
+    for n, line in enumerate(read_text(path).split("\n"), 1):
         m = HEAD.match(line)
         if m:
             if cur is not None:
@@ -221,7 +247,7 @@ def write_blocks(path, blocks):
     for i, flags, text in sorted(blocks, key=lambda b: b[0]):
         head = "@@ sDialog_0x%04X @@" % i + ("".join(" " + f for f in sorted(flags)))
         out.append(head + "\n" + text.strip("\n") + "\n")
-    Path(path).write_text("\n".join(out), encoding="utf-8", newline="\n")
+    write_text(path, "\n".join(out))
 
 
 class Item:
@@ -317,6 +343,7 @@ class Layout:
         self.screens = []           # per screen: number of cells used (index of the last used cell + 1)
         self.cells = []             # per screen: content of the cells (glyph id; "v" = text variable cell, "n" = number digit cell)
         self.errors = []
+        self.error_pos = []         # per error: (screen index, cell index) where the layout stopped being valid
         self.notes = []
         self.autopages = 0
 
@@ -351,6 +378,11 @@ def layout_items(items, lang, raw=None):
     L = Layout()
     cur = []                       # cells of the current screen
 
+    def err(msg, cell=None):
+        """error + its position (screen index, cell index of the screen) for the precise diagnostics of check.py"""
+        L.errors.append(msg)
+        L.error_pos.append((len(L.screens), len(cur) if cell is None else cell))
+
     def close_screen():
         L.screens.append(len(cur))
         L.cells.append(list(cur))
@@ -375,7 +407,7 @@ def layout_items(items, lang, raw=None):
         while eff and cur[eff - 1] == SPACE:
             eff -= 1
         if eff > marker:
-            L.errors.append("a screen that continues with <NEXT> uses cell %d, which holds the blinking marker (%s)" % (marker, why))
+            err("a screen that continues with <NEXT> uses cell %d, which holds the blinking marker (%s)" % (marker, why), marker)
         L.words.append(NEXT)
         close_screen()
 
@@ -389,7 +421,7 @@ def layout_items(items, lang, raw=None):
         it = items[i]
         k = it.kind
         if ended:
-            L.errors.append("text after <END>/<OPT>")
+            err("text after <END>/<OPT>")
             break
         if k == "next":
             page("explicit <NEXT>")
@@ -407,9 +439,9 @@ def layout_items(items, lang, raw=None):
             if k in ("g", "var", "num", "sp"):
                 put(Item("g", SPACE, 1) if k == "sp" else it)
                 if len(cur) > cap and not any("screen holds" in e for e in L.errors):
-                    L.errors.append("screen holds more than %d cells (the dialog box shows %d)" % (cap, cap))
+                    err("screen holds more than %d cells (the dialog box shows %d)" % (cap, cap))
             else:
-                L.errors.append("<BR>/<POS> need the wrap layout (raw text is written cell by cell)")
+                err("<BR>/<POS> need the wrap layout (raw text is written cell by cell)")
             i += 1
             continue
         # ---- wrap layout
@@ -421,7 +453,7 @@ def layout_items(items, lang, raw=None):
             continue
         if k == "pos":
             if it.val < len(cur) or it.val >= cap:
-                L.errors.append("<POS %d> is %s" % (it.val, "behind the text already written (cell %d)" % len(cur) if it.val < len(cur) else "outside the box"))
+                err("<POS %d> is %s" % (it.val, "behind the text already written (cell %d)" % len(cur) if it.val < len(cur) else "outside the box"))
             else:
                 pad_to(it.val)
             i += 1
@@ -437,13 +469,13 @@ def layout_items(items, lang, raw=None):
         # a word: glyphs, variables and numbers up to the next space / token
         j, wl = _word_cells(items, i)
         if wl > W:
-            L.errors.append("a word of %d cells does not fit into a line of %d" % (wl, W))
+            err("a word of %d cells does not fit into a line of %d" % (wl, W))
         if len(cur) % W != 0 and len(cur) % W + wl > W:        # does not fit into the rest of the line: next line
             pad_to((len(cur) // W + 1) * W)
         end = len(cur) + wl
         if end > cap or (end > marker and more_follows(j)):
             if not lang.autopage:
-                L.errors.append("more than %d cells on a screen (set autopage or add <NEXT>)" % cap)
+                err("more than %d cells on a screen (set autopage or add <NEXT>)" % cap)
             else:
                 page("automatic page break"); L.autopages += 1
         for it2 in items[i:j]:
@@ -481,7 +513,7 @@ def read_status(path):
     p = Path(path)
     if not p.exists():
         return out
-    rows = [l for l in p.read_text(encoding="utf-8").splitlines() if l.strip() and not l.startswith("#")]
+    rows = [l for l in read_text(p).split("\n") if l.strip() and not l.startswith("#")]
     for r in csv.DictReader(rows):
         out[int(r["id"], 0)] = {"status": r.get("status") or "todo", "translator": r.get("translator") or "", "note": r.get("note") or ""}
     return out
@@ -496,7 +528,7 @@ def write_status(path, st):
     w.writerow(["id", "status", "translator", "note"])
     for i in sorted(st):
         w.writerow(["0x%04X" % i, st[i]["status"], st[i].get("translator", ""), st[i].get("note", "")])
-    Path(path).write_text(buf.getvalue(), encoding="utf-8", newline="\n")
+    write_text(path, buf.getvalue())
 
 
 def effective_status(i, translated, st):
@@ -530,6 +562,7 @@ def cursor_cells(lang):
 class Result:
     def __init__(self):
         self.errors, self.warnings, self.layout, self.items = [], [], None, None
+        self.where = {}             # message -> (screen index, cell index) for the messages that point at a cell
 
 
 def check_entry(i, text, flags, lang, ctx):
@@ -548,6 +581,8 @@ def check_entry(i, text, flags, lang, ctx):
         r.errors.append("the dialog has no text")
     r.layout = layout_items(r.items, lang, raw=raw)
     r.errors += r.layout.errors
+    for m, pos in zip(r.layout.errors, r.layout.error_pos):
+        r.where.setdefault(m, pos)
     want = ctx.ref[i]
     sig = items_signature(r.items)
     opt_fields = set(ctx.vm.d.get("optional_fields", []))
@@ -572,9 +607,13 @@ def check_entry(i, text, flags, lang, ctx):
         for k in range(min(want["opt"], len(cur))):
             c = cur[k]
             if len(cells) <= c + off or cells[c + off] == SPACE:
-                r.errors.append("answer %d has no text at cell %d (cursor cell %d); use <OPTLBL %d>" % (k + 1, c + off, c, k + 1))
+                m = "answer %d has no text at cell %d (cursor cell %d); use <OPTLBL %d>" % (k + 1, c + off, c, k + 1)
+                r.errors.append(m)
+                r.where[m] = (len(r.layout.cells) - 1, c + off)
             elif c < len(cells) and cells[c] != SPACE:
-                r.warnings.append("the cursor cell %d of answer %d holds text" % (c, k + 1))
+                m = "the cursor cell %d of answer %d holds text" % (c, k + 1)
+                r.warnings.append(m)
+                r.where[m] = (len(r.layout.cells) - 1, c)
     r.nbytes = len(r.layout.words) * 2
     return r
 

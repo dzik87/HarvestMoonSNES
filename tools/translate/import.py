@@ -23,7 +23,7 @@ def read_worksheet(path):
     path = Path(path)
     if path.suffix.lower() == ".tsv":
         out = []
-        with open(path, encoding="utf-8", newline="") as f:
+        with open(path, encoding="utf-8-sig", newline="") as f:
             for r in csv.DictReader(f, delimiter="\t"):
                 t = (r.get("translation") or "").replace("\\n", "\n")
                 if t.strip():

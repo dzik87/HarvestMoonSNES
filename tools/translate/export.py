@@ -70,7 +70,7 @@ def write_txt(path, rs, lang):
         if r["translation"].strip():
             out.append(r["translation"].strip("\n"))
         out.append("")
-    Path(path).write_text("\n".join(out), encoding="utf-8", newline="\n")
+    C.write_text(path, "\n".join(out), keep_eol=False)
 
 
 def write_tsv(path, rs):
