@@ -1,10 +1,18 @@
 {
- "_doc": "Release specific values of the dialog text tables (tools/translate/texttables.py).  option_vram: aTextDataTableFFFE, the VRAM word address stored in strcDialogDisplay.glyphVramAddr for the selected answer (0-4) of an <OPT n> selection menu.",
+ "_doc": "Release specific values of the dialog text tables (tools/translate/texttables.py).  option_vram: aTextDataTableFFFE, the VRAM word address stored in strcDialogDisplay.glyphVramAddr for the selected answer (0-4) of an <OPT n> selection menu.  dialog_banks: the first dialog id of every ROM bank that holds dialogs (translate/<region>/dialogs.txt is cut at these ids, every bank is padded to $8000).",
  "option_vram": [
   "$5010",
   "$5170",
   "$5350",
   "$5108",
   "$5268"
- ]
+ ],
+ "dialog_banks": {
+  "B6": 0,
+  "B7": 210,
+  "B8": 421,
+  "B9": 653,
+  "BA": 856,
+  "BB": 1087
+ }
 }

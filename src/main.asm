@@ -98,7 +98,7 @@
     incsrc "ai/commands.asm"
     incsrc "ai/us/scripts.asm"
     
-    ; Dialogs (generated from translate/<lang>/bank_*.txt by tools/translate/dialog.py build):
+    ; Dialogs (generated from translate/<lang>/dialogs.txt by tools/translate/dialog.py build):
     ; US/EU/DE in banks $B6-$BB, JP in banks $AA-$AC (the other banks stay zero)
     if !REGION_JP
         incsrc "../build/gen/text/jp/bank_AA.asm"

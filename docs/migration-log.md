@@ -88,7 +88,7 @@ releases run the same scripts, see `docs/regions-ai.md`.
 - Removed as provably unused one-off migration scripts (no references anywhere in the repository, their inputs/outputs are long gone): `tools/migration/ai_labels.py`
   (AI raw addresses -> labels, done in phase 2), `tools/migration/split_ai.py` (per-script AI split, phase 2c).
 - Inventory of the remaining committed assembly under `src/`: hand-written/disassembled code (`src/code`, `src/ai`, `src/common`, `src/main.asm`, `src/code/header.asm`,
-  `src/code/region_targets.asm`) is kept; `src/data/dialogs/macros.asm` is a macro file; pending conversion by the graphics and audio work (not touched here):
+  `src/code/region_targets.asm`) is kept; the former dialog macro file (its constants are in `src/common/enums.asm` now) was a macro file; pending conversion by the graphics and audio work (not touched here):
   `src/data/gfx/**/bank_*.asm` (sprites, tiles, characters, palettes wrappers) and `src/data/audio/bank_AD..B2.asm`.
 - Kept although old: `tools/gfx/gfxpipe.py` (CI `verify` step and docs), `docs/naming/*.csv` (old -> new label maps referenced from the docs).
 
@@ -98,3 +98,14 @@ releases run the same scripts, see `docs/regions-ai.md`.
 - Moved to `tools/dev/` (maintenance tools with a docstring stating the purpose): `region_patch.py` (bootstrap / audit of the regional patch blocks, used by `tests/test_region_patch.py`),
   `table_layout.py` (re-derives `defs/tables/` from complete table sources; running it on the committed tree changes nothing), `apply_renames.py` (label rename utility).
 - `region_patch.py` / `region_variant.py` name region targets from the rename records (`L_` rows of `docs/naming/*.csv`) instead of emitting `L_<address>`; see `docs/regions.md`.
+
+## Texts and fonts under `translate/` (one folder per language)
+- The dialog texts and fonts of the four original releases (formerly under the asset tree's dialogs and fonts folders) and the translations (formerly `translations/`) now share one layout: `translate/<lang>/`
+  with `dialogs.txt` (US/EU/DE/JP: all 1176 dialogs of the release in one file, same block syntax as a translation; formerly one `bank_XX.txt` per ROM bank, the bank cut is now
+  `dialog_banks` in `text_tables.json`), `text_tables.json`, `text_vars.csv`, and `glyphs/` with one PNG per glyph plus `glyph_map.json` (id, character, PNG, engine width; the single source
+  of truth for characters and font; replaces the per-release `glyphs.json`, the character table of `src/common`, the JP charmap JSON and the JP display extras, now `defs/translation/charmaps.json` as the extraction seed).
+  `translate/pl/glyphs/` holds a PNG for all 704 ids (created once by `tools/translate/glyphs.py init`); the ROM build no longer generates Polish letters.
+- `tools/dialogs/` and `tools/fonts/` merged into `tools/translate/` (`dialog.py`, `texttables.py`, `font.py`, `glyphmap.py`); `defs/dialogs/` moved to `defs/translation/`; generated assembler is written to
+  `build/gen/text/` (formerly `build/gen/dialogs/`). The dialog control-word constants of the former `src/data/dialogs/macros.asm` moved to `src/common/enums.asm`; the unused `Dialog*` macros of that file were dropped.
+- `tools/extract.py --out DIR` writes `DIR/assets/` and `DIR/translate/{us,eu,de,jp}` and `--compare` takes a repository root; the four original language folders are extractable like `assets/`, other languages are never touched.
+- Verified bit-identical: the four ROMs ("ROM MATCHES ORIGINAL"), the Polish build (same SHA-256 as before the move) and the identity translation.

@@ -182,7 +182,7 @@ ORIGINAL_NAMES = {"us": "English (US release)", "eu": "English (EU release)", "d
 def write_lang_json(directory, region):
     """translate/<region>/lang.json: names the files of an original release (the text, tables and glyph sources are fixed by convention; the file is documentation and a marker)."""
     doc = {"code": region, "name": ORIGINAL_NAMES[region], "kind": "original", "engine_region": region,
-           "text": "bank_*.txt", "text_tables": "text_tables.json", "text_vars": "text_vars.csv", "number_vars": "../number_vars.csv",
+           "text": "dialogs.txt", "text_tables": "text_tables.json", "text_vars": "text_vars.csv", "number_vars": "../number_vars.csv",
            "glyphs": GLYPH_DIR + "/" + MAP_NAME}
     d = Path(directory)
     d.mkdir(parents=True, exist_ok=True)

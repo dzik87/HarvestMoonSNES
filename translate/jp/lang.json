@@ -3,7 +3,7 @@
  "name": "Japanese (JP release)",
  "kind": "original",
  "engine_region": "jp",
- "text": "bank_*.txt",
+ "text": "dialogs.txt",
  "text_tables": "text_tables.json",
  "text_vars": "text_vars.csv",
  "number_vars": "../number_vars.csv",

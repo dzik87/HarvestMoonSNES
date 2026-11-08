@@ -67,7 +67,8 @@ def write_fixture(root):
     for region, texts, bank in (("us", US_TEXT, "B6"), ("jp", JP_TEXT, "AA")):
         d = Path(root) / region
         d.mkdir(parents=True)
-        (d / ("bank_%s.txt" % bank)).write_text("\n".join("@@ sDialog_0x%04X @@\n%s\n" % (i, t) for i, t in texts.items()), encoding="utf-8")
+        (d / "dialogs.txt").write_text("\n".join("@@ sDialog_0x%04X @@\n%s\n" % (i, t) for i, t in texts.items()), encoding="utf-8")
+        (d / "text_tables.json").write_text(json.dumps({"dialog_banks": {bank: 0}}), encoding="utf-8")
 
 
 DEFAULT_LETTERS = {"Ą": {"id": "0x43"}, "ż": {"id": "0x44"}, "ó": {"id": "0x45"}}

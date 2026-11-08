@@ -9,8 +9,8 @@ translate/
   number_vars.csv          numeric variables of the dialog engine (shared by the four releases)
   us/ eu/ de/ jp/          the four ORIGINAL releases
     lang.json              code, name, kind "original", engine release
-    bank_B6.txt ...        dialog text (JP: bank_AA/AB/AC.txt), `@@ sDialog_0xNNNN @@` blocks
-    text_tables.json       dialog engine tables of the release
+    dialogs.txt            all dialogs of the release, `@@ sDialog_0xNNNN @@` blocks (same syntax as a translation)
+    text_tables.json       dialog engine tables of the release, `dialog_banks` = first dialog id of every ROM bank
     text_vars.csv          text variables of the release
     glyphs/                glyph_XXXX.png for every glyph that is not plain dither + glyph_map.json
   pl/                      a translation (the Polish one)

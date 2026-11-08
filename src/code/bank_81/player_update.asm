@@ -12,7 +12,7 @@
 ;   handlers that give an item set strcPlayerData.carryItemId and !PACTION_ITEMONHAND (pick-up pose, player_actions.asm);
 ;   AIExecute(slot, 0, script) starts an AI script on an NPC slot (fAI_StartSlotScript);
 ;   money is changed with fGameEngine_AddProfit (price in 10G units, 24-bit in ptrTemp0x72; returns A = 0 on success).
-; Dialog ids are the sDialog_0xNNNN numbers of assets/dialogs; texts quoted in the blocks are paraphrased from the US release.
+; Dialog ids are the sDialog_0xNNNN numbers of translate/<region>/dialogs.txt; texts quoted in the blocks are paraphrased from the US release.
 ; Entries with no behaviour are plain RTS. Data included at the end: aPlayerInteraction_SetFlags / aPlayerInteraction_ResetFlags.
 ; @bank     $81   @range $81D510-$81FFFF
 ; @see      player_actions.asm, ../bank_83/map_engine.asm, ../bank_82/interaction_data.asm, ../bank_83/dialog.asm

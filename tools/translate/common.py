@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Shared code of the translation tools (tools/translate/*, docs/translation.md).
 
-Reads the extracted dialog texts of the four releases (translate/<region>/bank_XX.txt, produced by tools/extract.py), the engine rules
+Reads the extracted dialog texts of the four releases (translate/<region>/dialogs.txt, produced by tools/extract.py), the engine rules
 (defs/translation/engine.json), the variable map (defs/translation/var_map_jp_us.json) and a language directory
 (translate/<lang>/), and implements
 
@@ -19,7 +19,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[2]
 DEFS = ROOT / "defs" / "translation"
 TRANSLATIONS = ROOT / "translate"                 # one directory per language: the four releases (us eu de jp) and the translations
-ASSETS_DIALOGS = TRANSLATIONS                       # the extracted dialogs of a release are translate/<region>/bank_*.txt
+ASSETS_DIALOGS = TRANSLATIONS                       # the extracted dialogs of a release are translate/<region>/dialogs.txt
 WORK = ROOT / "build" / "translate"
 
 NEXT, NUMV, TEXTV, OPTS, END = 0x00A2, 0xFFFC, 0xFFFD, 0xFFFE, 0xFFFF
@@ -114,19 +114,18 @@ def lang_dir(code_or_path):
 
 # ---------------------------------------------------------------- dialog assets
 def asset_blocks(region, root=None):
-    """{id: words} of the extracted dialogs of a release (translate/<region>)."""
+    """{id: words} of the extracted dialogs of a release (translate/<region>/dialogs.txt)."""
     root = Path(root) if root else ASSETS_DIALOGS
+    f = dialog.dialogs_file(region, root)
+    if not f.is_file():
+        return {}
     cm = dialog.load_charmap(region)
-    out = {}
-    for f in sorted((root / region).glob("bank_*.txt")):
-        for label, text in dialog.read_txt(f):
-            out[int(label.rsplit("_0x", 1)[1], 16)] = dialog.text_to_words(text, cm)
-    return out
+    return {int(label.rsplit("_0x", 1)[1], 16): dialog.text_to_words(text, cm) for label, text in dialog.read_txt(f)}
 
 
 def have_assets(region="us", root=None):
     root = Path(root) if root else ASSETS_DIALOGS
-    return any((root / region).glob("bank_*.txt"))
+    return dialog.dialogs_file(region, root).is_file()
 
 
 def split_tokens(words):
@@ -616,12 +615,15 @@ def check_entry(i, text, flags, lang, ctx):
 
 # ---------------------------------------------------------------- translation files
 def asset_banks(region, root=None):
-    """{id: bank} of the extracted dialogs of a release."""
+    """{id: bank} of the extracted dialogs of a release (the bank assignment is stored in text_tables.json)."""
     root = Path(root) if root else ASSETS_DIALOGS
+    ids = sorted(int(label.rsplit("_0x", 1)[1], 16) for label, _ in dialog.read_txt(dialog.dialogs_file(region, root)))
+    starts = dialog.bank_starts(region, root)
     out = {}
-    for f in sorted((root / region).glob("bank_*.txt")):
-        for label, _ in dialog.read_txt(f):
-            out[int(label.rsplit("_0x", 1)[1], 16)] = f.stem.split("_")[1]
+    for k, (bank, first) in enumerate(starts):
+        last = starts[k + 1][1] if k + 1 < len(starts) else len(ids)
+        for i in ids[first:last]:
+            out[i] = bank
     return out
 
 

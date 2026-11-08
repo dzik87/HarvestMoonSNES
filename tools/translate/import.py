@@ -70,7 +70,7 @@ def main(argv=None):
     ap.add_argument("file")
     ap.add_argument("--status", choices=C.STATUSES)
     ap.add_argument("--skip-invalid", action="store_true")
-    ap.add_argument("--translate-dir", "--assets", dest="assets", help="directory with the <region>/bank_*.txt dialogs of the four releases (default translate)")
+    ap.add_argument("--translate-dir", "--assets", dest="assets", help="directory with the <region>/dialogs.txt dialogs of the four releases (default translate)")
     a = ap.parse_args(argv)
     if not C.have_assets("jp", a.assets):
         sys.exit("The extracted dialogs are missing: python tools/extract.py --rom-dir <your dumps> (docs/extraction.md)")

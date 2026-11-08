@@ -6,7 +6,7 @@
   pTextAmmountTable       dl 10^0 .. 10^7               derived (decimal place values of the <NUM> digit loop)
   aTextDataTableFFFC      [dl address, db size] x 112   translate/number_vars.csv            (numeric variables of <NUM n i>)
   aTextDataTableFFFD      [dl address, db size] x N     translate/<region>/text_vars.csv     (text variables of <VAR n i>)
-  aDialogPointers         dl sDialog_0xNNNN x count     derived from the dialog sources translate/<region>/bank_*.txt (ids 0 .. count-1)
+  aDialogPointers         dl sDialog_0xNNNN x count     derived from the dialog sources translate/<region>/dialogs.txt (ids 0 .. count-1)
 
 ->  build/gen/text/<region>/text_tables.asm, included by src/code/bank_83/dialog.asm through `!{DLGDIR}` at the place of the former data.
 The pointer table therefore follows the dialog texts automatically: adding a dialog (next free id) only needs the text.
@@ -34,10 +34,8 @@ def read_csv(path):
 
 
 def dialog_ids(root, region):
-    ids = []
-    for f in sorted((Path(root) / DLG / region).glob("bank_*.txt")):
-        ids += [int(m.group(1), 16) for m in re.finditer(r"^@@ sDialog_0x([0-9A-F]{4}) @@$", f.read_text(encoding="utf-8"), re.M)]
-    return ids
+    f = Path(root) / DLG / region / "dialogs.txt"
+    return [int(m.group(1), 16) for m in re.finditer(r"^@@ sDialog_0x([0-9A-F]{4}) @@$", f.read_text(encoding="utf-8"), re.M)]
 
 
 def font_labels(root):
