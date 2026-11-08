@@ -11,7 +11,6 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "tests"))
 sys.path.insert(0, str(ROOT / "tools" / "translate"))
-sys.path.insert(0, str(ROOT / "tools" / "fonts"))
 import test_translate as T                               # noqa: E402  (fixtures: invented US/JP dialogs, make_lang)
 import common as C                                       # noqa: E402
 import font as fontmod                                   # noqa: E402
@@ -34,6 +33,8 @@ def synth_tables():
     for ch in "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789.,!? ":
         if ch != " ":
             fontmod.encode_glyph(tables[cm[ch] >> 6], cm[ch] & 0x3F, px)
+    for gid in (0x43, 0x44, 0x45):                      # the letters of the invented language (T.DEFAULT_LETTERS)
+        fontmod.encode_glyph(tables[gid >> 6], gid & 0x3F, px)
     return [bytes(t) for t in tables]
 
 
@@ -272,7 +273,7 @@ def test_gfx(root):
         GX.load_png_cells(root / "idx.png", GX.Screen(root, "Screen_T")); ok(False, "palette index above 127 or a KEEP mix must be refused")
     except GX.GfxError:
         pass
-    # language build: files in translations/<lang>/gfx
+    # language build: files in translate/<lang>/gfx
     (root / "lang").mkdir()
     d = T.make_lang(root / "lang")
     (d / "gfx").mkdir()

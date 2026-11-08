@@ -63,16 +63,16 @@ All tools: [tools/translate/README.md](../tools/translate/README.md) (quick star
   and by how many cells (`--max-screens N`, `--fit us` = no more screens than the US text). Dialogs with `<OPT>`/`<POS>` are manual. It writes `build/translate/<lang>_reflow.txt`; `--apply` rewrites only the
   chosen dialogs in `dialogs.txt` (backup in `build/translate/backup/`); nothing runs it implicitly.
 * **`status.py`**: `list`, `set <status> --ids ...`, `coverage` (per bank), `validate` on `status.csv`.
-* **`glossary.py`**: `translations/<lang>/glossary.csv` (`term,preferred,forbidden,note`; `|` separates forms, `stem*`, `re:PATTERN`): forbidden forms are errors, `--source us|jp` also warns where the source
+* **`glossary.py`**: `translate/<lang>/glossary.csv` (`term,preferred,forbidden,note`; `|` separates forms, `stem*`, `re:PATTERN`): forbidden forms are errors, `--source us|jp` also warns where the source
   uses a term but no preferred form appears; `names` lists the variables / numbers per id (`--proper`: capitalised word candidates).
 * **`gfx.py`** and **`make_patch.py`**: next sections.
 
-## Text in graphics (`translations/<lang>/gfx/`)
+## Text in graphics (`translate/<lang>/gfx/`)
 
 Words that are baked into background pictures (menu, title, signs, the name entry grid) are changed with override pictures. `python tools/translate/gfx.py list` names the candidate screens
 (the name tables that other releases replace); `gfx.py template Screen_X` writes an empty canvas of the right size.
 
-* An override is an **indexed PNG** `translations/<lang>/gfx/<Screen>.png` with the size of the screen picture (`assets/gfx/png/screens/<Screen>.png`; 8 px per name table cell). Pixel value = palette row << 4 | colour index
+* An override is an **indexed PNG** `translate/<lang>/gfx/<Screen>.png` with the size of the screen picture (`assets/gfx/png/screens/<Screen>.png`; 8 px per name table cell). Pixel value = palette row << 4 | colour index
   (0-127), exactly as in the composed pictures ([formats/graphics-png.md](formats/graphics-png.md)). Pixel value **255 = KEEP**: a cell that is completely 255 is not touched, so the file needs only the
   cells you change and holds none of the original pixels. Keep the full 256 entry palette when you save (an optimising PNG writer may renumber the indices).
 * For every changed 8x8 cell the tool reuses an existing tile with the same pixels (also mirrored) or writes the pixels into a free tile (all zero, not used by any name table of these tile sets, never tile 0)

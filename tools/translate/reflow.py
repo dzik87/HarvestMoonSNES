@@ -3,7 +3,7 @@
 
   python tools/translate/reflow.py pl --ids 0x0123,0x0200-0x0210       suggestions -> build/translate/pl_reflow.txt, summary (ids and counts only)
   python tools/translate/reflow.py pl --all --breaks free --fit us      free layout, report ids that need more screens than the US text
-  python tools/translate/reflow.py pl --all --apply                     ALSO write the suggestions into translations/pl/dialogs.txt (only with this flag)
+  python tools/translate/reflow.py pl --all --apply                     ALSO write the suggestions into translate/pl/dialogs.txt (only with this flag)
   python tools/translate/reflow.py --text "some text" --lang pl         one text from the command line / --stdin (fixtures, quick tests)
 
 Nothing is ever written to the translation unless --apply is given; the tool is never run by the build or by another tool.

@@ -41,7 +41,7 @@ tools\translate\translate.bat patch-apply build\HarvestMoon_US_pl.bps "C:\path\H
 | `preview.py` | PNG of the dialog box as the game draws it (generated letters included), contact sheets, problems marked red / magenta |
 | `reflow.py` | suggests line and page breaks without changing words; never writes to the translation without `--apply` |
 | `status.py` | `status.csv`: list, set, coverage per bank, validate |
-| `glossary.py` | term consistency (`translations/<lang>/glossary.csv`), names report |
+| `glossary.py` | term consistency (`translate/<lang>/glossary.csv`), names report |
 | `stats.py` | progress per bank with byte counts |
 | `strings.py`, `namegrid.py`, `glyphs.py` | season / weekday tables, name entry grid, letter generation |
 | `gfx.py` | text in graphics: override pictures, name entry grid letters |

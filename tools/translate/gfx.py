@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Text in graphics: picture overrides of a translation (translations/<lang>/gfx/) applied at translation-build time.
+"""Text in graphics: picture overrides of a translation (translate/<lang>/gfx/) applied at translation-build time.
 
   python tools/translate/gfx.py list [--all]              candidate screens (names only): the name tables that the other releases replace (text in tiles)
   python tools/translate/gfx.py template Screen_X [--out FILE]    an empty override canvas of the right size (every pixel = KEEP) to draw the new cells on
@@ -8,14 +8,14 @@
 
 Mechanism.  A screen is a BG name table (assets/gfx/characters/<Screen>.bin) drawn with the tile blobs listed in its sidecar (assets/gfx/tilemaps/<Screen>.json); the
 composed pictures of docs/formats/graphics-png.md show it as one indexed PNG (pixel value = palette row << 4 | colour index, one 8x8 cell per name table entry).  An override
-PNG `translations/<lang>/gfx/<Screen>.png` has the same size.  Cells that hold the value KEEP (255) everywhere are not touched, so an override only needs the cells that
+PNG `translate/<lang>/gfx/<Screen>.png` has the same size.  Cells that hold the value KEEP (255) everywhere are not touched, so an override only needs the cells that
 change (the repository then holds none of the original pixels).  For every cell that differs from the original picture the tool
   1. looks for an existing tile with exactly these pixels (also mirrored) and points the name table entry at it, otherwise
   2. writes the pixels into a FREE tile (an all-zero tile that no name table of any screen with these tile sets refers to) and points the entry at that,
 and keeps the priority bit of the entry.  Shared tiles of other screens are never edited, so no picture can contradict another.  The result is recompressed with the
 game's LZSS codec and written as `translation/<label>.bin` next to the shared blobs; the build then includes the blobs through `!{REGDIR}` (src/common/region.asm,
 `!TRANSLATION_GFX`).  A bank has to stay within $8000 bytes (checked here against defs/gfx/banks.json).  The four original releases never see these files.
-`lang.json` key `"gfx": {"name_grid": true}` also generates the 18 letters of the name entry grid (translations/<lang>/name_grids.txt) from the generated glyphs
+`lang.json` key `"gfx": {"name_grid": true}` also generates the 18 letters of the name entry grid (translate/<lang>/name_grids.txt) from the glyphs of the language (translate/<lang>/glyphs)
 (tools/translate/glyphs.py): the picture of the name entry screen uses the dialog font, so each new letter is the glyph cell of the language.
 """
 import argparse
@@ -169,7 +169,7 @@ def load_png_cells(path, scr):
 def name_grid_cells(lang, scr, glyph_px=None):
     """The picture cells of the language letters of the name entry grid -> {(cx, cy): 64 values}.
     Position of grid cell (x, y): the 8x16 letter block starts at pixel (x - 8, y - 4); the block holds the glyph cell of the dialog font."""
-    import glyphs as G
+    import font
     import namegrid as NG
     cfg = lang.cfg.get("gfx", {})
     if not cfg.get("name_grid") or lang.cfg.get("grids", {}).get("enabled", True) is False or "grids" not in lang.cfg:
@@ -179,7 +179,7 @@ def name_grid_cells(lang, scr, glyph_px=None):
     rows = NG.load_override(lang)
     if rows is None:
         return {}
-    gl = glyph_px if glyph_px is not None else G.build_glyphs(lang, G.engine_tables(lang.engine_region))
+    gl = glyph_px if glyph_px is not None else (font.load_glyphs(lang.dir)[1] if lang.has_glyphs else {})   # translate/<lang>/glyphs: {id: pixels}
     ids = {g["id"] for g in lang.glyphs.values()}
     out = {}
     for r in rows:

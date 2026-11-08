@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Status of the dialogs of a translation: translations/<lang>/status.csv (todo / draft / reviewed, translator, note).
+"""Status of the dialogs of a translation: translate/<lang>/status.csv (todo / draft / reviewed, translator, note).
 
   python tools/translate/status.py list pl [--status draft] [--bank B6] [--ids ...] [--json]    ids with their status (ids only, no text)
   python tools/translate/status.py set pl reviewed --ids 0x0100-0x01FF [--translator NAME] [--note TEXT] [--only-from draft] [--dry-run]

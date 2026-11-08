@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Terminology consistency for a translation: translations/<lang>/glossary.csv (works for any language).
+"""Terminology consistency for a translation: translate/<lang>/glossary.csv (works for any language).
 
   python tools/translate/glossary.py check pl [--source us|jp] [--ids ...] [--json]    forbidden forms, missing preferred forms
   python tools/translate/glossary.py list pl                                           the glossary as loaded (terms, forms)
@@ -170,7 +170,7 @@ def main(argv=None):
     for name in ("check", "list", "names"):
         p = sub.add_parser(name)
         p.add_argument("lang")
-        p.add_argument("--glossary", help="glossary file (default translations/<lang>/glossary.csv)")
+        p.add_argument("--glossary", help="glossary file (default translate/<lang>/glossary.csv)")
         p.add_argument("--assets")
         if name != "list":
             p.add_argument("--json", action="store_true")

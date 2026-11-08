@@ -12,7 +12,7 @@ variables and numbers as tinted hatched cells with their full width (names 4, gi
 Problems are drawn, not hidden:
   red frame / red rows      the screen holds more than 84 cells, or the text uses the marker cell 83 of a screen that continues, or another layout error
   magenta cross             a glyph that has no pixels (id outside the font tables or an empty glyph that is not the space)
-Glyphs are the extracted US font (assets/gfx/tiles) plus the generated or hand drawn letters of the language (tools/translate/glyphs.py), exactly what the build writes
+Glyphs are the font of the language (translate/<lang>/glyphs: PNGs + glyph map, tools/translate/font.py), exactly what the build writes
 into the ROM.  The output directory build/translate/ is git-ignored: previews of ROM-derived pixels are never committed.
 Only ids, counts and file names are printed, never the text.
 """
@@ -22,8 +22,6 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import common as C                                          # noqa: E402
-
-sys.path.insert(0, str(C.ROOT / "tools" / "fonts"))
 import font                                                 # noqa: E402
 
 CELL_W, LINE_H = 8, 16
@@ -77,10 +75,12 @@ class GlyphSource:
 
 
 def load_glyphs(lang, tables=None):
-    """The font as the translated ROM will hold it: US tables + generated / hand drawn letters of the language."""
-    import glyphs as G
-    base = tables if tables is not None else G.engine_tables(lang.engine_region)
-    return GlyphSource(G.apply_glyphs(base, G.build_glyphs(lang, base)))
+    """The font as the translated ROM will hold it: the tables built from translate/<lang>/glyphs (PNGs + glyph map), or the US tables for a language without its own glyphs.
+    `tables` replaces them (tests)."""
+    if tables is None:
+        import glyphs as G
+        tables = font.glyphs_to_tables(font.load_glyphs(lang.dir)[1]) if lang.has_glyphs else G.engine_tables(lang.engine_region)
+    return GlyphSource(tables)
 
 
 def _is_missing(px, gid):

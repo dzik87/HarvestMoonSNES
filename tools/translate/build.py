@@ -85,7 +85,7 @@ def generate(lang, ctx, fallback="us", allow_errors=False, gen_dir=GEN_DIR, tabl
 
 
 def post_process(rom, lang, symbols=None):
-    """Patch an assembled ROM (bytearray): generated glyphs, string tables, name entry grid, header title, checksum
+    """Patch an assembled ROM (bytearray): font tables (translate/<lang>/glyphs), string tables, name entry grid, header title, checksum
     -> (checksum, list of patched font tables, info dict {"strings": [(table, slots)], "grid_rows": n}).
     `symbols` = {label: address} of the assembled ROM (asar --symbols=nocash); with it the addresses of defs/translation/strings.json and defs/menu/name_input.json are verified."""
     from_tables = G.engine_tables(lang.engine_region)
