@@ -81,3 +81,10 @@ endif
 if !TRANSLATION
     !DLGDIR = "translation"
 endif
+
+; Text in graphics of a translation (tools/translate/gfx.py): the region specific blobs are taken from assets/gfx/<kind>/translation/ (the override blobs plus copies
+; of the shared US blobs), exactly like the regional directories of the other releases.  Defined only by `tools/build.py --translation` when the language has overrides.
+!TRANSLATION_GFX ?= 0
+if !TRANSLATION_GFX
+    !REGDIR = "translation/"
+endif

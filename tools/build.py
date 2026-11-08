@@ -78,13 +78,19 @@ def main() -> int:
         rc = build_assets.main(quiet=not args.verbose)
         if rc:
             return rc
-    tr = None
+    tr, gfx_blobs = None, 0
     if args.translation:
         sys.path.insert(0, str(ROOT / "tools" / "translate"))
         import build as trbuild
         import common as trcommon
         tr = trcommon.Lang(trcommon.lang_dir(args.translation))
         summary = trbuild.generate(tr, trcommon.Context(), args.fallback, args.allow_errors)
+        import gfx as trgfx
+        trgfx.clean_overrides()
+        try:
+            gfx_blobs = trgfx.write_overrides(tr) if trgfx.lang_has_gfx(tr) else 0
+        except trgfx.GfxError as e:
+            sys.exit("graphics override: %s" % e)
     asar = find_asar(args.asar)
     out = args.out if args.out.is_absolute() else ROOT / args.out
     out.parent.mkdir(parents=True, exist_ok=True)
@@ -97,6 +103,8 @@ def main() -> int:
     symfile = out.with_suffix(".sym")
     if tr:
         cmd += ["-DTRANSLATION=1", "--symbols=nocash", "--symbols-path=%s" % symfile]
+        if gfx_blobs:
+            cmd.append("-DTRANSLATION_GFX=1")
     cmd += ["-werror", "--no-title-check", "--fix-checksum=off", MAIN[args.region], str(out)]
     print("+", " ".join(cmd))
     rc = subprocess.run(cmd, cwd=ROOT).returncode

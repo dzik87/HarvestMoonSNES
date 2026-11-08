@@ -9,6 +9,9 @@
  "grids": {
   "file": "name_grids.txt"
  },
+ "gfx": {
+  "name_grid": true
+ },
  "strings": {
   "season": {
    "spring": "Wiosna",

@@ -628,8 +628,17 @@ def test_rom_polish_build():
                 allowed.append((trstr.rom_offset(int(b, 16) << 16 | 0x8000), trstr.rom_offset(int(b, 16) << 16 | 0x8000) + 0x8000))
             o = trstr.rom_offset(sym["aDialogPointers"])
             allowed.append((o, o + 3 * len(C.Context().ids)))
+        import gfx as trgfx
+        if trgfx.lang_has_gfx(lang):                      # text in graphics: the banks of the replaced blobs may move (recompressed streams)
+            sys.path.insert(0, str(ROOT / "tools" / "data"))
+            import gfxbanks
+            allowed.append((0x192BF, 0x192C2))           # LDA #Screen_DialogBox in bank $83 (follows the moved blobs)
+            allowed.append((0, 0x8000))                  # bank $80 holds the pointers to the graphics blobs that moved
+            for kind, label in trgfx.build_overrides(lang)[0]:
+                bank = int(gfxbanks.bank_of(ROOT, label)[1], 16)
+                allowed.append((trstr.rom_offset(bank << 16 | 0x8000), trstr.rom_offset(bank << 16 | 0x8000) + 0x8000))
         stray = [i for i in range(len(orig)) if orig[i] != rom[i] and not any(a <= i < b for a, b in allowed)]
-        ok(not stray, "the Polish build changes only the font table, the string tables, the name grid, the dialog banks and pointers and the checksum (stray bytes: %d, first $%06X)" % (len(stray), stray[0] if stray else 0))
+        ok(not stray, "the Polish build changes only the font table, the string tables, the name grid, the dialog banks and pointers, the graphics banks of replaced blobs and the checksum (stray bytes: %d, first $%06X)" % (len(stray), stray[0] if stray else 0))
         # every string slot holds the encoded Polish text
         for tname, slots in trstr.resolved(lang).items():
             t = sp["tables"][tname]
