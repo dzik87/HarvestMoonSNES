@@ -1,0 +1,4 @@
+{
+  "_doc": "Roles of the AICMD macro parameters that tools/analysis/aidiff.py must treat specially. Every 16-bit pointer parameter written as `dw <name>&$FFFF` in src/ai/commands.asm is a jump target inside the current script unless it is listed here. A parameter named in bank_b3_record_pointers is the low word of a record address in the fixed table at the start of bank $B3 (the NPC/animal sprite tables, label aAIScriptingData_Lxxx); it is identical in every region and is not a position inside the command stream.",
+  "bank_b3_record_pointers": ["pAnimTable"]
+}

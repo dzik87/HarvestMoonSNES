@@ -139,11 +139,11 @@
   confidence: confirmed
   length_bytes: 4
   params:
-    - {name: nDataIndex, offset: 1, size: 1, type: n8, meaning: "Index of the target script slot (64-byte structure at $7E:B586 + idx*64, 49 slots). Also stored in the new slot at offset +$3F."}
+    - {name: nSlot, offset: 1, size: 1, type: n8, meaning: "Index of the target script slot (64-byte structure at $7E:B586 + idx*64, 49 slots). Also stored in the new slot at offset +$3F."}
     - {name: pNextAction, offset: 2, size: 2, type: script_ptr, meaning: "16-bit address of the script start in the same bank as the current script (the bank is copied from offset +$32 of the current slot)."}
-  summary: "Starts a parallel script in another slot (nDataIndex), beginning at pNextAction; the current script continues."
-  details: "Remembers the current slot (ptrAISlot -> ptrTemp0x72), switches ptrAISlot to slot nDataIndex through fAI_SelectSlot, copies the bank into it (+$32), stores the 16-bit pointer to +$30, calls fAI_ResetSlotFull (slot initialization: active=1, flags=0, counters, position 0, etc.), stores nDataIndex in +$3F and restores the previous slot. Then ptrAIActionData += 4 in total. Does not block. The new slot starts executing in the slot loop (in the same frame if its index is greater)."
-  ram_touched: [ptrAISlot, ptrTemp0x72, ptrAIActionData, "slot[nDataIndex]: +0 +1 +3..+6 +0C +0F +10 +12 +14 +1A +1C +30 +32 +3F"]
+  summary: "Starts a parallel script in another slot (nSlot), beginning at pNextAction; the current script continues."
+  details: "Remembers the current slot (ptrAISlot -> ptrTemp0x72), switches ptrAISlot to slot nSlot through fAI_SelectSlot, copies the bank into it (+$32), stores the 16-bit pointer to +$30, calls fAI_ResetSlotFull (slot initialization: active=1, flags=0, counters, position 0, etc.), stores nSlot in +$3F and restores the previous slot. Then ptrAIActionData += 4 in total. Does not block. The new slot starts executing in the slot loop (in the same frame if its index is greater)."
+  ram_touched: [ptrAISlot, ptrTemp0x72, ptrAIActionData, "slot[nSlot]: +0 +1 +3..+6 +0C +0F +10 +12 +14 +1A +1C +30 +32 +3F"]
   calls: [fAI_SelectSlot, fAI_ResetSlotFull]
   open_questions: "The meaning of all slot fields reset in fAI_ResetSlotFull (strcAISlot.unkXX) is not fully described; what happens when the target slot is already active was not checked (it is overwritten without a check)."
 

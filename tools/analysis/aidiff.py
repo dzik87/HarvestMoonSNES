@@ -23,6 +23,7 @@ The ROMs built by tools/build.py are bit-identical to the originals in banks $B3
 """
 import argparse
 import difflib
+import json
 import re
 import subprocess
 import sys
@@ -84,6 +85,8 @@ def load_ops(path=None):
 
 
 OPS = load_ops()
+# parameters that point into the fixed record table of bank $B3 instead of the command stream (defs/ai/command_params.json)
+B3_RECORD_PARAMS = frozenset(json.loads((ROOT / "defs/ai/command_params.json").read_text())["bank_b3_record_pointers"])
 
 
 @dataclass
@@ -251,7 +254,7 @@ def compare_script(us, ot, region):
         for (v, k, pn), (w, _, _) in zip(c.args, o.args):
             if k != "ptr16":
                 continue
-            if pn == "pPointerB3":                # points into the record table of bank $B3, which is identical
+            if pn in B3_RECORD_PARAMS:            # points into the record table of bank $B3, which is identical
                 if v != w:
                     ptr_ok, ptr_diff = False, True
                 continue
@@ -348,7 +351,7 @@ def dead_blocks(rom):
     for s in rom.scripts:
         bank = s.start & 0xFF0000
         refs = {bank | e for e in s.entries}
-        refs |= {bank | v for c in s.cmds for v, k, pn in c.args if k == "ptr16" and pn != "pPointerB3"}
+        refs |= {bank | v for c in s.cmds for v, k, pn in c.args if k == "ptr16" and pn not in B3_RECORD_PARAMS}
         out += [c.addr for i, c in enumerate(s.cmds) if i and s.cmds[i - 1].op in (0x10, 0x12) and c.addr not in refs]
     return out
 

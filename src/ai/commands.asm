@@ -171,14 +171,14 @@ macro AICMD0x08_EnableAIControl()
 endmacro
 
 ;;
-; @brief      Starts a parallel script in another slot (nDataIndex), beginning at pNextAction; the current script
+; @brief      Starts a parallel script in another slot (nSlot), beginning at pNextAction; the current script
 ;             continues.
 ; @details    Remembers the current slot (ptrAISlot -> ptrTemp0x72), switches ptrAISlot to slot
-;             nDataIndex through fAI_SelectSlot, copies the bank into it (+$32), stores the 16-bit pointer to +$30,
+;             nSlot through fAI_SelectSlot, copies the bank into it (+$32), stores the 16-bit pointer to +$30,
 ;             calls fAI_ResetSlotFull (slot initialization: active=1, flags=0, counters, position 0, etc.), stores
-;             nDataIndex in +$3F and restores the previous slot. Then ptrAIActionData += 4 in total.
+;             nSlot in +$3F and restores the previous slot. Then ptrAIActionData += 4 in total.
 ; @case       $09; 4 byte(s) including the opcode
-; @param      nDataIndex  byte: Index of the target script slot (64-byte structure at $7E:B586 + idx*64, 49 slots).
+; @param      nSlot  byte: Index of the target script slot (64-byte structure at $7E:B586 + idx*64, 49 slots).
 ; @param      pNextAction  word: 16-bit address of the script start in the same bank as the current script (the bank
 ;             is copied from offset +$32 of the current slot).
 ; @see        fAIAction0x09_StartScript
@@ -187,9 +187,9 @@ endmacro
 ; @note       The meaning of all slot fields reset in fAI_ResetSlotFull (strcAISlot.unkXX) is not fully described;
 ;             what happens when the target slot is already active was not checked (it is overwritten without a check).
 ;;
-macro AICMD0x09_StartScript(nDataIndex, pNextAction)
+macro AICMD0x09_StartScript(nSlot, pNextAction)
     db $09
-    db <nDataIndex>
+    db <nSlot>
     dw <pNextAction>&$FFFF
 endmacro
 
@@ -521,7 +521,7 @@ endmacro
 ; @param      nPosX  word: X position of the object (16-bit, signed - scripts contain values such as $FF80, i.e.
 ;             off-screen to the left) stored to +$1A (posX) of the AI object.
 ; @param      nPosY  word: Y position of the object stored to +$1C (posY).
-; @param      pPointerB3  word: Low 16 bits of the pointer to the sprite table in bank $B3 (aAIScriptingData_Lxxx, the
+; @param      pAnimTable  word: Low 16 bits of the pointer to the sprite table in bank $B3 (aAIScriptingData_Lxxx, the
 ;             pointer is stored to +$33, bank $B3 is hardcoded).
 ; @param      nDirection  byte: Initial direction 0-3 (stored to +$02), selects the entry from pAnimTable.
 ; @see        fAIAction0x1A_SpawnNpc
@@ -530,11 +530,11 @@ endmacro
 ; @note       The exact coordinate units (world pixels vs. map pixels) are unconfirmed - the same pair goes to
 ;             strcObject.posX/posY.
 ;;
-macro AICMD0x1A_SpawnNpc(nPosX, nPosY, pPointerB3, nDirection)
+macro AICMD0x1A_SpawnNpc(nPosX, nPosY, pAnimTable, nDirection)
     db $1A
     dw <nPosX>
     dw <nPosY>
-    dw <pPointerB3>&$FFFF
+    dw <pAnimTable>&$FFFF
     db <nDirection>
     
 endmacro
@@ -795,9 +795,8 @@ endmacro
 ;             AICMD0x26 emits the byte $28, not $26, and is not used anywhere in the US scripts.
 ; @case       $26 (the macro emits $28: the table entry for $26 points to the same handler); 5 byte(s) including the
 ;             opcode
-; @param      pAddress  long: 24-bit address of a 16-bit word in RAM in which a bit is cleared (the macro calls it
-;             nUnknown1).
-; @param      nBitIndex  byte: Bit number 0-15 (index into aAIResetMask, the macro calls it nUnknown2).
+; @param      pAddress  long: 24-bit address of a 16-bit word in RAM in which a bit is cleared.
+; @param      nBitIndex  byte: Bit number 0-15 (index into aAIResetMask).
 ; @see        fAIAction0x28_ClearBit
 ; @confidence high
 ; @modifies   ptrTemp0x72, strcVariables.n16Temp1, ptrAIActionData
@@ -818,9 +817,8 @@ endmacro
 ;             instead of $27 and there are no uses in the US scripts.
 ; @case       $27 (the macro emits $28: the table entry for $27 points to the same handler); 5 byte(s) including the
 ;             opcode
-; @param      pAddress  long: 24-bit address of a 16-bit word in RAM in which a bit is cleared (the macro calls it
-;             nUnknown1).
-; @param      nBitIndex  byte: Bit number 0-15 (index into aAIResetMask, the macro calls it nUnknown2).
+; @param      pAddress  long: 24-bit address of a 16-bit word in RAM in which a bit is cleared.
+; @param      nBitIndex  byte: Bit number 0-15 (index into aAIResetMask).
 ; @see        fAIAction0x28_ClearBit
 ; @confidence high
 ; @modifies   ptrTemp0x72, strcVariables.n16Temp1, ptrAIActionData
@@ -905,22 +903,22 @@ endmacro
 ;             game object creation.
 ; @details    The handler stores the pointer in slot +$33, the byte in slot +$02, sets bits $03 in the slot flag +$01
 ;             (bit $01 active, bit $02 = create object), calls fAI_LoadSlotSpriteFromDirTable with ptrTemp0x72 =
-;             $B3:pointer, which selects the entry nDataIndex*3: word -> +$16 (sprite table index), byte*64 -> +$14.
+;             $B3:pointer, which selects the entry nDirection*3: word -> +$16 (sprite table index), byte*64 -> +$14.
 ;             It increments the +$10 counter (end of script frame) and advances the pointer by 4 bytes.
 ; @case       $2B; 4 byte(s) including the opcode
-; @param      pPointerB3  word: Lower 16 bits of the address of the sprite data table in bank $B3 (the bank is
+; @param      pAnimTable  word: Lower 16 bits of the address of the sprite data table in bank $B3 (the bank is
 ;             hardcoded to $B3).
-; @param      nDataIndex  byte: Direction/index of the table entry (AI slot +$02, nDataIndex).
+; @param      nDirection  byte: Direction/index of the table entry (AI slot +$02, nDirection).
 ; @see        fAIAction0x2B_SpawnActor
 ; @confidence medium
 ; @modifies   ptrAISlot, ptrTemp0x72, ptrAIActionData
 ; @note       Full meaning of the values from the table (word +$16 and byte +$14*64) - probably the sprite table index
 ;             and attributes/flip, not verified in the data file.
 ;;
-macro AICMD0x2B_SpawnActor(pPointerB3, nDataIndex)
+macro AICMD0x2B_SpawnActor(pAnimTable, nDirection)
     db $2B
-    dw <pPointerB3>&$FFFF
-    db <nDataIndex>
+    dw <pAnimTable>&$FFFF
+    db <nDirection>
     
 endmacro
 
@@ -991,7 +989,7 @@ endmacro
 ; @case       $2E; 5 byte(s) including the opcode
 ; @param      nStepFrames  byte: Written to slot +$0B, +$05 and +$06: the period (in frames) of a movement step -
 ;             counter +$06 counts down in fAI_UpdateSlotStepMove and after reaching zero is reloaded from +$05.
-; @param      pPointerB3  word: Lower 16 bits of the address of the sprite table in bank $B3, stored in slot +$36 -
+; @param      pAnimTable  word: Lower 16 bits of the address of the sprite table in bank $B3, stored in slot +$36 -
 ;             the table used during movement (when stopped, the table from +$33 is used, set by 0x2B/0x2F).
 ; @param      nStepLength  byte: Written to slot +$07 and +$08: the length of one random walk in steps (reloaded from
 ;             +$07 to +$08).
@@ -1000,10 +998,10 @@ endmacro
 ; @modifies   ptrAISlot, ptrAIActionData
 ; @note       Certain: the field writes and the setting of the $A8 flags.
 ;;
-macro AICMD0x2E_StartWander(nStepFrames, pPointerB3, nStepLength)
+macro AICMD0x2E_StartWander(nStepFrames, pAnimTable, nStepLength)
     db $2E
     db <nStepFrames>
-    dw <pPointerB3>&$FFFF
+    dw <pAnimTable>&$FFFF
     db <nStepLength>
     
 endmacro
@@ -1016,7 +1014,7 @@ endmacro
 ;             sets bit $04 in flag +$01, which at the next fAI_UpdateSlotMovementAndObject calls fObject_Replace
 ;             (sprite refresh, if +$16 != +$18).
 ; @case       $2F; 3 byte(s) including the opcode
-; @param      pPointerB3  word: Lower 16 bits of the address of the sprite table in bank $B3 (the bank is hardcoded to
+; @param      pAnimTable  word: Lower 16 bits of the address of the sprite table in bank $B3 (the bank is hardcoded to
 ;             $B3).
 ; @see        fAIAction0x2F_SetActorSpriteTable
 ; @confidence medium
@@ -1024,9 +1022,9 @@ endmacro
 ; @note       The contents of the aAIScriptingData_L* tables were not verified. The name follows from the operation on
 ;             fields +$33/+$16/+$14.
 ;;
-macro AICMD0x2F_SetActorSpriteTable(pPointerB3)
+macro AICMD0x2F_SetActorSpriteTable(pAnimTable)
     db $2F
-    dw <pPointerB3>&$FFFF
+    dw <pAnimTable>&$FFFF
 endmacro
 
 ;;
@@ -1522,10 +1520,10 @@ endmacro
 ;;
 ; @brief      Sets the sprite data table of the AI object and immediately selects the entry matching the player's
 ;             current direction (the 0x2B variant with index = strcPlayer.direction).
-; @details    Writes pPointerB3 to the AI object +0x33. Writes the low byte of strcPlayer.direction to the object
-;             +0x02 (nDataIndex).
+; @details    Writes pAnimTable to the AI object +0x33. Writes the low byte of strcPlayer.direction to the object
+;             +0x02 (nDirection).
 ; @case       $49; 3 byte(s) including the opcode
-; @param      pPointerB3  word: 16-bit pointer (bank $B3) to a sprite/flip data table indexed by direction; stored in
+; @param      pAnimTable  word: 16-bit pointer (bank $B3) to a sprite/flip data table indexed by direction; stored in
 ;             the AI object +0x33 (pDataAddress)
 ; @see        fAIAction0x49_SetSpriteTableFacingPlayer
 ; @confidence medium
@@ -1534,9 +1532,9 @@ endmacro
 ;             fAI_UpdateSlotMovementAndObject indicates that bit0 = object drawn/active, bit1/bit2 select the object
 ;             update variant. The name is a descriptive proposal.
 ;;
-macro AICMD0x49_SetSpriteTableFacingPlayer(pPointerB3)
+macro AICMD0x49_SetSpriteTableFacingPlayer(pAnimTable)
     db $49
-    dw <pPointerB3>&$FFFF
+    dw <pAnimTable>&$FFFF
 endmacro
 
 ;;
@@ -1736,18 +1734,18 @@ endmacro
 ;             the A button - so the dialog closes by itself after about 2 s.
 ; @case       $54; 4 byte(s) including the opcode
 ; @param      nDialogId  word: dialog index passed in X to fDialog_DialogHandler
-; @param      nUnknown2  byte: stored to strcDialogDisplay.boxPosition (always $01 in scripts)
+; @param      nPosition  byte: stored to strcDialogDisplay.boxPosition (always $01 in scripts)
 ; @see        fAIAction0x54_ShowDialogAutoClose
 ; @confidence medium
 ; @modifies   ptrAIActionData, strcDialogDisplay.boxPosition, strcDialogDisplay.inputMode,
 ;             strcDialogDisplay.dialogId, strcDialogDisplay.dialogFlags
-; @note       The meaning of nUnknown2 (dialogUnk191) is still unknown - it is modified in several places in
+; @note       The meaning of nPosition (dialogUnk191) is still unknown - it is modified in several places in
 ;             dialog.asm. The name 'AutoClose' comes from analysis of case06 in input.asm; not confirmed in game.
 ;;
-macro AICMD0x54_ShowDialog(nDialogId, nUnknown2)
+macro AICMD0x54_ShowDialog(nDialogId, nPosition)
     db $54
     dw <nDialogId>
-    db <nUnknown2>
+    db <nPosition>
     
 endmacro
 

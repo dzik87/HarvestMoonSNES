@@ -26,3 +26,11 @@ AICMD0x50,AICMD0x50_ReleaseCarried,medium,Macro name carries the command meaning
 AICMD0x51,AICMD0x51_ReleaseCarriedAnimal,medium,Macro name carries the command meaning (docs/ai/commands/*.yml suggested_name)
 AICMD0x52,AICMD0x52_PickUpObjectForEventA,medium,Macro name carries the command meaning (docs/ai/commands/*.yml suggested_name)
 AICMD0x53,AICMD0x53_PickUpObjectForEventB,medium,Macro name carries the command meaning (docs/ai/commands/*.yml suggested_name)
+AICMD0x1A_SpawnNpc.pPointerB3,AICMD0x1A_SpawnNpc.pAnimTable,high,Parameter: low word of a record in the sprite/animation table at the start of bank $B3 (defs/ai/command_params.json lists the pointer parameters that are not script jump targets)
+AICMD0x2B_SpawnActor.pPointerB3,AICMD0x2B_SpawnActor.pAnimTable,high,Same record pointer as 0x1A
+AICMD0x2E_StartWander.pPointerB3,AICMD0x2E_StartWander.pAnimTable,high,"Same record pointer (walking table, slot +$36)"
+AICMD0x2F_SetActorSpriteTable.pPointerB3,AICMD0x2F_SetActorSpriteTable.pAnimTable,high,"Same record pointer (idle table, slot +$33)"
+AICMD0x49_SetSpriteTableFacingPlayer.pPointerB3,AICMD0x49_SetSpriteTableFacingPlayer.pAnimTable,high,Same record pointer
+AICMD0x2B_SpawnActor.nDataIndex,AICMD0x2B_SpawnActor.nDirection,high,"Stored to slot +$02 = initial direction 0-3, as nDirection of 0x1A"
+AICMD0x09_StartScript.nDataIndex,AICMD0x09_StartScript.nSlot,high,Index of the AI slot that receives the script (64-byte slot structures)
+AICMD0x54_ShowDialog.nUnknown2,AICMD0x54_ShowDialog.nPosition,high,"Stored to strcDialogDisplay.boxPosition, as nPosition of 0x1C/0x1D"

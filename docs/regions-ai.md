@@ -86,7 +86,7 @@ region fixes; findings such as the `0x42` quirk (`docs/findings.md`) exist in ev
    (16 data slots, 0x88 in script 0) whose first entry is the first command. A script ends at the next script start; the last
    script of each bank ends with the command that holds the last non-zero byte before the bank's zero padding.
 2. The command sizes come from the macro definitions in `src/ai/commands.asm` (`db`/`dw`/`dl` per parameter; the `&$FFFF` words are
-   in-bank pointers, `pPointerB3` words point into the record table). Linear decoding of all 72 scripts of all four releases
+   in-bank pointers, `pAnimTable` words (listed in defs/ai/command_params.json) point into the record table). Linear decoding of all 72 scripts of all four releases
    lands exactly on the script boundaries (no data embedded in the code), so the command streams are exact.
 3. Per script the command lists are aligned with `difflib` on (opcode, operands with pointers masked). Unmatched blocks are
    re-paired by opcode; the remainder is "added"/"removed".

@@ -200,7 +200,7 @@ Sets the destination area (map) and the script yields for 1 frame.
 |---|---|---|---|---|
 | `nAreaId` | 1 | 1 | enum | Area id (!AREA_* enums from enums.asm, e.g. !AREA_COOP, !AREA_COWBARN, !AREA_ENDINGxx) stored to nDestinationAreaId ($7E:098B). |
 
-Writes the byte to nDestinationAreaId. Additionally increments the 16-bit wait counter of the script slot (offset +$10 in the 64-byte structure at ptrAIUnknown0xCC) by 1, so the script loop holds this slot for the next frame (wait 1). The map load itself happens outside the command.
+Writes the byte to nDestinationAreaId. Additionally increments the 16-bit wait counter of the script slot (offset +$10 in the 64-byte structure at ptrAISlot) by 1, so the script loop holds this slot for the next frame (wait 1). The map load itself happens outside the command.
 
 RAM: `nDestinationAreaId`, `ptrAIActionData`, `slot[+0x10] (wait counter)`
 
@@ -235,20 +235,20 @@ RAM: `strcPlayer.flags`, `strcAiControlData.input`, `strcAiControlData.counter`,
 - Macro: `AICMD0x09_StartScript` · handler: `fAIAction0x09_StartScript` ($848B08) · confidence: **confirmed**
 - Length: 4 B · usage: 0 calls in 0 scripts
 
-Starts a parallel script in another slot (nDataIndex), beginning at pNextAction; the current script continues.
+Starts a parallel script in another slot (nSlot), beginning at pNextAction; the current script continues.
 
 | Parameter | Offset | Size | Type | Meaning |
 |---|---|---|---|---|
-| `nDataIndex` | 1 | 1 | n8 | Index of the target script slot (64-byte structure at $7E:B586 + idx*64, 49 slots). Also stored in the new slot at offset +$3F. |
+| `nSlot` | 1 | 1 | n8 | Index of the target script slot (64-byte structure at $7E:B586 + idx*64, 49 slots). Also stored in the new slot at offset +$3F. |
 | `pNextAction` | 2 | 2 | script_ptr | 16-bit address of the script start in the same bank as the current script (the bank is copied from offset +$32 of the current slot). |
 
-Remembers the current slot (ptrAIUnknown0xCC -> ptrTemp0x72), switches ptrAIUnknown0xCC to slot nDataIndex through fAI_SelectSlot, copies the bank into it (+$32), stores the 16-bit pointer to +$30, calls fAI_ResetSlotFull (slot initialization: active=1, flags=0, counters, position 0, etc.), stores nDataIndex in +$3F and restores the previous slot. Then ptrAIActionData += 4 in total. Does not block. The new slot starts executing in the slot loop (in the same frame if its index is greater).
+Remembers the current slot (ptrAISlot -> ptrTemp0x72), switches ptrAISlot to slot nSlot through fAI_SelectSlot, copies the bank into it (+$32), stores the 16-bit pointer to +$30, calls fAI_ResetSlotFull (slot initialization: active=1, flags=0, counters, position 0, etc.), stores nSlot in +$3F and restores the previous slot. Then ptrAIActionData += 4 in total. Does not block. The new slot starts executing in the slot loop (in the same frame if its index is greater).
 
-RAM: `ptrAIUnknown0xCC`, `ptrTemp0x72`, `ptrAIActionData`, `slot[nDataIndex]: +0 +1 +3..+6 +0C +0F +10 +12 +14 +1A +1C +30 +32 +3F`
+RAM: `ptrAISlot`, `ptrTemp0x72`, `ptrAIActionData`, `slot[nSlot]: +0 +1 +3..+6 +0C +0F +10 +12 +14 +1A +1C +30 +32 +3F`
 
 Calls: `fAI_SelectSlot`, `fAI_ResetSlotFull`
 
-> Open questions: The meaning of all slot fields reset in fAI_ResetSlotFull (strcAIUnknown.unkXX) is not fully described; what happens when the target slot is already active was not checked (it is overwritten without a check).
+> Open questions: The meaning of all slot fields reset in fAI_ResetSlotFull (strcAISlot.unkXX) is not fully described; what happens when the target slot is already active was not checked (it is overwritten without a check).
 
 ## 0x0A — ScreenFadein
 
@@ -405,9 +405,9 @@ Suspends execution of the script of the given AI object for nTime frames.
 |---|---|---|---|---|
 | `nTime` | 1 | 2 | n16 | Number of calls of the AI loop (fAI_RunSlots, called once per frame from the main loop) for which the script of this object waits. A value of 0 = no waiting. Typical: 1, 60, 180, 240. |
 
-Stores nTime (16-bit) to field +$10 of the AI object structure pointed to by ptrAIUnknown0xCC (strcAIUnknown.unk10, wait counter). On each call, the fAI_RunSlots loop decrements +$10 for active objects and executes commands while +$10 = 0; after a command is executed with +$10 != 0, the object is no longer processed in that frame. As a result, the next command executes nTime frames after Wait (Wait(1) = skipping one frame). The script waits only for the current object (each AI object has its own counter); the AI loop is skipped entirely when strcDialogDisplay.inputMode == 2 or 6 (dialog) or when the player action = PACTION_JUMP.
+Stores nTime (16-bit) to field +$10 of the AI object structure pointed to by ptrAISlot (strcAISlot.unk10, wait counter). On each call, the fAI_RunSlots loop decrements +$10 for active objects and executes commands while +$10 = 0; after a command is executed with +$10 != 0, the object is no longer processed in that frame. As a result, the next command executes nTime frames after Wait (Wait(1) = skipping one frame). The script waits only for the current object (each AI object has its own counter); the AI loop is skipped entirely when strcDialogDisplay.inputMode == 2 or 6 (dialog) or when the player action = PACTION_JUMP.
 
-RAM: `ptrAIActionData`, `ptrAIUnknown0xCC+$10`
+RAM: `ptrAIActionData`, `ptrAISlot+$10`
 
 > Open questions: The time unit is AI loop calls; it is not confirmed that the loop is called exactly once per frame at all 10 call sites of fAI_RunSlots (core.asm, routines.asm, main_loop.asm, interaction_data.asm).
 
@@ -480,7 +480,7 @@ Rolls a number 0..nMax-1 and stores it in field +$0D of the current AI object.
 
 Calls fCore_GetRandomNumber (A = nMax) and stores the result to byte +$0D of the AI object structure (ptrAIUnknownCC). Does not block. Always used together with a series of 0x18 commands that compare the rolled value. Field +$0D is also used by other handlers (fAIAction at 849BFF and 84A011); it was not checked what for.
 
-RAM: `ptrAIActionData`, `ptrAIUnknown0xCC+$0D`
+RAM: `ptrAIActionData`, `ptrAISlot+$0D`
 
 Calls: `fCore_GetRandomNumber`
 
@@ -500,7 +500,7 @@ Jumps to pNextAction if the object's last rolled (0x17) value equals nValue.
 
 Compares byte +$0D of the AI object with nValue; equal -> ptrAIActionData = pNextAction (16 bit), not equal -> advance past the command (4 bytes), which allows a chain of several 0x18 after a single 0x17 (jump table). Does not block. Side effect: nValue is read as 16-bit (no SEP before LDA) and stored to $92-$93, so it also overwrites strcVariables.n8Temp2 ($93) with the pNextAction (lo) byte.
 
-RAM: `ptrAIActionData`, `ptrAIUnknown0xCC+$0D`, `strcVariables.n8Temp1`, `strcVariables.n8Temp2`
+RAM: `ptrAIActionData`, `ptrAISlot+$0D`, `strcVariables.n8Temp1`, `strcVariables.n8Temp2`
 
 > Open questions: The side effect on n8Temp2 is probably unintended (16-bit read/write); harmless as long as $93 is not used between commands.
 
@@ -538,7 +538,7 @@ Creates/places an NPC object at the given position with a sprite table and an in
 
 Stores nPosX -> +$1A, nPosY -> +$1C, pAnimTable -> +$33, nDirection -> +$02 in the AI object structure. Sets the object flags (+$01) |= $03: bit $01 marks the object as active (fAI_UpdateSlotMovementAndObject/AI loop), bit $02 causes fObject_Create to be called on the next processing (creation of the game object, index stored in +$12). Then calls fAI_LoadSlotSpriteFromDirTable with $72 = (+$33):$B3, which selects the table entry [nDirection]: word -> +$16 (spriteTableIdx), byte << 6 -> +$14 (flip). Finally +$10 += 1, so the object is processed from the next frame (blocks for 1 frame).
 
-RAM: `ptrAIActionData`, `ptrAIUnknown0xCC+$01`, `ptrAIUnknown0xCC+$02`, `ptrAIUnknown0xCC+$10`, `ptrAIUnknown0xCC+$14`, `ptrAIUnknown0xCC+$16`, `ptrAIUnknown0xCC+$1A`, `ptrAIUnknown0xCC+$1C`, `ptrAIUnknown0xCC+$33`, `ptrTemp0x72`
+RAM: `ptrAIActionData`, `ptrAISlot+$01`, `ptrAISlot+$02`, `ptrAISlot+$10`, `ptrAISlot+$14`, `ptrAISlot+$16`, `ptrAISlot+$1A`, `ptrAISlot+$1C`, `ptrAISlot+$33`, `ptrTemp0x72`
 
 Calls: `fAI_LoadSlotSpriteFromDirTable`
 
@@ -558,7 +558,7 @@ Directly sets the sprite and flip of the current AI object (NPC) and requests a 
 
 Stores nSpriteIdx to +$16 and (nFlip << 6) to +$14 of the AI object, then sets the flag +$01 |= $04 (sprite update request). In fAI_UpdateSlotMovementAndObject, when flag $04 is set, fObject_Replace is called, which changes the sprite only when +$16 differs from the previous +$18; the flag is cleared (mask $E9) at the end of processing. Does not block. Counterpart of 0x19 for NPCs instead of the player.
 
-RAM: `ptrAIActionData`, `ptrAIUnknown0xCC+$01`, `ptrAIUnknown0xCC+$14`, `ptrAIUnknown0xCC+$16`
+RAM: `ptrAIActionData`, `ptrAISlot+$01`, `ptrAISlot+$14`, `ptrAISlot+$16`
 
 > Open questions: The function fObject_Replace was only read superficially (comparison of spriteTableIdx with $18 and selection of bank $86/$87 by the threshold $0262); its full effect on OAM was not analyzed.
 
@@ -576,7 +576,7 @@ Displays dialog nDialogId and suspends the script for one frame (the AI loop con
 
 Loads nDialogId into X, stores the nPosition byte to boxPosition, sets strcDialogDisplay.inputMode = 2 and calls fDialog_DialogHandler (sets dialogId, dialogFlags |= DFLAGS_PROCESSDIALOG, zeroes the option/answer counters, selects the text pointer from aDialogPointers, sets the BG3 offset and nTimeState = 0, daily1 |= $4000). Then +$10 += 1 (one frame). Because inputMode == 2, fAI_RunSlots returns immediately at the start until the dialog ends (the dialog code zeroes/changes inputMode), so the script and all AI objects wait until the end of the dialog.
 
-RAM: `ptrAIActionData`, `ptrAIUnknown0xCC+$10`, `strcDialogDisplay.boxPosition`, `strcDialogDisplay.inputMode`, `strcDialogDisplay.dialogId`, `strcDialogDisplay.dialogFlags`, `strcDialogDisplay.dialogOptionsAnswer`, `strcFlags.daily1`, `nTimeState`, `strcBGScrool.BG3VerOffs`
+RAM: `ptrAIActionData`, `ptrAISlot+$10`, `strcDialogDisplay.boxPosition`, `strcDialogDisplay.inputMode`, `strcDialogDisplay.dialogId`, `strcDialogDisplay.dialogFlags`, `strcDialogDisplay.dialogOptionsAnswer`, `strcFlags.daily1`, `nTimeState`, `strcBGScrool.BG3VerOffs`
 
 Calls: `fDialog_DialogHandler`
 
@@ -596,7 +596,7 @@ Functionally identical to 0x1C (ShowDialog); in scripts it is used for dialogs w
 
 The handler code is identical to 0x1C instruction by instruction (only the address differs). Convention observed in scripts: 0x1D is called before a chain of 0x20 JumpIfChoice (a dialog with a question), and 0x1C for ordinary lines - the distinction is purely conventional (by the game's authors), with no effect on behavior.
 
-RAM: `ptrAIActionData`, `ptrAIUnknown0xCC+$10`, `strcDialogDisplay.boxPosition`, `strcDialogDisplay.inputMode`, `strcDialogDisplay.dialogId`, `strcDialogDisplay.dialogFlags`
+RAM: `ptrAIActionData`, `ptrAISlot+$10`, `strcDialogDisplay.boxPosition`, `strcDialogDisplay.inputMode`, `strcDialogDisplay.dialogId`, `strcDialogDisplay.dialogFlags`
 
 Calls: `fDialog_DialogHandler`
 
@@ -632,7 +632,7 @@ Checks whether the player is standing next to the NPC and pressed A; if so - tur
 
 This is a polling command: in scripts it is always 'AICMD0x1F_JumpIfTalkedTo(target); Jump(same_command)'. Conditions (all must be met, otherwise the .return path = ptrAIActionData += 3 and +$10 += 1, i.e. a one-frame block): byte +$0C of the object != 0 (player proximity flag set in the loop in game_engine.asm ~83AE26: |NPC posX/posY - player position| < $19), the player action is not PACTION_USINGTOOL / SHOWTOOL / WHISTLEHORSE / WHISTLEDOG, no PFLAGS_EATINGMEAL, (strcFlags.daily4 & $0006) == 0, and strcJoypad1.newInput has bit !JOYPAD_A (A newly pressed). When met: ptrAIActionData = pNextAction (16 bit); +$08 := +$07; +$03 := 0, +$04 := 0 (stop movement); +$0C := 0; +$02 := strcPlayer.direction XOR 1 (NPC faces the player); fAI_LoadSlotSpriteFromDirTable with the table (+$33):$B3 sets the sprite (+$16) and flip (+$14) according to the new direction; +$01 |= $14 (sprite update + auto-movement lock for this frame); nPlayerInteractionIndex := $56, Arg1 = Arg2 = 0; strcPlayer.flags |= PFLAGS_INTERACTING; strcPlayer.action := PACTION_NONE; +$10 += 1. fPlayerInteraction0x56 increments Arg2 and after 2 calls removes PFLAGS_INTERACTING (effect: a short player lock during the transition to the dialog).
 
-RAM: `ptrAIActionData`, `ptrAIUnknown0xCC+$01`, `ptrAIUnknown0xCC+$02`, `ptrAIUnknown0xCC+$03`, `ptrAIUnknown0xCC+$04`, `ptrAIUnknown0xCC+$07`, `ptrAIUnknown0xCC+$08`, `ptrAIUnknown0xCC+$0C`, `ptrAIUnknown0xCC+$10`, `ptrAIUnknown0xCC+$14`, `ptrAIUnknown0xCC+$16`, `ptrAIUnknown0xCC+$33`, `strcPlayer.flags`, `strcPlayer.action`, `strcPlayer.direction`, `strcJoypad1.newInput`, `strcFlags.daily4`, `nPlayerInteractionIndex`, `nPlayerInteractionArg1`, `nPlayerInteractionArg2`, `ptrTemp0x72`
+RAM: `ptrAIActionData`, `ptrAISlot+$01`, `ptrAISlot+$02`, `ptrAISlot+$03`, `ptrAISlot+$04`, `ptrAISlot+$07`, `ptrAISlot+$08`, `ptrAISlot+$0C`, `ptrAISlot+$10`, `ptrAISlot+$14`, `ptrAISlot+$16`, `ptrAISlot+$33`, `strcPlayer.flags`, `strcPlayer.action`, `strcPlayer.direction`, `strcJoypad1.newInput`, `strcFlags.daily4`, `nPlayerInteractionIndex`, `nPlayerInteractionArg1`, `nPlayerInteractionArg2`, `ptrTemp0x72`
 
 Calls: `fAI_LoadSlotSpriteFromDirTable`
 
@@ -689,7 +689,7 @@ Enables random wandering for the current NPC within a rectangular area around it
 
 Stores the arguments to fields +$09,+$0A,+$0B,+$05,+$06,+$36,+$07,+$08 of the AI object. Sets +$01 |= $28: bit $08 enables wandering (fAI_UpdateSlotWander), bit $20 enables automatic movement (fAI_UpdateSlotStepMove adds the velocity +$03/+$04 to posX/posY every +$05 frames). Copies the current position +$1A/+$1C to +$1E/+$20 as the home point. For this reason the command must come after 0x1A (which sets the position). The wandering loop chooses a direction (0 down, 1 up, 2 right, 3 left - based on +$0F or strcPlayer.lastRandomNumber), sets a velocity of +-1 px, checks the bounds relative to the home point and ends the segment when +$08 reaches 0 or goes out of range. The command does not block and does not change +$10; wandering runs in the background, in parallel with the continued execution of the script (usually followed by a 0x1F loop).
 
-RAM: `ptrAIActionData`, `ptrAIUnknown0xCC+$01`, `ptrAIUnknown0xCC+$05`, `ptrAIUnknown0xCC+$06`, `ptrAIUnknown0xCC+$07`, `ptrAIUnknown0xCC+$08`, `ptrAIUnknown0xCC+$09`, `ptrAIUnknown0xCC+$0A`, `ptrAIUnknown0xCC+$0B`, `ptrAIUnknown0xCC+$1A`, `ptrAIUnknown0xCC+$1C`, `ptrAIUnknown0xCC+$1E`, `ptrAIUnknown0xCC+$20`, `ptrAIUnknown0xCC+$36`
+RAM: `ptrAIActionData`, `ptrAISlot+$01`, `ptrAISlot+$05`, `ptrAISlot+$06`, `ptrAISlot+$07`, `ptrAISlot+$08`, `ptrAISlot+$09`, `ptrAISlot+$0A`, `ptrAISlot+$0B`, `ptrAISlot+$1A`, `ptrAISlot+$1C`, `ptrAISlot+$1E`, `ptrAISlot+$20`, `ptrAISlot+$36`
 
 > Open questions: The interpretation of the arguments comes from analysis of the fields in fAI_UpdateSlotMovementAndObject/8483CC/848331 (probable, not tested in emulation). The exact role of +$0F (preferred direction 1/2/4/8) and of flag bit $80 (skips the bounds check) is not determined. The range units (px) follow from the comparison with posX/posY.
 
@@ -737,11 +737,11 @@ Deactivates the AI slot with the given number and removes its game object (sprit
 
 | Parameter | Offset | Size | Type | Meaning |
 |---|---|---|---|---|
-| `nActorIndex` | 1 | 1 | n8 | Number of the AI slot (64-byte strcAIUnknown structures at $7E:B586 + n*64) to be removed. In scripts: $01,$02,$03,$09,$13. |
+| `nActorIndex` | 1 | 1 | n8 | Number of the AI slot (64-byte strcAISlot structures at $7E:B586 + n*64) to be removed. In scripts: $01,$02,$03,$09,$13. |
 
-The handler saves the current ptrAIUnknown0xCC in ptrTemp0x72, advances ptrAIActionData by 1, reads a byte and calls fAI_SelectSlot (ptrAIUnknown0xCC = $7E:B586 + n*64). It then clears byte 0 of the slot (activity marker), reads the word at offset $12 (game object index) into strcObject.gameObjectIdx and calls fObject_Destroy, which releases all components (sprites) of the object (fObject_ReleaseSpriteTiles / fObject_ReleaseTileSlot) and clears strcGameObject.initailized. Finally it restores the previous ptrAIUnknown0xCC (the slot executing the script). The command pointer is advanced by 2 bytes in total. It does not block and does not increment the $10 counter. Logically corresponds to the routine fAI_DeactivateSlotAndObject (the same sequence for an arbitrary slot).
+The handler saves the current ptrAISlot in ptrTemp0x72, advances ptrAIActionData by 1, reads a byte and calls fAI_SelectSlot (ptrAISlot = $7E:B586 + n*64). It then clears byte 0 of the slot (activity marker), reads the word at offset $12 (game object index) into strcObject.gameObjectIdx and calls fObject_Destroy, which releases all components (sprites) of the object (fObject_ReleaseSpriteTiles / fObject_ReleaseTileSlot) and clears strcGameObject.initailized. Finally it restores the previous ptrAISlot (the slot executing the script). The command pointer is advanced by 2 bytes in total. It does not block and does not increment the $10 counter. Logically corresponds to the routine fAI_DeactivateSlotAndObject (the same sequence for an arbitrary slot).
 
-RAM: `ptrAIUnknown0xCC`, `ptrTemp0x72`, `strcObject.gameObjectIdx`, `strcAIUnknown.unk00`, `strcAIUnknown.unk12`, `strcGameObject.initailized`, `ptrAIActionData`
+RAM: `ptrAISlot`, `ptrTemp0x72`, `strcObject.gameObjectIdx`, `strcAISlot.unk00`, `strcAISlot.unk12`, `strcGameObject.initailized`, `ptrAIActionData`
 
 Calls: `fAI_SelectSlot`, `fObject_Destroy`
 
@@ -823,15 +823,15 @@ RAM: `strcMapScrool.speedX`, `strcMapScrool.speedY`, `strcMapScrool.timer`, `ptr
 - Macro: `AICMD0x2A_StartTileSequence` · handler: `fAIAction0x2A_StartTileSequence` ($849553) · confidence: **probable**
 - Length: 3 B · usage: 0 calls in 0 scripts
 
-Starts a sequence of map tile changes (pointer ptrUnknown0xCF) and ends the current script frame.
+Starts a sequence of map tile changes (pointer ptrTileScript) and ends the current script frame.
 
 | Parameter | Offset | Size | Type | Meaning |
 |---|---|---|---|---|
 | `nSequenceIndex` | 1 | 2 | n16 | Index into the table of 24-bit pointers pTileScriptTable ($81:B963, 3 bytes per entry); it points to a sequence of map tile changes. $0041, $0043, $0045 in scripts. |
 
-The handler reads a word and calls fTileScript_Start ($81:A5E1): ptrUnknown0xCF ($7E:00CF) = pTileScriptTable[index], and clears the delay counter $7E:0989. It advances ptrAIActionData by 3 and increments the slot's strcAIUnknown+$10 counter by 1, which ends script execution in this frame (resumed in the next one). The sequence is then played back by fTileScript_Update (called from the main loop, core.asm and main_loop.asm): 7-byte records (3 words: argument/tile, X, Y + a delay byte in frames) passed to fSetTileAtCoords; $FFFF ends the sequence, $FFFE means a jump to a 24-bit pointer.
+The handler reads a word and calls fTileScript_Start ($81:A5E1): ptrTileScript ($7E:00CF) = pTileScriptTable[index], and clears the delay counter $7E:0989. It advances ptrAIActionData by 3 and increments the slot's strcAISlot+$10 counter by 1, which ends script execution in this frame (resumed in the next one). The sequence is then played back by fTileScript_Update (called from the main loop, core.asm and main_loop.asm): 7-byte records (3 words: argument/tile, X, Y + a delay byte in frames) passed to fSetTileAtCoords; $FFFF ends the sequence, $FFFE means a jump to a 24-bit pointer.
 
-RAM: `ptrUnknown0xCF`, `strcAIUnknown.unk10`, `ptrAIActionData`
+RAM: `ptrTileScript`, `strcAISlot.unk10`, `ptrAIActionData`
 
 Calls: `fTileScript_Start`
 
@@ -846,12 +846,12 @@ Sets the appearance (sprite table from bank $B3 and direction) of the current AI
 
 | Parameter | Offset | Size | Type | Meaning |
 |---|---|---|---|---|
-| `pPointerB3` | 1 | 2 | script_ptr | Lower 16 bits of the address of the sprite data table in bank $B3 (the bank is hardcoded to $B3). Stored in AI slot +$33 (pDataAddress). Table: 3 bytes per direction (word -> +$16 spriteTableIdx, byte*64 -> +$14). |
-| `nDataIndex` | 3 | 1 | enum | Direction/index of the table entry (AI slot +$02, nDataIndex). The movement code uses 0..3 as the direction (0 down, 1 up, 2 and 3 horizontal; pairs 0/1 and 2/3 are opposite). |
+| `pAnimTable` | 1 | 2 | script_ptr | Lower 16 bits of the address of the sprite data table in bank $B3 (the bank is hardcoded to $B3). Stored in AI slot +$33 (pDataAddress). Table: 3 bytes per direction (word -> +$16 spriteTableIdx, byte*64 -> +$14). |
+| `nDirection` | 3 | 1 | enum | Direction/index of the table entry (AI slot +$02, nDirection). The movement code uses 0..3 as the direction (0 down, 1 up, 2 and 3 horizontal; pairs 0/1 and 2/3 are opposite). |
 
-The handler stores the pointer in slot +$33, the byte in slot +$02, sets bits $03 in the slot flag +$01 (bit $01 active, bit $02 = create object), calls fAI_LoadSlotSpriteFromDirTable with ptrTemp0x72 = $B3:pointer, which selects the entry nDataIndex*3: word -> +$16 (sprite table index), byte*64 -> +$14. It increments the +$10 counter (end of script frame) and advances the pointer by 4 bytes. At the next fAI_UpdateSlotMovementAndObject the $02 flag calls fObject_Create (object creation) and stores the object index in +$12; flags $02/$04/$10 are cleared afterwards. Appears at the start of the general scripts of bank B3 (animals, NPCs) right before 0x2E / Update*.
+The handler stores the pointer in slot +$33, the byte in slot +$02, sets bits $03 in the slot flag +$01 (bit $01 active, bit $02 = create object), calls fAI_LoadSlotSpriteFromDirTable with ptrTemp0x72 = $B3:pointer, which selects the entry nDirection*3: word -> +$16 (sprite table index), byte*64 -> +$14. It increments the +$10 counter (end of script frame) and advances the pointer by 4 bytes. At the next fAI_UpdateSlotMovementAndObject the $02 flag calls fObject_Create (object creation) and stores the object index in +$12; flags $02/$04/$10 are cleared afterwards. Appears at the start of the general scripts of bank B3 (animals, NPCs) right before 0x2E / Update*.
 
-RAM: `ptrAIUnknown0xCC`, `strcAIUnknown.pDataAddress`, `strcAIUnknown.nDataIndex`, `strcAIUnknown.flags`, `strcAIUnknown.nDataValue`, `strcAIUnknown.nOtherUnknownIndex`, `ptrTemp0x72`, `strcAIUnknown.unk10`, `ptrAIActionData`
+RAM: `ptrAISlot`, `strcAISlot.pDataAddress`, `strcAISlot.nDirection`, `strcAISlot.flags`, `strcAISlot.nDataValue`, `strcAISlot.nOtherUnknownIndex`, `ptrTemp0x72`, `strcAISlot.unk10`, `ptrAIActionData`
 
 Calls: `fAI_LoadSlotSpriteFromDirTable`
 
@@ -892,7 +892,7 @@ Single-frame interaction test: if the player pressed A near this character, jump
 
 Preconditions (any one failing => the no-jump path): slot AI byte +$0C != 0; the player action is not USINGTOOL/SHOWTOOL/WHISTLEHORSE/WHISTLEDOG; no PFLAGS_EATINGMEAL; (strcFlags.daily4 AND $0006) == 0; strcJoypad1.newInput has the A bit. When satisfied: if the action == PACTION_DROPITEM and carryItemId != 0, the pointer is advanced by 2 (selecting pNextAction2); in every case ptrAIActionData = the 16-bit value read from the pointer (the jump). Then: +$08 := +$07, +$03 := 0, +$04 := 0, +$0C := 0 (stops movement, clears the proximity flag), +$02 := strcPlayer.direction XOR 1 (the character faces the player), the sprite is reloaded via fAI_LoadSlotSpriteFromDirTable with the table from +$33 (bank $B3), flag +$01 |= $14, nPlayerInteractionIndex = $56 (arg1/arg2 = 0), sets PFLAGS_INTERACTING and the player action PACTION_NONE, increments +$10 (end of frame). When the conditions are not satisfied: ptrAIActionData += 4 (the command takes 5 bytes in total) and +$10 is also incremented. The command does not wait - in NPC scripts it sits in a loop with Jump (153 uses in bank B3), often after command 0x4D.
 
-RAM: `ptrAIUnknown0xCC`, `ptrAIActionData`, `strcPlayer.action`, `strcPlayer.flags`, `strcPlayer.direction`, `strcFlags.daily4`, `strcJoypad1.newInput`, `strcPlayerData.carryItemId`, `strcPlayerData.carryItemIdPrev`, `nPlayerInteractionIndex`, `nPlayerInteractionArg1`, `nPlayerInteractionArg2`, `strcAIUnknown.flags`, `strcAIUnknown.nDataIndex`, `strcAIUnknown.pDataAddress`, `strcAIUnknown.unk10`
+RAM: `ptrAISlot`, `ptrAIActionData`, `strcPlayer.action`, `strcPlayer.flags`, `strcPlayer.direction`, `strcFlags.daily4`, `strcJoypad1.newInput`, `strcPlayerData.carryItemId`, `strcPlayerData.carryItemIdPrev`, `nPlayerInteractionIndex`, `nPlayerInteractionArg1`, `nPlayerInteractionArg2`, `strcAISlot.flags`, `strcAISlot.nDataIndex`, `strcAISlot.pDataAddress`, `strcAISlot.unk10`
 
 Calls: `fAI_LoadSlotSpriteFromDirTable`
 
@@ -908,12 +908,12 @@ Enables random wandering (animals/NPCs) for the current AI slot around its curre
 | Parameter | Offset | Size | Type | Meaning |
 |---|---|---|---|---|
 | `nStepFrames` | 1 | 1 | n8 | Written to slot +$0B, +$05 and +$06: the period (in frames) of a movement step - counter +$06 counts down in fAI_UpdateSlotStepMove and after reaching zero is reloaded from +$05. Always $01 in scripts (a step every frame). |
-| `pPointerB3` | 2 | 2 | script_ptr | Lower 16 bits of the address of the sprite table in bank $B3, stored in slot +$36 - the table used during movement (when stopped, the table from +$33 is used, set by 0x2B/0x2F). |
+| `pAnimTable` | 2 | 2 | script_ptr | Lower 16 bits of the address of the sprite table in bank $B3, stored in slot +$36 - the table used during movement (when stopped, the table from +$33 is used, set by 0x2B/0x2F). |
 | `nStepLength` | 4 | 1 | n8 | Written to slot +$07 and +$08: the length of one random walk in steps (reloaded from +$07 to +$08). $10 (16) in scripts. |
 
 The handler writes the arguments into the slot: nStepFrames -> +$0B/+$05/+$06, pointer -> +$36, nStepLength -> +$07/+$08; sets bits $A8 ($80,$20,$08) in flag +$01 and copies the current position (+$1A,+$1C) to the home point (+$1E,+$20). It advances ptrAIActionData by 5 bytes, does not block and does not increment the +$10 counter. The movement itself is performed every frame by fAI_UpdateSlotMovementAndObject -> fAI_UpdateSlotWander: with flag $08 set and a zero counter it picks a direction 0-3 randomly (strcPlayer.lastRandomNumber or a mask in +$0F), checks the range relative to the home point (+$09/+$0A), sets the velocity +$03/+$04 (+-1) and the direction +$02, loads the movement sprite table from +$36 (when stopped - from +$33) and moves the position +$1A/+$1C, with map collision (fGameEngine_CheckTileCollisionDir / fGameEngine_CheckPlayerOverlap). 22 uses in scripts in bank B3 (chickens, cows, horse, mole, dogs).
 
-RAM: `ptrAIUnknown0xCC`, `strcAIUnknown.flags`, `strcAIUnknown.unk05`, `strcAIUnknown.unk06`, `strcAIUnknown.unk07`, `strcAIUnknown.unk08`, `strcAIUnknown.unk0B`, `strcAIUnknown.unk1A`, `strcAIUnknown.unk1C`, `strcAIUnknown.unk1E`, `strcAIUnknown.unk20`, `strcAIUnknown.unk36`, `ptrAIActionData`
+RAM: `ptrAISlot`, `strcAISlot.flags`, `strcAISlot.unk05`, `strcAISlot.unk06`, `strcAISlot.unk07`, `strcAISlot.unk08`, `strcAISlot.unk0B`, `strcAISlot.unk1A`, `strcAISlot.unk1C`, `strcAISlot.unk1E`, `strcAISlot.unk20`, `strcAISlot.unk36`, `ptrAIActionData`
 
 > Open questions: Certain: the field writes and the setting of the $A8 flags. Uncertain: the exact meaning of bit $80 (in fAI_UpdateSlotWander setting it skips the home-point range test and enables the map collision test - the role of 'free movement with collision'), and of fields +$05/+$06/+$0B (distinction between period and counter) and +$07/+$08 (walk length vs. countdown). It does not set +$09/+$0A (range) - probably set elsewhere (e.g. at fAI_SetSlotScript).
 
@@ -926,11 +926,11 @@ Changes the sprite table (animation) of the current AI slot while preserving the
 
 | Parameter | Offset | Size | Type | Meaning |
 |---|---|---|---|---|
-| `pPointerB3` | 1 | 2 | script_ptr | Lower 16 bits of the address of the sprite table in bank $B3 (the bank is hardcoded to $B3). Stored in slot +$33 (pDataAddress). Table of 3 bytes per direction. |
+| `pAnimTable` | 1 | 2 | script_ptr | Lower 16 bits of the address of the sprite table in bank $B3 (the bank is hardcoded to $B3). Stored in slot +$33 (pDataAddress). Table of 3 bytes per direction. |
 
 The handler stores the pointer in slot +$33, calls fAI_LoadSlotSpriteFromDirTable with ptrTemp0x72 = $B3:pointer (selects the entry according to the direction from +$02: word -> +$16, byte*64 -> +$14) and sets bit $04 in flag +$01, which at the next fAI_UpdateSlotMovementAndObject calls fObject_Replace (sprite refresh, if +$16 != +$18). It advances ptrAIActionData by 3 and does NOT end the frame (does not increment +$10) - the script may continue immediately. 72 uses in scripts (bank B3, usually after Wait(60) before Jump).
 
-RAM: `ptrAIUnknown0xCC`, `strcAIUnknown.pDataAddress`, `strcAIUnknown.flags`, `strcAIUnknown.nDataIndex`, `strcAIUnknown.nDataValue`, `strcAIUnknown.nOtherUnknownIndex`, `ptrTemp0x72`, `ptrAIActionData`
+RAM: `ptrAISlot`, `strcAISlot.pDataAddress`, `strcAISlot.flags`, `strcAISlot.nDataIndex`, `strcAISlot.nDataValue`, `strcAISlot.nOtherUnknownIndex`, `ptrTemp0x72`, `ptrAIActionData`
 
 Calls: `fAI_LoadSlotSpriteFromDirTable`
 
@@ -945,7 +945,7 @@ One tick of the chicken logic: synchronizes the position with the chicken struct
 
 The handler advances ptrAIActionData by 1 (the next command is usually a Jump back - a loop, one frame per pass). The chicken index = slot byte +$3F (nArg) minus $24; fGameEngine_GetChickenData returns a ptr24 to the chicken data ($7E:C286 + n*8) and the slot X/Y positions (+$1A/+$1C) are copied to its fields +4/+6. If byte +$0E != $E0: when slot byte +$0C != 0 and the player is not busy (action != USINGTOOL/SHOWTOOL/WHISTLE*, no EATINGMEAL/INTERACTING/DOGHUGGING, daily4 AND $0006 = 0, action != PACTION_17/ITEMONHAND, carryItemId = 0) and pressed A, then with the appropriate chicken flag bits ($40, $0E, $20, $04, $08) the chicken is picked up: bit $20 in the chicken data, the slot nAiArg -> strcPlayerData.nAiArg ($7E:0920), the slot is deactivated (+$00 = 0) and marked for removal ($40 in +$01), carryItemId := $26 (flag $04) or $25 (flag $08), player action PACTION_ITEMONHAND. Otherwise, when the chicken data has bit $08, the counter strcStockData.unkEachChicken[n] grows to $0200 and then, based on a random roll (lastRandomNumber < $55 vs the rest), starts subscript $5C or $5D via fAI_SetSlotScript. When +$0E == $E0 and flag daily1 $0008: an interaction sequence (nCowSalePrice := $32, nPlayerInteractionIndex := $44). At the end it increments the +$10 counter (end of frame).
 
-RAM: `strcAIUnknown.nArg`, `strcAIUnknown.unk0C`, `strcAIUnknown.unk0E`, `strcAIUnknown.unk10`, `strcAIUnknown.unk1A`, `strcAIUnknown.unk1C`, `strcAIUnknown.flags`, `strcStockData.unkEachChicken`, `strcPlayerData.carryItemId`, `strcPlayerData.nAiArg`, `nPlayerInteractionIndex`, `nCowSalePrice`, `strcFlags.daily1`, `strcFlags.daily4`, `strcPlayer.action`, `strcPlayer.flags`, `strcPlayer.lastRandomNumber`, `strcJoypad1.newInput`, `ptrAIActionData`
+RAM: `strcAISlot.nArg`, `strcAISlot.unk0C`, `strcAISlot.unk0E`, `strcAISlot.unk10`, `strcAISlot.unk1A`, `strcAISlot.unk1C`, `strcAISlot.flags`, `strcStockData.unkEachChicken`, `strcPlayerData.carryItemId`, `strcPlayerData.nAiArg`, `nPlayerInteractionIndex`, `nCowSalePrice`, `strcFlags.daily1`, `strcFlags.daily4`, `strcPlayer.action`, `strcPlayer.flags`, `strcPlayer.lastRandomNumber`, `strcJoypad1.newInput`, `ptrAIActionData`
 
 Calls: `fGameEngine_GetChickenData`, `fAI_SetSlotScript`
 
@@ -960,7 +960,7 @@ One tick of the cow logic: synchronizes the position with the cow structure, han
 
 The handler advances ptrAIActionData by 1 (the command appears in a loop with Jump). The cow index = slot byte +$3F minus $18; fGameEngine_GetCowData returns a ptr24 to the cow data ($7E:C1C6 + n*16), and the slot X/Y positions are copied to fields +8/+$0A. In AREA_COWBARN and for +$0E == $C2 it jumps to fAIAction0x31_CowSendOutside; in map areas < AREA_TOWNSPRING with +$0E == $E0/$E1 to fUnknown_84A498 / fAIAction0x31_CowReturnToBarn; in the rest (the farm) it checks the player (no tool/whistling/eating/INTERACTING/DOGHUGGING, daily4 AND $0006 = 0, A pressed) and the day flags daily1 ($0100,$0080,$0040,$0010,$0004) and event1 $0004. Depending on bits in the cow data ($10,$20,$40,$08,$04) it opens a dialog (fDialog_DialogHandler with X = $2F/$30/$31/$32/$145, the cow name copied to strcNames.wCurrentCow), calls fCow_AddHappiness, picks up the cow/sets carryItemId and the action PACTION_ITEMONHAND, increments strcStockData.unkEachCow[n] (cleared after exceeding a threshold) and sets nPlayerInteractionIndex. End: increments the +$10 counter.
 
-RAM: `strcAIUnknown.nArg`, `strcAIUnknown.unk0C`, `strcAIUnknown.unk0E`, `strcAIUnknown.unk10`, `strcAIUnknown.unk1A`, `strcAIUnknown.unk1C`, `strcAIUnknown.flags`, `strcStockData.unkEachCow`, `strcNames.wCurrentCow`, `strcMap.loadAreaId`, `strcPlayerData.carryItemId`, `nPlayerInteractionIndex`, `strcFlags.daily1`, `strcFlags.daily4`, `strcFlags.event1`, `strcPlayer.action`, `strcPlayer.flags`, `strcJoypad1.newInput`, `strcDialogDisplay.inputMode`, `ptrAIActionData`
+RAM: `strcAISlot.nArg`, `strcAISlot.unk0C`, `strcAISlot.unk0E`, `strcAISlot.unk10`, `strcAISlot.unk1A`, `strcAISlot.unk1C`, `strcAISlot.flags`, `strcStockData.unkEachCow`, `strcNames.wCurrentCow`, `strcMap.loadAreaId`, `strcPlayerData.carryItemId`, `nPlayerInteractionIndex`, `strcFlags.daily1`, `strcFlags.daily4`, `strcFlags.event1`, `strcPlayer.action`, `strcPlayer.flags`, `strcJoypad1.newInput`, `strcDialogDisplay.inputMode`, `ptrAIActionData`
 
 Calls: `fGameEngine_GetCowData`, `fDialog_DialogHandler`, `fCow_AddHappiness`, `fUnknown_84A498`, `fAIAction0x31_CowReturnToBarn`, `fAIAction0x31_CowSendOutside`, `fAI_SetSlotScript`
 
@@ -993,7 +993,7 @@ One tick of the mole logic: lets the player pick it up, otherwise periodically s
 
 The handler advances ptrAIActionData by 1 (usually a loop with Jump). If slot byte +$0C != 0, the player is not busy (action != USINGTOOL/SHOWTOOL/WHISTLE*, no EATINGMEAL, DOGHUGGING, daily4 AND $0006 = 0, action != PACTION_17, carryItemId = 0) and pressed A: nAiArg ($3F) -> strcPlayerData.nAiArg, the slot is deactivated (+$00 = 0) and marked for removal ($40 in +$01), +$10++, carryItemId := $29, player action PACTION_ITEMONHAND (RTS). Otherwise the counter strcStockData.unkMole ($7E:093A) grows to $B4 (180 frames); once reached it is cleared and if bit $80 of strcPlayer.lastRandomNumber is set, it calls fAI_SetSlotScript(A=$11, X=0, Y=$81) - starts subscript $81 of the general list (index 0) in AI slot $11. At the end it increments the +$10 counter.
 
-RAM: `strcAIUnknown.unk0C`, `strcAIUnknown.nArg`, `strcAIUnknown.flags`, `strcAIUnknown.unk10`, `strcStockData.unkMole`, `strcPlayerData.carryItemId`, `strcPlayerData.nAiArg`, `strcPlayer.action`, `strcPlayer.flags`, `strcPlayer.lastRandomNumber`, `strcFlags.daily4`, `strcJoypad1.newInput`, `ptrAIActionData`
+RAM: `strcAISlot.unk0C`, `strcAISlot.nArg`, `strcAISlot.flags`, `strcAISlot.unk10`, `strcStockData.unkMole`, `strcPlayerData.carryItemId`, `strcPlayerData.nAiArg`, `strcPlayer.action`, `strcPlayer.flags`, `strcPlayer.lastRandomNumber`, `strcFlags.daily4`, `strcJoypad1.newInput`, `ptrAIActionData`
 
 Calls: `fAI_SetSlotScript`
 
@@ -1008,7 +1008,7 @@ One tick of a simple item actor: after A is pressed, a player not holding an ite
 
 The handler advances ptrAIActionData by 1 (in its only use, B38FFD, it sits in a Jump loop). When slot byte +$0C != 0, the player is not busy (action != USINGTOOL/SHOWTOOL/WHISTLE*, no EATINGMEAL, daily4 AND $0006 = 0), pressed A and is not holding an item (carryItemId = 0): nAiArg -> strcPlayerData.nAiArg, the slot is deactivated (+$00 = 0), +$01 |= $40 (object removal), +$10++, strcPlayerData.carryItemId := !EITEM_POTATOSEED (= $07; in the carried items enum $07 is CITEM_FISH) and the player action PACTION_ITEMONHAND. In other cases it only increments +$10. No random logic or counters - the simplest of the Update* family.
 
-RAM: `strcAIUnknown.unk0C`, `strcAIUnknown.nArg`, `strcAIUnknown.flags`, `strcAIUnknown.unk10`, `strcPlayerData.carryItemId`, `strcPlayerData.nAiArg`, `strcPlayer.action`, `strcFlags.daily4`, `strcJoypad1.newInput`, `ptrAIActionData`
+RAM: `strcAISlot.unk0C`, `strcAISlot.nArg`, `strcAISlot.flags`, `strcAISlot.unk10`, `strcPlayerData.carryItemId`, `strcPlayerData.nAiArg`, `strcPlayer.action`, `strcFlags.daily4`, `strcJoypad1.newInput`, `ptrAIActionData`
 
 > Open questions: The code uses the name !EITEM_POTATOSEED (from the equipped items enum) but writes to carryItemId, where $07 is CITEM_FISH - most likely a naming error in the source and the actor is a fish (the only use: an actor created by command 0x1A at (0x268,0x178) with aAIScriptingData_L127, probably a fish). To be confirmed after checking the script data. The macro name is a working proposal.
 
@@ -1021,7 +1021,7 @@ One tick of the horse logic: periodic random behaviors of the foal or adult hors
 
 The handler advances ptrAIActionData by 1 (a loop with Jump, 3 uses in B3), clears strcFlags.daily2 $0010. If nHorseAge ($7F:1F32) != $15: the counter strcStockData.unkHorse ($7E:0939) grows to $78, then is cleared and calls fAI_SetSlotScript(A=$17, X=0, Y=$80) - the foal subscript; the rest is skipped. When nHorseAge == $15 (adult): with daily2 $0040 it selects subscript $28-$2B according to the slot direction +$02; with daily2 flags $0800/$0020 absent it checks the player action (byte +$0C, no tool/whistling/eating, daily4 AND $0006 = 0), sets daily2 $0010 and, after A is pressed within a distance of ~$10 px from the player position (fGameEngine_CheckTileCollisionDir / 83AD91), sets the player action PACTION_17 (mounting). Flag daily2 $0020 enables riding mode: it sets PFLAGS_RIDINGHORSE and deactivates the slot (+$00 = 0, +$01 |= $40, +$0C = 0). When there is no interaction: every $78 frames it selects, based on lastRandomNumber, one of the subscripts $4B/$4D/$4E/$4F/$50 (slot $17). With daily2 $0400 (horse call) it sets +$01 |= $28, starts subscript $4C (adult) or $4A (foal) and computes the direction towards the player (+$0F = 1/2/4/8, +$08 := $20) and walks towards the player. Each branch ends by incrementing the +$10 counter.
 
-RAM: `nHorseAge`, `strcStockData.unkHorse`, `strcFlags.daily2`, `strcFlags.daily4`, `strcAIUnknown.nDataIndex`, `strcAIUnknown.flags`, `strcAIUnknown.unk08`, `strcAIUnknown.unk0C`, `strcAIUnknown.unk0F`, `strcAIUnknown.unk10`, `strcAIUnknown.unk1A`, `strcAIUnknown.unk1C`, `strcAIUnknown.nArg`, `strcPlayer.action`, `strcPlayer.flags`, `strcPlayer.posX`, `strcPlayer.posY`, `strcPlayer.unkE3`, `strcPlayer.lastRandomNumber`, `strcObjectData.directionNew`, `strcJoypad1.newInput`, `ptrAIActionData`
+RAM: `nHorseAge`, `strcStockData.unkHorse`, `strcFlags.daily2`, `strcFlags.daily4`, `strcAISlot.nDataIndex`, `strcAISlot.flags`, `strcAISlot.unk08`, `strcAISlot.unk0C`, `strcAISlot.unk0F`, `strcAISlot.unk10`, `strcAISlot.unk1A`, `strcAISlot.unk1C`, `strcAISlot.nArg`, `strcPlayer.action`, `strcPlayer.flags`, `strcPlayer.posX`, `strcPlayer.posY`, `strcPlayer.unkE3`, `strcPlayer.lastRandomNumber`, `strcObjectData.directionNew`, `strcJoypad1.newInput`, `ptrAIActionData`
 
 Calls: `fAI_SetSlotScript`, `fGameEngine_CheckTileCollisionDir`, `fGameEngine_CheckAISlotCollision`
 
@@ -1034,9 +1034,9 @@ Calls: `fAI_SetSlotScript`, `fGameEngine_CheckTileCollisionDir`, `fGameEngine_Ch
 
 One tick of the dog logic: copies the AI slot position to nDogX/nDogY, handles hugging/picking up the dog, random idle behaviors and running to the player after a whistle.
 
-The handler advances ptrAIActionData by 1 (the next command is usually a Jump back to UpdateDog - see B38DAC/B38DAD, so a loop). It copies the AI slot words ([ptrAIUnknown0xCC]+0x1A and +0x1C) to nDogX/nDogY. (1) Hug: if slot byte +0x0C != 0 and the player is NOT: using a tool / showing a tool / whistling for the horse or dog / eating a meal / riding a horse / in action $17 or ITEMONHAND / carrying an item (carryItemId), the flag daily4 $0006 is clear, A is newly pressed (strcJoypad1.newInput) and there is no PFLAGS_DOGHUGGING, then it clears slot byte +0x00 (slot deactivation), sets bit $40 in +0x01, sets PFLAGS_DOGHUGGING and increments nDogHugs. (2) Idle: strcStockData.unkDog counts frames up to $78 (120), then is cleared and a state machine in $7F1F58 (bits $01,$02,$04,$08,$10, checked in that order) starts a dog subscript with a random chance (strcPlayer.lastRandomNumber) via fAI_SetSlotScript(A=$16, X=0, Y=$3C..$49) and changes the state; the random thresholds are e.g. $40/$80/$C0 for state $01, $2A/$54/$7E/$A8 for state $02. (3) Whistle (flag daily4 $0010, set in fPlayerAction0x1B_WhistleDog and cleared at the end of the fAI_DeactivateSlotAndObject-style routine): clears unkDog, sets bits $28 in +0x01, starts subscript Y=slot[+0x3F] (X=0), computes |dx|,|dy| between the slot and the player, sets [+0x08]=$20 and the movement direction in [+0x0F] as a bit mask (1=down,2=up,4=right,8=left - same order as aAIJoypadInput) according to the larger axis. At the end (if there was no whistle) it increments the counter [+0x10]. It does not block.
+The handler advances ptrAIActionData by 1 (the next command is usually a Jump back to UpdateDog - see B38DAC/B38DAD, so a loop). It copies the AI slot words ([ptrAISlot]+0x1A and +0x1C) to nDogX/nDogY. (1) Hug: if slot byte +0x0C != 0 and the player is NOT: using a tool / showing a tool / whistling for the horse or dog / eating a meal / riding a horse / in action $17 or ITEMONHAND / carrying an item (carryItemId), the flag daily4 $0006 is clear, A is newly pressed (strcJoypad1.newInput) and there is no PFLAGS_DOGHUGGING, then it clears slot byte +0x00 (slot deactivation), sets bit $40 in +0x01, sets PFLAGS_DOGHUGGING and increments nDogHugs. (2) Idle: strcStockData.unkDog counts frames up to $78 (120), then is cleared and a state machine in $7F1F58 (bits $01,$02,$04,$08,$10, checked in that order) starts a dog subscript with a random chance (strcPlayer.lastRandomNumber) via fAI_SetSlotScript(A=$16, X=0, Y=$3C..$49) and changes the state; the random thresholds are e.g. $40/$80/$C0 for state $01, $2A/$54/$7E/$A8 for state $02. (3) Whistle (flag daily4 $0010, set in fPlayerAction0x1B_WhistleDog and cleared at the end of the fAI_DeactivateSlotAndObject-style routine): clears unkDog, sets bits $28 in +0x01, starts subscript Y=slot[+0x3F] (X=0), computes |dx|,|dy| between the slot and the player, sets [+0x08]=$20 and the movement direction in [+0x0F] as a bit mask (1=down,2=up,4=right,8=left - same order as aAIJoypadInput) according to the larger axis. At the end (if there was no whistle) it increments the counter [+0x10]. It does not block.
 
-RAM: `ptrAIActionData`, `ptrAIUnknown0xCC`, `nDogX`, `nDogY`, `nDogHugs`, `strcStockData.unkDog`, `$7F1F58`, `strcPlayer.action`, `strcPlayer.flags`, `strcPlayer.lastRandomNumber`, `strcPlayer.posX`, `strcPlayer.posY`, `strcPlayerData.carryItemId`, `strcJoypad1.newInput`, `strcFlags.daily4`
+RAM: `ptrAIActionData`, `ptrAISlot`, `nDogX`, `nDogY`, `nDogHugs`, `strcStockData.unkDog`, `$7F1F58`, `strcPlayer.action`, `strcPlayer.flags`, `strcPlayer.lastRandomNumber`, `strcPlayer.posX`, `strcPlayer.posY`, `strcPlayerData.carryItemId`, `strcJoypad1.newInput`, `strcFlags.daily4`
 
 Calls: `fAI_SetSlotScript`
 
@@ -1049,9 +1049,9 @@ Calls: `fAI_SetSlotScript`
 
 Removes/deactivates the game object associated with the AI slot (index from slot field +0x12).
 
-Advances the pointer by 1, loads the word [ptrAIUnknown0xCC]+0x12 into strcObject.gameObjectIdx and calls fObject_Destroy. That routine determines the object offset from aGameObjectIndexOffsets, checks the components (fObject_CheckComponentsPending), releases them (fObject_ReleaseSpriteTiles -> fObject_ReleaseTileSlot decrements the counter at $7EA320+idx*4) and clears strcGameObject.initailized. An identical sequence is in fAI_DeactivateSlotAndObject (where byte +0x00 of the slot is additionally cleared), so 0x37 is the variant 'remove the object, but do not deactivate the slot'. In scripts it appears right before %AICMD0x10_End() (e.g. B38DFA, B38E92). It does not block.
+Advances the pointer by 1, loads the word [ptrAISlot]+0x12 into strcObject.gameObjectIdx and calls fObject_Destroy. That routine determines the object offset from aGameObjectIndexOffsets, checks the components (fObject_CheckComponentsPending), releases them (fObject_ReleaseSpriteTiles -> fObject_ReleaseTileSlot decrements the counter at $7EA320+idx*4) and clears strcGameObject.initailized. An identical sequence is in fAI_DeactivateSlotAndObject (where byte +0x00 of the slot is additionally cleared), so 0x37 is the variant 'remove the object, but do not deactivate the slot'. In scripts it appears right before %AICMD0x10_End() (e.g. B38DFA, B38E92). It does not block.
 
-RAM: `ptrAIActionData`, `ptrAIUnknown0xCC`, `strcObject.gameObjectIdx`, `strcObject.gameObjectIdxOffs`, `strcObject.bankAddress`, `strcGameObject.initailized`, `strcGameObject.components`
+RAM: `ptrAIActionData`, `ptrAISlot`, `strcObject.gameObjectIdx`, `strcObject.gameObjectIdxOffs`, `strcObject.bankAddress`, `strcGameObject.initailized`, `strcGameObject.components`
 
 Calls: `fObject_Destroy`
 
@@ -1064,9 +1064,9 @@ Calls: `fObject_Destroy`
 
 Blocks the script until the flag daily1 $8000 is set (screen fully brightened after fade-in).
 
-If strcFlags.daily1 & $8000 != 0, it advances the pointer by 1 and finishes (the script proceeds). Otherwise it does NOT advance the pointer (the command is executed again in the next frame) and only increments the byte/word [ptrAIUnknown0xCC]+0x10. The flag $8000 is set at the end of fCore_ScreenFadein (after the target brightness is reached) and cleared at the end of fCore_ScreenFadeout; other places read it (input.asm - e.g. START handling). Typical pattern in scripts: 0x06 SetDestinationArea, 0x38, 0x0B, 0x0C.
+If strcFlags.daily1 & $8000 != 0, it advances the pointer by 1 and finishes (the script proceeds). Otherwise it does NOT advance the pointer (the command is executed again in the next frame) and only increments the byte/word [ptrAISlot]+0x10. The flag $8000 is set at the end of fCore_ScreenFadein (after the target brightness is reached) and cleared at the end of fCore_ScreenFadeout; other places read it (input.asm - e.g. START handling). Typical pattern in scripts: 0x06 SetDestinationArea, 0x38, 0x0B, 0x0C.
 
-RAM: `strcFlags.daily1`, `ptrAIActionData`, `ptrAIUnknown0xCC`
+RAM: `strcFlags.daily1`, `ptrAIActionData`, `ptrAISlot`
 
 > Open questions: The name of slot field +0x10 (script frame counter?) is not confirmed.
 
@@ -1084,7 +1084,7 @@ Simulates pressing a direction (pad) for the given number of frames and waits un
 
 Input 1 (when PFLAGS_AISTEERING in strcPlayer.flags is clear): ORs the pad mask from the table into strcAiControlData.input, writes nAmount to strcAiControlData.counter, moves the pointer back to the start of the command (the command repeats), increments [+0x10] of the slot and sets PFLAGS_AISTEERING (fInput_AIJoypadHandler reads strcAiControlData.input). Subsequent calls (flag set): if counter != 0 - decrements it and increments [+0x10], blocking. When counter == 0: clears input and counter, clears PFLAGS_AISTEERING, sets strcPlayer.action = PACTION_NONE and advances the pointer by 4 (next command). Blocks for ~nAmount frames.
 
-RAM: `ptrAIActionData`, `ptrAIUnknown0xCC`, `strcAiControlData.input`, `strcAiControlData.counter`, `strcPlayer.flags`, `strcPlayer.action`
+RAM: `ptrAIActionData`, `ptrAISlot`, `strcAiControlData.input`, `strcAiControlData.counter`, `strcPlayer.flags`, `strcPlayer.action`
 
 > Open questions: Whether the input is taken into account in the initialization frame depends on the order in the main loop (not investigated). There is no validation of nInputIndex.
 
@@ -1102,7 +1102,7 @@ Like 0x39, but additionally presses B (run).
 
 Identical logic to 0x39, with the difference that during initialization the mask from table index 4 (X=8 -> $8000 = JOYPAD_B) is also ORed into strcAiControlData.input. The same PFLAGS_AISTEERING + counter mechanism; on completion the input is cleared, action=PACTION_NONE and the pointer is advanced by 4. Blocks.
 
-RAM: `ptrAIActionData`, `ptrAIUnknown0xCC`, `strcAiControlData.input`, `strcAiControlData.counter`, `strcPlayer.flags`, `strcPlayer.action`
+RAM: `ptrAIActionData`, `ptrAISlot`, `strcAiControlData.input`, `strcAiControlData.counter`, `strcPlayer.flags`, `strcPlayer.action`
 
 ## 0x3B — SetCarryItemHolding
 
@@ -1343,11 +1343,11 @@ Sets the sprite data table of the AI object and immediately selects the entry ma
 
 | Parameter | Offset | Size | Type | Meaning |
 |---|---|---|---|---|
-| `pPointerB3` | 1 | 2 | script_ptr | 16-bit pointer (bank $B3) to a sprite/flip data table indexed by direction; stored in the AI object +0x33 (pDataAddress) |
+| `pAnimTable` | 1 | 2 | script_ptr | 16-bit pointer (bank $B3) to a sprite/flip data table indexed by direction; stored in the AI object +0x33 (pDataAddress) |
 
-Writes pPointerB3 to the AI object +0x33. Writes the low byte of strcPlayer.direction to the object +0x02 (nDataIndex). Sets the object flags +0x01 |= 0x03. Calls fAI_LoadSlotSpriteFromDirTable with ptrTemp0x72 = pDataAddress:B3, which loads from the table (3 bytes per entry, index*3) a word into the object +0x16 (spriteTableIdx) and a byte*64 into +0x14 (flip). At the end the object +0x10 += 1 (script execution is interrupted until the next frame). Used in dog/horse scripts (B3 General) before 0x2E and the UpdateDog loop. Difference from 0x2B - the index comes from the player's direction, not from an argument.
+Writes pAnimTable to the AI object +0x33. Writes the low byte of strcPlayer.direction to the object +0x02 (nDataIndex). Sets the object flags +0x01 |= 0x03. Calls fAI_LoadSlotSpriteFromDirTable with ptrTemp0x72 = pDataAddress:B3, which loads from the table (3 bytes per entry, index*3) a word into the object +0x16 (spriteTableIdx) and a byte*64 into +0x14 (flip). At the end the object +0x10 += 1 (script execution is interrupted until the next frame). Used in dog/horse scripts (B3 General) before 0x2E and the UpdateDog loop. Difference from 0x2B - the index comes from the player's direction, not from an argument.
 
-RAM: `ptrAIActionData`, `ptrAIUnknown0xCC`, `strcPlayer.direction`, `ptrTemp0x72`
+RAM: `ptrAIActionData`, `ptrAISlot`, `strcPlayer.direction`, `ptrTemp0x72`
 
 Calls: `fAI_LoadSlotSpriteFromDirTable`
 
@@ -1362,7 +1362,7 @@ If the player stands next to the object and presses A (with empty hands), picks 
 
 Advances the pointer by 1 and checks the conditions (any unmet condition exits with obj+0x10 += 1, i.e. yields the frame): proximity flag obj+0x0C != 0 (set by fGameEngine_CheckAISlotCollision when the player is within a radius of 0x19 px), the player action is not USINGTOOL/SHOWTOOL/WHISTLEHORSE/WHISTLEDOG/17, strcPlayer.flags does not have bit 0x0004 (EATINGMEAL) or DOGHUGGING, daily4 bits 0x0006 are cleared, strcJoypad1.newInput has A, strcPlayerData.carryItemId == 0. When everything is OK - obj+0x00 = 0 (object inactive, the script stops being executed), obj+0x01 |= 0x40 (hidden), obj+0x10 += 1, carryItemId = 8 (macro SetCurrentCarriedItemDirect(!EITEM_TURNIPSEED) - a value from the carryItemId space, the EITEM name is misleading), player action = PACTION_ITEMONHAND. Used in scripts in the loop '4A; Jump to 4A' (B3 General L038, B4 WaterImp).
 
-RAM: `ptrAIActionData`, `ptrAIUnknown0xCC`, `strcPlayer.action`, `strcPlayer.flags`, `strcFlags.daily4`, `strcJoypad1.newInput`, `strcPlayerData.carryItemId`
+RAM: `ptrAIActionData`, `ptrAISlot`, `strcPlayer.action`, `strcPlayer.flags`, `strcFlags.daily4`, `strcJoypad1.newInput`, `strcPlayerData.carryItemId`
 
 > Open questions: Item id 8 in carryItemId has no name in CITEM_* (only CITEM_FISH=7 exists); the macro uses !EITEM_TURNIPSEED from a different space - should be fixed to a CITEM constant. What is physically picked up (scripts B4 0x12 / WaterImp) has not been established.
 
@@ -1396,7 +1396,7 @@ Sets bit 0x02 in the AI object state byte (+0x00); the object no longer blocks t
 
 Executes obj+0x00 |= 0x02. In fGameEngine_CheckAISlotCollision (player collision with AI objects) an object with this bit still receives the proximity flag +0x0C = 1, but does not set n16Unk8C (movement block marker), so the player can pass through it. Does not block script execution, does not change the flow. Used in chicken scripts (B3 General, after 0x2E).
 
-RAM: `ptrAIActionData`, `ptrAIUnknown0xCC`
+RAM: `ptrAIActionData`, `ptrAISlot`
 
 > Open questions: The conclusion that it is 'non-blocking' comes from analysis of the fragment 83AE5B-83AE7F; other places reading bit 0x02 of obj+0x00 were not verified.
 
@@ -1413,7 +1413,7 @@ Conditional jump: if the player is next to the object and used the Blue Feather 
 
 Conditions: obj+0x0C != 0 (player nearby), strcPlayer.action != USINGTOOL, strcFlags.daily3 & 0x0040 (set only by fToolUsedAction0x18_BlueFeather, cleared every frame in the AI loop). If not met - advances the pointer by 3 (skips the address) and continues without yielding the frame. If met - ptrAIActionData = pNextAction; obj+0x08 = obj+0x07, obj+0x03 = obj+0x04 = obj+0x0C = 0; obj+0x02 (direction/index) = strcPlayer.direction XOR 1 (turns face to the player); reloads the sprite via fAI_LoadSlotSpriteFromDirTable from the pDataAddress table (+0x33, bank B3); obj+0x01 |= 0x14 (stops movement); obj+0x10 += 1 (yields the frame). Used 133 times, mainly in NPC scripts (e.g. B3 script 0x01) before a dialog.
 
-RAM: `ptrAIActionData`, `ptrAIUnknown0xCC`, `strcPlayer.action`, `strcPlayer.direction`, `strcFlags.daily3`
+RAM: `ptrAIActionData`, `ptrAISlot`, `strcPlayer.action`, `strcPlayer.direction`, `strcFlags.daily3`
 
 Calls: `fAI_LoadSlotSpriteFromDirTable`
 
@@ -1482,7 +1482,7 @@ Like 0x4A (picking up an object with the A button next to it), but instead of gr
 
 The same entry conditions as in 0x4A with two differences: it does not check PACTION_17, it requires PFLAGS_EATINGMEAL=0, DOGHUGGING=0, carryItemId == 0, daily4 & 0x0006 == 0, A pressed, obj+0x0C != 0. When met: obj+0x00 = 0, obj+0x01 |= 0x40 (the object disappears), obj+0x10 += 1, daily4 |= 0x0002. It does not set the player action or carryItemId. The flag is read by fPlayerAction0x1A (player_actions.asm 81C0B5): after the animation (sprite 0xF2+direction), when daily4 & 0x0004 == 0, it calls AIExecute(arg 0x14, script 0x45, sub 0), i.e. it starts AI script 0x45 (B5). Used once (B5 script 0x45 L018).
 
-RAM: `ptrAIActionData`, `ptrAIUnknown0xCC`, `strcPlayer.action`, `strcPlayer.flags`, `strcFlags.daily4`, `strcJoypad1.newInput`, `strcPlayerData.carryItemId`
+RAM: `ptrAIActionData`, `ptrAISlot`, `strcPlayer.action`, `strcPlayer.flags`, `strcFlags.daily4`, `strcJoypad1.newInput`, `strcPlayerData.carryItemId`
 
 > Open questions: It was not established what the player physically picks up in script 0x45, nor who sets action 0x1A after this command. The name is a descriptive proposal.
 
@@ -1495,7 +1495,7 @@ Like 0x52, but sets flag daily4 0x0004 (selects the second event variant after t
 
 Identical conditions to 0x52. When met: obj+0x00 = 0, obj+0x01 |= 0x40, obj+0x10 += 1, daily4 |= 0x0004. When daily4 & 0x0004, fPlayerAction0x1A starts AIExecute(arg 0x15, script 0x45, sub 3) instead of sub 0, and then clears daily4 0x0006. Used once (B5 script 0x45 L061).
 
-RAM: `ptrAIActionData`, `ptrAIUnknown0xCC`, `strcPlayer.action`, `strcPlayer.flags`, `strcFlags.daily4`, `strcJoypad1.newInput`, `strcPlayerData.carryItemId`
+RAM: `ptrAIActionData`, `ptrAISlot`, `strcPlayer.action`, `strcPlayer.flags`, `strcFlags.daily4`, `strcJoypad1.newInput`, `strcPlayerData.carryItemId`
 
 > Open questions: As in 0x52 - the event content of script 0x45 sub 3 has not been analyzed.
 
@@ -1509,7 +1509,7 @@ Shows a dialog in input handler mode 6 (closes by itself when finished, without 
 | Parameter | Offset | Size | Type | Meaning |
 |---|---|---|---|---|
 | `nDialogId` | 1 | 2 | n16 | dialog index passed in X to fDialog_DialogHandler |
-| `nUnknown2` | 3 | 1 | unknown | stored to strcDialogDisplay.boxPosition (always $01 in scripts) |
+| `nPosition` | 3 | 1 | unknown | stored to strcDialogDisplay.boxPosition (always $01 in scripts) |
 
 Identical to 0x1C/0x1D except: strcDialogDisplay.inputMode = 6 (instead of 2) and additionally zeroing of $09B1 (16-bit). In fInput_Handler mode 6 (fInput_Mode_CutsceneDialog): after the ENDDIALOG flag is set, it counts frames in $09B1 up to 0x78 (120), calls fDialog_EndDialogRestoreScroll, sets inputMode and masks the A button - so the dialog closes by itself after about 2 s. After calling fDialog_DialogHandler, obj+0x10 += 1 (yields the frame). Used 37 times in B5 (scenes/festivals).
 
@@ -1517,7 +1517,7 @@ RAM: `ptrAIActionData`, `strcDialogDisplay.boxPosition`, `strcDialogDisplay.inpu
 
 Calls: `fDialog_DialogHandler`
 
-> Open questions: The meaning of nUnknown2 (boxPosition) is still unknown - it is modified in several places in dialog.asm. The name 'AutoClose' comes from analysis of case06 in input.asm; not confirmed in game.
+> Open questions: The meaning of nPosition (boxPosition) is still unknown - it is modified in several places in dialog.asm. The name 'AutoClose' comes from analysis of case06 in input.asm; not confirmed in game.
 
 ## 0x55 — JumpIfFlagNotSet
 
@@ -1592,7 +1592,7 @@ Calls: `fMap_UpdateFarmTilemapCoords`, `fObjectEngine_ConvertCoordsToOffset`
 
 Sets the player action PACTION_SWAPTOOL - swaps the current tool with the second one.
 
-Advances the pointer by 1 and sets strcPlayer.action = PACTION_SWAPTOOL (0x1C). fPlayerAction0x1C (81C061), after the animation finishes (PFLAGS_ANIMATING), swaps toolEquipped <-> toolSecond, calls fToolUsedSound_PlayOnToolChange and returns to PACTION_NONE. Does not yield the frame within the command itself; the effect happens in subsequent frames of the player action.
+Advances the pointer by 1 and sets strcPlayer.action = PACTION_SWAPTOOL (0x1C). fPlayerAction_SwapTool (81C061), after the animation finishes (PFLAGS_ANIMATING), swaps toolEquipped <-> toolSecond, calls fToolUsedSound_PlayOnToolChange and returns to PACTION_NONE. Does not yield the frame within the command itself; the effect happens in subsequent frames of the player action.
 
 RAM: `ptrAIActionData`, `strcPlayer.action`, `strcPlayerData.toolEquipped`, `strcPlayerData.toolSecond`
 
