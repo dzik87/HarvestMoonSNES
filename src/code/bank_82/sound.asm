@@ -758,7 +758,7 @@ fPlayer_InteractWithFrontObject:
 ;          (skipped when b0 = 0). Ids $73-$79 get a bit mask of neighbours in the same range (below $01, right $02, above $04, left $08; left/right
 ;          are +-1, above/below +-$40) and are drawn with b0 + .unknownData[mask] - 1, i.e. one of nine border variants. Drawing goes through
 ;          fMap_CopyTilePatternToTilemapBuffer.
-; @modifies strcVariables.n16Unk86, strcVariables.n8Temp3
+; @modifies strcVariables.n16Temp5, strcVariables.n8Temp3
 ; @mode    M16X16
 ; @calls   fObjectEngine_ConvertCoordsToOffset, fMap_CopyTilePatternToTilemapBuffer
 ; @callers fTileMap_LoadAreaGraphics
@@ -800,7 +800,7 @@ fObjectMap_ConnectAdjacentObjectTiles:
  
  
   + REP #$20                                                   ;82AF32|C220    |      ;
-    STZ.B strcVariables.n16Unk86                               ;82AF34|6486    |000086;
+    STZ.B strcVariables.n16Temp5                               ;82AF34|6486    |000086;
     PHX                                                        ;82AF36|DA      |      ;
     TXA                                                        ;82AF37|8A      |      ;
     SEC                                                        ;82AF38|38      |      ;
@@ -815,9 +815,9 @@ fObjectMap_ConnectAdjacentObjectTiles:
     CMP.B #$7A                                                 ;82AF49|C97A    |      ;
     BCS +                                                      ;82AF4B|B009    |82AF56;
     REP #$20                                                   ;82AF4D|C220    |      ;
-    LDA.B strcVariables.n16Unk86                               ;82AF4F|A586    |000086;
+    LDA.B strcVariables.n16Temp5                               ;82AF4F|A586    |000086;
     ORA.W #$0008                                               ;82AF51|090800  |      ;
-    STA.B strcVariables.n16Unk86                               ;82AF54|8586    |000086;
+    STA.B strcVariables.n16Temp5                               ;82AF54|8586    |000086;
  
   + REP #$30                                                   ;82AF56|C230    |      ;
     PHX                                                        ;82AF58|DA      |      ;
@@ -834,9 +834,9 @@ fObjectMap_ConnectAdjacentObjectTiles:
     CMP.B #$7A                                                 ;82AF6B|C97A    |      ;
     BCS +                                                      ;82AF6D|B009    |82AF78;
     REP #$20                                                   ;82AF6F|C220    |      ;
-    LDA.B strcVariables.n16Unk86                               ;82AF71|A586    |000086;
+    LDA.B strcVariables.n16Temp5                               ;82AF71|A586    |000086;
     ORA.W #$0002                                               ;82AF73|090200  |      ;
-    STA.B strcVariables.n16Unk86                               ;82AF76|8586    |000086;
+    STA.B strcVariables.n16Temp5                               ;82AF76|8586    |000086;
  
   + REP #$30                                                   ;82AF78|C230    |      ;
     PHX                                                        ;82AF7A|DA      |      ;
@@ -853,9 +853,9 @@ fObjectMap_ConnectAdjacentObjectTiles:
     CMP.B #$7A                                                 ;82AF8D|C97A    |      ;
     BCS +                                                      ;82AF8F|B009    |82AF9A;
     REP #$20                                                   ;82AF91|C220    |      ;
-    LDA.B strcVariables.n16Unk86                               ;82AF93|A586    |000086;
+    LDA.B strcVariables.n16Temp5                               ;82AF93|A586    |000086;
     ORA.W #$0004                                               ;82AF95|090400  |      ;
-    STA.B strcVariables.n16Unk86                               ;82AF98|8586    |000086;
+    STA.B strcVariables.n16Temp5                               ;82AF98|8586    |000086;
  
   + REP #$30                                                   ;82AF9A|C230    |      ;
     PHX                                                        ;82AF9C|DA      |      ;
@@ -872,13 +872,13 @@ fObjectMap_ConnectAdjacentObjectTiles:
     CMP.B #$7A                                                 ;82AFAF|C97A    |      ;
     BCS +                                                      ;82AFB1|B009    |82AFBC;
     REP #$20                                                   ;82AFB3|C220    |      ;
-    LDA.B strcVariables.n16Unk86                               ;82AFB5|A586    |000086;
+    LDA.B strcVariables.n16Temp5                               ;82AFB5|A586    |000086;
     ORA.W #$0001                                               ;82AFB7|090100  |      ;
-    STA.B strcVariables.n16Unk86                               ;82AFBA|8586    |000086;
+    STA.B strcVariables.n16Temp5                               ;82AFBA|8586    |000086;
  
   + REP #$30                                                   ;82AFBC|C230    |      ;
     PHX                                                        ;82AFBE|DA      |      ;
-    LDA.B strcVariables.n16Unk86                               ;82AFBF|A586    |000086;
+    LDA.B strcVariables.n16Temp5                               ;82AFBF|A586    |000086;
     TAX                                                        ;82AFC1|AA      |      ;
     SEP #$20                                                   ;82AFC2|E220    |      ;
     LDA.L .unknownData,X                                       ;82AFC4|BF2AB082|82B02A;

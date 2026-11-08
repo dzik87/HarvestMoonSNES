@@ -564,7 +564,7 @@ fMap_SetupArea:
     REP #$20                                                   ;809917|C220    |      ;
     %UnsetFlag(daily1, $0200)
     LDA.W #$0000                                               ;809924|A90000  |      ;
-    STA.L $7F1F7A                                              ;809927|8F7A1F7F|7F1F7A;
+    STA.L nAIScriptFlags                                              ;809927|8F7A1F7F|7F1F7A;
     STZ.W $0878                                                ;80992B|9C7808  |000878;
     LDA.B strcPlayer.posX                                      ;80992E|A5D6    |0000D6;
     STA.W strcObjectData.playerX                               ;809930|8D0709  |000907;
@@ -594,9 +594,9 @@ fMap_SetupArea:
     LDY.W #$0001                                               ;80997C|A00100  |      ;
     JSL.L fItemCarried_LoadPoseData                                      ;80997F|22B78081|8180B7;
     LDA.W strcObjectData.camX                                  ;809983|AD0B09  |00090B;
-    STA.W nUnknownX                                            ;809986|8D8009  |000980;
+    STA.W nCarriedItemX                                            ;809986|8D8009  |000980;
     LDA.W strcObjectData.camY                                  ;809989|AD0D09  |00090D;
-    STA.W nUnknownY                                            ;80998C|8D8209  |000982;
+    STA.W nCarriedItemY                                            ;80998C|8D8209  |000982;
     SEP #$20                                                   ;80998F|E220    |      ;
     LDA.B #$01                                                 ;809991|A901    |      ;
     STA.W $0974+!RAM_SHIFT                                 ;809993|8D7409  |000974;
@@ -683,7 +683,7 @@ fMap_SetupArea:
 ;           $D0..$FF are the special tiles handled in .caseD0 (farm events). For doors: not while riding a horse, not with daily4 flags $0006, and the transition target is cancelled with the shop rules
 ;           of the flags byte of the table row: bit0 add season to the area id, bit1 closed from 17:00 (evening), bit2 closed before 17:00, bit3 open only Sunday/Saturday, bit4 closed Saturday (and winter day 10),
 ;           bit5 closed Sunday, bit6 day dependent area (spring day 1 -> $3A, winter day 24 -> !AREA_NY_MOUNTAINTOP, days 10..12 -> +4), bit7 closed on festival days (mapFlags $0010).
-;           Phase counter $098A: 0 -> 1 on the first frame (reads the row: destination area, tile-script id, flags, position), 1 -> waits for a running tile script (ptrUnknown0xCF), 2..$0D the player walks into the exit,
+;           Phase counter $098A: 0 -> 1 on the first frame (reads the row: destination area, tile-script id, flags, position), 1 -> waits for a running tile script (ptrTileScript), 2..$0D the player walks into the exit,
 ;           $0D finishes the walk: when the current area is a farm area (< !AREA_TOWNSPRING) fObjectMap_SaveCurrentToFarm runs; when the current area lies in [!AREA_CROSSROADSPRING, !AREA_WOODSSPRING) one hour is added to nCurrentTimeID (unless it is already 18:00) and fEvents_NoonMealCheck runs; then !AFLAGS_FORCETELEPORT is set.
 ;           .caseD0 (special tiles $D0..$FF, only in areas !AREA_WOODSSPRING..!AREA_NY_SPA-1 with mapFlags & $1A == 0): tile $F9 in spring (1/16 chance per frame, once per day via daily2 $2000) starts AI script $11 action $2C,
 ;           tile $FA in fall (daily2 $4000) script $13 action $2B, tile $FB in winter (daily2 $8000) script $12 action $2A; tile $F8 under the player while fishing switches the player action to !PACTION_0F (?).
@@ -967,7 +967,7 @@ fMap_ScreenTransitionHandler:
  
 .check_script_active:
     REP #$20                                                   ;809C5D|C220    |      ;
-    LDA.W ptrUnknown0xCF                                       ;809C5F|ADCF00  |0000CF;
+    LDA.W ptrTileScript                                       ;809C5F|ADCF00  |0000CF;
     BEQ .walk_into_transition                                               ;809C62|F003    |809C67;
     JMP.W .return                                              ;809C64|4C0A9D  |809D0A;
  
@@ -1265,8 +1265,8 @@ fMap_ScreenTransitionHandler:
 ;;
 ; @brief    Compute the camera position from the player's position, clamped to the map's camera limits.
 ; @details  cameraX = player.posX - $80 limited to [strcPlayer.offsetCamX, strcCamera.offsetCamX] (min/max set by fTileMap_LoadAreaGraphics); the screen position of the player sprite
-;           strcObjectData.camX = posX - cameraX (+$80 bias). When the camera is pinned to the minimum the scroll sub-pixel strcMap.unk20 is reset to 0, at the maximum set to 8. The same for Y with strcMap.unk21.
-; @modifies strcCamera.cameraX, strcCamera.cameraY, strcObjectData.camX, strcObjectData.camY, strcMap.unk20, strcMap.unk21
+;           strcObjectData.camX = posX - cameraX (+$80 bias). When the camera is pinned to the minimum the scroll sub-pixel strcMap.scrollAccumX is reset to 0, at the maximum set to 8. The same for Y with strcMap.scrollAccumY.
+; @modifies strcCamera.cameraX, strcCamera.cameraY, strcObjectData.camX, strcObjectData.camY, strcMap.scrollAccumX, strcMap.scrollAccumY
 ; @mode     M16X16
 ; @callers  fTileMap_LoadAreaGraphics
 ;;
@@ -1289,7 +1289,7 @@ fCamera_UpdateFromPlayerPos:
     STA.W strcObjectData.camX                                  ;809ED5|8D0B09  |00090B;
     SEP #$20                                                   ;809ED8|E220    |      ;
     LDA.B #$00                                                 ;809EDA|A900    |      ;
-    STA.B strcMap.unk20                                        ;809EDC|8520    |000020;
+    STA.B strcMap.scrollAccumX                                        ;809EDC|8520    |000020;
     REP #$20                                                   ;809EDE|C220    |      ;
     LDA.B strcPlayer.offsetCamX                                ;809EE0|A5ED    |0000ED;
     STA.B strcCamera.cameraX                                   ;809EE2|85F5    |0000F5;
@@ -1315,7 +1315,7 @@ fCamera_UpdateFromPlayerPos:
     STA.W strcObjectData.camX                                  ;809EFF|8D0B09  |00090B;
     SEP #$20                                                   ;809F02|E220    |      ;
     LDA.B #$08                                                 ;809F04|A908    |      ;
-    STA.B strcMap.unk20                                        ;809F06|8520    |000020;
+    STA.B strcMap.scrollAccumX                                        ;809F06|8520    |000020;
     REP #$20                                                   ;809F08|C220    |      ;
     LDA.B strcCamera.offsetCamX                                ;809F0A|A5F1    |0000F1;
     STA.B strcCamera.cameraX                                   ;809F0C|85F5    |0000F5;
@@ -1339,7 +1339,7 @@ fCamera_UpdateFromPlayerPos:
     STA.W strcObjectData.camY                                  ;809F27|8D0D09  |00090D;
     SEP #$20                                                   ;809F2A|E220    |      ;
     LDA.B #$00                                                 ;809F2C|A900    |      ;
-    STA.B strcMap.unk21                                        ;809F2E|8521    |000021;
+    STA.B strcMap.scrollAccumY                                        ;809F2E|8521    |000021;
     REP #$20                                                   ;809F30|C220    |      ;
     LDA.B strcPlayer.offsetCamY                                ;809F32|A5EF    |0000EF;
     STA.B strcCamera.cameraY                                   ;809F34|85F7    |0000F7;
@@ -1365,7 +1365,7 @@ fCamera_UpdateFromPlayerPos:
     STA.W strcObjectData.camY                                  ;809F51|8D0D09  |00090D;
     SEP #$20                                                   ;809F54|E220    |      ;
     LDA.B #$08                                                 ;809F56|A908    |      ;
-    STA.B strcMap.unk21                                        ;809F58|8521    |000021;
+    STA.B strcMap.scrollAccumY                                        ;809F58|8521    |000021;
     REP #$20                                                   ;809F5A|C220    |      ;
     LDA.B strcCamera.offsetCamY                                ;809F5C|A5F3    |0000F3;
     STA.B strcCamera.cameraY                                   ;809F5E|85F7    |0000F7;
@@ -1596,8 +1596,8 @@ fCamera_UpdateBG2Scroll:
 ;;
 ; @brief    Camera scroll step down: update BG1 vertical offset and request the streaming of the next row when the scroll crossed a tile boundary.
 ; @details  BG1 vertical offset = camera.cameraY. Unless the camera is pinned at its limits, strcMap.unk1E (scroll amount in pixels per call, max 8) is updated; when the map is large (mapFlags bit $0001 set, streaming mode)
-;           strcMap.unk21 accumulates the scroll and after 8 pixels fMap_StreamRowDown is called to load the next tile row.
-; @modifies strcBGScrool.BG1VerOffs, strcMap.unk1E, strcMap.unk21
+;           strcMap.scrollAccumY accumulates the scroll and after 8 pixels fMap_StreamRowDown is called to load the next tile row.
+; @modifies strcBGScrool.BG1VerOffs, strcMap.unk1E, strcMap.scrollAccumY
 ; @mode     M16X16 -> M16X16
 ; @calls    fMap_StreamRowDown
 ;;
@@ -1619,15 +1619,15 @@ fCamera_ScrollDownStep:
     AND.W #$0001                                               ;80A0C5|290100  |      ;
     BEQ .return                                                ;80A0C8|F016    |80A0E0;
     SEP #$20                                                   ;80A0CA|E220    |      ;
-    LDA.B strcMap.unk21                                        ;80A0CC|A521    |000021;
+    LDA.B strcMap.scrollAccumY                                        ;80A0CC|A521    |000021;
     CLC                                                        ;80A0CE|18      |      ;
     ADC.B strcMap.unk1E                                        ;80A0CF|651E    |00001E;
-    STA.B strcMap.unk21                                        ;80A0D1|8521    |000021;
+    STA.B strcMap.scrollAccumY                                        ;80A0D1|8521    |000021;
     CMP.B #$08                                                 ;80A0D3|C908    |      ;
     BCC .return                                                ;80A0D5|9009    |80A0E0;
     SEC                                                        ;80A0D7|38      |      ;
     SBC.B #$08                                                 ;80A0D8|E908    |      ;
-    STA.B strcMap.unk21                                        ;80A0DA|8521    |000021;
+    STA.B strcMap.scrollAccumY                                        ;80A0DA|8521    |000021;
     JSL.L fMap_StreamRowDown                                      ;80A0DC|228DA180|80A18D;
  
 .return:
@@ -1637,8 +1637,8 @@ fCamera_ScrollDownStep:
 ;;
 ; @brief    Camera scroll step up: update BG1 vertical offset and request the streaming of the next row when the scroll crossed a tile boundary.
 ; @details  BG1 vertical offset = camera.cameraY. Unless the camera is pinned at its limits, strcMap.unk1E (scroll amount in pixels per call, max 8) is updated; when the map is large (mapFlags bit $0001 set, streaming mode)
-;           strcMap.unk21 accumulates the scroll and after 8 pixels fMap_StreamRowUp is called to load the next tile row.
-; @modifies strcBGScrool.BG1VerOffs, strcMap.unk1E, strcMap.unk21
+;           strcMap.scrollAccumY accumulates the scroll and after 8 pixels fMap_StreamRowUp is called to load the next tile row.
+; @modifies strcBGScrool.BG1VerOffs, strcMap.unk1E, strcMap.scrollAccumY
 ; @mode     M16X16 -> M16X16
 ; @calls    fMap_StreamRowUp
 ;;
@@ -1663,15 +1663,15 @@ fCamera_ScrollUpStep:
     AND.W #$0001                                               ;80A100|290100  |      ;
     BEQ .return                                                ;80A103|F016    |80A11B;
     SEP #$20                                                   ;80A105|E220    |      ;
-    LDA.B strcMap.unk21                                        ;80A107|A521    |000021;
+    LDA.B strcMap.scrollAccumY                                        ;80A107|A521    |000021;
     SEC                                                        ;80A109|38      |      ;
     SBC.B strcMap.unk1E                                        ;80A10A|E51E    |00001E;
-    STA.B strcMap.unk21                                        ;80A10C|8521    |000021;
+    STA.B strcMap.scrollAccumY                                        ;80A10C|8521    |000021;
     BPL .return                                                ;80A10E|100B    |80A11B;
     LDA.B #$08                                                 ;80A110|A908    |      ;
     CLC                                                        ;80A112|18      |      ;
-    ADC.B strcMap.unk21                                        ;80A113|6521    |000021;
-    STA.B strcMap.unk21                                        ;80A115|8521    |000021;
+    ADC.B strcMap.scrollAccumY                                        ;80A113|6521    |000021;
+    STA.B strcMap.scrollAccumY                                        ;80A115|8521    |000021;
     JSL.L fMap_StreamRowUp                                      ;80A117|2208A380|80A308;
  
 .return:
@@ -1681,8 +1681,8 @@ fCamera_ScrollUpStep:
 ;;
 ; @brief    Camera scroll step right: update BG1 horizontal offset and request the streaming of the next column when the scroll crossed a tile boundary.
 ; @details  BG1 horizontal offset = camera.cameraX. Unless the camera is pinned at its limits, strcMap.unk1E (scroll amount in pixels per call, max 8) is updated; when the map is large (mapFlags bit $0001 set, streaming mode)
-;           strcMap.unk20 accumulates the scroll and after 8 pixels fMap_StreamColumnRight is called to load the next tile column.
-; @modifies strcBGScrool.BG1HorOffs, strcMap.unk1E, strcMap.unk20
+;           strcMap.scrollAccumX accumulates the scroll and after 8 pixels fMap_StreamColumnRight is called to load the next tile column.
+; @modifies strcBGScrool.BG1HorOffs, strcMap.unk1E, strcMap.scrollAccumX
 ; @mode     M16X16 -> M16X16
 ; @calls    fMap_StreamColumnRight
 ;;
@@ -1704,15 +1704,15 @@ fCamera_ScrollRightStep:
     AND.W #$0001                                               ;80A136|290100  |      ;
     BEQ .return                                                ;80A139|F016    |80A151;
     SEP #$20                                                   ;80A13B|E220    |      ;
-    LDA.B strcMap.unk20                                        ;80A13D|A520    |000020;
+    LDA.B strcMap.scrollAccumX                                        ;80A13D|A520    |000020;
     CLC                                                        ;80A13F|18      |      ;
     ADC.B strcMap.unk1E                                        ;80A140|651E    |00001E;
-    STA.B strcMap.unk20                                        ;80A142|8520    |000020;
+    STA.B strcMap.scrollAccumX                                        ;80A142|8520    |000020;
     CMP.B #$08                                                 ;80A144|C908    |      ;
     BCC .return                                                ;80A146|9009    |80A151;
     SEC                                                        ;80A148|38      |      ;
     SBC.B #$08                                                 ;80A149|E908    |      ;
-    STA.B strcMap.unk20                                        ;80A14B|8520    |000020;
+    STA.B strcMap.scrollAccumX                                        ;80A14B|8520    |000020;
     JSL.L fMap_StreamColumnRight                                      ;80A14D|2281A480|80A481;
  
 .return:
@@ -1722,8 +1722,8 @@ fCamera_ScrollRightStep:
 ;;
 ; @brief    Camera scroll step left: update BG1 horizontal offset and request the streaming of the next column when the scroll crossed a tile boundary.
 ; @details  BG1 horizontal offset = camera.cameraX. Unless the camera is pinned at its limits, strcMap.unk1E (scroll amount in pixels per call, max 8) is updated; when the map is large (mapFlags bit $0001 set, streaming mode)
-;           strcMap.unk20 accumulates the scroll and after 8 pixels fMap_StreamColumnLeft is called to load the next tile column.
-; @modifies strcBGScrool.BG1HorOffs, strcMap.unk1E, strcMap.unk20
+;           strcMap.scrollAccumX accumulates the scroll and after 8 pixels fMap_StreamColumnLeft is called to load the next tile column.
+; @modifies strcBGScrool.BG1HorOffs, strcMap.unk1E, strcMap.scrollAccumX
 ; @mode     M16X16 -> M16X16
 ; @calls    fMap_StreamColumnLeft
 ;;
@@ -1748,15 +1748,15 @@ fCamera_ScrollLeftStep:
     AND.W #$0001                                               ;80A171|290100  |      ;
     BEQ .return                                                ;80A174|F016    |80A18C;
     SEP #$20                                                   ;80A176|E220    |      ;
-    LDA.B strcMap.unk20                                        ;80A178|A520    |000020;
+    LDA.B strcMap.scrollAccumX                                        ;80A178|A520    |000020;
     SEC                                                        ;80A17A|38      |      ;
     SBC.B strcMap.unk1E                                        ;80A17B|E51E    |00001E;
-    STA.B strcMap.unk20                                        ;80A17D|8520    |000020;
+    STA.B strcMap.scrollAccumX                                        ;80A17D|8520    |000020;
     BPL .return                                                ;80A17F|100B    |80A18C;
     LDA.B #$08                                                 ;80A181|A908    |      ;
     CLC                                                        ;80A183|18      |      ;
-    ADC.B strcMap.unk20                                        ;80A184|6520    |000020;
-    STA.B strcMap.unk20                                        ;80A186|8520    |000020;
+    ADC.B strcMap.scrollAccumX                                        ;80A184|6520    |000020;
+    STA.B strcMap.scrollAccumX                                        ;80A186|8520    |000020;
     JSL.L fMap_StreamColumnLeft                                      ;80A188|2217A680|80A617;
  
 .return:
@@ -1768,7 +1768,7 @@ fCamera_ScrollLeftStep:
 ; @details  The room is held in WRAM as 32-entry-wide lines (layer 1 at $7E2000, layer 2 at $7E4000); strcMap.unk12 is the position in the map, strcMap.unk14 the ring-buffer
 ;           position in the VRAM tilemap. The code builds two $40 byte vectors in $0746 (layer 1) and $07C6 (layer 2) - taking care of the 32-entry VRAM screen wrap - and queues them with
 ;           fCore_PrepareTransfer on DMA channels 0 and 1 (VMAIN $80, word increment). The map position and the ring position are advanced downwards (+$20 words, wrapping $0C00 -> 0).
-; @modifies strcMap.unk12, strcMap.unk14, ptrTemp0x72, ptrUnknown0x75
+; @modifies strcMap.unk12, strcMap.unk14, ptrTemp0x72, ptrTemp0x75
 ; @mode     M16X16
 ; @calls    fCore_PrepareTransfer
 ; @callers  fCamera_ScrollDownStep
@@ -1865,21 +1865,21 @@ fMap_StreamRowDown:
     LDA.B strcMap.unk1C                                        ;80A21A|A51C    |00001C;
     LSR A                                                      ;80A21C|4A      |      ;
     LSR A                                                      ;80A21D|4A      |      ;
-    STA.B strcVariables.n16Unk86                               ;80A21E|8586    |000086;
+    STA.B strcVariables.n16Temp5                               ;80A21E|8586    |000086;
     LDA.W #$2000                                               ;80A220|A90020  |      ;
     CLC                                                        ;80A223|18      |      ;
     ADC.B strcMap.unk16                                        ;80A224|6516    |000016;
     ADC.B strcMap.unk1C                                        ;80A226|651C    |00001C;
     SEC                                                        ;80A228|38      |      ;
-    SBC.B strcVariables.n16Unk86                               ;80A229|E586    |000086;
+    SBC.B strcVariables.n16Temp5                               ;80A229|E586    |000086;
     STA.B ptrTemp0x72                                          ;80A22B|8572    |000072;
     CLC                                                        ;80A22D|18      |      ;
     ADC.W #$0040                                               ;80A22E|694000  |      ;
-    STA.B ptrUnknown0x75                                       ;80A231|8575    |000075;
+    STA.B ptrTemp0x75                                       ;80A231|8575    |000075;
     SEP #$20                                                   ;80A233|E220    |      ;
     LDA.B #$7E                                                 ;80A235|A97E    |      ;
     STA.B ptrTemp0x72+2                                        ;80A237|8574    |000074;
-    STA.B ptrUnknown0x75+2                                     ;80A239|8577    |000077;
+    STA.B ptrTemp0x75+2                                     ;80A239|8577    |000077;
     REP #$20                                                   ;80A23B|C220    |      ;
     LDX.W #$0000                                               ;80A23D|A20000  |      ;
  
@@ -1911,7 +1911,7 @@ fMap_StreamRowDown:
     STA.W $0746,X                                              ;80A269|9D4607  |000746;
     LDY.B strcVariables.n16Temp3                               ;80A26C|A482    |000082;
     LDX.B strcVariables.n16Temp4                               ;80A26E|A684    |000084;
-    LDA.B [ptrUnknown0x75],Y                                   ;80A270|B775    |000075;
+    LDA.B [ptrTemp0x75],Y                                   ;80A270|B775    |000075;
     STA.W $07C6,X                                              ;80A272|9DC607  |0007C6;
     INC.B strcVariables.n16Temp1                               ;80A275|E67E    |00007E;
     INC.B strcVariables.n16Temp1                               ;80A277|E67E    |00007E;
@@ -1994,7 +1994,7 @@ fMap_StreamRowDown:
 ; @details  The room is held in WRAM as 32-entry-wide lines (layer 1 at $7E2000, layer 2 at $7E4000); strcMap.unk12 is the position in the map, strcMap.unk14 the ring-buffer
 ;           position in the VRAM tilemap. The code builds two $40 byte vectors in $0746 (layer 1) and $07C6 (layer 2) - taking care of the 32-entry VRAM screen wrap - and queues them with
 ;           fCore_PrepareTransfer on DMA channels 0 and 1 (VMAIN $80, word increment). The map position and the ring position are advanced upwards (-$20 words, wrapping to $03E0).
-; @modifies strcMap.unk12, strcMap.unk14, ptrTemp0x72, ptrUnknown0x75
+; @modifies strcMap.unk12, strcMap.unk14, ptrTemp0x72, ptrTemp0x75
 ; @mode     M16X16
 ; @calls    fCore_PrepareTransfer
 ; @callers  fCamera_ScrollUpStep
@@ -2091,20 +2091,20 @@ fMap_StreamRowUp:
     LDA.B strcMap.unk1C                                        ;80A395|A51C    |00001C;
     LSR A                                                      ;80A397|4A      |      ;
     LSR A                                                      ;80A398|4A      |      ;
-    STA.B strcVariables.n16Unk86                               ;80A399|8586    |000086;
+    STA.B strcVariables.n16Temp5                               ;80A399|8586    |000086;
     LDA.W #$2000                                               ;80A39B|A90020  |      ;
     CLC                                                        ;80A39E|18      |      ;
     ADC.B strcMap.unk16                                        ;80A39F|6516    |000016;
     SEC                                                        ;80A3A1|38      |      ;
-    SBC.B strcVariables.n16Unk86                               ;80A3A2|E586    |000086;
+    SBC.B strcVariables.n16Temp5                               ;80A3A2|E586    |000086;
     STA.B ptrTemp0x72                                          ;80A3A4|8572    |000072;
     CLC                                                        ;80A3A6|18      |      ;
     ADC.W #$0040                                               ;80A3A7|694000  |      ;
-    STA.B ptrUnknown0x75                                       ;80A3AA|8575    |000075;
+    STA.B ptrTemp0x75                                       ;80A3AA|8575    |000075;
     SEP #$20                                                   ;80A3AC|E220    |      ;
     LDA.B #$7E                                                 ;80A3AE|A97E    |      ;
     STA.B ptrTemp0x72+2                                        ;80A3B0|8574    |000074;
-    STA.B ptrUnknown0x75+2                                     ;80A3B2|8577    |000077;
+    STA.B ptrTemp0x75+2                                     ;80A3B2|8577    |000077;
     REP #$20                                                   ;80A3B4|C220    |      ;
     LDX.W #$0000                                               ;80A3B6|A20000  |      ;
  
@@ -2136,7 +2136,7 @@ fMap_StreamRowUp:
     STA.W $0746,X                                              ;80A3E2|9D4607  |000746;
     LDY.B strcVariables.n16Temp3                               ;80A3E5|A482    |000082;
     LDX.B strcVariables.n16Temp4                               ;80A3E7|A684    |000084;
-    LDA.B [ptrUnknown0x75],Y                                   ;80A3E9|B775    |000075;
+    LDA.B [ptrTemp0x75],Y                                   ;80A3E9|B775    |000075;
     STA.W $07C6,X                                              ;80A3EB|9DC607  |0007C6;
     INC.B strcVariables.n16Temp1                               ;80A3EE|E67E    |00007E;
     INC.B strcVariables.n16Temp1                               ;80A3F0|E67E    |00007E;
@@ -2219,7 +2219,7 @@ fMap_StreamRowUp:
 ; @details  The room is held in WRAM as 32-entry-wide lines (layer 1 at $7E2000, layer 2 at $7E4000); strcMap.unk16 is the position in the map, strcMap.unk10 the ring-buffer
 ;           position in the VRAM tilemap. The code builds two $40 byte vectors in $0746 (layer 1) and $07C6 (layer 2) - taking care of the 32-entry VRAM screen wrap - and queues them with
 ;           fCore_PrepareTransfer on DMA channels 0 and 1 (VMAIN $81, increment by 32 words). The map position and the ring position are advanced to the right (+1 word).
-; @modifies strcMap.unk16, strcMap.unk10, ptrTemp0x72, ptrUnknown0x75
+; @modifies strcMap.unk16, strcMap.unk10, ptrTemp0x72, ptrTemp0x75
 ; @mode     M16X16
 ; @calls    fCore_PrepareTransfer
 ; @callers  fCamera_ScrollRightStep
@@ -2334,11 +2334,11 @@ fMap_StreamColumnRight:
     ADC.W #$0060                                               ;80A52F|696000  |      ;
     STA.B ptrTemp0x72                                          ;80A532|8572    |000072;
     ADC.W #$2000                                               ;80A534|690020  |      ;
-    STA.B ptrUnknown0x75                                       ;80A537|8575    |000075;
+    STA.B ptrTemp0x75                                       ;80A537|8575    |000075;
     SEP #$20                                                   ;80A539|E220    |      ;
     LDA.B #$7E                                                 ;80A53B|A97E    |      ;
     STA.B ptrTemp0x72+2                                        ;80A53D|8574    |000074;
-    STA.B ptrUnknown0x75+2                                     ;80A53F|8577    |000077;
+    STA.B ptrTemp0x75+2                                     ;80A53F|8577    |000077;
     REP #$20                                                   ;80A541|C220    |      ;
     LDX.W #$0000                                               ;80A543|A20000  |      ;
  
@@ -2370,7 +2370,7 @@ fMap_StreamColumnRight:
     STA.W $0746,X                                              ;80A56F|9D4607  |000746;
     LDY.B strcVariables.n16Temp3                               ;80A572|A482    |000082;
     LDX.B strcVariables.n16Temp4                               ;80A574|A684    |000084;
-    LDA.B [ptrUnknown0x75],Y                                   ;80A576|B775    |000075;
+    LDA.B [ptrTemp0x75],Y                                   ;80A576|B775    |000075;
     STA.W $07C6,X                                              ;80A578|9DC607  |0007C6;
     LDA.B strcVariables.n16Temp1                               ;80A57B|A57E    |00007E;
     CLC                                                        ;80A57D|18      |      ;
@@ -2457,7 +2457,7 @@ fMap_StreamColumnRight:
 ; @details  The room is held in WRAM as 32-entry-wide lines (layer 1 at $7E2000, layer 2 at $7E4000); strcMap.unk16 is the position in the map, strcMap.unk10 the ring-buffer
 ;           position in the VRAM tilemap. The code builds two $40 byte vectors in $0746 (layer 1) and $07C6 (layer 2) - taking care of the 32-entry VRAM screen wrap - and queues them with
 ;           fCore_PrepareTransfer on DMA channels 0 and 1 (VMAIN $81, increment by 32 words). The map position and the ring position are advanced to the left (-1 word).
-; @modifies strcMap.unk16, strcMap.unk10, ptrTemp0x72, ptrUnknown0x75
+; @modifies strcMap.unk16, strcMap.unk10, ptrTemp0x72, ptrTemp0x75
 ; @mode     M16X16
 ; @calls    fCore_PrepareTransfer
 ; @callers  fCamera_ScrollLeftStep
@@ -2574,11 +2574,11 @@ fMap_StreamColumnLeft:
     STA.B ptrTemp0x72                                          ;80A6C8|8572    |000072;
     CLC                                                        ;80A6CA|18      |      ;
     ADC.W #$2000                                               ;80A6CB|690020  |      ;
-    STA.B ptrUnknown0x75                                       ;80A6CE|8575    |000075;
+    STA.B ptrTemp0x75                                       ;80A6CE|8575    |000075;
     SEP #$20                                                   ;80A6D0|E220    |      ;
     LDA.B #$7E                                                 ;80A6D2|A97E    |      ;
     STA.B ptrTemp0x72+2                                        ;80A6D4|8574    |000074;
-    STA.B ptrUnknown0x75+2                                     ;80A6D6|8577    |000077;
+    STA.B ptrTemp0x75+2                                     ;80A6D6|8577    |000077;
     REP #$20                                                   ;80A6D8|C220    |      ;
     LDX.W #$0000                                               ;80A6DA|A20000  |      ;
  
@@ -2610,7 +2610,7 @@ fMap_StreamColumnLeft:
     STA.W $0746,X                                              ;80A706|9D4607  |000746;
     LDY.B strcVariables.n16Temp3                               ;80A709|A482    |000082;
     LDX.B strcVariables.n16Temp4                               ;80A70B|A684    |000084;
-    LDA.B [ptrUnknown0x75],Y                                   ;80A70D|B775    |000075;
+    LDA.B [ptrTemp0x75],Y                                   ;80A70D|B775    |000075;
     STA.W $07C6,X                                              ;80A70F|9DC607  |0007C6;
     LDA.B strcVariables.n16Temp1                               ;80A712|A57E    |00007E;
     CLC                                                        ;80A714|18      |      ;

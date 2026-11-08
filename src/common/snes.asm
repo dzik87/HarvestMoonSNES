@@ -1,3 +1,8 @@
+;;
+; @file   snes.asm
+; @brief  SNES hardware register addresses ($2100-$21FF PPU, $4200-$43FF CPU/DMA) and their bit masks, plus cartridge header constants.
+; @see    docs/ (SNES developer manuals), src/code/header.asm
+;;
 !CONSTANT                   =   $20
 !SPEED_FASTROM              =   $10
 !SPEED_SLOWROM              =   $00

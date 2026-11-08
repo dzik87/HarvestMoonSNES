@@ -1,3 +1,9 @@
+;;
+; @file   region.asm
+; @brief  Release selection (US default, -DREGION_EU/DE/JP=1), derived !REGION_* symbols, !RAM_SHIFT / text field sizes of the regions
+;         and the data directory names (!REGDIR, !DLGDIR); the translation build switch !TRANSLATION.
+; @see    docs/regions.md, docs/translation.md
+;;
 ; Region (release) selection for the patch blocks of the code banks $80-$85.
 ;
 ; The build defines at most one of REGION_EU, REGION_DE, REGION_JP (assembler option -D..=1); without any of

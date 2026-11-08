@@ -230,7 +230,7 @@ fObjectMap_WinterWitherFarm:
 ; @param   A   chance denominator for tile $05
 ; @param   X   chance denominator for tile $1D and grass tiles
 ; @param   Y   chance denominator for tiles $07, $08, $1E-$6F
-; @modifies sFarmTilemap, nPlantedGrassCount, strcPlayerData.leftGrassToCut, strcDialogDisplay.mapMultiWidth, strcVariables.n16Unk86/88/8A
+; @modifies sFarmTilemap, nPlantedGrassCount, strcPlayerData.leftGrassToCut, strcDialogDisplay.mapMultiWidth, strcVariables.n16Temp5/88/8A
 ; @mode    M16X16
 ; @calls   fObjectEngine_ConvertCoordsToOffset, fCore_GetRandomNumber
 ; @callers fNextDayHandler, fObjectMap_ApplyHurricaneDamageByMapFlags
@@ -239,9 +239,9 @@ fObjectMap_WinterWitherFarm:
 ;;
 fObjectMap_HurricaneDamage:
     REP #$30                                                   ;82A713|C230    |      ; A: nArg1, X: nArg2, Y: nArg3
-    STA.B strcVariables.n16Unk86                               ;82A715|8586    |000086;
-    STX.B strcVariables.n16Unk88                               ;82A717|8688    |000088;
-    STY.B strcVariables.n16Unk8A                               ;82A719|848A    |00008A;
+    STA.B strcVariables.n16Temp5                               ;82A715|8586    |000086;
+    STX.B strcVariables.n16Temp6                               ;82A717|8688    |000088;
+    STY.B strcVariables.n16Temp7                               ;82A719|848A    |00008A;
     SEP #$20                                                   ;82A71B|E220    |      ;
     LDA.B #$04                                                 ;82A71D|A904    |      ;
     STA.W strcDialogDisplay.mapMultiWidth                      ;82A71F|8D8101  |000181;
@@ -282,7 +282,7 @@ fObjectMap_HurricaneDamage:
  
 .damage_tile05:
     REP #$30                                                   ;82A75E|C230    |      ;
-    LDA.B strcVariables.n16Unk86                               ;82A760|A586    |000086;
+    LDA.B strcVariables.n16Temp5                               ;82A760|A586    |000086;
     BNE +                                                      ;82A762|D003    |82A767;
     JMP.W .next_tile                                              ;82A764|4CF0A7  |82A7F0;
  
@@ -306,7 +306,7 @@ fObjectMap_HurricaneDamage:
  
 .roll_clear_tile:
     REP #$30                                                   ;82A784|C230    |      ;
-    LDA.B strcVariables.n16Unk88                               ;82A786|A588    |000088;
+    LDA.B strcVariables.n16Temp6                               ;82A786|A588    |000088;
     BEQ .next_tile                                                ;82A788|F066    |82A7F0;
     PHX                                                        ;82A78A|DA      |      ;
     JSL.L fCore_GetRandomNumber                                ;82A78B|22F98980|8089F9;
@@ -335,7 +335,7 @@ fObjectMap_HurricaneDamage:
  
 .damage_tile1d:
     REP #$30                                                   ;82A7B8|C230    |      ;
-    LDA.B strcVariables.n16Unk88                               ;82A7BA|A588    |000088;
+    LDA.B strcVariables.n16Temp6                               ;82A7BA|A588    |000088;
     BEQ .next_tile                                                ;82A7BC|F032    |82A7F0;
     PHX                                                        ;82A7BE|DA      |      ;
     JSL.L fCore_GetRandomNumber                                ;82A7BF|22F98980|8089F9;
@@ -351,7 +351,7 @@ fObjectMap_HurricaneDamage:
  
 .damage_tile_low:
     REP #$30                                                   ;82A7D4|C230    |      ;
-    LDA.B strcVariables.n16Unk8A                               ;82A7D6|A58A    |00008A;
+    LDA.B strcVariables.n16Temp7                               ;82A7D6|A58A    |00008A;
     BEQ .next_tile                                                ;82A7D8|F016    |82A7F0;
     PHX                                                        ;82A7DA|DA      |      ;
     JSL.L fCore_GetRandomNumber                                ;82A7DB|22F98980|8089F9;

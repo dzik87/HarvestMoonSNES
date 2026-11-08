@@ -18,10 +18,10 @@
 ; @details The slots are 16-byte records at $7EB4E6: +0 flags (bit0 active, bit1 free the slot when the object is gone, bit2 jump pose
 ;   loaded), +1 handler index (into pItemCarriedSlotHandlerTable), +2 phase, +3 carried item id, +4 game object index, +6 sprite table index,
 ;   +8 previous sprite, +A flip/attribute bits, +C x, +E y. For every active slot the record is copied to the working variables
-;   ($0974-$097E, nCarriedItemId, nGameObjectIdx, nUnknownX/Y), the object state is read (fObject_GetSingleObjectData) and, unless the
+;   ($0974-$097E, nCarriedItemId, nGameObjectIdx, nCarriedItemX/Y), the object state is read (fObject_GetSingleObjectData) and, unless the
 ;   object was destroyed ($FFFD), the handler runs. Afterwards the record is written back, the object position/flip updated
 ;   (fObject_UpdatePositionAndFlip) and the sprite replaced (fObject_Replace) when the sprite index changed.
-; @modifies nCarriedItemId, nGameObjectIdx, nUnknownX, nUnknownY, ptrUnknown0x07
+; @modifies nCarriedItemId, nGameObjectIdx, nCarriedItemX, nCarriedItemY, ptrObjectSlot
 ; @clobbers A X Y
 ; @mode    ? -> M16X16
 ; @calls   fObject_GetSingleObjectData, fObject_Destroy, fObjectSlots_FreeCurrent, fObject_UpdatePositionAndFlip, fObject_Replace, pItemCarriedSlotHandlerTable (indirect)
@@ -31,17 +31,17 @@
 fObjectSlots_UpdateAll:
     REP #$30                                                   ;81A383|C230    |      ;
     LDA.W #$B4E6                                               ;81A385|A9E6B4  |      ;
-    STA.B ptrUnknown0x07                                       ;81A388|8507    |000007;
+    STA.B ptrObjectSlot                                       ;81A388|8507    |000007;
     SEP #$20                                                   ;81A38A|E220    |      ;
     LDA.B #$7E                                                 ;81A38C|A97E    |      ;
-    STA.B ptrUnknown0x07+2                                     ;81A38E|8509    |000009; $72 = 0x7EB4E6
+    STA.B ptrObjectSlot+2                                     ;81A38E|8509    |000009; $72 = 0x7EB4E6
     LDX.W #$0000                                               ;81A390|A20000  |      ;
  
 .loop:
     PHX                                                        ;81A393|DA      |      ;
     SEP #$20                                                   ;81A394|E220    |      ;
     ; slot flags: bit 0 = in use
-    LDA.B [ptrUnknown0x07]                                     ;81A396|A707    |000007;
+    LDA.B [ptrObjectSlot]                                     ;81A396|A707    |000007;
     AND.B #$01                                                 ;81A398|2901    |      ;
     BNE +                                                      ;81A39A|D003    |81A39F;
     JMP.W .caseFFFD                                            ;81A39C|4CB2A4  |81A4B2;
@@ -49,37 +49,37 @@ fObjectSlots_UpdateAll:
  
   + SEP #$20                                                   ;81A39F|E220    |      ;
     LDY.W #$0000                                               ;81A3A1|A00000  |      ;
-    LDA.B [ptrUnknown0x07],Y                                   ;81A3A4|B707    |000007;
+    LDA.B [ptrObjectSlot],Y                                   ;81A3A4|B707    |000007;
     STA.W $0974+!RAM_SHIFT                                 ;81A3A6|8D7409  |000974;
     LDY.W #$0001                                               ;81A3A9|A00100  |      ;
-    LDA.B [ptrUnknown0x07],Y                                   ;81A3AC|B707    |000007;
+    LDA.B [ptrObjectSlot],Y                                   ;81A3AC|B707    |000007;
     STA.W $0975+!RAM_SHIFT                                 ;81A3AE|8D7509  |000975;
     LDY.W #$0002                                               ;81A3B1|A00200  |      ;
-    LDA.B [ptrUnknown0x07],Y                                   ;81A3B4|B707    |000007;
+    LDA.B [ptrObjectSlot],Y                                   ;81A3B4|B707    |000007;
     STA.W $0976+!RAM_SHIFT                                 ;81A3B6|8D7609  |000976;
     LDY.W #$0003                                               ;81A3B9|A00300  |      ;
-    LDA.B [ptrUnknown0x07],Y                                   ;81A3BC|B707    |000007;
+    LDA.B [ptrObjectSlot],Y                                   ;81A3BC|B707    |000007;
     STA.W nCarriedItemId                                       ;81A3BE|8D8409  |000984;
     REP #$20                                                   ;81A3C1|C220    |      ;
     LDY.W #$0004                                               ;81A3C3|A00400  |      ;
-    LDA.B [ptrUnknown0x07],Y                                   ;81A3C6|B707    |000007;
+    LDA.B [ptrObjectSlot],Y                                   ;81A3C6|B707    |000007;
     STA.W nGameObjectIdx                                       ;81A3C8|8D7809  |000978;
     STA.B strcObject.gameObjectIdx                             ;81A3CB|85A5    |0000A5;
     LDY.W #$0006                                               ;81A3CD|A00600  |      ;
-    LDA.B [ptrUnknown0x07],Y                                   ;81A3D0|B707    |000007;
+    LDA.B [ptrObjectSlot],Y                                   ;81A3D0|B707    |000007;
     STA.W $097A+!RAM_SHIFT                                 ;81A3D2|8D7A09  |00097A;
     LDY.W #$0008                                               ;81A3D5|A00800  |      ;
-    LDA.B [ptrUnknown0x07],Y                                   ;81A3D8|B707    |000007;
+    LDA.B [ptrObjectSlot],Y                                   ;81A3D8|B707    |000007;
     STA.W $097C+!RAM_SHIFT                                 ;81A3DA|8D7C09  |00097C;
     LDY.W #$000A                                               ;81A3DD|A00A00  |      ;
-    LDA.B [ptrUnknown0x07],Y                                   ;81A3E0|B707    |000007;
+    LDA.B [ptrObjectSlot],Y                                   ;81A3E0|B707    |000007;
     STA.W $097E+!RAM_SHIFT                                 ;81A3E2|8D7E09  |00097E;
     LDY.W #$000C                                               ;81A3E5|A00C00  |      ;
-    LDA.B [ptrUnknown0x07],Y                                   ;81A3E8|B707    |000007;
-    STA.W nUnknownX                                            ;81A3EA|8D8009  |000980;
+    LDA.B [ptrObjectSlot],Y                                   ;81A3E8|B707    |000007;
+    STA.W nCarriedItemX                                            ;81A3EA|8D8009  |000980;
     LDY.W #$000E                                               ;81A3ED|A00E00  |      ;
-    LDA.B [ptrUnknown0x07],Y                                   ;81A3F0|B707    |000007;
-    STA.W nUnknownY                                            ;81A3F2|8D8209  |000982;
+    LDA.B [ptrObjectSlot],Y                                   ;81A3F0|B707    |000007;
+    STA.W nCarriedItemY                                            ;81A3F2|8D8209  |000982;
     JSL.L fObject_GetSingleObjectData                          ;81A3F5|22CB8185|8581CB;
     REP #$20                                                   ;81A3F9|C220    |      ;
     LDA.B strcObject.exists                                    ;81A3FB|A5A7    |0000A7;
@@ -117,7 +117,7 @@ fObjectSlots_UpdateAll:
     LDA.B #$00                                                 ;81A433|A900    |      ;
     XBA                                                        ;81A435|EB      |      ;
     LDY.W #$0001                                               ;81A436|A00100  |      ;
-    LDA.B [ptrUnknown0x07],Y                                   ;81A439|B707    |000007;
+    LDA.B [ptrObjectSlot],Y                                   ;81A439|B707    |000007;
     REP #$20                                                   ;81A43B|C220    |      ;
     ASL A                                                      ;81A43D|0A      |      ;
     TAX                                                        ;81A43E|AA      |      ;
@@ -128,35 +128,35 @@ fObjectSlots_UpdateAll:
     SEP #$20                                                   ;81A447|E220    |      ;
     LDY.W #$0000                                               ;81A449|A00000  |      ;
     LDA.W $0974+!RAM_SHIFT                                 ;81A44C|AD7409  |000974;
-    STA.B [ptrUnknown0x07],Y                                   ;81A44F|9707    |000007;
+    STA.B [ptrObjectSlot],Y                                   ;81A44F|9707    |000007;
     LDY.W #$0002                                               ;81A451|A00200  |      ;
     LDA.W $0976+!RAM_SHIFT                                 ;81A454|AD7609  |000976;
-    STA.B [ptrUnknown0x07],Y                                   ;81A457|9707    |000007;
+    STA.B [ptrObjectSlot],Y                                   ;81A457|9707    |000007;
     LDY.W #$0003                                               ;81A459|A00300  |      ;
     LDA.W nCarriedItemId                                       ;81A45C|AD8409  |000984;
-    STA.B [ptrUnknown0x07],Y                                   ;81A45F|9707    |000007;
+    STA.B [ptrObjectSlot],Y                                   ;81A45F|9707    |000007;
     REP #$20                                                   ;81A461|C220    |      ;
     LDY.W #$0004                                               ;81A463|A00400  |      ;
     LDA.W nGameObjectIdx                                       ;81A466|AD7809  |000978;
-    STA.B [ptrUnknown0x07],Y                                   ;81A469|9707    |000007;
+    STA.B [ptrObjectSlot],Y                                   ;81A469|9707    |000007;
     STA.B strcObject.gameObjectIdx                             ;81A46B|85A5    |0000A5;
     LDY.W #$0006                                               ;81A46D|A00600  |      ;
     LDA.W $097A+!RAM_SHIFT                                 ;81A470|AD7A09  |00097A;
-    STA.B [ptrUnknown0x07],Y                                   ;81A473|9707    |000007;
+    STA.B [ptrObjectSlot],Y                                   ;81A473|9707    |000007;
     LDY.W #$0008                                               ;81A475|A00800  |      ;
     LDA.W $097C+!RAM_SHIFT                                 ;81A478|AD7C09  |00097C;
-    STA.B [ptrUnknown0x07],Y                                   ;81A47B|9707    |000007;
+    STA.B [ptrObjectSlot],Y                                   ;81A47B|9707    |000007;
     LDY.W #$000A                                               ;81A47D|A00A00  |      ;
     LDA.W $097E+!RAM_SHIFT                                 ;81A480|AD7E09  |00097E;
-    STA.B [ptrUnknown0x07],Y                                   ;81A483|9707    |000007;
+    STA.B [ptrObjectSlot],Y                                   ;81A483|9707    |000007;
     STA.B strcObject.flip                                      ;81A485|859F    |00009F;
     LDY.W #$000C                                               ;81A487|A00C00  |      ;
-    LDA.W nUnknownX                                            ;81A48A|AD8009  |000980;
-    STA.B [ptrUnknown0x07],Y                                   ;81A48D|9707    |000007;
+    LDA.W nCarriedItemX                                            ;81A48A|AD8009  |000980;
+    STA.B [ptrObjectSlot],Y                                   ;81A48D|9707    |000007;
     STA.B strcObject.posX                                      ;81A48F|859B    |00009B;
     LDY.W #$000E                                               ;81A491|A00E00  |      ;
-    LDA.W nUnknownY                                            ;81A494|AD8209  |000982;
-    STA.B [ptrUnknown0x07],Y                                   ;81A497|9707    |000007;
+    LDA.W nCarriedItemY                                            ;81A494|AD8209  |000982;
+    STA.B [ptrObjectSlot],Y                                   ;81A497|9707    |000007;
     STA.B strcObject.posY                                      ;81A499|859D    |00009D;
     JSL.L fObject_UpdatePositionAndFlip                                ;81A49B|22B98085|8580B9;
     LDA.W $097A+!RAM_SHIFT                                 ;81A49F|AD7A09  |00097A;
@@ -164,16 +164,16 @@ fObjectSlots_UpdateAll:
     BEQ .caseFFFD                                              ;81A4A5|F00B    |81A4B2;
     STA.B strcObject.spriteTableIdx                            ;81A4A7|85A1    |0000A1;
     LDY.W #$0008                                               ;81A4A9|A00800  |      ;
-    STA.B [ptrUnknown0x07],Y                                   ;81A4AC|9707    |000007;
+    STA.B [ptrObjectSlot],Y                                   ;81A4AC|9707    |000007;
     JSL.L fObject_Replace                                ;81A4AE|22008185|858100;
  
 .caseFFFD:
     REP #$30                                                   ;81A4B2|C230    |      ;
     PLX                                                        ;81A4B4|FA      |      ;
-    LDA.B ptrUnknown0x07                                       ;81A4B5|A507    |000007;
+    LDA.B ptrObjectSlot                                       ;81A4B5|A507    |000007;
     CLC                                                        ;81A4B7|18      |      ;
     ADC.W #$0010                                               ;81A4B8|691000  |      ;
-    STA.B ptrUnknown0x07                                       ;81A4BB|8507    |000007;
+    STA.B ptrObjectSlot                                       ;81A4BB|8507    |000007;
     INX                                                        ;81A4BD|E8      |      ;
     ; 10 slots
     CPX.W #$000A                                               ;81A4BE|E00A00  |      ;
@@ -193,21 +193,21 @@ fObjectSlots_UpdateAll:
 fObjectSlots_ClearAll:
     REP #$30                                                   ;81A4C7|C230    |      ;
     LDA.W #$B4E6                                               ;81A4C9|A9E6B4  |      ;
-    STA.B ptrUnknown0x07                                       ;81A4CC|8507    |000007;
+    STA.B ptrObjectSlot                                       ;81A4CC|8507    |000007;
     SEP #$20                                                   ;81A4CE|E220    |      ;
     LDA.B #$7E                                                 ;81A4D0|A97E    |      ;
-    STA.B ptrUnknown0x07+2                                     ;81A4D2|8509    |000009;
+    STA.B ptrObjectSlot+2                                     ;81A4D2|8509    |000009;
     LDX.W #$0000                                               ;81A4D4|A20000  |      ;
  
   - SEP #$20                                                   ;81A4D7|E220    |      ;
     LDY.W #$0000                                               ;81A4D9|A00000  |      ;
     LDA.B #$00                                                 ;81A4DC|A900    |      ;
-    STA.B [ptrUnknown0x07],Y                                   ;81A4DE|9707    |000007;
+    STA.B [ptrObjectSlot],Y                                   ;81A4DE|9707    |000007;
     REP #$20                                                   ;81A4E0|C220    |      ;
-    LDA.B ptrUnknown0x07                                       ;81A4E2|A507    |000007;
+    LDA.B ptrObjectSlot                                       ;81A4E2|A507    |000007;
     CLC                                                        ;81A4E4|18      |      ;
     ADC.W #$0010                                               ;81A4E5|691000  |      ;
-    STA.B ptrUnknown0x07                                       ;81A4E8|8507    |000007;
+    STA.B ptrObjectSlot                                       ;81A4E8|8507    |000007;
     INX                                                        ;81A4EA|E8      |      ;
     CPX.W #$000A                                               ;81A4EB|E00A00  |      ;
     BNE -                                                      ;81A4EE|D0E7    |81A4D7;
@@ -216,7 +216,7 @@ fObjectSlots_ClearAll:
  
 ;;
 ; @brief   Frees the slot that fObjectSlots_UpdateAll is currently processing (clears its flags and the working flag byte $0974).
-; @details The slot pointer ptrUnknown0x07 still points at the record of the running handler.
+; @details The slot pointer ptrObjectSlot still points at the record of the running handler.
 ; @modifies $0974
 ; @clobbers A Y
 ; @mode    ? -> M8X16
@@ -227,13 +227,13 @@ fObjectSlots_FreeCurrent:
     REP #$10                                                   ;81A4F3|C210    |      ;
     LDY.W #$0000                                               ;81A4F5|A00000  |      ;
     LDA.B #$00                                                 ;81A4F8|A900    |      ;
-    STA.B [ptrUnknown0x07],Y                                   ;81A4FA|9707    |000007;
+    STA.B [ptrObjectSlot],Y                                   ;81A4FA|9707    |000007;
     STZ.W $0974+!RAM_SHIFT                                 ;81A4FC|9C7409  |000974;
     RTL                                                        ;81A4FF|6B      |      ;
  
  
 ;;
-; @brief   Stores the working slot variables ($0974-$097E, nCarriedItemId, nUnknownX/Y) into the first free slot and creates its sprite object.
+; @brief   Stores the working slot variables ($0974-$097E, nCarriedItemId, nCarriedItemX/Y) into the first free slot and creates its sprite object.
 ; @details Searches for a slot whose flag bit 0 is clear, copies the working copy into it, creates the game object with fObject_Create and stores the
 ;   returned game object index at +4.
 ; @param   $0974   slot flags
@@ -242,9 +242,9 @@ fObjectSlots_FreeCurrent:
 ; @param   nCarriedItemId   item id (also used as parameter by the tool animation objects)
 ; @param   $097A   sprite table index
 ; @param   $097E   flip/attribute bits
-; @param   nUnknownX   x position
-; @param   nUnknownY   y position
-; @modifies ptrUnknown0x07
+; @param   nCarriedItemX   x position
+; @param   nCarriedItemY   y position
+; @modifies ptrObjectSlot
 ; @clobbers A X Y
 ; @mode    ? -> M16X16
 ; @calls   fObject_Create
@@ -254,21 +254,21 @@ fObjectSlots_FreeCurrent:
 fObjectSlots_Allocate:
     REP #$30                                                   ;81A500|C230    |      ;
     LDA.W #$B4E6                                               ;81A502|A9E6B4  |      ;
-    STA.B ptrUnknown0x07                                       ;81A505|8507    |000007;
+    STA.B ptrObjectSlot                                       ;81A505|8507    |000007;
     SEP #$20                                                   ;81A507|E220    |      ;
     LDA.B #$7E                                                 ;81A509|A97E    |      ;
-    STA.B ptrUnknown0x07+2                                     ;81A50B|8509    |000009;
+    STA.B ptrObjectSlot+2                                     ;81A50B|8509    |000009;
     LDX.W #$0000                                               ;81A50D|A20000  |      ;
  
   - SEP #$20                                                   ;81A510|E220    |      ;
-    LDA.B [ptrUnknown0x07]                                     ;81A512|A707    |000007;
+    LDA.B [ptrObjectSlot]                                     ;81A512|A707    |000007;
     AND.B #$01                                                 ;81A514|2901    |      ;
     BEQ +                                                      ;81A516|F012    |81A52A;
     REP #$20                                                   ;81A518|C220    |      ;
-    LDA.B ptrUnknown0x07                                       ;81A51A|A507    |000007;
+    LDA.B ptrObjectSlot                                       ;81A51A|A507    |000007;
     CLC                                                        ;81A51C|18      |      ;
     ADC.W #$0010                                               ;81A51D|691000  |      ;
-    STA.B ptrUnknown0x07                                       ;81A520|8507    |000007;
+    STA.B ptrObjectSlot                                       ;81A520|8507    |000007;
     INX                                                        ;81A522|E8      |      ;
     CPX.W #$000A                                               ;81A523|E00A00  |      ;
     BNE -                                                      ;81A526|D0E8    |81A510;
@@ -280,41 +280,41 @@ fObjectSlots_Allocate:
   + SEP #$20                                                   ;81A52A|E220    |      ;
     LDY.W #$0000                                               ;81A52C|A00000  |      ;
     LDA.W $0974+!RAM_SHIFT                                 ;81A52F|AD7409  |000974;
-    STA.B [ptrUnknown0x07],Y                                   ;81A532|9707    |000007;
+    STA.B [ptrObjectSlot],Y                                   ;81A532|9707    |000007;
     LDY.W #$0001                                               ;81A534|A00100  |      ;
     LDA.W $0975+!RAM_SHIFT                                 ;81A537|AD7509  |000975;
-    STA.B [ptrUnknown0x07],Y                                   ;81A53A|9707    |000007;
+    STA.B [ptrObjectSlot],Y                                   ;81A53A|9707    |000007;
     LDY.W #$0002                                               ;81A53C|A00200  |      ;
     LDA.W $0976+!RAM_SHIFT                                 ;81A53F|AD7609  |000976;
-    STA.B [ptrUnknown0x07],Y                                   ;81A542|9707    |000007;
+    STA.B [ptrObjectSlot],Y                                   ;81A542|9707    |000007;
     LDY.W #$0003                                               ;81A544|A00300  |      ;
     LDA.W nCarriedItemId                                       ;81A547|AD8409  |000984;
-    STA.B [ptrUnknown0x07],Y                                   ;81A54A|9707    |000007;
+    STA.B [ptrObjectSlot],Y                                   ;81A54A|9707    |000007;
     REP #$20                                                   ;81A54C|C220    |      ;
     LDY.W #$0006                                               ;81A54E|A00600  |      ;
     LDA.W $097A+!RAM_SHIFT                                 ;81A551|AD7A09  |00097A;
-    STA.B [ptrUnknown0x07],Y                                   ;81A554|9707    |000007;
+    STA.B [ptrObjectSlot],Y                                   ;81A554|9707    |000007;
     LDY.W #$0008                                               ;81A556|A00800  |      ;
-    STA.B [ptrUnknown0x07],Y                                   ;81A559|9707    |000007;
+    STA.B [ptrObjectSlot],Y                                   ;81A559|9707    |000007;
     STA.B strcObject.spriteTableIdx                            ;81A55B|85A1    |0000A1;
     LDY.W #$000A                                               ;81A55D|A00A00  |      ;
     LDA.W $097E+!RAM_SHIFT                                 ;81A560|AD7E09  |00097E;
-    STA.B [ptrUnknown0x07],Y                                   ;81A563|9707    |000007;
+    STA.B [ptrObjectSlot],Y                                   ;81A563|9707    |000007;
     STA.B strcObject.flip                                      ;81A565|859F    |00009F;
     LDY.W #$000C                                               ;81A567|A00C00  |      ;
-    LDA.W nUnknownX                                            ;81A56A|AD8009  |000980;
-    STA.B [ptrUnknown0x07],Y                                   ;81A56D|9707    |000007;
+    LDA.W nCarriedItemX                                            ;81A56A|AD8009  |000980;
+    STA.B [ptrObjectSlot],Y                                   ;81A56D|9707    |000007;
     STA.B strcObject.posX                                      ;81A56F|859B    |00009B;
     LDY.W #$000E                                               ;81A571|A00E00  |      ;
-    LDA.W nUnknownY                                            ;81A574|AD8209  |000982;
-    STA.B [ptrUnknown0x07],Y                                   ;81A577|9707    |000007;
+    LDA.W nCarriedItemY                                            ;81A574|AD8209  |000982;
+    STA.B [ptrObjectSlot],Y                                   ;81A577|9707    |000007;
     STA.B strcObject.posY                                      ;81A579|859D    |00009D;
     STZ.B strcObject.unkA3                                     ;81A57B|64A3    |0000A3;
     JSL.L fObject_Create                                      ;81A57D|22008085|858000;
     REP #$30                                                   ;81A581|C230    |      ;
     LDY.W #$0004                                               ;81A583|A00400  |      ;
     LDA.B strcObject.gameObjectIdx                             ;81A586|A5A5    |0000A5;
-    STA.B [ptrUnknown0x07],Y                                   ;81A588|9707    |000007;
+    STA.B [ptrObjectSlot],Y                                   ;81A588|9707    |000007;
     RTL                                                        ;81A58A|6B      |      ;
  
  
@@ -384,10 +384,10 @@ fPlayer_LeaveSnowFootprint:
  
 ;;
 ; @brief   Starts a tile script (a timed list of tile changes, e.g. the shipping animations).
-; @details Stores the 24-bit script pointer pTileScriptTable[A] in ptrUnknown0xCF and resets the step delay counter ($0989).
+; @details Stores the 24-bit script pointer pTileScriptTable[A] in ptrTileScript and resets the step delay counter ($0989).
 ;   fTileScript_Update then executes one step per frame.
 ; @param   A   tile script index
-; @modifies ptrUnknown0xCF, $0989
+; @modifies ptrTileScript, $0989
 ; @clobbers A X
 ; @mode    ? -> M8
 ; @callers fItemShipped_InFarmCoopOrBarn, fItemShipped_StartCowBarnScript, fItemShipped_StartCoopScript, fAIAction0x2A_StartTileSequence, fMap_ScreenTransitionHandler, fPlayerInteraction_RingBell
@@ -401,12 +401,12 @@ fTileScript_Start:
     ADC.B strcVariables.n16Temp1                               ;81A5E7|657E    |00007E;
     TAX                                                        ;81A5E9|AA      |      ;
     LDA.L pTileScriptTable,X                                      ;81A5EA|BF63B981|81B963;
-    STA.B ptrUnknown0xCF                                       ;81A5EE|85CF    |0000CF;
+    STA.B ptrTileScript                                       ;81A5EE|85CF    |0000CF;
     INX                                                        ;81A5F0|E8      |      ;
     INX                                                        ;81A5F1|E8      |      ;
     SEP #$20                                                   ;81A5F2|E220    |      ;
     LDA.L pTileScriptTable,X                                      ;81A5F4|BF63B981|81B963;
-    STA.B ptrUnknown0xCF+2                                     ;81A5F8|85D1    |0000D1;
+    STA.B ptrTileScript+2                                     ;81A5F8|85D1    |0000D1;
     SEP #$20                                                   ;81A5FA|E220    |      ;
     STZ.W $0989+!RAM_SHIFT                                 ;81A5FC|9C8909  |000989;
     RTL                                                        ;81A5FF|6B      |      ;
@@ -415,8 +415,8 @@ fTileScript_Start:
 ;;
 ; @brief   Executes one step of the running tile script per call (frame).
 ; @details Script format (7-byte step): `[word tile][word x][word y][byte delay]` = set the tile (fSetTileAtCoords) and wait `delay` frames
-;   ($0989 counts down); `$FFFE` + ptr24 jumps to another script; `$FFFF` ends the script (ptrUnknown0xCF = 0).
-; @modifies ptrUnknown0xCF, $0989, ptrTemp0x72
+;   ($0989 counts down); `$FFFE` + ptr24 jumps to another script; `$FFFF` ends the script (ptrTileScript = 0).
+; @modifies ptrTileScript, $0989, ptrTemp0x72
 ; @clobbers A X Y
 ; @mode    ? -> M16X16
 ; @calls   fSetTileAtCoords
@@ -425,10 +425,10 @@ fTileScript_Start:
 ;;
 fTileScript_Update:
     REP #$30                                                   ;81A600|C230    |      ;
-    LDA.B ptrUnknown0xCF                                       ;81A602|A5CF    |0000CF;
+    LDA.B ptrTileScript                                       ;81A602|A5CF    |0000CF;
     BNE +                                                      ;81A604|D008    |81A60E;
     SEP #$20                                                   ;81A606|E220    |      ;
-    LDA.B ptrUnknown0xCF+2                                     ;81A608|A5D1    |0000D1;
+    LDA.B ptrTileScript+2                                     ;81A608|A5D1    |0000D1;
     BNE +                                                      ;81A60A|D002    |81A60E;
     BRA .return                                                ;81A60C|804E    |81A65C;
  
@@ -437,7 +437,7 @@ fTileScript_Update:
     LDA.W $0989+!RAM_SHIFT                                 ;81A610|AD8909  |000989;
     BNE .dec                                                   ;81A613|D044    |81A659;
     REP #$20                                                   ;81A615|C220    |      ;
-    LDA.B [ptrUnknown0xCF]                                     ;81A617|A7CF    |0000CF;
+    LDA.B [ptrTileScript]                                     ;81A617|A7CF    |0000CF;
     CMP.W #$FFFF                                               ;81A619|C9FFFF  |      ;
     BNE +                                                      ;81A61C|D003    |81A621;
     JMP.W .dataEnd                                             ;81A61E|4C5DA6  |81A65D;
@@ -452,20 +452,20 @@ fTileScript_Update:
 .loop:
     REP #$20                                                   ;81A629|C220    |      ;
     LDY.W #$0000                                               ;81A62B|A00000  |      ;
-    LDA.B [ptrUnknown0xCF],Y                                   ;81A62E|B7CF    |0000CF;
+    LDA.B [ptrTileScript],Y                                   ;81A62E|B7CF    |0000CF;
     PHA                                                        ;81A630|48      |      ;
     INY                                                        ;81A631|C8      |      ;
     INY                                                        ;81A632|C8      |      ;
-    LDA.B [ptrUnknown0xCF],Y                                   ;81A633|B7CF    |0000CF;
+    LDA.B [ptrTileScript],Y                                   ;81A633|B7CF    |0000CF;
     PHA                                                        ;81A635|48      |      ;
     INY                                                        ;81A636|C8      |      ;
     INY                                                        ;81A637|C8      |      ;
-    LDA.B [ptrUnknown0xCF],Y                                   ;81A638|B7CF    |0000CF;
+    LDA.B [ptrTileScript],Y                                   ;81A638|B7CF    |0000CF;
     PHA                                                        ;81A63A|48      |      ;
     SEP #$20                                                   ;81A63B|E220    |      ;
     INY                                                        ;81A63D|C8      |      ;
     INY                                                        ;81A63E|C8      |      ;
-    LDA.B [ptrUnknown0xCF],Y                                   ;81A63F|B7CF    |0000CF;
+    LDA.B [ptrTileScript],Y                                   ;81A63F|B7CF    |0000CF;
     STA.W $0989+!RAM_SHIFT                                 ;81A641|8D8909  |000989;
     REP #$20                                                   ;81A644|C220    |      ;
     PLY                                                        ;81A646|7A      |      ;
@@ -473,11 +473,11 @@ fTileScript_Update:
     PLA                                                        ;81A648|68      |      ;
     JSL.L fSetTileAtCoords                                     ;81A649|2288A681|81A688;
     REP #$30                                                   ;81A64D|C230    |      ;
-    LDA.B ptrUnknown0xCF                                       ;81A64F|A5CF    |0000CF;
+    LDA.B ptrTileScript                                       ;81A64F|A5CF    |0000CF;
     CLC                                                        ;81A651|18      |      ;
     ; a step is 7 bytes
     ADC.W #$0007                                               ;81A652|690700  |      ;
-    STA.B ptrUnknown0xCF                                       ;81A655|85CF    |0000CF;
+    STA.B ptrTileScript                                       ;81A655|85CF    |0000CF;
     BRA .return                                                ;81A657|8003    |81A65C;
  
  
@@ -490,9 +490,9 @@ fTileScript_Update:
  
 .dataEnd:
     REP #$30                                                   ;81A65D|C230    |      ;
-    STZ.B ptrUnknown0xCF                                       ;81A65F|64CF    |0000CF;
+    STZ.B ptrTileScript                                       ;81A65F|64CF    |0000CF;
     SEP #$20                                                   ;81A661|E220    |      ;
-    STZ.B ptrUnknown0xCF+2                                     ;81A663|64D1    |0000D1;
+    STZ.B ptrTileScript+2                                     ;81A663|64D1    |0000D1;
     BRA .return                                                ;81A665|80F5    |81A65C;
  
  
@@ -501,19 +501,19 @@ fTileScript_Update:
     LDY.W #$0000                                               ;81A669|A00000  |      ;
     INY                                                        ;81A66C|C8      |      ;
     INY                                                        ;81A66D|C8      |      ;
-    LDA.B [ptrUnknown0xCF],Y                                   ;81A66E|B7CF    |0000CF;
+    LDA.B [ptrTileScript],Y                                   ;81A66E|B7CF    |0000CF;
     STA.B ptrTemp0x72                                          ;81A670|8572    |000072;
     INY                                                        ;81A672|C8      |      ;
     INY                                                        ;81A673|C8      |      ;
     SEP #$20                                                   ;81A674|E220    |      ;
-    LDA.B [ptrUnknown0xCF],Y                                   ;81A676|B7CF    |0000CF;
+    LDA.B [ptrTileScript],Y                                   ;81A676|B7CF    |0000CF;
     STA.B ptrTemp0x72+2                                        ;81A678|8574    |000074;
     REP #$20                                                   ;81A67A|C220    |      ;
     LDA.B ptrTemp0x72                                          ;81A67C|A572    |000072;
-    STA.B ptrUnknown0xCF                                       ;81A67E|85CF    |0000CF;
+    STA.B ptrTileScript                                       ;81A67E|85CF    |0000CF;
     SEP #$20                                                   ;81A680|E220    |      ;
     LDA.B ptrTemp0x72+2                                        ;81A682|A574    |000074;
-    STA.B ptrUnknown0xCF+2                                     ;81A684|85D1    |0000D1;
+    STA.B ptrTileScript+2                                     ;81A684|85D1    |0000D1;
     BRA .loop                                                  ;81A686|80A1    |81A629;
  
  
@@ -525,7 +525,7 @@ fTileScript_Update:
 ; @param   A   tile pattern index (0 = nothing)
 ; @param   X   x position in pixels
 ; @param   Y   y position in pixels
-; @modifies strcVariables.n16Unk86, strcVariables.n16Unk88, sCurrentObjectMap
+; @modifies strcVariables.n16Temp5, strcVariables.n16Temp6, sCurrentObjectMap
 ; @clobbers A X Y
 ; @mode    M16X16
 ; @calls   fMap_QueueTilePatternVRAMUpload, fMap_CopyTilePatternToTilemapBuffer, fMap_GetTilePatternInfo, fMap_FillCurrentTilemapRect
@@ -557,9 +557,9 @@ fSetTileAtCoords:
     PLX                                                        ;81A6AE|FA      |      ;
     PLY                                                        ;81A6AF|7A      |      ;
     LDA.B strcVariables.n16Temp2                               ;81A6B0|A580    |000080;
-    STA.B strcVariables.n16Unk86                               ;81A6B2|8586    |000086;
+    STA.B strcVariables.n16Temp5                               ;81A6B2|8586    |000086;
     LDA.B strcVariables.n16Temp3                               ;81A6B4|A582    |000082;
-    STA.B strcVariables.n16Unk88                               ;81A6B6|8588    |000088;
+    STA.B strcVariables.n16Temp6                               ;81A6B6|8588    |000088;
     LDA.B strcVariables.n16Temp4                               ;81A6B8|A584    |000084;
     BEQ .return                                                ;81A6BA|F004    |81A6C0;
     JSL.L fMap_FillCurrentTilemapRect                                      ;81A6BC|2260B082|82B060;
@@ -577,7 +577,7 @@ fSetTileAtCoords:
 ; @param   A   tile pattern index
 ; @param   X   x position in pixels
 ; @param   Y   y position in pixels
-; @modifies strcVariables.n16Temp1, strcVariables.n16Temp2, strcVariables.n16Temp3, strcVariables.n16Unk86, strcVariables.n8Temp1, strcSystem.arrayIndex, strcSystem.destinationRegister, ptrTemp0x72, ptrUnknown0x75
+; @modifies strcVariables.n16Temp1, strcVariables.n16Temp2, strcVariables.n16Temp3, strcVariables.n16Temp5, strcVariables.n8Temp1, strcSystem.arrayIndex, strcSystem.destinationRegister, ptrTemp0x72, ptrTemp0x75
 ; @clobbers A X Y
 ; @mode    M16X16
 ; @region  DE: pattern source offset $A115; JP: $A77D; US/EU: $A096.
@@ -602,7 +602,7 @@ fMap_QueueTilePatternVRAMUpload:
     STA.B strcVariables.n16Temp2                               ;81A6D0|8580    |000080;
     ; VRAM word address of the BG1 tilemap
     LDA.W #$6000                                               ;81A6D2|A90060  |      ;
-    STA.B strcVariables.n16Unk86                               ;81A6D5|8586    |000086;
+    STA.B strcVariables.n16Temp5                               ;81A6D5|8586    |000086;
     LDA.B strcVariables.n16Temp1                               ;81A6D7|A57E    |00007E;
     CMP.W #$0020                                               ;81A6D9|C92000  |      ;
     BCC +                                                      ;81A6DC|9004    |81A6E2;
@@ -611,8 +611,8 @@ fMap_QueueTilePatternVRAMUpload:
  
   + ASL A                                                      ;81A6E2|0A      |      ;
     CLC                                                        ;81A6E3|18      |      ;
-    ADC.B strcVariables.n16Unk86                               ;81A6E4|6586    |000086;
-    STA.B strcVariables.n16Unk86                               ;81A6E6|8586    |000086;
+    ADC.B strcVariables.n16Temp5                               ;81A6E4|6586    |000086;
+    STA.B strcVariables.n16Temp5                               ;81A6E6|8586    |000086;
     LDA.B strcVariables.n16Temp1                               ;81A6E8|A57E    |00007E;
     CMP.W #$0010                                               ;81A6EA|C91000  |      ;
     BCC .wrap_row                                                ;81A6ED|9012    |81A701;
@@ -622,10 +622,10 @@ fMap_QueueTilePatternVRAMUpload:
     BCC .wrap_row                                                ;81A6F7|9008    |81A701;
  
 .add_column_quadrant:
-    LDA.B strcVariables.n16Unk86                               ;81A6F9|A586    |000086;
+    LDA.B strcVariables.n16Temp5                               ;81A6F9|A586    |000086;
     CLC                                                        ;81A6FB|18      |      ;
     ADC.W #$03E0                                               ;81A6FC|69E003  |      ;
-    STA.B strcVariables.n16Unk86                               ;81A6FF|8586    |000086;
+    STA.B strcVariables.n16Temp5                               ;81A6FF|8586    |000086;
  
 .wrap_row:
     LDA.B strcVariables.n16Temp2                               ;81A701|A580    |000080;
@@ -642,8 +642,8 @@ fMap_QueueTilePatternVRAMUpload:
     ASL A                                                      ;81A710|0A      |      ;
     ASL A                                                      ;81A711|0A      |      ;
     CLC                                                        ;81A712|18      |      ;
-    ADC.B strcVariables.n16Unk86                               ;81A713|6586    |000086;
-    STA.B strcVariables.n16Unk86                               ;81A715|8586    |000086;
+    ADC.B strcVariables.n16Temp5                               ;81A713|6586    |000086;
+    STA.B strcVariables.n16Temp5                               ;81A715|8586    |000086;
     LDA.B strcVariables.n16Temp2                               ;81A717|A580    |000080;
     CMP.W #$0010                                               ;81A719|C91000  |      ;
     BCC .load_pattern_source                                                ;81A71C|9012    |81A730;
@@ -653,10 +653,10 @@ fMap_QueueTilePatternVRAMUpload:
     BCC .load_pattern_source                                                ;81A726|9008    |81A730;
  
 .add_row_quadrant:
-    LDA.B strcVariables.n16Unk86                               ;81A728|A586    |000086;
+    LDA.B strcVariables.n16Temp5                               ;81A728|A586    |000086;
     CLC                                                        ;81A72A|18      |      ;
     ADC.W #$0400                                               ;81A72B|690004  |      ;
-    STA.B strcVariables.n16Unk86                               ;81A72E|8586    |000086;
+    STA.B strcVariables.n16Temp5                               ;81A72E|8586    |000086;
  
 .load_pattern_source:
     REP #$20                                                   ;81A730|C220    |      ;
@@ -668,11 +668,11 @@ fMap_QueueTilePatternVRAMUpload:
     LDA.W #$A096                                               ;81A732|A996A0  |      ;
     endif
     STA.B ptrTemp0x72                                          ;81A735|8572    |000072;
-    STA.B ptrUnknown0x75                                       ;81A737|8575    |000075;
+    STA.B ptrTemp0x75                                       ;81A737|8575    |000075;
     SEP #$20                                                   ;81A739|E220    |      ;
     LDA.B #$A6                                                 ;81A73B|A9A6    |      ;
     STA.B ptrTemp0x72+2                                        ;81A73D|8574    |000074;
-    STA.B ptrUnknown0x75+2                                     ;81A73F|8577    |000077;
+    STA.B ptrTemp0x75+2                                     ;81A73F|8577    |000077;
     REP #$20                                                   ;81A741|C220    |      ;
     PLA                                                        ;81A743|68      |      ;
     JSL.L fMap_GetTilePatternInfo                                      ;81A744|2201A881|81A801;
@@ -688,7 +688,7 @@ fMap_QueueTilePatternVRAMUpload:
     CLC                                                        ;81A757|18      |      ;
     ADC.B strcVariables.n16Temp1                               ;81A758|657E    |00007E;
     STA.B ptrTemp0x72                                          ;81A75A|8572    |000072;
-    STA.B ptrUnknown0x75                                       ;81A75C|8575    |000075;
+    STA.B ptrTemp0x75                                       ;81A75C|8575    |000075;
     SEP #$20                                                   ;81A75E|E220    |      ;
     LDA.B #$02                                                 ;81A760|A902    |      ;
     STA.B strcVariables.n8Temp1                                ;81A762|8592    |000092;
@@ -710,7 +710,7 @@ fMap_QueueTilePatternVRAMUpload:
     ASL A                                                      ;81A77A|0A      |      ;
     ASL A                                                      ;81A77B|0A      |      ;
     CLC                                                        ;81A77C|18      |      ;
-    ADC.B strcVariables.n16Unk86                               ;81A77D|6586    |000086;
+    ADC.B strcVariables.n16Temp5                               ;81A77D|6586    |000086;
     TAX                                                        ;81A77F|AA      |      ;
     REP #$20                                                   ;81A780|C220    |      ;
     ; $80 bytes = one row of 2 x 16-pixel tiles
@@ -739,16 +739,16 @@ fMap_QueueTilePatternVRAMUpload:
     ASL A                                                      ;81A7A9|0A      |      ;
     ASL A                                                      ;81A7AA|0A      |      ;
     CLC                                                        ;81A7AB|18      |      ;
-    ADC.B strcVariables.n16Unk86                               ;81A7AC|6586    |000086;
+    ADC.B strcVariables.n16Temp5                               ;81A7AC|6586    |000086;
     TAX                                                        ;81A7AE|AA      |      ;
     REP #$20                                                   ;81A7AF|C220    |      ;
     LDA.W #$0080                                               ;81A7B1|A98000  |      ;
     JSL.L fCore_PrepareTransfer                                ;81A7B4|22338A80|808A33;
     REP #$20                                                   ;81A7B8|C220    |      ;
-    LDA.B ptrUnknown0x75                                       ;81A7BA|A575    |000075;
+    LDA.B ptrTemp0x75                                       ;81A7BA|A575    |000075;
     CLC                                                        ;81A7BC|18      |      ;
     ADC.B strcVariables.n16Temp2                               ;81A7BD|6580    |000080;
-    STA.B ptrUnknown0x75                                       ;81A7BF|8575    |000075;
+    STA.B ptrTemp0x75                                       ;81A7BF|8575    |000075;
     STA.B ptrTemp0x72                                          ;81A7C1|8572    |000072;
     SEP #$20                                                   ;81A7C3|E220    |      ;
     STZ.B strcVariables.n8Temp1                                ;81A7C5|6492    |000092;
@@ -764,7 +764,7 @@ fMap_QueueTilePatternVRAMUpload:
 ; @param   A   tile pattern index
 ; @param   X   x position in pixels
 ; @param   Y   y position in pixels
-; @modifies strcVariables.n16Unk86, strcVariables.n16Unk88, sCurrentObjectMap
+; @modifies strcVariables.n16Temp5, strcVariables.n16Temp6, sCurrentObjectMap
 ; @clobbers A X Y
 ; @mode    M16X16
 ; @calls   fMap_GetTilePatternInfo, fMap_CopyTilePatternToTilemapBuffer, fMap_FillCurrentTilemapRect
@@ -792,9 +792,9 @@ fMap_DrawTilePatternAt:
     PLX                                                        ;81A7EC|FA      |      ;
     PLY                                                        ;81A7ED|7A      |      ;
     LDA.B strcVariables.n16Temp2                               ;81A7EE|A580    |000080;
-    STA.B strcVariables.n16Unk86                               ;81A7F0|8586    |000086;
+    STA.B strcVariables.n16Temp5                               ;81A7F0|8586    |000086;
     LDA.B strcVariables.n16Temp3                               ;81A7F2|A582    |000082;
-    STA.B strcVariables.n16Unk88                               ;81A7F4|8588    |000088;
+    STA.B strcVariables.n16Temp6                               ;81A7F4|8588    |000088;
     LDA.B strcVariables.n16Temp4                               ;81A7F6|A584    |000084;
     BEQ +                                                      ;81A7F8|F006    |81A800;
     SEP #$20                                                   ;81A7FA|E220    |      ;
@@ -857,7 +857,7 @@ fMap_GetTilePatternInfo:
 ; @param   A   tile pattern index
 ; @param   X   x position in pixels
 ; @param   Y   y position in pixels
-; @modifies strcVariables.n16Temp1, strcVariables.n16Temp2, strcVariables.n16Unk86, strcVariables.n16Unk88, strcVariables.n16Unk8E, strcVariables.n16Unk90, ptrTemp0x72, ptrUnknown0x75, ptrObjectData
+; @modifies strcVariables.n16Temp1, strcVariables.n16Temp2, strcVariables.n16Temp5, strcVariables.n16Temp6, strcVariables.n16Temp9, strcVariables.n16Temp10, ptrTemp0x72, ptrTemp0x75, ptrObjectData
 ; @clobbers A X Y
 ; @mode    M16X16
 ; @region  DE: pattern source offset $A115; JP: $A77D; US/EU: $A096. EU/DE jump back to the loop through region_targets.asm.
@@ -890,7 +890,7 @@ fMap_CopyTilePatternToTilemapBuffer:
     ASL A                                                      ;81A851|0A      |      ;
     STA.B strcVariables.n16Temp2                               ;81A852|8580    |000080;
     LDA.W #$0040                                               ;81A854|A94000  |      ;
-    STA.B strcVariables.n16Unk88                               ;81A857|8588    |000088;
+    STA.B strcVariables.n16Temp6                               ;81A857|8588    |000088;
     SEP #$20                                                   ;81A859|E220    |      ;
     LDA.W strcDialogDisplay.mapMultiWidth                      ;81A85B|AD8101  |000181;
     CMP.B #$01                                                 ;81A85E|C901    |      ;
@@ -899,7 +899,7 @@ fMap_CopyTilePatternToTilemapBuffer:
     LDA.B strcVariables.n16Temp2                               ;81A864|A580    |000080;
     ASL A                                                      ;81A866|0A      |      ;
     STA.B strcVariables.n16Temp2                               ;81A867|8580    |000080;
-    ASL.B strcVariables.n16Unk88                               ;81A869|0688    |000088;
+    ASL.B strcVariables.n16Temp6                               ;81A869|0688    |000088;
     SEP #$20                                                   ;81A86B|E220    |      ;
     LDA.W strcDialogDisplay.mapMultiWidth                      ;81A86D|AD8101  |000181;
     CMP.B #$02                                                 ;81A870|C902    |      ;
@@ -908,13 +908,13 @@ fMap_CopyTilePatternToTilemapBuffer:
     LDA.B strcVariables.n16Temp2                               ;81A876|A580    |000080;
     ASL A                                                      ;81A878|0A      |      ;
     STA.B strcVariables.n16Temp2                               ;81A879|8580    |000080;
-    ASL.B strcVariables.n16Unk88                               ;81A87B|0688    |000088;
+    ASL.B strcVariables.n16Temp6                               ;81A87B|0688    |000088;
  
   + REP #$30                                                   ;81A87D|C230    |      ;
     LDA.B strcVariables.n16Temp1                               ;81A87F|A57E    |00007E;
     CLC                                                        ;81A881|18      |      ;
     ADC.B strcVariables.n16Temp2                               ;81A882|6580    |000080;
-    STA.B strcVariables.n16Unk86                               ;81A884|8586    |000086;
+    STA.B strcVariables.n16Temp5                               ;81A884|8586    |000086;
     PLA                                                        ;81A886|68      |      ;
     JSL.L fMap_GetTilePatternInfo                                      ;81A887|2201A881|81A801;
     REP #$20                                                   ;81A88B|C220    |      ;
@@ -941,14 +941,14 @@ fMap_CopyTilePatternToTilemapBuffer:
     REP #$20                                                   ;81A8A7|C220    |      ;
     LDA.W #$2000                                               ;81A8A9|A90020  |      ;
     CLC                                                        ;81A8AC|18      |      ;
-    ADC.B strcVariables.n16Unk86                               ;81A8AD|6586    |000086;
-    STA.B ptrUnknown0x75                                       ;81A8AF|8575    |000075;
+    ADC.B strcVariables.n16Temp5                               ;81A8AD|6586    |000086;
+    STA.B ptrTemp0x75                                       ;81A8AF|8575    |000075;
     SEP #$20                                                   ;81A8B1|E220    |      ;
     LDA.B #$7E                                                 ;81A8B3|A97E    |      ;
-    STA.B ptrUnknown0x75+2                                     ;81A8B5|8577    |000077;
+    STA.B ptrTemp0x75+2                                     ;81A8B5|8577    |000077;
     REP #$30                                                   ;81A8B7|C230    |      ;
-    STZ.B strcVariables.n16Unk8E                               ;81A8B9|648E    |00008E;
-    STZ.B strcVariables.n16Unk90                               ;81A8BB|6490    |000090;
+    STZ.B strcVariables.n16Temp9                               ;81A8B9|648E    |00008E;
+    STZ.B strcVariables.n16Temp10                               ;81A8BB|6490    |000090;
     LDY.W #$0000                                               ;81A8BD|A00000  |      ;
  
 --- PHY                                                        ;81A8C0|5A      |      ; outer loop
@@ -957,12 +957,12 @@ fMap_CopyTilePatternToTilemapBuffer:
  -- PHA                                                        ;81A8C4|48      |      ; inner loop
     LDY.W #$0000                                               ;81A8C5|A00000  |      ;
     LDX.W #$0000                                               ;81A8C8|A20000  |      ;
-    STZ.B strcVariables.n16Unk90                               ;81A8CB|6490    |000090;
+    STZ.B strcVariables.n16Temp10                               ;81A8CB|6490    |000090;
  
   - LDA.B [ptrTemp0x72],Y                                      ;81A8CD|B772    |000072;
     PHY                                                        ;81A8CF|5A      |      ;
     TXY                                                        ;81A8D0|9B      |      ;
-    STA.B [ptrUnknown0x75],Y                                   ;81A8D1|9775    |000075;
+    STA.B [ptrTemp0x75],Y                                   ;81A8D1|9775    |000075;
     PLY                                                        ;81A8D3|7A      |      ;
     INY                                                        ;81A8D4|C8      |      ;
     INY                                                        ;81A8D5|C8      |      ;
@@ -972,32 +972,32 @@ fMap_CopyTilePatternToTilemapBuffer:
     PHA                                                        ;81A8D9|48      |      ;
     CMP.W #$0000                                               ;81A8DA|C90000  |      ;
     BNE .advance_column                                                ;81A8DD|D010    |81A8EF;
-    INC.B strcVariables.n16Unk90                               ;81A8DF|E690    |000090;
-    INC.B strcVariables.n16Unk90                               ;81A8E1|E690    |000090;
+    INC.B strcVariables.n16Temp10                               ;81A8DF|E690    |000090;
+    INC.B strcVariables.n16Temp10                               ;81A8E1|E690    |000090;
     LDA.B strcVariables.n16Temp1                               ;81A8E3|A57E    |00007E;
     CLC                                                        ;81A8E5|18      |      ;
-    ADC.B strcVariables.n16Unk90                               ;81A8E6|6590    |000090;
+    ADC.B strcVariables.n16Temp10                               ;81A8E6|6590    |000090;
     AND.W #$0040                                               ;81A8E8|294000  |      ;
     BEQ .check_row_end                                                ;81A8EB|F023    |81A910;
     BRA .cross_block_boundary                                                ;81A8ED|800E    |81A8FD;
  
  
 .advance_column:
-    INC.B strcVariables.n16Unk90                               ;81A8EF|E690    |000090;
-    INC.B strcVariables.n16Unk90                               ;81A8F1|E690    |000090;
+    INC.B strcVariables.n16Temp10                               ;81A8EF|E690    |000090;
+    INC.B strcVariables.n16Temp10                               ;81A8F1|E690    |000090;
     LDA.B strcVariables.n16Temp1                               ;81A8F3|A57E    |00007E;
     CLC                                                        ;81A8F5|18      |      ;
-    ADC.B strcVariables.n16Unk90                               ;81A8F6|6590    |000090;
+    ADC.B strcVariables.n16Temp10                               ;81A8F6|6590    |000090;
     AND.W #$0040                                               ;81A8F8|294000  |      ;
     BEQ .check_row_end                                                ;81A8FB|F013    |81A910;
  
 .cross_block_boundary:
     LDA.W #$0040                                               ;81A8FD|A94000  |      ;
-    STA.B strcVariables.n16Unk8E                               ;81A900|858E    |00008E;
-    LDA.B strcVariables.n16Unk90                               ;81A902|A590    |000090;
+    STA.B strcVariables.n16Temp9                               ;81A900|858E    |00008E;
+    LDA.B strcVariables.n16Temp10                               ;81A902|A590    |000090;
     CLC                                                        ;81A904|18      |      ;
     ADC.W #$0040                                               ;81A905|694000  |      ;
-    STA.B strcVariables.n16Unk90                               ;81A908|8590    |000090;
+    STA.B strcVariables.n16Temp10                               ;81A908|8590    |000090;
     TYA                                                        ;81A90A|98      |      ;
     CLC                                                        ;81A90B|18      |      ;
     ADC.W #$0040                                               ;81A90C|694000  |      ;
@@ -1010,10 +1010,10 @@ fMap_CopyTilePatternToTilemapBuffer:
     CLC                                                        ;81A916|18      |      ;
     ADC.W #$0040                                               ;81A917|694000  |      ;
     STA.B ptrTemp0x72                                          ;81A91A|8572    |000072;
-    LDA.B ptrUnknown0x75                                       ;81A91C|A575    |000075;
+    LDA.B ptrTemp0x75                                       ;81A91C|A575    |000075;
     CLC                                                        ;81A91E|18      |      ;
-    ADC.B strcVariables.n16Unk88                               ;81A91F|6588    |000088;
-    STA.B ptrUnknown0x75                                       ;81A921|8575    |000075;
+    ADC.B strcVariables.n16Temp6                               ;81A91F|6588    |000088;
+    STA.B ptrTemp0x75                                       ;81A921|8575    |000075;
     PLA                                                        ;81A923|68      |      ;
     INC A                                                      ;81A924|1A      |      ;
     CMP.W #$0002                                               ;81A925|C90200  |      ;
@@ -1022,13 +1022,13 @@ fMap_CopyTilePatternToTilemapBuffer:
     LDA.B ptrObjectData                                        ;81A92C|A578    |000078;
     CLC                                                        ;81A92E|18      |      ;
     ADC.B strcVariables.n16Temp2                               ;81A92F|6580    |000080;
-    ADC.B strcVariables.n16Unk8E                               ;81A931|658E    |00008E;
+    ADC.B strcVariables.n16Temp9                               ;81A931|658E    |00008E;
     STA.B ptrObjectData                                        ;81A933|8578    |000078;
     STA.B ptrTemp0x72                                          ;81A935|8572    |000072;
-    STZ.B strcVariables.n16Unk8E                               ;81A937|648E    |00008E;
+    STZ.B strcVariables.n16Temp9                               ;81A937|648E    |00008E;
     LDA.B strcVariables.n16Temp1                               ;81A939|A57E    |00007E;
     CLC                                                        ;81A93B|18      |      ;
-    ADC.B strcVariables.n16Unk90                               ;81A93C|6590    |000090;
+    ADC.B strcVariables.n16Temp10                               ;81A93C|6590    |000090;
     STA.B strcVariables.n16Temp1                               ;81A93E|857E    |00007E;
     PLY                                                        ;81A940|7A      |      ;
     INY                                                        ;81A941|C8      |      ;

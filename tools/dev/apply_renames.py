@@ -12,6 +12,10 @@ the CI build is the final oracle.
 After renaming run tools/docs/gen_ai_docs.py to refresh the generated AI command docs. The CSV maps are kept in docs/naming/ as the record
 of every rename (see docs/naming/README.md).
 
+Structure members are renamed with dotted rows `strcX.oldField,strcX.newField,confidence,reason` (the struct part must be the same on both
+sides). Every `strcX.oldField` access in src/ and the `.oldField` definition line inside `struct strcX ... endstruct` are rewritten. A struct itself is
+renamed with a plain row (`strcOld,strcNew`); rename the members first (run the dotted rows before the struct row).
+
 Usage: python tools/dev/apply_renames.py MAP.csv [MAP2.csv ...] [--min-confidence medium] [--dry]
 """
 import csv, re, sys
@@ -32,6 +36,8 @@ for p in args:
         if r['new'] != r['old'] and RANK.get(r['confidence'], 0) >= RANK[minc]:
             rows.append(r)
 
+dotted = [r for r in rows if '.' in r['old']]
+rows = [r for r in rows if '.' not in r['old']]
 files = sorted((ROOT / 'src').rglob('*.asm'))
 texts = {f: f.read_text(encoding='utf-8') for f in files}
 # YAML command analyses also reference labels; they are renamed too (not part of the checks above)
@@ -42,6 +48,31 @@ for t in texts.values():
     present.update(ident.findall(t))
 
 errors = []
+# members defined in structures.asm: {struct: set(field)}
+members = {}
+_cur = None
+for line in texts[ROOT / 'src/common/structures.asm'].splitlines():
+    m = re.match(r'struct\s+(\w+)\s', line)
+    if m:
+        _cur = m.group(1); members[_cur] = set(); continue
+    if line.startswith('endstruct'):
+        _cur = None; continue
+    m = re.match(r'\s+\.(\w+)', line)
+    if _cur and m:
+        members[_cur].add(m.group(1))
+dmap = {}
+for r in dotted:
+    o, n = r['old'], r['new']
+    if not re.fullmatch(r'[A-Za-z_]\w*\.[A-Za-z_]\w*', o) or not re.fullmatch(r'[A-Za-z_]\w*\.[A-Za-z_]\w*', n) or o.split('.')[0] != n.split('.')[0]:
+        errors.append(f'invalid member rename: {o} -> {n}'); continue
+    st, of = o.split('.'); nf = n.split('.')[1]
+    if of not in members.get(st, ()):
+        errors.append(f'member not defined: {o}')
+    if nf in members.get(st, ()) and o not in {x['old'] for x in dotted}:
+        errors.append(f'member collision: {n}')
+    if n in dmap.values():
+        errors.append(f'duplicate new member name {n}')
+    dmap[o] = n
 olds = {r['old'] for r in rows}
 seen = {}
 for r in rows:
@@ -63,16 +94,41 @@ if errors:
     sys.exit(1)
 
 mapping = {r['old']: r['new'] for r in rows}
-pattern = re.compile(r'(?<![A-Za-z0-9_])(' + '|'.join(sorted(map(re.escape, mapping), key=len, reverse=True)) + r')(?![A-Za-z0-9_])')
+mapping_all = dict(mapping)
+mapping_all.update(dmap)
+pattern = re.compile(r'(?<![A-Za-z0-9_.])(' + '|'.join(sorted(map(re.escape, mapping_all), key=len, reverse=True)) + r')(?![A-Za-z0-9_])') if mapping_all else None
+if pattern is None:
+    print('nothing to rename'); sys.exit(0)
+
+
+def fix_definitions(t):
+    """rewrite `.oldField` definition lines inside struct blocks"""
+    out = []; cur = None
+    for line in t.split('\n'):
+        m = re.match(r'struct\s+(\w+)\s', line)
+        if m:
+            cur = m.group(1)
+        elif line.startswith('endstruct'):
+            cur = None
+        elif cur:
+            m = re.match(r'(\s+)\.(\w+)(?![A-Za-z0-9_])(.*)$', line)
+            if m and f'{cur}.{m.group(2)}' in dmap:
+                line = f"{m.group(1)}.{dmap[cur + '.' + m.group(2)].split('.')[1]}{m.group(3)}"
+        out.append(line)
+    return '\n'.join(out)
+
+
 changed = 0
 for f, t in texts.items():
-    nt = pattern.sub(lambda m: mapping[m.group(1)], t)
+    nt = pattern.sub(lambda m: mapping_all[m.group(1)], t)
+    if f.name == 'structures.asm' and dmap:
+        nt = fix_definitions(nt)
     if nt != t:
         changed += 1
         if not dry:
             f.write_text(nt, encoding='utf-8')
 for f, t in yml.items():
-    nt = pattern.sub(lambda m: mapping[m.group(1)], t)
+    nt = pattern.sub(lambda m: mapping_all[m.group(1)], t)
     if nt != t and not dry:
         f.write_text(nt, encoding='utf-8')
 # AI slot tables (defs/ai/scripts.json) name their entry points as `_<suffix>` relative to the script label
@@ -99,4 +155,4 @@ if sj.exists():
         sj.write_text('\n'.join(lines), encoding='utf-8')
     if slots_changed:
         print(f'{slots_changed} slot-table entries updated in defs/ai/scripts.json')
-print(f'{len(mapping)} labels renamed in {changed} files' + (' (dry run)' if dry else ''))
+print(f'{len(mapping_all)} labels renamed in {changed} files' + (' (dry run)' if dry else ''))

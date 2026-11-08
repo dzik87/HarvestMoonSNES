@@ -1,3 +1,9 @@
+;;
+; @file   charmap.asm
+; @brief  Character map of the dialog font: characters to glyph ids for asar `db "text"` (a-z = $00-$19, A-Z = $1A-$33, punctuation $34-$41, space $B1, digits $B2-$BB).
+;         Ids are indexes into the font tile table (docs/formats/font.md); control codes $FFxx are not part of the map.
+; @see    docs/formats/font.md, docs/formats/dialog-tables.md
+;;
 'a' = $00
 'b' = $01
 'c' = $02

@@ -13,11 +13,11 @@
 ; @brief   Unsigned 16 x 16 -> 16 bit multiply: A * strcVariables.n16Temp1, low 16 bits of the product.
 ; @details Built from three 8x8 hardware multiplications (fMathMultiply): lo*lo gives the base product, hi(A)*lo(Temp1) and
 ;          lo(A)*hi(Temp1) are only added into the high byte of the result ((product & $FF) << 8); hi*hi never matters for a
-;          16-bit result. The partial results live in strcAudio.unkMulti11E / 120 / 122, scratch is shared with the audio code.
+;          16-bit result. The partial results live in strcAudio.mulPartLoLo / 120 / 122, scratch is shared with the audio code.
 ; @param   A      16-bit factor 1
 ; @param   n16Temp1  16-bit factor 2 (strcVariables.n16Temp1, DP $7E)
 ; @return  A      (A * n16Temp1) & $FFFF
-; @modifies strcAudio.unkMulti11A, strcAudio.unkMulti11B, strcAudio.unkMulti11C, strcAudio.unkMulti11E, strcAudio.unkMulti120, strcAudio.unkMulti122
+; @modifies strcAudio.mulFactorA, strcAudio.mulFactorB, strcAudio.mulInputA, strcAudio.mulPartLoLo, strcAudio.mulPartHiLo, strcAudio.mulPartLoHi
 ; @mode    M16X16 -> =
 ; @calls   fMathMultiply
 ; @callers fAudio_LoadCommonSamples, fAudio_LoadSfxSample, fAudio_LoadTrackSamples, fAudio_UploadTrackData, fAreaEvents_House_PrepareEnding
@@ -26,66 +26,66 @@
 fMathMultiply_7EbyA:
     PHP                                                        ;838000|08      |      ;
     REP #$30                                                   ;838001|C230    |      ;
-    STA.W strcAudio.unkMulti11C                                ;838003|8D1C01  |00011C;
-    STZ.W strcAudio.unkMulti11E                                ;838006|9C1E01  |00011E;
-    STZ.W strcAudio.unkMulti120                                ;838009|9C2001  |000120;
-    STZ.W strcAudio.unkMulti122                                ;83800C|9C2201  |000122;
+    STA.W strcAudio.mulInputA                                ;838003|8D1C01  |00011C;
+    STZ.W strcAudio.mulPartLoLo                                ;838006|9C1E01  |00011E;
+    STZ.W strcAudio.mulPartHiLo                                ;838009|9C2001  |000120;
+    STZ.W strcAudio.mulPartLoHi                                ;83800C|9C2201  |000122;
     SEP #$20                                                   ;83800F|E220    |      ;
-    STA.W strcAudio.unkMulti11A                                ;838011|8D1A01  |00011A;
+    STA.W strcAudio.mulFactorA                                ;838011|8D1A01  |00011A;
     LDA.B strcVariables.n16Temp1                               ;838014|A57E    |00007E;
-    STA.W strcAudio.unkMulti11B                                ;838016|8D1B01  |00011B;
+    STA.W strcAudio.mulFactorB                                ;838016|8D1B01  |00011B;
     JSR.W fMathMultiply                                        ;838019|206780  |838067;
     REP #$20                                                   ;83801C|C220    |      ;
-    STA.W strcAudio.unkMulti11E                                ;83801E|8D1E01  |00011E;
-    LDA.W strcAudio.unkMulti11C                                ;838021|AD1C01  |00011C;
+    STA.W strcAudio.mulPartLoLo                                ;83801E|8D1E01  |00011E;
+    LDA.W strcAudio.mulInputA                                ;838021|AD1C01  |00011C;
     AND.W #$FF00                                               ;838024|2900FF  |      ;
     BEQ +                                                      ;838027|F012    |83803B;
     SEP #$20                                                   ;838029|E220    |      ;
     XBA                                                        ;83802B|EB      |      ;
-    STA.W strcAudio.unkMulti11A                                ;83802C|8D1A01  |00011A;
+    STA.W strcAudio.mulFactorA                                ;83802C|8D1A01  |00011A;
     JSR.W fMathMultiply                                        ;83802F|206780  |838067;
     REP #$20                                                   ;838032|C220    |      ;
     AND.W #$00FF                                               ;838034|29FF00  |      ;
     XBA                                                        ;838037|EB      |      ;
-    STA.W strcAudio.unkMulti120                                ;838038|8D2001  |000120;
+    STA.W strcAudio.mulPartHiLo                                ;838038|8D2001  |000120;
  
   + LDA.B strcVariables.n16Temp1                               ;83803B|A57E    |00007E;
     AND.W #$FF00                                               ;83803D|2900FF  |      ;
     BEQ +                                                      ;838040|F018    |83805A;
     SEP #$20                                                   ;838042|E220    |      ;
     XBA                                                        ;838044|EB      |      ;
-    STA.W strcAudio.unkMulti11B                                ;838045|8D1B01  |00011B;
-    LDA.W strcAudio.unkMulti11C                                ;838048|AD1C01  |00011C;
-    STA.W strcAudio.unkMulti11A                                ;83804B|8D1A01  |00011A;
+    STA.W strcAudio.mulFactorB                                ;838045|8D1B01  |00011B;
+    LDA.W strcAudio.mulInputA                                ;838048|AD1C01  |00011C;
+    STA.W strcAudio.mulFactorA                                ;83804B|8D1A01  |00011A;
     JSR.W fMathMultiply                                        ;83804E|206780  |838067;
     REP #$20                                                   ;838051|C220    |      ;
     AND.W #$00FF                                               ;838053|29FF00  |      ;
     XBA                                                        ;838056|EB      |      ;
-    STA.W strcAudio.unkMulti122                                ;838057|8D2201  |000122;
+    STA.W strcAudio.mulPartLoHi                                ;838057|8D2201  |000122;
  
-  + LDA.W strcAudio.unkMulti11E                                ;83805A|AD1E01  |00011E;
+  + LDA.W strcAudio.mulPartLoLo                                ;83805A|AD1E01  |00011E;
     CLC                                                        ;83805D|18      |      ;
-    ADC.W strcAudio.unkMulti120                                ;83805E|6D2001  |000120;
+    ADC.W strcAudio.mulPartHiLo                                ;83805E|6D2001  |000120;
     CLC                                                        ;838061|18      |      ;
-    ADC.W strcAudio.unkMulti122                                ;838062|6D2201  |000122;
+    ADC.W strcAudio.mulPartLoHi                                ;838062|6D2201  |000122;
     PLP                                                        ;838065|28      |      ;
     RTL                                                        ;838066|6B      |      ;
  
  
 ;;
-; @brief   Local helper: 8 x 8 unsigned hardware multiply of strcAudio.unkMulti11A and strcAudio.unkMulti11B.
+; @brief   Local helper: 8 x 8 unsigned hardware multiply of strcAudio.mulFactorA and strcAudio.mulFactorB.
 ; @details Writes SNES_WRMPYA/WRMPYB, waits four NOPs for the 8 machine cycles of the multiplier and reads SNES_RDMPYL.
-; @param   strcAudio.unkMulti11A  8-bit factor 1
-; @param   strcAudio.unkMulti11B  8-bit factor 2
+; @param   strcAudio.mulFactorA  8-bit factor 1
+; @param   strcAudio.mulFactorB  8-bit factor 2
 ; @return  A      16-bit product
 ; @mode    M16X16 -> M16X16
 ; @callers fMathMultiply_7EbyA
 ;;
 fMathMultiply:
     SEP #$20                                                   ;838067|E220    |      ; $011A: nA, $011B, return A = $011A * $011B
-    LDA.W strcAudio.unkMulti11A                                ;838069|AD1A01  |00011A;
+    LDA.W strcAudio.mulFactorA                                ;838069|AD1A01  |00011A;
     STA.L SNES_WRMPYA                                          ;83806C|8F024200|004202;
-    LDA.W strcAudio.unkMulti11B                                ;838070|AD1B01  |00011B;
+    LDA.W strcAudio.mulFactorB                                ;838070|AD1B01  |00011B;
     STA.L SNES_WRMPYB                                          ;838073|8F034200|004203;
     REP #$20                                                   ;838077|C220    |      ;
     NOP                                                        ;838079|EA      |      ;

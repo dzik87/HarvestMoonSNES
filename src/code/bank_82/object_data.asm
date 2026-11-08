@@ -61,9 +61,9 @@ fMap_UpdateFarmTilemapCoords:
 ; @param   A   object id (kept in $99)
 ; @param   X   pixel X of the top-left corner (strcVariables.n16Temp3)
 ; @param   Y   pixel Y of the top-left corner (strcVariables.n16Temp4)
-; @param   strcVariables.n16Unk86   width in tiles
-; @param   strcVariables.n16Unk88   height in tiles
-; @modifies sCurrentObjectMap, strcVariables.n16Unk8E, strcVariables.n16Unk90
+; @param   strcVariables.n16Temp5   width in tiles
+; @param   strcVariables.n16Temp6   height in tiles
+; @modifies sCurrentObjectMap, strcVariables.n16Temp9, strcVariables.n16Temp10
 ; @mode    M8X16
 ; @calls   fObjectEngine_ConvertCoordsToOffset
 ; @callers fMap_DrawTilePatternAt, fSetTileAtCoords
@@ -82,7 +82,7 @@ fMap_FillCurrentTilemapRect:
     ASL A                                                      ;82B070|0A      |      ;
     ASL A                                                      ;82B071|0A      |      ;
     ASL A                                                      ;82B072|0A      |      ;
-    STA.B strcVariables.n16Unk8E                               ;82B073|858E    |00008E;
+    STA.B strcVariables.n16Temp9                               ;82B073|858E    |00008E;
     LDX.W #$0000                                               ;82B075|A20000  |      ;
  
   - PHX                                                        ;82B078|DA      |      ;
@@ -91,15 +91,15 @@ fMap_FillCurrentTilemapRect:
     ASL A                                                      ;82B07B|0A      |      ;
     ASL A                                                      ;82B07C|0A      |      ;
     ASL A                                                      ;82B07D|0A      |      ;
-    STA.B strcVariables.n16Unk90                               ;82B07E|8590    |000090;
+    STA.B strcVariables.n16Temp10                               ;82B07E|8590    |000090;
     REP #$30                                                   ;82B080|C230    |      ;
     LDA.B strcVariables.n16Temp3                               ;82B082|A582    |000082;
     CLC                                                        ;82B084|18      |      ;
-    ADC.B strcVariables.n16Unk8E                               ;82B085|658E    |00008E;
+    ADC.B strcVariables.n16Temp9                               ;82B085|658E    |00008E;
     TAX                                                        ;82B087|AA      |      ;
     LDA.B strcVariables.n16Temp4                               ;82B088|A584    |000084;
     CLC                                                        ;82B08A|18      |      ;
-    ADC.B strcVariables.n16Unk90                               ;82B08B|6590    |000090;
+    ADC.B strcVariables.n16Temp10                               ;82B08B|6590    |000090;
     TAY                                                        ;82B08D|A8      |      ;
     JSR.W fObjectEngine_ConvertCoordsToOffset                  ;82B08E|203CB1  |82B13C;
     SEP #$20                                                   ;82B091|E220    |      ;
@@ -108,11 +108,11 @@ fMap_FillCurrentTilemapRect:
     STA.W sCurrentObjectMap,X                                  ;82B097|9DB609  |0009B6;
     PLX                                                        ;82B09A|FA      |      ;
     INX                                                        ;82B09B|E8      |      ;
-    CPX.B strcVariables.n16Unk86                               ;82B09C|E486    |000086;
+    CPX.B strcVariables.n16Temp5                               ;82B09C|E486    |000086;
     BNE -                                                      ;82B09E|D0D8    |82B078;
     PLY                                                        ;82B0A0|7A      |      ;
     INY                                                        ;82B0A1|C8      |      ;
-    CPY.B strcVariables.n16Unk88                               ;82B0A2|C488    |000088;
+    CPY.B strcVariables.n16Temp6                               ;82B0A2|C488    |000088;
     BNE --                                                     ;82B0A4|D0C7    |82B06D;
     RTL                                                        ;82B0A6|6B      |      ;
  
@@ -133,8 +133,8 @@ fMap_FillCurrentTilemapRect:
 ;;
 fMap_StampTemplateToCurrentTilemap:
     REP #$30                                                   ;82B0A7|C230    |      ;
-    STX.B strcVariables.n16Unk8E                               ;82B0A9|868E    |00008E;
-    STY.B strcVariables.n16Unk90                               ;82B0AB|8490    |000090;
+    STX.B strcVariables.n16Temp9                               ;82B0A9|868E    |00008E;
+    STY.B strcVariables.n16Temp10                               ;82B0AB|8490    |000090;
     JSL.L fMap_GetTilePatternInfo                                      ;82B0AD|2201A881|81A801;
     REP #$30                                                   ;82B0B1|C230    |      ;
     LDA.W #$F500                                               ;82B0B3|A900F5  |      ;
@@ -147,7 +147,7 @@ fMap_StampTemplateToCurrentTilemap:
     AND.W #$007F                                               ;82B0C2|297F00  |      ;
     LSR A                                                      ;82B0C5|4A      |      ;
     LSR A                                                      ;82B0C6|4A      |      ;
-    STA.B strcVariables.n16Unk86                               ;82B0C7|8586    |000086;
+    STA.B strcVariables.n16Temp5                               ;82B0C7|8586    |000086;
     LDA.B strcVariables.n16Temp1                               ;82B0C9|A57E    |00007E;
     LSR A                                                      ;82B0CB|4A      |      ;
     LSR A                                                      ;82B0CC|4A      |      ;
@@ -161,8 +161,8 @@ fMap_StampTemplateToCurrentTilemap:
     ASL A                                                      ;82B0D4|0A      |      ;
     ASL A                                                      ;82B0D5|0A      |      ;
     CLC                                                        ;82B0D6|18      |      ;
-    ADC.B strcVariables.n16Unk86                               ;82B0D7|6586    |000086;
-    STA.B strcVariables.n16Unk86                               ;82B0D9|8586    |000086;
+    ADC.B strcVariables.n16Temp5                               ;82B0D7|6586    |000086;
+    STA.B strcVariables.n16Temp5                               ;82B0D9|8586    |000086;
     LDA.B strcVariables.n16Temp3                               ;82B0DB|A582    |000082;
     STA.B strcVariables.n16Temp4                               ;82B0DD|8584    |000084;
     LDA.B strcVariables.n16Temp2                               ;82B0DF|A580    |000080;
@@ -175,8 +175,8 @@ fMap_StampTemplateToCurrentTilemap:
   - REP #$30                                                   ;82B0EA|C230    |      ;
     PHX                                                        ;82B0EC|DA      |      ;
     PHY                                                        ;82B0ED|5A      |      ;
-    LDY.B strcVariables.n16Unk86                               ;82B0EE|A486    |000086;
-    INC.B strcVariables.n16Unk86                               ;82B0F0|E686    |000086;
+    LDY.B strcVariables.n16Temp5                               ;82B0EE|A486    |000086;
+    INC.B strcVariables.n16Temp5                               ;82B0F0|E686    |000086;
     SEP #$20                                                   ;82B0F2|E220    |      ;
     LDA.B [ptrTemp0x72],Y                                      ;82B0F4|B772    |000072;
     PLY                                                        ;82B0F6|7A      |      ;
@@ -189,7 +189,7 @@ fMap_StampTemplateToCurrentTilemap:
     ASL A                                                      ;82B0FE|0A      |      ;
     ASL A                                                      ;82B0FF|0A      |      ;
     CLC                                                        ;82B100|18      |      ;
-    ADC.B strcVariables.n16Unk8E                               ;82B101|658E    |00008E;
+    ADC.B strcVariables.n16Temp9                               ;82B101|658E    |00008E;
     TAX                                                        ;82B103|AA      |      ;
     TYA                                                        ;82B104|98      |      ;
     ASL A                                                      ;82B105|0A      |      ;
@@ -197,7 +197,7 @@ fMap_StampTemplateToCurrentTilemap:
     ASL A                                                      ;82B107|0A      |      ;
     ASL A                                                      ;82B108|0A      |      ;
     CLC                                                        ;82B109|18      |      ;
-    ADC.B strcVariables.n16Unk90                               ;82B10A|6590    |000090;
+    ADC.B strcVariables.n16Temp10                               ;82B10A|6590    |000090;
     TAY                                                        ;82B10C|A8      |      ;
     SEP #$20                                                   ;82B10D|E220    |      ;
     PLA                                                        ;82B10F|68      |      ;

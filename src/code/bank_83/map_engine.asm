@@ -774,13 +774,13 @@ fAreaEvents_Town:
     XBA                                                        ;83D385|EB      |      ;
     REP #$20                                                   ;83D386|C220    |      ;
     TAX                                                        ;83D388|AA      |      ;
-    STX.B strcVariables.n16Unk86                               ;83D389|8686    |000086;
+    STX.B strcVariables.n16Temp5                               ;83D389|8686    |000086;
     SEP #$20                                                   ;83D38B|E220    |      ;
     LDA.W $09A4+!RAM_SHIFT,X                               ;83D38D|BDA409  |0009A4;
     LDX.B strcVariables.n16Temp4                               ;83D390|A684    |000084;
     STA.W $09A4+!RAM_SHIFT,X                               ;83D392|9DA409  |0009A4;
     LDA.B strcVariables.n8Temp4                                ;83D395|A595    |000095;
-    LDX.B strcVariables.n16Unk86                               ;83D397|A686    |000086;
+    LDX.B strcVariables.n16Temp5                               ;83D397|A686    |000086;
     STA.W $09A4+!RAM_SHIFT,X                               ;83D399|9DA409  |0009A4;
     PLY                                                        ;83D39C|7A      |      ;
     INY                                                        ;83D39D|C8      |      ;
@@ -2506,7 +2506,7 @@ fAreaEvents_House:
 ; @brief   Event handler of the four crossroads areas (!AREA_CROSSROADSPRING-WINTER, where the horse is obtained).
 ; @details Clears daily2 bit $0080 and starts slot $15 script $15 (group 0). With event3 bit $0001 clear: first visit (event3 bit $0010 clear) -> group $0A sub 1 and the flag is set;
 ;          then group $0B sub $0B (the label in the source is .houseExtensionCampain). Horse events (year >= 1 or winter): event3 bit $0040 clear -> group $0D sub 0
-;          (AI_ObtainHorse), flag set and strcMenuData.nameDestinationIdx = 4 (name the horse); event3 bit $0100 clear -> group $0D sub 1 and nHorseAreaIdMaybe = 0.
+;          (AI_ObtainHorse), flag set and strcMenuData.nameDestinationIdx = 4 (name the horse); event3 bit $0100 clear -> group $0D sub 1 and nHorseAreaId = 0.
 ; @calls   fAI_StartSlotScript (via %AIExecute)
 ; @mode    M16X16 -> M16X16 (ends with RTS)
 ; @callers fMapEngine_AreaEvents (through .areaEventsJumpTable)
@@ -2566,7 +2566,7 @@ fAreaEvents_CrossRoad:
     %AIExecute($0000, $000D, $0001)
     SEP #$20                                                   ;83E4C1|E220    |      ;
     LDA.B #$00                                                 ;83E4C3|A900    |      ;
-    STA.L nHorseAreaIdMaybe                                    ;83E4C5|8F311F7F|7F1F31;
+    STA.L nHorseAreaId                                    ;83E4C5|8F311F7F|7F1F31;
     RTS                                                        ;83E4C9|60      |      ;
  
  

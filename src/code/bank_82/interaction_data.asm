@@ -148,7 +148,7 @@ fMainMenu_StartHowToPlayDemo:
     LDY.W #$0000                                               ;82D344|A00000  |      ;
  
   - REP #$20                                                   ;82D347|C220    |      ;
-    STZ.B strcVariables.n16Unk90                               ;82D349|6490    |000090;
+    STZ.B strcVariables.n16Temp10                               ;82D349|6490    |000090;
     SEP #$20                                                   ;82D34B|E220    |      ;
     LDA.B $00                                                  ;82D34D|A500    |000000;
     BEQ -                                                      ;82D34F|F0F6    |82D347;
@@ -197,5 +197,5 @@ fMainMenu_StartHowToPlayDemo:
     LDA.B #$09                                                 ;82D3BB|A909    |      ;
     STA.B strcVariables.n8Temp4                                ;82D3BD|8595    |000095;
     REP #$20                                                   ;82D3BF|C220    |      ;
-    STZ.B strcVariables.n16Unk90                               ;82D3C1|6490    |000090;
+    STZ.B strcVariables.n16Temp10                               ;82D3C1|6490    |000090;
     JML.L fMainMenu_EndFrame                                      ;82D3C3|5C71D882|82D871;

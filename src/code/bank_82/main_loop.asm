@@ -6,7 +6,7 @@
 ;          $00 initial delay (Natsume logo in US/JP), $01 opening demo (AI script), $02 horizontal logo scroll, $03 diagonal logo scroll,
 ;          $04 title screen start (cursor animation set-up), $05 title menu input, $06 skip to title, $07 New Game slot select, $08 Load Game slot select,
 ;          $09 re-initialise the title screen, $0A start the How to Play demo. strcVariables.n8Temp3 / u8Unk96 are frame timers, u8Unk97 is set by the input
-;          code when the title cursor (nTitleMenuCursor) changed, strcVariables.n16Unk90 counts idle frames (600 frames without input starts the
+;          code when the title cursor (nTitleMenuCursor) changed, strcVariables.n16Temp10 counts idle frames (600 frames without input starts the
 ;          automatic How to Play demo). Screens are areas of the intro group: $5B farm scroll, $5C logo, $5D Natsume logo, $5E menu backgrounds.
 ; @bank   $82   @range $82D3C7-$82E665
 ; @see    interaction_data.asm (fMainMenu_StartHowToPlayDemo), system.asm, bank_84/input.asm (title cursor), bank_80/core.asm (fCore_MainLoop)
@@ -316,7 +316,7 @@ fMainMenu_PrepareHowToPlay:
     LDY.W #$0000                                               ;82D6C6|A00000  |      ;
  
   - REP #$20                                                   ;82D6C9|C220    |      ;
-    STZ.B strcVariables.n16Unk90                               ;82D6CB|6490    |000090;
+    STZ.B strcVariables.n16Temp10                               ;82D6CB|6490    |000090;
     SEP #$20                                                   ;82D6CD|E220    |      ;
     LDA.B $00                                                  ;82D6CF|A500    |000000;
     BEQ -                                                      ;82D6D1|F0F6    |82D6C9;
@@ -378,7 +378,7 @@ fMainMenu_HowToPlayCleanup:
  
 ;;
 ; @brief   Select title state 9 (re-initialise the title screen), reset the idle counter and end the frame.
-; @modifies strcVariables.n8Temp4, strcVariables.n16Unk90
+; @modifies strcVariables.n8Temp4, strcVariables.n16Temp10
 ; @callers fMainMenu_HowToPlayCleanup
 ;;
 fMainMenu_SetStateReturnToTitle:
@@ -386,7 +386,7 @@ fMainMenu_SetStateReturnToTitle:
     LDA.B #$09                                                 ;82D752|A909    |      ;
     STA.B strcVariables.n8Temp4                                ;82D754|8595    |000095;
     REP #$20                                                   ;82D756|C220    |      ;
-    STZ.B strcVariables.n16Unk90                               ;82D758|6490    |000090;
+    STZ.B strcVariables.n16Temp10                               ;82D758|6490    |000090;
     JML.L fMainMenu_EndFrame                                      ;82D75A|5C71D882|82D871;
  
  
@@ -470,7 +470,7 @@ fMainMenu_TitleScreenInit:
     SEP #$20                                                   ;82D800|E220    |      ;
     STZ.B strcVariables.u8Unk97                                ;82D802|6497    |000097;
     REP #$20                                                   ;82D804|C220    |      ;
-    STZ.B strcVariables.n16Unk90                               ;82D806|6490    |000090;
+    STZ.B strcVariables.n16Temp10                               ;82D806|6490    |000090;
     LDA.W #$0001                                               ;82D808|A90100  |      ;
     STA.B strcObject.bankAddress                               ;82D80B|85AF    |0000AF;
  
@@ -546,7 +546,7 @@ fMainMenu_EndFrame:
     SEP #$20                                                   ;82D871|E220    |      ;
     STZ.B $00                                                  ;82D873|6400    |000000;
     REP #$20                                                   ;82D875|C220    |      ;
-    LDA.B strcVariables.n16Unk90                               ;82D877|A590    |000090;
+    LDA.B strcVariables.n16Temp10                               ;82D877|A590    |000090;
     CMP.W #$0258                                               ;82D879|C95802  |      ;
     BNE +                                                      ;82D87C|D003    |82D881;
     JMP.W fMainMenu_AutoHowToPlay                              ;82D87E|4CC7D3  |82D3C7;
@@ -927,7 +927,7 @@ fMainMenu_StateSkipToTitleScreen:
 ;;
 fMainMenu_ShowTitleScreen:
     REP #$20                                                   ;82DBB2|C220    |      ;
-    STZ.B strcVariables.n16Unk90                               ;82DBB4|6490    |000090;
+    STZ.B strcVariables.n16Temp10                               ;82DBB4|6490    |000090;
     STZ.W strcBGScrool.BG1HorOffs                              ;82DBB6|9C3C01  |00013C;
     STZ.W strcBGScrool.BG1VerOffs                              ;82DBB9|9C3E01  |00013E;
     STZ.W strcBGScrool.BG2HorOffs                              ;82DBBC|9C4001  |000140;
@@ -1288,9 +1288,9 @@ fMainMenu_StateTitleStartCursorAnim:
 ;;
 ; @brief   State $05: keep scrolling BG2 and, when the cursor changed (strcVariables.u8Unk97), refresh the highlight palette animations of the three entries.
 ; @details The cursor and the confirm action are handled by the input code (bank_84/input.asm, fInput_Title_MenuChoice): cursor 0 -> state $08
-;          (Load Game), 1 -> state $07 (New Game), 2 -> state $0A (How to Play). Counts idle frames in strcVariables.n16Unk90.
+;          (Load Game), 1 -> state $07 (New Game), 2 -> state $0A (How to Play). Counts idle frames in strcVariables.n16Temp10.
 ; @param   nTitleMenuCursor   title menu cursor (0-2)
-; @modifies strcVariables.u8Unk97, strcVariables.n16Unk90, strcVariables.n8Temp3
+; @modifies strcVariables.u8Unk97, strcVariables.n16Temp10, strcVariables.n8Temp3
 ;;
 fMainMenu_StateTitleMenuInput:
     SEP #$20                                                   ;82DD8C|E220    |      ;
@@ -1442,13 +1442,13 @@ fMainMenu_StateTitleMenuInput:
  
 .return:
     REP #$30                                                   ;82DEBD|C230    |      ;
-    INC.B strcVariables.n16Unk90                               ;82DEBF|E690    |000090;
+    INC.B strcVariables.n16Temp10                               ;82DEBF|E690    |000090;
     JML.L fMainMenu_EndFrame                                      ;82DEC1|5C71D882|82D871;
  
  
 ;;
 ; @brief   Leave the slot-select screen (cancel): reload the title graphics (areas $5B and $5C), palette, music and fade in; back to state $04.
-; @modifies strcMap.loadAreaId, strcVariables.n8Temp4, strcVariables.n16Unk90
+; @modifies strcMap.loadAreaId, strcVariables.n8Temp4, strcVariables.n16Temp10
 ; @callers fMainMenu_LoadGameSlotSelect_FrameTail, fMainMenu_NewGameSlotSelect_FrameTail
 ;;
 fMainMenu_ReturnToTitleFromSlotSelect:
@@ -1528,7 +1528,7 @@ fMainMenu_ReturnToTitleFromSlotSelect:
     STA.B strcVariables.n8Temp4                                ;82DF86|8595    |000095;
     STZ.B strcVariables.n8Temp3                                ;82DF88|6494    |000094;
     REP #$20                                                   ;82DF8A|C220    |      ;
-    STZ.B strcVariables.n16Unk90                               ;82DF8C|6490    |000090;
+    STZ.B strcVariables.n16Temp10                               ;82DF8C|6490    |000090;
     JML.L fMainMenu_EndFrame                                      ;82DF8E|5C71D882|82D871;
  
  

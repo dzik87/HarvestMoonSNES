@@ -24,7 +24,7 @@
 ;   is replaced by the tile pattern read from the selected map (strcMap.pSelected, index*4)(?) so that the picked up
 ;   object disappears from the map; items with nItemCarriedPickupSoundTable[id] != 0 play !SFX_ITEMPICKUP.
 ; @param   strcPlayerData.carryItemId   carried item id ($01-$5A)
-; @modifies nCarriedItemId, nUnknownX, nUnknownY, nTileInFrontOfPlayerX, nTileInFrontOfPlayerY, strcAudio.sfxId, strcAudio.sfxVoice
+; @modifies nCarriedItemId, nCarriedItemX, nCarriedItemY, nTileInFrontOfPlayerX, nTileInFrontOfPlayerY, strcAudio.sfxId, strcAudio.sfxVoice
 ; @clobbers A X Y
 ; @mode    ? -> M8X16
 ; @calls   fItemCarried_LoadPoseData, fObjectSlots_Allocate, fStoreTileOnFrontOfPlayerAtDistance, fSetTileAtCoords, fAudio_PlaySoundEffect
@@ -52,12 +52,12 @@ fItemCarried_Begin:
     JSL.L fItemCarried_LoadPoseData                                      ;818022|22B78081|8180B7;
     REP #$20                                                   ;818026|C220    |      ;
     LDA.B strcPlayer.posX                                      ;818028|A5D6    |0000D6;
-    STA.W nUnknownX                                            ;81802A|8D8009  |000980;
+    STA.W nCarriedItemX                                            ;81802A|8D8009  |000980;
     LDA.B strcPlayer.posY                                      ;81802D|A5D8    |0000D8;
     ; object is placed 2 pixels below the player
     INC A                                                      ;81802F|1A      |      ;
     INC A                                                      ;818030|1A      |      ;
-    STA.W nUnknownY                                            ;818031|8D8209  |000982;
+    STA.W nCarriedItemY                                            ;818031|8D8209  |000982;
     JSL.L fObjectSlots_Allocate                                      ;818034|2200A581|81A500;
     REP #$30                                                   ;818038|C230    |      ;
     LDA.W #$0001                                               ;81803A|A90100  |      ;
@@ -2800,7 +2800,7 @@ fItemFound_Return:
 ;   loaded once (bit 2 of the slot flags remembers it). When !PACTION_DROPITEM is active the tile in front is inspected with
 ;   fObjectEngine_GetObjectPropertyByDirSeason(2): only tiles with property 1, 2, 7, 8 or the fixed drop tiles $F0, $F9-$FD accept the
 ;   item, otherwise the drop is cancelled. On success pose 6 + direction is loaded and the phase becomes 3.
-; @modifies nUnknownX, nUnknownY, $0974, $0976, strcPlayer.lastX, strcPlayer.lastY, strcPlayer.newX, strcPlayer.newY, strcPlayer.unkE3, strcPlayer.action
+; @modifies nCarriedItemX, nCarriedItemY, $0974, $0976, strcPlayer.lastX, strcPlayer.lastY, strcPlayer.newX, strcPlayer.newY, strcPlayer.unkE3, strcPlayer.action
 ; @clobbers A X Y
 ; @mode    ? -> ?
 ; @calls   fItemCarried_LoadPoseData, fObject_GetSingleObjectData, fStoreTileOnFrontOfPlayerAtDistance, fObjectEngine_GetObjectPropertyByDirSeason, fGameEngine_CheckAISlotCollision
@@ -2809,11 +2809,11 @@ fItemFound_Return:
 fItemCarried_CarryLoop_NoSell:
     REP #$20                                                   ;818C24|C220    |      ;
     LDA.B strcPlayer.posX                                      ;818C26|A5D6    |0000D6;
-    STA.W nUnknownX                                            ;818C28|8D8009  |000980;
+    STA.W nCarriedItemX                                            ;818C28|8D8009  |000980;
     LDA.B strcPlayer.posY                                      ;818C2B|A5D8    |0000D8;
     INC A                                                      ;818C2D|1A      |      ;
     INC A                                                      ;818C2E|1A      |      ;
-    STA.W nUnknownY                                            ;818C2F|8D8209  |000982;
+    STA.W nCarriedItemY                                            ;818C2F|8D8209  |000982;
     %CheckPlayerAction(!PACTION_JUMP)
     BNE .not_jump                                                ;818C39|D003    |818C3E;
     JMP.W .jump                                              ;818C3B|4C538C  |818C53;
@@ -3034,7 +3034,7 @@ fItemShipped_SetBinTileAndRelease:
 ;;
 ; @brief   Starts flying/placing the item to one of the fixed drop positions and ends the carry state.
 ; @param   A   index into aFixedDropPositionsXY
-; @modifies nUnknownX, nUnknownY, $097A (= $00CA), $0976 (= 4), strcPlayerData.carryItemId
+; @modifies nCarriedItemX, nCarriedItemY, $097A (= $00CA), $0976 (= 4), strcPlayerData.carryItemId
 ; @clobbers A X
 ; @mode    M16 -> M8
 ; @callers fItemCarried_PutDown_NoSell
@@ -3048,11 +3048,11 @@ fItemCarried_StartDropAtTarget:
     ASL A                                                      ;818DEF|0A      |      ;
     TAX                                                        ;818DF0|AA      |      ;
     LDA.L aFixedDropPositionsXY,X                                    ;818DF1|BF63A381|81A363;
-    STA.W nUnknownX                                            ;818DF5|8D8009  |000980;
+    STA.W nCarriedItemX                                            ;818DF5|8D8009  |000980;
     INX                                                        ;818DF8|E8      |      ;
     INX                                                        ;818DF9|E8      |      ;
     LDA.L aFixedDropPositionsXY,X                                    ;818DFA|BF63A381|81A363;
-    STA.W nUnknownY                                            ;818DFE|8D8209  |000982;
+    STA.W nCarriedItemY                                            ;818DFE|8D8209  |000982;
     ; sprite shown while the item flies to the target
     LDA.W #$00CA                                               ;818E01|A9CA00  |      ;
     STA.W $097A+!RAM_SHIFT                                 ;818E04|8D7A09  |00097A;
@@ -3366,7 +3366,7 @@ fItemSell_ShowCancelDialog:
  
 ;;
 ; @brief   Sunday market: back to the carry state - pose 1 at the camera position, phase 2, player holds the item again.
-; @modifies nUnknownX, nUnknownY, $0976 (= 2), strcPlayer.flags
+; @modifies nCarriedItemX, nCarriedItemY, $0976 (= 2), strcPlayer.flags
 ; @clobbers A Y
 ; @mode    ? -> M8
 ; @calls   fItemCarried_LoadPoseData
@@ -3376,9 +3376,9 @@ fItemSell_ResumeCarry:
     LDY.W #$0001                                               ;818FEC|A00100  |      ;
     JSL.L fItemCarried_LoadPoseData                                      ;818FEF|22B78081|8180B7;
     LDA.W strcObjectData.camX                                  ;818FF3|AD0B09  |00090B;
-    STA.W nUnknownX                                            ;818FF6|8D8009  |000980;
+    STA.W nCarriedItemX                                            ;818FF6|8D8009  |000980;
     LDA.W strcObjectData.camY                                  ;818FF9|AD0D09  |00090D;
-    STA.W nUnknownY                                            ;818FFC|8D8209  |000982;
+    STA.W nCarriedItemY                                            ;818FFC|8D8209  |000982;
     SEP #$20                                                   ;818FFF|E220    |      ;
     LDA.B #$02                                                 ;819001|A902    |      ;
     STA.W $0976+!RAM_SHIFT                                 ;819003|8D7609  |000976;
@@ -3431,7 +3431,7 @@ fItemCarried_DestroyAndRelease:
 ;   $0B once while jumping. When !PACTION_DROPITEM is active, the item is shipped into a bin when the step in front is blocked
 ;   (fItemShipped_DropInBin); at the town on Sunday before time id $11 it may be offered on the market stall (tile property $F0 in front,
 ;   non-zero aDialogData_SellItems entry): pose 0 at the stall and phase 5; in every other case it is put down (phase 3).
-; @modifies nUnknownX, nUnknownY, $0974, $0976, strcPlayer.lastX, strcPlayer.lastY, strcPlayer.newX, strcPlayer.newY, strcPlayer.unkE3, strcPlayer.action, strcPlayer.flags
+; @modifies nCarriedItemX, nCarriedItemY, $0974, $0976, strcPlayer.lastX, strcPlayer.lastY, strcPlayer.newX, strcPlayer.newY, strcPlayer.unkE3, strcPlayer.action, strcPlayer.flags
 ; @clobbers A X Y
 ; @mode    ? -> ?
 ; @calls   fItemCarried_CarryLoop_NotJumping, fItemCarried_CarryLoop_Jumping
@@ -3440,11 +3440,11 @@ fItemCarried_DestroyAndRelease:
 fItemCarried_CarryLoop:
     REP #$20                                                   ;819049|C220    |      ;
     LDA.B strcPlayer.posX                                      ;81904B|A5D6    |0000D6;
-    STA.W nUnknownX                                            ;81904D|8D8009  |000980;
+    STA.W nCarriedItemX                                            ;81904D|8D8009  |000980;
     LDA.B strcPlayer.posY                                      ;819050|A5D8    |0000D8;
     INC A                                                      ;819052|1A      |      ;
     INC A                                                      ;819053|1A      |      ;
-    STA.W nUnknownY                                            ;819054|8D8209  |000982;
+    STA.W nCarriedItemY                                            ;819054|8D8209  |000982;
     %CheckPlayerAction(!PACTION_JUMP)
     BNE fItemCarried_CarryLoop_NotJumping                                        ;81905E|D003    |819063;
     JMP.W fItemCarried_CarryLoop_Jumping                                      ;819060|4C7890  |819078;
@@ -3589,9 +3589,9 @@ fItemCarried_HandleDropAction:
  
   + REP #$20                                                   ;81914C|C220    |      ;
     LDA.W nTileInFrontOfPlayerX                                ;81914E|AD8509  |000985;
-    STA.W nUnknownX                                            ;819151|8D8009  |000980;
+    STA.W nCarriedItemX                                            ;819151|8D8009  |000980;
     LDA.W nTileInFrontOfPlayerY                                ;819154|AD8709  |000987;
-    STA.W nUnknownY                                            ;819157|8D8209  |000982;
+    STA.W nCarriedItemY                                            ;819157|8D8209  |000982;
     LDY.W #$0000                                               ;81915A|A00000  |      ;
     JSL.L fItemCarried_LoadPoseData                                      ;81915D|22B78081|8180B7;
     SEP #$20                                                   ;819161|E220    |      ;
@@ -3628,7 +3628,7 @@ fItemCarried_BeginPutDown:
 ; @brief   Drops the carried item into the shipping spot in front of the player and books the profit.
 ; @details Pose 0 at the tile in front; when strcFlags.daily2 bit $0010 is set (shipping possible today (?)) and the item has a profit,
 ;   fItemShipped_AddProfit adds it, otherwise the item is only destroyed (phase 8).
-; @modifies nUnknownX, nUnknownY
+; @modifies nCarriedItemX, nCarriedItemY
 ; @clobbers A X Y
 ; @mode    ? -> ?
 ; @calls   fStoreTileOnFrontOfPlayerAtDistance, fItemCarried_LoadPoseData, fItemShipped_AddProfit, fItemCarried_SetPhaseFinish
@@ -3643,9 +3643,9 @@ fItemShipped_DropInBin:
     JSL.L fStoreTileOnFrontOfPlayerAtDistance                  ;8191A0|224ED181|81D14E;
     REP #$20                                                   ;8191A4|C220    |      ;
     LDA.W nTileInFrontOfPlayerX                                ;8191A6|AD8509  |000985;
-    STA.W nUnknownX                                            ;8191A9|8D8009  |000980;
+    STA.W nCarriedItemX                                            ;8191A9|8D8009  |000980;
     LDA.W nTileInFrontOfPlayerY                                ;8191AC|AD8709  |000987;
-    STA.W nUnknownY                                            ;8191AF|8D8209  |000982;
+    STA.W nCarriedItemY                                            ;8191AF|8D8209  |000982;
     LDY.W #$0000                                               ;8191B2|A00000  |      ;
     JSL.L fItemCarried_LoadPoseData                                      ;8191B5|22B78081|8180B7;
     REP #$30                                                   ;8191B9|C230    |      ;
@@ -3714,7 +3714,7 @@ fItemCarried_ReturnAfterDropAction:
 ;   (fGameEngine_CheckAISlotCollision = 0) and three tiles in front (distance 0/7/7, 1/10/10 and 1/0/0) must have no blocking tile
 ;   property (type 2 and $1F == 0, not $FF; the nearest one additionally not $E1 and not $C0-$CF); otherwise the drop is cancelled.
 ;   On success the put-down pose is loaded and the phase becomes 3 (fItemCarriedAnimal_PutDown).
-; @modifies nUnknownX, nUnknownY, $0974, $0976, strcPlayer.lastX, strcPlayer.lastY, strcPlayer.newX, strcPlayer.newY, strcPlayer.unkE3, strcPlayer.action
+; @modifies nCarriedItemX, nCarriedItemY, $0974, $0976, strcPlayer.lastX, strcPlayer.lastY, strcPlayer.newX, strcPlayer.newY, strcPlayer.unkE3, strcPlayer.action
 ; @clobbers A X Y
 ; @mode    ? -> ?
 ; @calls   fItemCarried_LoadPoseData, fObject_GetSingleObjectData, fStoreTileOnFrontOfPlayerAtDistance, fObjectEngine_GetObjectPropertyByDirSeason, fGameEngine_CheckAISlotCollision
@@ -3723,11 +3723,11 @@ fItemCarried_ReturnAfterDropAction:
 fItemCarriedAnimal_CarryLoop:
     REP #$20                                                   ;819228|C220    |      ;
     LDA.B strcPlayer.posX                                      ;81922A|A5D6    |0000D6;
-    STA.W nUnknownX                                            ;81922C|8D8009  |000980;
+    STA.W nCarriedItemX                                            ;81922C|8D8009  |000980;
     LDA.B strcPlayer.posY                                      ;81922F|A5D8    |0000D8;
     INC A                                                      ;819231|1A      |      ;
     INC A                                                      ;819232|1A      |      ;
-    STA.W nUnknownY                                            ;819233|8D8209  |000982;
+    STA.W nCarriedItemY                                            ;819233|8D8209  |000982;
     %CheckPlayerAction(!PACTION_JUMP)
     BNE .notjump                                               ;81923D|D003    |819242;
     JMP.W .jump                                                ;81923F|4C5792  |819257;
@@ -4111,7 +4111,7 @@ fItemCarried_PlaceEggInIncubator:
     REP #$10                                                   ;8194F3|C210    |      ;
     LDY.W #$0000                                               ;8194F5|A00000  |      ;
     LDA.B #$03                                                 ;8194F8|A903    |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;8194FA|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;8194FA|97CC    |0000CC;
     REP #$20                                                   ;8194FC|C220    |      ;
     LDA.W #$0000                                               ;8194FE|A90000  |      ;
     JSL.L fGameEngine_AddChicken                               ;819501|2207C883|83C807;
@@ -4277,7 +4277,7 @@ fEvent_FreedImpFish:
 ;;
 ; @brief   Throws the item to the fixed target and ends the carry state (phase 4).
 ; @param   A   index into aFixedDropPositionsXY (0-7)
-; @modifies nUnknownX, nUnknownY, $097A (= $00CA), $0976 (= 4), strcPlayerData.carryItemId
+; @modifies nCarriedItemX, nCarriedItemY, $097A (= $00CA), $0976 (= 4), strcPlayerData.carryItemId
 ; @clobbers A X
 ; @mode    M16 -> M8
 ; @callers fItemCarried_PutDown_LowAreas, fItemCarried_PutDown_Outdoor, fEvent_FreedImpFish
@@ -4289,11 +4289,11 @@ fItemCarried_ThrowToTarget:
     ASL A                                                      ;819634|0A      |      ;
     TAX                                                        ;819635|AA      |      ;
     LDA.L aFixedDropPositionsXY,X                                    ;819636|BF63A381|81A363;
-    STA.W nUnknownX                                            ;81963A|8D8009  |000980;
+    STA.W nCarriedItemX                                            ;81963A|8D8009  |000980;
     INX                                                        ;81963D|E8      |      ;
     INX                                                        ;81963E|E8      |      ;
     LDA.L aFixedDropPositionsXY,X                                    ;81963F|BF63A381|81A363;
-    STA.W nUnknownY                                            ;819643|8D8209  |000982;
+    STA.W nCarriedItemY                                            ;819643|8D8209  |000982;
     LDA.W #$00CA                                               ;819646|A9CA00  |      ;
     STA.W $097A+!RAM_SHIFT                                 ;819649|8D7A09  |00097A;
     SEP #$20                                                   ;81964C|E220    |      ;
@@ -4306,7 +4306,7 @@ fItemCarried_ThrowToTarget:
  
 ;;
 ; @brief   Drops the item on the ground in front of the player (pose $0A), clears carryItemId and moves to phase 4.
-; @modifies nUnknownX, nUnknownY, $0976 (= 4), strcPlayerData.carryItemId
+; @modifies nCarriedItemX, nCarriedItemY, $0976 (= 4), strcPlayerData.carryItemId
 ; @clobbers A X Y
 ; @mode    M8X16 -> M8
 ; @calls   fItemCarried_LoadPoseData, fStoreTileOnFrontOfPlayerAtDistance
@@ -4326,9 +4326,9 @@ fItemCarried_DropInFront:
     LDY.W #$0000                                               ;819673|A00000  |      ;
     JSL.L fStoreTileOnFrontOfPlayerAtDistance                  ;819676|224ED181|81D14E;
     LDA.W nTileInFrontOfPlayerX                                ;81967A|AD8509  |000985;
-    STA.W nUnknownX                                            ;81967D|8D8009  |000980;
+    STA.W nCarriedItemX                                            ;81967D|8D8009  |000980;
     LDA.W nTileInFrontOfPlayerY                                ;819680|AD8709  |000987;
-    STA.W nUnknownY                                            ;819683|8D8209  |000982;
+    STA.W nCarriedItemY                                            ;819683|8D8209  |000982;
     SEP #$20                                                   ;819686|E220    |      ;
     LDA.B #$04                                                 ;819688|A904    |      ;
     STA.W $0976+!RAM_SHIFT                                 ;81968A|8D7609  |000976;
@@ -4346,17 +4346,17 @@ fItemCarried_PhaseClearSlot:
  
  
 ;;
-; @brief   Phase 7: waits until the tile script of the shipping animation ended (ptrUnknown0xCF = 0), then frees the slot and re-activates the player.
+; @brief   Phase 7: waits until the tile script of the shipping animation ended (ptrTileScript = 0), then frees the slot and re-activates the player.
 ; @modifies strcPlayer.flags
 ; @mode    ? -> ?
 ; @calls   fObjectSlots_FreeCurrent
 ;;
 fItemCarried_PhaseWaitScriptEnd:
     REP #$30                                                   ;819695|C230    |      ;
-    LDA.B ptrUnknown0xCF                                       ;819697|A5CF    |0000CF;
+    LDA.B ptrTileScript                                       ;819697|A5CF    |0000CF;
     BNE fItemCarried_ReturnFromPhase                                         ;819699|D013    |8196AE;
     SEP #$20                                                   ;81969B|E220    |      ;
-    LDA.B ptrUnknown0xCF+2                                     ;81969D|A5D1    |0000D1;
+    LDA.B ptrTileScript+2                                     ;81969D|A5D1    |0000D1;
     BNE fItemCarried_ReturnFromPhase                                         ;81969F|D00D    |8196AE;
     JSL.L fObjectSlots_FreeCurrent                                      ;8196A1|22F1A481|81A4F1;
     %SetPlayerFlag(!PFLAGS_ACTIVE)

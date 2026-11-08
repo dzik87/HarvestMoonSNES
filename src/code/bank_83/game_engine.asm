@@ -68,7 +68,7 @@ fGameEngine_SetDefaults:
     LDA.B #$00                                                 ;83AA17|A900    |      ;
     STA.L nDogAreaId                                           ;83AA19|8F301F7F|7F1F30;
     LDA.B #$00                                                 ;83AA1D|A900    |      ;
-    STA.L nHorseAreaIdMaybe                                    ;83AA1F|8F311F7F|7F1F31;
+    STA.L nHorseAreaId                                    ;83AA1F|8F311F7F|7F1F31;
     LDA.B #$00                                                 ;83AA23|A900    |      ;
     STA.L nHorseAge                                            ;83AA25|8F321F7F|7F1F32;
     LDA.B #$00                                                 ;83AA29|A900    |      ;
@@ -277,9 +277,9 @@ fGameEngine_ResetSessionState:
     STZ.W $087A                                                ;83AC42|9C7A08  |00087A;
     STZ.W nTimeState                                           ;83AC45|9C7309  |000973;
     REP #$20                                                   ;83AC48|C220    |      ;
-    STZ.B ptrUnknown0xCF                                       ;83AC4A|64CF    |0000CF;
+    STZ.B ptrTileScript                                       ;83AC4A|64CF    |0000CF;
     SEP #$20                                                   ;83AC4C|E220    |      ;
-    STZ.B ptrUnknown0xCF+2                                     ;83AC4E|64D1    |0000D1;
+    STZ.B ptrTileScript+2                                     ;83AC4E|64D1    |0000D1;
     STZ.W $098A+!RAM_SHIFT                                 ;83AC50|9C8A09  |00098A;
     STZ.W $0972+!RAM_SHIFT                                 ;83AC53|9C7209  |000972;
     REP #$20                                                   ;83AC56|C220    |      ;
@@ -320,7 +320,7 @@ fGameEngine_ResetSessionState:
     LDA.W #$0000                                               ;83ACBE|A90000  |      ;
     STA.L strcFlags.unknown3                                   ;83ACC1|8F781F7F|7F1F78;
     LDA.W #$0000                                               ;83ACC5|A90000  |      ;
-    STA.L $7F1F7A                                              ;83ACC8|8F7A1F7F|7F1F7A;
+    STA.L nAIScriptFlags                                              ;83ACC8|8F7A1F7F|7F1F7A;
     REP #$20                                                   ;83ACCC|C220    |      ;
     %SetPlayerFlag(!PFLAGS_ACTIVE)
     %SetPlayerAction(!PACTION_NONE)
@@ -393,13 +393,13 @@ fGameEngine_ResetSessionState:
 ; @brief   Test whether the player's next step would run into an AI slot (NPC, animal or other moving object).
 ; @details If daily4 bit $4000 is set the test is skipped and the new position is reported. Otherwise a probe point is built
 ;          12 pixels in front of the player's last position in the move direction (lastX/lastY plus newX/newY/unkE3, +12
-;          centring offset). All 49 AI slots ($7E:B586, stride $40, pointer ptrAIUnknown0xCC) are scanned: slot byte +0C is first
+;          centring offset). All 49 AI slots ($7E:B586, stride $40, pointer ptrAISlot) are scanned: slot byte +0C is first
 ;          cleared, then set to 1 for each active slot (+00 <> 0) whose position (+1A, +1C) is within 25 pixels of the probe.
 ;          The first such slot whose +00 bit 1 is clear blocks the movement.
 ; @param   A      move direction: 0 down, 1 up, 2 +X, 3 -X (note: !PDIR_LEFT is $02 but this code moves +X for 2; the PDIR names look swapped (?))
 ; @param   strcPlayer.lastX, lastY, newX, newY, unkE3  current position and the step to test
 ; @return  A      1 = blocked (X = Y = 0), 0 = free (X = strcPlayer.newX, Y = strcPlayer.newY)
-; @modifies strcVariables.n16Temp2, strcVariables.n16Temp3, strcVariables.n16Unk8C
+; @modifies strcVariables.n16Temp2, strcVariables.n16Temp3, strcVariables.n16Temp8
 ; @clobbers X Y
 ; @mode    M16X16 -> M16X16
 ; @callers fPlayer_MoveInDirection, fInput_PlayerButtonA_Interact, fInput_PlayerButtonB, fInput_IsObjectDirectionBlocked, fPlayer_InteractWithFrontObject, fAIAction0x35_UpdateHorse, fItemCarried_CarryLoop_NoSell, fItemCarried_HandleDropAction, fItemCarriedAnimal_CarryLoop
@@ -484,19 +484,19 @@ fGameEngine_CheckAISlotCollision:
  
 .scan_objects:
     REP #$30                                                   ;83AE08|C230    |      ;
-    LDA.B ptrAIUnknown0xCC                                     ;83AE0A|A5CC    |0000CC;
+    LDA.B ptrAISlot                                     ;83AE0A|A5CC    |0000CC;
     PHA                                                        ;83AE0C|48      |      ;
     SEP #$20                                                   ;83AE0D|E220    |      ;
-    LDA.B ptrAIUnknown0xCC+2                                   ;83AE0F|A5CE    |0000CE;
+    LDA.B ptrAISlot+2                                   ;83AE0F|A5CE    |0000CE;
     PHA                                                        ;83AE11|48      |      ;
     REP #$20                                                   ;83AE12|C220    |      ;
     LDA.W #$B586                                               ;83AE14|A986B5  |      ;
-    STA.B ptrAIUnknown0xCC                                     ;83AE17|85CC    |0000CC;
+    STA.B ptrAISlot                                     ;83AE17|85CC    |0000CC;
     SEP #$20                                                   ;83AE19|E220    |      ;
     LDA.B #$7E                                                 ;83AE1B|A97E    |      ;
-    STA.B ptrAIUnknown0xCC+2                                   ;83AE1D|85CE    |0000CE;
+    STA.B ptrAISlot+2                                   ;83AE1D|85CE    |0000CE;
     REP #$20                                                   ;83AE1F|C220    |      ;
-    STZ.B strcVariables.n16Unk8C                               ;83AE21|648C    |00008C;
+    STZ.B strcVariables.n16Temp8                               ;83AE21|648C    |00008C;
     LDX.W #$0000                                               ;83AE23|A20000  |      ;
  
 .loop:
@@ -504,11 +504,11 @@ fGameEngine_CheckAISlotCollision:
     REP #$10                                                   ;83AE28|C210    |      ;
     LDY.W #$000C                                               ;83AE2A|A00C00  |      ;
     LDA.B #$00                                                 ;83AE2D|A900    |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;83AE2F|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;83AE2F|97CC    |0000CC;
     SEP #$20                                                   ;83AE31|E220    |      ;
     REP #$10                                                   ;83AE33|C210    |      ;
     LDY.W #$0000                                               ;83AE35|A00000  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;83AE38|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;83AE38|B7CC    |0000CC;
     BNE +                                                      ;83AE3A|D003    |83AE3F;
     JMP.W .next_object                                              ;83AE3C|4C81AE  |83AE81;
  
@@ -517,26 +517,26 @@ fGameEngine_CheckAISlotCollision:
     LDA.B strcVariables.n16Temp2                               ;83AE41|A580    |000080;
     SEC                                                        ;83AE43|38      |      ;
     LDY.W #$001A                                               ;83AE44|A01A00  |      ;
-    SBC.B [ptrAIUnknown0xCC],Y                                 ;83AE47|F7CC    |0000CC;
+    SBC.B [ptrAISlot],Y                                 ;83AE47|F7CC    |0000CC;
     CMP.W #$0019                                               ;83AE49|C91900  |      ;
     BCS .next_object                                                ;83AE4C|B033    |83AE81;
     LDA.B strcVariables.n16Temp3                               ;83AE4E|A582    |000082;
     SEC                                                        ;83AE50|38      |      ;
     LDY.W #$001C                                               ;83AE51|A01C00  |      ;
-    SBC.B [ptrAIUnknown0xCC],Y                                 ;83AE54|F7CC    |0000CC;
+    SBC.B [ptrAISlot],Y                                 ;83AE54|F7CC    |0000CC;
     CMP.W #$0019                                               ;83AE56|C91900  |      ;
     BCS .next_object                                                ;83AE59|B026    |83AE81;
-    LDA.B strcVariables.n16Unk8C                               ;83AE5B|A58C    |00008C;
+    LDA.B strcVariables.n16Temp8                               ;83AE5B|A58C    |00008C;
     BNE .next_object                                                ;83AE5D|D022    |83AE81;
     SEP #$20                                                   ;83AE5F|E220    |      ;
     REP #$10                                                   ;83AE61|C210    |      ;
     LDY.W #$000C                                               ;83AE63|A00C00  |      ;
     LDA.B #$01                                                 ;83AE66|A901    |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;83AE68|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;83AE68|97CC    |0000CC;
     SEP #$20                                                   ;83AE6A|E220    |      ;
     REP #$10                                                   ;83AE6C|C210    |      ;
     LDY.W #$0000                                               ;83AE6E|A00000  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;83AE71|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;83AE71|B7CC    |0000CC;
     AND.B #$02                                                 ;83AE73|2902    |      ;
     BEQ +                                                      ;83AE75|F003    |83AE7A;
     JMP.W .next_object                                              ;83AE77|4C81AE  |83AE81;
@@ -544,28 +544,28 @@ fGameEngine_CheckAISlotCollision:
  
   + REP #$20                                                   ;83AE7A|C220    |      ;
     LDA.W #$0001                                               ;83AE7C|A90100  |      ;
-    STA.B strcVariables.n16Unk8C                               ;83AE7F|858C    |00008C;
+    STA.B strcVariables.n16Temp8                               ;83AE7F|858C    |00008C;
  
 .next_object:
     REP #$20                                                   ;83AE81|C220    |      ;
-    LDA.B ptrAIUnknown0xCC                                     ;83AE83|A5CC    |0000CC;
+    LDA.B ptrAISlot                                     ;83AE83|A5CC    |0000CC;
     CLC                                                        ;83AE85|18      |      ;
     ADC.W #$0040                                               ;83AE86|694000  |      ;
-    STA.B ptrAIUnknown0xCC                                     ;83AE89|85CC    |0000CC;
+    STA.B ptrAISlot                                     ;83AE89|85CC    |0000CC;
     INX                                                        ;83AE8B|E8      |      ;
     CPX.W #$0031                                               ;83AE8C|E03100  |      ;
     BEQ +                                                      ;83AE8F|F003    |83AE94;
     JMP.W .loop                                                ;83AE91|4C26AE  |83AE26;
  
  
-  + LDA.B strcVariables.n16Unk8C                               ;83AE94|A58C    |00008C;
+  + LDA.B strcVariables.n16Temp8                               ;83AE94|A58C    |00008C;
     BNE .return                                                ;83AE96|D015    |83AEAD;
     SEP #$20                                                   ;83AE98|E220    |      ;
     PLA                                                        ;83AE9A|68      |      ;
-    STA.B ptrAIUnknown0xCC+2                                   ;83AE9B|85CE    |0000CE;
+    STA.B ptrAISlot+2                                   ;83AE9B|85CE    |0000CE;
     REP #$20                                                   ;83AE9D|C220    |      ;
     PLA                                                        ;83AE9F|68      |      ;
-    STA.B ptrAIUnknown0xCC                                     ;83AEA0|85CC    |0000CC;
+    STA.B ptrAISlot                                     ;83AEA0|85CC    |0000CC;
  
 .report_new_position:
     REP #$30                                                   ;83AEA2|C230    |      ;
@@ -578,10 +578,10 @@ fGameEngine_CheckAISlotCollision:
 .return:
     SEP #$20                                                   ;83AEAD|E220    |      ;
     PLA                                                        ;83AEAF|68      |      ;
-    STA.B ptrAIUnknown0xCC+2                                   ;83AEB0|85CE    |0000CE;
+    STA.B ptrAISlot+2                                   ;83AEB0|85CE    |0000CE;
     REP #$20                                                   ;83AEB2|C220    |      ;
     PLA                                                        ;83AEB4|68      |      ;
-    STA.B ptrAIUnknown0xCC                                     ;83AEB5|85CC    |0000CC;
+    STA.B ptrAISlot                                     ;83AEB5|85CC    |0000CC;
     REP #$20                                                   ;83AEB7|C220    |      ;
     LDX.W #$0000                                               ;83AEB9|A20000  |      ;
     LDY.W #$0000                                               ;83AEBC|A00000  |      ;
@@ -698,7 +698,7 @@ fGameEngine_CheckPlayerOverlap:
 ; @return  A      collision mask: 0 free, 1 second corner blocked, 2 first corner blocked, 3 both blocked
 ; @return  X      allowed distance on X axis (directions 2 and 3), otherwise unchanged (?)
 ; @return  Y      allowed distance on Y axis (directions 0 and 1), otherwise unchanged (?)
-; @modifies strcVariables.n16Temp1, strcVariables.n16Unk86, strcVariables.n16Unk88, strcVariables.n16Unk8A, strcVariables.n16Unk8C, strcVariables.n16Unk8E, strcVariables.n16Unk90, strcPlayer.unkPosX, strcPlayer.unkPosY
+; @modifies strcVariables.n16Temp1, strcVariables.n16Temp5, strcVariables.n16Temp6, strcVariables.n16Temp7, strcVariables.n16Temp8, strcVariables.n16Temp9, strcVariables.n16Temp10, strcPlayer.unkPosX, strcPlayer.unkPosY
 ; @mode    M16X16 -> M16X16
 ; @calls   fGameEngine_CheckTileCollision
 ; @callers fPlayer_MoveInDirection, fInput_PlayerButtonB, fInput_IsObjectDirectionBlocked, fAI_UpdateSlotWander, fAIAction0x35_UpdateHorse
@@ -733,7 +733,7 @@ fGameEngine_CheckTileCollisionDir:
     REP #$20                                                   ;83AF5F|C220    |      ;
     PLY                                                        ;83AF61|7A      |      ;
     PHA                                                        ;83AF62|48      |      ;
-    LDA.B strcVariables.n16Unk90                               ;83AF63|A590    |000090;
+    LDA.B strcVariables.n16Temp10                               ;83AF63|A590    |000090;
     PHA                                                        ;83AF65|48      |      ;
     LDA.B strcPlayer.lastX                                     ;83AF66|A5DF    |0000DF;
     CLC                                                        ;83AF68|18      |      ;
@@ -759,20 +759,20 @@ fGameEngine_CheckTileCollisionDir:
     BEQ +                                                      ;83AF8D|F013    |83AFA2;
     CMP.W #$0002                                               ;83AF8F|C90200  |      ;
     BNE +                                                      ;83AF92|D00E    |83AFA2;
-    STY.B strcVariables.n16Unk90                               ;83AF94|8490    |000090;
-    LDA.B strcVariables.n16Unk88                               ;83AF96|A588    |000088;
+    STY.B strcVariables.n16Temp10                               ;83AF94|8490    |000090;
+    LDA.B strcVariables.n16Temp6                               ;83AF96|A588    |000088;
     SEC                                                        ;83AF98|38      |      ;
-    SBC.B strcVariables.n16Unk8C                               ;83AF99|E58C    |00008C;
-    SBC.B strcVariables.n16Unk90                               ;83AF9B|E590    |000090;
+    SBC.B strcVariables.n16Temp8                               ;83AF99|E58C    |00008C;
+    SBC.B strcVariables.n16Temp10                               ;83AF9B|E590    |000090;
     INC A                                                      ;83AF9D|1A      |      ;
     TAY                                                        ;83AF9E|A8      |      ;
     JMP.W .return                                              ;83AF9F|4CE1B0  |83B0E1;
  
  
-  + LDA.B strcVariables.n16Unk88                               ;83AFA2|A588    |000088;
+  + LDA.B strcVariables.n16Temp6                               ;83AFA2|A588    |000088;
     SEC                                                        ;83AFA4|38      |      ;
-    SBC.B strcVariables.n16Unk8C                               ;83AFA5|E58C    |00008C;
-    SBC.B strcVariables.n16Unk90                               ;83AFA7|E590    |000090;
+    SBC.B strcVariables.n16Temp8                               ;83AFA5|E58C    |00008C;
+    SBC.B strcVariables.n16Temp10                               ;83AFA7|E590    |000090;
     INC A                                                      ;83AFA9|1A      |      ;
     TAY                                                        ;83AFAA|A8      |      ;
     JMP.W .return                                              ;83AFAB|4CE1B0  |83B0E1;
@@ -795,7 +795,7 @@ fGameEngine_CheckTileCollisionDir:
     REP #$20                                                   ;83AFC7|C220    |      ;
     PLY                                                        ;83AFC9|7A      |      ;
     PHA                                                        ;83AFCA|48      |      ;
-    LDA.B strcVariables.n16Unk8E                               ;83AFCB|A58E    |00008E;
+    LDA.B strcVariables.n16Temp9                               ;83AFCB|A58E    |00008E;
     PHA                                                        ;83AFCD|48      |      ;
     LDA.B strcPlayer.lastX                                     ;83AFCE|A5DF    |0000DF;
     CLC                                                        ;83AFD0|18      |      ;
@@ -821,21 +821,21 @@ fGameEngine_CheckTileCollisionDir:
     BEQ +                                                      ;83AFF5|F013    |83B00A;
     CMP.W #$0002                                               ;83AFF7|C90200  |      ;
     BNE +                                                      ;83AFFA|D00E    |83B00A;
-    STY.B strcVariables.n16Unk8E                               ;83AFFC|848E    |00008E;
-    LDA.B strcVariables.n16Unk8C                               ;83AFFE|A58C    |00008C;
+    STY.B strcVariables.n16Temp9                               ;83AFFC|848E    |00008E;
+    LDA.B strcVariables.n16Temp8                               ;83AFFE|A58C    |00008C;
     CLC                                                        ;83B000|18      |      ;
-    ADC.B strcVariables.n16Unk8E                               ;83B001|658E    |00008E;
+    ADC.B strcVariables.n16Temp9                               ;83B001|658E    |00008E;
     SEC                                                        ;83B003|38      |      ;
-    SBC.B strcVariables.n16Unk88                               ;83B004|E588    |000088;
+    SBC.B strcVariables.n16Temp6                               ;83B004|E588    |000088;
     TAY                                                        ;83B006|A8      |      ;
     JMP.W .return                                              ;83B007|4CE1B0  |83B0E1;
  
  
-  + LDA.B strcVariables.n16Unk8C                               ;83B00A|A58C    |00008C;
+  + LDA.B strcVariables.n16Temp8                               ;83B00A|A58C    |00008C;
     CLC                                                        ;83B00C|18      |      ;
-    ADC.B strcVariables.n16Unk8E                               ;83B00D|658E    |00008E;
+    ADC.B strcVariables.n16Temp9                               ;83B00D|658E    |00008E;
     SEC                                                        ;83B00F|38      |      ;
-    SBC.B strcVariables.n16Unk88                               ;83B010|E588    |000088;
+    SBC.B strcVariables.n16Temp6                               ;83B010|E588    |000088;
     TAY                                                        ;83B012|A8      |      ;
     JMP.W .return                                              ;83B013|4CE1B0  |83B0E1;
  
@@ -857,7 +857,7 @@ fGameEngine_CheckTileCollisionDir:
     REP #$20                                                   ;83B02F|C220    |      ;
     PLX                                                        ;83B031|FA      |      ;
     PHA                                                        ;83B032|48      |      ;
-    LDA.B strcVariables.n16Unk90                               ;83B033|A590    |000090;
+    LDA.B strcVariables.n16Temp10                               ;83B033|A590    |000090;
     PHA                                                        ;83B035|48      |      ;
     LDA.B strcPlayer.lastY                                     ;83B036|A5E1    |0000E1;
     CLC                                                        ;83B038|18      |      ;
@@ -883,20 +883,20 @@ fGameEngine_CheckTileCollisionDir:
     BEQ +                                                      ;83B05D|F012    |83B071;
     CMP.W #$0002                                               ;83B05F|C90200  |      ;
     BNE +                                                      ;83B062|D00D    |83B071;
-    STX.B strcVariables.n16Unk90                               ;83B064|8690    |000090;
-    LDA.B strcVariables.n16Unk86                               ;83B066|A586    |000086;
+    STX.B strcVariables.n16Temp10                               ;83B064|8690    |000090;
+    LDA.B strcVariables.n16Temp5                               ;83B066|A586    |000086;
     SEC                                                        ;83B068|38      |      ;
-    SBC.B strcVariables.n16Unk8A                               ;83B069|E58A    |00008A;
-    SBC.B strcVariables.n16Unk90                               ;83B06B|E590    |000090;
+    SBC.B strcVariables.n16Temp7                               ;83B069|E58A    |00008A;
+    SBC.B strcVariables.n16Temp10                               ;83B06B|E590    |000090;
     INC A                                                      ;83B06D|1A      |      ;
     TAX                                                        ;83B06E|AA      |      ;
     BRA .return                                                ;83B06F|8070    |83B0E1;
  
  
-  + LDA.B strcVariables.n16Unk86                               ;83B071|A586    |000086;
+  + LDA.B strcVariables.n16Temp5                               ;83B071|A586    |000086;
     SEC                                                        ;83B073|38      |      ;
-    SBC.B strcVariables.n16Unk8A                               ;83B074|E58A    |00008A;
-    SBC.B strcVariables.n16Unk90                               ;83B076|E590    |000090;
+    SBC.B strcVariables.n16Temp7                               ;83B074|E58A    |00008A;
+    SBC.B strcVariables.n16Temp10                               ;83B076|E590    |000090;
     INC A                                                      ;83B078|1A      |      ;
     TAX                                                        ;83B079|AA      |      ;
     BRA .return                                                ;83B07A|8065    |83B0E1;
@@ -919,7 +919,7 @@ fGameEngine_CheckTileCollisionDir:
     REP #$20                                                   ;83B095|C220    |      ;
     PLX                                                        ;83B097|FA      |      ;
     PHA                                                        ;83B098|48      |      ;
-    LDA.B strcVariables.n16Unk8E                               ;83B099|A58E    |00008E;
+    LDA.B strcVariables.n16Temp9                               ;83B099|A58E    |00008E;
     PHA                                                        ;83B09B|48      |      ;
     LDA.B strcPlayer.lastY                                     ;83B09C|A5E1    |0000E1;
     CLC                                                        ;83B09E|18      |      ;
@@ -945,21 +945,21 @@ fGameEngine_CheckTileCollisionDir:
     BEQ +                                                      ;83B0C2|F012    |83B0D6;
     CMP.W #$0002                                               ;83B0C4|C90200  |      ;
     BNE +                                                      ;83B0C7|D00D    |83B0D6;
-    STX.B strcVariables.n16Unk8E                               ;83B0C9|868E    |00008E;
-    LDA.B strcVariables.n16Unk8A                               ;83B0CB|A58A    |00008A;
+    STX.B strcVariables.n16Temp9                               ;83B0C9|868E    |00008E;
+    LDA.B strcVariables.n16Temp7                               ;83B0CB|A58A    |00008A;
     CLC                                                        ;83B0CD|18      |      ;
-    ADC.B strcVariables.n16Unk8E                               ;83B0CE|658E    |00008E;
+    ADC.B strcVariables.n16Temp9                               ;83B0CE|658E    |00008E;
     SEC                                                        ;83B0D0|38      |      ;
-    SBC.B strcVariables.n16Unk86                               ;83B0D1|E586    |000086;
+    SBC.B strcVariables.n16Temp5                               ;83B0D1|E586    |000086;
     TAX                                                        ;83B0D3|AA      |      ;
     BRA .return                                                ;83B0D4|800B    |83B0E1;
  
  
-  + LDA.B strcVariables.n16Unk8A                               ;83B0D6|A58A    |00008A;
+  + LDA.B strcVariables.n16Temp7                               ;83B0D6|A58A    |00008A;
     CLC                                                        ;83B0D8|18      |      ;
-    ADC.B strcVariables.n16Unk8E                               ;83B0D9|658E    |00008E;
+    ADC.B strcVariables.n16Temp9                               ;83B0D9|658E    |00008E;
     SEC                                                        ;83B0DB|38      |      ;
-    SBC.B strcVariables.n16Unk86                               ;83B0DC|E586    |000086;
+    SBC.B strcVariables.n16Temp5                               ;83B0DC|E586    |000086;
     TAX                                                        ;83B0DE|AA      |      ;
     BRA .return                                                ;83B0DF|8000    |83B0E1;
  
@@ -997,7 +997,7 @@ fGameEngine_Unused83B0E6:
 ; @param   X      probe x coordinate
 ; @param   Y      probe y coordinate
 ; @return  A      1 = blocked, 0 = free
-; @modifies strcVariables.n16Unk86, strcVariables.n16Unk88, strcVariables.n16Unk8A, strcVariables.n16Unk8C, strcVariables.n16Unk8E, strcVariables.n16Unk90, strcVariables.n8Temp1, strcPlayer.unkPosX, strcPlayer.unkPosY
+; @modifies strcVariables.n16Temp5, strcVariables.n16Temp6, strcVariables.n16Temp7, strcVariables.n16Temp8, strcVariables.n16Temp9, strcVariables.n16Temp10, strcVariables.n8Temp1, strcPlayer.unkPosX, strcPlayer.unkPosY
 ; @mode    M16X16 -> M16X16
 ; @calls   fObjectEngine_GetObjectPropertyByDirSeason
 ; @callers fGameEngine_CheckTileCollisionDir
@@ -1006,18 +1006,18 @@ fGameEngine_Unused83B0E6:
 fGameEngine_CheckTileCollision:
     REP #$30                                                   ;83B0F6|C230    |      ; return A: nStatus
     PHA                                                        ;83B0F8|48      |      ;
-    STX.B strcVariables.n16Unk86                               ;83B0F9|8686    |000086;
-    STY.B strcVariables.n16Unk88                               ;83B0FB|8488    |000088;
+    STX.B strcVariables.n16Temp5                               ;83B0F9|8686    |000086;
+    STY.B strcVariables.n16Temp6                               ;83B0FB|8488    |000088;
     TXA                                                        ;83B0FD|8A      |      ;
     AND.W #$FFF0                                               ;83B0FE|29F0FF  |      ;
-    STA.B strcVariables.n16Unk8A                               ;83B101|858A    |00008A;
+    STA.B strcVariables.n16Temp7                               ;83B101|858A    |00008A;
     TYA                                                        ;83B103|98      |      ;
     AND.W #$FFF0                                               ;83B104|29F0FF  |      ;
-    STA.B strcVariables.n16Unk8C                               ;83B107|858C    |00008C;
+    STA.B strcVariables.n16Temp8                               ;83B107|858C    |00008C;
     LDA.W #$0010                                               ;83B109|A91000  |      ; tile size $10: unk8E/unk90 = free span inside the tile (8 for half tiles)
-    STA.B strcVariables.n16Unk8E                               ;83B10C|858E    |00008E;
+    STA.B strcVariables.n16Temp9                               ;83B10C|858E    |00008E;
     LDA.W #$0000                                               ;83B10E|A90000  |      ;
-    STA.B strcVariables.n16Unk90                               ;83B111|8590    |000090;
+    STA.B strcVariables.n16Temp10                               ;83B111|8590    |000090;
     LDA.W #$0002                                               ;83B113|A90200  |      ;
     JSL.L fObjectEngine_GetObjectPropertyByDirSeason                                      ;83B116|2261AC82|82AC61; property index 2 = collision flags of the tile object
     SEP #$20                                                   ;83B11A|E220    |      ;
@@ -1070,9 +1070,9 @@ fGameEngine_CheckTileCollision:
     LDA.B strcPlayer.newY                                      ;83B16C|A5E7    |0000E7;
     BNE +                                                      ;83B16E|D005    |83B175;
     LDA.W #$0008                                               ;83B170|A90800  |      ;
-    STA.B strcVariables.n16Unk8E                               ;83B173|858E    |00008E;
+    STA.B strcVariables.n16Temp9                               ;83B173|858E    |00008E;
  
-  + LDA.B strcVariables.n16Unk86                               ;83B175|A586    |000086;
+  + LDA.B strcVariables.n16Temp5                               ;83B175|A586    |000086;
     AND.W #$0008                                               ;83B177|290800  |      ;
     BNE .return0                                               ;83B17A|D045    |83B1C1;
     BRA .return1                                               ;83B17C|803C    |83B1BA;
@@ -1083,9 +1083,9 @@ fGameEngine_CheckTileCollision:
     LDA.B strcPlayer.newY                                      ;83B180|A5E7    |0000E7;
     BNE +                                                      ;83B182|D005    |83B189;
     LDA.W #$0008                                               ;83B184|A90800  |      ;
-    STA.B strcVariables.n16Unk90                               ;83B187|8590    |000090;
+    STA.B strcVariables.n16Temp10                               ;83B187|8590    |000090;
  
-  + LDA.B strcVariables.n16Unk86                               ;83B189|A586    |000086;
+  + LDA.B strcVariables.n16Temp5                               ;83B189|A586    |000086;
     AND.W #$0008                                               ;83B18B|290800  |      ;
     BEQ .return0                                               ;83B18E|F031    |83B1C1;
     BRA .return1                                               ;83B190|8028    |83B1BA;
@@ -1096,9 +1096,9 @@ fGameEngine_CheckTileCollision:
     LDA.B strcPlayer.newX                                      ;83B194|A5E5    |0000E5;
     BNE +                                                      ;83B196|D005    |83B19D;
     LDA.W #$0008                                               ;83B198|A90800  |      ;
-    STA.B strcVariables.n16Unk8E                               ;83B19B|858E    |00008E;
+    STA.B strcVariables.n16Temp9                               ;83B19B|858E    |00008E;
  
-  + LDA.B strcVariables.n16Unk88                               ;83B19D|A588    |000088;
+  + LDA.B strcVariables.n16Temp6                               ;83B19D|A588    |000088;
     AND.W #$0008                                               ;83B19F|290800  |      ;
     BNE .return0                                               ;83B1A2|D01D    |83B1C1;
     BRA .return1                                               ;83B1A4|8014    |83B1BA;
@@ -1109,9 +1109,9 @@ fGameEngine_CheckTileCollision:
     LDA.B strcPlayer.newX                                      ;83B1A8|A5E5    |0000E5;
     BNE +                                                      ;83B1AA|D005    |83B1B1;
     LDA.W #$0008                                               ;83B1AC|A90800  |      ;
-    STA.B strcVariables.n16Unk90                               ;83B1AF|8590    |000090;
+    STA.B strcVariables.n16Temp10                               ;83B1AF|8590    |000090;
  
-  + LDA.B strcVariables.n16Unk88                               ;83B1B1|A588    |000088;
+  + LDA.B strcVariables.n16Temp6                               ;83B1B1|A588    |000088;
     AND.W #$0008                                               ;83B1B3|290800  |      ;
     BEQ .return0                                               ;83B1B6|F009    |83B1C1;
     BRA .return1                                               ;83B1B8|8000    |83B1BA;
@@ -1139,7 +1139,7 @@ fGameEngine_CheckTileCollision:
 ;          (not enough money); a result above 999999 ($0F423F) is clamped.
 ; @param   ptrTemp0x72  24-bit signed amount (DP $72-$74)
 ; @return  A      0 = money updated, 1 = result would be negative (money unchanged)
-; @modifies nMoney, ptrUnknown0x75
+; @modifies nMoney, ptrTemp0x75
 ; @mode    M16X16 -> M16X16
 ; @callers fNextDayHandler, fItemBuy_HandleAnswer, fItemSell_HandleAnswer, fToolUsedAction0x02_Plow, fToolUsedAction0x12_GoldenPlow, fAIAction0x42_AddValue24, fPlayerInteraction_LivestockDealerMenu, fPlayerInteraction_SellCow, fPlayerInteraction_SellChicken, fPlayerInteraction_HouseExpansion, fPlayerInteraction_BuyRiceBall, fPlayerInteraction_BuyDumpling
 ;;
@@ -1148,24 +1148,24 @@ fGameEngine_AddProfit:
     LDA.L nMoney                                               ;83B1CB|AF041F7F|7F1F04;
     CLC                                                        ;83B1CF|18      |      ;
     ADC.B ptrTemp0x72                                          ;83B1D0|6572    |000072;
-    STA.B ptrUnknown0x75                                       ;83B1D2|8575    |000075;
+    STA.B ptrTemp0x75                                       ;83B1D2|8575    |000075;
     SEP #$20                                                   ;83B1D4|E220    |      ;
     LDA.L nMoney+2                                             ;83B1D6|AF061F7F|7F1F06;
     ADC.B ptrTemp0x72+2                                        ;83B1DA|6574    |000074;
-    STA.B ptrUnknown0x75+2                                     ;83B1DC|8577    |000077;
+    STA.B ptrTemp0x75+2                                     ;83B1DC|8577    |000077;
     BMI .ok                                                    ;83B1DE|3026    |83B206; sign of the 24-bit sum: negative = not enough money
     REP #$20                                                   ;83B1E0|C220    |      ;
-    LDA.B ptrUnknown0x75                                       ;83B1E2|A575    |000075;
+    LDA.B ptrTemp0x75                                       ;83B1E2|A575    |000075;
     CMP.W #$423F                                               ;83B1E4|C93F42  |      ; cap at 999999 ($0F423F)
     SEP #$20                                                   ;83B1E7|E220    |      ;
-    LDA.B ptrUnknown0x75+2                                     ;83B1E9|A577    |000077;
+    LDA.B ptrTemp0x75+2                                     ;83B1E9|A577    |000077;
     SBC.B #$0F                                                 ;83B1EB|E90F    |      ;
     BCS .max                                                   ;83B1ED|B01E    |83B20D;
     REP #$20                                                   ;83B1EF|C220    |      ;
-    LDA.B ptrUnknown0x75                                       ;83B1F1|A575    |000075;
+    LDA.B ptrTemp0x75                                       ;83B1F1|A575    |000075;
     STA.L nMoney                                               ;83B1F3|8F041F7F|7F1F04;
     SEP #$20                                                   ;83B1F7|E220    |      ;
-    LDA.B ptrUnknown0x75+2                                     ;83B1F9|A577    |000077;
+    LDA.B ptrTemp0x75+2                                     ;83B1F9|A577    |000077;
     STA.L nMoney+2                                             ;83B1FB|8F061F7F|7F1F06;
     REP #$20                                                   ;83B1FF|C220    |      ;
     LDA.W #$0000                                               ;83B201|A90000  |      ;
@@ -1313,7 +1313,7 @@ fGameEngine_AddHappiness:
 ;          (fObjectMap_LoadDefaultFarm) and the saved tilemap bytes from slot offset $1C0 are copied over sFarmTilemap+$C0..$F00.
 ;          No signature or checksum test is made here; the slot is validated by fGameEngine_ValidateSaveSlots at boot.
 ; @param   A      save slot (0 or 1)
-; @modifies ptrTemp0x72, ptrUnknown0x75, strcChickenData, strcCowData, sFarmTilemap
+; @modifies ptrTemp0x72, ptrTemp0x75, strcChickenData, strcCowData, sFarmTilemap
 ; @note    Besides the listed fields every persistent value of the save layout above is overwritten.
 ; @clobbers A X Y
 ; @mode    M16X16 -> M8X16
@@ -1401,7 +1401,7 @@ fGameEngine_LoadGame:
     STA.L nDogAreaId                                           ;83B379|8F301F7F|7F1F30;
     LDY.W #$0014                                               ;83B37D|A01400  |      ;
     LDA.B [ptrTemp0x72],Y                                      ;83B380|B772    |000072;
-    STA.L nHorseAreaIdMaybe                                    ;83B382|8F311F7F|7F1F31;
+    STA.L nHorseAreaId                                    ;83B382|8F311F7F|7F1F31;
     LDY.W #$0015                                               ;83B386|A01500  |      ;
     LDA.B [ptrTemp0x72],Y                                      ;83B389|B772    |000072;
     STA.L nHorseAge                                            ;83B38B|8F321F7F|7F1F32;
@@ -1681,16 +1681,16 @@ fGameEngine_LoadGame:
     BNE -                                                      ;83B666|D0F3    |83B65B;
     REP #$20                                                   ;83B668|C220    |      ;
     LDA.B ptrTemp0x72                                          ;83B66A|A572    |000072;
-    STA.B ptrUnknown0x75                                       ;83B66C|8575    |000075;
+    STA.B ptrTemp0x75                                       ;83B66C|8575    |000075;
     SEP #$20                                                   ;83B66E|E220    |      ;
     LDA.B ptrTemp0x72+2                                        ;83B670|A574    |000074;
-    STA.B ptrUnknown0x75+2                                     ;83B672|8577    |000077;
+    STA.B ptrTemp0x75+2                                     ;83B672|8577    |000077;
     JSL.L fObjectMap_LoadDefaultFarm                           ;83B674|225AA682|82A65A;
     SEP #$20                                                   ;83B678|E220    |      ;
     LDY.W #$01C0                                               ;83B67A|A0C001  |      ;
     LDX.W #$00C0                                               ;83B67D|A2C000  |      ;
  
-  - LDA.B [ptrUnknown0x75],Y                                   ;83B680|B775    |000075; loop farm tilemap
+  - LDA.B [ptrTemp0x75],Y                                   ;83B680|B775    |000075; loop farm tilemap
     STA.L sFarmTilemap,X                                       ;83B682|9FE6A47E|7EA4E6;
     INY                                                        ;83B686|C8      |      ;
     INX                                                        ;83B687|E8      |      ;
@@ -1793,7 +1793,7 @@ fGameEngine_SaveGame:
     LDA.L nDogAreaId                                           ;83B755|AF301F7F|7F1F30;
     STA.B [ptrTemp0x72],Y                                      ;83B759|9772    |000072;
     LDY.W #$0014                                               ;83B75B|A01400  |      ;
-    LDA.L nHorseAreaIdMaybe                                    ;83B75E|AF311F7F|7F1F31;
+    LDA.L nHorseAreaId                                    ;83B75E|AF311F7F|7F1F31;
     STA.B [ptrTemp0x72],Y                                      ;83B762|9772    |000072;
     LDY.W #$0015                                               ;83B764|A01500  |      ;
     LDA.L nHorseAge                                            ;83B767|AF321F7F|7F1F32;
@@ -3389,7 +3389,7 @@ fGameEngine_SpawnChickensOnMap:
     REP #$10                                                   ;83C3A0|C210    |      ;
     LDY.W #$0000                                               ;83C3A2|A00000  |      ;
     LDA.B #$03                                                 ;83C3A5|A903    |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;83C3A7|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;83C3A7|97CC    |0000CC;
     BRA .next_chicken                                               ;83C3A9|8056    |83C401;
  
  
@@ -3928,7 +3928,7 @@ fGameEngine_SpawnChickensOnMap:
     JSL.L fAI_StartSlotScriptAtFrontTile                                    ;83C722|22F88084|8480F8;
     REP #$20                                                   ;83C726|C220    |      ;
     LDA.W #$0001                                               ;83C728|A90100  |      ;
-    STA.L $7F1F58                                              ;83C72B|8F581F7F|7F1F58;
+    STA.L nDogPoseState                                              ;83C72B|8F581F7F|7F1F58;
     SEP #$20                                                   ;83C72F|E220    |      ;
     STZ.W strcStockData.unkDog                                 ;83C731|9C3809  |000938;
  
@@ -3945,7 +3945,7 @@ fGameEngine_SpawnChickensOnMap:
  
  
   + SEP #$20                                                   ;83C74C|E220    |      ;
-    LDA.L nHorseAreaIdMaybe                                    ;83C74E|AF311F7F|7F1F31;
+    LDA.L nHorseAreaId                                    ;83C74E|AF311F7F|7F1F31;
     CMP.B #$04                                                 ;83C752|C904    |      ;
     BCS .horse_area_04_07                                               ;83C754|B00B    |83C761;
     LDA.B strcMap.loadAreaId                                   ;83C756|A522    |000022;
@@ -3959,7 +3959,7 @@ fGameEngine_SpawnChickensOnMap:
  
 .horse_area_04_07:
     SEP #$20                                                   ;83C761|E220    |      ;
-    LDA.L nHorseAreaIdMaybe                                    ;83C763|AF311F7F|7F1F31;
+    LDA.L nHorseAreaId                                    ;83C763|AF311F7F|7F1F31;
     CMP.B #$08                                                 ;83C767|C908    |      ;
     BCS .horse_area_08_0f                                               ;83C769|B012    |83C77D;
     LDA.B strcMap.loadAreaId                                   ;83C76B|A522    |000022;
@@ -3978,7 +3978,7 @@ fGameEngine_SpawnChickensOnMap:
  
 .horse_area_08_0f:
     SEP #$20                                                   ;83C77D|E220    |      ;
-    LDA.L nHorseAreaIdMaybe                                    ;83C77F|AF311F7F|7F1F31;
+    LDA.L nHorseAreaId                                    ;83C77F|AF311F7F|7F1F31;
     CMP.B #$10                                                 ;83C783|C910    |      ;
     BCS .horse_area_10_13                                               ;83C785|B012    |83C799;
     LDA.B strcMap.loadAreaId                                   ;83C787|A522    |000022;
@@ -3997,7 +3997,7 @@ fGameEngine_SpawnChickensOnMap:
  
 .horse_area_10_13:
     SEP #$20                                                   ;83C799|E220    |      ;
-    LDA.L nHorseAreaIdMaybe                                    ;83C79B|AF311F7F|7F1F31;
+    LDA.L nHorseAreaId                                    ;83C79B|AF311F7F|7F1F31;
     CMP.B #$14                                                 ;83C79F|C914    |      ;
     BCS .horse_area_ge_31                                               ;83C7A1|B012    |83C7B5;
     LDA.B strcMap.loadAreaId                                   ;83C7A3|A522    |000022;
@@ -4016,7 +4016,7 @@ fGameEngine_SpawnChickensOnMap:
  
 .horse_area_ge_31:
     SEP #$20                                                   ;83C7B5|E220    |      ;
-    LDA.L nHorseAreaIdMaybe                                    ;83C7B7|AF311F7F|7F1F31;
+    LDA.L nHorseAreaId                                    ;83C7B7|AF311F7F|7F1F31;
     CMP.B #$31                                                 ;83C7BB|C931    |      ;
     BCC .horse_area_exact                                               ;83C7BD|900B    |83C7CA;
     LDA.B strcMap.loadAreaId                                   ;83C7BF|A522    |000022;
@@ -4030,7 +4030,7 @@ fGameEngine_SpawnChickensOnMap:
  
 .horse_area_exact:
     SEP #$20                                                   ;83C7CA|E220    |      ;
-    LDA.L nHorseAreaIdMaybe                                    ;83C7CC|AF311F7F|7F1F31;
+    LDA.L nHorseAreaId                                    ;83C7CC|AF311F7F|7F1F31;
     CMP.B strcMap.loadAreaId                                   ;83C7D0|C522    |000022;
     BEQ .jump2                                                 ;83C7D2|F003    |83C7D7;
     JMP.W .return                                              ;83C7D4|4C06C8  |83C806;

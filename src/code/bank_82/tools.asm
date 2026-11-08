@@ -761,7 +761,7 @@ fToolUsedAction0x00_Empty:
 ;;
 ; @brief   Sickle: cut the weed or grass in front of the player.
 ; @details Needs result != 0 and not winter. Away from the farm (area >= 4): object $35 becomes tile $DE, anything else $DD. On the farm: weed $03 -> tile $0E; ripe grass $79 -> +1 feed (fGameEngine_AddFeed), strcPlayerData.leftGrassToCut-1, tile $52 and a grass effect object; other sickle-able tiles -> $17. A cut effect object ($B7) is spawned. In summer, unless daily4 $0008 or daily1 $2000, a 1-in-16 roll starts AI slot $12 subscript $32, gives +2 happiness and sets daily1 $2000. Costs 2 stamina.
-; @modifies sCurrentObjectMap, sFarmTilemap, strcPlayerData.leftGrassToCut, strcFlags.daily1, nUnknownX, nUnknownY
+; @modifies sCurrentObjectMap, sFarmTilemap, strcPlayerData.leftGrassToCut, strcFlags.daily1, nCarriedItemX, nCarriedItemY
 ; @mode    M16X16
 ;;
 fToolUsedAction0x01_Sickle:
@@ -824,9 +824,9 @@ fToolUsedAction0x01_Sickle:
     JSL.L fSetTileAtCoords                                     ;829391|2288A681|81A688;
     REP #$20                                                   ;829395|C220    |      ;
     LDA.W nTileInFrontOfPlayerX                                ;829397|AD8509  |000985;
-    STA.W nUnknownX                                            ;82939A|8D8009  |000980;
+    STA.W nCarriedItemX                                            ;82939A|8D8009  |000980;
     LDA.W nTileInFrontOfPlayerY                                ;82939D|AD8709  |000987;
-    STA.W nUnknownY                                            ;8293A0|8D8209  |000982;
+    STA.W nCarriedItemY                                            ;8293A0|8D8209  |000982;
     REP #$30                                                   ;8293A3|C230    |      ;
     LDA.W #$00C1                                               ;8293A5|A9C100  |      ;
     STA.W $097A+!RAM_SHIFT                                 ;8293A8|8D7A09  |00097A;
@@ -849,9 +849,9 @@ fToolUsedAction0x01_Sickle:
     JSL.L fSetTileAtCoords                                     ;8293CE|2288A681|81A688;
     REP #$20                                                   ;8293D2|C220    |      ;
     LDA.W nTileInFrontOfPlayerX                                ;8293D4|AD8509  |000985;
-    STA.W nUnknownX                                            ;8293D7|8D8009  |000980;
+    STA.W nCarriedItemX                                            ;8293D7|8D8009  |000980;
     LDA.W nTileInFrontOfPlayerY                                ;8293DA|AD8709  |000987;
-    STA.W nUnknownY                                            ;8293DD|8D8209  |000982;
+    STA.W nCarriedItemY                                            ;8293DD|8D8209  |000982;
     REP #$30                                                   ;8293E0|C230    |      ;
     LDA.W #$00B7                                               ;8293E2|A9B700  |      ;
     STA.W $097A+!RAM_SHIFT                                 ;8293E5|8D7A09  |00097A;
@@ -1072,9 +1072,9 @@ fToolUsedAction0x03_Hammer:
     JSL.L fSetTileAtCoords                                     ;8295FB|2288A681|81A688;
     REP #$20                                                   ;8295FF|C220    |      ;
     LDA.W nTileInFrontOfPlayerX                                ;829601|AD8509  |000985;
-    STA.W nUnknownX                                            ;829604|8D8009  |000980;
+    STA.W nCarriedItemX                                            ;829604|8D8009  |000980;
     LDA.W nTileInFrontOfPlayerY                                ;829607|AD8709  |000987;
-    STA.W nUnknownY                                            ;82960A|8D8209  |000982;
+    STA.W nCarriedItemY                                            ;82960A|8D8209  |000982;
     REP #$30                                                   ;82960D|C230    |      ;
     LDA.W #$00C8                                               ;82960F|A9C800  |      ;
     STA.W $097A+!RAM_SHIFT                                 ;829612|8D7A09  |00097A;
@@ -1166,11 +1166,11 @@ fToolUsedAction0x03_Hammer:
     LDA.W nTileInFrontOfPlayerX                                ;8296C5|AD8509  |000985;
     CLC                                                        ;8296C8|18      |      ;
     ADC.W #$0008                                               ;8296C9|690800  |      ;
-    STA.W nUnknownX                                            ;8296CC|8D8009  |000980;
+    STA.W nCarriedItemX                                            ;8296CC|8D8009  |000980;
     LDA.W nTileInFrontOfPlayerY                                ;8296CF|AD8709  |000987;
     CLC                                                        ;8296D2|18      |      ;
     ADC.W #$0008                                               ;8296D3|690800  |      ;
-    STA.W nUnknownY                                            ;8296D6|8D8209  |000982;
+    STA.W nCarriedItemY                                            ;8296D6|8D8209  |000982;
     REP #$30                                                   ;8296D9|C230    |      ;
     LDA.W #$00C9                                               ;8296DB|A9C900  |      ;
     STA.W $097A+!RAM_SHIFT                                 ;8296DE|8D7A09  |00097A;
@@ -1190,9 +1190,9 @@ fToolUsedAction0x03_Hammer:
 .hit_stone_not_broken:
     REP #$20                                                   ;8296FE|C220    |      ;
     LDA.W nTileInFrontOfPlayerX                                ;829700|AD8509  |000985;
-    STA.W nUnknownX                                            ;829703|8D8009  |000980;
+    STA.W nCarriedItemX                                            ;829703|8D8009  |000980;
     LDA.W nTileInFrontOfPlayerY                                ;829706|AD8709  |000987;
-    STA.W nUnknownY                                            ;829709|8D8209  |000982;
+    STA.W nCarriedItemY                                            ;829709|8D8209  |000982;
     REP #$30                                                   ;82970C|C230    |      ;
     LDA.W #$00CB                                               ;82970E|A9CB00  |      ;
     STA.W $097A+!RAM_SHIFT                                 ;829711|8D7A09  |00097A;
@@ -1407,11 +1407,11 @@ fToolUsedAction0x04_Axe:
     LDA.W nTileInFrontOfPlayerX                                ;8298D6|AD8509  |000985;
     CLC                                                        ;8298D9|18      |      ;
     ADC.W #$0008                                               ;8298DA|690800  |      ;
-    STA.W nUnknownX                                            ;8298DD|8D8009  |000980;
+    STA.W nCarriedItemX                                            ;8298DD|8D8009  |000980;
     LDA.W nTileInFrontOfPlayerY                                ;8298E0|AD8709  |000987;
     CLC                                                        ;8298E3|18      |      ;
     ADC.W #$0008                                               ;8298E4|690800  |      ;
-    STA.W nUnknownY                                            ;8298E7|8D8209  |000982;
+    STA.W nCarriedItemY                                            ;8298E7|8D8209  |000982;
     REP #$30                                                   ;8298EA|C230    |      ;
     LDA.W #$00B8                                               ;8298EC|A9B800  |      ;
     STA.W $097A+!RAM_SHIFT                                 ;8298EF|8D7A09  |00097A;
@@ -1434,9 +1434,9 @@ fToolUsedAction0x04_Axe:
 .hit_tree_not_broken:
     REP #$20                                                   ;829918|C220    |      ;
     LDA.W nTileInFrontOfPlayerX                                ;82991A|AD8509  |000985;
-    STA.W nUnknownX                                            ;82991D|8D8009  |000980;
+    STA.W nCarriedItemX                                            ;82991D|8D8009  |000980;
     LDA.W nTileInFrontOfPlayerY                                ;829920|AD8709  |000987;
-    STA.W nUnknownY                                            ;829923|8D8209  |000982;
+    STA.W nCarriedItemY                                            ;829923|8D8209  |000982;
     REP #$30                                                   ;829926|C230    |      ;
     LDA.W #$00CB                                               ;829928|A9CB00  |      ;
     STA.W $097A+!RAM_SHIFT                                 ;82992B|8D7A09  |00097A;
@@ -2016,9 +2016,9 @@ fToolUsedAction0x11_GoldenSickle:
     JSL.L fSetTileAtCoords                                     ;829DAF|2288A681|81A688;
     REP #$20                                                   ;829DB3|C220    |      ;
     LDA.W nTileInFrontOfPlayerX                                ;829DB5|AD8509  |000985;
-    STA.W nUnknownX                                            ;829DB8|8D8009  |000980;
+    STA.W nCarriedItemX                                            ;829DB8|8D8009  |000980;
     LDA.W nTileInFrontOfPlayerY                                ;829DBB|AD8709  |000987;
-    STA.W nUnknownY                                            ;829DBE|8D8209  |000982;
+    STA.W nCarriedItemY                                            ;829DBE|8D8209  |000982;
     REP #$30                                                   ;829DC1|C230    |      ;
     LDA.W #$00C1                                               ;829DC3|A9C100  |      ;
     STA.W $097A+!RAM_SHIFT                                 ;829DC6|8D7A09  |00097A;
@@ -2041,9 +2041,9 @@ fToolUsedAction0x11_GoldenSickle:
     JSL.L fSetTileAtCoords                                     ;829DEC|2288A681|81A688;
     REP #$20                                                   ;829DF0|C220    |      ;
     LDA.W nTileInFrontOfPlayerX                                ;829DF2|AD8509  |000985;
-    STA.W nUnknownX                                            ;829DF5|8D8009  |000980;
+    STA.W nCarriedItemX                                            ;829DF5|8D8009  |000980;
     LDA.W nTileInFrontOfPlayerY                                ;829DF8|AD8709  |000987;
-    STA.W nUnknownY                                            ;829DFB|8D8209  |000982;
+    STA.W nCarriedItemY                                            ;829DFB|8D8209  |000982;
     REP #$30                                                   ;829DFE|C230    |      ;
     LDA.W #$00B7                                               ;829E00|A9B700  |      ;
     STA.W $097A+!RAM_SHIFT                                 ;829E03|8D7A09  |00097A;
@@ -2289,9 +2289,9 @@ fToolUsedAction0x13_GoldenHammer:
     JSL.L fSetTileAtCoords                                     ;82A043|2288A681|81A688;
     REP #$20                                                   ;82A047|C220    |      ;
     LDA.W nTileInFrontOfPlayerX                                ;82A049|AD8509  |000985;
-    STA.W nUnknownX                                            ;82A04C|8D8009  |000980;
+    STA.W nCarriedItemX                                            ;82A04C|8D8009  |000980;
     LDA.W nTileInFrontOfPlayerY                                ;82A04F|AD8709  |000987;
-    STA.W nUnknownY                                            ;82A052|8D8209  |000982;
+    STA.W nCarriedItemY                                            ;82A052|8D8209  |000982;
     REP #$30                                                   ;82A055|C230    |      ;
     LDA.W #$00C8                                               ;82A057|A9C800  |      ;
     STA.W $097A+!RAM_SHIFT                                 ;82A05A|8D7A09  |00097A;
@@ -2372,11 +2372,11 @@ fToolUsedAction0x13_GoldenHammer:
     LDA.W nTileInFrontOfPlayerX                                ;82A0FA|AD8509  |000985;
     CLC                                                        ;82A0FD|18      |      ;
     ADC.W #$0008                                               ;82A0FE|690800  |      ;
-    STA.W nUnknownX                                            ;82A101|8D8009  |000980;
+    STA.W nCarriedItemX                                            ;82A101|8D8009  |000980;
     LDA.W nTileInFrontOfPlayerY                                ;82A104|AD8709  |000987;
     CLC                                                        ;82A107|18      |      ;
     ADC.W #$0008                                               ;82A108|690800  |      ;
-    STA.W nUnknownY                                            ;82A10B|8D8209  |000982;
+    STA.W nCarriedItemY                                            ;82A10B|8D8209  |000982;
     REP #$30                                                   ;82A10E|C230    |      ;
     LDA.W #$00C9                                               ;82A110|A9C900  |      ;
     STA.W $097A+!RAM_SHIFT                                 ;82A113|8D7A09  |00097A;
@@ -2573,11 +2573,11 @@ fToolUsedAction0x14_GoldenAxe:
     LDA.W nTileInFrontOfPlayerX                                ;82A2B7|AD8509  |000985;
     CLC                                                        ;82A2BA|18      |      ;
     ADC.W #$0008                                               ;82A2BB|690800  |      ;
-    STA.W nUnknownX                                            ;82A2BE|8D8009  |000980;
+    STA.W nCarriedItemX                                            ;82A2BE|8D8009  |000980;
     LDA.W nTileInFrontOfPlayerY                                ;82A2C1|AD8709  |000987;
     CLC                                                        ;82A2C4|18      |      ;
     ADC.W #$0008                                               ;82A2C5|690800  |      ;
-    STA.W nUnknownY                                            ;82A2C8|8D8209  |000982;
+    STA.W nCarriedItemY                                            ;82A2C8|8D8209  |000982;
     REP #$30                                                   ;82A2CB|C230    |      ;
     LDA.W #$00B8                                               ;82A2CD|A9B800  |      ;
     STA.W $097A+!RAM_SHIFT                                 ;82A2D0|8D7A09  |00097A;
@@ -2788,9 +2788,9 @@ fToolUsedAction0x19_ChickenFeed:
 .drop_feed_on_ground:
     REP #$20                                                   ;82A473|C220    |      ;
     LDA.W nTileInFrontOfPlayerX                                ;82A475|AD8509  |000985;
-    STA.W nUnknownX                                            ;82A478|8D8009  |000980;
+    STA.W nCarriedItemX                                            ;82A478|8D8009  |000980;
     LDA.W nTileInFrontOfPlayerY                                ;82A47B|AD8709  |000987;
-    STA.W nUnknownY                                            ;82A47E|8D8209  |000982;
+    STA.W nCarriedItemY                                            ;82A47E|8D8209  |000982;
     REP #$30                                                   ;82A481|C230    |      ;
     LDA.W #$00C4                                               ;82A483|A9C400  |      ;
     STA.W $097A+!RAM_SHIFT                                 ;82A486|8D7A09  |00097A;
@@ -2865,9 +2865,9 @@ fToolUsedAction0x1A_CowFeed:
 .drop_feed_on_ground:
     REP #$20                                                   ;82A521|C220    |      ;
     LDA.W nTileInFrontOfPlayerX                                ;82A523|AD8509  |000985;
-    STA.W nUnknownX                                            ;82A526|8D8009  |000980;
+    STA.W nCarriedItemX                                            ;82A526|8D8009  |000980;
     LDA.W nTileInFrontOfPlayerY                                ;82A529|AD8709  |000987;
-    STA.W nUnknownY                                            ;82A52C|8D8209  |000982;
+    STA.W nCarriedItemY                                            ;82A52C|8D8209  |000982;
     REP #$30                                                   ;82A52F|C230    |      ;
     LDA.W #$00C4                                               ;82A531|A9C400  |      ;
     STA.W $097A+!RAM_SHIFT                                 ;82A534|8D7A09  |00097A;

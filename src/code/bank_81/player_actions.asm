@@ -331,7 +331,7 @@ fPlayerAction_PutDownDog:
     JSL.L fAI_StartSlotScriptAtFrontTile                                    ;81C1DB|22F88084|8480F8;
     REP #$20                                                   ;81C1DF|C220    |      ;
     LDA.W #$0001                                               ;81C1E1|A90100  |      ;
-    STA.L $7F1F58                                              ;81C1E4|8F581F7F|7F1F58;
+    STA.L nDogPoseState                                              ;81C1E4|8F581F7F|7F1F58;
     SEP #$20                                                   ;81C1E8|E220    |      ;
     STZ.W strcStockData.unkDog                                 ;81C1EA|9C3809  |000938;
  
@@ -478,7 +478,7 @@ fPlayerAction0x12_FishingBite:
 ; @details  At the end: action -> $0F; AI slot $14 is deactivated if its first byte is non-zero; strcObjectData.spriteIdx $8B ->
 ; AIExecute($14,0,$35) and +2 happiness, $8C -> AIExecute($14,0,$34), otherwise AIExecute($14,0,$33).
 ; @case     $13
-; @modifies strcPlayer.action, ptrAIUnknown0xCC
+; @modifies strcPlayer.action, ptrAISlot
 ; @mode     M16X16
 ; @calls    fPlayer_UpdateSpriteObject, fAI_SelectSlot, fAI_DeactivateSlotAndObject, fAI_StartSlotScript, fGameEngine_AddHappiness
 ; @note     confidence: medium - the sprites $8B/$8C are assumed to be the two catch poses (fish vs. junk), not verified in game
@@ -497,7 +497,7 @@ fPlayerAction_FishingReel:
     SEP #$20                                                   ;81C2CE|E220    |      ;
     REP #$10                                                   ;81C2D0|C210    |      ;
     LDY.W #$0000                                               ;81C2D2|A00000  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;81C2D5|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;81C2D5|B7CC    |0000CC;
     BEQ .check_sprite_idx                                                ;81C2D7|F009    |81C2E2;
     REP #$30                                                   ;81C2D9|C230    |      ;
     LDA.W #$0014                                               ;81C2DB|A91400  |      ;

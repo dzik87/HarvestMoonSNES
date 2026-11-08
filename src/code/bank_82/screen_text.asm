@@ -367,7 +367,7 @@ fScreen_NameInput_DrawEmptyNameSlots:
 ; @brief   Draw the frame of the name box (nScreen_NameInput_BoxTileCount pieces of 2x2 tiles) into the BG tilemap.
 ; @details Same piece-drawing scheme as fMainMenu_DrawSaveSlotFrames: two 4-byte DMA transfers per piece (rows $20 words apart),
 ;          tile numbers start at nScreen_NameInput_BoxTileStart, VRAM word address starts at nScreen_NameInput_BoxVramAddr.
-; @modifies strcVariables.n16Temp1, strcVariables.n16Temp2, strcVariables.n16Temp3, strcVariables.n16Temp4, strcVariables.n16Unk86, strcVariables.n16Unk88
+; @modifies strcVariables.n16Temp1, strcVariables.n16Temp2, strcVariables.n16Temp3, strcVariables.n16Temp4, strcVariables.n16Temp5, strcVariables.n16Temp6
 ; @mode    M16X16
 ; @calls   fCore_PrepareTransfer, fCore_StartTransfer
 ; @callers fScreen_NameInput
@@ -384,7 +384,7 @@ fScreen_NameInput_DrawNameBox:
     INC A                                                      ;82EAC5|1A      |      ;
     STA.B strcVariables.n16Temp4                               ;82EAC6|8584    |000084;
     LDA.L nScreen_NameInput_BoxVramAddr                                      ;82EAC8|AF49EB82|82EB49;
-    STA.B strcVariables.n16Unk86                               ;82EACC|8586    |000086;
+    STA.B strcVariables.n16Temp5                               ;82EACC|8586    |000086;
     LDY.W #$0000                                               ;82EACE|A00000  |      ;
  
   - PHY                                                        ;82EAD1|5A      |      ;
@@ -395,7 +395,7 @@ fScreen_NameInput_DrawNameBox:
     STA.B strcSystem.destinationRegister                       ;82EADA|8529    |000029;
     REP #$30                                                   ;82EADC|C230    |      ;
     LDY.W #$0004                                               ;82EADE|A00400  |      ;
-    LDX.B strcVariables.n16Unk86                               ;82EAE1|A686    |000086;
+    LDX.B strcVariables.n16Temp5                               ;82EAE1|A686    |000086;
     LDA.W #$007E                                               ;82EAE3|A97E00  |      ;
     STA.B ptrTemp0x72                                          ;82EAE6|8572    |000072;
     SEP #$20                                                   ;82EAE8|E220    |      ;
@@ -411,7 +411,7 @@ fScreen_NameInput_DrawNameBox:
     STA.B strcSystem.destinationRegister                       ;82EAFF|8529    |000029;
     REP #$30                                                   ;82EB01|C230    |      ;
     LDY.W #$0004                                               ;82EB03|A00400  |      ;
-    LDX.B strcVariables.n16Unk86                               ;82EB06|A686    |000086;
+    LDX.B strcVariables.n16Temp5                               ;82EB06|A686    |000086;
     TXA                                                        ;82EB08|8A      |      ;
     CLC                                                        ;82EB09|18      |      ;
     ADC.W #$0020                                               ;82EB0A|692000  |      ;
@@ -434,13 +434,13 @@ fScreen_NameInput_DrawNameBox:
     INC.B strcVariables.n16Temp3                               ;82EB32|E682    |000082;
     INC.B strcVariables.n16Temp4                               ;82EB34|E684    |000084;
     INC.B strcVariables.n16Temp4                               ;82EB36|E684    |000084;
-    INC.B strcVariables.n16Unk86                               ;82EB38|E686    |000086;
-    INC.B strcVariables.n16Unk86                               ;82EB3A|E686    |000086;
+    INC.B strcVariables.n16Temp5                               ;82EB38|E686    |000086;
+    INC.B strcVariables.n16Temp5                               ;82EB3A|E686    |000086;
     PLY                                                        ;82EB3C|7A      |      ;
     INY                                                        ;82EB3D|C8      |      ;
     LDA.L nScreen_NameInput_BoxTileCount                                       ;82EB3E|AF55EB82|82EB55;
-    STA.B strcVariables.n16Unk88                               ;82EB42|8588    |000088;
-    CPY.B strcVariables.n16Unk88                               ;82EB44|C488    |000088;
+    STA.B strcVariables.n16Temp6                               ;82EB42|8588    |000088;
+    CPY.B strcVariables.n16Temp6                               ;82EB44|C488    |000088;
     BNE -                                                      ;82EB46|D089    |82EAD1;
     RTS                                                        ;82EB48|60      |      ;
  

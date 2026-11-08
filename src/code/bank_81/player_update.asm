@@ -258,7 +258,7 @@ fPlayerInteraction0x0E_Nop:
 ;;
 ; @brief    Watching the weather forecast on TV, variant 1 (player sits down; !PFLAGS_SITTING).
 ; @details  Phase 0: sets !PFLAGS_SITTING and starts tile script $00 (TV turn-on; skipped on festival days, mapFlags bit $0010).
-; Phase 1: once the tile script is done (ptrUnknown0xCF == 0) fWeather_SetForecastDialogIndex selects nWeatherDialogIdIndex and the
+; Phase 1: once the tile script is done (ptrTileScript == 0) fWeather_SetForecastDialogIndex selects nWeatherDialogIdIndex and the
 ; dialog aWeatherDialogId[weather*8 + season*2] is shown ($FFFF = none); tile script $00 + weather index + 1 starts.
 ; Phase 2: when the dialog finished, tile script $46 (TV off) runs, !PFLAGS_INTERACTING and !PFLAGS_SITTING are cleared.
 ; @case     $0F
@@ -289,7 +289,7 @@ fPlayerInteraction_WatchTv1:
  
 .case1:
     REP #$20                                                   ;81D747|C220    |      ;
-    LDA.W ptrUnknown0xCF                                       ;81D749|ADCF00  |0000CF;
+    LDA.W ptrTileScript                                       ;81D749|ADCF00  |0000CF;
     BNE .return                                                ;81D74C|D076    |81D7C4;
     JSL.L fWeather_SetForecastDialogIndex                               ;81D74E|22C08182|8281C0;
     SEP #$20                                                   ;81D752|E220    |      ;
@@ -576,7 +576,7 @@ fPlayerInteraction_AutoWalkUp:
 ;;
 ; @brief    Watching the weather forecast on TV, variant 2 (player sits down; !PFLAGS_SITTING).
 ; @details  Phase 0: sets !PFLAGS_SITTING and starts tile script $27 (TV turn-on; skipped on festival days, mapFlags bit $0010).
-; Phase 1: once the tile script is done (ptrUnknown0xCF == 0) fWeather_SetForecastDialogIndex selects nWeatherDialogIdIndex and the
+; Phase 1: once the tile script is done (ptrTileScript == 0) fWeather_SetForecastDialogIndex selects nWeatherDialogIdIndex and the
 ; dialog aWeatherDialogId[weather*8 + season*2] is shown ($FFFF = none); tile script $27 + weather index + 1 starts.
 ; Phase 2: when the dialog finished, tile script $47 (TV off) runs, !PFLAGS_INTERACTING and !PFLAGS_SITTING are cleared.
 ; @case     $12
@@ -607,7 +607,7 @@ fPlayerInteraction_WatchTv2:
  
 .case1:
     REP #$20                                                   ;81D9FD|C220    |      ;
-    LDA.W ptrUnknown0xCF                                       ;81D9FF|ADCF00  |0000CF;
+    LDA.W ptrTileScript                                       ;81D9FF|ADCF00  |0000CF;
     BEQ +                                                      ;81DA02|F003    |81DA07;
     JMP.W .return                                              ;81DA04|4C81DA  |81DA81;
  
@@ -670,7 +670,7 @@ fPlayerInteraction_WatchTv2:
 ;;
 ; @brief    Watching the weather forecast on TV, variant 3 (player sits down; !PFLAGS_SITTING).
 ; @details  Phase 0: sets !PFLAGS_SITTING and starts tile script $34 (TV turn-on; skipped on festival days, mapFlags bit $0010).
-; Phase 1: once the tile script is done (ptrUnknown0xCF == 0) fWeather_SetForecastDialogIndex selects nWeatherDialogIdIndex and the
+; Phase 1: once the tile script is done (ptrTileScript == 0) fWeather_SetForecastDialogIndex selects nWeatherDialogIdIndex and the
 ; dialog aWeatherDialogId[weather*8 + season*2] is shown ($FFFF = none); tile script $34 + weather index + 1 starts.
 ; Phase 2: when the dialog finished, tile script $48 (TV off) runs, !PFLAGS_INTERACTING and !PFLAGS_SITTING are cleared.
 ; @case     $13
@@ -701,7 +701,7 @@ fPlayerInteraction_WatchTv3:
  
 .case1:
     REP #$20                                                   ;81DAB3|C220    |      ;
-    LDA.W ptrUnknown0xCF                                       ;81DAB5|ADCF00  |0000CF;
+    LDA.W ptrTileScript                                       ;81DAB5|ADCF00  |0000CF;
     BEQ +                                                      ;81DAB8|F003    |81DABD;
     JMP.W .return                                              ;81DABA|4C37DB  |81DB37;
  
@@ -2704,12 +2704,12 @@ fPlayerInteraction_SellCow:
     SEP #$20                                                   ;81EA77|E220    |      ;
     REP #$10                                                   ;81EA79|C210    |      ;
     LDY.W #$0001                                               ;81EA7B|A00100  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;81EA7E|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;81EA7E|B7CC    |0000CC;
     ORA.B #$A8                                                 ;81EA80|09A8    |      ;
     SEP #$20                                                   ;81EA82|E220    |      ;
     REP #$10                                                   ;81EA84|C210    |      ;
     LDY.W #$0001                                               ;81EA86|A00100  |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;81EA89|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;81EA89|97CC    |0000CC;
     JMP.W .return                                              ;81EA8B|4CD4EB  |81EBD4;
  
  
@@ -3154,12 +3154,12 @@ fPlayerInteraction_SellChicken:
     SEP #$20                                                   ;81EE3A|E220    |      ;
     REP #$10                                                   ;81EE3C|C210    |      ;
     LDY.W #$0001                                               ;81EE3E|A00100  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;81EE41|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;81EE41|B7CC    |0000CC;
     ORA.B #$A8                                                 ;81EE43|09A8    |      ;
     SEP #$20                                                   ;81EE45|E220    |      ;
     REP #$10                                                   ;81EE47|C210    |      ;
     LDY.W #$0001                                               ;81EE49|A00100  |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;81EE4C|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;81EE4C|97CC    |0000CC;
     JMP.W .return                                              ;81EE4E|4CACEF  |81EFAC;
  
  

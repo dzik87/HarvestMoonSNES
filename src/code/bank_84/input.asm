@@ -745,7 +745,7 @@ fInput_Title_LogoScrollSkip:
 ; @brief   Title menu (state 5): up/down moves the highlighted entry (nTitleMenuCursor = 0-2, wrapping), A selects.
 ; @details A: entry 0 -> state 8 (load game slot select), entry 1 -> state 7 (new game slot select), entry 2 -> state $0A
 ;          (how-to-play demo). Every move sets strcVariables.u8Unk97 (redraw) and clears n16Unk90.
-; @modifies strcVariables.n8Temp4, nTitleMenuCursor, strcVariables.u8Unk97, strcVariables.n16Unk90
+; @modifies strcVariables.n8Temp4, nTitleMenuCursor, strcVariables.u8Unk97, strcVariables.n16Temp10
 ; @clobbers A
 ; @mode    M16 -> M8X16
 ; @calls   fAudio_PlaySoundEffect
@@ -775,7 +775,7 @@ fInput_Title_MenuChoice:
  
 .move_down:
     REP #$20                                                   ;84C47C|C220    |      ;
-    STZ.B strcVariables.n16Unk90                               ;84C47E|6490    |000090;
+    STZ.B strcVariables.n16Temp10                               ;84C47E|6490    |000090;
     SEP #$20                                                   ;84C480|E220    |      ;
     LDA.W nTitleMenuCursor                                     ;84C482|AD8D09  |00098D;
     CMP.B #$02                                                 ;84C485|C902    |      ;
@@ -795,7 +795,7 @@ fInput_Title_MenuChoice:
  
  
   + REP #$20                                                   ;84C4A4|C220    |      ;
-    STZ.B strcVariables.n16Unk90                               ;84C4A6|6490    |000090;
+    STZ.B strcVariables.n16Temp10                               ;84C4A6|6490    |000090;
     SEP #$20                                                   ;84C4A8|E220    |      ;
     STZ.W nTitleMenuCursor                                     ;84C4AA|9C8D09  |00098D;
     LDA.B #$01                                                 ;84C4AD|A901    |      ;
@@ -812,7 +812,7 @@ fInput_Title_MenuChoice:
  
 .move_up:
     REP #$20                                                   ;84C4C4|C220    |      ;
-    STZ.B strcVariables.n16Unk90                               ;84C4C6|6490    |000090;
+    STZ.B strcVariables.n16Temp10                               ;84C4C6|6490    |000090;
     SEP #$20                                                   ;84C4C8|E220    |      ;
     LDA.W nTitleMenuCursor                                     ;84C4CA|AD8D09  |00098D;
     BEQ +                                                      ;84C4CD|F01B    |84C4EA;
@@ -831,7 +831,7 @@ fInput_Title_MenuChoice:
  
  
   + REP #$20                                                   ;84C4EA|C220    |      ;
-    STZ.B strcVariables.n16Unk90                               ;84C4EC|6490    |000090;
+    STZ.B strcVariables.n16Temp10                               ;84C4EC|6490    |000090;
     SEP #$20                                                   ;84C4EE|E220    |      ;
     LDA.B #$02                                                 ;84C4F0|A902    |      ;
     STA.W nTitleMenuCursor                                     ;84C4F2|8D8D09  |00098D;

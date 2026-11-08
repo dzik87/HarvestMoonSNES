@@ -28,12 +28,12 @@ fDialog_LoadDialogBoxGraphics:
     LDA.W #Screen_DialogBox                                    ;8392BF; region specific blob, label moves with the layout
     STA.B ptrTemp0x72                                          ;8392C2|8572    |000072;
     LDA.W #$2000                                               ;8392C4|A90020  |      ;
-    STA.B ptrUnknown0x75                                       ;8392C7|8575    |000075;
+    STA.B ptrTemp0x75                                       ;8392C7|8575    |000075;
     SEP #$20                                                   ;8392C9|E220    |      ;
     LDA.B #Screen_DialogBox>>16                                ;8392CB|A9A5    |      ;
     STA.B ptrTemp0x72+2                                        ;8392CD|8574    |000074;
     LDA.B #$7E                                                 ;8392CF|A97E    |      ;
-    STA.B ptrUnknown0x75+2                                     ;8392D1|8577    |000077;
+    STA.B ptrTemp0x75+2                                     ;8392D1|8577    |000077;
     JSL.L fGraphicsDecompressTilemap                           ;8392D3|22F88183|8381F8;
     SEP #$20                                                   ;8392D7|E220    |      ;
     LDA.B #$00                                                 ;8392D9|A900    |      ;

@@ -120,17 +120,17 @@ fGraphics_WriteTilemap2x2:
  
  
 ;;
-; @brief   Decompress an LZSS blob (N=2048, F=34) from ptrTemp0x72 to the buffer at ptrUnknown0x75.
+; @brief   Decompress an LZSS blob (N=2048, F=34) from ptrTemp0x72 to the buffer at ptrTemp0x75.
 ; @details Header: word = number of output bytes, followed by 2 more header bytes (skipped). The 2 KB ring buffer is
 ;          $7F:0000-$7F:07FF, cleared first, write position starts at $07DE. Flag bytes are read LSB first: 1 = literal byte,
 ;          0 = match: byte 1 = ring offset low 8 bits, byte 2 = bits 0-4 length-3, bits 5-7 = ring offset bits 8-10.
 ;          Output stops when the counter from the header reaches zero (no end marker). Full format description:
 ;          docs/formats/tilemap-compression.md.
 ; @param   ptrTemp0x72     24-bit pointer to the compressed blob
-; @param   ptrUnknown0x75  24-bit pointer to the destination buffer
+; @param   ptrTemp0x75  24-bit pointer to the destination buffer
 ; @return  A      0 (remaining byte counter, strcVariables.n16Temp1)
-; @modifies ptrTemp0x72, ptrUnknown0x75, strcVariables.n16Temp1, strcVariables.n16Temp2, strcVariables.n16Temp3, strcVariables.n16Temp4, strcVariables.n16Unk86, strcVariables.n16Unk88
-; @note    ptrTemp0x72 / ptrUnknown0x75 end past the last byte read / written; the ring buffer $7F:0000-$7F:07FF is overwritten.
+; @modifies ptrTemp0x72, ptrTemp0x75, strcVariables.n16Temp1, strcVariables.n16Temp2, strcVariables.n16Temp3, strcVariables.n16Temp4, strcVariables.n16Temp5, strcVariables.n16Temp6
+; @note    ptrTemp0x72 / ptrTemp0x75 end past the last byte read / written; the ring buffer $7F:0000-$7F:07FF is overwritten.
 ; @clobbers X
 ; @mode    M16X16 -> =
 ; @callers fDialog_LoadDialogBoxGraphics, fTileMap_LoadAreaGraphics (two call sites)
@@ -180,9 +180,9 @@ fGraphicsDecompressTilemap:
     INC.B ptrTemp0x72                                          ;838241|E672    |000072;
     AND.W #$00FF                                               ;838243|29FF00  |      ;
     SEP #$20                                                   ;838246|E220    |      ;
-    STA.B [ptrUnknown0x75]                                     ;838248|8775    |000075;
+    STA.B [ptrTemp0x75]                                     ;838248|8775    |000075;
     REP #$30                                                   ;83824A|C230    |      ;
-    INC.B ptrUnknown0x75                                       ;83824C|E675    |000075;
+    INC.B ptrTemp0x75                                       ;83824C|E675    |000075;
     DEC.B strcVariables.n16Temp1                               ;83824E|C67E    |00007E;
     BEQ .return                                                ;838250|F070    |8382C2;
     LDX.B strcVariables.n16Temp4                               ;838252|A684    |000084;
@@ -200,7 +200,7 @@ fGraphicsDecompressTilemap:
     LDA.B [ptrTemp0x72]                                        ;838267|A772    |000072;
     INC.B ptrTemp0x72                                          ;838269|E672    |000072;
     AND.W #$00FF                                               ;83826B|29FF00  |      ;
-    STA.B strcVariables.n16Unk86                               ;83826E|8586    |000086;
+    STA.B strcVariables.n16Temp5                               ;83826E|8586    |000086;
     REP #$20                                                   ;838270|C220    |      ;
     LDA.B [ptrTemp0x72]                                        ;838272|A772    |000072;
     INC.B ptrTemp0x72                                          ;838274|E672    |000072;
@@ -210,22 +210,22 @@ fGraphicsDecompressTilemap:
     INC A                                                      ;83827D|1A      |      ;
     INC A                                                      ;83827E|1A      |      ;
     INC A                                                      ;83827F|1A      |      ;
-    STA.B strcVariables.n16Unk88                               ;838280|8588    |000088;
+    STA.B strcVariables.n16Temp6                               ;838280|8588    |000088;
     TXA                                                        ;838282|8A      |      ;
     AND.W #$00E0                                               ;838283|29E000  |      ;
     ASL A                                                      ;838286|0A      |      ;
     ASL A                                                      ;838287|0A      |      ;
     ASL A                                                      ;838288|0A      |      ;
-    ORA.B strcVariables.n16Unk86                               ;838289|0586    |000086;
-    STA.B strcVariables.n16Unk86                               ;83828B|8586    |000086;
+    ORA.B strcVariables.n16Temp5                               ;838289|0586    |000086;
+    STA.B strcVariables.n16Temp5                               ;83828B|8586    |000086;
  
-  - LDX.B strcVariables.n16Unk86                               ;83828D|A686    |000086;
+  - LDX.B strcVariables.n16Temp5                               ;83828D|A686    |000086;
     LDA.L $7F0000,X                                            ;83828F|BF00007F|7F0000;
     AND.W #$00FF                                               ;838293|29FF00  |      ;
     SEP #$20                                                   ;838296|E220    |      ;
-    STA.B [ptrUnknown0x75]                                     ;838298|8775    |000075;
+    STA.B [ptrTemp0x75]                                     ;838298|8775    |000075;
     REP #$30                                                   ;83829A|C230    |      ;
-    INC.B ptrUnknown0x75                                       ;83829C|E675    |000075;
+    INC.B ptrTemp0x75                                       ;83829C|E675    |000075;
     DEC.B strcVariables.n16Temp1                               ;83829E|C67E    |00007E;
     BEQ .return                                                ;8382A0|F020    |8382C2;
     LDX.B strcVariables.n16Temp4                               ;8382A2|A684    |000084;
@@ -236,11 +236,11 @@ fGraphicsDecompressTilemap:
     INC A                                                      ;8382AD|1A      |      ;
     AND.W #$07FF                                               ;8382AE|29FF07  |      ;
     STA.B strcVariables.n16Temp4                               ;8382B1|8584    |000084;
-    LDA.B strcVariables.n16Unk86                               ;8382B3|A586    |000086;
+    LDA.B strcVariables.n16Temp5                               ;8382B3|A586    |000086;
     INC A                                                      ;8382B5|1A      |      ;
     AND.W #$07FF                                               ;8382B6|29FF07  |      ;
-    STA.B strcVariables.n16Unk86                               ;8382B9|8586    |000086;
-    DEC.B strcVariables.n16Unk88                               ;8382BB|C688    |000088;
+    STA.B strcVariables.n16Temp5                               ;8382B9|8586    |000086;
+    DEC.B strcVariables.n16Temp6                               ;8382BB|C688    |000088;
     BNE -                                                      ;8382BD|D0CE    |83828D;
     JMP.W .loop                                                ;8382BF|4C2582  |838225;
  

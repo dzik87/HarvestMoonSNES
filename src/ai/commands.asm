@@ -123,7 +123,7 @@ endmacro
 ;;
 ; @brief      Sets the destination area (map) and the script yields for 1 frame.
 ; @details    Writes the byte to nDestinationAreaId. Additionally increments the 16-bit wait counter of the script
-;             slot (offset +$10 in the 64-byte structure at ptrAIUnknown0xCC) by 1, so the script loop holds this slot
+;             slot (offset +$10 in the 64-byte structure at ptrAISlot) by 1, so the script loop holds this slot
 ;             for the next frame (wait 1).
 ; @case       $06; 2 byte(s) including the opcode
 ; @param      nAreaId  byte: Area id (!AREA_* enums from enums.asm, e.g. !AREA_COOP, !AREA_COWBARN, !AREA_ENDINGxx)
@@ -173,7 +173,7 @@ endmacro
 ;;
 ; @brief      Starts a parallel script in another slot (nDataIndex), beginning at pNextAction; the current script
 ;             continues.
-; @details    Remembers the current slot (ptrAIUnknown0xCC -> ptrTemp0x72), switches ptrAIUnknown0xCC to slot
+; @details    Remembers the current slot (ptrAISlot -> ptrTemp0x72), switches ptrAISlot to slot
 ;             nDataIndex through fAI_SelectSlot, copies the bank into it (+$32), stores the 16-bit pointer to +$30,
 ;             calls fAI_ResetSlotFull (slot initialization: active=1, flags=0, counters, position 0, etc.), stores
 ;             nDataIndex in +$3F and restores the previous slot. Then ptrAIActionData += 4 in total.
@@ -183,8 +183,8 @@ endmacro
 ;             is copied from offset +$32 of the current slot).
 ; @see        fAIAction0x09_StartScript
 ; @confidence high
-; @modifies   ptrAIUnknown0xCC, ptrTemp0x72, ptrAIActionData
-; @note       The meaning of all slot fields reset in fAI_ResetSlotFull (strcAIUnknown.unkXX) is not fully described;
+; @modifies   ptrAISlot, ptrTemp0x72, ptrAIActionData
+; @note       The meaning of all slot fields reset in fAI_ResetSlotFull (strcAISlot.unkXX) is not fully described;
 ;             what happens when the target slot is already active was not checked (it is overwritten without a check).
 ;;
 macro AICMD0x09_StartScript(nDataIndex, pNextAction)
@@ -359,8 +359,8 @@ endmacro
 
 ;;
 ; @brief      Suspends execution of the script of the given AI object for nTime frames.
-; @details    Stores nTime (16-bit) to field +$10 of the AI object structure pointed to by ptrAIUnknown0xCC
-;             (strcAIUnknown.unk10, wait counter). On each call, the fAI_RunSlots loop decrements +$10 for active
+; @details    Stores nTime (16-bit) to field +$10 of the AI object structure pointed to by ptrAISlot
+;             (strcAISlot.unk10, wait counter). On each call, the fAI_RunSlots loop decrements +$10 for active
 ;             objects and executes commands while +$10 = 0; after a command is executed with +$10 != 0, the object is
 ;             no longer processed in that frame.
 ; @case       $13; 3 byte(s) including the opcode
@@ -770,14 +770,14 @@ endmacro
 
 ;;
 ; @brief      Deactivates the AI slot with the given number and removes its game object (sprite) from the map.
-; @details    The handler saves the current ptrAIUnknown0xCC in ptrTemp0x72, advances ptrAIActionData by 1, reads a
-;             byte and calls fAI_SelectSlot (ptrAIUnknown0xCC = $7E:B586 + n*64).
+; @details    The handler saves the current ptrAISlot in ptrTemp0x72, advances ptrAIActionData by 1, reads a
+;             byte and calls fAI_SelectSlot (ptrAISlot = $7E:B586 + n*64).
 ; @case       $25; 2 byte(s) including the opcode
-; @param      nActorIndex  byte: Number of the AI slot (64-byte strcAIUnknown structures at $7E:B586 + n*64) to be
+; @param      nActorIndex  byte: Number of the AI slot (64-byte strcAISlot structures at $7E:B586 + n*64) to be
 ;             removed.
 ; @see        fAIAction0x25_RemoveActor
 ; @confidence high
-; @modifies   ptrAIUnknown0xCC, ptrTemp0x72, strcObject.gameObjectIdx, strcGameObject.initailized, ptrAIActionData
+; @modifies   ptrAISlot, ptrTemp0x72, strcObject.gameObjectIdx, strcGameObject.initailized, ptrAIActionData
 ; @note       The call to fObject_Destroy contains a known bug (a jump to fObject_ReturnLong instead of RTL) - it does
 ;             not affect the command. It was not checked what happens to the other slot fields (they are not cleared).
 ;;
@@ -879,17 +879,17 @@ macro AICMD0x29_SetMapScrolling(nMapSpeedX, nMapSpeedY, nMapTimer)
 endmacro
 
 ;;
-; @brief      Starts a sequence of map tile changes (pointer ptrUnknown0xCF) and ends the current script frame.
-; @details    The handler reads a word and calls fTileScript_Start ($81:A5E1): ptrUnknown0xCF ($7E:00CF) =
+; @brief      Starts a sequence of map tile changes (pointer ptrTileScript) and ends the current script frame.
+; @details    The handler reads a word and calls fTileScript_Start ($81:A5E1): ptrTileScript ($7E:00CF) =
 ;             pTileScriptTable[index], and clears the delay counter $7E:0989. It advances ptrAIActionData by 3 and
-;             increments the slot's strcAIUnknown+$10 counter by 1, which ends script execution in this frame (resumed
+;             increments the slot's strcAISlot+$10 counter by 1, which ends script execution in this frame (resumed
 ;             in the next one).
 ; @case       $2A; 3 byte(s) including the opcode
 ; @param      nSequenceIndex  word: Index into the table of 24-bit pointers pTileScriptTable ($81:B963, 3 bytes per
 ;             entry); it points to a sequence of map tile changes.
 ; @see        fAIAction0x2A_StartTileSequence
 ; @confidence medium
-; @modifies   ptrUnknown0xCF, ptrAIActionData
+; @modifies   ptrTileScript, ptrAIActionData
 ; @note       It was not determined what exactly the sequences $41/$43/$45 change (the contents of pTileScriptTable
 ;             and fSetTileAtCoords were not analyzed). The name is based on the behavior of the records (tile X/Y), so
 ;             only probable.
@@ -913,7 +913,7 @@ endmacro
 ; @param      nDataIndex  byte: Direction/index of the table entry (AI slot +$02, nDataIndex).
 ; @see        fAIAction0x2B_SpawnActor
 ; @confidence medium
-; @modifies   ptrAIUnknown0xCC, ptrTemp0x72, ptrAIActionData
+; @modifies   ptrAISlot, ptrTemp0x72, ptrAIActionData
 ; @note       Full meaning of the values from the table (word +$16 and byte +$14*64) - probably the sprite table index
 ;             and attributes/flip, not verified in the data file.
 ;;
@@ -969,7 +969,7 @@ endmacro
 ;             carryItemIdPrev ($7E:091E).
 ; @see        fAIAction0x2D_JumpOnInteract
 ; @confidence high
-; @modifies   ptrAIUnknown0xCC, ptrAIActionData, strcPlayer.action, strcPlayer.flags, strcPlayer.direction,
+; @modifies   ptrAISlot, ptrAIActionData, strcPlayer.action, strcPlayer.flags, strcPlayer.direction,
 ;             strcFlags.daily4
 ; @note       The meaning of slot byte +$0C (probably a 'player is within interaction range' flag, set outside this
 ;             command - e.g. by command 0x4D) and of the daily4 bits $0002/$0004 was not determined. The value
@@ -997,7 +997,7 @@ endmacro
 ;             +$07 to +$08).
 ; @see        fAIAction0x2E_StartWander
 ; @confidence medium
-; @modifies   ptrAIUnknown0xCC, ptrAIActionData
+; @modifies   ptrAISlot, ptrAIActionData
 ; @note       Certain: the field writes and the setting of the $A8 flags.
 ;;
 macro AICMD0x2E_StartWander(nStepFrames, pPointerB3, nStepLength)
@@ -1020,7 +1020,7 @@ endmacro
 ;             $B3).
 ; @see        fAIAction0x2F_SetActorSpriteTable
 ; @confidence medium
-; @modifies   ptrAIUnknown0xCC, ptrTemp0x72, ptrAIActionData
+; @modifies   ptrAISlot, ptrTemp0x72, ptrAIActionData
 ; @note       The contents of the aAIScriptingData_L* tables were not verified. The name follows from the operation on
 ;             fields +$33/+$16/+$14.
 ;;
@@ -1151,12 +1151,12 @@ endmacro
 ; @brief      One tick of the dog logic: copies the AI slot position to nDogX/nDogY, handles hugging/picking up the
 ;             dog, random idle behaviors and running to the player after a whistle.
 ; @details    The handler advances ptrAIActionData by 1 (the next command is usually a Jump back to UpdateDog - see
-;             B38DAC/B38DAD, so a loop). It copies the AI slot words ([ptrAIUnknown0xCC]+0x1A and +0x1C) to
+;             B38DAC/B38DAD, so a loop). It copies the AI slot words ([ptrAISlot]+0x1A and +0x1C) to
 ;             nDogX/nDogY.
 ; @case       $36; 1 byte(s) including the opcode
 ; @see        fAIAction0x36_UpdateDog
 ; @confidence medium
-; @modifies   ptrAIActionData, ptrAIUnknown0xCC, nDogX, nDogY, nDogHugs, strcStockData.unkDog
+; @modifies   ptrAIActionData, ptrAISlot, nDogX, nDogY, nDogHugs, strcStockData.unkDog
 ; @note       The meaning of the bits of state $7F1F58 (probably: 1=standing, 2=sitting/lying etc.), of the subscript
 ;             indices $3C-$49, $3F and of slot bytes +0x08/+0x0C/+0x0F is not determined without analyzing the
 ;             subscripts in B38xxx. It is not known whether byte +0x0C means 'the dog can be picked up' (inference
@@ -1169,14 +1169,14 @@ endmacro
 
 ;;
 ; @brief      Removes/deactivates the game object associated with the AI slot (index from slot field +0x12).
-; @details    Advances the pointer by 1, loads the word [ptrAIUnknown0xCC]+0x12 into strcObject.gameObjectIdx and
+; @details    Advances the pointer by 1, loads the word [ptrAISlot]+0x12 into strcObject.gameObjectIdx and
 ;             calls fObject_Destroy. That routine determines the object offset from aGameObjectIndexOffsets, checks
 ;             the components (fObject_CheckComponentsPending), releases them (fObject_ReleaseSpriteTiles ->
 ;             fObject_ReleaseTileSlot decrements the counter at $7EA320+idx*4) and clears strcGameObject.initailized.
 ; @case       $37; 1 byte(s) including the opcode
 ; @see        fAIAction0x37_RemoveObject
 ; @confidence medium
-; @modifies   ptrAIActionData, ptrAIUnknown0xCC, strcObject.gameObjectIdx, strcObject.gameObjectIdxOffs,
+; @modifies   ptrAIActionData, ptrAISlot, strcObject.gameObjectIdx, strcObject.gameObjectIdxOffs,
 ;             strcObject.bankAddress, strcGameObject.initailized
 ; @note       The exact semantics of fObject_Destroy (e.g. the path with strcObject.bankAddress != 0 jumps to a
 ;             different RTL - a comment in the code points to a bug) and what type of object is in slot +0x12
@@ -1191,11 +1191,11 @@ endmacro
 ; @brief      Blocks the script until the flag daily1 $8000 is set (screen fully brightened after fade-in).
 ; @details    If strcFlags.daily1 & $8000 != 0, it advances the pointer by 1 and finishes (the script proceeds).
 ;             Otherwise it does NOT advance the pointer (the command is executed again in the next frame) and only
-;             increments the byte/word [ptrAIUnknown0xCC]+0x10.
+;             increments the byte/word [ptrAISlot]+0x10.
 ; @case       $38; 1 byte(s) including the opcode
 ; @see        fAIAction0x38_WaitForFadeIn
 ; @confidence high
-; @modifies   strcFlags.daily1, ptrAIActionData, ptrAIUnknown0xCC
+; @modifies   strcFlags.daily1, ptrAIActionData, ptrAISlot
 ; @note       The name of slot field +0x10 (script frame counter?) is not confirmed.
 ;;
 macro AICMD0x38_WaitForFadeIn()
@@ -1217,7 +1217,7 @@ endmacro
 ;             nAmount+1 handler calls.
 ; @see        fAIAction0x39_WalkForTime
 ; @confidence high
-; @modifies   ptrAIActionData, ptrAIUnknown0xCC, strcAiControlData.input, strcAiControlData.counter, strcPlayer.flags,
+; @modifies   ptrAIActionData, ptrAISlot, strcAiControlData.input, strcAiControlData.counter, strcPlayer.flags,
 ;             strcPlayer.action
 ; @note       Whether the input is taken into account in the initialization frame depends on the order in the main
 ;             loop (not investigated). There is no validation of nInputIndex.
@@ -1239,7 +1239,7 @@ endmacro
 ; @param      nAmount  word: Duration in frames (strcAiControlData.counter).
 ; @see        fAIAction0x3A_RunForTime
 ; @confidence high
-; @modifies   ptrAIActionData, ptrAIUnknown0xCC, strcAiControlData.input, strcAiControlData.counter, strcPlayer.flags,
+; @modifies   ptrAIActionData, ptrAISlot, strcAiControlData.input, strcAiControlData.counter, strcPlayer.flags,
 ;             strcPlayer.action
 ;;
 macro AICMD0x3A_RunForTime(nInputIndex, nAmount)
@@ -1529,7 +1529,7 @@ endmacro
 ;             the AI object +0x33 (pDataAddress)
 ; @see        fAIAction0x49_SetSpriteTableFacingPlayer
 ; @confidence medium
-; @modifies   ptrAIActionData, ptrAIUnknown0xCC, strcPlayer.direction, ptrTemp0x72
+; @modifies   ptrAIActionData, ptrAISlot, strcPlayer.direction, ptrTemp0x72
 ; @note       The exact meaning of the +0x01 flag bits (0x03) is not fully established -
 ;             fAI_UpdateSlotMovementAndObject indicates that bit0 = object drawn/active, bit1/bit2 select the object
 ;             update variant. The name is a descriptive proposal.
@@ -1550,7 +1550,7 @@ endmacro
 ; @case       $4A; 1 byte(s) including the opcode
 ; @see        fAIAction0x4A_PickUpObjectOnButtonA
 ; @confidence medium
-; @modifies   ptrAIActionData, ptrAIUnknown0xCC, strcPlayer.action, strcPlayer.flags, strcFlags.daily4,
+; @modifies   ptrAIActionData, ptrAISlot, strcPlayer.action, strcPlayer.flags, strcFlags.daily4,
 ;             strcJoypad1.newInput
 ; @note       Item id 8 in carryItemId has no name in CITEM_* (only CITEM_FISH=7 exists); the macro uses
 ;             !EITEM_TURNIPSEED from a different space - should be fixed to a CITEM constant. What is physically
@@ -1594,7 +1594,7 @@ endmacro
 ; @case       $4C; 1 byte(s) including the opcode
 ; @see        fAIAction0x4C_SetPassable
 ; @confidence medium
-; @modifies   ptrAIActionData, ptrAIUnknown0xCC
+; @modifies   ptrAIActionData, ptrAISlot
 ; @note       The conclusion that it is 'non-blocking' comes from analysis of the fragment 83AE5B-83AE7F; other places
 ;             reading bit 0x02 of obj+0x00 were not verified.
 ;;
@@ -1614,7 +1614,7 @@ endmacro
 ;             Feather next to the object
 ; @see        fAIAction0x4D_JumpIfBlueFeatherUsed
 ; @confidence high
-; @modifies   ptrAIActionData, ptrAIUnknown0xCC, strcPlayer.action, strcPlayer.direction, strcFlags.daily3
+; @modifies   ptrAIActionData, ptrAISlot, strcPlayer.action, strcPlayer.direction, strcFlags.daily3
 ; @note       The meaning of the object bytes +0x03/+0x04/+0x07/+0x08 (probably NPC movement counters/direction) has
 ;             not been established.
 ;;
@@ -1702,7 +1702,7 @@ endmacro
 ; @case       $52; 1 byte(s) including the opcode
 ; @see        fAIAction0x52_PickUpObjectForEventA
 ; @confidence medium
-; @modifies   ptrAIActionData, ptrAIUnknown0xCC, strcPlayer.action, strcPlayer.flags, strcFlags.daily4,
+; @modifies   ptrAIActionData, ptrAISlot, strcPlayer.action, strcPlayer.flags, strcFlags.daily4,
 ;             strcJoypad1.newInput
 ; @note       It was not established what the player physically picks up in script 0x45, nor who sets action 0x1A
 ;             after this command. The name is a descriptive proposal.
@@ -1718,7 +1718,7 @@ endmacro
 ; @case       $53; 1 byte(s) including the opcode
 ; @see        fAIAction0x53_PickUpObjectForEventB
 ; @confidence medium
-; @modifies   ptrAIActionData, ptrAIUnknown0xCC, strcPlayer.action, strcPlayer.flags, strcFlags.daily4,
+; @modifies   ptrAIActionData, ptrAISlot, strcPlayer.action, strcPlayer.flags, strcFlags.daily4,
 ;             strcJoypad1.newInput
 ; @note       As in 0x52 - the event content of script 0x45 sub 3 has not been analyzed.
 ;;

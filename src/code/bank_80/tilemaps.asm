@@ -44,7 +44,7 @@ fTileMap_GetAreaDescriptorByte:
 ;           and for the farm/outdoor areas below !AREA_TOWNSPRING the object tiles are connected and the item subroutines of the area run (daily3 $0002 not set, single charmap).
 ;           Camera, map position and streaming ring positions are reset (unk10=$0410, unk14=$0A00), strcMap.pCurrent+2 / unk1C get the row stride and size from nMapRoomRowStrideTable / nMapRoomSizeTable.
 ;           Finally (areas < $57) the player position is stepped in 8 pixel increments to mapDestX/mapDestY with camera + scroll updates and DMA flushing, so that the visible map is fully loaded around the destination.
-; @modifies strcMap.pCurrent, strcMap.unk10, strcMap.unk12, strcMap.unk14, strcMap.unk16, strcMap.unk1C, strcMap.unk1E, strcMap.unk20, strcMap.unk21, strcCamera.cameraX, strcCamera.cameraY, strcPlayer.posX, strcPlayer.posY, strcPlayer.offsetCamX, strcPlayer.offsetCamY, strcCamera.offsetCamX, strcCamera.offsetCamY, strcDialogDisplay.mapFlags, strcDialogDisplay.mapMultiWidth, strcDialogDisplay.mapMultiHeight, strcDialogDisplay.mapCurrentPresetId
+; @modifies strcMap.pCurrent, strcMap.unk10, strcMap.unk12, strcMap.unk14, strcMap.unk16, strcMap.unk1C, strcMap.unk1E, strcMap.scrollAccumX, strcMap.scrollAccumY, strcCamera.cameraX, strcCamera.cameraY, strcPlayer.posX, strcPlayer.posY, strcPlayer.offsetCamX, strcPlayer.offsetCamY, strcCamera.offsetCamX, strcCamera.offsetCamY, strcDialogDisplay.mapFlags, strcDialogDisplay.mapMultiWidth, strcDialogDisplay.mapMultiHeight, strcDialogDisplay.mapCurrentPresetId
 ; @mode     M8X16
 ; @calls    fCore_ApplyGraphicsPreset, fGraphicsDecompressTilemap, fCore_PrepareTransfer, fCore_StartPreparedTransfer, fTileMap_UploadRowToVRAM, fObjectMap_ConnectAdjacentObjectTiles, fAreaItemSubrutine_Run, fCamera_UpdateFromPlayerPos, fCamera_ScrollRightStep, fCamera_ScrollDownStep, fCore_StartTransfer
 ; @callers  fMap_SetupArea
@@ -153,10 +153,10 @@ fTileMap_LoadAreaGraphics:
     INY                                                        ;80A876|C8      |      ; Y++
     PHY                                                        ;80A877|5A      |      ; Y -> stack2
     LDA.W #$2000                                               ;80A878|A90020  |      ;
-    STA.B ptrUnknown0x75                                       ;80A87B|8575    |000075;
+    STA.B ptrTemp0x75                                       ;80A87B|8575    |000075;
     SEP #$20                                                   ;80A87D|E220    |      ;
     LDA.B #$7E                                                 ;80A87F|A97E    |      ;
-    STA.B ptrUnknown0x75+2                                     ;80A881|8577    |000077; $75 = 0x7E2000
+    STA.B ptrTemp0x75+2                                     ;80A881|8577    |000077; $75 = 0x7E2000
     JSL.L fGraphicsDecompressTilemap                           ;80A883|22F88183|8381F8;
     SEP #$20                                                   ;80A887|E220    |      ;
     LDA.B #$00                                                 ;80A889|A900    |      ;
@@ -189,7 +189,7 @@ fTileMap_LoadAreaGraphics:
 .charactermaps:
     REP #$30                                                   ;80A8BE|C230    |      ;
     LDA.B (strcMap.pCurrent),Y                                 ;80A8C0|B118    |000018;
-    STA.B strcVariables.n16Unk8A                               ;80A8C2|858A    |00008A;
+    STA.B strcVariables.n16Temp7                               ;80A8C2|858A    |00008A;
     INY                                                        ;80A8C4|C8      |      ;
     INY                                                        ;80A8C5|C8      |      ;
     LDA.B (strcMap.pCurrent),Y                                 ;80A8C6|B118    |000018;
@@ -203,10 +203,10 @@ fTileMap_LoadAreaGraphics:
     INY                                                        ;80A8D4|C8      |      ;
     PHY                                                        ;80A8D5|5A      |      ;
     LDA.W #$2000                                               ;80A8D6|A90020  |      ;
-    STA.B ptrUnknown0x75                                       ;80A8D9|8575    |000075;
+    STA.B ptrTemp0x75                                       ;80A8D9|8575    |000075;
     SEP #$20                                                   ;80A8DB|E220    |      ;
     LDA.B #$7E                                                 ;80A8DD|A97E    |      ;
-    STA.B ptrUnknown0x75+2                                     ;80A8DF|8577    |000077;
+    STA.B ptrTemp0x75+2                                     ;80A8DF|8577    |000077;
     REP #$20                                                   ;80A8E1|C220    |      ;
     LDA.W strcDialogDisplay.mapFlags                           ;80A8E3|AD9601  |000196;
     AND.W #$8000                                               ;80A8E6|290080  |      ;
@@ -221,7 +221,7 @@ fTileMap_LoadAreaGraphics:
  
 .loop:
     LDA.B [ptrTemp0x72],Y                                      ;80A8F6|B772    |000072;
-    STA.B [ptrUnknown0x75],Y                                   ;80A8F8|9775    |000075;
+    STA.B [ptrTemp0x75],Y                                   ;80A8F8|9775    |000075;
     INY                                                        ;80A8FA|C8      |      ;
     INY                                                        ;80A8FB|C8      |      ;
     CPY.W #$8000                                               ;80A8FC|C00080  |      ;
@@ -255,8 +255,8 @@ fTileMap_LoadAreaGraphics:
     STZ.B strcMap.unk12                                        ;80A934|6412    |000012;
     STZ.B strcMap.unk16                                        ;80A936|6416    |000016;
     SEP #$20                                                   ;80A938|E220    |      ;
-    STZ.B strcMap.unk20                                        ;80A93A|6420    |000020;
-    STZ.B strcMap.unk21                                        ;80A93C|6421    |000021;
+    STZ.B strcMap.scrollAccumX                                        ;80A93A|6420    |000020;
+    STZ.B strcMap.scrollAccumY                                        ;80A93C|6421    |000021;
     REP #$20                                                   ;80A93E|C220    |      ;
     STZ.B strcPlayer.posX                                      ;80A940|64D6    |0000D6;
     STZ.B strcPlayer.posY                                      ;80A942|64D8    |0000D8;
@@ -277,7 +277,7 @@ fTileMap_LoadAreaGraphics:
     REP #$20                                                   ;80A962|C220    |      ;
     LDA.W #$0000                                               ;80A964|A90000  |      ;
     STA.B strcVariables.n16Temp1                               ;80A967|857E    |00007E;
-    LDX.B strcVariables.n16Unk8A                               ;80A969|A68A    |00008A;
+    LDX.B strcVariables.n16Temp7                               ;80A969|A68A    |00008A;
     LDY.W #$0040                                               ;80A96B|A04000  |      ;
     LDA.W #$0000                                               ;80A96E|A90000  |      ;
  
@@ -303,7 +303,7 @@ fTileMap_LoadAreaGraphics:
     LDA.B strcMap.loadAreaId                                   ;80A98F|A522    |000022;
     CMP.B #$5B                                                 ;80A991|C95B    |      ;
     BCS .upload_alt_row                                               ;80A993|B007    |80A99C;
-    LDY.B strcVariables.n16Unk8A                               ;80A995|A48A    |00008A;
+    LDY.B strcVariables.n16Temp7                               ;80A995|A48A    |00008A;
     CPY.W #$7000                                               ;80A997|C00070  |      ;
     BEQ .advance_row                                               ;80A99A|F006    |80A9A2;
  
@@ -330,7 +330,7 @@ fTileMap_LoadAreaGraphics:
     LDA.B strcMap.loadAreaId                                   ;80A9BD|A522    |000022;
     CMP.B #$5B                                                 ;80A9BF|C95B    |      ;
     BCS .advance_vram_row                                               ;80A9C1|B007    |80A9CA;
-    LDY.B strcVariables.n16Unk8A                               ;80A9C3|A48A    |00008A;
+    LDY.B strcVariables.n16Temp7                               ;80A9C3|A48A    |00008A;
     CPY.W #$7000                                               ;80A9C5|C00070  |      ;
     BEQ .next_copy_pass                                               ;80A9C8|F008    |80A9D2;
  

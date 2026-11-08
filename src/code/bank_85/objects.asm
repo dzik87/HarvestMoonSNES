@@ -29,7 +29,7 @@
 ; @param   strcObject.flip, strcObject.unkA3, strcObject.posX, strcObject.posY
 ; @return  strcObject.exists   0 = created, $FFFF = no free slot
 ; @return  strcObject.gameObjectIdx   slot number (0-39)
-; @modifies strcGameObject (slot), strcPlayer.gameObjectSlotLimit, ptrUnknown0x75, ptrObjectData
+; @modifies strcGameObject (slot), strcPlayer.gameObjectSlotLimit, ptrTemp0x75, ptrObjectData
 ; @clobbers A X Y
 ; @mode    M16X16
 ; @calls   fObject_ParseObjectData
@@ -41,7 +41,7 @@ fObject_Create:
     BCS .high_object_bank                                                ;858007|B00A    |858013;
     SEP #$20                                                   ;858009|E220    |      ;
     LDA.B #$86                                                 ;85800B|A986    |      ;
-    STA.B ptrUnknown0x75+2                                     ;85800D|8577    |000077;
+    STA.B ptrTemp0x75+2                                     ;85800D|8577    |000077;
     STA.B ptrObjectData+2                                      ;85800F|857A    |00007A;
     BRA .bank_selected                                                ;858011|8008    |85801B;
  
@@ -49,7 +49,7 @@ fObject_Create:
 .high_object_bank:
     SEP #$20                                                   ;858013|E220    |      ;
     LDA.B #$87                                                 ;858015|A987    |      ;
-    STA.B ptrUnknown0x75+2                                     ;858017|8577    |000077;
+    STA.B ptrTemp0x75+2                                     ;858017|8577    |000077;
     STA.B ptrObjectData+2                                      ;858019|857A    |00007A;
  
 .bank_selected:
@@ -101,7 +101,7 @@ fObject_Create:
     ASL A                                                      ;858073|0A      |      ;
     TAX                                                        ;858074|AA      |      ;
     LDA.L aObjAnimListPtrs_86,X                                      ;858075|BF808086|868080;
-    STA.B ptrUnknown0x75                                       ;858079|8575    |000075;
+    STA.B ptrTemp0x75                                       ;858079|8575    |000075;
     BRA .store_anim_list                                                ;85807B|800F    |85808C;
  
  
@@ -112,21 +112,21 @@ fObject_Create:
     ASL A                                                      ;858084|0A      |      ;
     TAX                                                        ;858085|AA      |      ;
     LDA.L aObjAnimListPtrs_87,X                                      ;858086|BF808087|878080;
-    STA.B ptrUnknown0x75                                       ;85808A|8575    |000075;
+    STA.B ptrTemp0x75                                       ;85808A|8575    |000075;
  
 .store_anim_list:
     LDX.B strcObject.gameObjectIdxOffs                         ;85808C|A6A9    |0000A9;
-    LDA.B ptrUnknown0x75                                       ;85808E|A575    |000075;
+    LDA.B ptrTemp0x75                                       ;85808E|A575    |000075;
     STA.W strcGameObject.objectListPointer,X                   ;858090|9DA801  |0001A8;
     CLC                                                        ;858093|18      |      ;
     ADC.W #$0003                                               ;858094|690300  |      ;
     STA.W strcGameObject.objectListPointer+2,X                 ;858097|9DAA01  |0001AA;
     LDY.W #$0000                                               ;85809A|A00000  |      ;
-    LDA.B [ptrUnknown0x75],Y                                   ;85809D|B775    |000075;
+    LDA.B [ptrTemp0x75],Y                                   ;85809D|B775    |000075;
     STA.W strcGameObject.objectDataPointer,X                   ;85809F|9DAC01  |0001AC;
     SEP #$20                                                   ;8580A2|E220    |      ;
     LDY.W #$0002                                               ;8580A4|A00200  |      ;
-    LDA.B [ptrUnknown0x75],Y                                   ;8580A7|B775    |000075;
+    LDA.B [ptrTemp0x75],Y                                   ;8580A7|B775    |000075;
     STA.W strcGameObject.objectDataPointer+2,X                 ;8580A9|9DAE01  |0001AE;
     REP #$20                                                   ;8580AC|C220    |      ;
     JSR.W fObject_ParseObjectData                              ;8580AE|20E58A  |858AE5;
@@ -157,7 +157,7 @@ fObject_UpdatePositionAndFlip:
     BCS .high_object_bank                                                ;8580C0|B00A    |8580CC;
     SEP #$20                                                   ;8580C2|E220    |      ;
     LDA.B #$86                                                 ;8580C4|A986    |      ;
-    STA.B ptrUnknown0x75+2                                     ;8580C6|8577    |000077;
+    STA.B ptrTemp0x75+2                                     ;8580C6|8577    |000077;
     STA.B ptrObjectData+2                                      ;8580C8|857A    |00007A;
     BRA .bank_selected                                                ;8580CA|8008    |8580D4;
  
@@ -165,7 +165,7 @@ fObject_UpdatePositionAndFlip:
 .high_object_bank:
     SEP #$20                                                   ;8580CC|E220    |      ;
     LDA.B #$87                                                 ;8580CE|A987    |      ;
-    STA.B ptrUnknown0x75+2                                     ;8580D0|8577    |000077;
+    STA.B ptrTemp0x75+2                                     ;8580D0|8577    |000077;
     STA.B ptrObjectData+2                                      ;8580D2|857A    |00007A;
  
 .bank_selected:
@@ -213,7 +213,7 @@ fObject_Replace:
     BCS .high_object_bank                                                ;858109|B00A    |858115;
     SEP #$20                                                   ;85810B|E220    |      ;
     LDA.B #$86                                                 ;85810D|A986    |      ;
-    STA.B ptrUnknown0x75+2                                     ;85810F|8577    |000077;
+    STA.B ptrTemp0x75+2                                     ;85810F|8577    |000077;
     STA.B ptrObjectData+2                                      ;858111|857A    |00007A;
     BRA .bank_selected                                                ;858113|8008    |85811D;
  
@@ -221,7 +221,7 @@ fObject_Replace:
 .high_object_bank:
     SEP #$20                                                   ;858115|E220    |      ;
     LDA.B #$87                                                 ;858117|A987    |      ;
-    STA.B ptrUnknown0x75+2                                     ;858119|8577    |000077;
+    STA.B ptrTemp0x75+2                                     ;858119|8577    |000077;
     STA.B ptrObjectData+2                                      ;85811B|857A    |00007A;
  
 .bank_selected:
@@ -256,7 +256,7 @@ fObject_Replace:
     ASL A                                                      ;85815E|0A      |      ;
     TAX                                                        ;85815F|AA      |      ;
     LDA.L aObjAnimListPtrs_86,X                                      ;858160|BF808086|868080;
-    STA.B ptrUnknown0x75                                       ;858164|8575    |000075;
+    STA.B ptrTemp0x75                                       ;858164|8575    |000075;
     BRA .store_anim_list                                                ;858166|800F    |858177;
  
  
@@ -267,21 +267,21 @@ fObject_Replace:
     ASL A                                                      ;85816F|0A      |      ;
     TAX                                                        ;858170|AA      |      ;
     LDA.L aObjAnimListPtrs_87,X                                      ;858171|BF808087|878080;
-    STA.B ptrUnknown0x75                                       ;858175|8575    |000075;
+    STA.B ptrTemp0x75                                       ;858175|8575    |000075;
  
 .store_anim_list:
     LDX.B strcObject.gameObjectIdxOffs                         ;858177|A6A9    |0000A9;
-    LDA.B ptrUnknown0x75                                       ;858179|A575    |000075;
+    LDA.B ptrTemp0x75                                       ;858179|A575    |000075;
     STA.W strcGameObject.objectListPointer,X                   ;85817B|9DA801  |0001A8;
     CLC                                                        ;85817E|18      |      ;
     ADC.W #$0003                                               ;85817F|690300  |      ;
     STA.W strcGameObject.objectListPointer+2,X                 ;858182|9DAA01  |0001AA;
     LDY.W #$0000                                               ;858185|A00000  |      ;
-    LDA.B [ptrUnknown0x75],Y                                   ;858188|B775    |000075;
+    LDA.B [ptrTemp0x75],Y                                   ;858188|B775    |000075;
     STA.W strcGameObject.objectDataPointer,X                   ;85818A|9DAC01  |0001AC;
     SEP #$20                                                   ;85818D|E220    |      ;
     LDY.W #$0002                                               ;85818F|A00200  |      ;
-    LDA.B [ptrUnknown0x75],Y                                   ;858192|B775    |000075;
+    LDA.B [ptrTemp0x75],Y                                   ;858192|B775    |000075;
     STA.W strcGameObject.objectDataPointer+2,X                 ;858194|9DAE01  |0001AE;
     REP #$20                                                   ;858197|C220    |      ;
     JSR.W fObject_ParseObjectData                              ;858199|20E58A  |858AE5;
@@ -379,7 +379,7 @@ fObject_GetSingleObjectData:
  
 ;;
 ; @brief   Resets all 40 object slots (empty, components $FF) and the OAM buffer.
-; @modifies strcGameObject, strcVariables.n16Unk86, strcPlayer.gameObjectSlotLimit
+; @modifies strcGameObject, strcVariables.n16Temp5, strcPlayer.gameObjectSlotLimit
 ; @clobbers A X Y
 ; @mode    M16X16
 ; @calls   fObject_ClearOamBuffer_Init
@@ -392,7 +392,7 @@ fObject_ClearGameObject:
     BCS .bank87                                                ;858218|B00A    |858224;
     SEP #$20                                                   ;85821A|E220    |      ;
     LDA.B #$86                                                 ;85821C|A986    |      ;
-    STA.B ptrUnknown0x75+2                                     ;85821E|8577    |000077;
+    STA.B ptrTemp0x75+2                                     ;85821E|8577    |000077;
     STA.B ptrObjectData+2                                      ;858220|857A    |00007A;
     BRA .continue                                              ;858222|8008    |85822C;
  
@@ -400,17 +400,17 @@ fObject_ClearGameObject:
 .bank87:
     SEP #$20                                                   ;858224|E220    |      ;
     LDA.B #$87                                                 ;858226|A987    |      ;
-    STA.B ptrUnknown0x75+2                                     ;858228|8577    |000077;
+    STA.B ptrTemp0x75+2                                     ;858228|8577    |000077;
     STA.B ptrObjectData+2                                      ;85822A|857A    |00007A;
  
 .continue:
     REP #$30                                                   ;85822C|C230    |      ;
     LDA.W #$0000                                               ;85822E|A90000  |      ;
-    STA.W strcVariables.n16Unk86                               ;858231|8D8600  |000086;
+    STA.W strcVariables.n16Temp5                               ;858231|8D8600  |000086;
     LDY.W #$0000                                               ;858234|A00000  |      ;
  
 .loop:
-    LDX.W strcVariables.n16Unk86                               ;858237|AE8600  |000086;
+    LDX.W strcVariables.n16Temp5                               ;858237|AE8600  |000086;
     LDA.W #$0000                                               ;85823A|A90000  |      ;
     STA.W strcGameObject.initailized,X                         ;85823D|9D9C01  |00019C;
     LDA.W #$0000                                               ;858240|A90000  |      ;
@@ -434,26 +434,26 @@ fObject_ClearGameObject:
     SEP #$20                                                   ;858276|E220    |      ;
     LDA.B #$FF                                                 ;858278|A9FF    |      ;
     STA.W strcGameObject.components,X                          ;85827A|9DB001  |0001B0;
-    STA.W strcGameObject.unknown1B1,X                          ;85827D|9DB101  |0001B1;
-    STA.W strcGameObject.unknown1B2,X                          ;858280|9DB201  |0001B2;
-    STA.W strcGameObject.unknown1B3,X                          ;858283|9DB301  |0001B3;
-    STA.W strcGameObject.unknown1B4,X                          ;858286|9DB401  |0001B4;
-    STA.W strcGameObject.unknown1B5,X                          ;858289|9DB501  |0001B5;
-    STA.W strcGameObject.unknown1B6,X                          ;85828C|9DB601  |0001B6;
-    STA.W strcGameObject.unknown1B7,X                          ;85828F|9DB701  |0001B7;
-    STA.W strcGameObject.unknown1B8,X                          ;858292|9DB801  |0001B8;
-    STA.W strcGameObject.unknown1B9,X                          ;858295|9DB901  |0001B9;
-    STA.W strcGameObject.unknown1BA,X                          ;858298|9DBA01  |0001BA;
-    STA.W strcGameObject.unknown1BB,X                          ;85829B|9DBB01  |0001BB;
-    STA.W strcGameObject.unknown1BC,X                          ;85829E|9DBC01  |0001BC;
-    STA.W strcGameObject.unknown1BD,X                          ;8582A1|9DBD01  |0001BD;
-    STA.W strcGameObject.unknown1BE,X                          ;8582A4|9DBE01  |0001BE;
-    STA.W strcGameObject.unknown1BF,X                          ;8582A7|9DBF01  |0001BF;
+    STA.W strcGameObject.component1,X                          ;85827D|9DB101  |0001B1;
+    STA.W strcGameObject.component2,X                          ;858280|9DB201  |0001B2;
+    STA.W strcGameObject.component3,X                          ;858283|9DB301  |0001B3;
+    STA.W strcGameObject.component4,X                          ;858286|9DB401  |0001B4;
+    STA.W strcGameObject.component5,X                          ;858289|9DB501  |0001B5;
+    STA.W strcGameObject.component6,X                          ;85828C|9DB601  |0001B6;
+    STA.W strcGameObject.component7,X                          ;85828F|9DB701  |0001B7;
+    STA.W strcGameObject.component8,X                          ;858292|9DB801  |0001B8;
+    STA.W strcGameObject.component9,X                          ;858295|9DB901  |0001B9;
+    STA.W strcGameObject.componentA,X                          ;858298|9DBA01  |0001BA;
+    STA.W strcGameObject.componentB,X                          ;85829B|9DBB01  |0001BB;
+    STA.W strcGameObject.componentC,X                          ;85829E|9DBC01  |0001BC;
+    STA.W strcGameObject.componentD,X                          ;8582A1|9DBD01  |0001BD;
+    STA.W strcGameObject.componentE,X                          ;8582A4|9DBE01  |0001BE;
+    STA.W strcGameObject.componentF,X                          ;8582A7|9DBF01  |0001BF;
     REP #$20                                                   ;8582AA|C220    |      ;
-    LDA.W strcVariables.n16Unk86                               ;8582AC|AD8600  |000086;
+    LDA.W strcVariables.n16Temp5                               ;8582AC|AD8600  |000086;
     CLC                                                        ;8582AF|18      |      ;
     ADC.W #$0024                                               ;8582B0|692400  |      ;
-    STA.W strcVariables.n16Unk86                               ;8582B3|8D8600  |000086;
+    STA.W strcVariables.n16Temp5                               ;8582B3|8D8600  |000086;
     INY                                                        ;8582B6|C8      |      ;
     CPY.W #$0028                                               ;8582B7|C02800  |      ;
     BEQ .exit                                                  ;8582BA|F003    |8582BF;
@@ -509,7 +509,7 @@ fObject_UpdateAllAnimations:
     BCS .high_object_bank                                                ;8582EF|B00A    |8582FB;
     SEP #$20                                                   ;8582F1|E220    |      ;
     LDA.B #$86                                                 ;8582F3|A986    |      ;
-    STA.B ptrUnknown0x75+2                                     ;8582F5|8577    |000077;
+    STA.B ptrTemp0x75+2                                     ;8582F5|8577    |000077;
     STA.B ptrObjectData+2                                      ;8582F7|857A    |00007A;
     BRA .bank_selected                                                ;8582F9|8008    |858303;
  
@@ -517,7 +517,7 @@ fObject_UpdateAllAnimations:
 .high_object_bank:
     SEP #$20                                                   ;8582FB|E220    |      ;
     LDA.B #$87                                                 ;8582FD|A987    |      ;
-    STA.B ptrUnknown0x75+2                                     ;8582FF|8577    |000077;
+    STA.B ptrTemp0x75+2                                     ;8582FF|8577    |000077;
     STA.B ptrObjectData+2                                      ;858301|857A    |00007A;
  
 .bank_selected:
@@ -532,13 +532,13 @@ fObject_UpdateAllAnimations:
     REP #$30                                                   ;858316|C230    |      ;
     LDX.B strcObject.gameObjectIdxOffs                         ;858318|A6A9    |0000A9;
     LDA.W strcGameObject.objectListPointer+2,X                 ;85831A|BDAA01  |0001AA;
-    STA.B ptrUnknown0x75                                       ;85831D|8575    |000075;
+    STA.B ptrTemp0x75                                       ;85831D|8575    |000075;
  
 .loop3:
-    LDA.B [ptrUnknown0x75]                                     ;85831F|A775    |000075; sub inner loop
+    LDA.B [ptrTemp0x75]                                     ;85831F|A775    |000075; sub inner loop
     BNE .load_next_frame                                                ;858321|D007    |85832A;
     LDA.W strcGameObject.objectListPointer,X                   ;858323|BDA801  |0001A8;
-    STA.B ptrUnknown0x75                                       ;858326|8575    |000075;
+    STA.B ptrTemp0x75                                       ;858326|8575    |000075;
     BRA .loop3                                                 ;858328|80F5    |85831F;
  
  
@@ -546,10 +546,10 @@ fObject_UpdateAllAnimations:
     STA.W strcGameObject.objectDataPointer,X                   ;85832A|9DAC01  |0001AC;
     SEP #$20                                                   ;85832D|E220    |      ;
     LDY.W #$0002                                               ;85832F|A00200  |      ;
-    LDA.B [ptrUnknown0x75],Y                                   ;858332|B775    |000075;
+    LDA.B [ptrTemp0x75],Y                                   ;858332|B775    |000075;
     STA.W strcGameObject.objectDataPointer+2,X                 ;858334|9DAE01  |0001AE;
     REP #$20                                                   ;858337|C220    |      ;
-    LDA.B ptrUnknown0x75                                       ;858339|A575    |000075;
+    LDA.B ptrTemp0x75                                       ;858339|A575    |000075;
     CLC                                                        ;85833B|18      |      ;
     ADC.W #$0003                                               ;85833C|690300  |      ;
     STA.W strcGameObject.objectListPointer+2,X                 ;85833F|9DAA01  |0001AA;
@@ -687,7 +687,7 @@ fObject_RenderAll:
     BCS .high_object_bank                                                ;8583E9|B00A    |8583F5;
     SEP #$20                                                   ;8583EB|E220    |      ;
     LDA.B #$86                                                 ;8583ED|A986    |      ;
-    STA.B ptrUnknown0x75+2                                     ;8583EF|8577    |000077;
+    STA.B ptrTemp0x75+2                                     ;8583EF|8577    |000077;
     STA.B ptrObjectData+2                                      ;8583F1|857A    |00007A;
     BRA .bank_selected                                                ;8583F3|8008    |8583FD;
  
@@ -695,7 +695,7 @@ fObject_RenderAll:
 .high_object_bank:
     SEP #$20                                                   ;8583F5|E220    |      ;
     LDA.B #$87                                                 ;8583F7|A987    |      ;
-    STA.B ptrUnknown0x75+2                                     ;8583F9|8577    |000077;
+    STA.B ptrTemp0x75+2                                     ;8583F9|8577    |000077;
     STA.B ptrObjectData+2                                      ;8583FB|857A    |00007A;
  
 .bank_selected:
@@ -747,7 +747,7 @@ fObject_RenderAll:
     BCS .object_high_bank                                                ;85844E|B00A    |85845A;
     SEP #$20                                                   ;858450|E220    |      ;
     LDA.B #$86                                                 ;858452|A986    |      ;
-    STA.B ptrUnknown0x75+2                                     ;858454|8577    |000077;
+    STA.B ptrTemp0x75+2                                     ;858454|8577    |000077;
     STA.B ptrObjectData+2                                      ;858456|857A    |00007A;
     BRA .object_bank_selected                                                ;858458|8008    |858462;
  
@@ -755,7 +755,7 @@ fObject_RenderAll:
 .object_high_bank:
     SEP #$20                                                   ;85845A|E220    |      ;
     LDA.B #$87                                                 ;85845C|A987    |      ;
-    STA.B ptrUnknown0x75+2                                     ;85845E|8577    |000077;
+    STA.B ptrTemp0x75+2                                     ;85845E|8577    |000077;
     STA.B ptrObjectData+2                                      ;858460|857A    |00007A;
  
 .object_bank_selected:
@@ -785,12 +785,12 @@ fObject_RenderAll:
     ADC.B ptrObjectData                                        ;858492|6578    |000078;
     STA.B ptrObjectData                                        ;858494|8578    |000078;
     LDA.B strcObject.gameObjectIdxOffs                         ;858496|A5A9    |0000A9;
-    STA.B ptrUnknown0x75                                       ;858498|8575    |000075;
+    STA.B ptrTemp0x75                                       ;858498|8575    |000075;
     CLC                                                        ;85849A|18      |      ;
     ADC.B strcObject.totalComponents                           ;85849B|65AD    |0000AD;
     SEC                                                        ;85849D|38      |      ;
     SBC.W #$0001                                               ;85849E|E90100  |      ;
-    STA.B ptrUnknown0x75                                       ;8584A1|8575    |000075;
+    STA.B ptrTemp0x75                                       ;8584A1|8575    |000075;
  
 .component_loop:
     LDY.B strcObject.unkAB                                     ;8584A3|A4AB    |0000AB;
@@ -800,7 +800,7 @@ fObject_RenderAll:
  
  
 .component_present:
-    LDX.B ptrUnknown0x75                                       ;8584AC|A675    |000075;
+    LDX.B ptrTemp0x75                                       ;8584AC|A675    |000075;
     SEP #$20                                                   ;8584AE|E220    |      ;
     LDA.W strcGameObject.components,X                          ;8584B0|BDB001  |0001B0;
     CMP.B #$FF                                                 ;8584B3|C9FF    |      ;
@@ -956,7 +956,7 @@ fObject_RenderAll:
     STA.L $7EA003,X                                            ;8585AF|9F03A07E|7EA003;
     REP #$20                                                   ;8585B3|C220    |      ;
     LDA.W #$0000                                               ;8585B5|A90000  |      ;
-    LDX.B ptrUnknown0x75                                       ;8585B8|A675    |000075;
+    LDX.B ptrTemp0x75                                       ;8585B8|A675    |000075;
     SEP #$20                                                   ;8585BA|E220    |      ;
     LDA.W strcGameObject.components,X                          ;8585BC|BDB001  |0001B0;
     REP #$20                                                   ;8585BF|C220    |      ;
@@ -988,7 +988,7 @@ fObject_RenderAll:
     STA.B ptrObjectData                                        ;8585EB|8578    |000078;
  
 .next_component:
-    DEC.B ptrUnknown0x75                                       ;8585ED|C675    |000075;
+    DEC.B ptrTemp0x75                                       ;8585ED|C675    |000075;
     DEC.B strcObject.totalComponents                           ;8585EF|C6AD    |0000AD;
     JMP.W .component_loop                                              ;8585F1|4CA384  |8584A3;
  
@@ -1482,7 +1482,7 @@ fObject_ReleaseSpriteTiles:
 ; @brief   Tests whether any component of the slot still waits for its tile ($FF).
 ; @param   strcObject.gameObjectIdxOffs
 ; @return  strcObject.bankAddress   $FFFF = at least one tile pending, 0 = all resident
-; @modifies strcUnknown740.unk740 (incremented per refusal)
+; @modifies strcTileLoadStats.tileRefusals (incremented per refusal)
 ; @clobbers A X Y
 ; @mode    M8 -> M16X16
 ; @note    Misuse of strcObject.bankAddress as result variable; Replace/Destroy/UpdateAllAnimations act on it.
@@ -1511,7 +1511,7 @@ fObject_CheckComponentsPending:
  
 .pending_found:
     REP #$30                                                   ;858B9C|C230    |      ;
-    INC.W strcUnknown740.unk740                                ;858B9E|EE4007  |000740;
+    INC.W strcTileLoadStats.tileRefusals                                ;858B9E|EE4007  |000740;
     LDA.W #$FFFF                                               ;858BA1|A9FFFF  |      ;
     STA.B strcObject.bankAddress                               ;858BA4|85AF    |0000AF;
     BRA .return                                                ;858BA6|8007    |858BAF;
@@ -1681,10 +1681,10 @@ fObject_ReleaseTileSlot:
 ;          is bank $88 + (tile id >> 8) at $8000 + $2000 * ((id >> 6) & 3) + slotTable[id & $3F] * $20; the VRAM destination
 ;          is slotTable[slot] * $10 words. Each load appends [source address, bank, VRAM address] to the DMA list at
 ;          DMAtoVRAMData and terminates it with $FFFF (max $C0 bytes = 32 loads per frame). $C7 -= $0100 per load.
-;          Finally stores the number of remaining requests in strcUnknown740.unk742.
+;          Finally stores the number of remaining requests in strcTileLoadStats.pendingLoads.
 ; @param   $BB, $BD   ring buffer tail / head
 ; @param   $C7        remaining DMA budget this frame (set to $1800 at the top of the main loop)
-; @modifies DMAtoVRAMData, strcUnknown740.unk742
+; @modifies DMAtoVRAMData, strcTileLoadStats.pendingLoads
 ; @note    Also writes $7EA320 (slot table), $7F0F00 (tile id to slot), $0846 / $0848 (slot allocation counters), $BB (queue tail), $C7 (DMA budget).
 ; @clobbers A X Y
 ; @mode    M8 -> M16X16
@@ -1776,7 +1776,7 @@ fObject_ProcessTileLoadQueue:
     SEP #$20                                                   ;858D3E|E220    |      ;
     ; write the cache slot number into the requester's component byte (bank $80 mirror)
     STA.B [ptrObjectData]                                      ;858D40|8778    |000078;
-    STA.B ptrUnknown0x75                                       ;858D42|8575    |000075;
+    STA.B ptrTemp0x75                                       ;858D42|8575    |000075;
     STZ.B $76                                                  ;858D44|6476    |000076;
     REP #$20                                                   ;858D46|C220    |      ;
     LDX.B $C3                                                  ;858D48|A6C3    |0000C3;
@@ -1860,7 +1860,7 @@ fObject_ProcessTileLoadQueue:
     CLC                                                        ;858DD7|18      |      ;
     ADC.W #$8000                                               ;858DD8|690080  |      ;
     STA.B $C3                                                  ;858DDB|85C3    |0000C3;
-    LDA.B ptrUnknown0x75                                       ;858DDD|A575    |000075;
+    LDA.B ptrTemp0x75                                       ;858DDD|A575    |000075;
     ASL A                                                      ;858DDF|0A      |      ;
     TAX                                                        ;858DE0|AA      |      ;
     LDA.L aObjSlotOamTile_868000,X                          ;858DE1|BF008086|868000;
@@ -1877,13 +1877,13 @@ fObject_ProcessTileLoadQueue:
     NOP                                                        ;858DF6|EA      |      ;
     NOP                                                        ;858DF7|EA      |      ;
     LDA.W SNES_RDMPYL                                          ;858DF8|AD1642  |004216;
-    STA.B ptrUnknown0x75                                       ;858DFB|8575    |000075;
+    STA.B ptrTemp0x75                                       ;858DFB|8575    |000075;
     LDX.B $BF                                                  ;858DFD|A6BF    |0000BF;
     LDA.B $C3                                                  ;858DFF|A5C3    |0000C3;
     STA.L DMAtoVRAMData,X                                      ;858E01|9F20A47E|7EA420;
     LDA.B $C5                                                  ;858E05|A5C5    |0000C5;
     STA.L $7EA422,X                                            ;858E07|9F22A47E|7EA422;
-    LDA.B ptrUnknown0x75                                       ;858E0B|A575    |000075;
+    LDA.B ptrTemp0x75                                       ;858E0B|A575    |000075;
     STA.L $7EA424,X                                            ;858E0D|9F24A47E|7EA424;
     LDA.W #$FFFF                                               ;858E11|A9FFFF  |      ;
     STA.L $7EA426,X                                            ;858E14|9F26A47E|7EA426;
@@ -1915,8 +1915,8 @@ fObject_ProcessTileLoadQueue:
  
   + LSR A                                                      ;858E3C|4A      |      ;
     LSR A                                                      ;858E3D|4A      |      ;
-    STA.W strcUnknown740.unk742                                ;858E3E|8D4207  |000742;
-    STZ.W strcUnknown740.unk743                                ;858E41|9C4307  |000743;
+    STA.W strcTileLoadStats.pendingLoads                                ;858E3E|8D4207  |000742;
+    STZ.W strcTileLoadStats.unk743                                ;858E41|9C4307  |000743;
     REP #$20                                                   ;858E44|C220    |      ;
     RTL                                                        ;858E46|6B      |      ;
  

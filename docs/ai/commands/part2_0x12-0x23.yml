@@ -23,8 +23,8 @@
   params:
     - {name: nTime, offset: 1, size: 2, type: n16, meaning: "Number of calls of the AI loop (fAI_RunSlots, called once per frame from the main loop) for which the script of this object waits. A value of 0 = no waiting. Typical: 1, 60, 180, 240."}
   summary: "Suspends execution of the script of the given AI object for nTime frames."
-  details: "Stores nTime (16-bit) to field +$10 of the AI object structure pointed to by ptrAIUnknown0xCC (strcAIUnknown.unk10, wait counter). On each call, the fAI_RunSlots loop decrements +$10 for active objects and executes commands while +$10 = 0; after a command is executed with +$10 != 0, the object is no longer processed in that frame. As a result, the next command executes nTime frames after Wait (Wait(1) = skipping one frame). The script waits only for the current object (each AI object has its own counter); the AI loop is skipped entirely when strcDialogDisplay.inputMode == 2 or 6 (dialog) or when the player action = PACTION_JUMP."
-  ram_touched: [ptrAIActionData, ptrAIUnknown0xCC+$10]
+  details: "Stores nTime (16-bit) to field +$10 of the AI object structure pointed to by ptrAISlot (strcAISlot.unk10, wait counter). On each call, the fAI_RunSlots loop decrements +$10 for active objects and executes commands while +$10 = 0; after a command is executed with +$10 != 0, the object is no longer processed in that frame. As a result, the next command executes nTime frames after Wait (Wait(1) = skipping one frame). The script waits only for the current object (each AI object has its own counter); the AI loop is skipped entirely when strcDialogDisplay.inputMode == 2 or 6 (dialog) or when the player action = PACTION_JUMP."
+  ram_touched: [ptrAIActionData, ptrAISlot+$10]
   calls: []
   open_questions: "The time unit is AI loop calls; it is not confirmed that the loop is called exactly once per frame at all 10 call sites of fAI_RunSlots (core.asm, routines.asm, main_loop.asm, interaction_data.asm)."
 
@@ -91,7 +91,7 @@
     - {name: nMax, offset: 1, size: 1, type: n8, meaning: "Number of possible outcomes. The roll result is in the range 0..nMax-1 (fCore_GetRandomNumber never returns nMax). Typical: 2, 3, 4, 5."}
   summary: "Rolls a number 0..nMax-1 and stores it in field +$0D of the current AI object."
   details: "Calls fCore_GetRandomNumber (A = nMax) and stores the result to byte +$0D of the AI object structure (ptrAIUnknownCC). Does not block. Always used together with a series of 0x18 commands that compare the rolled value. Field +$0D is also used by other handlers (fAIAction at 849BFF and 84A011); it was not checked what for."
-  ram_touched: [ptrAIActionData, ptrAIUnknown0xCC+$0D]
+  ram_touched: [ptrAIActionData, ptrAISlot+$0D]
   calls: [fCore_GetRandomNumber]
   open_questions: "The comment at fCore_GetRandomNumber says 0x00-nMax, but the code (the loop ends at X == nMax-1) implies the range 0..nMax-1; this is consistent with the usage in scripts (0x17($02) + 0x18($00)/0x18($01)). The other users of field +$0D are not determined."
 
@@ -107,7 +107,7 @@
     - {name: pNextAction, offset: 2, size: 2, type: script_ptr, meaning: "Low 16 bits of the address of the command to jump to when +$0D == nValue."}
   summary: "Jumps to pNextAction if the object's last rolled (0x17) value equals nValue."
   details: "Compares byte +$0D of the AI object with nValue; equal -> ptrAIActionData = pNextAction (16 bit), not equal -> advance past the command (4 bytes), which allows a chain of several 0x18 after a single 0x17 (jump table). Does not block. Side effect: nValue is read as 16-bit (no SEP before LDA) and stored to $92-$93, so it also overwrites strcVariables.n8Temp2 ($93) with the pNextAction (lo) byte."
-  ram_touched: [ptrAIActionData, ptrAIUnknown0xCC+$0D, strcVariables.n8Temp1, strcVariables.n8Temp2]
+  ram_touched: [ptrAIActionData, ptrAISlot+$0D, strcVariables.n8Temp1, strcVariables.n8Temp2]
   calls: []
   open_questions: "The side effect on n8Temp2 is probably unintended (16-bit read/write); harmless as long as $93 is not used between commands."
 
@@ -141,7 +141,7 @@
     - {name: nDirection, offset: 7, size: 1, type: n8, meaning: "Initial direction 0-3 (stored to +$02), selects the entry from pAnimTable. From the movement code: 0 = down, 1 = up, 2 = right (dx=+1), 3 = left (dx=-1)."}
   summary: "Creates/places an NPC object at the given position with a sprite table and an initial direction."
   details: "Stores nPosX -> +$1A, nPosY -> +$1C, pAnimTable -> +$33, nDirection -> +$02 in the AI object structure. Sets the object flags (+$01) |= $03: bit $01 marks the object as active (fAI_UpdateSlotMovementAndObject/AI loop), bit $02 causes fObject_Create to be called on the next processing (creation of the game object, index stored in +$12). Then calls fAI_LoadSlotSpriteFromDirTable with $72 = (+$33):$B3, which selects the table entry [nDirection]: word -> +$16 (spriteTableIdx), byte << 6 -> +$14 (flip). Finally +$10 += 1, so the object is processed from the next frame (blocks for 1 frame)."
-  ram_touched: [ptrAIActionData, ptrAIUnknown0xCC+$01, ptrAIUnknown0xCC+$02, ptrAIUnknown0xCC+$10, ptrAIUnknown0xCC+$14, ptrAIUnknown0xCC+$16, ptrAIUnknown0xCC+$1A, ptrAIUnknown0xCC+$1C, ptrAIUnknown0xCC+$33, ptrTemp0x72]
+  ram_touched: [ptrAIActionData, ptrAISlot+$01, ptrAISlot+$02, ptrAISlot+$10, ptrAISlot+$14, ptrAISlot+$16, ptrAISlot+$1A, ptrAISlot+$1C, ptrAISlot+$33, ptrTemp0x72]
   calls: [fAI_LoadSlotSpriteFromDirTable]
   open_questions: "The exact coordinate units (world pixels vs. map pixels) are unconfirmed - the same pair goes to strcObject.posX/posY. The direction convention conflicts with the PDIR_* enum (PDIR_LEFT=2, PDIR_RIGHT=3), while the NPC movement code treats 2 as movement in +X (right); this also affects 0x1F, which uses strcPlayer.direction XOR 1. It should be checked whether the PDIR enum has LEFT/RIGHT swapped. The macro contains &$FFFF masking for pAnimTable - bank B3 is hardcoded in the handler."
 
@@ -157,7 +157,7 @@
     - {name: nFlip, offset: 3, size: 1, type: flag, meaning: "Flip flags, value << 6 stored to +$14 (flip): bit0 -> $0040 (horizontal), bit1 -> $0080 (vertical). 0 or 1 in scripts."}
   summary: "Directly sets the sprite and flip of the current AI object (NPC) and requests a sprite refresh."
   details: "Stores nSpriteIdx to +$16 and (nFlip << 6) to +$14 of the AI object, then sets the flag +$01 |= $04 (sprite update request). In fAI_UpdateSlotMovementAndObject, when flag $04 is set, fObject_Replace is called, which changes the sprite only when +$16 differs from the previous +$18; the flag is cleared (mask $E9) at the end of processing. Does not block. Counterpart of 0x19 for NPCs instead of the player."
-  ram_touched: [ptrAIActionData, ptrAIUnknown0xCC+$01, ptrAIUnknown0xCC+$14, ptrAIUnknown0xCC+$16]
+  ram_touched: [ptrAIActionData, ptrAISlot+$01, ptrAISlot+$14, ptrAISlot+$16]
   calls: []
   open_questions: "The function fObject_Replace was only read superficially (comparison of spriteTableIdx with $18 and selection of bank $86/$87 by the threshold $0262); its full effect on OAM was not analyzed."
 
@@ -173,7 +173,7 @@
     - {name: nPosition, offset: 3, size: 1, type: n8, meaning: "Stored to strcDialogDisplay.boxPosition ($7E:0191). In fDialog_DialogHandler: 0 = automatic (default 1, and 2 when strcObjectData.camY < $81), a non-zero value is used directly for the BG3 offset (by (value-1)*128 px) - so it is probably the position of the dialog window (top/bottom of the screen). 0 or 1 in scripts."}
   summary: "Displays dialog nDialogId and suspends the script for one frame (the AI loop continues to be skipped for the duration of the dialog)."
   details: "Loads nDialogId into X, stores the nPosition byte to boxPosition, sets strcDialogDisplay.inputMode = 2 and calls fDialog_DialogHandler (sets dialogId, dialogFlags |= DFLAGS_PROCESSDIALOG, zeroes the option/answer counters, selects the text pointer from aDialogPointers, sets the BG3 offset and nTimeState = 0, daily1 |= $4000). Then +$10 += 1 (one frame). Because inputMode == 2, fAI_RunSlots returns immediately at the start until the dialog ends (the dialog code zeroes/changes inputMode), so the script and all AI objects wait until the end of the dialog."
-  ram_touched: [ptrAIActionData, ptrAIUnknown0xCC+$10, strcDialogDisplay.boxPosition, strcDialogDisplay.inputMode, strcDialogDisplay.dialogId, strcDialogDisplay.dialogFlags, strcDialogDisplay.dialogOptionsAnswer, strcFlags.daily1, nTimeState, strcBGScrool.BG3VerOffs]
+  ram_touched: [ptrAIActionData, ptrAISlot+$10, strcDialogDisplay.boxPosition, strcDialogDisplay.inputMode, strcDialogDisplay.dialogId, strcDialogDisplay.dialogFlags, strcDialogDisplay.dialogOptionsAnswer, strcFlags.daily1, nTimeState, strcBGScrool.BG3VerOffs]
   calls: [fDialog_DialogHandler]
   open_questions: "The exact meaning of nPosition (top/bottom) is unconfirmed; the code that resets inputMode after the dialog is closed was not checked."
 
@@ -189,7 +189,7 @@
     - {name: nPosition, offset: 3, size: 1, type: n8, meaning: "As in 0x1C: goes to strcDialogDisplay.boxPosition."}
   summary: "Functionally identical to 0x1C (ShowDialog); in scripts it is used for dialogs with choices, followed by a series of 0x20."
   details: "The handler code is identical to 0x1C instruction by instruction (only the address differs). Convention observed in scripts: 0x1D is called before a chain of 0x20 JumpIfChoice (a dialog with a question), and 0x1C for ordinary lines - the distinction is purely conventional (by the game's authors), with no effect on behavior."
-  ram_touched: [ptrAIActionData, ptrAIUnknown0xCC+$10, strcDialogDisplay.boxPosition, strcDialogDisplay.inputMode, strcDialogDisplay.dialogId, strcDialogDisplay.dialogFlags]
+  ram_touched: [ptrAIActionData, ptrAISlot+$10, strcDialogDisplay.boxPosition, strcDialogDisplay.inputMode, strcDialogDisplay.dialogId, strcDialogDisplay.dialogFlags]
   calls: [fDialog_DialogHandler]
   open_questions: "None - the difference between 0x1C and 0x1D exists only in usage convention (there are no differences in the handler code)."
 
@@ -219,7 +219,7 @@
     - {name: pNextAction, offset: 1, size: 2, type: script_ptr, meaning: "Low 16 bits of the address of the command (conversation handler) to jump to when the player starts a conversation with the NPC (bank unchanged)."}
   summary: "Checks whether the player is standing next to the NPC and pressed A; if so - turns the NPC toward the player, locks the player in an interaction and jumps to pNextAction, otherwise waits one frame and continues."
   details: "This is a polling command: in scripts it is always 'AICMD0x1F_JumpIfTalkedTo(target); Jump(same_command)'. Conditions (all must be met, otherwise the .return path = ptrAIActionData += 3 and +$10 += 1, i.e. a one-frame block): byte +$0C of the object != 0 (player proximity flag set in the loop in game_engine.asm ~83AE26: |NPC posX/posY - player position| < $19), the player action is not PACTION_USINGTOOL / SHOWTOOL / WHISTLEHORSE / WHISTLEDOG, no PFLAGS_EATINGMEAL, (strcFlags.daily4 & $0006) == 0, and strcJoypad1.newInput has bit !JOYPAD_A (A newly pressed). When met: ptrAIActionData = pNextAction (16 bit); +$08 := +$07; +$03 := 0, +$04 := 0 (stop movement); +$0C := 0; +$02 := strcPlayer.direction XOR 1 (NPC faces the player); fAI_LoadSlotSpriteFromDirTable with the table (+$33):$B3 sets the sprite (+$16) and flip (+$14) according to the new direction; +$01 |= $14 (sprite update + auto-movement lock for this frame); nPlayerInteractionIndex := $56, Arg1 = Arg2 = 0; strcPlayer.flags |= PFLAGS_INTERACTING; strcPlayer.action := PACTION_NONE; +$10 += 1. fPlayerInteraction0x56 increments Arg2 and after 2 calls removes PFLAGS_INTERACTING (effect: a short player lock during the transition to the dialog)."
-  ram_touched: [ptrAIActionData, ptrAIUnknown0xCC+$01, ptrAIUnknown0xCC+$02, ptrAIUnknown0xCC+$03, ptrAIUnknown0xCC+$04, ptrAIUnknown0xCC+$07, ptrAIUnknown0xCC+$08, ptrAIUnknown0xCC+$0C, ptrAIUnknown0xCC+$10, ptrAIUnknown0xCC+$14, ptrAIUnknown0xCC+$16, ptrAIUnknown0xCC+$33, strcPlayer.flags, strcPlayer.action, strcPlayer.direction, strcJoypad1.newInput, strcFlags.daily4, nPlayerInteractionIndex, nPlayerInteractionArg1, nPlayerInteractionArg2, ptrTemp0x72]
+  ram_touched: [ptrAIActionData, ptrAISlot+$01, ptrAISlot+$02, ptrAISlot+$03, ptrAISlot+$04, ptrAISlot+$07, ptrAISlot+$08, ptrAISlot+$0C, ptrAISlot+$10, ptrAISlot+$14, ptrAISlot+$16, ptrAISlot+$33, strcPlayer.flags, strcPlayer.action, strcPlayer.direction, strcJoypad1.newInput, strcFlags.daily4, nPlayerInteractionIndex, nPlayerInteractionArg1, nPlayerInteractionArg2, ptrTemp0x72]
   calls: [fAI_LoadSlotSpriteFromDirTable]
   open_questions: "The meaning of bits $0002/$0004 in strcFlags.daily4 (they block conversation) is not determined. Field +$0C = 'player nearby' was inferred from game_engine.asm:~83AE26-83AE68 (probable). The direction XOR 1 depends on the direction convention (see open_questions in 0x1A: PDIR enum vs. NPC movement code). The aAIActions table points two opcodes (0x1E, 0x1F) to the same handler."
 
@@ -270,7 +270,7 @@
     - {name: nSegmentLen, offset: 6, size: 1, type: n8, meaning: "Number of steps taken in one chosen direction before a new choice is made (stored to +$07 and +$08; +$07 = reload value, +$08 = counter). Values: 0, 2, 8, $0C, $10."}
   summary: "Enables random wandering for the current NPC within a rectangular area around its current position."
   details: "Stores the arguments to fields +$09,+$0A,+$0B,+$05,+$06,+$36,+$07,+$08 of the AI object. Sets +$01 |= $28: bit $08 enables wandering (fAI_UpdateSlotWander), bit $20 enables automatic movement (fAI_UpdateSlotStepMove adds the velocity +$03/+$04 to posX/posY every +$05 frames). Copies the current position +$1A/+$1C to +$1E/+$20 as the home point. For this reason the command must come after 0x1A (which sets the position). The wandering loop chooses a direction (0 down, 1 up, 2 right, 3 left - based on +$0F or strcPlayer.lastRandomNumber), sets a velocity of +-1 px, checks the bounds relative to the home point and ends the segment when +$08 reaches 0 or goes out of range. The command does not block and does not change +$10; wandering runs in the background, in parallel with the continued execution of the script (usually followed by a 0x1F loop)."
-  ram_touched: [ptrAIActionData, ptrAIUnknown0xCC+$01, ptrAIUnknown0xCC+$05, ptrAIUnknown0xCC+$06, ptrAIUnknown0xCC+$07, ptrAIUnknown0xCC+$08, ptrAIUnknown0xCC+$09, ptrAIUnknown0xCC+$0A, ptrAIUnknown0xCC+$0B, ptrAIUnknown0xCC+$1A, ptrAIUnknown0xCC+$1C, ptrAIUnknown0xCC+$1E, ptrAIUnknown0xCC+$20, ptrAIUnknown0xCC+$36]
+  ram_touched: [ptrAIActionData, ptrAISlot+$01, ptrAISlot+$05, ptrAISlot+$06, ptrAISlot+$07, ptrAISlot+$08, ptrAISlot+$09, ptrAISlot+$0A, ptrAISlot+$0B, ptrAISlot+$1A, ptrAISlot+$1C, ptrAISlot+$1E, ptrAISlot+$20, ptrAISlot+$36]
   calls: []
   open_questions: "The interpretation of the arguments comes from analysis of the fields in fAI_UpdateSlotMovementAndObject/8483CC/848331 (probable, not tested in emulation). The exact role of +$0F (preferred direction 1/2/4/8) and of flag bit $80 (skips the bounds check) is not determined. The range units (px) follow from the comparison with posX/posY."
 

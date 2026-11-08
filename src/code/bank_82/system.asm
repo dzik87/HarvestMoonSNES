@@ -19,7 +19,7 @@
 ;          that many 2x2-tile pieces (tile, tile+1 / tile+$10, tile+$11) to the name table with two small DMA transfers per piece
 ;          (top row, then the row $20 words below). Tile numbers are advanced by 2 per piece.
 ; @clobbers A X Y
-; @modifies strcVariables.n16Temp1, strcVariables.n16Temp2, strcVariables.n16Temp3, strcVariables.n16Temp4, strcVariables.n16Unk86, strcVariables.n16Unk88, ptrTemp0x72
+; @modifies strcVariables.n16Temp1, strcVariables.n16Temp2, strcVariables.n16Temp3, strcVariables.n16Temp4, strcVariables.n16Temp5, strcVariables.n16Temp6, ptrTemp0x72
 ; @mode    M16X16 -> M16X16
 ; @calls   fCore_PrepareTransfer, fCore_StartTransfer
 ; @callers fMainMenu_StateNewGameSlotSelect, fMainMenu_StateLoadGameSlotSelect
@@ -41,7 +41,7 @@ fMainMenu_DrawSaveSlotFrames:
     INC A                                                      ;82E758|1A      |      ;
     STA.B strcVariables.n16Temp4                               ;82E759|8584    |000084;
     LDA.L aMainMenu_SlotFrameVramAddr,X                                    ;82E75B|BF58F282|82F258;
-    STA.B strcVariables.n16Unk86                               ;82E75F|8586    |000086;
+    STA.B strcVariables.n16Temp5                               ;82E75F|8586    |000086;
     LDY.W #$0000                                               ;82E761|A00000  |      ;
  
   - PHY                                                        ;82E764|5A      |      ;
@@ -53,7 +53,7 @@ fMainMenu_DrawSaveSlotFrames:
     STA.B strcSystem.destinationRegister                       ;82E76E|8529    |000029;
     REP #$30                                                   ;82E770|C230    |      ;
     LDY.W #$0004                                               ;82E772|A00400  |      ;
-    LDX.B strcVariables.n16Unk86                               ;82E775|A686    |000086;
+    LDX.B strcVariables.n16Temp5                               ;82E775|A686    |000086;
     LDA.W #$007E                                               ;82E777|A97E00  |      ;
     STA.B ptrTemp0x72                                          ;82E77A|8572    |000072;
     SEP #$20                                                   ;82E77C|E220    |      ;
@@ -69,7 +69,7 @@ fMainMenu_DrawSaveSlotFrames:
     STA.B strcSystem.destinationRegister                       ;82E793|8529    |000029;
     REP #$30                                                   ;82E795|C230    |      ;
     LDY.W #$0004                                               ;82E797|A00400  |      ;
-    LDX.B strcVariables.n16Unk86                               ;82E79A|A686    |000086;
+    LDX.B strcVariables.n16Temp5                               ;82E79A|A686    |000086;
     TXA                                                        ;82E79C|8A      |      ;
     CLC                                                        ;82E79D|18      |      ;
     ADC.W #$0020                                               ;82E79E|692000  |      ;
@@ -92,8 +92,8 @@ fMainMenu_DrawSaveSlotFrames:
     INC.B strcVariables.n16Temp3                               ;82E7C6|E682    |000082;
     INC.B strcVariables.n16Temp4                               ;82E7C8|E684    |000084;
     INC.B strcVariables.n16Temp4                               ;82E7CA|E684    |000084;
-    INC.B strcVariables.n16Unk86                               ;82E7CC|E686    |000086;
-    INC.B strcVariables.n16Unk86                               ;82E7CE|E686    |000086;
+    INC.B strcVariables.n16Temp5                               ;82E7CC|E686    |000086;
+    INC.B strcVariables.n16Temp5                               ;82E7CE|E686    |000086;
     PLX                                                        ;82E7D0|FA      |      ;
     PLY                                                        ;82E7D1|7A      |      ;
     INY                                                        ;82E7D2|C8      |      ;
@@ -102,8 +102,8 @@ fMainMenu_DrawSaveSlotFrames:
     else
     LDA.L aMainMenu_SlotFrameRunLength,X                                    ;82E7D3|BF88F282|82F288;
     endif
-    STA.B strcVariables.n16Unk88                               ;82E7D7|8588    |000088;
-    CPY.B strcVariables.n16Unk88                               ;82E7D9|C488    |000088;
+    STA.B strcVariables.n16Temp6                               ;82E7D7|8588    |000088;
+    CPY.B strcVariables.n16Temp6                               ;82E7D9|C488    |000088;
     BNE -                                                      ;82E7DB|D087    |82E764;
     INX                                                        ;82E7DD|E8      |      ;
     INX                                                        ;82E7DE|E8      |      ;

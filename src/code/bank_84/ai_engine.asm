@@ -2,7 +2,7 @@
 ; @file   ai_engine.asm
 ; @brief  Interpreter of the AI script byte-code ("AI" = NPC / animal / cut-scene scripts) plus the per-actor update
 ;         handlers (chicken, cow, mole, horse, dog) that are themselves script commands.
-; @details The engine owns 49 "slots" (strcAIUnknown, 64 bytes each, $7EB586-$7EC1C5). A slot runs one script: the
+; @details The engine owns 49 "slots" (strcAISlot, 64 bytes each, $7EB586-$7EC1C5). A slot runs one script: the
 ;         24-bit script pointer lives at slot +$30 (word) / +$32 (bank) and is copied to ptrAIActionData while a command runs.
 ;         Every frame fAI_RunSlots walks the slots: an active slot with wait counter (+$10) = 0 executes commands through
 ;         the jump table aAIActions (opcode*2, generated in build/gen/blocks/ai_action_tables.asm; macros: src/ai/commands.asm,
@@ -10,7 +10,7 @@
 ;         (fAI_UpdateSlotMovementAndObject) runs.
 ;
 ;         Command handler convention: entered with JSR from fAI_ExecuteAiAction in M16X16, ptrAIActionData -> opcode byte,
-;         ptrAIUnknown0xCC -> current slot ($7E:xxxx long pointer). The handler advances ptrAIActionData past the opcode and
+;         ptrAISlot -> current slot ($7E:xxxx long pointer). The handler advances ptrAIActionData past the opcode and
 ;         its operands (macro AIMoveAction) or replaces it with a jump target (16-bit, bank unchanged), may use ptrTemp0x72
 ;         and strcVariables.n8Temp*/n16Temp* as scratch, and returns with RTS. To yield it adds 1 to the wait counter (+$10).
 ;         Handlers need not preserve the register width (the caller reloads REP #$30).
@@ -40,8 +40,8 @@
 ;          byte +00 is cleared; the other slot fields stay stale until a script is started in the slot.
 ; @mode    M16X16 -> M16X16
 ; @clobbers A X Y
-; @modifies ptrAIUnknown0xCC
-; @note    Also writes slot fields: strcAIUnknown[0..48].+00.
+; @modifies ptrAISlot
+; @note    Also writes slot fields: strcAISlot[0..48].+00.
 ; @calls   fAI_SelectSlot
 ; @callers fMap_ResetAndLoadDestinationArea, fMainMenu_StateOpeningDemo, fMainMenu_StartHowToPlayDemo
 ;;
@@ -56,7 +56,7 @@ fAI_ClearAllSlots:
     REP #$10                                                   ;84800D|C210    |      ;
     LDY.W #$0000                                               ;84800F|A00000  |      ;
     LDA.B #$00                                                 ;848012|A900    |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;848014|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;848014|97CC    |0000CC;
     REP #$30                                                   ;848016|C230    |      ;
     PLX                                                        ;848018|FA      |      ;
     INX                                                        ;848019|E8      |      ;
@@ -67,12 +67,12 @@ fAI_ClearAllSlots:
  
 ;;
 ; @brief   Stops the script of the currently selected slot and destroys the game object it owns.
-; @details Clears the active byte (+00) of the slot ptrAIUnknown0xCC points to, then loads the game object index from +12
+; @details Clears the active byte (+00) of the slot ptrAISlot points to, then loads the game object index from +12
 ;          into strcObject.gameObjectIdx and calls fObject_Destroy. Used for animals / pick-ups that vanish when the player
 ;          picks them up (chickens, cow, dog, items).
-; @param   ptrAIUnknown0xCC  slot to deactivate (set with fAI_SelectSlot)
+; @param   ptrAISlot  slot to deactivate (set with fAI_SelectSlot)
 ; @modifies strcObject.gameObjectIdx
-; @note    Also writes slot fields: strcAIUnknown.+00.
+; @note    Also writes slot fields: strcAISlot.+00.
 ; @mode    M16X16 -> M16X16
 ; @clobbers A Y
 ; @calls   fAI_SelectSlot, fObject_Destroy
@@ -84,10 +84,10 @@ fAI_DeactivateSlotAndObject:
     REP #$10                                                   ;848028|C210    |      ;
     LDY.W #$0000                                               ;84802A|A00000  |      ;
     LDA.B #$00                                                 ;84802D|A900    |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;84802F|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;84802F|97CC    |0000CC;
     REP #$30                                                   ;848031|C230    |      ;
     LDY.W #$0012                                               ;848033|A01200  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;848036|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;848036|B7CC    |0000CC;
     STA.B strcObject.gameObjectIdx                             ;848038|85A5    |0000A5;
     JSL.L fObject_Destroy                                ;84803A|22A28185|8581A2;
     RTL                                                        ;84803E|6B      |      ;
@@ -102,8 +102,8 @@ fAI_DeactivateSlotAndObject:
 ; @param   A  slot number (0..48); the animal handlers pass fixed slots (mole $11, dog $16, horse $17) or their own id from +3F
 ; @param   X  script set index (entry of pppAISelector; the animal handlers all use set 0)
 ; @param   Y  script index inside the set
-; @modifies ptrAIUnknown0xCC, ptrUnknown0x75, ptrObjectData, ptrAIActionData, strcVariables.n16Temp1, strcVariables.n16Temp2
-; @note    Also writes slot fields: strcAIUnknown.+30/+32 and slot reset fields.
+; @modifies ptrAISlot, ptrTemp0x75, ptrObjectData, ptrAIActionData, strcVariables.n16Temp1, strcVariables.n16Temp2
+; @note    Also writes slot fields: strcAISlot.+30/+32 and slot reset fields.
 ; @mode    M16X16 -> M16X16
 ; @clobbers A X Y
 ; @calls   fAI_SelectSlot, fAI_ResetSlotKeepObject
@@ -117,24 +117,24 @@ fAI_SetSlotScript:
     STY.B strcVariables.n16Temp2                               ;848049|8480    |000080;
     LDX.W #$0000                                               ;84804B|A20000  |      ;
     LDA.L pppAISelector,X                                      ;84804E|BFCD9484|8494CD; index = 0
-    STA.B ptrUnknown0x75                                       ;848052|8575    |000075;
+    STA.B ptrTemp0x75                                       ;848052|8575    |000075;
     INX                                                        ;848054|E8      |      ;
     INX                                                        ;848055|E8      |      ;
     SEP #$20                                                   ;848056|E220    |      ;
     LDA.L pppAISelector,X                                      ;848058|BFCD9484|8494CD;
-    STA.B ptrUnknown0x75+2                                     ;84805C|8577    |000077; $0x75 = 0xB38000
+    STA.B ptrTemp0x75+2                                     ;84805C|8577    |000077; $0x75 = 0xB38000
     REP #$20                                                   ;84805E|C220    |      ;
     LDA.B strcVariables.n16Temp1                               ;848060|A57E    |00007E;
     ASL A                                                      ;848062|0A      |      ;
     CLC                                                        ;848063|18      |      ;
     ADC.B strcVariables.n16Temp1                               ;848064|657E    |00007E;
     TAY                                                        ;848066|A8      |      ;
-    LDA.B [ptrUnknown0x75],Y                                   ;848067|B775    |000075; index = nIndex * 2
+    LDA.B [ptrTemp0x75],Y                                   ;848067|B775    |000075; index = nIndex * 2
     STA.B ptrObjectData                                        ;848069|8578    |000078;
     INY                                                        ;84806B|C8      |      ;
     INY                                                        ;84806C|C8      |      ;
     SEP #$20                                                   ;84806D|E220    |      ;
-    LDA.B [ptrUnknown0x75],Y                                   ;84806F|B775    |000075;
+    LDA.B [ptrTemp0x75],Y                                   ;84806F|B775    |000075;
     STA.B ptrObjectData+2                                      ;848071|857A    |00007A; $78 = 0xB38BB8
     REP #$20                                                   ;848073|C220    |      ;
     LDA.B strcVariables.n16Temp2                               ;848075|A580    |000080;
@@ -143,14 +143,14 @@ fAI_SetSlotScript:
     LDA.B [ptrObjectData],Y                                    ;848079|B778    |000078; index = nSubindex * 2
     REP #$30                                                   ;84807B|C230    |      ;
     LDY.W #$0030                                               ;84807D|A03000  |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;848080|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;848080|97CC    |0000CC;
     STA.B ptrAIActionData                                      ;848082|85C9    |0000C9;
     SEP #$20                                                   ;848084|E220    |      ;
     LDA.B ptrObjectData+2                                      ;848086|A57A    |00007A;
     SEP #$20                                                   ;848088|E220    |      ;
     REP #$10                                                   ;84808A|C210    |      ;
     LDY.W #$0032                                               ;84808C|A03200  |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;84808F|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;84808F|97CC    |0000CC;
     STA.B ptrAIActionData+2                                    ;848091|85CB    |0000CB;
     JSR.W fAI_ResetSlotKeepObject                                    ;848093|206189  |848961;
     RTL                                                        ;848096|6B      |      ;
@@ -164,7 +164,7 @@ fAI_SetSlotScript:
 ; @param   A  slot number (0..48); also stored in +3F
 ; @param   X  script set index
 ; @param   Y  script index inside the set
-; @modifies ptrAIUnknown0xCC, ptrTemp0x72, ptrAIActionData, strcVariables.n16Temp1, strcVariables.n16Temp2
+; @modifies ptrAISlot, ptrTemp0x72, ptrAIActionData, strcVariables.n16Temp1, strcVariables.n16Temp2
 ; @note    Also writes slot fields: slot +30/+32/+3F and reset fields.
 ; @mode    M16X16 -> M16X16
 ; @clobbers A X Y
@@ -206,20 +206,20 @@ fAI_StartSlotScript:
     LDA.B [ptrAIActionData],Y                                  ;8480D2|B7C9    |0000C9;
     REP #$30                                                   ;8480D4|C230    |      ;
     LDY.W #$0030                                               ;8480D6|A03000  |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;8480D9|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;8480D9|97CC    |0000CC;
     SEP #$20                                                   ;8480DB|E220    |      ;
     LDA.B ptrAIActionData+2                                    ;8480DD|A5CB    |0000CB;
     SEP #$20                                                   ;8480DF|E220    |      ;
     REP #$10                                                   ;8480E1|C210    |      ;
     LDY.W #$0032                                               ;8480E3|A03200  |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;8480E6|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;8480E6|97CC    |0000CC;
     JSR.W fAI_ResetSlotFull                                    ;8480E8|20D488  |8488D4;
     REP #$30                                                   ;8480EB|C230    |      ;
     PLA                                                        ;8480ED|68      |      ;
     SEP #$20                                                   ;8480EE|E220    |      ;
     REP #$10                                                   ;8480F0|C210    |      ;
     LDY.W #$003F                                               ;8480F2|A03F00  |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;8480F5|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;8480F5|97CC    |0000CC;
     RTL                                                        ;8480F7|6B      |      ;
  
  
@@ -231,7 +231,7 @@ fAI_StartSlotScript:
 ; @param   A  slot number
 ; @param   X  script set index
 ; @param   Y  script index inside the set
-; @modifies ptrAIUnknown0xCC, ptrTemp0x72, ptrAIActionData, strcVariables.n16Temp1, strcVariables.n16Temp2
+; @modifies ptrAISlot, ptrTemp0x72, ptrAIActionData, strcVariables.n16Temp1, strcVariables.n16Temp2
 ; @note    Also writes slot fields: slot fields.
 ; @mode    M16X16 -> M16X16
 ; @clobbers A X Y
@@ -272,29 +272,29 @@ fAI_StartSlotScriptAtFrontTile:
     LDA.B [ptrAIActionData],Y                                  ;848133|B7C9    |0000C9;
     REP #$30                                                   ;848135|C230    |      ;
     LDY.W #$0030                                               ;848137|A03000  |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;84813A|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;84813A|97CC    |0000CC;
     SEP #$20                                                   ;84813C|E220    |      ;
     LDA.B ptrAIActionData+2                                    ;84813E|A5CB    |0000CB;
     SEP #$20                                                   ;848140|E220    |      ;
     REP #$10                                                   ;848142|C210    |      ;
     LDY.W #$0032                                               ;848144|A03200  |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;848147|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;848147|97CC    |0000CC;
     JSR.W fAI_ResetSlotFull                                    ;848149|20D488  |8488D4;
     REP #$30                                                   ;84814C|C230    |      ;
     PLA                                                        ;84814E|68      |      ;
     SEP #$20                                                   ;84814F|E220    |      ;
     REP #$10                                                   ;848151|C210    |      ;
     LDY.W #$003F                                               ;848153|A03F00  |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;848156|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;848156|97CC    |0000CC;
     REP #$30                                                   ;848158|C230    |      ;
     LDA.W nTileInFrontOfPlayerX                                ;84815A|AD8509  |000985;
     REP #$30                                                   ;84815D|C230    |      ;
     LDY.W #$001A                                               ;84815F|A01A00  |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;848162|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;848162|97CC    |0000CC;
     LDA.W nTileInFrontOfPlayerY                                ;848164|AD8709  |000987;
     REP #$30                                                   ;848167|C230    |      ;
     LDY.W #$001C                                               ;848169|A01C00  |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;84816C|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;84816C|97CC    |0000CC;
     RTL                                                        ;84816E|6B      |      ;
  
  
@@ -309,7 +309,7 @@ fAI_StartSlotScriptAtFrontTile:
 ;          daily1 $01D0, daily2 $0400, daily3 $0040 and daily4 $0010 are cleared.
 ; @mode    M8X16 -> M16X16
 ; @clobbers A X Y
-; @modifies strcPlayer.lastRandomNumber, ptrAIUnknown0xCC
+; @modifies strcPlayer.lastRandomNumber, ptrAISlot
 ; @note    Also writes slot fields: strcFlags.daily1-4 (bits above), all slot fields.
 ; @calls   fGetRandomNumber, fAI_ExecuteAiAction, fAI_UpdateSlotMovementAndObject
 ; @callers fCore_MainLoop, fMap_SetupArea, fMap_ResetAndLoadDestinationArea, fMainMenu_PrepareHowToPlay, fMainMenu_StateOpeningDemo, fMainMenu_StartHowToPlayDemo
@@ -339,10 +339,10 @@ fAI_RunSlots:
     STA.B strcPlayer.lastRandomNumber                          ;848196|85DE    |0000DE;
     REP #$20                                                   ;848198|C220    |      ;
     LDA.W #$B586                                               ;84819A|A986B5  |      ;
-    STA.B ptrAIUnknown0xCC                                     ;84819D|85CC    |0000CC;
+    STA.B ptrAISlot                                     ;84819D|85CC    |0000CC;
     SEP #$20                                                   ;84819F|E220    |      ;
     LDA.B #$7E                                                 ;8481A1|A97E    |      ;
-    STA.B ptrAIUnknown0xCC+2                                   ;8481A3|85CE    |0000CE; 7EB586 -> $CC
+    STA.B ptrAISlot+2                                   ;8481A3|85CE    |0000CE; 7EB586 -> $CC
     REP #$20                                                   ;8481A5|C220    |      ;
     LDX.W #$0000                                               ;8481A7|A20000  |      ;
  
@@ -351,24 +351,24 @@ fAI_RunSlots:
     SEP #$20                                                   ;8481AD|E220    |      ;
     REP #$10                                                   ;8481AF|C210    |      ;
     LDY.W #$0000                                               ;8481B1|A00000  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;8481B4|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;8481B4|B7CC    |0000CC;
     AND.B #$01                                                 ;8481B6|2901    |      ;
     BEQ .next_slot                                                ;8481B8|F04F    |848209;
     REP #$30                                                   ;8481BA|C230    |      ;
     LDY.W #$0010                                               ;8481BC|A01000  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;8481BF|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;8481BF|B7CC    |0000CC;
     BNE .decrement_timer                                                ;8481C1|D01C    |8481DF;
  
   - SEP #$20                                                   ;8481C3|E220    |      ;
     REP #$10                                                   ;8481C5|C210    |      ;
     LDY.W #$0001                                               ;8481C7|A00100  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;8481CA|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;8481CA|B7CC    |0000CC;
     AND.B #$08                                                 ;8481CC|2908    |      ;
     BNE +                                                      ;8481CE|D00A    |8481DA;
     REP #$20                                                   ;8481D0|C220    |      ;
     LDY.W #$0003                                               ;8481D2|A00300  |      ;
     LDA.W #$0000                                               ;8481D5|A90000  |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;8481D8|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;8481D8|97CC    |0000CC;
  
   + JSR.W fAI_ExecuteAiAction                                  ;8481DA|204982  |848249;
     BRA +                                                      ;8481DD|8008    |8481E7;
@@ -379,11 +379,11 @@ fAI_RunSlots:
     DEC A                                                      ;8481DF|3A      |      ;
     REP #$30                                                   ;8481E0|C230    |      ;
     LDY.W #$0010                                               ;8481E2|A01000  |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;8481E5|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;8481E5|97CC    |0000CC;
  
   + REP #$30                                                   ;8481E7|C230    |      ;
     LDY.W #$0010                                               ;8481E9|A01000  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;8481EC|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;8481EC|B7CC    |0000CC;
     BEQ -                                                      ;8481EE|F0D3    |8481C3;
     SEP #$20                                                   ;8481F0|E220    |      ;
     LDA.B strcPlayer.lastRandomNumber                          ;8481F2|A5DE    |0000DE;
@@ -393,7 +393,7 @@ fAI_RunSlots:
     SEP #$20                                                   ;8481F9|E220    |      ;
     REP #$10                                                   ;8481FB|C210    |      ;
     LDY.W #$0001                                               ;8481FD|A00100  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;848200|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;848200|B7CC    |0000CC;
     AND.B #$01                                                 ;848202|2901    |      ;
     BEQ .next_slot                                                ;848204|F003    |848209;
     JSR.W fAI_UpdateSlotMovementAndObject                                    ;848206|208682  |848286;
@@ -401,10 +401,10 @@ fAI_RunSlots:
 .next_slot:
     ; advance to the next 64-byte slot; 49 slots in total ($31)
     REP #$30                                                   ;848209|C230    |      ;
-    LDA.B ptrAIUnknown0xCC                                     ;84820B|A5CC    |0000CC;
+    LDA.B ptrAISlot                                     ;84820B|A5CC    |0000CC;
     CLC                                                        ;84820D|18      |      ;
     ADC.W #$0040                                               ;84820E|694000  |      ;
-    STA.B ptrAIUnknown0xCC                                     ;848211|85CC    |0000CC;
+    STA.B ptrAISlot                                     ;848211|85CC    |0000CC;
     PLX                                                        ;848213|FA      |      ;
     INX                                                        ;848214|E8      |      ;
     CPX.W #$0031                                               ;848215|E03100  |      ;
@@ -424,7 +424,7 @@ fAI_RunSlots:
 ; @brief   Fetches the command opcode of the current slot, dispatches to its handler and stores the new script pointer.
 ; @details Loads the 24-bit script pointer from slot +30/+32 into ptrAIActionData, reads the opcode byte, calls
 ;          aAIActions[opcode] with JSR and writes the (advanced or jumped) ptrAIActionData back to the slot.
-; @param   ptrAIUnknown0xCC  current slot
+; @param   ptrAISlot  current slot
 ; @modifies ptrAIActionData
 ; @note    Also writes slot fields: slot +30/+32.
 ; @mode    M16X16 -> M8X16
@@ -435,12 +435,12 @@ fAI_ExecuteAiAction:
     REP #$30                                                   ;848249|C230    |      ;
     REP #$30                                                   ;84824B|C230    |      ;
     LDY.W #$0030                                               ;84824D|A03000  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;848250|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;848250|B7CC    |0000CC;
     STA.B ptrAIActionData                                      ;848252|85C9    |0000C9;
     SEP #$20                                                   ;848254|E220    |      ;
     REP #$10                                                   ;848256|C210    |      ;
     LDY.W #$0032                                               ;848258|A03200  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;84825B|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;84825B|B7CC    |0000CC;
     STA.B ptrAIActionData+2                                    ;84825D|85CB    |0000CB;
     SEP #$20                                                   ;84825F|E220    |      ;
     LDA.B #$00                                                 ;848261|A900    |      ;
@@ -454,13 +454,13 @@ fAI_ExecuteAiAction:
     LDA.B ptrAIActionData                                      ;84826F|A5C9    |0000C9;
     REP #$30                                                   ;848271|C230    |      ;
     LDY.W #$0030                                               ;848273|A03000  |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;848276|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;848276|97CC    |0000CC;
     SEP #$20                                                   ;848278|E220    |      ;
     LDA.B ptrAIActionData+2                                    ;84827A|A5CB    |0000CB;
     SEP #$20                                                   ;84827C|E220    |      ;
     REP #$10                                                   ;84827E|C210    |      ;
     LDY.W #$0032                                               ;848280|A03200  |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;848283|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;848283|97CC    |0000CC;
     RTS                                                        ;848285|60      |      ;
  
  
@@ -471,7 +471,7 @@ fAI_ExecuteAiAction:
 ;          bit6 -> fObject_Destroy; bit1 -> fObject_Create (the new object index is stored in +12); bit2 -> fObject_Replace when
 ;          the sprite index changed since +18; otherwise fObject_UpdatePositionAndFlip. Finally +18 = +16 and the one-shot flag
 ;          bits 1, 2 and 4 are cleared (flags &= $E9).
-; @param   ptrAIUnknown0xCC  current slot
+; @param   ptrAISlot  current slot
 ; @modifies strcObject.gameObjectIdx, strcObject.flip, strcObject.posX, strcObject.posY, strcObject.spriteTableIdx
 ; @note    Also writes slot fields: slot +01/+12/+18.
 ; @mode    M16X16 -> M16X16
@@ -483,7 +483,7 @@ fAI_UpdateSlotMovementAndObject:
     SEP #$20                                                   ;848288|E220    |      ;
     REP #$10                                                   ;84828A|C210    |      ;
     LDY.W #$0001                                               ;84828C|A00100  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;84828F|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;84828F|B7CC    |0000CC;
     AND.B #$10                                                 ;848291|2910    |      ;
     BNE +                                                      ;848293|D006    |84829B;
     JSR.W fAI_UpdateSlotWander                                    ;848295|20CC83  |8483CC;
@@ -491,30 +491,30 @@ fAI_UpdateSlotMovementAndObject:
  
   + REP #$30                                                   ;84829B|C230    |      ;
     LDY.W #$0012                                               ;84829D|A01200  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;8482A0|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;8482A0|B7CC    |0000CC;
     STA.B strcObject.gameObjectIdx                             ;8482A2|85A5    |0000A5;
     LDY.W #$0014                                               ;8482A4|A01400  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;8482A7|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;8482A7|B7CC    |0000CC;
     STA.B strcObject.flip                                      ;8482A9|859F    |00009F;
     LDY.W #$001A                                               ;8482AB|A01A00  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;8482AE|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;8482AE|B7CC    |0000CC;
     STA.B strcObject.posX                                      ;8482B0|859B    |00009B;
     LDY.W #$001C                                               ;8482B2|A01C00  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;8482B5|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;8482B5|B7CC    |0000CC;
     STA.B strcObject.posY                                      ;8482B7|859D    |00009D;
     LDY.W #$0016                                               ;8482B9|A01600  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;8482BC|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;8482BC|B7CC    |0000CC;
     STA.B strcObject.spriteTableIdx                            ;8482BE|85A1    |0000A1;
     SEP #$20                                                   ;8482C0|E220    |      ;
     REP #$10                                                   ;8482C2|C210    |      ;
     LDY.W #$0001                                               ;8482C4|A00100  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;8482C7|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;8482C7|B7CC    |0000CC;
     AND.B #$40                                                 ;8482C9|2940    |      ;
     BNE .destroy_object                                                ;8482CB|D03D    |84830A;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;8482CD|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;8482CD|B7CC    |0000CC;
     AND.B #$02                                                 ;8482CF|2902    |      ;
     BNE .create_object                                                ;8482D1|D00C    |8482DF;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;8482D3|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;8482D3|B7CC    |0000CC;
     AND.B #$04                                                 ;8482D5|2904    |      ;
     BNE .replace_sprite                                                ;8482D7|D017    |8482F0;
     JSL.L fObject_UpdatePositionAndFlip                                ;8482D9|22B98085|8580B9;
@@ -528,7 +528,7 @@ fAI_UpdateSlotMovementAndObject:
     LDA.B strcObject.gameObjectIdx                             ;8482E5|A5A5    |0000A5;
     REP #$30                                                   ;8482E7|C230    |      ;
     LDY.W #$0012                                               ;8482E9|A01200  |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;8482EC|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;8482EC|97CC    |0000CC;
     BRA .return                                                ;8482EE|801E    |84830E;
  
  
@@ -536,11 +536,11 @@ fAI_UpdateSlotMovementAndObject:
     ; only replace when the sprite index (+16) differs from the shown one (+18)
     REP #$30                                                   ;8482F0|C230    |      ;
     LDY.W #$0016                                               ;8482F2|A01600  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;8482F5|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;8482F5|B7CC    |0000CC;
     STA.B strcVariables.n16Temp1                               ;8482F7|857E    |00007E;
     REP #$30                                                   ;8482F9|C230    |      ;
     LDY.W #$0018                                               ;8482FB|A01800  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;8482FE|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;8482FE|B7CC    |0000CC;
     CMP.B strcVariables.n16Temp1                               ;848300|C57E    |00007E;
     BEQ .return                                                ;848302|F00A    |84830E;
     JSL.L fObject_Replace                                ;848304|22008185|858100;
@@ -554,19 +554,19 @@ fAI_UpdateSlotMovementAndObject:
 .return:
     REP #$30                                                   ;84830E|C230    |      ;
     LDY.W #$0016                                               ;848310|A01600  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;848313|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;848313|B7CC    |0000CC;
     REP #$30                                                   ;848315|C230    |      ;
     LDY.W #$0018                                               ;848317|A01800  |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;84831A|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;84831A|97CC    |0000CC;
     SEP #$20                                                   ;84831C|E220    |      ;
     REP #$10                                                   ;84831E|C210    |      ;
     LDY.W #$0001                                               ;848320|A00100  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;848323|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;848323|B7CC    |0000CC;
     AND.B #$E9                                                 ;848325|29E9    |      ;
     SEP #$20                                                   ;848327|E220    |      ;
     REP #$10                                                   ;848329|C210    |      ;
     LDY.W #$0001                                               ;84832B|A00100  |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;84832E|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;84832E|97CC    |0000CC;
     RTS                                                        ;848330|60      |      ;
  
  
@@ -575,7 +575,7 @@ fAI_UpdateSlotMovementAndObject:
 ; @details Decrements the step counter (+06); when it reaches 0 it is reloaded from +05 and the sign-extended dx (+03) / dy (+04)
 ;          are added to the position (+1A / +1C). Set up by AI command 0x0D (MoveObject) and by the wander code; the flag is never
 ;          cleared here, a following 0x0D with dx = dy = 0 stops the motion.
-; @param   ptrAIUnknown0xCC  current slot
+; @param   ptrAISlot  current slot
 ; @modifies strcVariables.n16Temp1, strcVariables.n16Temp2
 ; @note    Also writes slot fields: slot +06, +1A, +1C.
 ; @mode    M16X16 -> M16X16
@@ -587,7 +587,7 @@ fAI_UpdateSlotStepMove:
     SEP #$20                                                   ;848333|E220    |      ;
     REP #$10                                                   ;848335|C210    |      ;
     LDY.W #$0001                                               ;848337|A00100  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;84833A|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;84833A|B7CC    |0000CC;
     AND.B #$20                                                 ;84833C|2920    |      ;
     BNE +                                                      ;84833E|D003    |848343;
     JMP.W .return                                              ;848340|4CCB83  |8483CB;
@@ -596,31 +596,31 @@ fAI_UpdateSlotStepMove:
   + SEP #$20                                                   ;848343|E220    |      ;
     REP #$10                                                   ;848345|C210    |      ;
     LDY.W #$0006                                               ;848347|A00600  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;84834A|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;84834A|B7CC    |0000CC;
     DEC A                                                      ;84834C|3A      |      ;
     SEP #$20                                                   ;84834D|E220    |      ;
     REP #$10                                                   ;84834F|C210    |      ;
     LDY.W #$0006                                               ;848351|A00600  |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;848354|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;848354|97CC    |0000CC;
     SEP #$20                                                   ;848356|E220    |      ;
     REP #$10                                                   ;848358|C210    |      ;
     LDY.W #$0006                                               ;84835A|A00600  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;84835D|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;84835D|B7CC    |0000CC;
     BNE .return                                                ;84835F|D06A    |8483CB;
     SEP #$20                                                   ;848361|E220    |      ;
     REP #$10                                                   ;848363|C210    |      ;
     LDY.W #$0005                                               ;848365|A00500  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;848368|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;848368|B7CC    |0000CC;
     SEP #$20                                                   ;84836A|E220    |      ;
     REP #$10                                                   ;84836C|C210    |      ;
     LDY.W #$0006                                               ;84836E|A00600  |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;848371|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;848371|97CC    |0000CC;
     REP #$20                                                   ;848373|C220    |      ;
     LDA.W #$0000                                               ;848375|A90000  |      ;
     SEP #$20                                                   ;848378|E220    |      ;
     REP #$10                                                   ;84837A|C210    |      ;
     LDY.W #$0003                                               ;84837C|A00300  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;84837F|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;84837F|B7CC    |0000CC;
     BMI +                                                      ;848381|3002    |848385;
     BRA .dx_sign_done                                                ;848383|8006    |84838B;
  
@@ -638,7 +638,7 @@ fAI_UpdateSlotStepMove:
     SEP #$20                                                   ;848392|E220    |      ;
     REP #$10                                                   ;848394|C210    |      ;
     LDY.W #$0004                                               ;848396|A00400  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;848399|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;848399|B7CC    |0000CC;
     BMI +                                                      ;84839B|3002    |84839F;
     BRA .dy_sign_done                                                ;84839D|8006    |8483A5;
  
@@ -653,20 +653,20 @@ fAI_UpdateSlotStepMove:
     STA.B strcVariables.n16Temp2                               ;8483A7|8580    |000080;
     REP #$30                                                   ;8483A9|C230    |      ;
     LDY.W #$001A                                               ;8483AB|A01A00  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;8483AE|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;8483AE|B7CC    |0000CC;
     CLC                                                        ;8483B0|18      |      ;
     ADC.B strcVariables.n16Temp1                               ;8483B1|657E    |00007E;
     REP #$30                                                   ;8483B3|C230    |      ;
     LDY.W #$001A                                               ;8483B5|A01A00  |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;8483B8|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;8483B8|97CC    |0000CC;
     REP #$30                                                   ;8483BA|C230    |      ;
     LDY.W #$001C                                               ;8483BC|A01C00  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;8483BF|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;8483BF|B7CC    |0000CC;
     CLC                                                        ;8483C1|18      |      ;
     ADC.B strcVariables.n16Temp2                               ;8483C2|6580    |000080;
     REP #$30                                                   ;8483C4|C230    |      ;
     LDY.W #$001C                                               ;8483C6|A01C00  |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;8483C9|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;8483C9|97CC    |0000CC;
  
 .return:
     RTS                                                        ;8483CB|60      |      ;
@@ -684,7 +684,7 @@ fAI_UpdateSlotStepMove:
 ;          the move is checked with fGameEngine_CheckTileCollisionDir / fGameEngine_CheckPlayerOverlap (map collision and
 ;          player overlap; tile ids $E1/$C0-$CF/$FF special cased, +3F in $18-$23 exempt); a blocked step resets velocity and
 ;          the preferred direction (+0F).
-; @param   ptrAIUnknown0xCC  current slot
+; @param   ptrAISlot  current slot
 ; @modifies strcPlayer.lastX, strcPlayer.lastY, strcPlayer.newX, strcPlayer.newY, strcPlayer.unkE3, strcVariables.n8Temp1, strcVariables.n16Temp1, strcVariables.n16Temp2, ptrTemp0x72
 ; @note    Also writes slot fields: slot +02..+0F.
 ; @mode    M16X16 -> M16X16
@@ -696,31 +696,31 @@ fAI_UpdateSlotWander:
     REP #$30                                                   ;8483CC|C230    |      ;
     SEP #$20                                                   ;8483CE|E220    |      ;
     LDY.W #$0001                                               ;8483D0|A00100  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;8483D3|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;8483D3|B7CC    |0000CC;
     AND.B #$08                                                 ;8483D5|2908    |      ;
     BNE +                                                      ;8483D7|D003    |8483DC;
     JMP.W .justReturn                                          ;8483D9|4C1688  |848816;
  
  
   + LDY.W #$0006                                               ;8483DC|A00600  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;8483DF|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;8483DF|B7CC    |0000CC;
     STA.B strcVariables.n8Temp1                                ;8483E1|8592    |000092;
     LDY.W #$0005                                               ;8483E3|A00500  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;8483E6|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;8483E6|B7CC    |0000CC;
     CMP.B strcVariables.n8Temp1                                ;8483E8|C592    |000092;
     BEQ +                                                      ;8483EA|F003    |8483EF;
     JMP.W .justReturn                                          ;8483EC|4C1688  |848816;
  
  
   + LDY.W #$0008                                               ;8483EF|A00800  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;8483F2|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;8483F2|B7CC    |0000CC;
     BNE .moving_check_limit                                                ;8483F4|D050    |848446;
     LDY.W #$0007                                               ;8483F6|A00700  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;8483F9|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;8483F9|B7CC    |0000CC;
     LDY.W #$0008                                               ;8483FB|A00800  |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;8483FE|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;8483FE|97CC    |0000CC;
     LDY.W #$000F                                               ;848400|A00F00  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;848403|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;848403|B7CC    |0000CC;
     BEQ .default                                               ;848405|F01C    |848423;
     CMP.B #$01                                                 ;848407|C901    |      ;
     BNE +                                                      ;848409|D003    |84840E;
@@ -774,7 +774,7 @@ fAI_UpdateSlotWander:
     SEP #$20                                                   ;848446|E220    |      ;
     REP #$10                                                   ;848448|C210    |      ;
     LDY.W #$0001                                               ;84844A|A00100  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;84844D|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;84844D|B7CC    |0000CC;
     AND.B #$80                                                 ;84844F|2980    |      ;
     BEQ +                                                      ;848451|F003    |848456;
     JMP.W .decrement_wait_timer                                             ;848453|4C1D87  |84871D;
@@ -782,7 +782,7 @@ fAI_UpdateSlotWander:
  
   + SEP #$20                                                   ;848456|E220    |      ;
     LDY.W #$0002                                               ;848458|A00200  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;84845B|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;84845B|B7CC    |0000CC;
     CMP.B #$00                                                 ;84845D|C900    |      ;
     BEQ .check_down_limit                                                ;84845F|F00F    |848470;
     CMP.B #$01                                                 ;848461|C901    |      ;
@@ -800,16 +800,16 @@ fAI_UpdateSlotWander:
     SEP #$20                                                   ;848475|E220    |      ;
     REP #$10                                                   ;848477|C210    |      ;
     LDY.W #$000A                                               ;848479|A00A00  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;84847C|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;84847C|B7CC    |0000CC;
     REP #$20                                                   ;84847E|C220    |      ;
     STA.B strcVariables.n16Temp1                               ;848480|857E    |00007E;
     REP #$30                                                   ;848482|C230    |      ;
     LDY.W #$001C                                               ;848484|A01C00  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;848487|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;848487|B7CC    |0000CC;
     STA.B strcVariables.n16Temp2                               ;848489|8580    |000080;
     REP #$30                                                   ;84848B|C230    |      ;
     LDY.W #$0020                                               ;84848D|A02000  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;848490|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;848490|B7CC    |0000CC;
     CLC                                                        ;848492|18      |      ;
     ADC.B strcVariables.n16Temp1                               ;848493|657E    |00007E;
     CMP.B strcVariables.n16Temp2                               ;848495|C580    |000080;
@@ -826,16 +826,16 @@ fAI_UpdateSlotWander:
     SEP #$20                                                   ;8484A4|E220    |      ;
     REP #$10                                                   ;8484A6|C210    |      ;
     LDY.W #$000A                                               ;8484A8|A00A00  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;8484AB|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;8484AB|B7CC    |0000CC;
     REP #$20                                                   ;8484AD|C220    |      ;
     STA.B strcVariables.n16Temp1                               ;8484AF|857E    |00007E;
     REP #$30                                                   ;8484B1|C230    |      ;
     LDY.W #$001C                                               ;8484B3|A01C00  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;8484B6|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;8484B6|B7CC    |0000CC;
     STA.B strcVariables.n16Temp2                               ;8484B8|8580    |000080;
     REP #$30                                                   ;8484BA|C230    |      ;
     LDY.W #$0020                                               ;8484BC|A02000  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;8484BF|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;8484BF|B7CC    |0000CC;
     SEC                                                        ;8484C1|38      |      ;
     SBC.B strcVariables.n16Temp1                               ;8484C2|E57E    |00007E;
     CMP.B strcVariables.n16Temp2                               ;8484C4|C580    |000080;
@@ -852,16 +852,16 @@ fAI_UpdateSlotWander:
     SEP #$20                                                   ;8484D3|E220    |      ;
     REP #$10                                                   ;8484D5|C210    |      ;
     LDY.W #$0009                                               ;8484D7|A00900  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;8484DA|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;8484DA|B7CC    |0000CC;
     REP #$20                                                   ;8484DC|C220    |      ;
     STA.B strcVariables.n16Temp1                               ;8484DE|857E    |00007E;
     REP #$30                                                   ;8484E0|C230    |      ;
     LDY.W #$001A                                               ;8484E2|A01A00  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;8484E5|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;8484E5|B7CC    |0000CC;
     STA.B strcVariables.n16Temp2                               ;8484E7|8580    |000080;
     REP #$30                                                   ;8484E9|C230    |      ;
     LDY.W #$001E                                               ;8484EB|A01E00  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;8484EE|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;8484EE|B7CC    |0000CC;
     CLC                                                        ;8484F0|18      |      ;
     ADC.B strcVariables.n16Temp1                               ;8484F1|657E    |00007E;
     CMP.B strcVariables.n16Temp2                               ;8484F3|C580    |000080;
@@ -878,16 +878,16 @@ fAI_UpdateSlotWander:
     SEP #$20                                                   ;848502|E220    |      ;
     REP #$10                                                   ;848504|C210    |      ;
     LDY.W #$0009                                               ;848506|A00900  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;848509|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;848509|B7CC    |0000CC;
     REP #$20                                                   ;84850B|C220    |      ;
     STA.B strcVariables.n16Temp1                               ;84850D|857E    |00007E;
     REP #$30                                                   ;84850F|C230    |      ;
     LDY.W #$001A                                               ;848511|A01A00  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;848514|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;848514|B7CC    |0000CC;
     STA.B strcVariables.n16Temp2                               ;848516|8580    |000080;
     REP #$30                                                   ;848518|C230    |      ;
     LDY.W #$001E                                               ;84851A|A01E00  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;84851D|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;84851D|B7CC    |0000CC;
     SEC                                                        ;84851F|38      |      ;
     SBC.B strcVariables.n16Temp1                               ;848520|E57E    |00007E;
     CMP.B strcVariables.n16Temp2                               ;848522|C580    |000080;
@@ -902,7 +902,7 @@ fAI_UpdateSlotWander:
     SEP #$20                                                   ;84852C|E220    |      ;
     REP #$10                                                   ;84852E|C210    |      ;
     LDY.W #$0001                                               ;848530|A00100  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;848533|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;848533|B7CC    |0000CC;
     AND.B #$80                                                 ;848535|2980    |      ;
     BNE .start_walk_down                                                ;848537|D02C    |848565;
     REP #$20                                                   ;848539|C220    |      ;
@@ -910,16 +910,16 @@ fAI_UpdateSlotWander:
     SEP #$20                                                   ;84853E|E220    |      ;
     REP #$10                                                   ;848540|C210    |      ;
     LDY.W #$000A                                               ;848542|A00A00  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;848545|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;848545|B7CC    |0000CC;
     REP #$20                                                   ;848547|C220    |      ;
     STA.B strcVariables.n16Temp1                               ;848549|857E    |00007E;
     REP #$30                                                   ;84854B|C230    |      ;
     LDY.W #$001C                                               ;84854D|A01C00  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;848550|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;848550|B7CC    |0000CC;
     STA.B strcVariables.n16Temp2                               ;848552|8580    |000080;
     REP #$30                                                   ;848554|C230    |      ;
     LDY.W #$0020                                               ;848556|A02000  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;848559|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;848559|B7CC    |0000CC;
     CLC                                                        ;84855B|18      |      ;
     ADC.B strcVariables.n16Temp1                               ;84855C|657E    |00007E;
     CMP.B strcVariables.n16Temp2                               ;84855E|C580    |000080;
@@ -930,20 +930,20 @@ fAI_UpdateSlotWander:
 .start_walk_down:
     SEP #$20                                                   ;848565|E220    |      ;
     LDY.W #$000B                                               ;848567|A00B00  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;84856A|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;84856A|B7CC    |0000CC;
     LDY.W #$0005                                               ;84856C|A00500  |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;84856F|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;84856F|97CC    |0000CC;
     LDY.W #$0006                                               ;848571|A00600  |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;848574|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;848574|97CC    |0000CC;
     LDY.W #$0003                                               ;848576|A00300  |      ;
     LDA.B #$00                                                 ;848579|A900    |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;84857B|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;84857B|97CC    |0000CC;
     LDY.W #$0004                                               ;84857D|A00400  |      ;
     LDA.B #$01                                                 ;848580|A901    |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;848582|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;848582|97CC    |0000CC;
     LDY.W #$0002                                               ;848584|A00200  |      ;
     LDA.B #$00                                                 ;848587|A900    |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;848589|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;848589|97CC    |0000CC;
     JMP.W .set_walk_sprite                                             ;84858B|4CF486  |8486F4;
  
  
@@ -951,7 +951,7 @@ fAI_UpdateSlotWander:
     SEP #$20                                                   ;84858E|E220    |      ;
     REP #$10                                                   ;848590|C210    |      ;
     LDY.W #$0001                                               ;848592|A00100  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;848595|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;848595|B7CC    |0000CC;
     AND.B #$80                                                 ;848597|2980    |      ;
     BNE .start_walk_up                                                ;848599|D02C    |8485C7;
     REP #$20                                                   ;84859B|C220    |      ;
@@ -959,16 +959,16 @@ fAI_UpdateSlotWander:
     SEP #$20                                                   ;8485A0|E220    |      ;
     REP #$10                                                   ;8485A2|C210    |      ;
     LDY.W #$000A                                               ;8485A4|A00A00  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;8485A7|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;8485A7|B7CC    |0000CC;
     REP #$20                                                   ;8485A9|C220    |      ;
     STA.B strcVariables.n16Temp1                               ;8485AB|857E    |00007E;
     REP #$30                                                   ;8485AD|C230    |      ;
     LDY.W #$001C                                               ;8485AF|A01C00  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;8485B2|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;8485B2|B7CC    |0000CC;
     STA.B strcVariables.n16Temp2                               ;8485B4|8580    |000080;
     REP #$30                                                   ;8485B6|C230    |      ;
     LDY.W #$0020                                               ;8485B8|A02000  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;8485BB|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;8485BB|B7CC    |0000CC;
     SEC                                                        ;8485BD|38      |      ;
     SBC.B strcVariables.n16Temp1                               ;8485BE|E57E    |00007E;
     CMP.B strcVariables.n16Temp2                               ;8485C0|C580    |000080;
@@ -979,20 +979,20 @@ fAI_UpdateSlotWander:
 .start_walk_up:
     SEP #$20                                                   ;8485C7|E220    |      ;
     LDY.W #$000B                                               ;8485C9|A00B00  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;8485CC|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;8485CC|B7CC    |0000CC;
     LDY.W #$0005                                               ;8485CE|A00500  |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;8485D1|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;8485D1|97CC    |0000CC;
     LDY.W #$0006                                               ;8485D3|A00600  |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;8485D6|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;8485D6|97CC    |0000CC;
     LDY.W #$0003                                               ;8485D8|A00300  |      ;
     LDA.B #$00                                                 ;8485DB|A900    |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;8485DD|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;8485DD|97CC    |0000CC;
     LDY.W #$0004                                               ;8485DF|A00400  |      ;
     LDA.B #$FF                                                 ;8485E2|A9FF    |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;8485E4|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;8485E4|97CC    |0000CC;
     LDY.W #$0002                                               ;8485E6|A00200  |      ;
     LDA.B #$01                                                 ;8485E9|A901    |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;8485EB|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;8485EB|97CC    |0000CC;
     JMP.W .set_walk_sprite                                             ;8485ED|4CF486  |8486F4;
  
  
@@ -1000,7 +1000,7 @@ fAI_UpdateSlotWander:
     SEP #$20                                                   ;8485F0|E220    |      ;
     REP #$10                                                   ;8485F2|C210    |      ;
     LDY.W #$0001                                               ;8485F4|A00100  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;8485F7|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;8485F7|B7CC    |0000CC;
     AND.B #$80                                                 ;8485F9|2980    |      ;
     BNE .start_walk_left                                                ;8485FB|D02C    |848629;
     REP #$20                                                   ;8485FD|C220    |      ;
@@ -1008,16 +1008,16 @@ fAI_UpdateSlotWander:
     SEP #$20                                                   ;848602|E220    |      ;
     REP #$10                                                   ;848604|C210    |      ;
     LDY.W #$0009                                               ;848606|A00900  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;848609|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;848609|B7CC    |0000CC;
     REP #$20                                                   ;84860B|C220    |      ;
     STA.B strcVariables.n16Temp1                               ;84860D|857E    |00007E;
     REP #$30                                                   ;84860F|C230    |      ;
     LDY.W #$001A                                               ;848611|A01A00  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;848614|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;848614|B7CC    |0000CC;
     STA.B strcVariables.n16Temp2                               ;848616|8580    |000080;
     REP #$30                                                   ;848618|C230    |      ;
     LDY.W #$001E                                               ;84861A|A01E00  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;84861D|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;84861D|B7CC    |0000CC;
     CLC                                                        ;84861F|18      |      ;
     ADC.B strcVariables.n16Temp1                               ;848620|657E    |00007E;
     CMP.B strcVariables.n16Temp2                               ;848622|C580    |000080;
@@ -1028,20 +1028,20 @@ fAI_UpdateSlotWander:
 .start_walk_left:
     SEP #$20                                                   ;848629|E220    |      ;
     LDY.W #$000B                                               ;84862B|A00B00  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;84862E|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;84862E|B7CC    |0000CC;
     LDY.W #$0005                                               ;848630|A00500  |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;848633|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;848633|97CC    |0000CC;
     LDY.W #$0006                                               ;848635|A00600  |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;848638|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;848638|97CC    |0000CC;
     LDY.W #$0003                                               ;84863A|A00300  |      ;
     LDA.B #$01                                                 ;84863D|A901    |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;84863F|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;84863F|97CC    |0000CC;
     LDY.W #$0004                                               ;848641|A00400  |      ;
     LDA.B #$00                                                 ;848644|A900    |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;848646|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;848646|97CC    |0000CC;
     LDY.W #$0002                                               ;848648|A00200  |      ;
     LDA.B #$02                                                 ;84864B|A902    |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;84864D|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;84864D|97CC    |0000CC;
     JMP.W .set_walk_sprite                                             ;84864F|4CF486  |8486F4;
  
  
@@ -1049,7 +1049,7 @@ fAI_UpdateSlotWander:
     SEP #$20                                                   ;848652|E220    |      ;
     REP #$10                                                   ;848654|C210    |      ;
     LDY.W #$0001                                               ;848656|A00100  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;848659|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;848659|B7CC    |0000CC;
     AND.B #$80                                                 ;84865B|2980    |      ;
     BNE .start_walk_right                                               ;84865D|D02C    |84868B;
     REP #$20                                                   ;84865F|C220    |      ;
@@ -1057,16 +1057,16 @@ fAI_UpdateSlotWander:
     SEP #$20                                                   ;848664|E220    |      ;
     REP #$10                                                   ;848666|C210    |      ;
     LDY.W #$0009                                               ;848668|A00900  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;84866B|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;84866B|B7CC    |0000CC;
     REP #$20                                                   ;84866D|C220    |      ;
     STA.B strcVariables.n16Temp1                               ;84866F|857E    |00007E;
     REP #$30                                                   ;848671|C230    |      ;
     LDY.W #$001A                                               ;848673|A01A00  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;848676|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;848676|B7CC    |0000CC;
     STA.B strcVariables.n16Temp2                               ;848678|8580    |000080;
     REP #$30                                                   ;84867A|C230    |      ;
     LDY.W #$001E                                               ;84867C|A01E00  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;84867F|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;84867F|B7CC    |0000CC;
     SEC                                                        ;848681|38      |      ;
     SBC.B strcVariables.n16Temp1                               ;848682|E57E    |00007E;
     CMP.B strcVariables.n16Temp2                               ;848684|C580    |000080;
@@ -1077,20 +1077,20 @@ fAI_UpdateSlotWander:
 .start_walk_right:
     SEP #$20                                                   ;84868B|E220    |      ;
     LDY.W #$000B                                               ;84868D|A00B00  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;848690|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;848690|B7CC    |0000CC;
     LDY.W #$0005                                               ;848692|A00500  |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;848695|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;848695|97CC    |0000CC;
     LDY.W #$0006                                               ;848697|A00600  |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;84869A|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;84869A|97CC    |0000CC;
     LDY.W #$0003                                               ;84869C|A00300  |      ;
     LDA.B #$FF                                                 ;84869F|A9FF    |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;8486A1|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;8486A1|97CC    |0000CC;
     LDY.W #$0004                                               ;8486A3|A00400  |      ;
     LDA.B #$00                                                 ;8486A6|A900    |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;8486A8|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;8486A8|97CC    |0000CC;
     LDY.W #$0002                                               ;8486AA|A00200  |      ;
     LDA.B #$03                                                 ;8486AD|A903    |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;8486AF|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;8486AF|97CC    |0000CC;
     BRA .set_walk_sprite                                               ;8486B1|8041    |8486F4;
  
  
@@ -1099,16 +1099,16 @@ fAI_UpdateSlotWander:
     SEP #$20                                                   ;8486B3|E220    |      ;
     LDY.W #$0003                                               ;8486B5|A00300  |      ;
     LDA.B #$00                                                 ;8486B8|A900    |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;8486BA|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;8486BA|97CC    |0000CC;
     LDY.W #$0004                                               ;8486BC|A00400  |      ;
     LDA.B #$00                                                 ;8486BF|A900    |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;8486C1|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;8486C1|97CC    |0000CC;
     LDY.W #$0008                                               ;8486C3|A00800  |      ;
     LDA.B #$00                                                 ;8486C6|A900    |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;8486C8|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;8486C8|97CC    |0000CC;
     REP #$30                                                   ;8486CA|C230    |      ;
     LDY.W #$0033                                               ;8486CC|A03300  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;8486CF|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;8486CF|B7CC    |0000CC;
     STA.B ptrTemp0x72                                          ;8486D1|8572    |000072;
     SEP #$20                                                   ;8486D3|E220    |      ;
     LDA.B #$B3                                                 ;8486D5|A9B3    |      ;
@@ -1117,12 +1117,12 @@ fAI_UpdateSlotWander:
     SEP #$20                                                   ;8486DD|E220    |      ;
     REP #$10                                                   ;8486DF|C210    |      ;
     LDY.W #$0001                                               ;8486E1|A00100  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;8486E4|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;8486E4|B7CC    |0000CC;
     ORA.B #$04                                                 ;8486E6|0904    |      ;
     SEP #$20                                                   ;8486E8|E220    |      ;
     REP #$10                                                   ;8486EA|C210    |      ;
     LDY.W #$0001                                               ;8486EC|A00100  |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;8486EF|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;8486EF|97CC    |0000CC;
     JMP.W .justReturn                                          ;8486F1|4C1688  |848816;
  
  
@@ -1130,7 +1130,7 @@ fAI_UpdateSlotWander:
     ; walking: use the walking sprite table (+36)
     REP #$30                                                   ;8486F4|C230    |      ;
     LDY.W #$0036                                               ;8486F6|A03600  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;8486F9|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;8486F9|B7CC    |0000CC;
     STA.B ptrTemp0x72                                          ;8486FB|8572    |000072;
     SEP #$20                                                   ;8486FD|E220    |      ;
     LDA.B #$B3                                                 ;8486FF|A9B3    |      ;
@@ -1139,12 +1139,12 @@ fAI_UpdateSlotWander:
     SEP #$20                                                   ;848707|E220    |      ;
     REP #$10                                                   ;848709|C210    |      ;
     LDY.W #$0001                                               ;84870B|A00100  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;84870E|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;84870E|B7CC    |0000CC;
     ORA.B #$04                                                 ;848710|0904    |      ;
     SEP #$20                                                   ;848712|E220    |      ;
     REP #$10                                                   ;848714|C210    |      ;
     LDY.W #$0001                                               ;848716|A00100  |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;848719|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;848719|97CC    |0000CC;
     BRA .check_velocity                                               ;84871B|8013    |848730;
  
  
@@ -1152,23 +1152,23 @@ fAI_UpdateSlotWander:
     SEP #$20                                                   ;84871D|E220    |      ;
     REP #$10                                                   ;84871F|C210    |      ;
     LDY.W #$0008                                               ;848721|A00800  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;848724|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;848724|B7CC    |0000CC;
     DEC A                                                      ;848726|3A      |      ;
     SEP #$20                                                   ;848727|E220    |      ;
     REP #$10                                                   ;848729|C210    |      ;
     LDY.W #$0008                                               ;84872B|A00800  |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;84872E|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;84872E|97CC    |0000CC;
  
 .check_velocity:
     SEP #$20                                                   ;848730|E220    |      ;
     REP #$10                                                   ;848732|C210    |      ;
     LDY.W #$0003                                               ;848734|A00300  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;848737|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;848737|B7CC    |0000CC;
     BNE .try_move                                               ;848739|D00E    |848749;
     SEP #$20                                                   ;84873B|E220    |      ;
     REP #$10                                                   ;84873D|C210    |      ;
     LDY.W #$0004                                               ;84873F|A00400  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;848742|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;848742|B7CC    |0000CC;
     BNE .try_move                                               ;848744|D003    |848749;
     JMP.W .justReturn                                          ;848746|4C1688  |848816;
  
@@ -1178,17 +1178,17 @@ fAI_UpdateSlotWander:
     REP #$20                                                   ;848749|C220    |      ;
     REP #$30                                                   ;84874B|C230    |      ;
     LDY.W #$001A                                               ;84874D|A01A00  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;848750|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;848750|B7CC    |0000CC;
     STA.B strcPlayer.lastX                                     ;848752|85DF    |0000DF;
     REP #$30                                                   ;848754|C230    |      ;
     LDY.W #$001C                                               ;848756|A01C00  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;848759|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;848759|B7CC    |0000CC;
     STA.B strcPlayer.lastY                                     ;84875B|85E1    |0000E1;
     LDA.W #$0000                                               ;84875D|A90000  |      ;
     SEP #$20                                                   ;848760|E220    |      ;
     REP #$10                                                   ;848762|C210    |      ;
     LDY.W #$0003                                               ;848764|A00300  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;848767|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;848767|B7CC    |0000CC;
     BMI +                                                      ;848769|3002    |84876D;
     BRA .dx_abs_done                                               ;84876B|8005    |848772;
  
@@ -1204,7 +1204,7 @@ fAI_UpdateSlotWander:
     SEP #$20                                                   ;848779|E220    |      ;
     REP #$10                                                   ;84877B|C210    |      ;
     LDY.W #$0004                                               ;84877D|A00400  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;848780|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;848780|B7CC    |0000CC;
     BMI +                                                      ;848782|3002    |848786;
     BRA .dy_abs_done                                               ;848784|8005    |84878B;
  
@@ -1220,7 +1220,7 @@ fAI_UpdateSlotWander:
     SEP #$20                                                   ;848791|E220    |      ;
     REP #$10                                                   ;848793|C210    |      ;
     LDY.W #$0001                                               ;848795|A00100  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;848798|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;848798|B7CC    |0000CC;
     AND.B #$80                                                 ;84879A|2980    |      ;
     BEQ .check_tile_y                                               ;84879C|F045    |8487E3;
     REP #$20                                                   ;84879E|C220    |      ;
@@ -1228,7 +1228,7 @@ fAI_UpdateSlotWander:
     SEP #$20                                                   ;8487A3|E220    |      ;
     REP #$10                                                   ;8487A5|C210    |      ;
     LDY.W #$0002                                               ;8487A7|A00200  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;8487AA|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;8487AA|B7CC    |0000CC;
     REP #$20                                                   ;8487AC|C220    |      ;
     JSL.L fGameEngine_CheckTileCollisionDir                   ;8487AE|2237AF83|83AF37;
     REP #$20                                                   ;8487B2|C220    |      ;
@@ -1237,7 +1237,7 @@ fAI_UpdateSlotWander:
     SEP #$20                                                   ;8487B7|E220    |      ;
     REP #$10                                                   ;8487B9|C210    |      ;
     LDY.W #$000E                                               ;8487BB|A00E00  |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;8487BE|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;8487BE|97CC    |0000CC;
     REP #$20                                                   ;8487C0|C220    |      ;
     PLA                                                        ;8487C2|68      |      ;
     CMP.W #$0000                                               ;8487C3|C90000  |      ;
@@ -1277,7 +1277,7 @@ fAI_UpdateSlotWander:
     SEP #$20                                                   ;848802|E220    |      ;
     REP #$10                                                   ;848804|C210    |      ;
     LDY.W #$0002                                               ;848806|A00200  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;848809|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;848809|B7CC    |0000CC;
     REP #$20                                                   ;84880B|C220    |      ;
     JSL.L fGameEngine_CheckPlayerOverlap                            ;84880D|22C3AE83|83AEC3;
     CMP.W #$0000                                               ;848811|C90000  |      ;
@@ -1292,29 +1292,29 @@ fAI_UpdateSlotWander:
     REP #$10                                                   ;848819|C210    |      ;
     LDY.W #$0003                                               ;84881B|A00300  |      ;
     LDA.B #$00                                                 ;84881E|A900    |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;848820|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;848820|97CC    |0000CC;
     SEP #$20                                                   ;848822|E220    |      ;
     REP #$10                                                   ;848824|C210    |      ;
     LDY.W #$0004                                               ;848826|A00400  |      ;
     LDA.B #$00                                                 ;848829|A900    |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;84882B|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;84882B|97CC    |0000CC;
     SEP #$20                                                   ;84882D|E220    |      ;
     REP #$10                                                   ;84882F|C210    |      ;
     LDY.W #$000B                                               ;848831|A00B00  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;848834|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;848834|B7CC    |0000CC;
     SEP #$20                                                   ;848836|E220    |      ;
     REP #$10                                                   ;848838|C210    |      ;
     LDY.W #$0005                                               ;84883A|A00500  |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;84883D|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;84883D|97CC    |0000CC;
     SEP #$20                                                   ;84883F|E220    |      ;
     REP #$10                                                   ;848841|C210    |      ;
     LDY.W #$0006                                               ;848843|A00600  |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;848846|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;848846|97CC    |0000CC;
     SEP #$20                                                   ;848848|E220    |      ;
     REP #$10                                                   ;84884A|C210    |      ;
     LDY.W #$000F                                               ;84884C|A00F00  |      ;
     LDA.B #$00                                                 ;84884F|A900    |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;848851|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;848851|97CC    |0000CC;
     RTS                                                        ;848853|60      |      ;
  
  
@@ -1322,7 +1322,7 @@ fAI_UpdateSlotWander:
     SEP #$20                                                   ;848854|E220    |      ;
     REP #$10                                                   ;848856|C210    |      ;
     LDY.W #$003F                                               ;848858|A03F00  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;84885B|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;84885B|B7CC    |0000CC;
     CMP.B #$24                                                 ;84885D|C924    |      ;
     BCS .return                                                ;84885F|B0B6    |848817;
     CMP.B #$18                                                 ;848861|C918    |      ;
@@ -1334,7 +1334,7 @@ fAI_UpdateSlotWander:
     SEP #$20                                                   ;848868|E220    |      ;
     REP #$10                                                   ;84886A|C210    |      ;
     LDY.W #$003F                                               ;84886C|A03F00  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;84886F|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;84886F|B7CC    |0000CC;
     CMP.B #$24                                                 ;848871|C924    |      ;
     BCS .return                                                ;848873|B0A2    |848817;
     CMP.B #$18                                                 ;848875|C918    |      ;
@@ -1343,9 +1343,9 @@ fAI_UpdateSlotWander:
  
  
 ;;
-; @brief   Points ptrAIUnknown0xCC at slot A ($7EB586 + A * 64).
+; @brief   Points ptrAISlot at slot A ($7EB586 + A * 64).
 ; @param   A  slot number (0..48)
-; @modifies ptrAIUnknown0xCC, strcVariables.n16Temp1
+; @modifies ptrAISlot, strcVariables.n16Temp1
 ; @mode    M16X16 -> M16X16
 ; @clobbers A
 ;;
@@ -1361,10 +1361,10 @@ fAI_SelectSlot:
     LDA.W #$B586                                               ;848886|A986B5  |      ;
     CLC                                                        ;848889|18      |      ;
     ADC.B strcVariables.n16Temp1                               ;84888A|657E    |00007E;
-    STA.B ptrAIUnknown0xCC                                     ;84888C|85CC    |0000CC;
+    STA.B ptrAISlot                                     ;84888C|85CC    |0000CC;
     SEP #$20                                                   ;84888E|E220    |      ;
     LDA.B #$7E                                                 ;848890|A97E    |      ;
-    STA.B ptrAIUnknown0xCC+2                                   ;848892|85CE    |0000CE; $0xCC = 7EB586 + A * 64
+    STA.B ptrAISlot+2                                   ;848892|85CE    |0000CE; $0xCC = 7EB586 + A * 64
     RTL                                                        ;848894|6B      |      ;
  
  
@@ -1374,7 +1374,7 @@ fAI_SelectSlot:
 ;          the slot direction (+02) is read; the sprite index goes to +16 and flip index * 64 (flip bits shifted to bit 6/7 of the
 ;          OAM attribute) to +14.
 ; @param   ptrTemp0x72  24-bit pointer to the direction table (bank $B3; usually slot +33 or +36)
-; @param   ptrAIUnknown0xCC  current slot (+02 = direction)
+; @param   ptrAISlot  current slot (+02 = direction)
 ; @modifies strcVariables.n16Temp1
 ; @note    Also writes slot fields: slot +14, +16.
 ; @mode    M16X16 -> M16X16
@@ -1389,7 +1389,7 @@ fAI_LoadSlotSpriteFromDirTable:
     SEP #$20                                                   ;84889C|E220    |      ;
     REP #$10                                                   ;84889E|C210    |      ;
     LDY.W #$0002                                               ;8488A0|A00200  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;8488A3|B7CC    |0000CC; strcAIUnknown.nDataIndex
+    LDA.B [ptrAISlot],Y                                 ;8488A3|B7CC    |0000CC; strcAISlot.nDataIndex
     REP #$20                                                   ;8488A5|C220    |      ;
     STA.B strcVariables.n16Temp1                               ;8488A7|857E    |00007E;
     ASL A                                                      ;8488A9|0A      |      ;
@@ -1401,7 +1401,7 @@ fAI_LoadSlotSpriteFromDirTable:
     PHY                                                        ;8488B2|5A      |      ;
     REP #$30                                                   ;8488B3|C230    |      ;
     LDY.W #$0016                                               ;8488B5|A01600  |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;8488B8|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;8488B8|97CC    |0000CC;
     PLY                                                        ;8488BA|7A      |      ;
     INY                                                        ;8488BB|C8      |      ;
     INY                                                        ;8488BC|C8      |      ;
@@ -1418,14 +1418,14 @@ fAI_LoadSlotSpriteFromDirTable:
     ASL A                                                      ;8488CB|0A      |      ;
     REP #$30                                                   ;8488CC|C230    |      ;
     LDY.W #$0014                                               ;8488CE|A01400  |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;8488D1|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;8488D1|97CC    |0000CC;
     RTL                                                        ;8488D3|6B      |      ;
  
  
 ;;
 ; @brief   Initialises a slot for a freshly started script: active, no flags, no motion, no object, position 0.
 ; @details Sets +00 = 1 and clears +01 flags, +03..+06, +0C, +0F, +10, +12, +14, +1A, +1C. Compare fAI_ResetSlotKeepObject.
-; @param   ptrAIUnknown0xCC  slot to reset
+; @param   ptrAISlot  slot to reset
 ; @note    Also writes slot fields: slot +00 .. +1C (see above).
 ; @mode    M16X16 -> M16X16 (JSR)
 ; @clobbers A Y
@@ -1437,69 +1437,69 @@ fAI_ResetSlotFull:
     REP #$10                                                   ;8488D8|C210    |      ;
     LDY.W #$0000                                               ;8488DA|A00000  |      ;
     LDA.B #$01                                                 ;8488DD|A901    |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;8488DF|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;8488DF|97CC    |0000CC;
     SEP #$20                                                   ;8488E1|E220    |      ;
     REP #$10                                                   ;8488E3|C210    |      ;
     LDY.W #$0001                                               ;8488E5|A00100  |      ;
     LDA.B #$00                                                 ;8488E8|A900    |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;8488EA|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;8488EA|97CC    |0000CC;
     SEP #$20                                                   ;8488EC|E220    |      ;
     REP #$10                                                   ;8488EE|C210    |      ;
     LDY.W #$000F                                               ;8488F0|A00F00  |      ;
     LDA.B #$00                                                 ;8488F3|A900    |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;8488F5|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;8488F5|97CC    |0000CC;
     SEP #$20                                                   ;8488F7|E220    |      ;
     REP #$10                                                   ;8488F9|C210    |      ;
     LDY.W #$0003                                               ;8488FB|A00300  |      ;
     LDA.B #$00                                                 ;8488FE|A900    |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;848900|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;848900|97CC    |0000CC;
     SEP #$20                                                   ;848902|E220    |      ;
     REP #$10                                                   ;848904|C210    |      ;
     LDY.W #$0004                                               ;848906|A00400  |      ;
     LDA.B #$00                                                 ;848909|A900    |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;84890B|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;84890B|97CC    |0000CC;
     SEP #$20                                                   ;84890D|E220    |      ;
     REP #$10                                                   ;84890F|C210    |      ;
     LDY.W #$0005                                               ;848911|A00500  |      ;
     LDA.B #$00                                                 ;848914|A900    |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;848916|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;848916|97CC    |0000CC;
     SEP #$20                                                   ;848918|E220    |      ;
     REP #$10                                                   ;84891A|C210    |      ;
     LDY.W #$0006                                               ;84891C|A00600  |      ;
     LDA.B #$00                                                 ;84891F|A900    |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;848921|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;848921|97CC    |0000CC;
     SEP #$20                                                   ;848923|E220    |      ;
     REP #$10                                                   ;848925|C210    |      ;
     LDY.W #$000C                                               ;848927|A00C00  |      ;
     LDA.B #$00                                                 ;84892A|A900    |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;84892C|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;84892C|97CC    |0000CC;
     REP #$30                                                   ;84892E|C230    |      ;
     LDY.W #$0010                                               ;848930|A01000  |      ;
     LDA.W #$0000                                               ;848933|A90000  |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;848936|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;848936|97CC    |0000CC;
     REP #$30                                                   ;848938|C230    |      ;
     LDY.W #$001A                                               ;84893A|A01A00  |      ;
     LDA.W #$0000                                               ;84893D|A90000  |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;848940|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;848940|97CC    |0000CC;
     REP #$30                                                   ;848942|C230    |      ;
     LDY.W #$001C                                               ;848944|A01C00  |      ;
     LDA.W #$0000                                               ;848947|A90000  |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;84894A|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;84894A|97CC    |0000CC;
     REP #$30                                                   ;84894C|C230    |      ;
     LDY.W #$0012                                               ;84894E|A01200  |      ;
     LDA.W #$0000                                               ;848951|A90000  |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;848954|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;848954|97CC    |0000CC;
     REP #$30                                                   ;848956|C230    |      ;
     LDY.W #$0014                                               ;848958|A01400  |      ;
     LDA.W #$0000                                               ;84895B|A90000  |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;84895E|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;84895E|97CC    |0000CC;
     RTS                                                        ;848960|60      |      ;
  
  
 ;;
 ; @brief   Re-initialises a running slot for a new script but keeps its game object, flip, sprite and position.
 ; @details Sets +00 = 1 and +01 = 1 (object active), clears +03..+06, +0F and the wait counter +10. Used by fAI_SetSlotScript.
-; @param   ptrAIUnknown0xCC  slot to reset
+; @param   ptrAISlot  slot to reset
 ; @note    Also writes slot fields: slot +00, +01, +03..+06, +0F, +10.
 ; @mode    M16X16 -> M16X16 (JSR)
 ; @clobbers A Y
@@ -1511,41 +1511,41 @@ fAI_ResetSlotKeepObject:
     REP #$10                                                   ;848965|C210    |      ;
     LDY.W #$0000                                               ;848967|A00000  |      ;
     LDA.B #$01                                                 ;84896A|A901    |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;84896C|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;84896C|97CC    |0000CC;
     SEP #$20                                                   ;84896E|E220    |      ;
     REP #$10                                                   ;848970|C210    |      ;
     LDY.W #$0001                                               ;848972|A00100  |      ;
     LDA.B #$01                                                 ;848975|A901    |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;848977|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;848977|97CC    |0000CC;
     SEP #$20                                                   ;848979|E220    |      ;
     REP #$10                                                   ;84897B|C210    |      ;
     LDY.W #$000F                                               ;84897D|A00F00  |      ;
     LDA.B #$00                                                 ;848980|A900    |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;848982|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;848982|97CC    |0000CC;
     SEP #$20                                                   ;848984|E220    |      ;
     REP #$10                                                   ;848986|C210    |      ;
     LDY.W #$0003                                               ;848988|A00300  |      ;
     LDA.B #$00                                                 ;84898B|A900    |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;84898D|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;84898D|97CC    |0000CC;
     SEP #$20                                                   ;84898F|E220    |      ;
     REP #$10                                                   ;848991|C210    |      ;
     LDY.W #$0004                                               ;848993|A00400  |      ;
     LDA.B #$00                                                 ;848996|A900    |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;848998|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;848998|97CC    |0000CC;
     SEP #$20                                                   ;84899A|E220    |      ;
     REP #$10                                                   ;84899C|C210    |      ;
     LDY.W #$0005                                               ;84899E|A00500  |      ;
     LDA.B #$00                                                 ;8489A1|A900    |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;8489A3|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;8489A3|97CC    |0000CC;
     SEP #$20                                                   ;8489A5|E220    |      ;
     REP #$10                                                   ;8489A7|C210    |      ;
     LDY.W #$0006                                               ;8489A9|A00600  |      ;
     LDA.B #$00                                                 ;8489AC|A900    |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;8489AE|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;8489AE|97CC    |0000CC;
     REP #$30                                                   ;8489B0|C230    |      ;
     LDY.W #$0010                                               ;8489B2|A01000  |      ;
     LDA.W #$0000                                               ;8489B5|A90000  |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;8489B8|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;8489B8|97CC    |0000CC;
     RTS                                                        ;8489BA|60      |      ;
  
  
@@ -1681,10 +1681,10 @@ fAIAction0x06_SetDestinationArea:
     %AIMoveAction($0001)
     REP #$30                                                   ;848AB1|C230    |      ;
     LDY.W #$0010                                               ;848AB3|A01000  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;848AB6|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;848AB6|B7CC    |0000CC;
     CLC                                                        ;848AB8|18      |      ;
     ADC.W #$0001                                               ;848AB9|690100  |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;848ABC|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;848ABC|97CC    |0000CC;
     RTS                                                        ;848ABE|60      |      ;
  
  
@@ -1729,12 +1729,12 @@ fAIAction0x08_EnableAIControl:
  
 ;;
 ; @brief   AI command 0x09: start a second script in another slot while the current one continues.
-; @details Operands: [slot number][word script address, same bank as the current script]. Switches ptrAIUnknown0xCC to the target
+; @details Operands: [slot number][word script address, same bank as the current script]. Switches ptrAISlot to the target
 ;          slot (the current slot is kept in ptrTemp0x72), copies the bank, stores the address, resets the slot with
 ;          fAI_ResetSlotFull, stores the slot number in +3F and restores the current slot. The target slot is overwritten even
 ;          when it is still active.
 ; @case    $09
-; @modifies ptrAIActionData, ptrAIUnknown0xCC, ptrTemp0x72
+; @modifies ptrAIActionData, ptrAISlot, ptrTemp0x72
 ; @note    Also writes the target slot fields +30/+32/+3F and the fields reset by fAI_ResetSlotFull.
 ; @mode    M16X16 -> ?
 ; @calls   fAI_SelectSlot, fAI_ResetSlotFull
@@ -1742,15 +1742,15 @@ fAIAction0x08_EnableAIControl:
 fAIAction0x09_StartScript:
     REP #$30                                                   ;848B08|C230    |      ;
     %AIMoveAction($0001)
-    LDA.B ptrAIUnknown0xCC                                     ;848B14|A5CC    |0000CC;
+    LDA.B ptrAISlot                                     ;848B14|A5CC    |0000CC;
     STA.B ptrTemp0x72                                          ;848B16|8572    |000072;
     SEP #$20                                                   ;848B18|E220    |      ;
-    LDA.B ptrAIUnknown0xCC+2                                   ;848B1A|A5CE    |0000CE;
+    LDA.B ptrAISlot+2                                   ;848B1A|A5CE    |0000CE;
     STA.B ptrTemp0x72+2                                        ;848B1C|8574    |000074;
     SEP #$20                                                   ;848B1E|E220    |      ;
     REP #$10                                                   ;848B20|C210    |      ;
     LDY.W #$0032                                               ;848B22|A03200  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;848B25|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;848B25|B7CC    |0000CC;
     SEP #$20                                                   ;848B27|E220    |      ;
     PHA                                                        ;848B29|48      |      ;
     SEP #$20                                                   ;848B2A|E220    |      ;
@@ -1765,7 +1765,7 @@ fAIAction0x09_StartScript:
     SEP #$20                                                   ;848B3C|E220    |      ;
     REP #$10                                                   ;848B3E|C210    |      ;
     LDY.W #$0032                                               ;848B40|A03200  |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;848B43|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;848B43|97CC    |0000CC;
     SEP #$20                                                   ;848B45|E220    |      ;
     LDA.B [ptrAIActionData]                                    ;848B47|A7C9    |0000C9;
     PHA                                                        ;848B49|48      |      ;
@@ -1773,20 +1773,20 @@ fAIAction0x09_StartScript:
     LDA.B [ptrAIActionData]                                    ;848B54|A7C9    |0000C9;
     REP #$30                                                   ;848B56|C230    |      ;
     LDY.W #$0030                                               ;848B58|A03000  |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;848B5B|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;848B5B|97CC    |0000CC;
     JSR.W fAI_ResetSlotFull                                    ;848B5D|20D488  |8488D4;
     SEP #$20                                                   ;848B60|E220    |      ;
     PLA                                                        ;848B62|68      |      ;
     SEP #$20                                                   ;848B63|E220    |      ;
     REP #$10                                                   ;848B65|C210    |      ;
     LDY.W #$003F                                               ;848B67|A03F00  |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;848B6A|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;848B6A|97CC    |0000CC;
     REP #$20                                                   ;848B6C|C220    |      ;
     LDA.B ptrTemp0x72                                          ;848B6E|A572    |000072;
-    STA.B ptrAIUnknown0xCC                                     ;848B70|85CC    |0000CC;
+    STA.B ptrAISlot                                     ;848B70|85CC    |0000CC;
     SEP #$20                                                   ;848B72|E220    |      ;
     LDA.B ptrTemp0x72+2                                        ;848B74|A574    |000074;
-    STA.B ptrAIUnknown0xCC+2                                   ;848B76|85CE    |0000CE;
+    STA.B ptrAISlot+2                                   ;848B76|85CE    |0000CE;
     %AIMoveAction($0002)
     RTS                                                        ;848B82|60      |      ;
  
@@ -1820,7 +1820,7 @@ fAIAction0x0A_ScreenFadein:
 ; @details Operand: [bit number 0..15]; mask from aAISetMask. The word is cleared on new game and on map load.
 ; @case    $0B
 ; @modifies ptrAIActionData
-; @note    Writes $7F1F7A (no RAM symbol yet).
+; @note    Writes nAIScriptFlags ($7F1F7A).
 ; @mode    M16X16 -> ?
 ;;
 fAIAction0x0B_SetScriptFlag:
@@ -1835,8 +1835,8 @@ fAIAction0x0B_SetScriptFlag:
     TAX                                                        ;848BC2|AA      |      ;
     REP #$20                                                   ;848BC3|C220    |      ;
     LDA.L aAISetMask,X                                         ;848BC5|BFD39484|8494D3;
-    ORA.L $7F1F7A                                              ;848BC9|0F7A1F7F|7F1F7A;
-    STA.L $7F1F7A                                              ;848BCD|8F7A1F7F|7F1F7A;
+    ORA.L nAIScriptFlags                                              ;848BC9|0F7A1F7F|7F1F7A;
+    STA.L nAIScriptFlags                                              ;848BCD|8F7A1F7F|7F1F7A;
     %AIMoveAction($0001)
     RTS                                                        ;848BDB|60      |      ;
  
@@ -1847,7 +1847,7 @@ fAIAction0x0B_SetScriptFlag:
 ;          incremented, so the command repeats next frame; if set the script continues. The bit is not cleared.
 ; @case    $0C
 ; @modifies ptrAIActionData
-; @note    Also increments slot wait counter +10; reads $7F1F7A (no RAM symbol yet).
+; @note    Also increments slot wait counter +10; reads nAIScriptFlags ($7F1F7A).
 ; @mode    M16X16 -> ?
 ;;
 fAIAction0x0C_WaitForScriptFlag:
@@ -1862,7 +1862,7 @@ fAIAction0x0C_WaitForScriptFlag:
     TAX                                                        ;848BF2|AA      |      ;
     REP #$20                                                   ;848BF3|C220    |      ;
     LDA.L aAISetMask,X                                         ;848BF5|BFD39484|8494D3;
-    AND.L $7F1F7A                                              ;848BF9|2F7A1F7F|7F1F7A;
+    AND.L nAIScriptFlags                                              ;848BF9|2F7A1F7F|7F1F7A;
     BEQ +                                                      ;848BFD|F00B    |848C0A;
     %AIMoveAction($0001)
     RTS                                                        ;848C09|60      |      ;
@@ -1875,10 +1875,10 @@ fAIAction0x0C_WaitForScriptFlag:
     STA.B ptrAIActionData                                      ;848C12|85C9    |0000C9;
     REP #$30                                                   ;848C14|C230    |      ;
     LDY.W #$0010                                               ;848C16|A01000  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;848C19|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;848C19|B7CC    |0000CC;
     CLC                                                        ;848C1B|18      |      ;
     ADC.W #$0001                                               ;848C1C|690100  |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;848C1F|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;848C1F|97CC    |0000CC;
     RTS                                                        ;848C21|60      |      ;
  
  
@@ -1901,41 +1901,41 @@ fAIAction0x0D_MoveObject:
     SEP #$20                                                   ;848C32|E220    |      ;
     REP #$10                                                   ;848C34|C210    |      ;
     LDY.W #$0003                                               ;848C36|A00300  |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;848C39|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;848C39|97CC    |0000CC;
     %AIMoveAction($0001)
     SEP #$20                                                   ;848C45|E220    |      ;
     LDA.B [ptrAIActionData]                                    ;848C47|A7C9    |0000C9;
     SEP #$20                                                   ;848C49|E220    |      ;
     REP #$10                                                   ;848C4B|C210    |      ;
     LDY.W #$0004                                               ;848C4D|A00400  |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;848C50|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;848C50|97CC    |0000CC;
     %AIMoveAction($0001)
     SEP #$20                                                   ;848C5C|E220    |      ;
     LDA.B [ptrAIActionData]                                    ;848C5E|A7C9    |0000C9;
     SEP #$20                                                   ;848C60|E220    |      ;
     REP #$10                                                   ;848C62|C210    |      ;
     LDY.W #$0010                                               ;848C64|A01000  |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;848C67|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;848C67|97CC    |0000CC;
     %AIMoveAction($0001)
     SEP #$20                                                   ;848C73|E220    |      ;
     LDA.B [ptrAIActionData]                                    ;848C75|A7C9    |0000C9;
     SEP #$20                                                   ;848C77|E220    |      ;
     REP #$10                                                   ;848C79|C210    |      ;
     LDY.W #$0005                                               ;848C7B|A00500  |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;848C7E|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;848C7E|97CC    |0000CC;
     SEP #$20                                                   ;848C80|E220    |      ;
     REP #$10                                                   ;848C82|C210    |      ;
     LDY.W #$0006                                               ;848C84|A00600  |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;848C87|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;848C87|97CC    |0000CC;
     SEP #$20                                                   ;848C89|E220    |      ;
     REP #$10                                                   ;848C8B|C210    |      ;
     LDY.W #$0001                                               ;848C8D|A00100  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;848C90|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;848C90|B7CC    |0000CC;
     ORA.B #$20                                                 ;848C92|0920    |      ;
     SEP #$20                                                   ;848C94|E220    |      ;
     REP #$10                                                   ;848C96|C210    |      ;
     LDY.W #$0001                                               ;848C98|A00100  |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;848C9B|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;848C9B|97CC    |0000CC;
     %AIMoveAction($0001)
     RTS                                                        ;848CA7|60      |      ;
  
@@ -1990,13 +1990,13 @@ fAIAction0x10_End:
     REP #$10                                                   ;848CE6|C210    |      ;
     LDY.W #$0000                                               ;848CE8|A00000  |      ;
     LDA.B #$00                                                 ;848CEB|A900    |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;848CED|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;848CED|97CC    |0000CC;
     REP #$30                                                   ;848CEF|C230    |      ;
     LDY.W #$0010                                               ;848CF1|A01000  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;848CF4|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;848CF4|B7CC    |0000CC;
     CLC                                                        ;848CF6|18      |      ;
     ADC.W #$0001                                               ;848CF7|690100  |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;848CFA|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;848CFA|97CC    |0000CC;
     RTS                                                        ;848CFC|60      |      ;
  
  
@@ -2042,7 +2042,7 @@ fAIAction0x13_Wait:
     LDA.B [ptrAIActionData]                                    ;848D30|A7C9    |0000C9;
     REP #$30                                                   ;848D32|C230    |      ;
     LDY.W #$0010                                               ;848D34|A01000  |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;848D37|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;848D37|97CC    |0000CC;
     %AIMoveAction($0002)
     RTS                                                        ;848D43|60      |      ;
  
@@ -2187,7 +2187,7 @@ fAIAction0x17_RollRandom:
     SEP #$20                                                   ;848E7C|E220    |      ;
     REP #$10                                                   ;848E7E|C210    |      ;
     LDY.W #$000D                                               ;848E80|A00D00  |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;848E83|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;848E83|97CC    |0000CC;
     %AIMoveAction($0001)
     RTS                                                        ;848E8F|60      |      ;
  
@@ -2207,7 +2207,7 @@ fAIAction0x18_JumpIfRandomEquals:
     SEP #$20                                                   ;848EA0|E220    |      ;
     REP #$10                                                   ;848EA2|C210    |      ;
     LDY.W #$000D                                               ;848EA4|A00D00  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;848EA7|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;848EA7|B7CC    |0000CC;
     CMP.B strcVariables.n8Temp1                                ;848EA9|C592    |000092;
     BNE +                                                      ;848EAB|D011    |848EBE;
     %AIMoveAction($0001)
@@ -2268,37 +2268,37 @@ fAIAction0x1A_SpawnNpc:
     LDA.B [ptrAIActionData]                                    ;848F16|A7C9    |0000C9;
     REP #$30                                                   ;848F18|C230    |      ;
     LDY.W #$001A                                               ;848F1A|A01A00  |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;848F1D|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;848F1D|97CC    |0000CC;
     %AIMoveAction($0002)
     LDA.B [ptrAIActionData]                                    ;848F29|A7C9    |0000C9;
     REP #$30                                                   ;848F2B|C230    |      ;
     LDY.W #$001C                                               ;848F2D|A01C00  |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;848F30|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;848F30|97CC    |0000CC;
     %AIMoveAction($0002)
     LDA.B [ptrAIActionData]                                    ;848F3C|A7C9    |0000C9;
     REP #$30                                                   ;848F3E|C230    |      ;
     LDY.W #$0033                                               ;848F40|A03300  |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;848F43|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;848F43|97CC    |0000CC;
     %AIMoveAction($0002)
     SEP #$20                                                   ;848F4F|E220    |      ;
     LDA.B [ptrAIActionData]                                    ;848F51|A7C9    |0000C9;
     SEP #$20                                                   ;848F53|E220    |      ;
     REP #$10                                                   ;848F55|C210    |      ;
     LDY.W #$0002                                               ;848F57|A00200  |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;848F5A|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;848F5A|97CC    |0000CC;
     %AIMoveAction($0001)
     SEP #$20                                                   ;848F66|E220    |      ;
     REP #$10                                                   ;848F68|C210    |      ;
     LDY.W #$0001                                               ;848F6A|A00100  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;848F6D|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;848F6D|B7CC    |0000CC;
     ORA.B #$03                                                 ;848F6F|0903    |      ;
     SEP #$20                                                   ;848F71|E220    |      ;
     REP #$10                                                   ;848F73|C210    |      ;
     LDY.W #$0001                                               ;848F75|A00100  |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;848F78|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;848F78|97CC    |0000CC;
     REP #$30                                                   ;848F7A|C230    |      ;
     LDY.W #$0033                                               ;848F7C|A03300  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;848F7F|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;848F7F|B7CC    |0000CC;
     STA.B ptrTemp0x72                                          ;848F81|8572    |000072;
     SEP #$20                                                   ;848F83|E220    |      ;
     LDA.B #$B3                                                 ;848F85|A9B3    |      ;
@@ -2306,10 +2306,10 @@ fAIAction0x1A_SpawnNpc:
     JSL.L fAI_LoadSlotSpriteFromDirTable                                    ;848F89|22958884|848895;
     REP #$30                                                   ;848F8D|C230    |      ;
     LDY.W #$0010                                               ;848F8F|A01000  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;848F92|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;848F92|B7CC    |0000CC;
     CLC                                                        ;848F94|18      |      ;
     ADC.W #$0001                                               ;848F95|690100  |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;848F98|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;848F98|97CC    |0000CC;
     RTS                                                        ;848F9A|60      |      ;
  
  
@@ -2327,7 +2327,7 @@ fAIAction0x1B_SetSprite:
     LDA.B [ptrAIActionData]                                    ;848FA7|A7C9    |0000C9;
     REP #$30                                                   ;848FA9|C230    |      ;
     LDY.W #$0016                                               ;848FAB|A01600  |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;848FAE|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;848FAE|97CC    |0000CC;
     %AIMoveAction($0002)
     SEP #$20                                                   ;848FBA|E220    |      ;
     LDA.B #$00                                                 ;848FBC|A900    |      ;
@@ -2342,17 +2342,17 @@ fAIAction0x1B_SetSprite:
     ASL A                                                      ;848FC8|0A      |      ;
     REP #$30                                                   ;848FC9|C230    |      ;
     LDY.W #$0014                                               ;848FCB|A01400  |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;848FCE|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;848FCE|97CC    |0000CC;
     %AIMoveAction($0001)
     SEP #$20                                                   ;848FDA|E220    |      ;
     REP #$10                                                   ;848FDC|C210    |      ;
     LDY.W #$0001                                               ;848FDE|A00100  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;848FE1|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;848FE1|B7CC    |0000CC;
     ORA.B #$04                                                 ;848FE3|0904    |      ;
     SEP #$20                                                   ;848FE5|E220    |      ;
     REP #$10                                                   ;848FE7|C210    |      ;
     LDY.W #$0001                                               ;848FE9|A00100  |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;848FEC|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;848FEC|97CC    |0000CC;
     RTS                                                        ;848FEE|60      |      ;
  
  
@@ -2383,10 +2383,10 @@ fAIAction0x1C_ShowDialog:
     %AIMoveAction($0001)
     REP #$30                                                   ;849026|C230    |      ;
     LDY.W #$0010                                               ;849028|A01000  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;84902B|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;84902B|B7CC    |0000CC;
     CLC                                                        ;84902D|18      |      ;
     ADC.W #$0001                                               ;84902E|690100  |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;849031|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;849031|97CC    |0000CC;
     RTS                                                        ;849033|60      |      ;
  
  
@@ -2416,10 +2416,10 @@ fAIAction0x1D_ShowDialogWithChoice:
     %AIMoveAction($0001)
     REP #$30                                                   ;84906B|C230    |      ;
     LDY.W #$0010                                               ;84906D|A01000  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;849070|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;849070|B7CC    |0000CC;
     CLC                                                        ;849072|18      |      ;
     ADC.W #$0001                                               ;849073|690100  |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;849076|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;849076|97CC    |0000CC;
     RTS                                                        ;849078|60      |      ;
  
  
@@ -2442,7 +2442,7 @@ fAIAction0x1F_JumpIfTalkedTo:
     SEP #$20                                                   ;849085|E220    |      ;
     REP #$10                                                   ;849087|C210    |      ;
     LDY.W #$000C                                               ;849089|A00C00  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;84908C|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;84908C|B7CC    |0000CC;
     CMP.B #$00                                                 ;84908E|C900    |      ;
     BNE +                                                      ;849090|D003    |849095;
     JMP.W .return                                              ;849092|4C8591  |849185;
@@ -2494,36 +2494,36 @@ fAIAction0x1F_JumpIfTalkedTo:
     SEP #$20                                                   ;8490F0|E220    |      ;
     REP #$10                                                   ;8490F2|C210    |      ;
     LDY.W #$0007                                               ;8490F4|A00700  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;8490F7|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;8490F7|B7CC    |0000CC;
     SEP #$20                                                   ;8490F9|E220    |      ;
     REP #$10                                                   ;8490FB|C210    |      ;
     LDY.W #$0008                                               ;8490FD|A00800  |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;849100|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;849100|97CC    |0000CC;
     SEP #$20                                                   ;849102|E220    |      ;
     REP #$10                                                   ;849104|C210    |      ;
     LDY.W #$0003                                               ;849106|A00300  |      ;
     LDA.B #$00                                                 ;849109|A900    |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;84910B|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;84910B|97CC    |0000CC;
     SEP #$20                                                   ;84910D|E220    |      ;
     REP #$10                                                   ;84910F|C210    |      ;
     LDY.W #$0004                                               ;849111|A00400  |      ;
     LDA.B #$00                                                 ;849114|A900    |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;849116|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;849116|97CC    |0000CC;
     SEP #$20                                                   ;849118|E220    |      ;
     REP #$10                                                   ;84911A|C210    |      ;
     LDY.W #$000C                                               ;84911C|A00C00  |      ;
     LDA.B #$00                                                 ;84911F|A900    |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;849121|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;849121|97CC    |0000CC;
     REP #$20                                                   ;849123|C220    |      ;
     LDA.B strcPlayer.direction                                 ;849125|A5DA    |0000DA;
     EOR.W #$0001                                               ;849127|490100  |      ;
     SEP #$20                                                   ;84912A|E220    |      ;
     REP #$10                                                   ;84912C|C210    |      ;
     LDY.W #$0002                                               ;84912E|A00200  |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;849131|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;849131|97CC    |0000CC;
     REP #$30                                                   ;849133|C230    |      ;
     LDY.W #$0033                                               ;849135|A03300  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;849138|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;849138|B7CC    |0000CC;
     STA.B ptrTemp0x72                                          ;84913A|8572    |000072;
     SEP #$20                                                   ;84913C|E220    |      ;
     LDA.B #$B3                                                 ;84913E|A9B3    |      ;
@@ -2532,12 +2532,12 @@ fAIAction0x1F_JumpIfTalkedTo:
     SEP #$20                                                   ;849146|E220    |      ;
     REP #$10                                                   ;849148|C210    |      ;
     LDY.W #$0001                                               ;84914A|A00100  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;84914D|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;84914D|B7CC    |0000CC;
     ORA.B #$14                                                 ;84914F|0914    |      ;
     SEP #$20                                                   ;849151|E220    |      ;
     REP #$10                                                   ;849153|C210    |      ;
     LDY.W #$0001                                               ;849155|A00100  |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;849158|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;849158|97CC    |0000CC;
     SEP #$20                                                   ;84915A|E220    |      ;
     LDA.B #$56                                                 ;84915C|A956    |      ;
     STA.W nPlayerInteractionIndex                              ;84915E|8D6E09  |00096E;
@@ -2547,10 +2547,10 @@ fAIAction0x1F_JumpIfTalkedTo:
     %SetPlayerAction(!PACTION_NONE)
     REP #$30                                                   ;849177|C230    |      ;
     LDY.W #$0010                                               ;849179|A01000  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;84917C|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;84917C|B7CC    |0000CC;
     CLC                                                        ;84917E|18      |      ;
     ADC.W #$0001                                               ;84917F|690100  |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;849182|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;849182|97CC    |0000CC;
     RTS                                                        ;849184|60      |      ;
  
  
@@ -2558,10 +2558,10 @@ fAIAction0x1F_JumpIfTalkedTo:
     %AIMoveAction($0002)
     REP #$30                                                   ;84918F|C230    |      ;
     LDY.W #$0010                                               ;849191|A01000  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;849194|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;849194|B7CC    |0000CC;
     CLC                                                        ;849196|18      |      ;
     ADC.W #$0001                                               ;849197|690100  |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;84919A|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;84919A|97CC    |0000CC;
     RTS                                                        ;84919C|60      |      ;
  
  
@@ -2667,67 +2667,67 @@ fAIAction0x22_StartRandomWalk:
     SEP #$20                                                   ;84924F|E220    |      ;
     REP #$10                                                   ;849251|C210    |      ;
     LDY.W #$0009                                               ;849253|A00900  |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;849256|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;849256|97CC    |0000CC;
     %AIMoveAction($0001)
     SEP #$20                                                   ;849262|E220    |      ;
     LDA.B [ptrAIActionData]                                    ;849264|A7C9    |0000C9;
     SEP #$20                                                   ;849266|E220    |      ;
     REP #$10                                                   ;849268|C210    |      ;
     LDY.W #$000A                                               ;84926A|A00A00  |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;84926D|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;84926D|97CC    |0000CC;
     %AIMoveAction($0001)
     SEP #$20                                                   ;849279|E220    |      ;
     LDA.B [ptrAIActionData]                                    ;84927B|A7C9    |0000C9;
     SEP #$20                                                   ;84927D|E220    |      ;
     REP #$10                                                   ;84927F|C210    |      ;
     LDY.W #$000B                                               ;849281|A00B00  |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;849284|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;849284|97CC    |0000CC;
     SEP #$20                                                   ;849286|E220    |      ;
     REP #$10                                                   ;849288|C210    |      ;
     LDY.W #$0005                                               ;84928A|A00500  |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;84928D|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;84928D|97CC    |0000CC;
     SEP #$20                                                   ;84928F|E220    |      ;
     REP #$10                                                   ;849291|C210    |      ;
     LDY.W #$0006                                               ;849293|A00600  |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;849296|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;849296|97CC    |0000CC;
     %AIMoveAction($0001)
     LDA.B [ptrAIActionData]                                    ;8492A2|A7C9    |0000C9;
     REP #$30                                                   ;8492A4|C230    |      ;
     LDY.W #$0036                                               ;8492A6|A03600  |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;8492A9|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;8492A9|97CC    |0000CC;
     %AIMoveAction($0002)
     SEP #$20                                                   ;8492B5|E220    |      ;
     LDA.B [ptrAIActionData]                                    ;8492B7|A7C9    |0000C9;
     SEP #$20                                                   ;8492B9|E220    |      ;
     REP #$10                                                   ;8492BB|C210    |      ;
     LDY.W #$0007                                               ;8492BD|A00700  |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;8492C0|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;8492C0|97CC    |0000CC;
     SEP #$20                                                   ;8492C2|E220    |      ;
     REP #$10                                                   ;8492C4|C210    |      ;
     LDY.W #$0008                                               ;8492C6|A00800  |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;8492C9|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;8492C9|97CC    |0000CC;
     %AIMoveAction($0001)
     SEP #$20                                                   ;8492D5|E220    |      ;
     REP #$10                                                   ;8492D7|C210    |      ;
     LDY.W #$0001                                               ;8492D9|A00100  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;8492DC|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;8492DC|B7CC    |0000CC;
     ORA.B #$28                                                 ;8492DE|0928    |      ;
     SEP #$20                                                   ;8492E0|E220    |      ;
     REP #$10                                                   ;8492E2|C210    |      ;
     LDY.W #$0001                                               ;8492E4|A00100  |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;8492E7|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;8492E7|97CC    |0000CC;
     REP #$30                                                   ;8492E9|C230    |      ;
     LDY.W #$001A                                               ;8492EB|A01A00  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;8492EE|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;8492EE|B7CC    |0000CC;
     REP #$30                                                   ;8492F0|C230    |      ;
     LDY.W #$001E                                               ;8492F2|A01E00  |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;8492F5|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;8492F5|97CC    |0000CC;
     REP #$30                                                   ;8492F7|C230    |      ;
     LDY.W #$001C                                               ;8492F9|A01C00  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;8492FC|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;8492FC|B7CC    |0000CC;
     REP #$30                                                   ;8492FE|C230    |      ;
     LDY.W #$0020                                               ;849300|A02000  |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;849303|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;849303|97CC    |0000CC;
     RTS                                                        ;849305|60      |      ;
  
  
@@ -2788,7 +2788,7 @@ fAIAction0x24_NextHourPalette:
 ; @brief   AI command 0x25: deactivate another slot and destroy its game object.
 ; @details Operand: [slot number]. The current slot is restored afterwards.
 ; @case    $25
-; @modifies ptrAIActionData, ptrTemp0x72, ptrAIUnknown0xCC, strcObject.gameObjectIdx
+; @modifies ptrAIActionData, ptrTemp0x72, ptrAISlot, strcObject.gameObjectIdx
 ; @note    Clears the target slot's active byte (+00).
 ; @mode    M16X16 -> ?
 ; @calls   fAI_SelectSlot, fObject_Destroy
@@ -2796,10 +2796,10 @@ fAIAction0x24_NextHourPalette:
 fAIAction0x25_RemoveActor:
     REP #$30                                                   ;849375|C230    |      ;
     %AIMoveAction($0001)
-    LDA.B ptrAIUnknown0xCC                                     ;849381|A5CC    |0000CC;
+    LDA.B ptrAISlot                                     ;849381|A5CC    |0000CC;
     STA.B ptrTemp0x72                                          ;849383|8572    |000072;
     SEP #$20                                                   ;849385|E220    |      ;
-    LDA.B ptrAIUnknown0xCC+2                                   ;849387|A5CE    |0000CE;
+    LDA.B ptrAISlot+2                                   ;849387|A5CE    |0000CE;
     STA.B ptrTemp0x72+2                                        ;849389|8574    |000074;
     SEP #$20                                                   ;84938B|E220    |      ;
     LDA.B #$00                                                 ;84938D|A900    |      ;
@@ -2813,18 +2813,18 @@ fAIAction0x25_RemoveActor:
     REP #$10                                                   ;8493A6|C210    |      ;
     LDY.W #$0000                                               ;8493A8|A00000  |      ;
     LDA.B #$00                                                 ;8493AB|A900    |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;8493AD|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;8493AD|97CC    |0000CC;
     REP #$30                                                   ;8493AF|C230    |      ;
     LDY.W #$0012                                               ;8493B1|A01200  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;8493B4|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;8493B4|B7CC    |0000CC;
     STA.B strcObject.gameObjectIdx                             ;8493B6|85A5    |0000A5;
     JSL.L fObject_Destroy                                ;8493B8|22A28185|8581A2;
     REP #$20                                                   ;8493BC|C220    |      ;
     LDA.B ptrTemp0x72                                          ;8493BE|A572    |000072;
-    STA.B ptrAIUnknown0xCC                                     ;8493C0|85CC    |0000CC;
+    STA.B ptrAISlot                                     ;8493C0|85CC    |0000CC;
     SEP #$20                                                   ;8493C2|E220    |      ;
     LDA.B ptrTemp0x72+2                                        ;8493C4|A574    |000074;
-    STA.B ptrAIUnknown0xCC+2                                   ;8493C6|85CE    |0000CE;
+    STA.B ptrAISlot+2                                   ;8493C6|85CE    |0000CE;
     RTS                                                        ;8493C8|60      |      ;
  
  
@@ -2906,10 +2906,10 @@ fAIAction0x2A_StartTileSequence:
     %AIMoveAction($0002)
     REP #$30                                                   ;84956F|C230    |      ;
     LDY.W #$0010                                               ;849571|A01000  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;849574|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;849574|B7CC    |0000CC;
     CLC                                                        ;849576|18      |      ;
     ADC.W #$0001                                               ;849577|690100  |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;84957A|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;84957A|97CC    |0000CC;
     RTS                                                        ;84957C|60      |      ;
  
  
@@ -2928,27 +2928,27 @@ fAIAction0x2B_SpawnActor:
     LDA.B [ptrAIActionData]                                    ;849589|A7C9    |0000C9;
     REP #$30                                                   ;84958B|C230    |      ;
     LDY.W #$0033                                               ;84958D|A03300  |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;849590|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;849590|97CC    |0000CC;
     %AIMoveAction($0002)
     SEP #$20                                                   ;84959C|E220    |      ;
     LDA.B [ptrAIActionData]                                    ;84959E|A7C9    |0000C9;
     SEP #$20                                                   ;8495A0|E220    |      ;
     REP #$10                                                   ;8495A2|C210    |      ;
     LDY.W #$0002                                               ;8495A4|A00200  |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;8495A7|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;8495A7|97CC    |0000CC;
     %AIMoveAction($0001)
     SEP #$20                                                   ;8495B3|E220    |      ;
     REP #$10                                                   ;8495B5|C210    |      ;
     LDY.W #$0001                                               ;8495B7|A00100  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;8495BA|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;8495BA|B7CC    |0000CC;
     ORA.B #$03                                                 ;8495BC|0903    |      ;
     SEP #$20                                                   ;8495BE|E220    |      ;
     REP #$10                                                   ;8495C0|C210    |      ;
     LDY.W #$0001                                               ;8495C2|A00100  |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;8495C5|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;8495C5|97CC    |0000CC;
     REP #$30                                                   ;8495C7|C230    |      ;
     LDY.W #$0033                                               ;8495C9|A03300  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;8495CC|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;8495CC|B7CC    |0000CC;
     STA.B ptrTemp0x72                                          ;8495CE|8572    |000072;
     SEP #$20                                                   ;8495D0|E220    |      ;
     LDA.B #$B3                                                 ;8495D2|A9B3    |      ;
@@ -2956,10 +2956,10 @@ fAIAction0x2B_SpawnActor:
     JSL.L fAI_LoadSlotSpriteFromDirTable                                    ;8495D6|22958884|848895;
     REP #$30                                                   ;8495DA|C230    |      ;
     LDY.W #$0010                                               ;8495DC|A01000  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;8495DF|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;8495DF|B7CC    |0000CC;
     CLC                                                        ;8495E1|18      |      ;
     ADC.W #$0001                                               ;8495E2|690100  |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;8495E5|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;8495E5|97CC    |0000CC;
     RTS                                                        ;8495E7|60      |      ;
  
  
@@ -3016,7 +3016,7 @@ fAIAction0x2D_JumpOnInteract:
     SEP #$20                                                   ;84963F|E220    |      ;
     REP #$10                                                   ;849641|C210    |      ;
     LDY.W #$000C                                               ;849643|A00C00  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;849646|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;849646|B7CC    |0000CC;
     CMP.B #$00                                                 ;849648|C900    |      ;
     BNE +                                                      ;84964A|D003    |84964F;
     JMP.W .return                                              ;84964C|4C5F97  |84975F;
@@ -3079,36 +3079,36 @@ fAIAction0x2D_JumpOnInteract:
     SEP #$20                                                   ;8496CA|E220    |      ;
     REP #$10                                                   ;8496CC|C210    |      ;
     LDY.W #$0007                                               ;8496CE|A00700  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;8496D1|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;8496D1|B7CC    |0000CC;
     SEP #$20                                                   ;8496D3|E220    |      ;
     REP #$10                                                   ;8496D5|C210    |      ;
     LDY.W #$0008                                               ;8496D7|A00800  |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;8496DA|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;8496DA|97CC    |0000CC;
     SEP #$20                                                   ;8496DC|E220    |      ;
     REP #$10                                                   ;8496DE|C210    |      ;
     LDY.W #$0003                                               ;8496E0|A00300  |      ;
     LDA.B #$00                                                 ;8496E3|A900    |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;8496E5|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;8496E5|97CC    |0000CC;
     SEP #$20                                                   ;8496E7|E220    |      ;
     REP #$10                                                   ;8496E9|C210    |      ;
     LDY.W #$0004                                               ;8496EB|A00400  |      ;
     LDA.B #$00                                                 ;8496EE|A900    |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;8496F0|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;8496F0|97CC    |0000CC;
     SEP #$20                                                   ;8496F2|E220    |      ;
     REP #$10                                                   ;8496F4|C210    |      ;
     LDY.W #$000C                                               ;8496F6|A00C00  |      ;
     LDA.B #$00                                                 ;8496F9|A900    |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;8496FB|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;8496FB|97CC    |0000CC;
     REP #$20                                                   ;8496FD|C220    |      ;
     LDA.B strcPlayer.direction                                 ;8496FF|A5DA    |0000DA;
     EOR.W #$0001                                               ;849701|490100  |      ;
     SEP #$20                                                   ;849704|E220    |      ;
     REP #$10                                                   ;849706|C210    |      ;
     LDY.W #$0002                                               ;849708|A00200  |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;84970B|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;84970B|97CC    |0000CC;
     REP #$30                                                   ;84970D|C230    |      ;
     LDY.W #$0033                                               ;84970F|A03300  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;849712|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;849712|B7CC    |0000CC;
     STA.B ptrTemp0x72                                          ;849714|8572    |000072;
     SEP #$20                                                   ;849716|E220    |      ;
     LDA.B #$B3                                                 ;849718|A9B3    |      ;
@@ -3117,12 +3117,12 @@ fAIAction0x2D_JumpOnInteract:
     SEP #$20                                                   ;849720|E220    |      ;
     REP #$10                                                   ;849722|C210    |      ;
     LDY.W #$0001                                               ;849724|A00100  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;849727|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;849727|B7CC    |0000CC;
     ORA.B #$14                                                 ;849729|0914    |      ;
     SEP #$20                                                   ;84972B|E220    |      ;
     REP #$10                                                   ;84972D|C210    |      ;
     LDY.W #$0001                                               ;84972F|A00100  |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;849732|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;849732|97CC    |0000CC;
     SEP #$20                                                   ;849734|E220    |      ;
     LDA.B #$56                                                 ;849736|A956    |      ;
     STA.W nPlayerInteractionIndex                              ;849738|8D6E09  |00096E;
@@ -3132,10 +3132,10 @@ fAIAction0x2D_JumpOnInteract:
     %SetPlayerAction(!PACTION_NONE)
     REP #$30                                                   ;849751|C230    |      ;
     LDY.W #!PACTION_10                                               
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;849756|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;849756|B7CC    |0000CC;
     CLC                                                        ;849758|18      |      ;
     ADC.W #$0001                                               ;849759|690100  |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;84975C|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;84975C|97CC    |0000CC;
     RTS                                                        ;84975E|60      |      ;
  
  
@@ -3143,10 +3143,10 @@ fAIAction0x2D_JumpOnInteract:
     %AIMoveAction($0004)
     REP #$30                                                   ;849769|C230    |      ;
     LDY.W #$0010                                               ;84976B|A01000  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;84976E|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;84976E|B7CC    |0000CC;
     CLC                                                        ;849770|18      |      ;
     ADC.W #$0001                                               ;849771|690100  |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;849774|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;849774|97CC    |0000CC;
     RTS                                                        ;849776|60      |      ;
  
  
@@ -3167,53 +3167,53 @@ fAIAction0x2E_StartWander:
     SEP #$20                                                   ;849787|E220    |      ;
     REP #$10                                                   ;849789|C210    |      ;
     LDY.W #$000B                                               ;84978B|A00B00  |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;84978E|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;84978E|97CC    |0000CC;
     SEP #$20                                                   ;849790|E220    |      ;
     REP #$10                                                   ;849792|C210    |      ;
     LDY.W #$0005                                               ;849794|A00500  |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;849797|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;849797|97CC    |0000CC;
     SEP #$20                                                   ;849799|E220    |      ;
     REP #$10                                                   ;84979B|C210    |      ;
     LDY.W #$0006                                               ;84979D|A00600  |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;8497A0|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;8497A0|97CC    |0000CC;
     %AIMoveAction($0001)
     LDA.B [ptrAIActionData]                                    ;8497AC|A7C9    |0000C9;
     REP #$30                                                   ;8497AE|C230    |      ;
     LDY.W #$0036                                               ;8497B0|A03600  |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;8497B3|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;8497B3|97CC    |0000CC;
     %AIMoveAction($0002)
     SEP #$20                                                   ;8497BF|E220    |      ;
     LDA.B [ptrAIActionData]                                    ;8497C1|A7C9    |0000C9;
     SEP #$20                                                   ;8497C3|E220    |      ;
     REP #$10                                                   ;8497C5|C210    |      ;
     LDY.W #$0007                                               ;8497C7|A00700  |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;8497CA|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;8497CA|97CC    |0000CC;
     SEP #$20                                                   ;8497CC|E220    |      ;
     REP #$10                                                   ;8497CE|C210    |      ;
     LDY.W #$0008                                               ;8497D0|A00800  |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;8497D3|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;8497D3|97CC    |0000CC;
     %AIMoveAction($0001)
     SEP #$20                                                   ;8497DF|E220    |      ;
     REP #$10                                                   ;8497E1|C210    |      ;
     LDY.W #$0001                                               ;8497E3|A00100  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;8497E6|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;8497E6|B7CC    |0000CC;
     ORA.B #$A8                                                 ;8497E8|09A8    |      ;
     SEP #$20                                                   ;8497EA|E220    |      ;
     REP #$10                                                   ;8497EC|C210    |      ;
     LDY.W #$0001                                               ;8497EE|A00100  |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;8497F1|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;8497F1|97CC    |0000CC;
     REP #$30                                                   ;8497F3|C230    |      ;
     LDY.W #$001A                                               ;8497F5|A01A00  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;8497F8|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;8497F8|B7CC    |0000CC;
     REP #$30                                                   ;8497FA|C230    |      ;
     LDY.W #$001E                                               ;8497FC|A01E00  |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;8497FF|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;8497FF|97CC    |0000CC;
     REP #$30                                                   ;849801|C230    |      ;
     LDY.W #$001C                                               ;849803|A01C00  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;849806|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;849806|B7CC    |0000CC;
     REP #$30                                                   ;849808|C230    |      ;
     LDY.W #$0020                                               ;84980A|A02000  |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;84980D|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;84980D|97CC    |0000CC;
     RTS                                                        ;84980F|60      |      ;
  
  
@@ -3232,11 +3232,11 @@ fAIAction0x2F_SetActorSpriteTable:
     LDA.B [ptrAIActionData]                                    ;84981C|A7C9    |0000C9;
     REP #$30                                                   ;84981E|C230    |      ;
     LDY.W #$0033                                               ;849820|A03300  |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;849823|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;849823|97CC    |0000CC;
     %AIMoveAction($0002)
     REP #$30                                                   ;84982F|C230    |      ;
     LDY.W #$0033                                               ;849831|A03300  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;849834|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;849834|B7CC    |0000CC;
     STA.B ptrTemp0x72                                          ;849836|8572    |000072;
     SEP #$20                                                   ;849838|E220    |      ;
     LDA.B #$B3                                                 ;84983A|A9B3    |      ;
@@ -3245,12 +3245,12 @@ fAIAction0x2F_SetActorSpriteTable:
     SEP #$20                                                   ;849842|E220    |      ;
     REP #$10                                                   ;849844|C210    |      ;
     LDY.W #$0001                                               ;849846|A00100  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;849849|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;849849|B7CC    |0000CC;
     ORA.B #$04                                                 ;84984B|0904    |      ;
     SEP #$20                                                   ;84984D|E220    |      ;
     REP #$10                                                   ;84984F|C210    |      ;
     LDY.W #$0001                                               ;849851|A00100  |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;849854|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;849854|97CC    |0000CC;
     RTS                                                        ;849856|60      |      ;
  
  
@@ -3279,7 +3279,7 @@ fAIAction0x30_UpdateChicken:
     SEP #$20                                                   ;849863|E220    |      ;
     REP #$10                                                   ;849865|C210    |      ;
     LDY.W #$003F                                               ;849867|A03F00  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;84986A|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;84986A|B7CC    |0000CC;
     SEC                                                        ;84986C|38      |      ;
     SBC.B #$24                                                 ;84986D|E924    |      ;
     XBA                                                        ;84986F|EB      |      ;
@@ -3289,18 +3289,18 @@ fAIAction0x30_UpdateChicken:
     JSL.L fGameEngine_GetChickenData                           ;849875|2295C983|83C995;
     REP #$30                                                   ;849879|C230    |      ;
     LDY.W #$001A                                               ;84987B|A01A00  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;84987E|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;84987E|B7CC    |0000CC;
     LDY.W #$0004                                               ;849880|A00400  |      ;
     STA.B [ptrTemp0x72],Y                                      ;849883|9772    |000072;
     REP #$30                                                   ;849885|C230    |      ;
     LDY.W #$001C                                               ;849887|A01C00  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;84988A|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;84988A|B7CC    |0000CC;
     LDY.W #$0006                                               ;84988C|A00600  |      ;
     STA.B [ptrTemp0x72],Y                                      ;84988F|9772    |000072;
     SEP #$20                                                   ;849891|E220    |      ;
     REP #$10                                                   ;849893|C210    |      ;
     LDY.W #$000E                                               ;849895|A00E00  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;849898|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;849898|B7CC    |0000CC;
     CMP.B #$E0                                                 ;84989A|C9E0    |      ;
     BNE .loop                                                  ;84989C|D003    |8498A1;
     if !REGION_EUDE
@@ -3314,7 +3314,7 @@ fAIAction0x30_UpdateChicken:
     SEP #$20                                                   ;8498A1|E220    |      ;
     REP #$10                                                   ;8498A3|C210    |      ;
     LDY.W #$000C                                               ;8498A5|A00C00  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;8498A8|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;8498A8|B7CC    |0000CC;
     CMP.B #$00                                                 ;8498AA|C900    |      ;
     BNE +                                                      ;8498AC|D003    |8498B1;
     JMP.W .idle_roll                                              ;8498AE|4CC899  |8499C8;
@@ -3407,32 +3407,32 @@ fAIAction0x30_UpdateChicken:
     SEP #$20                                                   ;849949|E220    |      ;
     REP #$10                                                   ;84994B|C210    |      ;
     LDY.W #$003F                                               ;84994D|A03F00  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;849950|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;849950|B7CC    |0000CC;
     STA.W strcPlayerData.nAiArg                                ;849952|8D2009  |000920;
     SEP #$20                                                   ;849955|E220    |      ;
     REP #$10                                                   ;849957|C210    |      ;
     LDY.W #$0000                                               ;849959|A00000  |      ;
     LDA.B #$00                                                 ;84995C|A900    |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;84995E|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;84995E|97CC    |0000CC;
     SEP #$20                                                   ;849960|E220    |      ;
     REP #$10                                                   ;849962|C210    |      ;
     LDY.W #$0001                                               ;849964|A00100  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;849967|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;849967|B7CC    |0000CC;
     ORA.B #$40                                                 ;849969|0940    |      ;
     SEP #$20                                                   ;84996B|E220    |      ;
     REP #$10                                                   ;84996D|C210    |      ;
     LDY.W #$0001                                               ;84996F|A00100  |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;849972|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;849972|97CC    |0000CC;
     REP #$30                                                   ;849974|C230    |      ;
     LDY.W #$0010                                               ;849976|A01000  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;849979|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;849979|B7CC    |0000CC;
     CLC                                                        ;84997B|18      |      ;
     ADC.W #$0001                                               ;84997C|690100  |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;84997F|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;84997F|97CC    |0000CC;
     SEP #$20                                                   ;849981|E220    |      ;
     REP #$10                                                   ;849983|C210    |      ;
     LDY.W #$003F                                               ;849985|A03F00  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;849988|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;849988|B7CC    |0000CC;
     CMP.B #$24                                                 ;84998A|C924    |      ;
     BCS +                                                      ;84998C|B003    |849991;
     JMP.W .finish_update                                              ;84998E|4C419A  |849A41;
@@ -3472,7 +3472,7 @@ fAIAction0x30_UpdateChicken:
     SEP #$20                                                   ;8499D5|E220    |      ;
     REP #$10                                                   ;8499D7|C210    |      ;
     LDY.W #$003F                                               ;8499D9|A03F00  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;8499DC|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;8499DC|B7CC    |0000CC;
     SEC                                                        ;8499DE|38      |      ;
     SBC.B #$24                                                 ;8499DF|E924    |      ;
     XBA                                                        ;8499E1|EB      |      ;
@@ -3499,7 +3499,7 @@ fAIAction0x30_UpdateChicken:
     SEP #$20                                                   ;849A07|E220    |      ;
     REP #$10                                                   ;849A09|C210    |      ;
     LDY.W #$003F                                               ;849A0B|A03F00  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;849A0E|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;849A0E|B7CC    |0000CC;
     XBA                                                        ;849A10|EB      |      ;
     LDA.B #$00                                                 ;849A11|A900    |      ;
     XBA                                                        ;849A13|EB      |      ;
@@ -3514,7 +3514,7 @@ fAIAction0x30_UpdateChicken:
     SEP #$20                                                   ;849A25|E220    |      ;
     REP #$10                                                   ;849A27|C210    |      ;
     LDY.W #$003F                                               ;849A29|A03F00  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;849A2C|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;849A2C|B7CC    |0000CC;
     XBA                                                        ;849A2E|EB      |      ;
     LDA.B #$00                                                 ;849A2F|A900    |      ;
     XBA                                                        ;849A31|EB      |      ;
@@ -3528,10 +3528,10 @@ fAIAction0x30_UpdateChicken:
 .finish_update:
     REP #$30                                                   ;849A41|C230    |      ;
     LDY.W #$0010                                               ;849A43|A01000  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;849A46|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;849A46|B7CC    |0000CC;
     CLC                                                        ;849A48|18      |      ;
     ADC.W #$0001                                               ;849A49|690100  |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;849A4C|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;849A4C|97CC    |0000CC;
     RTS                                                        ;849A4E|60      |      ;
  
  
@@ -3571,7 +3571,7 @@ fAIAction0x30_UpdateChicken:
     SEP #$20                                                   ;849A89|E220    |      ;
     REP #$10                                                   ;849A8B|C210    |      ;
     LDY.W #$003F                                               ;849A8D|A03F00  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;849A90|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;849A90|B7CC    |0000CC;
     STA.W $09A1+!RAM_SHIFT                                 ;849A92|8DA109  |0009A1;
     SEP #$20                                                   ;849A95|E220    |      ;
     LDA.B #$44                                                 ;849A97|A944    |      ;
@@ -3584,16 +3584,16 @@ fAIAction0x30_UpdateChicken:
     REP #$10                                                   ;849AB4|C210    |      ;
     LDY.W #$000E                                               ;849AB6|A00E00  |      ;
     LDA.B #$00                                                 ;849AB9|A900    |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;849ABB|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;849ABB|97CC    |0000CC;
     SEP #$20                                                   ;849ABD|E220    |      ;
     REP #$10                                                   ;849ABF|C210    |      ;
     LDY.W #$0001                                               ;849AC1|A00100  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;849AC4|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;849AC4|B7CC    |0000CC;
     AND.B #$57                                                 ;849AC6|2957    |      ;
     SEP #$20                                                   ;849AC8|E220    |      ;
     REP #$10                                                   ;849ACA|C210    |      ;
     LDY.W #$0001                                               ;849ACC|A00100  |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;849ACF|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;849ACF|97CC    |0000CC;
     JMP.W .finish_update                                              ;849AD1|4C419A  |849A41;
  
  
@@ -3616,7 +3616,7 @@ fAIAction0x31_UpdateCow:
     SEP #$20                                                   ;849AE0|E220    |      ;
     REP #$10                                                   ;849AE2|C210    |      ;
     LDY.W #$003F                                               ;849AE4|A03F00  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;849AE7|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;849AE7|B7CC    |0000CC;
     SEC                                                        ;849AE9|38      |      ;
     SBC.B #$18                                                 ;849AEA|E918    |      ;
     XBA                                                        ;849AEC|EB      |      ;
@@ -3626,12 +3626,12 @@ fAIAction0x31_UpdateCow:
     JSL.L fGameEngine_GetCowData                               ;849AF2|22A7C983|83C9A7;
     REP #$30                                                   ;849AF6|C230    |      ;
     LDY.W #$001A                                               ;849AF8|A01A00  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;849AFB|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;849AFB|B7CC    |0000CC;
     LDY.W #$0008                                               ;849AFD|A00800  |      ;
     STA.B [ptrTemp0x72],Y                                      ;849B00|9772    |000072;
     REP #$30                                                   ;849B02|C230    |      ;
     LDY.W #$001C                                               ;849B04|A01C00  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;849B07|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;849B07|B7CC    |0000CC;
     LDY.W #$000A                                               ;849B09|A00A00  |      ;
     STA.B [ptrTemp0x72],Y                                      ;849B0C|9772    |000072;
     SEP #$20                                                   ;849B0E|E220    |      ;
@@ -3641,7 +3641,7 @@ fAIAction0x31_UpdateCow:
     SEP #$20                                                   ;849B16|E220    |      ;
     REP #$10                                                   ;849B18|C210    |      ;
     LDY.W #$000E                                               ;849B1A|A00E00  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;849B1D|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;849B1D|B7CC    |0000CC;
     CMP.B #$C2                                                 ;849B1F|C9C2    |      ;
     BNE +                                                      ;849B21|D003    |849B26;
     JMP.W fAIAction0x31_CowSendOutside                                      ;849B23|4C95A5  |84A595;
@@ -3654,7 +3654,7 @@ fAIAction0x31_UpdateCow:
     SEP #$20                                                   ;849B2E|E220    |      ;
     REP #$10                                                   ;849B30|C210    |      ;
     LDY.W #$000E                                               ;849B32|A00E00  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;849B35|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;849B35|B7CC    |0000CC;
     CMP.B #$E0                                                 ;849B37|C9E0    |      ;
     BNE +                                                      ;849B39|D003    |849B3E;
     if !REGION_EUDE
@@ -3690,7 +3690,7 @@ fAIAction0x31_CowDefaultPath:
     SEP #$20                                                   ;849B45|E220    |      ;
     REP #$10                                                   ;849B47|C210    |      ;
     LDY.W #$000C                                               ;849B49|A00C00  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;849B4C|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;849B4C|B7CC    |0000CC;
     CMP.B #$00                                                 ;849B4E|C900    |      ;
     BNE +                                                      ;849B50|D003    |849B55;
     JMP.W .continue                                            ;849B52|4CB9A0  |84A0B9;
@@ -3895,7 +3895,7 @@ fAIAction0x31_CowDefaultPath:
     SEP #$20                                                   ;849CCE|E220    |      ;
     REP #$10                                                   ;849CD0|C210    |      ;
     LDY.W #$0002                                               ;849CD2|A00200  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;849CD5|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;849CD5|B7CC    |0000CC;
     CMP.B #$00                                                 ;849CD7|C900    |      ;
     BEQ .baby_script_down                                                ;849CD9|F00C    |849CE7;
     CMP.B #$01                                                 ;849CDB|C901    |      ;
@@ -3911,7 +3911,7 @@ fAIAction0x31_CowDefaultPath:
     SEP #$20                                                   ;849CEC|E220    |      ;
     REP #$10                                                   ;849CEE|C210    |      ;
     LDY.W #$003F                                               ;849CF0|A03F00  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;849CF3|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;849CF3|B7CC    |0000CC;
     LDX.W #$0000                                               ;849CF5|A20000  |      ;
     LDY.W #$0064                                               ;849CF8|A06400  |      ;
     BRA .jump1                                                 ;849CFB|8042    |849D3F;
@@ -3923,7 +3923,7 @@ fAIAction0x31_CowDefaultPath:
     SEP #$20                                                   ;849D02|E220    |      ;
     REP #$10                                                   ;849D04|C210    |      ;
     LDY.W #$003F                                               ;849D06|A03F00  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;849D09|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;849D09|B7CC    |0000CC;
     LDX.W #$0000                                               ;849D0B|A20000  |      ;
     LDY.W #$0065                                               ;849D0E|A06500  |      ;
     BRA .jump1                                                 ;849D11|802C    |849D3F;
@@ -3935,7 +3935,7 @@ fAIAction0x31_CowDefaultPath:
     SEP #$20                                                   ;849D18|E220    |      ;
     REP #$10                                                   ;849D1A|C210    |      ;
     LDY.W #$003F                                               ;849D1C|A03F00  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;849D1F|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;849D1F|B7CC    |0000CC;
     LDX.W #$0000                                               ;849D21|A20000  |      ;
     LDY.W #$0066                                               ;849D24|A06600  |      ;
     BRA .jump1                                                 ;849D27|8016    |849D3F;
@@ -3947,7 +3947,7 @@ fAIAction0x31_CowDefaultPath:
     SEP #$20                                                   ;849D2E|E220    |      ;
     REP #$10                                                   ;849D30|C210    |      ;
     LDY.W #$003F                                               ;849D32|A03F00  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;849D35|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;849D35|B7CC    |0000CC;
     LDX.W #$0000                                               ;849D37|A20000  |      ;
     LDY.W #$0067                                               ;849D3A|A06700  |      ;
     BRA .jump1                                                 ;849D3D|8000    |849D3F;
@@ -3962,7 +3962,7 @@ fAIAction0x31_CowDefaultPath:
     SEP #$20                                                   ;849D46|E220    |      ;
     REP #$10                                                   ;849D48|C210    |      ;
     LDY.W #$0002                                               ;849D4A|A00200  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;849D4D|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;849D4D|B7CC    |0000CC;
     CMP.B #$00                                                 ;849D4F|C900    |      ;
     BEQ .child_script_down                                               ;849D51|F00C    |849D5F;
     CMP.B #$01                                                 ;849D53|C901    |      ;
@@ -3978,7 +3978,7 @@ fAIAction0x31_CowDefaultPath:
     SEP #$20                                                   ;849D64|E220    |      ;
     REP #$10                                                   ;849D66|C210    |      ;
     LDY.W #$003F                                               ;849D68|A03F00  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;849D6B|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;849D6B|B7CC    |0000CC;
     LDX.W #$0000                                               ;849D6D|A20000  |      ;
     LDY.W #$0060                                               ;849D70|A06000  |      ;
     BRA .jump2                                                 ;849D73|8042    |849DB7;
@@ -3990,7 +3990,7 @@ fAIAction0x31_CowDefaultPath:
     SEP #$20                                                   ;849D7A|E220    |      ;
     REP #$10                                                   ;849D7C|C210    |      ;
     LDY.W #$003F                                               ;849D7E|A03F00  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;849D81|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;849D81|B7CC    |0000CC;
     LDX.W #$0000                                               ;849D83|A20000  |      ;
     LDY.W #$0061                                               ;849D86|A06100  |      ;
     BRA .jump2                                                 ;849D89|802C    |849DB7;
@@ -4002,7 +4002,7 @@ fAIAction0x31_CowDefaultPath:
     SEP #$20                                                   ;849D90|E220    |      ;
     REP #$10                                                   ;849D92|C210    |      ;
     LDY.W #$003F                                               ;849D94|A03F00  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;849D97|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;849D97|B7CC    |0000CC;
     LDX.W #$0000                                               ;849D99|A20000  |      ;
     LDY.W #$0062                                               ;849D9C|A06200  |      ;
     BRA .jump2                                                 ;849D9F|8016    |849DB7;
@@ -4014,7 +4014,7 @@ fAIAction0x31_CowDefaultPath:
     SEP #$20                                                   ;849DA6|E220    |      ;
     REP #$10                                                   ;849DA8|C210    |      ;
     LDY.W #$003F                                               ;849DAA|A03F00  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;849DAD|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;849DAD|B7CC    |0000CC;
     LDX.W #$0000                                               ;849DAF|A20000  |      ;
     LDY.W #$0063                                               ;849DB2|A06300  |      ;
     BRA .jump2                                                 ;849DB5|8000    |849DB7;
@@ -4224,7 +4224,7 @@ fAIAction0x31_CowDefaultPath:
     SEP #$20                                                   ;849F2B|E220    |      ;
     REP #$10                                                   ;849F2D|C210    |      ;
     LDY.W #$0002                                               ;849F2F|A00200  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;849F32|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;849F32|B7CC    |0000CC;
     BEQ .jump3                                                 ;849F34|F04B    |849F81;
     CMP.B #$02                                                 ;849F36|C902    |      ;
     BEQ .jump3                                                 ;849F38|F047    |849F81;
@@ -4241,7 +4241,7 @@ fAIAction0x31_CowDefaultPath:
     SEP #$20                                                   ;849F4A|E220    |      ;
     REP #$10                                                   ;849F4C|C210    |      ;
     LDY.W #$0002                                               ;849F4E|A00200  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;849F51|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;849F51|B7CC    |0000CC;
     BEQ .jump3                                                 ;849F53|F02C    |849F81;
     CMP.B #$02                                                 ;849F55|C902    |      ;
     BEQ .jump3                                                 ;849F57|F028    |849F81;
@@ -4258,7 +4258,7 @@ fAIAction0x31_CowDefaultPath:
     SEP #$20                                                   ;849F69|E220    |      ;
     REP #$10                                                   ;849F6B|C210    |      ;
     LDY.W #$0002                                               ;849F6D|A00200  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;849F70|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;849F70|B7CC    |0000CC;
     BEQ .jump3                                                 ;849F72|F00D    |849F81;
     CMP.B #$02                                                 ;849F74|C902    |      ;
     BEQ .jump3                                                 ;849F76|F009    |849F81;
@@ -4283,7 +4283,7 @@ fAIAction0x31_CowDefaultPath:
     SEP #$20                                                   ;849F96|E220    |      ;
     REP #$10                                                   ;849F98|C210    |      ;
     LDY.W #$003F                                               ;849F9A|A03F00  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;849F9D|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;849F9D|B7CC    |0000CC;
     LDX.W #$0000                                               ;849F9F|A20000  |      ;
     LDY.B strcVariables.n16Temp1                               ;849FA2|A47E    |00007E;
     JSL.L fAI_SetSlotScript                                    ;849FA4|223F8084|84803F;
@@ -4315,7 +4315,7 @@ fAIAction0x31_CowDefaultPath:
     SEP #$20                                                   ;849FD0|E220    |      ;
     REP #$10                                                   ;849FD2|C210    |      ;
     LDY.W #$0002                                               ;849FD4|A00200  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;849FD7|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;849FD7|B7CC    |0000CC;
     CMP.B #$00                                                 ;849FD9|C900    |      ;
     BEQ .adult_script_down                                               ;849FDB|F00C    |849FE9;
     CMP.B #$01                                                 ;849FDD|C901    |      ;
@@ -4331,7 +4331,7 @@ fAIAction0x31_CowDefaultPath:
     SEP #$20                                                   ;849FEE|E220    |      ;
     REP #$10                                                   ;849FF0|C210    |      ;
     LDY.W #$003F                                               ;849FF2|A03F00  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;849FF5|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;849FF5|B7CC    |0000CC;
     LDX.W #$0000                                               ;849FF7|A20000  |      ;
     LDY.W #$000C                                               ;849FFA|A00C00  |      ;
     JMP.W .jump4                                               ;849FFD|4CB5A0  |84A0B5;
@@ -4343,7 +4343,7 @@ fAIAction0x31_CowDefaultPath:
     SEP #$20                                                   ;84A005|E220    |      ;
     REP #$10                                                   ;84A007|C210    |      ;
     LDY.W #$003F                                               ;84A009|A03F00  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;84A00C|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;84A00C|B7CC    |0000CC;
     LDX.W #$0000                                               ;84A00E|A20000  |      ;
     LDY.W #$000D                                               ;84A011|A00D00  |      ;
     JMP.W .jump4                                               ;84A014|4CB5A0  |84A0B5;
@@ -4355,7 +4355,7 @@ fAIAction0x31_CowDefaultPath:
     SEP #$20                                                   ;84A01C|E220    |      ;
     REP #$10                                                   ;84A01E|C210    |      ;
     LDY.W #$003F                                               ;84A020|A03F00  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;84A023|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;84A023|B7CC    |0000CC;
     LDX.W #$0000                                               ;84A025|A20000  |      ;
     LDY.W #$000E                                               ;84A028|A00E00  |      ;
     JMP.W .jump4                                               ;84A02B|4CB5A0  |84A0B5;
@@ -4367,7 +4367,7 @@ fAIAction0x31_CowDefaultPath:
     SEP #$20                                                   ;84A033|E220    |      ;
     REP #$10                                                   ;84A035|C210    |      ;
     LDY.W #$003F                                               ;84A037|A03F00  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;84A03A|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;84A03A|B7CC    |0000CC;
     LDX.W #$0000                                               ;84A03C|A20000  |      ;
     LDY.W #$000F                                               ;84A03F|A00F00  |      ;
     BRA .jump4                                                 ;84A042|8071    |84A0B5;
@@ -4377,7 +4377,7 @@ fAIAction0x31_CowDefaultPath:
     SEP #$20                                                   ;84A044|E220    |      ;
     REP #$10                                                   ;84A046|C210    |      ;
     LDY.W #$0002                                               ;84A048|A00200  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;84A04B|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;84A04B|B7CC    |0000CC;
     CMP.B #$00                                                 ;84A04D|C900    |      ;
     BEQ .pregnant_script_down                                               ;84A04F|F00C    |84A05D;
     CMP.B #$01                                                 ;84A051|C901    |      ;
@@ -4393,7 +4393,7 @@ fAIAction0x31_CowDefaultPath:
     SEP #$20                                                   ;84A062|E220    |      ;
     REP #$10                                                   ;84A064|C210    |      ;
     LDY.W #$003F                                               ;84A066|A03F00  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;84A069|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;84A069|B7CC    |0000CC;
     LDX.W #$0000                                               ;84A06B|A20000  |      ;
     LDY.W #$0082                                               ;84A06E|A08200  |      ;
     BRA .jump4                                                 ;84A071|8042    |84A0B5;
@@ -4405,7 +4405,7 @@ fAIAction0x31_CowDefaultPath:
     SEP #$20                                                   ;84A078|E220    |      ;
     REP #$10                                                   ;84A07A|C210    |      ;
     LDY.W #$003F                                               ;84A07C|A03F00  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;84A07F|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;84A07F|B7CC    |0000CC;
     LDX.W #$0000                                               ;84A081|A20000  |      ;
     LDY.W #$0083                                               ;84A084|A08300  |      ;
     BRA .jump4                                                 ;84A087|802C    |84A0B5;
@@ -4417,7 +4417,7 @@ fAIAction0x31_CowDefaultPath:
     SEP #$20                                                   ;84A08E|E220    |      ;
     REP #$10                                                   ;84A090|C210    |      ;
     LDY.W #$003F                                               ;84A092|A03F00  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;84A095|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;84A095|B7CC    |0000CC;
     LDX.W #$0000                                               ;84A097|A20000  |      ;
     LDY.W #$0084                                               ;84A09A|A08400  |      ;
     BRA .jump4                                                 ;84A09D|8016    |84A0B5;
@@ -4429,7 +4429,7 @@ fAIAction0x31_CowDefaultPath:
     SEP #$20                                                   ;84A0A4|E220    |      ;
     REP #$10                                                   ;84A0A6|C210    |      ;
     LDY.W #$003F                                               ;84A0A8|A03F00  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;84A0AB|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;84A0AB|B7CC    |0000CC;
     LDX.W #$0000                                               ;84A0AD|A20000  |      ;
     LDY.W #$0085                                               ;84A0B0|A08500  |      ;
     BRA .jump4                                                 ;84A0B3|8000    |84A0B5;
@@ -4466,7 +4466,7 @@ fAIAction0x31_CowDefaultPath:
     SEP #$20                                                   ;84A0DC|E220    |      ;
     REP #$10                                                   ;84A0DE|C210    |      ;
     LDY.W #$003F                                               ;84A0E0|A03F00  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;84A0E3|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;84A0E3|B7CC    |0000CC;
     SEC                                                        ;84A0E5|38      |      ;
     SBC.B #$18                                                 ;84A0E6|E918    |      ;
     XBA                                                        ;84A0E8|EB      |      ;
@@ -4514,7 +4514,7 @@ fAIAction0x31_CowDefaultPath:
     SEP #$20                                                   ;84A12C|E220    |      ;
     REP #$10                                                   ;84A12E|C210    |      ;
     LDY.W #$003F                                               ;84A130|A03F00  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;84A133|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;84A133|B7CC    |0000CC;
     XBA                                                        ;84A135|EB      |      ;
     LDA.B #$00                                                 ;84A136|A900    |      ;
     XBA                                                        ;84A138|EB      |      ;
@@ -4536,7 +4536,7 @@ fAIAction0x31_CowDefaultPath:
     SEP #$20                                                   ;84A157|E220    |      ;
     REP #$10                                                   ;84A159|C210    |      ;
     LDY.W #$003F                                               ;84A15B|A03F00  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;84A15E|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;84A15E|B7CC    |0000CC;
     XBA                                                        ;84A160|EB      |      ;
     LDA.B #$00                                                 ;84A161|A900    |      ;
     XBA                                                        ;84A163|EB      |      ;
@@ -4558,7 +4558,7 @@ fAIAction0x31_CowDefaultPath:
     SEP #$20                                                   ;84A182|E220    |      ;
     REP #$10                                                   ;84A184|C210    |      ;
     LDY.W #$003F                                               ;84A186|A03F00  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;84A189|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;84A189|B7CC    |0000CC;
     XBA                                                        ;84A18B|EB      |      ;
     LDA.B #$00                                                 ;84A18C|A900    |      ;
     XBA                                                        ;84A18E|EB      |      ;
@@ -4580,7 +4580,7 @@ fAIAction0x31_CowDefaultPath:
     SEP #$20                                                   ;84A1AD|E220    |      ;
     REP #$10                                                   ;84A1AF|C210    |      ;
     LDY.W #$003F                                               ;84A1B1|A03F00  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;84A1B4|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;84A1B4|B7CC    |0000CC;
     XBA                                                        ;84A1B6|EB      |      ;
     LDA.B #$00                                                 ;84A1B7|A900    |      ;
     XBA                                                        ;84A1B9|EB      |      ;
@@ -4595,7 +4595,7 @@ fAIAction0x31_CowDefaultPath:
     SEP #$20                                                   ;84A1C9|E220    |      ;
     REP #$10                                                   ;84A1CB|C210    |      ;
     LDY.W #$003F                                               ;84A1CD|A03F00  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;84A1D0|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;84A1D0|B7CC    |0000CC;
     SEC                                                        ;84A1D2|38      |      ;
     SBC.B #$18                                                 ;84A1D3|E918    |      ;
     XBA                                                        ;84A1D5|EB      |      ;
@@ -4642,7 +4642,7 @@ fAIAction0x31_CowDefaultPath:
     SEP #$20                                                   ;84A219|E220    |      ;
     REP #$10                                                   ;84A21B|C210    |      ;
     LDY.W #$003F                                               ;84A21D|A03F00  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;84A220|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;84A220|B7CC    |0000CC;
     XBA                                                        ;84A222|EB      |      ;
     LDA.B #$00                                                 ;84A223|A900    |      ;
     XBA                                                        ;84A225|EB      |      ;
@@ -4664,7 +4664,7 @@ fAIAction0x31_CowDefaultPath:
     SEP #$20                                                   ;84A244|E220    |      ;
     REP #$10                                                   ;84A246|C210    |      ;
     LDY.W #$003F                                               ;84A248|A03F00  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;84A24B|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;84A24B|B7CC    |0000CC;
     XBA                                                        ;84A24D|EB      |      ;
     LDA.B #$00                                                 ;84A24E|A900    |      ;
     XBA                                                        ;84A250|EB      |      ;
@@ -4686,7 +4686,7 @@ fAIAction0x31_CowDefaultPath:
     SEP #$20                                                   ;84A26F|E220    |      ;
     REP #$10                                                   ;84A271|C210    |      ;
     LDY.W #$003F                                               ;84A273|A03F00  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;84A276|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;84A276|B7CC    |0000CC;
     XBA                                                        ;84A278|EB      |      ;
     LDA.B #$00                                                 ;84A279|A900    |      ;
     XBA                                                        ;84A27B|EB      |      ;
@@ -4708,7 +4708,7 @@ fAIAction0x31_CowDefaultPath:
     SEP #$20                                                   ;84A29A|E220    |      ;
     REP #$10                                                   ;84A29C|C210    |      ;
     LDY.W #$003F                                               ;84A29E|A03F00  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;84A2A1|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;84A2A1|B7CC    |0000CC;
     XBA                                                        ;84A2A3|EB      |      ;
     LDA.B #$00                                                 ;84A2A4|A900    |      ;
     XBA                                                        ;84A2A6|EB      |      ;
@@ -4723,7 +4723,7 @@ fAIAction0x31_CowDefaultPath:
     SEP #$20                                                   ;84A2B6|E220    |      ;
     REP #$10                                                   ;84A2B8|C210    |      ;
     LDY.W #$003F                                               ;84A2BA|A03F00  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;84A2BD|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;84A2BD|B7CC    |0000CC;
     SEC                                                        ;84A2BF|38      |      ;
     SBC.B #$18                                                 ;84A2C0|E918    |      ;
     XBA                                                        ;84A2C2|EB      |      ;
@@ -4801,7 +4801,7 @@ fAIAction0x31_CowDefaultPath:
   + SEP #$20                                                   ;84A338|E220    |      ;
     REP #$10                                                   ;84A33A|C210    |      ;
     LDY.W #$003F                                               ;84A33C|A03F00  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;84A33F|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;84A33F|B7CC    |0000CC;
     XBA                                                        ;84A341|EB      |      ;
     LDA.B #$00                                                 ;84A342|A900    |      ;
     XBA                                                        ;84A344|EB      |      ;
@@ -4843,7 +4843,7 @@ fAIAction0x31_CowDefaultPath:
   + SEP #$20                                                   ;84A37F|E220    |      ;
     REP #$10                                                   ;84A381|C210    |      ;
     LDY.W #$003F                                               ;84A383|A03F00  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;84A386|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;84A386|B7CC    |0000CC;
     XBA                                                        ;84A388|EB      |      ;
     LDA.B #$00                                                 ;84A389|A900    |      ;
     XBA                                                        ;84A38B|EB      |      ;
@@ -4885,7 +4885,7 @@ fAIAction0x31_CowDefaultPath:
   + SEP #$20                                                   ;84A3C6|E220    |      ;
     REP #$10                                                   ;84A3C8|C210    |      ;
     LDY.W #$003F                                               ;84A3CA|A03F00  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;84A3CD|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;84A3CD|B7CC    |0000CC;
     XBA                                                        ;84A3CF|EB      |      ;
     LDA.B #$00                                                 ;84A3D0|A900    |      ;
     XBA                                                        ;84A3D2|EB      |      ;
@@ -4927,7 +4927,7 @@ fAIAction0x31_CowDefaultPath:
   + SEP #$20                                                   ;84A40D|E220    |      ;
     REP #$10                                                   ;84A40F|C210    |      ;
     LDY.W #$003F                                               ;84A411|A03F00  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;84A414|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;84A414|B7CC    |0000CC;
     XBA                                                        ;84A416|EB      |      ;
     LDA.B #$00                                                 ;84A417|A900    |      ;
     XBA                                                        ;84A419|EB      |      ;
@@ -4969,7 +4969,7 @@ fAIAction0x31_CowDefaultPath:
   + SEP #$20                                                   ;84A454|E220    |      ;
     REP #$10                                                   ;84A456|C210    |      ;
     LDY.W #$003F                                               ;84A458|A03F00  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;84A45B|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;84A45B|B7CC    |0000CC;
     XBA                                                        ;84A45D|EB      |      ;
     LDA.B #$00                                                 ;84A45E|A900    |      ;
     XBA                                                        ;84A460|EB      |      ;
@@ -4997,7 +4997,7 @@ fAIAction0x31_CowUpdateTail:
   + SEP #$20                                                   ;84A47C|E220    |      ;
     REP #$10                                                   ;84A47E|C210    |      ;
     LDY.W #$000C                                               ;84A480|A00C00  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;84A483|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;84A483|B7CC    |0000CC;
     BEQ fAIAction0x31_CowAdvanceTimer                                 ;84A485|F003    |84A48A;
     JMP.W fAIAction0x31_CowAnimThenFacePlayerDir                                      ;84A487|4C07A6  |84A607;
  
@@ -5010,10 +5010,10 @@ fAIAction0x31_CowUpdateTail:
 fAIAction0x31_CowAdvanceTimer:
     REP #$30                                                   ;84A48A|C230    |      ;
     LDY.W #$0010                                               ;84A48C|A01000  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;84A48F|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;84A48F|B7CC    |0000CC;
     CLC                                                        ;84A491|18      |      ;
     ADC.W #$0001                                               ;84A492|690100  |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;84A495|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;84A495|97CC    |0000CC;
     RTS                                                        ;84A497|60      |      ;
  
  
@@ -5080,7 +5080,7 @@ fAIAction0x31_CowHandleSale:
     SEP #$20                                                   ;84A4F5|E220    |      ;
     REP #$10                                                   ;84A4F7|C210    |      ;
     LDY.W #$003F                                               ;84A4F9|A03F00  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;84A4FC|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;84A4FC|B7CC    |0000CC;
     STA.W $09A0+!RAM_SHIFT                                 ;84A4FE|8DA009  |0009A0;
     SEP #$20                                                   ;84A501|E220    |      ;
     LDA.B #$43                                                 ;84A503|A943    |      ;
@@ -5093,16 +5093,16 @@ fAIAction0x31_CowHandleSale:
     REP #$10                                                   ;84A520|C210    |      ;
     LDY.W #$000E                                               ;84A522|A00E00  |      ;
     LDA.B #$00                                                 ;84A525|A900    |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;84A527|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;84A527|97CC    |0000CC;
     SEP #$20                                                   ;84A529|E220    |      ;
     REP #$10                                                   ;84A52B|C210    |      ;
     LDY.W #$0001                                               ;84A52D|A00100  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;84A530|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;84A530|B7CC    |0000CC;
     AND.B #$57                                                 ;84A532|2957    |      ;
     SEP #$20                                                   ;84A534|E220    |      ;
     REP #$10                                                   ;84A536|C210    |      ;
     LDY.W #$0001                                               ;84A538|A00100  |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;84A53B|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;84A53B|97CC    |0000CC;
     JMP.W fAIAction0x31_CowUpdateTail                                      ;84A53D|4C6EA4  |84A46E;
  
  
@@ -5120,22 +5120,22 @@ fAIAction0x31_CowReturnToBarn:
     REP #$10                                                   ;84A542|C210    |      ;
     LDY.W #$0000                                               ;84A544|A00000  |      ;
     LDA.B #$00                                                 ;84A547|A900    |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;84A549|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;84A549|97CC    |0000CC;
     SEP #$20                                                   ;84A54B|E220    |      ;
     REP #$10                                                   ;84A54D|C210    |      ;
     LDY.W #$0001                                               ;84A54F|A00100  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;84A552|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;84A552|B7CC    |0000CC;
     ORA.B #$40                                                 ;84A554|0940    |      ;
     SEP #$20                                                   ;84A556|E220    |      ;
     REP #$10                                                   ;84A558|C210    |      ;
     LDY.W #$0001                                               ;84A55A|A00100  |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;84A55D|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;84A55D|97CC    |0000CC;
     REP #$30                                                   ;84A55F|C230    |      ;
     LDA.W #$0000                                               ;84A561|A90000  |      ;
     SEP #$20                                                   ;84A564|E220    |      ;
     REP #$10                                                   ;84A566|C210    |      ;
     LDY.W #$003F                                               ;84A568|A03F00  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;84A56B|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;84A56B|B7CC    |0000CC;
     SEC                                                        ;84A56D|38      |      ;
     SBC.B #$18                                                 ;84A56E|E918    |      ;
     REP #$20                                                   ;84A570|C220    |      ;
@@ -5170,16 +5170,16 @@ fAIAction0x31_CowSendOutside:
     REP #$10                                                   ;84A597|C210    |      ;
     LDY.W #$0000                                               ;84A599|A00000  |      ;
     LDA.B #$00                                                 ;84A59C|A900    |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;84A59E|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;84A59E|97CC    |0000CC;
     SEP #$20                                                   ;84A5A0|E220    |      ;
     REP #$10                                                   ;84A5A2|C210    |      ;
     LDY.W #$0001                                               ;84A5A4|A00100  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;84A5A7|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;84A5A7|B7CC    |0000CC;
     ORA.B #$40                                                 ;84A5A9|0940    |      ;
     SEP #$20                                                   ;84A5AB|E220    |      ;
     REP #$10                                                   ;84A5AD|C210    |      ;
     LDY.W #$0001                                               ;84A5AF|A00100  |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;84A5B2|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;84A5B2|97CC    |0000CC;
     SEP #$20                                                   ;84A5B4|E220    |      ;
     LDY.W #$0002                                               ;84A5B6|A00200  |      ;
     LDA.L nCurrentSeasonID                                     ;84A5B9|AF191F7F|7F1F19;
@@ -5263,7 +5263,7 @@ fAIAction0x31_CowAnimThenFacePlayerDir:
     SEP #$20                                                   ;84A620|E220    |      ;
     REP #$10                                                   ;84A622|C210    |      ;
     LDY.W #$003F                                               ;84A624|A03F00  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;84A627|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;84A627|B7CC    |0000CC;
     SEC                                                        ;84A629|38      |      ;
     SBC.B #$18                                                 ;84A62A|E918    |      ;
     XBA                                                        ;84A62C|EB      |      ;
@@ -5300,17 +5300,17 @@ fAIAction0x31_CowAnimThenFacePlayerDir:
     SEP #$20                                                   ;84A65A|E220    |      ;
     REP #$10                                                   ;84A65C|C210    |      ;
     LDY.W #$0001                                               ;84A65E|A00100  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;84A661|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;84A661|B7CC    |0000CC;
     ORA.B #$28                                                 ;84A663|0928    |      ;
     SEP #$20                                                   ;84A665|E220    |      ;
     REP #$10                                                   ;84A667|C210    |      ;
     LDY.W #$0001                                               ;84A669|A00100  |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;84A66C|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;84A66C|97CC    |0000CC;
     REP #$30                                                   ;84A66E|C230    |      ;
     SEP #$20                                                   ;84A670|E220    |      ;
     REP #$10                                                   ;84A672|C210    |      ;
     LDY.W #$003F                                               ;84A674|A03F00  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;84A677|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;84A677|B7CC    |0000CC;
     XBA                                                        ;84A679|EB      |      ;
     LDA.B #$00                                                 ;84A67A|A900    |      ;
     XBA                                                        ;84A67C|EB      |      ;
@@ -5325,17 +5325,17 @@ fAIAction0x31_CowAnimThenFacePlayerDir:
     SEP #$20                                                   ;84A68C|E220    |      ;
     REP #$10                                                   ;84A68E|C210    |      ;
     LDY.W #$0001                                               ;84A690|A00100  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;84A693|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;84A693|B7CC    |0000CC;
     ORA.B #$28                                                 ;84A695|0928    |      ;
     SEP #$20                                                   ;84A697|E220    |      ;
     REP #$10                                                   ;84A699|C210    |      ;
     LDY.W #$0001                                               ;84A69B|A00100  |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;84A69E|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;84A69E|97CC    |0000CC;
     REP #$30                                                   ;84A6A0|C230    |      ;
     SEP #$20                                                   ;84A6A2|E220    |      ;
     REP #$10                                                   ;84A6A4|C210    |      ;
     LDY.W #$003F                                               ;84A6A6|A03F00  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;84A6A9|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;84A6A9|B7CC    |0000CC;
     XBA                                                        ;84A6AB|EB      |      ;
     LDA.B #$00                                                 ;84A6AC|A900    |      ;
     XBA                                                        ;84A6AE|EB      |      ;
@@ -5373,17 +5373,17 @@ fAIAction0x31_CowAnimThenFacePlayerDir:
   + SEP #$20                                                   ;84A6E1|E220    |      ;
     REP #$10                                                   ;84A6E3|C210    |      ;
     LDY.W #$0001                                               ;84A6E5|A00100  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;84A6E8|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;84A6E8|B7CC    |0000CC;
     ORA.B #$28                                                 ;84A6EA|0928    |      ;
     SEP #$20                                                   ;84A6EC|E220    |      ;
     REP #$10                                                   ;84A6EE|C210    |      ;
     LDY.W #$0001                                               ;84A6F0|A00100  |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;84A6F3|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;84A6F3|97CC    |0000CC;
     REP #$30                                                   ;84A6F5|C230    |      ;
     SEP #$20                                                   ;84A6F7|E220    |      ;
     REP #$10                                                   ;84A6F9|C210    |      ;
     LDY.W #$003F                                               ;84A6FB|A03F00  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;84A6FE|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;84A6FE|B7CC    |0000CC;
     XBA                                                        ;84A700|EB      |      ;
     LDA.B #$00                                                 ;84A701|A900    |      ;
     XBA                                                        ;84A703|EB      |      ;
@@ -5450,7 +5450,7 @@ fAIAction0x31_CowAnimThenSteerToPlayer:
     SEP #$20                                                   ;84A759|E220    |      ;
     REP #$10                                                   ;84A75B|C210    |      ;
     LDY.W #$003F                                               ;84A75D|A03F00  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;84A760|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;84A760|B7CC    |0000CC;
     SEC                                                        ;84A762|38      |      ;
     SBC.B #$18                                                 ;84A763|E918    |      ;
     XBA                                                        ;84A765|EB      |      ;
@@ -5487,17 +5487,17 @@ fAIAction0x31_CowAnimThenSteerToPlayer:
     SEP #$20                                                   ;84A793|E220    |      ;
     REP #$10                                                   ;84A795|C210    |      ;
     LDY.W #$0001                                               ;84A797|A00100  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;84A79A|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;84A79A|B7CC    |0000CC;
     ORA.B #$28                                                 ;84A79C|0928    |      ;
     SEP #$20                                                   ;84A79E|E220    |      ;
     REP #$10                                                   ;84A7A0|C210    |      ;
     LDY.W #$0001                                               ;84A7A2|A00100  |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;84A7A5|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;84A7A5|97CC    |0000CC;
     REP #$30                                                   ;84A7A7|C230    |      ;
     SEP #$20                                                   ;84A7A9|E220    |      ;
     REP #$10                                                   ;84A7AB|C210    |      ;
     LDY.W #$003F                                               ;84A7AD|A03F00  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;84A7B0|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;84A7B0|B7CC    |0000CC;
     XBA                                                        ;84A7B2|EB      |      ;
     LDA.B #$00                                                 ;84A7B3|A900    |      ;
     XBA                                                        ;84A7B5|EB      |      ;
@@ -5512,17 +5512,17 @@ fAIAction0x31_CowAnimThenSteerToPlayer:
     SEP #$20                                                   ;84A7C5|E220    |      ;
     REP #$10                                                   ;84A7C7|C210    |      ;
     LDY.W #$0001                                               ;84A7C9|A00100  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;84A7CC|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;84A7CC|B7CC    |0000CC;
     ORA.B #$28                                                 ;84A7CE|0928    |      ;
     SEP #$20                                                   ;84A7D0|E220    |      ;
     REP #$10                                                   ;84A7D2|C210    |      ;
     LDY.W #$0001                                               ;84A7D4|A00100  |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;84A7D7|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;84A7D7|97CC    |0000CC;
     REP #$30                                                   ;84A7D9|C230    |      ;
     SEP #$20                                                   ;84A7DB|E220    |      ;
     REP #$10                                                   ;84A7DD|C210    |      ;
     LDY.W #$003F                                               ;84A7DF|A03F00  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;84A7E2|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;84A7E2|B7CC    |0000CC;
     XBA                                                        ;84A7E4|EB      |      ;
     LDA.B #$00                                                 ;84A7E5|A900    |      ;
     XBA                                                        ;84A7E7|EB      |      ;
@@ -5563,17 +5563,17 @@ fAIAction0x31_CowAnimThenSteerToPlayer:
   + SEP #$20                                                   ;84A81D|E220    |      ;
     REP #$10                                                   ;84A81F|C210    |      ;
     LDY.W #$0001                                               ;84A821|A00100  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;84A824|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;84A824|B7CC    |0000CC;
     ORA.B #$28                                                 ;84A826|0928    |      ;
     SEP #$20                                                   ;84A828|E220    |      ;
     REP #$10                                                   ;84A82A|C210    |      ;
     LDY.W #$0001                                               ;84A82C|A00100  |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;84A82F|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;84A82F|97CC    |0000CC;
     REP #$30                                                   ;84A831|C230    |      ;
     SEP #$20                                                   ;84A833|E220    |      ;
     REP #$10                                                   ;84A835|C210    |      ;
     LDY.W #$003F                                               ;84A837|A03F00  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;84A83A|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;84A83A|B7CC    |0000CC;
     XBA                                                        ;84A83C|EB      |      ;
     LDA.B #$00                                                 ;84A83D|A900    |      ;
     XBA                                                        ;84A83F|EB      |      ;
@@ -5588,7 +5588,7 @@ fAIAction0x31_CowAnimThenSteerToPlayer:
     STZ.B strcVariables.n16Temp4                               ;84A84E|6484    |000084;
     REP #$30                                                   ;84A850|C230    |      ;
     LDY.W #$001A                                               ;84A852|A01A00  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;84A855|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;84A855|B7CC    |0000CC;
     SEC                                                        ;84A857|38      |      ;
     SBC.B strcPlayer.posX                                      ;84A858|E5D6    |0000D6;
     STA.B strcVariables.n16Temp1                               ;84A85A|857E    |00007E;
@@ -5606,7 +5606,7 @@ fAIAction0x31_CowAnimThenSteerToPlayer:
 .dx_abs_done:
     REP #$30                                                   ;84A86D|C230    |      ;
     LDY.W #$001C                                               ;84A86F|A01C00  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;84A872|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;84A872|B7CC    |0000CC;
     SEC                                                        ;84A874|38      |      ;
     SBC.B strcPlayer.posY                                      ;84A875|E5D8    |0000D8;
     STA.B strcVariables.n16Temp2                               ;84A877|8580    |000080;
@@ -5627,7 +5627,7 @@ fAIAction0x31_CowAnimThenSteerToPlayer:
     SEP #$20                                                   ;84A88E|E220    |      ;
     REP #$10                                                   ;84A890|C210    |      ;
     LDY.W #$0008                                               ;84A892|A00800  |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;84A895|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;84A895|97CC    |0000CC;
     REP #$20                                                   ;84A897|C220    |      ;
     LDA.B strcVariables.n16Temp2                               ;84A899|A580    |000080;
     CMP.B strcVariables.n16Temp1                               ;84A89B|C57E    |00007E;
@@ -5680,7 +5680,7 @@ fAIAction0x31_CowSetDirDown:
     REP #$10                                                   ;84A8D9|C210    |      ;
     LDY.W #$000F                                               ;84A8DB|A00F00  |      ;
     LDA.B #$01                                                 ;84A8DE|A901    |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;84A8E0|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;84A8E0|97CC    |0000CC;
     JMP.W fAIAction0x31_CowAdvanceTimer                               ;84A8E2|4C8AA4  |84A48A;
  
  
@@ -5694,7 +5694,7 @@ fAIAction0x31_CowSetDirUp:
     REP #$10                                                   ;84A8E7|C210    |      ;
     LDY.W #$000F                                               ;84A8E9|A00F00  |      ;
     LDA.B #$02                                                 ;84A8EC|A902    |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;84A8EE|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;84A8EE|97CC    |0000CC;
     JMP.W fAIAction0x31_CowAdvanceTimer                               ;84A8F0|4C8AA4  |84A48A;
  
  
@@ -5710,7 +5710,7 @@ fAIAction0x31_CowSetDirLeft:
     REP #$10                                                   ;84A8F5|C210    |      ;
     LDY.W #$000F                                               ;84A8F7|A00F00  |      ;
     LDA.B #$04                                                 ;84A8FA|A904    |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;84A8FC|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;84A8FC|97CC    |0000CC;
     JMP.W fAIAction0x31_CowAdvanceTimer                               ;84A8FE|4C8AA4  |84A48A;
  
  
@@ -5726,7 +5726,7 @@ fAIAction0x31_CowSetDirRight:
     REP #$10                                                   ;84A903|C210    |      ;
     LDY.W #$000F                                               ;84A905|A00F00  |      ;
     LDA.B #$08                                                 ;84A908|A908    |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;84A90A|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;84A90A|97CC    |0000CC;
     JMP.W fAIAction0x31_CowAdvanceTimer                               ;84A90C|4C8AA4  |84A48A;
  
  
@@ -5774,7 +5774,7 @@ fAIAction0x33_UpdateMole:
     SEP #$20                                                   ;84A958|E220    |      ;
     REP #$10                                                   ;84A95A|C210    |      ;
     LDY.W #$000C                                               ;84A95C|A00C00  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;84A95F|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;84A95F|B7CC    |0000CC;
     CMP.B #$00                                                 ;84A961|C900    |      ;
     BNE +                                                      ;84A963|D003    |84A968;
     JMP.W .idle_wait                                              ;84A965|4C1EAA  |84AA1E;
@@ -5832,28 +5832,28 @@ fAIAction0x33_UpdateMole:
   + SEP #$20                                                   ;84A9D7|E220    |      ;
     REP #$10                                                   ;84A9D9|C210    |      ;
     LDY.W #$003F                                               ;84A9DB|A03F00  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;84A9DE|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;84A9DE|B7CC    |0000CC;
     STA.W strcPlayerData.nAiArg                                ;84A9E0|8D2009  |000920;
     SEP #$20                                                   ;84A9E3|E220    |      ;
     REP #$10                                                   ;84A9E5|C210    |      ;
     LDY.W #$0000                                               ;84A9E7|A00000  |      ;
     LDA.B #$00                                                 ;84A9EA|A900    |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;84A9EC|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;84A9EC|97CC    |0000CC;
     SEP #$20                                                   ;84A9EE|E220    |      ;
     REP #$10                                                   ;84A9F0|C210    |      ;
     LDY.W #$0001                                               ;84A9F2|A00100  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;84A9F5|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;84A9F5|B7CC    |0000CC;
     ORA.B #$40                                                 ;84A9F7|0940    |      ;
     SEP #$20                                                   ;84A9F9|E220    |      ;
     REP #$10                                                   ;84A9FB|C210    |      ;
     LDY.W #$0001                                               ;84A9FD|A00100  |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;84AA00|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;84AA00|97CC    |0000CC;
     REP #$30                                                   ;84AA02|C230    |      ;
     LDY.W #$0010                                               ;84AA04|A01000  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;84AA07|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;84AA07|B7CC    |0000CC;
     CLC                                                        ;84AA09|18      |      ;
     ADC.W #$0001                                               ;84AA0A|690100  |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;84AA0D|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;84AA0D|97CC    |0000CC;
     %SetCurrentCarriedItemDirect($29)
     %SetPlayerAction(!PACTION_ITEMONHAND)
     RTS                                                        ;84AA1D|60      |      ;
@@ -5888,10 +5888,10 @@ fAIAction0x33_UpdateMole:
 .return:
     REP #$30                                                   ;84AA4F|C230    |      ;
     LDY.W #$0010                                               ;84AA51|A01000  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;84AA54|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;84AA54|B7CC    |0000CC;
     CLC                                                        ;84AA56|18      |      ;
     ADC.W #$0001                                               ;84AA57|690100  |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;84AA5A|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;84AA5A|97CC    |0000CC;
     RTS                                                        ;84AA5C|60      |      ;
  
  
@@ -5910,7 +5910,7 @@ fAIAction0x34_PickUpFish:
     SEP #$20                                                   ;84AA69|E220    |      ;
     REP #$10                                                   ;84AA6B|C210    |      ;
     LDY.W #$000C                                               ;84AA6D|A00C00  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;84AA70|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;84AA70|B7CC    |0000CC;
     CMP.B #$00                                                 ;84AA72|C900    |      ;
     BNE +                                                      ;84AA74|D003    |84AA79;
     JMP.W .return                                              ;84AA76|4C19AB  |84AB19;
@@ -5957,28 +5957,28 @@ fAIAction0x34_PickUpFish:
   + SEP #$20                                                   ;84AAD2|E220    |      ;
     REP #$10                                                   ;84AAD4|C210    |      ;
     LDY.W #$003F                                               ;84AAD6|A03F00  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;84AAD9|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;84AAD9|B7CC    |0000CC;
     STA.W strcPlayerData.nAiArg                                ;84AADB|8D2009  |000920;
     SEP #$20                                                   ;84AADE|E220    |      ;
     REP #$10                                                   ;84AAE0|C210    |      ;
     LDY.W #$0000                                               ;84AAE2|A00000  |      ;
     LDA.B #$00                                                 ;84AAE5|A900    |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;84AAE7|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;84AAE7|97CC    |0000CC;
     SEP #$20                                                   ;84AAE9|E220    |      ;
     REP #$10                                                   ;84AAEB|C210    |      ;
     LDY.W #$0001                                               ;84AAED|A00100  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;84AAF0|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;84AAF0|B7CC    |0000CC;
     ORA.B #$40                                                 ;84AAF2|0940    |      ;
     SEP #$20                                                   ;84AAF4|E220    |      ;
     REP #$10                                                   ;84AAF6|C210    |      ;
     LDY.W #$0001                                               ;84AAF8|A00100  |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;84AAFB|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;84AAFB|97CC    |0000CC;
     REP #$30                                                   ;84AAFD|C230    |      ;
     LDY.W #$0010                                               ;84AAFF|A01000  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;84AB02|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;84AB02|B7CC    |0000CC;
     CLC                                                        ;84AB04|18      |      ;
     ADC.W #$0001                                               ;84AB05|690100  |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;84AB08|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;84AB08|97CC    |0000CC;
     %SetCurrentCarriedItemDirect(!CITEM_FISH)
     %SetPlayerAction(!PACTION_ITEMONHAND)
     RTS                                                        ;84AB18|60      |      ;
@@ -5987,10 +5987,10 @@ fAIAction0x34_PickUpFish:
 .return:
     REP #$30                                                   ;84AB19|C230    |      ;
     LDY.W #$0010                                               ;84AB1B|A01000  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;84AB1E|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;84AB1E|B7CC    |0000CC;
     CLC                                                        ;84AB20|18      |      ;
     ADC.W #$0001                                               ;84AB21|690100  |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;84AB24|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;84AB24|97CC    |0000CC;
     RTS                                                        ;84AB26|60      |      ;
  
  
@@ -6049,7 +6049,7 @@ fAIAction0x35_UpdateHorse:
   + SEP #$20                                                   ;84AB81|E220    |      ;
     REP #$10                                                   ;84AB83|C210    |      ;
     LDY.W #$0002                                               ;84AB85|A00200  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;84AB88|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;84AB88|B7CC    |0000CC;
     CMP.B #$00                                                 ;84AB8A|C900    |      ;
     BEQ .case0                                                 ;84AB8C|F00C    |84AB9A;
     CMP.B #$01                                                 ;84AB8E|C901    |      ;
@@ -6111,7 +6111,7 @@ fAIAction0x35_UpdateHorse:
   + SEP #$20                                                   ;84ABF9|E220    |      ;
     REP #$10                                                   ;84ABFB|C210    |      ;
     LDY.W #$000C                                               ;84ABFD|A00C00  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;84AC00|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;84AC00|B7CC    |0000CC;
     CMP.B #$00                                                 ;84AC02|C900    |      ;
     BNE +                                                      ;84AC04|D003    |84AC09;
     JMP.W .idle_roll                                              ;84AC06|4CEEAC  |84ACEE;
@@ -6305,10 +6305,10 @@ fAIAction0x35_UpdateHorse:
 .loop2:
     REP #$30                                                   ;84AD96|C230    |      ;
     LDY.W #$0010                                               ;84AD98|A01000  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;84AD9B|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;84AD9B|B7CC    |0000CC;
     CLC                                                        ;84AD9D|18      |      ;
     ADC.W #$0001                                               ;84AD9E|690100  |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;84ADA1|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;84ADA1|97CC    |0000CC;
     RTS                                                        ;84ADA3|60      |      ;
  
  
@@ -6320,27 +6320,27 @@ fAIAction0x35_UpdateHorse:
     REP #$10                                                   ;84ADBC|C210    |      ;
     LDY.W #$0000                                               ;84ADBE|A00000  |      ;
     LDA.B #$00                                                 ;84ADC1|A900    |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;84ADC3|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;84ADC3|97CC    |0000CC;
     SEP #$20                                                   ;84ADC5|E220    |      ;
     REP #$10                                                   ;84ADC7|C210    |      ;
     LDY.W #$0001                                               ;84ADC9|A00100  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;84ADCC|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;84ADCC|B7CC    |0000CC;
     ORA.B #$40                                                 ;84ADCE|0940    |      ;
     SEP #$20                                                   ;84ADD0|E220    |      ;
     REP #$10                                                   ;84ADD2|C210    |      ;
     LDY.W #$0001                                               ;84ADD4|A00100  |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;84ADD7|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;84ADD7|97CC    |0000CC;
     SEP #$20                                                   ;84ADD9|E220    |      ;
     REP #$10                                                   ;84ADDB|C210    |      ;
     LDY.W #$000C                                               ;84ADDD|A00C00  |      ;
     LDA.B #$00                                                 ;84ADE0|A900    |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;84ADE2|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;84ADE2|97CC    |0000CC;
     REP #$30                                                   ;84ADE4|C230    |      ;
     LDY.W #$0010                                               ;84ADE6|A01000  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;84ADE9|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;84ADE9|B7CC    |0000CC;
     CLC                                                        ;84ADEB|18      |      ;
     ADC.W #$0001                                               ;84ADEC|690100  |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;84ADEF|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;84ADEF|97CC    |0000CC;
     RTS                                                        ;84ADF1|60      |      ;
  
  
@@ -6358,17 +6358,17 @@ fAIAction0x35_UpdateHorse:
     SEP #$20                                                   ;84AE04|E220    |      ;
     REP #$10                                                   ;84AE06|C210    |      ;
     LDY.W #$0001                                               ;84AE08|A00100  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;84AE0B|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;84AE0B|B7CC    |0000CC;
     ORA.B #$28                                                 ;84AE0D|0928    |      ;
     SEP #$20                                                   ;84AE0F|E220    |      ;
     REP #$10                                                   ;84AE11|C210    |      ;
     LDY.W #$0001                                               ;84AE13|A00100  |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;84AE16|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;84AE16|97CC    |0000CC;
     REP #$30                                                   ;84AE18|C230    |      ;
     SEP #$20                                                   ;84AE1A|E220    |      ;
     REP #$10                                                   ;84AE1C|C210    |      ;
     LDY.W #$003F                                               ;84AE1E|A03F00  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;84AE21|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;84AE21|B7CC    |0000CC;
     XBA                                                        ;84AE23|EB      |      ;
     LDA.B #$00                                                 ;84AE24|A900    |      ;
     XBA                                                        ;84AE26|EB      |      ;
@@ -6384,17 +6384,17 @@ fAIAction0x35_UpdateHorse:
     SEP #$20                                                   ;84AE38|E220    |      ;
     REP #$10                                                   ;84AE3A|C210    |      ;
     LDY.W #$0001                                               ;84AE3C|A00100  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;84AE3F|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;84AE3F|B7CC    |0000CC;
     ORA.B #$28                                                 ;84AE41|0928    |      ;
     SEP #$20                                                   ;84AE43|E220    |      ;
     REP #$10                                                   ;84AE45|C210    |      ;
     LDY.W #$0001                                               ;84AE47|A00100  |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;84AE4A|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;84AE4A|97CC    |0000CC;
     REP #$30                                                   ;84AE4C|C230    |      ;
     SEP #$20                                                   ;84AE4E|E220    |      ;
     REP #$10                                                   ;84AE50|C210    |      ;
     LDY.W #$003F                                               ;84AE52|A03F00  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;84AE55|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;84AE55|B7CC    |0000CC;
     XBA                                                        ;84AE57|EB      |      ;
     LDA.B #$00                                                 ;84AE58|A900    |      ;
     XBA                                                        ;84AE5A|EB      |      ;
@@ -6411,7 +6411,7 @@ fAIAction0x35_UpdateHorse:
     STZ.B strcVariables.n16Temp4                               ;84AE6D|6484    |000084;
     REP #$30                                                   ;84AE6F|C230    |      ;
     LDY.W #$001A                                               ;84AE71|A01A00  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;84AE74|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;84AE74|B7CC    |0000CC;
     SEC                                                        ;84AE76|38      |      ;
     SBC.B strcPlayer.posX                                      ;84AE77|E5D6    |0000D6;
     STA.B strcVariables.n16Temp1                               ;84AE79|857E    |00007E;
@@ -6429,7 +6429,7 @@ fAIAction0x35_UpdateHorse:
 .dx_abs_done:
     REP #$30                                                   ;84AE8C|C230    |      ;
     LDY.W #$001C                                               ;84AE8E|A01C00  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;84AE91|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;84AE91|B7CC    |0000CC;
     SEC                                                        ;84AE93|38      |      ;
     SBC.B strcPlayer.posY                                      ;84AE94|E5D8    |0000D8;
     STA.B strcVariables.n16Temp2                               ;84AE96|8580    |000080;
@@ -6450,7 +6450,7 @@ fAIAction0x35_UpdateHorse:
     SEP #$20                                                   ;84AEAD|E220    |      ;
     REP #$10                                                   ;84AEAF|C210    |      ;
     LDY.W #$0008                                               ;84AEB1|A00800  |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;84AEB4|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;84AEB4|97CC    |0000CC;
     REP #$20                                                   ;84AEB6|C220    |      ;
     LDA.B strcVariables.n16Temp2                               ;84AEB8|A580    |000080;
     CMP.B strcVariables.n16Temp1                               ;84AEBA|C57E    |00007E;
@@ -6473,7 +6473,7 @@ fAIAction0x35_UpdateHorse:
     REP #$10                                                   ;84AED0|C210    |      ;
     LDY.W #$000F                                               ;84AED2|A00F00  |      ;
     LDA.B #$01                                                 ;84AED5|A901    |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;84AED7|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;84AED7|97CC    |0000CC;
     JMP.W .loop2                                               ;84AED9|4C96AD  |84AD96;
  
  
@@ -6482,7 +6482,7 @@ fAIAction0x35_UpdateHorse:
     REP #$10                                                   ;84AEDE|C210    |      ;
     LDY.W #$000F                                               ;84AEE0|A00F00  |      ;
     LDA.B #$02                                                 ;84AEE3|A902    |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;84AEE5|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;84AEE5|97CC    |0000CC;
     JMP.W .loop2                                               ;84AEE7|4C96AD  |84AD96;
  
  
@@ -6491,7 +6491,7 @@ fAIAction0x35_UpdateHorse:
     REP #$10                                                   ;84AEEC|C210    |      ;
     LDY.W #$000F                                               ;84AEEE|A00F00  |      ;
     LDA.B #$04                                                 ;84AEF1|A904    |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;84AEF3|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;84AEF3|97CC    |0000CC;
     JMP.W .loop2                                               ;84AEF5|4C96AD  |84AD96;
  
  
@@ -6500,7 +6500,7 @@ fAIAction0x35_UpdateHorse:
     REP #$10                                                   ;84AEFA|C210    |      ;
     LDY.W #$000F                                               ;84AEFC|A00F00  |      ;
     LDA.B #$08                                                 ;84AEFF|A908    |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;84AF01|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;84AF01|97CC    |0000CC;
     JMP.W .loop2                                               ;84AF03|4C96AD  |84AD96;
  
  
@@ -6513,7 +6513,7 @@ fAIAction0x35_UpdateHorse:
 ;          to the player with script from +3F and a direction mask toward the player.
 ; @case    $36
 ; @modifies ptrAIActionData, nDogX, nDogY, nDogHugs, strcPlayer.flags, strcStockData.unkDog, strcVariables.n16Temp1, strcVariables.n16Temp2, strcVariables.n16Temp3, strcVariables.n16Temp4
-; @note    Writes $7F1F58 (dog pose state, no RAM symbol) and slot fields +00, +01, +08, +0F, +10.
+; @note    Writes nDogPoseState ($7F1F58) and slot fields +00, +01, +08, +0F, +10.
 ; @mode    M16X16 -> ?
 ; @calls   fAI_SetSlotScript
 ; @note    confidence: low - the pose meaning of the $7F1F58 bits is not decoded.
@@ -6523,16 +6523,16 @@ fAIAction0x36_UpdateDog:
     %AIMoveAction($0001)
     REP #$30                                                   ;84AF12|C230    |      ;
     LDY.W #$001A                                               ;84AF14|A01A00  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;84AF17|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;84AF17|B7CC    |0000CC;
     STA.L nDogX                                                ;84AF19|8F2C1F7F|7F1F2C;
     REP #$30                                                   ;84AF1D|C230    |      ;
     LDY.W #$001C                                               ;84AF1F|A01C00  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;84AF22|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;84AF22|B7CC    |0000CC;
     STA.L nDogY                                                ;84AF24|8F2E1F7F|7F1F2E;
     SEP #$20                                                   ;84AF28|E220    |      ;
     REP #$10                                                   ;84AF2A|C210    |      ;
     LDY.W #$000C                                               ;84AF2C|A00C00  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;84AF2F|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;84AF2F|B7CC    |0000CC;
     CMP.B #$00                                                 ;84AF31|C900    |      ;
     BNE +                                                      ;84AF33|D003    |84AF38;
     JMP.W .idle_timer                                              ;84AF35|4CF4AF  |84AFF4;
@@ -6605,16 +6605,16 @@ fAIAction0x36_UpdateDog:
     REP #$10                                                   ;84AFC0|C210    |      ;
     LDY.W #$0000                                               ;84AFC2|A00000  |      ;
     LDA.B #$00                                                 ;84AFC5|A900    |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;84AFC7|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;84AFC7|97CC    |0000CC;
     SEP #$20                                                   ;84AFC9|E220    |      ;
     REP #$10                                                   ;84AFCB|C210    |      ;
     LDY.W #$0001                                               ;84AFCD|A00100  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;84AFD0|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;84AFD0|B7CC    |0000CC;
     ORA.B #$40                                                 ;84AFD2|0940    |      ;
     SEP #$20                                                   ;84AFD4|E220    |      ;
     REP #$10                                                   ;84AFD6|C210    |      ;
     LDY.W #$0001                                               ;84AFD8|A00100  |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;84AFDB|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;84AFDB|97CC    |0000CC;
     %SetPlayerFlag(!PFLAGS_DOGHUGGING)
     REP #$30                                                   ;84AFE6|C230    |      ;
     LDA.L nDogHugs                                             ;84AFE8|AF521F7F|7F1F52;
@@ -6637,28 +6637,28 @@ fAIAction0x36_UpdateDog:
   + SEP #$20                                                   ;84B004|E220    |      ;
     STZ.W strcStockData.unkDog                                 ;84B006|9C3809  |000938;
     REP #$30                                                   ;84B009|C230    |      ;
-    LDA.L $7F1F58                                              ;84B00B|AF581F7F|7F1F58;
+    LDA.L nDogPoseState                                              ;84B00B|AF581F7F|7F1F58;
     AND.W #$0001                                               ;84B00F|290100  |      ;
     BNE .idle_state1                                                ;84B012|D033    |84B047;
-    LDA.L $7F1F58                                              ;84B014|AF581F7F|7F1F58;
+    LDA.L nDogPoseState                                              ;84B014|AF581F7F|7F1F58;
     AND.W #$0002                                               ;84B018|290200  |      ;
     BEQ +                                                      ;84B01B|F003    |84B020;
     JMP.W .idle_state2                                             ;84B01D|4CFEB0  |84B0FE;
  
  
-  + LDA.L $7F1F58                                              ;84B020|AF581F7F|7F1F58;
+  + LDA.L nDogPoseState                                              ;84B020|AF581F7F|7F1F58;
     AND.W #$0004                                               ;84B024|290400  |      ;
     BEQ +                                                      ;84B027|F003    |84B02C;
     JMP.W .idle_state4                                             ;84B029|4C7FB1  |84B17F;
  
  
-  + LDA.L $7F1F58                                              ;84B02C|AF581F7F|7F1F58;
+  + LDA.L nDogPoseState                                              ;84B02C|AF581F7F|7F1F58;
     AND.W #$0008                                               ;84B030|290800  |      ;
     BEQ +                                                      ;84B033|F003    |84B038;
     JMP.W .idle_state8                                             ;84B035|4CEAB1  |84B1EA;
  
  
-  + LDA.L $7F1F58                                              ;84B038|AF581F7F|7F1F58;
+  + LDA.L nDogPoseState                                              ;84B038|AF581F7F|7F1F58;
     AND.W #$0010                                               ;84B03C|291000  |      ;
     BEQ +                                                      ;84B03F|F003    |84B044;
     JMP.W .idle_state10                                             ;84B041|4C2DB2  |84B22D;
@@ -6687,10 +6687,10 @@ fAIAction0x36_UpdateDog:
     LDY.W #$003D                                               ;84B064|A03D00  |      ;
     JSL.L fAI_SetSlotScript                                    ;84B067|223F8084|84803F;
     REP #$30                                                   ;84B06B|C230    |      ;
-    LDA.L $7F1F58                                              ;84B06D|AF581F7F|7F1F58;
+    LDA.L nDogPoseState                                              ;84B06D|AF581F7F|7F1F58;
     AND.W #$FFFE                                               ;84B071|29FEFF  |      ;
     ORA.W #$0002                                               ;84B074|090200  |      ;
-    STA.L $7F1F58                                              ;84B077|8F581F7F|7F1F58;
+    STA.L nDogPoseState                                              ;84B077|8F581F7F|7F1F58;
     JMP.W .check_whistle                                             ;84B07B|4C5CB2  |84B25C;
  
  
@@ -6711,10 +6711,10 @@ fAIAction0x36_UpdateDog:
  
 .loop:
     REP #$30                                                   ;84B096|C230    |      ;
-    LDA.L $7F1F58                                              ;84B098|AF581F7F|7F1F58;
+    LDA.L nDogPoseState                                              ;84B098|AF581F7F|7F1F58;
     AND.W #$FFFE                                               ;84B09C|29FEFF  |      ;
     ORA.W #$0010                                               ;84B09F|091000  |      ;
-    STA.L $7F1F58                                              ;84B0A2|8F581F7F|7F1F58;
+    STA.L nDogPoseState                                              ;84B0A2|8F581F7F|7F1F58;
     JMP.W .check_whistle                                             ;84B0A6|4C5CB2  |84B25C;
  
  
@@ -6785,10 +6785,10 @@ fAIAction0x36_UpdateDog:
     LDY.W #$003C                                               ;84B11F|A03C00  |      ;
     JSL.L fAI_SetSlotScript                                    ;84B122|223F8084|84803F;
     REP #$30                                                   ;84B126|C230    |      ;
-    LDA.L $7F1F58                                              ;84B128|AF581F7F|7F1F58;
+    LDA.L nDogPoseState                                              ;84B128|AF581F7F|7F1F58;
     AND.W #$FFFD                                               ;84B12C|29FDFF  |      ;
     ORA.W #$0001                                               ;84B12F|090100  |      ;
-    STA.L $7F1F58                                              ;84B132|8F581F7F|7F1F58;
+    STA.L nDogPoseState                                              ;84B132|8F581F7F|7F1F58;
     JMP.W .check_whistle                                             ;84B136|4C5CB2  |84B25C;
  
  
@@ -6799,10 +6799,10 @@ fAIAction0x36_UpdateDog:
     LDY.W #$0041                                               ;84B141|A04100  |      ;
     JSL.L fAI_SetSlotScript                                    ;84B144|223F8084|84803F;
     REP #$30                                                   ;84B148|C230    |      ;
-    LDA.L $7F1F58                                              ;84B14A|AF581F7F|7F1F58;
+    LDA.L nDogPoseState                                              ;84B14A|AF581F7F|7F1F58;
     AND.W #$FFFD                                               ;84B14E|29FDFF  |      ;
     ORA.W #$0004                                               ;84B151|090400  |      ;
-    STA.L $7F1F58                                              ;84B154|8F581F7F|7F1F58;
+    STA.L nDogPoseState                                              ;84B154|8F581F7F|7F1F58;
     JMP.W .check_whistle                                             ;84B158|4C5CB2  |84B25C;
  
  
@@ -6844,10 +6844,10 @@ fAIAction0x36_UpdateDog:
     LDY.W #$003D                                               ;84B19C|A03D00  |      ;
     JSL.L fAI_SetSlotScript                                    ;84B19F|223F8084|84803F;
     REP #$30                                                   ;84B1A3|C230    |      ;
-    LDA.L $7F1F58                                              ;84B1A5|AF581F7F|7F1F58;
+    LDA.L nDogPoseState                                              ;84B1A5|AF581F7F|7F1F58;
     AND.W #$FFFB                                               ;84B1A9|29FBFF  |      ;
     ORA.W #$0002                                               ;84B1AC|090200  |      ;
-    STA.L $7F1F58                                              ;84B1AF|8F581F7F|7F1F58;
+    STA.L nDogPoseState                                              ;84B1AF|8F581F7F|7F1F58;
     JMP.W .check_whistle                                             ;84B1B3|4C5CB2  |84B25C;
  
  
@@ -6858,10 +6858,10 @@ fAIAction0x36_UpdateDog:
     LDY.W #$0045                                               ;84B1BE|A04500  |      ;
     JSL.L fAI_SetSlotScript                                    ;84B1C1|223F8084|84803F;
     REP #$30                                                   ;84B1C5|C230    |      ;
-    LDA.L $7F1F58                                              ;84B1C7|AF581F7F|7F1F58;
+    LDA.L nDogPoseState                                              ;84B1C7|AF581F7F|7F1F58;
     AND.W #$FFFB                                               ;84B1CB|29FBFF  |      ;
     ORA.W #$0008                                               ;84B1CE|090800  |      ;
-    STA.L $7F1F58                                              ;84B1D1|8F581F7F|7F1F58;
+    STA.L nDogPoseState                                              ;84B1D1|8F581F7F|7F1F58;
     JMP.W .check_whistle                                             ;84B1D5|4C5CB2  |84B25C;
  
  
@@ -6892,10 +6892,10 @@ fAIAction0x36_UpdateDog:
     LDY.W #$0041                                               ;84B203|A04100  |      ;
     JSL.L fAI_SetSlotScript                                    ;84B206|223F8084|84803F;
     REP #$30                                                   ;84B20A|C230    |      ;
-    LDA.L $7F1F58                                              ;84B20C|AF581F7F|7F1F58;
+    LDA.L nDogPoseState                                              ;84B20C|AF581F7F|7F1F58;
     AND.W #$FFF7                                               ;84B210|29F7FF  |      ;
     ORA.W #$0004                                               ;84B213|090400  |      ;
-    STA.L $7F1F58                                              ;84B216|8F581F7F|7F1F58;
+    STA.L nDogPoseState                                              ;84B216|8F581F7F|7F1F58;
     BRA .check_whistle                                               ;84B21A|8040    |84B25C;
  
  
@@ -6923,10 +6923,10 @@ fAIAction0x36_UpdateDog:
     LDY.W #$003C                                               ;84B242|A03C00  |      ;
     JSL.L fAI_SetSlotScript                                    ;84B245|223F8084|84803F;
     REP #$30                                                   ;84B249|C230    |      ;
-    LDA.L $7F1F58                                              ;84B24B|AF581F7F|7F1F58;
+    LDA.L nDogPoseState                                              ;84B24B|AF581F7F|7F1F58;
     AND.W #$FFEF                                               ;84B24F|29EFFF  |      ;
     ORA.W #$0001                                               ;84B252|090100  |      ;
-    STA.L $7F1F58                                              ;84B255|8F581F7F|7F1F58;
+    STA.L nDogPoseState                                              ;84B255|8F581F7F|7F1F58;
     JMP.W .check_whistle                                             ;84B259|4C5CB2  |84B25C;
  
  
@@ -6941,10 +6941,10 @@ fAIAction0x36_UpdateDog:
 .loop2:
     REP #$30                                                   ;84B26A|C230    |      ;
     LDY.W #$0010                                               ;84B26C|A01000  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;84B26F|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;84B26F|B7CC    |0000CC;
     CLC                                                        ;84B271|18      |      ;
     ADC.W #$0001                                               ;84B272|690100  |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;84B275|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;84B275|97CC    |0000CC;
     RTS                                                        ;84B277|60      |      ;
  
  
@@ -6955,17 +6955,17 @@ fAIAction0x36_UpdateDog:
     SEP #$20                                                   ;84B27F|E220    |      ;
     REP #$10                                                   ;84B281|C210    |      ;
     LDY.W #$0001                                               ;84B283|A00100  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;84B286|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;84B286|B7CC    |0000CC;
     ORA.B #$28                                                 ;84B288|0928    |      ;
     SEP #$20                                                   ;84B28A|E220    |      ;
     REP #$10                                                   ;84B28C|C210    |      ;
     LDY.W #$0001                                               ;84B28E|A00100  |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;84B291|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;84B291|97CC    |0000CC;
     REP #$30                                                   ;84B293|C230    |      ;
     SEP #$20                                                   ;84B295|E220    |      ;
     REP #$10                                                   ;84B297|C210    |      ;
     LDY.W #$003F                                               ;84B299|A03F00  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;84B29C|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;84B29C|B7CC    |0000CC;
     XBA                                                        ;84B29E|EB      |      ;
     LDA.B #$00                                                 ;84B29F|A900    |      ;
     XBA                                                        ;84B2A1|EB      |      ;
@@ -6978,7 +6978,7 @@ fAIAction0x36_UpdateDog:
     STZ.B strcVariables.n16Temp4                               ;84B2B2|6484    |000084;
     REP #$30                                                   ;84B2B4|C230    |      ;
     LDY.W #$001A                                               ;84B2B6|A01A00  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;84B2B9|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;84B2B9|B7CC    |0000CC;
     SEC                                                        ;84B2BB|38      |      ;
     SBC.B strcPlayer.posX                                      ;84B2BC|E5D6    |0000D6;
     STA.B strcVariables.n16Temp1                               ;84B2BE|857E    |00007E;
@@ -6996,7 +6996,7 @@ fAIAction0x36_UpdateDog:
 .dx_abs_done:
     REP #$30                                                   ;84B2D1|C230    |      ;
     LDY.W #$001C                                               ;84B2D3|A01C00  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;84B2D6|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;84B2D6|B7CC    |0000CC;
     SEC                                                        ;84B2D8|38      |      ;
     SBC.B strcPlayer.posY                                      ;84B2D9|E5D8    |0000D8;
     STA.B strcVariables.n16Temp2                               ;84B2DB|8580    |000080;
@@ -7017,7 +7017,7 @@ fAIAction0x36_UpdateDog:
     SEP #$20                                                   ;84B2F2|E220    |      ;
     REP #$10                                                   ;84B2F4|C210    |      ;
     LDY.W #$0008                                               ;84B2F6|A00800  |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;84B2F9|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;84B2F9|97CC    |0000CC;
     REP #$20                                                   ;84B2FB|C220    |      ;
     LDA.B strcVariables.n16Temp2                               ;84B2FD|A580    |000080;
     CMP.B strcVariables.n16Temp1                               ;84B2FF|C57E    |00007E;
@@ -7039,7 +7039,7 @@ fAIAction0x36_UpdateDog:
     REP #$10                                                   ;84B315|C210    |      ;
     LDY.W #$000F                                               ;84B317|A00F00  |      ;
     LDA.B #$01                                                 ;84B31A|A901    |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;84B31C|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;84B31C|97CC    |0000CC;
     JMP.W .loop2                                               ;84B31E|4C6AB2  |84B26A;
  
  
@@ -7048,7 +7048,7 @@ fAIAction0x36_UpdateDog:
     REP #$10                                                   ;84B323|C210    |      ;
     LDY.W #$000F                                               ;84B325|A00F00  |      ;
     LDA.B #$02                                                 ;84B328|A902    |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;84B32A|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;84B32A|97CC    |0000CC;
     JMP.W .loop2                                               ;84B32C|4C6AB2  |84B26A;
  
  
@@ -7057,7 +7057,7 @@ fAIAction0x36_UpdateDog:
     REP #$10                                                   ;84B331|C210    |      ;
     LDY.W #$000F                                               ;84B333|A00F00  |      ;
     LDA.B #$04                                                 ;84B336|A904    |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;84B338|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;84B338|97CC    |0000CC;
     JMP.W .loop2                                               ;84B33A|4C6AB2  |84B26A;
  
  
@@ -7066,7 +7066,7 @@ fAIAction0x36_UpdateDog:
     REP #$10                                                   ;84B33F|C210    |      ;
     LDY.W #$000F                                               ;84B341|A00F00  |      ;
     LDA.B #$08                                                 ;84B344|A908    |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;84B346|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;84B346|97CC    |0000CC;
     JMP.W .loop2                                               ;84B348|4C6AB2  |84B26A;
  
  
@@ -7083,7 +7083,7 @@ fAIAction0x37_RemoveObject:
     %AIMoveAction($0001)
     REP #$30                                                   ;84B357|C230    |      ;
     LDY.W #$0012                                               ;84B359|A01200  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;84B35C|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;84B35C|B7CC    |0000CC;
     STA.B strcObject.gameObjectIdx                             ;84B35E|85A5    |0000A5;
     JSL.L fObject_Destroy                                ;84B360|22A28185|8581A2;
     RTS                                                        ;84B364|60      |      ;
@@ -7107,10 +7107,10 @@ fAIAction0x38_WaitForFadeIn:
  
   + REP #$30                                                   ;84B37B|C230    |      ;
     LDY.W #$0010                                               ;84B37D|A01000  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;84B380|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;84B380|B7CC    |0000CC;
     CLC                                                        ;84B382|18      |      ;
     ADC.W #$0001                                               ;84B383|690100  |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;84B386|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;84B386|97CC    |0000CC;
     RTS                                                        ;84B388|60      |      ;
  
  
@@ -7155,10 +7155,10 @@ fAIAction0x39_WalkForTime:
     STA.B ptrAIActionData                                      ;84B3CF|85C9    |0000C9;
     REP #$30                                                   ;84B3D1|C230    |      ;
     LDY.W #$0010                                               ;84B3D3|A01000  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;84B3D6|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;84B3D6|B7CC    |0000CC;
     CLC                                                        ;84B3D8|18      |      ;
     ADC.W #$0001                                               ;84B3D9|690100  |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;84B3DC|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;84B3DC|97CC    |0000CC;
     %SetPlayerFlag(!PFLAGS_AISTEERING)
     RTS                                                        ;84B3E7|60      |      ;
  
@@ -7172,10 +7172,10 @@ fAIAction0x39_WalkForTime:
     STA.W strcAiControlData.counter                            ;84B3F0|8DFF08  |0008FF;
     REP #$30                                                   ;84B3F3|C230    |      ;
     LDY.W #$0010                                               ;84B3F5|A01000  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;84B3F8|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;84B3F8|B7CC    |0000CC;
     CLC                                                        ;84B3FA|18      |      ;
     ADC.W #$0001                                               ;84B3FB|690100  |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;84B3FE|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;84B3FE|97CC    |0000CC;
     RTS                                                        ;84B400|60      |      ;
  
  
@@ -7231,10 +7231,10 @@ fAIAction0x3A_RunForTime:
     STA.B ptrAIActionData                                      ;84B47A|85C9    |0000C9;
     REP #$30                                                   ;84B47C|C230    |      ;
     LDY.W #$0010                                               ;84B47E|A01000  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;84B481|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;84B481|B7CC    |0000CC;
     CLC                                                        ;84B483|18      |      ;
     ADC.W #$0001                                               ;84B484|690100  |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;84B487|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;84B487|97CC    |0000CC;
     %SetPlayerFlag(!PFLAGS_AISTEERING)
     RTS                                                        ;84B492|60      |      ;
  
@@ -7247,10 +7247,10 @@ fAIAction0x3A_RunForTime:
     STA.W strcAiControlData.counter                            ;84B49B|8DFF08  |0008FF;
     REP #$30                                                   ;84B49E|C230    |      ;
     LDY.W #$0010                                               ;84B4A0|A01000  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;84B4A3|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;84B4A3|B7CC    |0000CC;
     CLC                                                        ;84B4A5|18      |      ;
     ADC.W #$0001                                               ;84B4A6|690100  |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;84B4A9|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;84B4A9|97CC    |0000CC;
     RTS                                                        ;84B4AB|60      |      ;
  
  
@@ -7728,7 +7728,7 @@ fAIAction0x49_SetSpriteTableFacingPlayer:
     LDA.B [ptrAIActionData]                                    ;84B8E5|A7C9    |0000C9;
     REP #$30                                                   ;84B8E7|C230    |      ;
     LDY.W #$0033                                               ;84B8E9|A03300  |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;84B8EC|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;84B8EC|97CC    |0000CC;
     %AIMoveAction($0002)
     REP #$20                                                   ;84B8F8|C220    |      ;
     LDA.B strcPlayer.direction                                 ;84B8FA|A5DA    |0000DA;
@@ -7736,19 +7736,19 @@ fAIAction0x49_SetSpriteTableFacingPlayer:
     SEP #$20                                                   ;84B8FE|E220    |      ;
     REP #$10                                                   ;84B900|C210    |      ;
     LDY.W #$0002                                               ;84B902|A00200  |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;84B905|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;84B905|97CC    |0000CC;
     SEP #$20                                                   ;84B907|E220    |      ;
     REP #$10                                                   ;84B909|C210    |      ;
     LDY.W #$0001                                               ;84B90B|A00100  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;84B90E|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;84B90E|B7CC    |0000CC;
     ORA.B #$03                                                 ;84B910|0903    |      ;
     SEP #$20                                                   ;84B912|E220    |      ;
     REP #$10                                                   ;84B914|C210    |      ;
     LDY.W #$0001                                               ;84B916|A00100  |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;84B919|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;84B919|97CC    |0000CC;
     REP #$30                                                   ;84B91B|C230    |      ;
     LDY.W #$0033                                               ;84B91D|A03300  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;84B920|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;84B920|B7CC    |0000CC;
     STA.B ptrTemp0x72                                          ;84B922|8572    |000072;
     SEP #$20                                                   ;84B924|E220    |      ;
     LDA.B #$B3                                                 ;84B926|A9B3    |      ;
@@ -7756,10 +7756,10 @@ fAIAction0x49_SetSpriteTableFacingPlayer:
     JSL.L fAI_LoadSlotSpriteFromDirTable                                    ;84B92A|22958884|848895;
     REP #$30                                                   ;84B92E|C230    |      ;
     LDY.W #$0010                                               ;84B930|A01000  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;84B933|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;84B933|B7CC    |0000CC;
     CLC                                                        ;84B935|18      |      ;
     ADC.W #$0001                                               ;84B936|690100  |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;84B939|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;84B939|97CC    |0000CC;
     RTS                                                        ;84B93B|60      |      ;
  
  
@@ -7779,7 +7779,7 @@ fAIAction0x4A_PickUpObjectOnButtonA:
     SEP #$20                                                   ;84B948|E220    |      ;
     REP #$10                                                   ;84B94A|C210    |      ;
     LDY.W #$000C                                               ;84B94C|A00C00  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;84B94F|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;84B94F|B7CC    |0000CC;
     CMP.B #$00                                                 ;84B951|C900    |      ;
     BNE +                                                      ;84B953|D003    |84B958;
     JMP.W .return                                              ;84B955|4C02BA  |84BA02;
@@ -7838,22 +7838,22 @@ fAIAction0x4A_PickUpObjectOnButtonA:
     REP #$10                                                   ;84B9C9|C210    |      ;
     LDY.W #$0000                                               ;84B9CB|A00000  |      ;
     LDA.B #$00                                                 ;84B9CE|A900    |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;84B9D0|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;84B9D0|97CC    |0000CC;
     SEP #$20                                                   ;84B9D2|E220    |      ;
     REP #$10                                                   ;84B9D4|C210    |      ;
     LDY.W #$0001                                               ;84B9D6|A00100  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;84B9D9|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;84B9D9|B7CC    |0000CC;
     ORA.B #$40                                                 ;84B9DB|0940    |      ;
     SEP #$20                                                   ;84B9DD|E220    |      ;
     REP #$10                                                   ;84B9DF|C210    |      ;
     LDY.W #$0001                                               ;84B9E1|A00100  |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;84B9E4|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;84B9E4|97CC    |0000CC;
     REP #$30                                                   ;84B9E6|C230    |      ;
     LDY.W #$0010                                               ;84B9E8|A01000  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;84B9EB|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;84B9EB|B7CC    |0000CC;
     CLC                                                        ;84B9ED|18      |      ;
     ADC.W #$0001                                               ;84B9EE|690100  |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;84B9F1|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;84B9F1|97CC    |0000CC;
     %SetCurrentCarriedItemDirect(!EITEM_TURNIPSEED)
     %SetPlayerAction(!PACTION_ITEMONHAND)
     RTS                                                        ;84BA01|60      |      ;
@@ -7862,10 +7862,10 @@ fAIAction0x4A_PickUpObjectOnButtonA:
 .return:
     REP #$30                                                   ;84BA02|C230    |      ;
     LDY.W #$0010                                               ;84BA04|A01000  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;84BA07|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;84BA07|B7CC    |0000CC;
     CLC                                                        ;84BA09|18      |      ;
     ADC.W #$0001                                               ;84BA0A|690100  |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;84BA0D|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;84BA0D|97CC    |0000CC;
     RTS                                                        ;84BA0F|60      |      ;
  
  
@@ -7913,12 +7913,12 @@ fAIAction0x4C_SetPassable:
     SEP #$20                                                   ;84BA5D|E220    |      ;
     REP #$10                                                   ;84BA5F|C210    |      ;
     LDY.W #$0000                                               ;84BA61|A00000  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;84BA64|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;84BA64|B7CC    |0000CC;
     ORA.B #$02                                                 ;84BA66|0902    |      ;
     SEP #$20                                                   ;84BA68|E220    |      ;
     REP #$10                                                   ;84BA6A|C210    |      ;
     LDY.W #$0000                                               ;84BA6C|A00000  |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;84BA6F|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;84BA6F|97CC    |0000CC;
     RTS                                                        ;84BA71|60      |      ;
  
  
@@ -7939,7 +7939,7 @@ fAIAction0x4D_JumpIfBlueFeatherUsed:
     SEP #$20                                                   ;84BA7E|E220    |      ;
     REP #$10                                                   ;84BA80|C210    |      ;
     LDY.W #$000C                                               ;84BA82|A00C00  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;84BA85|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;84BA85|B7CC    |0000CC;
     CMP.B #$00                                                 ;84BA87|C900    |      ;
     BNE +                                                      ;84BA89|D003    |84BA8E;
     JMP.W .return                                              ;84BA8B|4C26BB  |84BB26;
@@ -7962,36 +7962,36 @@ fAIAction0x4D_JumpIfBlueFeatherUsed:
     SEP #$20                                                   ;84BAAE|E220    |      ;
     REP #$10                                                   ;84BAB0|C210    |      ;
     LDY.W #$0007                                               ;84BAB2|A00700  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;84BAB5|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;84BAB5|B7CC    |0000CC;
     SEP #$20                                                   ;84BAB7|E220    |      ;
     REP #$10                                                   ;84BAB9|C210    |      ;
     LDY.W #$0008                                               ;84BABB|A00800  |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;84BABE|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;84BABE|97CC    |0000CC;
     SEP #$20                                                   ;84BAC0|E220    |      ;
     REP #$10                                                   ;84BAC2|C210    |      ;
     LDY.W #$0003                                               ;84BAC4|A00300  |      ;
     LDA.B #$00                                                 ;84BAC7|A900    |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;84BAC9|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;84BAC9|97CC    |0000CC;
     SEP #$20                                                   ;84BACB|E220    |      ;
     REP #$10                                                   ;84BACD|C210    |      ;
     LDY.W #$0004                                               ;84BACF|A00400  |      ;
     LDA.B #$00                                                 ;84BAD2|A900    |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;84BAD4|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;84BAD4|97CC    |0000CC;
     SEP #$20                                                   ;84BAD6|E220    |      ;
     REP #$10                                                   ;84BAD8|C210    |      ;
     LDY.W #$000C                                               ;84BADA|A00C00  |      ;
     LDA.B #$00                                                 ;84BADD|A900    |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;84BADF|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;84BADF|97CC    |0000CC;
     REP #$20                                                   ;84BAE1|C220    |      ;
     LDA.B strcPlayer.direction                                 ;84BAE3|A5DA    |0000DA;
     EOR.W #$0001                                               ;84BAE5|490100  |      ;
     SEP #$20                                                   ;84BAE8|E220    |      ;
     REP #$10                                                   ;84BAEA|C210    |      ;
     LDY.W #$0002                                               ;84BAEC|A00200  |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;84BAEF|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;84BAEF|97CC    |0000CC;
     REP #$30                                                   ;84BAF1|C230    |      ;
     LDY.W #$0033                                               ;84BAF3|A03300  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;84BAF6|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;84BAF6|B7CC    |0000CC;
     STA.B ptrTemp0x72                                          ;84BAF8|8572    |000072;
     SEP #$20                                                   ;84BAFA|E220    |      ;
     LDA.B #$B3                                                 ;84BAFC|A9B3    |      ;
@@ -8000,18 +8000,18 @@ fAIAction0x4D_JumpIfBlueFeatherUsed:
     SEP #$20                                                   ;84BB04|E220    |      ;
     REP #$10                                                   ;84BB06|C210    |      ;
     LDY.W #$0001                                               ;84BB08|A00100  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;84BB0B|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;84BB0B|B7CC    |0000CC;
     ORA.B #$14                                                 ;84BB0D|0914    |      ;
     SEP #$20                                                   ;84BB0F|E220    |      ;
     REP #$10                                                   ;84BB11|C210    |      ;
     LDY.W #$0001                                               ;84BB13|A00100  |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;84BB16|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;84BB16|97CC    |0000CC;
     REP #$30                                                   ;84BB18|C230    |      ;
     LDY.W #$0010                                               ;84BB1A|A01000  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;84BB1D|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;84BB1D|B7CC    |0000CC;
     CLC                                                        ;84BB1F|18      |      ;
     ADC.W #$0001                                               ;84BB20|690100  |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;84BB23|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;84BB23|97CC    |0000CC;
     RTS                                                        ;84BB25|60      |      ;
  
  
@@ -8321,7 +8321,7 @@ fAIAction0x52_PickUpObjectForEventA:
     SEP #$20                                                   ;84BD50|E220    |      ;
     REP #$10                                                   ;84BD52|C210    |      ;
     LDY.W #$000C                                               ;84BD54|A00C00  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;84BD57|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;84BD57|B7CC    |0000CC;
     CMP.B #$00                                                 ;84BD59|C900    |      ;
     BNE +                                                      ;84BD5B|D003    |84BD60;
     JMP.W .return                                              ;84BD5D|4CFFBD  |84BDFF;
@@ -8374,22 +8374,22 @@ fAIAction0x52_PickUpObjectForEventA:
     REP #$10                                                   ;84BDC7|C210    |      ;
     LDY.W #$0000                                               ;84BDC9|A00000  |      ;
     LDA.B #$00                                                 ;84BDCC|A900    |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;84BDCE|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;84BDCE|97CC    |0000CC;
     SEP #$20                                                   ;84BDD0|E220    |      ;
     REP #$10                                                   ;84BDD2|C210    |      ;
     LDY.W #$0001                                               ;84BDD4|A00100  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;84BDD7|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;84BDD7|B7CC    |0000CC;
     ORA.B #$40                                                 ;84BDD9|0940    |      ;
     SEP #$20                                                   ;84BDDB|E220    |      ;
     REP #$10                                                   ;84BDDD|C210    |      ;
     LDY.W #$0001                                               ;84BDDF|A00100  |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;84BDE2|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;84BDE2|97CC    |0000CC;
     REP #$30                                                   ;84BDE4|C230    |      ;
     LDY.W #$0010                                               ;84BDE6|A01000  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;84BDE9|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;84BDE9|B7CC    |0000CC;
     CLC                                                        ;84BDEB|18      |      ;
     ADC.W #$0001                                               ;84BDEC|690100  |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;84BDEF|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;84BDEF|97CC    |0000CC;
     REP #$30                                                   ;84BDF1|C230    |      ;
     %SetFlag(daily4, $0002)
     RTS                                                        ;84BDFE|60      |      ;
@@ -8398,10 +8398,10 @@ fAIAction0x52_PickUpObjectForEventA:
 .return:
     REP #$30                                                   ;84BDFF|C230    |      ;
     LDY.W #$0010                                               ;84BE01|A01000  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;84BE04|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;84BE04|B7CC    |0000CC;
     CLC                                                        ;84BE06|18      |      ;
     ADC.W #$0001                                               ;84BE07|690100  |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;84BE0A|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;84BE0A|97CC    |0000CC;
     RTS                                                        ;84BE0C|60      |      ;
  
  
@@ -8419,7 +8419,7 @@ fAIAction0x53_PickUpObjectForEventB:
     SEP #$20                                                   ;84BE19|E220    |      ;
     REP #$10                                                   ;84BE1B|C210    |      ;
     LDY.W #$000C                                               ;84BE1D|A00C00  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;84BE20|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;84BE20|B7CC    |0000CC;
     CMP.B #$00                                                 ;84BE22|C900    |      ;
     BNE +                                                      ;84BE24|D003    |84BE29;
     JMP.W .return                                              ;84BE26|4CC8BE  |84BEC8;
@@ -8472,22 +8472,22 @@ fAIAction0x53_PickUpObjectForEventB:
     REP #$10                                                   ;84BE90|C210    |      ;
     LDY.W #$0000                                               ;84BE92|A00000  |      ;
     LDA.B #$00                                                 ;84BE95|A900    |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;84BE97|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;84BE97|97CC    |0000CC;
     SEP #$20                                                   ;84BE99|E220    |      ;
     REP #$10                                                   ;84BE9B|C210    |      ;
     LDY.W #$0001                                               ;84BE9D|A00100  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;84BEA0|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;84BEA0|B7CC    |0000CC;
     ORA.B #$40                                                 ;84BEA2|0940    |      ;
     SEP #$20                                                   ;84BEA4|E220    |      ;
     REP #$10                                                   ;84BEA6|C210    |      ;
     LDY.W #$0001                                               ;84BEA8|A00100  |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;84BEAB|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;84BEAB|97CC    |0000CC;
     REP #$30                                                   ;84BEAD|C230    |      ;
     LDY.W #$0010                                               ;84BEAF|A01000  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;84BEB2|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;84BEB2|B7CC    |0000CC;
     CLC                                                        ;84BEB4|18      |      ;
     ADC.W #$0001                                               ;84BEB5|690100  |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;84BEB8|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;84BEB8|97CC    |0000CC;
     REP #$30                                                   ;84BEBA|C230    |      ;
     %SetFlag(daily4, $0004)
     RTS                                                        ;84BEC7|60      |      ;
@@ -8496,10 +8496,10 @@ fAIAction0x53_PickUpObjectForEventB:
 .return:
     REP #$30                                                   ;84BEC8|C230    |      ;
     LDY.W #$0010                                               ;84BECA|A01000  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;84BECD|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;84BECD|B7CC    |0000CC;
     CLC                                                        ;84BECF|18      |      ;
     ADC.W #$0001                                               ;84BED0|690100  |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;84BED3|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;84BED3|97CC    |0000CC;
     RTS                                                        ;84BED5|60      |      ;
  
  
@@ -8531,10 +8531,10 @@ fAIAction0x54_ShowDialogAutoClose:
     %AIMoveAction($0001)
     REP #$30                                                   ;84BF12|C230    |      ;
     LDY.W #$0010                                               ;84BF14|A01000  |      ;
-    LDA.B [ptrAIUnknown0xCC],Y                                 ;84BF17|B7CC    |0000CC;
+    LDA.B [ptrAISlot],Y                                 ;84BF17|B7CC    |0000CC;
     CLC                                                        ;84BF19|18      |      ;
     ADC.W #$0001                                               ;84BF1A|690100  |      ;
-    STA.B [ptrAIUnknown0xCC],Y                                 ;84BF1D|97CC    |0000CC;
+    STA.B [ptrAISlot],Y                                 ;84BF1D|97CC    |0000CC;
     RTS                                                        ;84BF1F|60      |      ;
  
  

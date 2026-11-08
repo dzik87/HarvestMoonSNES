@@ -1,0 +1,49 @@
+old,new,confidence,reason
+ptrUnknown0x07,ptrObjectSlot,high,"only fObjectSlots_Allocate/ClearAll/FreeCurrent/UpdateAll use it: points at a 16-byte object slot record (bytes +0..+2 copied to the $0974.. current-slot cache, +3 carried item id, +4 game object index, +6/+8/+10 params, +12/+14 X/Y position)"
+ptrUnknown0xCF,ptrTileScript,medium,"set by fTileScript_Start and walked by fTileScript_Update (reads the words at +0,+2,+4,+6 of the tile script record); also read by interaction cases that wait for the script"
+ptrAIUnknown0xCC,ptrAISlot,high,"points at the 64-byte AI script slot (49 slots at $7EB586, fAI_SelectSlot); +0 active flag, +$30 script pointer, +$3F slot index; see docs/ai/commands.md"
+ptrUnknown0x75,ptrTemp0x75,medium,"generic second scratch 24-bit pointer next to ptrTemp0x72 (map streaming, tilemap decompression, AI table lookup, object creation); never holds state across frames"
+nUnknownX,nCarriedItemX,medium,"loaded from object slot +$0C by fObjectSlots_UpdateAll; written with strcPlayer.posX (and nCarriedItemY with posY+1) when a carry starts and during drop/throw (fItemCarried_*, fItemShipped_DropInBin)"
+nUnknownY,nCarriedItemY,medium,"see nCarriedItemX (object slot +$0E)"
+nHorseAreaIdMaybe,nHorseAreaId,medium,"saved/loaded next to nDogAreaId; compared with strcMap.loadAreaId in groups of 4 (<4, <8, <$10) like the chicken map ids, so it is the area the horse is in"
+strcMap.unk20,strcMap.scrollAccumX,medium,"horizontal scroll accumulator: += strcMap.unk1E (8) per frame while mapFlags bit 0 is set; at >= 8 it subtracts 8 and calls fMap_StreamColumnRight/Left (one BG tile column is streamed per 8 px)"
+strcMap.unk21,strcMap.scrollAccumY,medium,"vertical twin of scrollAccumX: calls fMap_StreamRowDown/Up when >= 8; set to 0 or 8 by the camera set-up code in routines.asm (lines near fCamera_UpdateFromPlayerPos)"
+strcAIUnknown,strcAISlot,high,"the 64-byte AI script slot structure (ptrAISlot); members renamed by offset evidence in fAI_ResetSlotFull/UpdateSlotWander/UpdateSlotStepMove/UpdateSlotMovementAndObject (no source file accesses the members by name)"
+strcAudio.unkMulti11A,strcAudio.mulFactorA,high,"fMathMultiply_7EbyA/fMathMultiply: byte factor written to SNES_WRMPYA; the 8x8 hardware multiplier is driven from these WRAM bytes (the struct member lives in the audio block but is math scratch)"
+strcAudio.unkMulti11B,strcAudio.mulFactorB,high,"byte factor written to SNES_WRMPYB by fMathMultiply"
+strcAudio.unkMulti11C,strcAudio.mulInputA,high,"16-bit input A of fMathMultiply_7EbyA (the other input is strcVariables.n16Temp1)"
+strcAudio.unkMulti11E,strcAudio.mulPartLoLo,high,"partial product low(A)*low(B); first of the three terms summed by fMathMultiply_7EbyA"
+strcAudio.unkMulti120,strcAudio.mulPartHiLo,high,"partial product high(A)*low(B) shifted left by 8"
+strcAudio.unkMulti122,strcAudio.mulPartLoHi,high,"partial product low(A)*high(B) shifted left by 8"
+strcVariables.n16Unk86,strcVariables.n16Temp5,medium,"scratch word of the tilemap helpers (fMap_QueueTilePatternVRAMUpload, fSetTileAtCoords, fGraphicsDecompressTilemap, name-entry box drawing ...): always written before it is read inside one routine"
+strcVariables.n16Unk88,strcVariables.n16Temp6,medium,"same use as n16Temp5 (tile / rect coordinate scratch)"
+strcVariables.n16Unk8A,strcVariables.n16Temp7,medium,"scratch word of fTileMap_MapChangeHandler (tilemap bank offset)"
+strcVariables.n16Unk8C,strcVariables.n16Temp8,medium,"scratch word of the tile collision / direction handlers (fGameEngine_CheckTileCollision, fGameEngine_DirectionHandler83AD91/83AF37)"
+strcVariables.n16Unk8E,strcVariables.n16Temp9,medium,"scratch word of fMap_CalcTilemapBufferOffset, fMap_FillCurrentTilemapRect and the collision check"
+strcVariables.n16Unk90,strcVariables.n16Temp10,medium,"scratch word of the tilemap helpers; the main menu states also use it as a short-lived counter within one frame handler chain"
+AIFLAGS_UNK00,AIFLAGS_HASOBJECT,medium,"bit 0 of AI slot byte +1: fAI_RunSlots runs fAI_UpdateSlotMovementAndObject only when set; fAI_ResetSlotKeepObject sets it, fAI_ResetSlotFull clears it"
+AIFLAGS_UNK02,AIFLAGS_CREATEOBJECT,high,"fAI_UpdateSlotMovementAndObject calls fObject_Create and stores the new game object index in slot +$12; one-shot (cleared by the AND #$E9 at the end of the update)"
+AIFLAGS_UNK04,AIFLAGS_REPLACESPRITE,high,"calls fObject_Replace when slot +$16 (sprite table index) differs from +$18; one-shot"
+AIFLAGS_UNK08,AIFLAGS_WANDER,high,"enables fAI_UpdateSlotWander (random walk of cows / chickens / animals inside the home range)"
+AIFLAGS_UNK10,AIFLAGS_SKIPMOVE,medium,"when set fAI_UpdateSlotMovementAndObject skips both fAI_UpdateSlotWander and fAI_UpdateSlotStepMove for that frame; one-shot"
+AIFLAGS_UNK20,AIFLAGS_STEPMOVE,high,"enables fAI_UpdateSlotStepMove (constant velocity move from AI command 0x0D); documented in docs/ai/commands.md"
+AIFLAGS_UNK40,AIFLAGS_DESTROYOBJECT,high,"fAI_UpdateSlotMovementAndObject calls fObject_Destroy"
+AIFLAGS_UNK80,AIFLAGS_WANDERNOLIMIT,medium,"fAI_UpdateSlotWander skips the home range limit test while set (walks without checking +$09/+$0A range)"
+strcGameObject.unknown1B1,strcGameObject.component1,high,byte 1 of the 16 component slots (components at $1B0 + index): initialised to $FF (= no sprite component) together with .components by fObject_ClearGameObject; $FF means unused
+strcGameObject.unknown1B2,strcGameObject.component2,high,byte 1 of the 16 component slots (components at $1B0 + index): initialised to $FF (= no sprite component) together with .components by fObject_ClearGameObject; $FF means unused
+strcGameObject.unknown1B3,strcGameObject.component3,high,byte 1 of the 16 component slots (components at $1B0 + index): initialised to $FF (= no sprite component) together with .components by fObject_ClearGameObject; $FF means unused
+strcGameObject.unknown1B4,strcGameObject.component4,high,byte 1 of the 16 component slots (components at $1B0 + index): initialised to $FF (= no sprite component) together with .components by fObject_ClearGameObject; $FF means unused
+strcGameObject.unknown1B5,strcGameObject.component5,high,byte 1 of the 16 component slots (components at $1B0 + index): initialised to $FF (= no sprite component) together with .components by fObject_ClearGameObject; $FF means unused
+strcGameObject.unknown1B6,strcGameObject.component6,high,byte 1 of the 16 component slots (components at $1B0 + index): initialised to $FF (= no sprite component) together with .components by fObject_ClearGameObject; $FF means unused
+strcGameObject.unknown1B7,strcGameObject.component7,high,byte 1 of the 16 component slots (components at $1B0 + index): initialised to $FF (= no sprite component) together with .components by fObject_ClearGameObject; $FF means unused
+strcGameObject.unknown1B8,strcGameObject.component8,high,byte 1 of the 16 component slots (components at $1B0 + index): initialised to $FF (= no sprite component) together with .components by fObject_ClearGameObject; $FF means unused
+strcGameObject.unknown1B9,strcGameObject.component9,high,byte 1 of the 16 component slots (components at $1B0 + index): initialised to $FF (= no sprite component) together with .components by fObject_ClearGameObject; $FF means unused
+strcGameObject.unknown1BA,strcGameObject.componentA,high,byte 1 of the 16 component slots (components at $1B0 + index): initialised to $FF (= no sprite component) together with .components by fObject_ClearGameObject; $FF means unused
+strcGameObject.unknown1BB,strcGameObject.componentB,high,byte 1 of the 16 component slots (components at $1B0 + index): initialised to $FF (= no sprite component) together with .components by fObject_ClearGameObject; $FF means unused
+strcGameObject.unknown1BC,strcGameObject.componentC,high,byte 1 of the 16 component slots (components at $1B0 + index): initialised to $FF (= no sprite component) together with .components by fObject_ClearGameObject; $FF means unused
+strcGameObject.unknown1BD,strcGameObject.componentD,high,byte 1 of the 16 component slots (components at $1B0 + index): initialised to $FF (= no sprite component) together with .components by fObject_ClearGameObject; $FF means unused
+strcGameObject.unknown1BE,strcGameObject.componentE,high,byte 1 of the 16 component slots (components at $1B0 + index): initialised to $FF (= no sprite component) together with .components by fObject_ClearGameObject; $FF means unused
+strcGameObject.unknown1BF,strcGameObject.componentF,high,byte 1 of the 16 component slots (components at $1B0 + index): initialised to $FF (= no sprite component) together with .components by fObject_ClearGameObject; $FF means unused
+strcTileLoadStats.tileRefusals,strcTileLoadStats.tileRefusals,medium,word incremented by fObject_CheckComponentsPending for each object whose tiles are not all resident (render is refused that frame)
+strcTileLoadStats.pendingLoads,strcTileLoadStats.pendingLoads,medium,set at the end of fObject_ProcessTileLoadQueue to the number of tile load requests still waiting in the ring buffer
+strcTileLoadStats,strcTileLoadStats,medium,"$7E0740-$7E0743: statistics of the sprite tile loader (refusals, pending loads); only objects.asm touches it"
