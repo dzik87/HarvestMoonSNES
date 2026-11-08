@@ -827,19 +827,19 @@ loop: aPaletteAnimScript_TownSummer_T4_Slot6
 ?,?
 loop: aPaletteAnimScript_TownFall_NYPublicSquare_T1_Slot4
 
-@label aPaletteAnim_Row2Col0E_80E455
+@label aPaletteAnimScript_DancingS2_T1_Slot5
 @columns color:bgr555,frames:u8
 ?,?
 ?,?
 ?,?
-loop: aPaletteAnim_Row2Col0E_80E455
+loop: aPaletteAnimScript_DancingS2_T1_Slot5
 
-@label aPaletteAnim_Row2Col0F_80E463
+@label aPaletteAnimScript_DancingS2_T1_Slot6
 @columns color:bgr555,frames:u8
 ?,?
 ?,?
 ?,?
-loop: aPaletteAnim_Row2Col0F_80E463
+loop: aPaletteAnimScript_DancingS2_T1_Slot6
 
 @label aPaletteAnim_Row2Col06_80E471
 @columns color:bgr555,frames:u8
@@ -992,47 +992,47 @@ loop: aPaletteAnim_Row2Col04_80E588
 ?,?
 loop: aPaletteAnim_Row2Col05_80E599
 
-@label aPaletteAnim_Row2Col07_80E5AA
+@label aPaletteAnimScript_TownFall_T4_Slot10
 @columns color:bgr555,frames:u8
 ?,?
 ?,?
 ?,?
 ?,?
-loop: aPaletteAnim_Row2Col07_80E5AA
+loop: aPaletteAnimScript_TownFall_T4_Slot10
 
-@label aPaletteAnim_Row2Col03_80E5BB
+@label aPaletteAnimScript_TownWinter_T4_Slot4
 @columns color:bgr555,frames:u8
 ?,?
 ?,?
 ?,?
 ?,?
-loop: aPaletteAnim_Row2Col03_80E5BB
+loop: aPaletteAnimScript_TownWinter_T4_Slot4
 
-@label aPaletteAnim_Row2Col04_80E5CC
+@label aPaletteAnimScript_TownWinter_T4_Slot5
 @columns color:bgr555,frames:u8
 ?,?
 ?,?
 ?,?
 ?,?
-loop: aPaletteAnim_Row2Col04_80E5CC
+loop: aPaletteAnimScript_TownWinter_T4_Slot5
 
-@label aPaletteAnim_Row2Col05_80E5DD
+@label aPaletteAnimScript_TownWinter_T4_Slot6
 @columns color:bgr555,frames:u8
 ?,?
 ?,?
 ?,?
 ?,?
-loop: aPaletteAnim_Row2Col05_80E5DD
+loop: aPaletteAnimScript_TownWinter_T4_Slot6
 
-@label aPaletteAnim_Row2Col07_80E5EE
+@label aPaletteAnimScript_TownWinter_T4_Slot7
 @columns color:bgr555,frames:u8
 ?,?
 ?,?
 ?,?
 ?,?
-loop: aPaletteAnim_Row2Col07_80E5EE
+loop: aPaletteAnimScript_TownWinter_T4_Slot7
 
-@label aPaletteAnim_Row3Col08_80E5FF
+@label aPaletteAnimScript_WoodsSpring_T1_Slot4
 @columns color:bgr555,frames:u8
 ?,?
 ?,?
@@ -1040,9 +1040,9 @@ loop: aPaletteAnim_Row2Col07_80E5EE
 ?,?
 ?,?
 ?,?
-loop: aPaletteAnim_Row3Col08_80E5FF
+loop: aPaletteAnimScript_WoodsSpring_T1_Slot4
 
-@label aPaletteAnim_Row3Col09_80E616
+@label aPaletteAnimScript_WoodsSpring_T1_Slot5
 @columns color:bgr555,frames:u8
 ?,?
 ?,?
@@ -1050,9 +1050,9 @@ loop: aPaletteAnim_Row3Col08_80E5FF
 ?,?
 ?,?
 ?,?
-loop: aPaletteAnim_Row3Col09_80E616
+loop: aPaletteAnimScript_WoodsSpring_T1_Slot5
 
-@label aPaletteAnim_Row3Col0A_80E62D
+@label aPaletteAnimScript_WoodsSpring_T1_Slot6
 @columns color:bgr555,frames:u8
 ?,?
 ?,?
@@ -1060,9 +1060,9 @@ loop: aPaletteAnim_Row3Col09_80E616
 ?,?
 ?,?
 ?,?
-loop: aPaletteAnim_Row3Col0A_80E62D
+loop: aPaletteAnimScript_WoodsSpring_T1_Slot6
 
-@label aPaletteAnim_Row3Col0B_80E644
+@label aPaletteAnimScript_WoodsSpring_T1_Slot7
 @columns color:bgr555,frames:u8
 ?,?
 ?,?
@@ -1070,7 +1070,7 @@ loop: aPaletteAnim_Row3Col0A_80E62D
 ?,?
 ?,?
 ?,?
-loop: aPaletteAnim_Row3Col0B_80E644
+loop: aPaletteAnimScript_WoodsSpring_T1_Slot7
 
 @label aPaletteAnim_Row3Col0C_80E65B
 @columns color:bgr555,frames:u8
@@ -1885,7 +1885,7 @@ loop: aPaletteAnim_Row4Col0B_80ED5B
 ?,?
 loop: aPaletteAnim_Row4Col03_80ED6C
 
-@label aPaletteAnim_Row4Col05_80ED83
+@label aPaletteAnimScript_MountainTopAllSeasonsAndNY_T4_Slot5
 @columns color:bgr555,frames:u8
 ?,?
 ?,?
@@ -1893,163 +1893,163 @@ loop: aPaletteAnim_Row4Col03_80ED6C
 ?,?
 ?,?
 ?,?
-loop: aPaletteAnim_Row4Col05_80ED83
+loop: aPaletteAnimScript_MountainTopAllSeasonsAndNY_T4_Slot5
 
-@label aPaletteAnim_Row4Col0B_80ED9A
+@label aPaletteAnimScript_GoldChicken_All_Slot4
 @columns color:bgr555,frames:u8
 ?,?
 ?,?
 ?,?
 ?,?
-loop: aPaletteAnim_Row4Col0B_80ED9A
+loop: aPaletteAnimScript_GoldChicken_All_Slot4
 
-@label aPaletteAnim_Row4Col0C_80EDAB
+@label aPaletteAnimScript_GoldChicken_All_Slot5
 @columns color:bgr555,frames:u8
 ?,?
 ?,?
 ?,?
 ?,?
-loop: aPaletteAnim_Row4Col0C_80EDAB
+loop: aPaletteAnimScript_GoldChicken_All_Slot5
 
-@label aPaletteAnim_Row4Col0D_80EDBC
+@label aPaletteAnimScript_GoldChicken_All_Slot6
 @columns color:bgr555,frames:u8
 ?,?
 ?,?
 ?,?
 ?,?
-loop: aPaletteAnim_Row4Col0D_80EDBC
+loop: aPaletteAnimScript_GoldChicken_All_Slot6
 
-@label aPaletteAnim_Row4Col0E_80EDCD
+@label aPaletteAnimScript_GoldChicken_All_Slot7
 @columns color:bgr555,frames:u8
 ?,?
 ?,?
 ?,?
 ?,?
-loop: aPaletteAnim_Row4Col0E_80EDCD
+loop: aPaletteAnimScript_GoldChicken_All_Slot7
 
-@label aPaletteAnim_Row4Col0C_80EDDE
+@label aPaletteAnimScript_NYPublicSquare_T4_Slot4
 @columns color:bgr555,frames:u8
 ?,?
 ?,?
 ?,?
-loop: aPaletteAnim_Row4Col0C_80EDDE
+loop: aPaletteAnimScript_NYPublicSquare_T4_Slot4
 
-@label aPaletteAnim_Row4Col0D_80EDEC
+@label aPaletteAnimScript_NYPublicSquare_T4_Slot5
 @columns color:bgr555,frames:u8
 ?,?
 ?,?
 ?,?
-loop: aPaletteAnim_Row4Col0D_80EDEC
+loop: aPaletteAnimScript_NYPublicSquare_T4_Slot5
 
-@label aPaletteAnim_Row4Col0E_80EDFA
+@label aPaletteAnimScript_NYPublicSquare_T4_Slot6
 @columns color:bgr555,frames:u8
 ?,?
 ?,?
 ?,?
-loop: aPaletteAnim_Row4Col0E_80EDFA
+loop: aPaletteAnimScript_NYPublicSquare_T4_Slot6
 
-@label aPaletteAnim_Row1Col07_80EE08
+@label aPaletteAnimScript_FortuneTeller_T1234_Slot4
 @columns color:bgr555,frames:u8
 ?,?
 ?,?
 ?,?
-loop: aPaletteAnim_Row1Col07_80EE08
+loop: aPaletteAnimScript_FortuneTeller_T1234_Slot4
 
-@label aPaletteAnim_Row1Col08_80EE16
+@label aPaletteAnimScript_FortuneTeller_T1234_Slot5
 @columns color:bgr555,frames:u8
 ?,?
 ?,?
 ?,?
-loop: aPaletteAnim_Row1Col08_80EE16
+loop: aPaletteAnimScript_FortuneTeller_T1234_Slot5
 
-@label aPaletteAnim_Row1Col0D_80EE24
+@label aPaletteAnimScript_FortuneTeller_T1234_Slot6
 @columns color:bgr555,frames:u8
 ?,?
 ?,?
 ?,?
-loop: aPaletteAnim_Row1Col0D_80EE24
+loop: aPaletteAnimScript_FortuneTeller_T1234_Slot6
 
-@label aPaletteAnim_Row1Col0E_80EE32
+@label aPaletteAnimScript_FortuneTeller_T1234_Slot7
 @columns color:bgr555,frames:u8
 ?,?
 ?,?
 ?,?
-loop: aPaletteAnim_Row1Col0E_80EE32
+loop: aPaletteAnimScript_FortuneTeller_T1234_Slot7
 
-@label aPaletteAnim_Row3Col06_80EE40
+@label aPaletteAnimScript_FortuneTeller_T1234_Slot8
 @columns color:bgr555,frames:u8
 ?,?
 ?,?
 ?,?
-loop: aPaletteAnim_Row3Col06_80EE40
+loop: aPaletteAnimScript_FortuneTeller_T1234_Slot8
 
-@label aPaletteAnim_Row3Col09_80EE4E
+@label aPaletteAnimScript_FortuneTeller_T1234_Slot9
 @columns color:bgr555,frames:u8
 ?,?
 ?,?
 ?,?
-loop: aPaletteAnim_Row3Col09_80EE4E
+loop: aPaletteAnimScript_FortuneTeller_T1234_Slot9
 
-@label aPaletteAnim_Row3Col0A_80EE5C
+@label aPaletteAnimScript_FortuneTeller_T1234_Slot10
 @columns color:bgr555,frames:u8
 ?,?
 ?,?
 ?,?
-loop: aPaletteAnim_Row3Col0A_80EE5C
+loop: aPaletteAnimScript_FortuneTeller_T1234_Slot10
 
-@label aPaletteAnim_Row3Col0B_80EE6A
+@label aPaletteAnimScript_FortuneTeller_T1234_Slot11
 @columns color:bgr555,frames:u8
 ?,?
 ?,?
 ?,?
-loop: aPaletteAnim_Row3Col0B_80EE6A
+loop: aPaletteAnimScript_FortuneTeller_T1234_Slot11
 
-@label aPaletteAnim_Row3Col0C_80EE78
+@label aPaletteAnimScript_FortuneTeller_T1234_Slot12
 @columns color:bgr555,frames:u8
 ?,?
 ?,?
 ?,?
-loop: aPaletteAnim_Row3Col0C_80EE78
+loop: aPaletteAnimScript_FortuneTeller_T1234_Slot12
 
-@label aPaletteAnim_Row3Col0D_80EE86
+@label aPaletteAnimScript_FortuneTeller_T1234_Slot13
 @columns color:bgr555,frames:u8
 ?,?
 ?,?
 ?,?
-loop: aPaletteAnim_Row3Col0D_80EE86
+loop: aPaletteAnimScript_FortuneTeller_T1234_Slot13
 
-@label aPaletteAnim_Row3Col0E_80EE94
+@label aPaletteAnimScript_FortuneTeller_T1234_Slot14
 @columns color:bgr555,frames:u8
 ?,?
 ?,?
 ?,?
-loop: aPaletteAnim_Row3Col0E_80EE94
+loop: aPaletteAnimScript_FortuneTeller_T1234_Slot14
 
-@label aPaletteAnim_Row6Col0C_80EEA2
+@label aPaletteAnimScript_DancingS2_T1_Slot7
 @columns color:bgr555,frames:u8
 ?,?
 ?,?
 ?,?
 ?,?
-loop: aPaletteAnim_Row6Col0C_80EEA2
+loop: aPaletteAnimScript_DancingS2_T1_Slot7
 
-@label aPaletteAnim_Row6Col0D_80EEB3
+@label aPaletteAnimScript_DancingS2_T1_Slot8
 @columns color:bgr555,frames:u8
 ?,?
 ?,?
 ?,?
 ?,?
-loop: aPaletteAnim_Row6Col0D_80EEB3
+loop: aPaletteAnimScript_DancingS2_T1_Slot8
 
-@label aPaletteAnim_Row6Col0F_80EEC4
+@label aPaletteAnimScript_DancingS2_T1_Slot9
 @columns color:bgr555,frames:u8
 ?,?
 ?,?
 ?,?
 ?,?
-loop: aPaletteAnim_Row6Col0F_80EEC4
+loop: aPaletteAnimScript_DancingS2_T1_Slot9
 
-@label aPaletteAnim_Row6Col05_80EED5
+@label aPaletteAnimScript_DancingS2_T1_Slot10
 @columns color:bgr555,frames:u8
 ?,?
 ?,?
@@ -2057,9 +2057,9 @@ loop: aPaletteAnim_Row6Col0F_80EEC4
 ?,?
 ?,?
 ?,?
-loop: aPaletteAnim_Row6Col05_80EED5
+loop: aPaletteAnimScript_DancingS2_T1_Slot10
 
-@label aPaletteAnim_Row6Col0E_80EEEC
+@label aPaletteAnimScript_DancingS2_T1_Slot11
 @columns color:bgr555,frames:u8
 ?,?
 ?,?
@@ -2068,23 +2068,23 @@ loop: aPaletteAnim_Row6Col05_80EED5
 ?,?
 ?,?
 ?,?
-loop: aPaletteAnim_Row6Col0E_80EEEC
+loop: aPaletteAnimScript_DancingS2_T1_Slot11
 
-@label aPaletteAnim_Row2Col07_80EF06
+@label aPaletteAnimScript_RestaurantBedroom_T1234_Slot4
 @columns color:bgr555,frames:u8
 ?,?
 ?,?
-loop: aPaletteAnim_Row2Col07_80EF06
+loop: aPaletteAnimScript_RestaurantBedroom_T1234_Slot4
 
-@label aPaletteAnim_Row2Col0D_80EF11
+@label aPaletteAnimScript_RestaurantBedroom_T1234_Slot5
 @columns color:bgr555,frames:u8
 ?,?
 ?,?
-loop: aPaletteAnim_Row2Col0D_80EF11
+loop: aPaletteAnimScript_RestaurantBedroom_T1234_Slot5
 
-@label aPaletteAnim_Row2Col0E_80EF1C
+@label aPaletteAnimScript_RestaurantBedroom_T1234_Slot6
 @columns color:bgr555,frames:u8
 ?,?
 ?,?
-loop: aPaletteAnim_Row2Col0E_80EF1C
+loop: aPaletteAnimScript_RestaurantBedroom_T1234_Slot6
 

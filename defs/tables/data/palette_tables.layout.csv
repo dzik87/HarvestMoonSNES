@@ -13,6 +13,9 @@
 
 @record loop op:u16=$FFFE,target:ptr24
 @record end op:u16=$FFFF
+# @brief   Rain overlay colour animation scripts (slots 0..3): started by fMap_SetupArea when the rain overlay area $57 is loaded (mapFlags bit $0002).
+# @format  Records `[word BGR555 colour][byte frames]`, `end` = $FFFF; Slot2 loops back to Slot1.
+# @used_by fMap_SetupArea (A = colour index $0C..$0F, X = slot 0..3, palette row 0), fPalette_ProcessColorAnimSlots
 @label aPaletteAnimScript_Rain_Slot0
 @columns color:bgr555,frames:u8
 @at US=$80B9D7 EU=$80B9D7 DE=$80B9D7 JP=$80B9D5
@@ -32,6 +35,9 @@ end:
 ?,?
 loop: aPaletteAnimScript_Rain_Slot1
 
+# @brief   Snow overlay colour animation scripts (slots 0..3), same use as the rain scripts, started when the snow overlay area $59 is loaded (mapFlags bit $0008).
+# @format  Records `[word BGR555 colour][byte frames]`, loop/end records as above.
+# @used_by fMap_SetupArea, fPalette_ProcessColorAnimSlots
 @label aPaletteAnimScript_Snow_Slot0
 @columns color:bgr555,frames:u8
 ?,?
@@ -49,6 +55,10 @@ end:
 @columns color:bgr555,frames:u8
 ?,?
 loop: aPaletteAnimScript_Snow_Slot1
+# @brief   Table of all 256-colour palettes of the game, by palette id.
+# @format  One ptr24 (`dl`) per palette to the 512 byte palette blob (Palette_* labels); ids $00..$73 + the three JP-only ids.
+# @index   Palette id (from aMapPalettesIndexes / aMapPalettesId, or explicit ids $71-$73 in fPalette_PrepareSpritePalette), times 3.
+# @used_by fPalette_SetNextHourPalette, fPalette_LoadFirstHalf, fPalette_LoadSecondHalf, fPalette_LoadMapPallete
 @label aPalettes
 @columns index:index,palette:ptr24
 $00,Palette_FarmSpring_Early
@@ -169,6 +179,10 @@ $72,Palette_Unk_72
 $73,Palette_Unk_73
 $74,Palette_Unk_74
 
+# @brief   Palette id of each area for each time of day phase.
+# @format  6 bytes per area: early, day, evening, dusk, night, extra ($FF = no palette for the phase); 96 areas.
+# @index   area*6 + phase (phase from nCurrentTimeID: <7, <15, <17, <18, >=18); night is loaded first by fPalette_LoadMapPallete.
+# @used_by fPalette_LoadMapPallete, fPalette_ChangeTimePallete, fPalette_AdjustTimePalette
 @label aMapPalettesIndexes
 @columns area:index,early:u8,day:u8,evening:u8,dusk:u8,night:u8,extra:u8
 $00,?,?,?,?,?,?
@@ -268,6 +282,11 @@ $5D,?,?,?,?,?,?
 $5E,?,?,?,?,?,?
 $5F,?,?,?,?,?,?
 
+# @brief   Season / weather replacement colours for the shared palette rows.
+# @format  3 words (BGR555) per entry, written to colour indices $0A,$0B,$0C of palette row $0F; entry = season (0-3) + variant (4 = night / n8Temp1 set).
+# @index   (season + variant) * 6 bytes.
+# @used_by fPalette_LoadSpritePallete (via %PaletteModify -> fPalette_ModifyPalette)
+# @note    confidence: medium for the meaning of the entry order (4 seasons x day/night = 8 entries; the file has more rows for the other area groups).
 @label nPaletteSeasonOverwriteTable
 @columns index:index,color_a:bgr555,color_b:bgr555,color_c:bgr555
 $00,?,?,?
@@ -287,6 +306,11 @@ $0D,?,?,?
 $0E,?,?,?
 $0F,?,?,?
 
+# @brief   Hair / skin colours of the girl the player married, so the wife sprite matches her palette in the farm house.
+# @format  12 entries of 3 words (BGR555), written to colour indices 8,9,10 of palette row $0B; entry = girl id (0 unused, 1..5 = Maria, Ann, Nina, Ellen, Eve) + 6 for the night variant.
+# @index   entry * 6 bytes; the girl is chosen from the event2 flags !EFLAGS2_MARRIEDMARIA..EVE.
+# @used_by fPalette_LoadSpritePallete
+# @note    confidence: medium (girl order follows the EFLAGS2 bit order).
 @label sPallete_MarriedGirlTable
 @columns girl:index,c0:bgr555,c1:bgr555,c2:bgr555,c3:bgr555,c4:bgr555,c5:bgr555
 $00,?,?,?,?,?,?
@@ -296,6 +320,10 @@ $03,?,?,?,?,?,?
 $04,?,?,?,?,?,?
 $05,?,?,?,?,?,?
 
+# @brief   Sprite (OBJ) palette id of each area.
+# @format  2 bytes per area: [day set][evening/night set] (palette ids into aPalettes, $6B/$6C in most areas); 96 areas.
+# @index   area*2 + (night ? 1 : 0)
+# @used_by fPalette_PrepareSpritePalette, fPalette_LoadMapPallete
 @label aMapPalettesId
 @columns area:index,obj_a:u8,obj_b:u8
 $00,?,?
@@ -382,6 +410,10 @@ $50,?,?
 $51,?,?
 $52,?,?
 $53,?,?
+# @brief   Colour animation start routine of every area for every time of day phase.
+# @format  6 words per area: phase 0..4 = routine pointer (ptr16 in bank $80, `PTR16_None` = $FFFF none), then an extra word: $FFFF = routines always run, other value = only in fall/winter.
+# @index   (area*6 + phase) * 2
+# @used_by fPaletteAnim_RunAreaRoutine
 @label pPaletteAnimRoutineTable
 @columns slot:index,routine:ptr16
 # area $00 AREA_FARMSPRING
