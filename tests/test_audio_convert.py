@@ -238,7 +238,7 @@ def test_sfx_names():
     check(files == sorted(n + ".sfx.txt" for n in names), "one source file per named effect, no others")
     enums = open(os.path.join(ROOT, "src", "common", "enums.asm")).read()
     for i, n in enumerate(names):
-        m = re.search(r"^!SFX_%s\s*= \$([0-9A-F]{2})$" % n[4:].upper(), enums, re.M)
+        m = re.search(r"^!SFX_%s\s*= \$([0-9A-F]{2})[ \t]*(?:;.*)?$" % n[4:].upper(), enums, re.M)
         check(m and int(m.group(1), 16) == i, "enum !SFX_%s = $%02X" % (n[4:].upper(), i))
     blob = audioconv.assemble_sfx(man)
     check(len(blob) == 1010 and blob[:2] == bytes([0x64, 0x16]), "SFX block assembled from the per-effect files (1010 bytes, first stream at $1664)")
