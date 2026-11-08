@@ -99,7 +99,7 @@ def derive_varmap(root=None):
     used_eu = {t[2] for i in toks["eu"] for t in toks["eu"][i] if t[0] == "VAR"}
     doc = {
         "_doc": ("Text variables (<VAR chars index> in the dialogs) by meaning.  fields: the WRAM strings; tables: field of every variable index per release "
-                 "(derived from the WRAM address of the entries of assets/dialogs/<region>/text_vars.csv); sizes: bytes of the entry; jp_to_us / jp_to_eu / jp_to_de: the "
+                 "(derived from the WRAM address of the entries of translate/<region>/text_vars.csv); sizes: bytes of the entry; jp_to_us / jp_to_eu / jp_to_de: the "
                  "index the US / EU / DE dialog uses for the variable of the same meaning at the same place of the same dialog id (null = the release has no such use); "
                  "canonical_us: first index of a field, used by the symbolic <VAR field> token of the translation source.  The engine reads only the address of an "
                  "entry (the size byte is not used), so every index of a field is equivalent.  optional_fields: US-engine fields that are no part of the Japanese "

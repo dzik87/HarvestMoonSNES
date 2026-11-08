@@ -12,9 +12,9 @@ import tempfile
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-spec = importlib.util.spec_from_file_location("font", ROOT / "tools" / "translate" / "font.py")
-font = importlib.util.module_from_spec(spec)
-spec.loader.exec_module(font)
+sys.path.insert(0, str(ROOT / "tools" / "translate"))
+import font                                              # noqa: E402
+import glyphmap                                          # noqa: E402
 
 FAILS = []
 SKIPS = []
@@ -65,9 +65,9 @@ def test_us_roundtrip_from_assets():
     check(font.glyphs_to_tables(font.tables_to_glyphs(tables)) == tables, "us: in-memory extract->build is byte exact")
     with tempfile.TemporaryDirectory() as d:
         out = Path(d) / "us"
-        check(font.main(["extract", "--region", "us", "--out", str(out)]) == 0, "us extract to temp dir")
-        check(font.glyphs_to_tables(font.load_png_dir(out)) == tables, "us: PNG files on disk rebuild byte exact")
-        check(font.main(["build", "--region", "us", "--src", str(out), "--out", str(Path(d) / "b")]) == 0, "us build")
+        check(font.main(["extract", "--lang", "us", "--out", str(out)]) == 0, "us extract to temp dir")
+        check(font.glyphs_to_tables(font.load_glyphs(out)[1]) == tables, "us: PNG files and map on disk rebuild byte exact")
+        check(font.main(["build", "--lang", "us", "--src", str(out), "--out", str(Path(d) / "b")]) == 0, "us build")
         for t in range(font.N_TABLES):
             f = Path(d) / "b" / ("%s.bin" % font.TABLE_NAME[t])
             check(f.read_bytes() == tables[t], "build output %s is identical" % font.TABLE_NAME[t])
@@ -119,16 +119,68 @@ def test_png_validation():
 
 
 def test_committed_assets():
-    for r in font.REGIONS:
-        ok, msgs = font.check_region(r, None)
-        # without ROM only the PNG/sidecar part is evaluated for non-us regions
-        check(ok, "%s: committed font assets consistent (%s)" % (r, "; ".join(msgs)))
-    meta = json.loads((font.FONT_ASSETS / "us" / "glyphs.json").read_text(encoding="utf-8"))
-    check(meta["chars"]["0000"] == "a" and meta["chars"]["001A"] == "A" and meta["chars"]["00B2"] == "0",
-          "us glyphs.json maps ids to characters")
-    check(meta["tables"][6]["cpu_address"] == "$958000", "sidecar table addresses")
-    de = json.loads((font.FONT_ASSETS / "de" / "glyphs.json").read_text(encoding="utf-8"))
-    check(de["chars"]["0043"] == "ä", "de glyphs.json maps $43 to a-umlaut")
+    for r in font.all_langs():
+        ok, msgs = font.check_lang(r, None)
+        # without ROM only the PNG/map part is evaluated for non-us regions
+        check(ok, "%s: committed font sources consistent (%s)" % (r, "; ".join(msgs)))
+    check(set(font.REGIONS) <= set(font.all_langs()) and "pl" in font.all_langs(), "us eu de jp and pl have a glyph map")
+    us = glyphmap.load_charmap("us")
+    check(us[0x0000] == "a" and us[0x001A] == "A" and us[0x00B2] == "0", "us glyph map maps ids to characters")
+    doc = glyphmap.read(glyphmap.lang_dir("us"))
+    check(doc["tables"][6]["cpu_address"] == "$958000", "map table addresses")
+    check(glyphmap.load_charmap("de")[0x43] == "\u00e4", "de glyph map maps $43 to a-umlaut")
+    pl = glyphmap.read(glyphmap.lang_dir("pl"))
+    check(len(pl["glyphs"]) == 704 and all(e["png"] for e in pl["glyphs"]), "pl: every one of the 704 ids has a PNG")
+    check(all(e["width"] == 8 for e in pl["glyphs"]), "pl: US engine, every glyph 8 px wide")
+    jp = glyphmap.read(glyphmap.lang_dir("jp"))
+    check({e["id"] for e in jp["glyphs"] if e["width"] == 8} == {"0x%04X" % i for i in font.NARROW_IDS}, "jp: engine width 8 for exactly the narrow ids")
+
+
+def test_map_validation():
+    """The build rejects: a broken PNG, an id without PNG that is not blank, a duplicate character, a PNG that is not in the map."""
+    import json, shutil
+    src = glyphmap.lang_dir("us")
+    with tempfile.TemporaryDirectory() as d:
+        d = Path(d)
+        shutil.copytree(src, d / "x")
+        gd = d / "x" / "glyphs"
+        doc = json.loads((gd / "glyph_map.json").read_text(encoding="utf-8"))
+        font.load_glyphs(d / "x")                                           # the copy is valid
+
+        def broken(mut, why):
+            m = json.loads(json.dumps(doc))
+            mut(m)
+            glyphmap.write(gd / "glyph_map.json", m)
+            glyphmap._cache.clear()
+            try:
+                font.load_glyphs(d / "x")
+                check(False, "must be rejected: " + why)
+            except ValueError:
+                pass
+            glyphmap.write(gd / "glyph_map.json", doc)
+            glyphmap._cache.clear()
+        broken(lambda m: m["glyphs"][0x04].update(char="a"), "duplicate character")
+        broken(lambda m: m["glyphs"][0x04].update(png=None), "id without PNG that is not blank (no label)")
+        broken(lambda m: m["glyphs"][0x04].update(png="glyph_0005.png"), "PNG name that does not match the id")
+        broken(lambda m: m["glyphs"][0x04].update(width=12), "bad width")
+        broken(lambda m: m["glyphs"].pop(), "missing id")
+        broken(lambda m: m["glyphs"][0x04].update(char="<"), "token character")
+        blank = next(e["id"] for e in doc["glyphs"] if e["png"] is None and e["char"] is None)
+        stray = gd / ("glyph_%s.png" % blank[2:].upper())
+        shutil.copyfile(gd / "glyph_0000.png", stray)                       # a blank id of the map that has a PNG file: stray
+        try:
+            font.load_glyphs(d / "x"); check(False, "a PNG that is not in the map must be rejected")
+        except ValueError:
+            pass
+        stray.unlink()
+        from PIL import Image
+        Image.new("P", (16, 16)).save(gd / "glyph_0000.png")                # 1-colour palette is fine, 17x16 is not
+        font.load_glyphs(d / "x")
+        Image.new("P", (17, 16)).save(gd / "glyph_0000.png")
+        try:
+            font.load_glyphs(d / "x"); check(False, "a PNG of the wrong size must be rejected")
+        except ValueError:
+            pass
 
 
 def test_region_roms():
@@ -140,7 +192,7 @@ def test_region_roms():
             continue
         tables, _ = font.source_tables(r, rom)
         check(font.glyphs_to_tables(font.tables_to_glyphs(tables)) == tables, "%s: ROM extract->build exact" % r)
-        ok, msgs = font.check_region(r, None)
+        ok, msgs = font.check_lang(r, None)
         check(ok, "%s: check against ROM and committed PNGs (%s)" % (r, "; ".join(msgs)))
         if r == "us":
             us_tables = tables
@@ -175,7 +227,7 @@ def test_narrow_png_roundtrip():
 
 
 def test_check_command():
-    check(font.main(["check", "--region", "us"]) == 0, "check --region us exits 0")
+    check(font.main(["check", "--lang", "us"]) == 0, "check --lang us exits 0")
 
 
 def main():

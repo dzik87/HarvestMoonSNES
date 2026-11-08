@@ -7,7 +7,7 @@ Called by `python tools/build.py --region US --translation pl` (docs/translation
   python tools/translate/build.py post pl build/HarvestMoon_US_pl.sfc [--symbols FILE]   patch glyph tables, string tables, name grid, header title and checksum of an assembled ROM
 
 `gen` packs the dialogs of the language in id order into the banks $B6..$BF (then $AA-$AC) without splitting a dialog; ids without a translation use the US words
-(--fallback us, default) so the ROM builds at every stage.  `post` writes the generated letters into the font tables of the ROM image, the translated string tables (lang.json "strings", tools/translate/strings.py) and the name
+(--fallback us, default) so the ROM builds at every stage.  `post` writes the font tables built from translate/<lang>/glyphs (PNGs + glyph_map.json) into the ROM image, the translated string tables (lang.json "strings", tools/translate/strings.py) and the name
 entry grid override (lang.json "grids", tools/translate/namegrid.py), optionally the header title (lang.json "header_title"), and fixes the header checksum; the four original releases
 are never touched by this code.
 """
@@ -18,6 +18,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import check                                                # noqa: E402
 import common as C                                          # noqa: E402
+import font                                                 # noqa: E402
 import glyphs as G                                          # noqa: E402
 import namegrid as NG                                       # noqa: E402
 import strings as ST                                        # noqa: E402
@@ -72,7 +73,7 @@ def generate(lang, ctx, fallback="us", allow_errors=False, gen_dir=GEN_DIR, tabl
     for b in banks:
         blocks = [("sDialog_0x%04X" % i, words[i]) for i in ctx.ids if where[i] == b]
         if blocks:
-            text = C.dialog.render_asm(b, blocks).replace("assets/dialogs/<region>/bank_%s.txt" % b, "translate/%s/" % lang.code)
+            text = C.dialog.render_asm(b, blocks, "translate/%s/" % lang.code)
         else:
             text = "; Dialog bank $%s - unused by this translation\n\n    ORG $%s8000\n" % (b, b)
         (gen_dir / ("bank_%s.asm" % b)).write_text(text, encoding="utf-8", newline="\n")
@@ -88,9 +89,7 @@ def post_process(rom, lang, symbols=None):
     -> (checksum, list of patched font tables, info dict {"strings": [(table, slots)], "grid_rows": n}).
     `symbols` = {label: address} of the assembled ROM (asar --symbols=nocash); with it the addresses of defs/translation/strings.json and defs/menu/name_input.json are verified."""
     from_tables = G.engine_tables(lang.engine_region)
-    new_tables = G.apply_glyphs(from_tables, G.build_glyphs(lang, from_tables))
-    sys.path.insert(0, str(C.ROOT / "tools" / "translate"))
-    import font
+    new_tables = font.glyphs_to_tables(font.load_glyphs(lang.dir)[1]) if lang.has_glyphs else from_tables       # translate/<lang>/glyphs: PNGs + glyph_map.json
     patched = []
     for t, (a, b) in enumerate(zip(from_tables, new_tables)):
         if a != b:

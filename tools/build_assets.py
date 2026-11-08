@@ -3,7 +3,7 @@
 
 Sources (committed)                                   -> generated, git-ignored files
   assets/gfx/palettes/Palette_<Area>_<Slot>.json               -> assets/gfx/palettes/Palette_<Area>_<Slot>.pal          (tools/gfx/palette.py pack)
-  assets/fonts/us/glyph_*.png + glyphs.json            -> assets/gfx/tiles/sFontGlyphs_*.bin             (tools/translate/font.py build)
+  translate/us/glyphs/glyph_*.png + glyph_map.json     -> assets/gfx/tiles/sFontGlyphs_*.bin             (tools/translate/font.py build; eu/de/jp: assets/gfx/tiles/<region>/)
   assets/gfx/png/{frames,screens,tiles,sprites}/ composed PNGs + <label>.json -> assets/gfx/{tiles,sprites}/*.bin  (tools/gfx/pngsync.py build)
   assets/gfx/tilemaps/*.map.txt + sidecar JSON         -> assets/gfx/characters/*.bin                    (tools/gfx/pngsync.py build)
   defs/gfx/banks.json (bank layout)                  -> build/gen/gfx/<kind>/bank_XX.asm               (tools/data/gfxbanks.py build)

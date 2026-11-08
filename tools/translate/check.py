@@ -222,7 +222,7 @@ def main(argv=None):
     ap.add_argument("lang")
     ap.add_argument("--list", choices=C.STATUSES, help="print the ids with this status")
     ap.add_argument("--warnings-as-errors", action="store_true")
-    ap.add_argument("--assets")
+    ap.add_argument("--translate-dir", "--assets", dest="assets", help="directory with the <region>/dialogs.txt dialogs of the four releases (default translate)")
     sel = ap.add_mutually_exclusive_group()
     sel.add_argument("--ids", help="check only these dialogs, e.g. 0x0123,0x0200-0x0210")
     sel.add_argument("--range", nargs=2, metavar=("FIRST", "LAST"), help="check only the ids FIRST..LAST")

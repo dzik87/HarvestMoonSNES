@@ -1,0 +1,11 @@
+{
+ "code": "de",
+ "name": "German (DE release)",
+ "kind": "original",
+ "engine_region": "de",
+ "text": "bank_*.txt",
+ "text_tables": "text_tables.json",
+ "text_vars": "text_vars.csv",
+ "number_vars": "../number_vars.csv",
+ "glyphs": "glyphs/glyph_map.json"
+}

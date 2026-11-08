@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Tests of the translation tools (tools/translate/).  Run: python3 tests/test_translate.py
 
-Fast part (always): synthetic fixtures with invented text, no ROM and no extracted assets are needed except `src/common/charmap.asm` and `defs/`:
+Fast part (always): synthetic fixtures with invented text, no ROM is needed except the committed `translate/us` glyph map and `defs/`:
 syntax and characters, token checks against the Japanese structure, layout (wrapping, pages, option cursors), worksheet export/import round trip,
 fallback, bank packing and generated assembler, glyph generation, checksum, string tables (encoding, widths, ROM patch on a synthetic image), name entry grid
 (links, reachability, the dead grids, patch on a synthetic image), glyph id collision checks.
@@ -13,6 +13,7 @@ import csv
 import hashlib
 import json
 import os
+import shutil
 import subprocess
 import sys
 import tempfile
@@ -25,6 +26,7 @@ import check as trcheck                                  # noqa: E402
 import common as C                                       # noqa: E402
 import export as trexport                                # noqa: E402
 import glyphs as trglyphs                                # noqa: E402
+import glyphmap                                          # noqa: E402
 import namegrid as trgrid                                # noqa: E402
 import strings as trstr                                  # noqa: E402
 import importlib.util                                    # noqa: E402
@@ -68,12 +70,26 @@ def write_fixture(root):
         (d / ("bank_%s.txt" % bank)).write_text("\n".join("@@ sDialog_0x%04X @@\n%s\n" % (i, t) for i, t in texts.items()), encoding="utf-8")
 
 
+DEFAULT_LETTERS = {"Ą": {"id": "0x43"}, "ż": {"id": "0x44"}, "ó": {"id": "0x45"}}
+
+
+def write_glyph_map(d, letters):
+    """glyphs/glyph_map.json of a synthetic language: the US map plus the given extra letters {char: {"id": ...}} (no PNG files; only the characters matter here)."""
+    us = glyphmap.read(glyphmap.lang_dir("us"))
+    ents = [dict(e) for e in us["glyphs"]]
+    for ch, g in letters.items():
+        gid = int(str(g["id"]), 0)
+        ents[gid] = glyphmap.entry(gid, ch, None, "glyph_%04X.png" % gid, 8)
+    (Path(d) / "glyphs").mkdir(exist_ok=True)
+    glyphmap.write(Path(d) / "glyphs" / "glyph_map.json", dict({k: v for k, v in us.items() if k != "glyphs"}, glyphs=ents))
+
+
 def make_lang(root, glyphs=None, layout="wrap", autopage=True, dialogs=""):
     d = Path(root) / "lang_t"
     d.mkdir(exist_ok=True)
-    cfg = {"code": "tt", "engine_region": "us", "layout": layout, "autopage": autopage, "glyphs": glyphs if glyphs is not None else {
-        "Ą": {"id": "0x43", "base": "A", "mark": "ogonek"}, "ż": {"id": "0x44", "base": "z", "mark": "dot"}, "ó": {"id": "0x45", "base": "o", "mark": "acute"}}}
+    cfg = {"code": "tt", "engine_region": "us", "layout": layout, "autopage": autopage}
     (d / "lang.json").write_text(json.dumps(cfg, ensure_ascii=False), encoding="utf-8")
+    write_glyph_map(d, glyphs if glyphs is not None else DEFAULT_LETTERS)
     (d / "dialogs.txt").write_text(dialogs, encoding="utf-8")
     return d
 
@@ -269,40 +285,61 @@ def test_build(lang_dir, ctx, root):
 
 
 def test_glyphs(root):
+    """glyphs.py init: a new translation gets a PNG for every glyph id plus a map; the build reads only those files."""
     import font as fontmod
-    tables = [bytearray(fontmod.TABLE_SIZE) for _ in range(fontmod.N_TABLES)]
-    px = list(fontmod.BLANK)
-    for y in range(8, 15):
-        for x in range(1, 7):
-            px[y * 16 + x] = 3
-    cm = {c: k for k, c in C.dialog.load_charmap("us").items()}
-    for ch in "Azo":
-        fontmod.encode_glyph(tables[cm[ch] >> 6], cm[ch] & 0x3F, px)
-    tables = [bytes(t) for t in tables]
-    d = make_lang(root)
+    d = Path(root) / "gl"
+    d.mkdir()
+    (d / "lang.json").write_text(json.dumps({"code": "gl", "engine_region": "us"}), encoding="utf-8")
+    spec = {"Ą": {"id": 0x43, "base": "A", "mark": "ogonek"}, "ż": {"id": 0x44, "base": "z", "mark": "dot"}, "ó": {"id": 0x45, "base": "o", "mark": "acute"}}
+    ok(trglyphs.init(str(d), spec, out=lambda *_: None) == 704, "init writes a PNG for each of the 704 glyph ids")
+    doc, g = fontmod.load_glyphs(d)
+    ok(len(g) == 704 and all(e["png"] for e in doc["glyphs"]), "every id of the map has a PNG")
+    ok(sorted(g) == list(range(704)) and len(list((d / "glyphs").glob("glyph_*.png"))) == 704, "PNG files and map agree")
+    cm = glyphmap.charmap(doc)
+    ok(cm[0x43] == "Ą" and cm[0x44] == "ż" and cm[0x45] == "ó" and cm[0x00] == "a" and cm[0x1A] == "A", "the map has the letters of the language and the characters of the US font")
+    us_tables = trglyphs.engine_tables("us")
+    us_g = fontmod.tables_to_glyphs(us_tables)
+    base_a, base_z, base_o = us_g[cm_id("A")], us_g[cm_id("z")], us_g[cm_id("o")]
+    ok(g[0x43][15 * 16 + 5] == 3 and g[0x43][15 * 16 + 6] == 3 and base_a[15 * 16 + 5] != 3, "ogonek is painted below the baseline")
+    ok(g[0x45][4 * 16 + 5] == 3 and base_o[4 * 16 + 5] != 3, "acute above the letter")
+    ok(g[0x43][8 * 16 + 3] == base_a[8 * 16 + 3] and g[0x45][8 * 16 + 3] == base_o[8 * 16 + 3], "base letter kept")
+    ok(all(g[0x45][y * 16 + x] == base_o[y * 16 + x] for y in range(16) for x in range(8, 16)), "right half stays what the base letter has")
+    new = fontmod.glyphs_to_tables(g)
+    ok(fontmod.decode_glyph(new[1], 0x43 & 0x3F) == g[0x43] and [t for t in range(11) if new[t] != us_tables[t]] == [1], "the letters change table 1 only")
+    ok(all(g[i] == us_g.get(i, fontmod.BLANK) for i in range(704) if i not in (0x43, 0x44, 0x45)), "all other glyphs are the glyphs of the US font")
     lang = C.Lang(d)
-    g = trglyphs.build_glyphs(lang, tables)
-    ok(sorted(g) == [0x43, 0x44, 0x45], "one glyph per letter of the language")
-    ok(g[0x43][15 * 16 + 5] == 3 and g[0x43][15 * 16 + 6] == 3 and px[15 * 16 + 5] != 3, "ogonek is painted below the baseline")
-    ok(g[0x45][4 * 16 + 5] == 3 and g[0x45][8 * 16 + 3] == 3, "acute above the letter, base kept")
-    ok(all(g[0x45][y * 16 + x] == px[y * 16 + x] for y in range(16) for x in range(8, 16)), "right half stays the plain dither")
-    new = trglyphs.apply_glyphs(tables, g)
-    ok(fontmod.decode_glyph(new[1], 0x43 & 0x3F) == g[0x43] and new[0] == tables[0], "glyph is written into table 1 only")
-    # hand drawn override
-    fd = d / "font"
-    fd.mkdir()
+    ok(sorted(v["id"] for v in lang.glyphs.values()) == [0x43, 0x44, 0x45], "Lang finds the three letters of the language in the map")
+    # hand drawn replacement: the PNG is the source
     over = list(fontmod.BLANK)
     over[5 * 16 + 5] = 3
-    fontmod.write_png(fd / "glyph_0044.png", over, narrow=True)
-    g2 = trglyphs.build_glyphs(lang, tables)
-    ok(g2[0x44] == over and g2[0x43] == g[0x43], "a PNG in translate/<lang>/font replaces the generated glyph")
-    # collisions
-    bad = make_lang(tempfile.mkdtemp(), glyphs={"Ą": {"id": "0x05", "base": "A", "mark": "ogonek"}})
+    fontmod.write_png(d / "glyphs" / "glyph_0044.png", over, narrow=True)
+    g2 = fontmod.load_glyphs(d)[1]
+    ok(g2[0x44] == over and g2[0x43] == g[0x43], "an edited PNG in translate/<lang>/glyphs is what the build uses")
+    # refusals
     try:
-        C.Lang(bad)
+        trglyphs.init(str(d), spec, out=lambda *_: None)
+        ok(False, "init must not overwrite existing glyph PNGs")
+    except ValueError:
+        ok(True, "")
+    d2 = Path(root) / "gl2"
+    d2.mkdir()
+    (d2 / "lang.json").write_text(json.dumps({"code": "gl2", "engine_region": "us"}), encoding="utf-8")
+    try:
+        trglyphs.init(str(d2), {"Ą": {"id": 0x05, "base": "A", "mark": "ogonek"}}, out=lambda *_: None)
         ok(False, "a glyph id that is already used must be refused")
     except ValueError:
         ok(True, "")
+    # a glyph map character that replaces a character of the engine release
+    bad = make_lang(tempfile.mkdtemp(), glyphs={"Ą": {"id": "0x05"}})
+    try:
+        C.Lang(bad)
+        ok(False, "a glyph id that is already used must be refused by Lang")
+    except ValueError:
+        ok(True, "")
+
+
+def cm_id(ch):
+    return {c: k for k, c in glyphmap.load_charmap("us").items()}[ch]
 
 
 # ---------------------------------------------------------------- strings, name grid (synthetic)
@@ -413,7 +450,7 @@ def test_namegrid(root):
     sw["aNameInputGrid0"][1][7] = 2             # a cell of grid 0 that switches to grid 1
     gset, cells = trgrid.reachable_grids(sw)
     ok(gset == {0, 1}, "an action-2 cell makes grid 1 reachable")
-    lang = lang_with(root, glyphs={"Ą": {"id": "0x50", "base": "A", "mark": "ogonek"}, "ż": {"id": "0x44", "base": "z", "mark": "dot"}})
+    lang = lang_with(root, glyphs={"Ą": {"id": "0x50"}, "ż": {"id": "0x44"}})
     ok(trgrid.collisions(lang, sw) == [(1, 0, 0x50)], "a reachable grid 1 cell that enters a letter id of the language is a collision: %s" % trgrid.collisions(lang, sw))
     ok(trgrid.collisions(lang, base) == [], "the dead grid 1 is no collision")
     # grid 1 reachable only through a cell that is itself unreachable stays dead
@@ -554,10 +591,13 @@ def test_real_language():
     ids = sorted(g["id"] for g in lang.glyphs.values())
     ok(ids == list(range(0x43, 0x55)), "Polish glyph ids $43-$54")
     us = C.dialog.load_charmap("us")
-    ok(not (set(ids) & set(i for i in us if i < 0x43 or i > 0x54)) or True, "no collision")
+    ok(not (set(ids) & set(i for i in us if i < 0x43 or i > 0x54)), "no collision with the characters of the US font")
     ok(lang.engine_region == "us", "Polish uses the US engine")
     marks = C.read_json(C.DEFS / "marks.json")["marks"]
-    ok(all(g["mark"] in marks for g in lang.glyphs.values()), "all marks exist")
+    spec = trglyphs.load_spec("pl")
+    ok(set(spec) == set(lang.glyphs) and all(g["mark"] in marks for g in spec.values()), "the overlay spec of glyphs.py init lists the same 18 letters, all marks exist")
+    doc = glyphmap.read(lang.dir)
+    ok(all(e["png"] and e["width"] == 8 for e in doc["glyphs"]) and len(doc["glyphs"]) == 704, "the Polish glyph map covers all 704 ids with a PNG each")
     ok(not C.load_translation(lang) or True, "pl translation file parses")
     eng = C.engine()
     ok(eng["cells_per_line"] * eng["lines_per_screen"] == eng["cells_per_screen"] == 84, "engine numbers")
@@ -579,7 +619,7 @@ def test_rom_identity():
     with tempfile.TemporaryDirectory() as t:
         d = Path(t) / "idlang"
         d.mkdir()
-        (d / "lang.json").write_text(json.dumps({"code": "id", "engine_region": "us", "layout": "raw", "autopage": False, "glyphs": {}}), encoding="utf-8")
+        (d / "lang.json").write_text(json.dumps({"code": "id", "engine_region": "us", "layout": "raw", "autopage": False}), encoding="utf-8")
         C.write_blocks(d / "dialogs.txt", [(i, set(), C.dialog.words_to_text(ctx.us[i], cm)) for i in ctx.ids])
         lang = C.Lang(d)
         rep = trcheck.check_lang(lang, ctx)
@@ -604,8 +644,10 @@ def test_rom_polish_build():
     orig = us[0].read_bytes()
     with tempfile.TemporaryDirectory() as t:
         out = Path(t) / "pl.sfc"
-        r = subprocess.run([sys.executable, str(ROOT / "tools" / "build.py"), "--translation", "pl", "--out", str(out)], capture_output=True, text=True)
-        ok(r.returncode == 0, "Polish build (no dialogs translated yet) ran: %s" % (r.stdout + r.stderr)[-400:])
+        nodlg = Path(t) / "pl_nodialogs"                 # the Polish font, strings and name grid without the dialog text: everything else is the US ROM
+        shutil.copytree(C.lang_dir("pl"), nodlg, ignore=shutil.ignore_patterns("dialogs.txt", "status.csv"))
+        r = subprocess.run([sys.executable, str(ROOT / "tools" / "build.py"), "--translation", str(nodlg), "--out", str(out)], capture_output=True, text=True)
+        ok(r.returncode == 0, "Polish build without dialog text ran: %s" % (r.stdout + r.stderr)[-400:])
         if r.returncode != 0:
             return
         rom = out.read_bytes()

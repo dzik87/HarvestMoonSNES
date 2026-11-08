@@ -3,8 +3,8 @@
 
     HM_ROM_DIR=/path/to/roms python3 tests/test_extract_roundtrip.py
 
-Each group of steps extracts into a scratch directory and the result must be identical to the committed assets/ tree
-(`tools/extract.py --compare`).  HM_ROUNDTRIP_BUILD=1 additionally replaces those kinds in a scratch copy of the repository
+Each group of steps extracts into a scratch tree (which gets assets/ and translate/, like the repository) and the result must be identical to the committed
+assets/ and translate/{us,eu,de,jp} files (`tools/extract.py --compare`; translate/pl is original work and not part of the comparison).  HM_ROUNDTRIP_BUILD=1 additionally replaces those kinds in a scratch copy of the repository
 with the extracted files and builds all four releases ("ROM MATCHES ORIGINAL").
 The ROMs are read only; nothing derived from them is written outside the temporary directory.
 """
@@ -20,24 +20,25 @@ ROM_DIR = os.environ.get("HM_ROM_DIR")
 
 AUDIO_DATA_STEPS = "audio,objects,maps,areas,tables,menu,ai"      # audio, object banks, maps, areas, tables, menu, AI data
 GFX_STEPS = "palettes,presets,fonts,dialogs,graphics"                   # palettes, fonts, graphics, dialogs (graphics needs areas, objects, tables)
-KINDS = ["audio", "objects", "maps", "areas", "tables", "menu", "ai", "fonts", "dialogs", "gfx"]
+KINDS = ["audio", "objects", "maps", "areas", "tables", "menu", "ai", "gfx"]          # directories of assets/ that the steps write
+TRANSLATE_KINDS = ["us", "eu", "de", "jp", "number_vars.csv"]                     # entries of translate/ that the steps `fonts` and `dialogs` write
 
 
 def extract(out: Path, steps: str):
     return subprocess.run([sys.executable, str(ROOT / "tools" / "extract.py"), "--rom-dir", ROM_DIR, "--out", str(out),
-                           "--only", steps, "--compare", str(ROOT / "assets")], capture_output=True, text=True)
+                           "--only", steps, "--compare", str(ROOT)], capture_output=True, text=True)
 
 
 def test_data_steps_reproduce_assets():
     with tempfile.TemporaryDirectory(prefix="hm_extract_") as tmp:
-        r = extract(Path(tmp) / "assets", AUDIO_DATA_STEPS)
+        r = extract(Path(tmp) / "tree", AUDIO_DATA_STEPS)
         assert r.returncode == 0 and "identical" in r.stdout, r.stdout[-2000:] + r.stderr[-2000:]
 
 
 def test_graphics_steps_reproduce_assets():
     """palettes, fonts, dialogs and graphics (with the steps the graphics need) are byte-identical to assets/."""
     with tempfile.TemporaryDirectory(prefix="hm_extract_") as tmp:
-        r = extract(Path(tmp) / "assets", GFX_STEPS + ",areas,objects,tables")
+        r = extract(Path(tmp) / "tree", GFX_STEPS + ",areas,objects,tables")
         assert r.returncode == 0 and "identical" in r.stdout, r.stdout[-2000:] + r.stderr[-2000:]
 
 
@@ -53,7 +54,15 @@ def test_steps_build_all_regions():
         shutil.copytree(ROOT, proj, ignore=shutil.ignore_patterns(".git", "build", "__pycache__"), symlinks=True)
         for k in KINDS:
             shutil.rmtree(proj / "assets" / k, ignore_errors=True)
-            shutil.copytree(tmp / "ex" / k, proj / "assets" / k)
+            shutil.copytree(tmp / "ex" / "assets" / k, proj / "assets" / k)
+        for k in TRANSLATE_KINDS:
+            src = tmp / "ex" / "translate" / k
+            dst = proj / "translate" / k
+            if src.is_dir():
+                shutil.rmtree(dst, ignore_errors=True)
+                shutil.copytree(src, dst)
+            else:
+                shutil.copyfile(src, dst)
         for region in ("US", "EU", "DE", "JP"):
             b = subprocess.run([sys.executable, "tools/build.py", "--region", region, "--out", "build/rt_%s.sfc" % region],
                                cwd=proj, capture_output=True, text=True)

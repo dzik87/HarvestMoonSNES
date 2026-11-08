@@ -1,5 +1,5 @@
 {
- "_doc": "Rows of the per-release text variable tables (assets/dialogs/<region>/text_vars.csv) whose address points into the WRAM block that moves with the release's RAM layout (`+!RAM_SHIFT`, src/common/region.asm): variable indexes per release. Analysis result (the ROM only holds the relocated value, and the US value cannot tell).",
+ "_doc": "Rows of the per-release text variable tables (translate/<region>/text_vars.csv) whose address points into the WRAM block that moves with the release's RAM layout (`+!RAM_SHIFT`, src/common/region.asm): variable indexes per release. Analysis result (the ROM only holds the relocated value, and the US value cannot tell).",
  "US": [
   27,
   28,

@@ -89,7 +89,7 @@ def main(argv=None):
     ap.add_argument("--status", action="append", choices=C.STATUSES, help="only ids with this status; repeatable")
     ap.add_argument("--out")
     ap.add_argument("--no-refs", action="store_true", help="skip the (slow) scan of the sources for the `unref` flag")
-    ap.add_argument("--assets", help="dialog assets directory (default assets/dialogs)")
+    ap.add_argument("--translate-dir", "--assets", dest="assets", help="directory with the <region>/bank_*.txt dialogs of the four releases (default translate)")
     a = ap.parse_args(argv)
     if not C.have_assets("jp", a.assets):
         sys.exit("The extracted dialogs are missing: python tools/extract.py --rom-dir <your dumps> (docs/extraction.md)")

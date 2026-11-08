@@ -27,7 +27,7 @@ DEFINES = {"US": [], "EU": ["-DREGION_EU=1"], "DE": ["-DREGION_DE=1"], "JP": ["-
 
 
 # sources that tools/extract.py writes from the user's ROM dumps (docs/extraction.md); any one missing = the assets tree is not there
-REQUIRED_ASSETS = ("assets/gfx/png", "assets/gfx/palettes", "assets/fonts/us", "assets/dialogs/us")
+REQUIRED_ASSETS = ("assets/gfx/png", "assets/gfx/palettes", "translate/us/glyphs", "translate/us")
 
 
 def check_assets():

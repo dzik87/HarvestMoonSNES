@@ -1,7 +1,7 @@
 """Registry of ROM -> assets extraction steps (see docs/extraction.md).
 
 Every module in this package that defines STEPS (a list of Step) is picked up by tools/extract.py. A step reads
-the user's own ROM dumps and writes editable sources into `ctx.assets` (the git-ignored `assets/` tree). Hand-written
+the user's own ROM dumps and writes editable sources into `ctx.assets` (the `assets/` tree) or, for the dialog text and the font of the four releases, into `ctx.translate` (`translate/<us|eu|de|jp>/`). Hand-written
 structure (names, layouts, record formats) lives in `defs/` and is committed; steps may read it but must not write it.
 """
 import importlib
@@ -16,6 +16,7 @@ class Context:
     roms: Dict[str, Path]          # region ("US", "EU", "DE", "JP") -> ROM file (headerless 2 MB)
     root: Path                     # repository root
     assets: Path                   # output tree (assets/)
+    translate: Path                # output tree of the texts and fonts of the four releases (translate/)
     defs: Path                     # committed hand-written definitions (defs/)
     verbose: bool = False
 
@@ -26,7 +27,7 @@ class Context:
 @dataclass
 class Step:
     name: str                                  # unique, e.g. "palettes"
-    run: Callable[[Context], None]             # writes files under ctx.assets
+    run: Callable[[Context], None]             # writes files under ctx.assets / ctx.translate
     regions: List[str] = field(default_factory=lambda: ["US"])   # ROMs required
     after: List[str] = field(default_factory=list)               # steps that must run first
     doc: str = ""

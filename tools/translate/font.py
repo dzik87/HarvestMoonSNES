@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Font converter: ROM font glyph tables <-> one editable PNG per glyph, byte-exact round trip.
+"""Font converter: ROM font glyph tables <-> one editable PNG per glyph plus a glyph map, byte-exact round trip.
 
 Format (details and evidence in docs/formats/font.md):
   * The font is stored in 11 tables of 4096 bytes (sFontGlyphs_0x00..0x09 plus the dialog font tiles sFontGlyphs_Dialog),
@@ -9,25 +9,29 @@ Format (details and evidence in docs/formats/font.md):
   * Pixel value 0..3 (plane 0 = bit 0, plane 1 = bit 1).  Values 0/1 form the dialog-window background dither
     ((x + y) even -> 1, odd -> 0) that is baked into every glyph, values 2/3 are the letter (3 = ink, 2 = soft edge).
 
-Editable output: assets/fonts/<region>/glyph_<ID4hex>.png (16x16 or, for 8 px wide glyphs, 8x16 indexed PNG, 4-colour palette, index = SNES pixel
-value) and assets/fonts/<region>/glyphs.json (id -> character, table layout, SHA-256 of every table).
-A glyph whose 256 pixels are exactly the plain dither has no PNG file; it is regenerated on build.
+Sources of a language (translate/us, eu, de, jp = the original releases, translate/pl = a translation, ...): translate/<lang>/glyphs/glyph_<ID4hex>.png
+(16x16 or, for glyphs that the engine draws 8 px wide, 8x16 indexed PNG, 4-colour palette, index = SNES pixel value) and translate/<lang>/glyphs/glyph_map.json,
+the glyph map (tools/translate/glyphmap.py): for each of the 704 ids the character, the PNG name (null = plain dither), the engine width and a note, plus the
+tables (CPU address, SHA-256).  The map is the single source of truth: this tool builds the font from it, the text converters read their characters from it.
 
-Commands:
-    extract --region R [--rom PATH] [--out DIR]   ROM (or assets/gfx/tiles for us) -> PNGs + glyphs.json
-    build   --region R [--src DIR] [--out DIR] [--write-assets]   PNGs -> sFontGlyphs_*.bin
-    check   [--region R]... [--rom-dir DIR]       round trip must reproduce every byte (exit 1 otherwise)
-    seal    --region R                            recompute the SHA-256 values in glyphs.json after an edit
-    sheet   --region R [--out FILE]               contact sheet of all glyphs (for viewing only)
+Commands (--lang is a folder of translate/; --region is the same option under its old name):
+    extract --lang R [--rom PATH] [--out DIR]    ROM (or assets/gfx/tiles for us) -> PNGs + glyph_map.json (original releases only)
+    build   --lang L [--src DIR] [--out DIR] [--write-assets]   PNGs + map -> sFontGlyphs_*.bin (--write-assets: assets/gfx/tiles for the original releases)
+    check   [--lang L]... [--rom-dir DIR]        map consistent, PNGs rebuild to the recorded hashes, round trip with the ROM (exit 1 otherwise)
+    seal    --lang L                             recompute the SHA-256 values in the map after an edit of the PNGs
+    sheet   --lang L [--out FILE]                contact sheet of all glyphs (for viewing only)
+Creating the PNGs of a new translation: tools/translate/glyphs.py init.
 """
-import argparse, glob, hashlib, importlib.util, json, os, re, sys
+import argparse, glob, hashlib, os, re, sys
 from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import glyphmap                                                    # noqa: E402
 
 ROOT = Path(__file__).resolve().parents[2]
 ASSETS_TILES = ROOT / "assets" / "gfx" / "tiles"
-FONT_ASSETS = ROOT / "assets" / "fonts"
 BUILD_DIR = ROOT / "build" / "fonts"
-REGIONS = ("us", "eu", "de", "jp")
+REGIONS = glyphmap.ORIGINALS
 
 TABLE_SIZE = 0x1000
 GLYPHS_PER_TABLE = 64
@@ -141,18 +145,6 @@ def source_tables(region, rom=None):
     raise ValueError("region %s needs --rom PATH (or HM_ROM_%s / HM_ROM_DIR)" % (region, region.upper()))
 
 
-# ---------------------------------------------------------------- characters
-def load_dialog_module():
-    spec = importlib.util.spec_from_file_location("hm_dialog", ROOT / "tools" / "translate" / "dialog.py")
-    mod = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(mod)
-    return mod
-
-
-def char_map(region):
-    return load_dialog_module().load_charmap(region)
-
-
 # ---------------------------------------------------------------- tables <-> images
 def tables_to_glyphs(tables):
     """-> {gid: pixels} for every glyph that is not the plain dither."""
@@ -228,148 +220,177 @@ def sha(b):
     return hashlib.sha256(b).hexdigest()
 
 
-def ranges(ids):
-    ids = sorted(ids); out = []
-    for i in ids:
-        if out and out[-1][1] == i - 1:
-            out[-1][1] = i
-        else:
-            out.append([i, i])
-    return ["%04X" % a if a == b else "%04X-%04X" % (a, b) for a, b in out]
+# ---------------------------------------------------------------- the glyph map (translate/<lang>/glyphs/glyph_map.json, tools/translate/glyphmap.py)
+def table_docs(tables):
+    return [{"table": t, "label": TABLE_NAME[t], "file": "%s.bin" % TABLE_NAME[t], "cpu_address": "$%06X" % TABLE_ADDR[t],
+             "first_id": "0x%04X" % (t * GLYPHS_PER_TABLE), "last_id": "0x%04X" % (t * GLYPHS_PER_TABLE + GLYPHS_PER_TABLE - 1),
+             "referenced_by_engine": t < 10, "sha256": sha(tables[t])} for t in range(N_TABLES)]
 
 
-def write_sidecar(path, region, tables, source, nfiles, nnarrow=0):
-    cmap = char_map(region)
-    meta = {
-        "region": region,
-        "source": source,
-        "format": {
-            "glyph_size": [16, 16],
-            "bits_per_pixel": 2,
-            "tile_layout": "TL=base TR=base+0x10 BL=base+0x100 BR=base+0x110, base=(idx&7)*32+(idx>>3)*512",
-            "pixel_values": "0/1 = dialog background dither ((x+y) even -> 1), 2 = letter edge, 3 = letter ink",
-            "png_palette_index": "PNG palette index == SNES pixel value; preview colours only",
-            "blank_glyphs": "ids without a glyph_XXXX.png are the plain dither and are regenerated by build",
-            "png_sizes": "glyph_XXXX.png is 8x16 (left half only) when the engine draws the glyph 8 px wide and the right half is plain dither; "
-                         "otherwise 16x16. build accepts both; the right half of an 8x16 glyph is regenerated as dither.",
-        },
-        "engine_glyph_width_px": (
-            {"default": 16, "narrow_8px_ids": ranges(NARROW_IDS)} if region == "jp"
-            else {"default": 8, "note": "engine always draws only the left 8x16 half (TL+BL tiles); right half is unused"}),
-        "png_files": nfiles,
-        "tables": [
-            {"table": t, "label": TABLE_NAME[t], "cpu_address": "$%06X" % TABLE_ADDR[t],
-             "first_id": "%04X" % (t * 64), "last_id": "%04X" % (t * 64 + 63),
-             "referenced_by_engine": t < 10, "sha256": sha(tables[t])}
-            for t in range(N_TABLES)],
-        "chars": {"%04X" % g: cmap[g] for g in sorted(cmap) if g < N_GLYPHS and (region != "jp" or cmap[g].strip())},     # JP: the two blank glyphs are not listed
-        "chars_note": "from tools/translate/dialog.py (informational; edit when adding letters). JP table lists the first "
-                      "occurrence of each character only.",
-        "png_files_8x16": nnarrow,
-    }
-    Path(path).write_text(json.dumps(meta, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
+MAP_DOC = ("Glyph map of this language: every glyph id of the font with its character, PNG file and engine width, plus the font tables (CPU address, SHA-256 of the built bytes). "
+           "tools/translate/font.py build turns this map and the PNGs into sFontGlyphs_*.bin; the text tools read the characters from here. Format: docs/formats/font.md")
+
+
+def make_doc(lang, engine_region, kind, source, tables, ents):
+    return {"_doc": MAP_DOC, "lang": lang, "kind": kind, "engine_region": engine_region, "source": source,
+            "tables": table_docs(tables), "glyphs": ents}
+
+
+def engine_width(region, gid):
+    return 8 if (region != "jp" or gid in NARROW_IDS) else 16
+
+
+def original_entries(region, glyphs):
+    """Map entries of an original release: characters from defs/translation/charmaps.json, PNG names from the extracted glyphs."""
+    chars, display = glyphmap.seeds(region)
+    out = []
+    for gid in range(N_GLYPHS):
+        ch, png = chars.get(gid), (glyph_filename(gid) if gid in glyphs else None)
+        label = note = disp = None
+        if png is None:
+            label = "blank"
+        elif ch is None:
+            if gid in display:
+                label, disp = "duplicate", display[gid]
+            elif gid == 0xA2:
+                label = "<NEXT>"
+            elif gid >= 0x280:
+                label = "window"
+            else:
+                label = "unmapped"
+        if gid == 0xA2:
+            note = "next-screen marker; the control word $00A2 is written <NEXT> in the text"
+        elif region == "jp" and gid == 0xB1:
+            note = "full-width blank (U+3000)"
+        elif region == "jp" and gid == 0x270:
+            note = "half-width blank (ASCII space)"
+        out.append(glyphmap.entry(gid, ch, label, png, engine_width(region, gid), disp, note))
+    return out
+
+
+def write_lang_files(directory, glyphs, doc, narrow_region, clean=True):
+    """PNGs + glyph_map.json of one language into <directory>/glyphs."""
+    gd = glyphmap.glyph_dir(directory)
+    gd.mkdir(parents=True, exist_ok=True)
+    if clean:
+        for p in gd.glob("glyph_*.png"):
+            p.unlink()
+    for gid, px in sorted(glyphs.items()):
+        write_png(gd / glyph_filename(gid), px, is_narrow_png(narrow_region, gid, px))
+    glyphmap.write(gd / glyphmap.MAP_NAME, doc)
+
+
+def load_glyphs(directory):
+    """-> (map document, {gid: pixels}) of translate/<lang>; every listed PNG is validated (size, indexed, indices 0..3); the map is checked first."""
+    directory = Path(directory)
+    doc = glyphmap.read(directory)
+    errs = glyphmap.check(doc, directory)
+    if errs:
+        raise ValueError("%s: %d error(s) in the glyph map or its PNG files:\n  %s" % (glyphmap.map_path(directory), len(errs), "\n  ".join(errs[:12])))
+    gd = glyphmap.glyph_dir(directory)
+    return doc, {glyphmap.gid_of(e): read_png(gd / e["png"]) for e in doc["glyphs"] if e["png"]}
+
+
+def lang_tables(code):
+    """Font tables (11 x 4096 bytes) built from translate/<code>/glyphs."""
+    return glyphs_to_tables(load_glyphs(glyphmap.lang_dir(code))[1])
 
 
 # ---------------------------------------------------------------- commands
-def out_dir_for(region, out):
-    return Path(out) if out else FONT_ASSETS / region
-
-
-def extract_rom_bytes(region, rom, out):
-    """ROM image (bytes, headerless 2 MB) -> assets/fonts/<region>: glyph PNGs + glyphs.json.  Used by tools/extract.py (step `fonts`)."""
+def extract_rom_bytes(region, rom, directory):
+    """ROM image (bytes, headerless 2 MB) -> <directory>/glyphs: glyph PNGs + glyph_map.json (directory = translate/<region>).  Used by tools/extract.py (step `fonts`)."""
     if len(rom) != 0x200000 or rom.count(POINTER_TABLE) != 1:
         raise ValueError("%s: not a Harvest Moon ROM image (aLetterGlyphsPointers not found exactly once)" % region)
-    tables = [rom[rom_offset(a):rom_offset(a) + TABLE_SIZE] for a in TABLE_ADDR]
-    glyphs = tables_to_glyphs(tables)
-    out = Path(out)
-    out.mkdir(parents=True, exist_ok=True)
-    for p in out.glob("glyph_*.png"):
-        p.unlink()
-    nnarrow = 0
-    for gid, px in sorted(glyphs.items()):
-        narrow = is_narrow_png(region, gid, px)
-        nnarrow += narrow
-        write_png(out / glyph_filename(gid), px, narrow)
-    if glyphs_to_tables(load_png_dir(out)) != tables:
-        raise ValueError("internal error: extracted PNGs do not rebuild to the source data")
-    write_sidecar(out / "glyphs.json", region, tables, "rom", len(glyphs), nnarrow)
-    return len(glyphs)
+    return _extract_tables(region, [rom[rom_offset(a):rom_offset(a) + TABLE_SIZE] for a in TABLE_ADDR], directory)
 
 
 def cmd_extract(a):
-    tables, source = source_tables(a.region, a.rom)
-    glyphs = tables_to_glyphs(tables)
-    out = out_dir_for(a.region, a.out)
-    out.mkdir(parents=True, exist_ok=True)
-    for p in out.glob("glyph_*.png"):
-        p.unlink()
-    nnarrow = 0
-    for gid, px in sorted(glyphs.items()):
-        narrow = is_narrow_png(a.region, gid, px)
-        nnarrow += narrow
-        write_png(out / glyph_filename(gid), px, narrow)
-    # the generated files must rebuild to the source bytes
-    if glyphs_to_tables(load_png_dir(out)) != list(tables):
-        sys.exit("internal error: extracted PNGs do not rebuild to the source data")
-    src_label = "rom"
-    write_sidecar(out / "glyphs.json", a.region, tables, src_label, len(glyphs), nnarrow)
-    print("%s: %d glyph PNGs (%d blank ids omitted) -> %s" % (a.region, len(glyphs), N_GLYPHS - len(glyphs), out))
+    if a.lang not in REGIONS:
+        sys.exit("error: extract works on the original releases (%s), not on %r" % (", ".join(REGIONS), a.lang))
+    tables, source = source_tables(a.lang, a.rom)
+    directory = Path(a.out) if a.out else glyphmap.lang_dir(a.lang)
+    n = _extract_tables(a.lang, tables, directory)
+    print("%s: %d glyph PNGs (%d blank ids without PNG) -> %s" % (a.lang, n, N_GLYPHS - n, glyphmap.glyph_dir(directory)))
     return 0
+
+
+def _extract_tables(region, tables, directory):
+    glyphs = tables_to_glyphs(tables)
+    doc = make_doc(region, region, "original", "rom", tables, original_entries(region, glyphs))
+    write_lang_files(directory, glyphs, doc, region)
+    if glyphs_to_tables(load_glyphs(directory)[1]) != list(tables):
+        raise ValueError("internal error: extracted PNGs do not rebuild to the source data")
+    return len(glyphs)
 
 
 def cmd_build(a):
-    src = Path(a.src) if a.src else FONT_ASSETS / a.region
-    if not src.is_dir():
-        sys.exit("error: %s does not exist (run extract first)" % src)
-    tables = glyphs_to_tables(load_png_dir(src))
+    directory = glyphmap.lang_dir(a.lang)
+    if a.src:
+        directory = Path(a.src)
+    if not glyphmap.has_map(directory):
+        sys.exit("error: %s does not exist (original releases: run tools/extract.py; translations: tools/translate/glyphs.py init)" % glyphmap.map_path(directory))
+    tables = glyphs_to_tables(load_glyphs(directory)[1])
     if a.write_assets:
-        out = ASSETS_TILES if a.region == "us" else ASSETS_TILES / a.region     # eu/de/jp: assets/gfx/tiles/<region>/
+        if a.lang not in REGIONS:
+            sys.exit("error: --write-assets is for the original releases; a translation's font is patched into the ROM by tools/translate/build.py")
+        out = ASSETS_TILES if a.lang == "us" else ASSETS_TILES / a.lang     # eu/de/jp: assets/gfx/tiles/<region>/
     else:
-        out = Path(a.out) if a.out else BUILD_DIR / a.region
+        out = Path(a.out) if a.out else BUILD_DIR / a.lang
     out.mkdir(parents=True, exist_ok=True)
     for t in range(N_TABLES):
         (out / ("%s.bin" % TABLE_NAME[t])).write_bytes(tables[t])
-    print("%s: wrote %d tables to %s" % (a.region, N_TABLES, out))
+    print("%s: wrote %d tables to %s" % (a.lang, N_TABLES, out))
     return 0
 
 
-def check_region(region, rom_dir):
+def check_lang(lang, rom_dir):
     """-> (ok, [messages])"""
     msgs, ok = [], True
-    rom = find_rom(region, rom_dir)
+    directory = glyphmap.lang_dir(lang)
+    if not (directory / "lang.json").is_file():
+        return False, ["%s: lang.json missing" % lang]
+    if not glyphmap.has_map(directory):
+        return False, ["%s: %s missing (original releases: run tools/extract.py; translations: tools/translate/glyphs.py init)" % (lang, glyphmap.map_path(directory))]
+    try:
+        doc, glyphs = load_glyphs(directory)
+    except (ValueError, OSError) as e:
+        return False, ["%s: %s" % (lang, e)]
+    built = glyphs_to_tables(glyphs)
+    msgs.append("%s: glyph map and %d PNG files are consistent (%d characters, %d ids without PNG)" % (
+        lang, len(glyphs), len(glyphmap.charmap(doc)), N_GLYPHS - len(glyphs)))
+    bad = [t for t in range(N_TABLES) if sha(built[t]) != doc["tables"][t]["sha256"]]
+    if bad:
+        ok = False; msgs.append("%s: PNG build differs from the SHA-256 values of the map in tables %s (font.py seal --lang %s after an intended edit)" % (lang, bad, lang))
+    else:
+        msgs.append("%s: PNGs rebuild to the recorded SHA-256 of all %d tables" % (lang, N_TABLES))
+    if lang not in REGIONS:
+        eng = doc.get("engine_region", "us")
+        coll = glyphmap.collisions(doc, glyphmap.read(glyphmap.lang_dir(eng)))
+        if coll:
+            ok = False; msgs += ["%s: %s" % (lang, c) for c in coll]
+        else:
+            msgs.append("%s: no character replaces one of the %s engine release" % (lang, eng))
+        return ok, msgs
+    if glyphmap.charmap(doc) != glyphmap.seed_charmap(lang):
+        ok = False; msgs.append("%s: characters of the map differ from defs/translation/charmaps.json (the extraction seed; edit both)" % lang)
+    rom = find_rom(lang, rom_dir)
     src_tables = None
     try:
         if rom:
-            src_tables, label = source_tables(region, rom)
-        elif region == "us":
-            src_tables, label = source_tables(region)
-        else:
-            label = None
+            src_tables, label = source_tables(lang, rom)
+        elif lang == "us":
+            src_tables, label = source_tables(lang)
     except (ValueError, OSError) as e:
-        return False, ["%s: %s" % (region, e)]
+        return False, msgs + ["%s: %s" % (lang, e)]
     if src_tables is not None:
         again = glyphs_to_tables(tables_to_glyphs(src_tables))
         if again != list(src_tables):
-            ok = False; msgs.append("%s: extract->build does not reproduce %s" % (region, label))
+            ok = False; msgs.append("%s: extract->build does not reproduce %s" % (lang, label))
         else:
-            msgs.append("%s: extract->build reproduces all %d bytes of %s" % (region, N_TABLES * TABLE_SIZE, label))
-    pngdir = FONT_ASSETS / region
-    side = pngdir / "glyphs.json"
-    if not side.is_file():
-        return False, msgs + ["%s: %s missing (run extract)" % (region, side)]
-    meta = json.loads(side.read_text(encoding="utf-8"))
-    try:
-        built = glyphs_to_tables(load_png_dir(pngdir))
-    except ValueError as e:
-        return False, msgs + ["%s: %s" % (region, e)]
-    bad = [t for t in range(N_TABLES) if sha(built[t]) != meta["tables"][t]["sha256"]]
-    if bad:
-        ok = False; msgs.append("%s: PNG build differs from glyphs.json hashes in tables %s" % (region, bad))
-    else:
-        msgs.append("%s: committed PNGs rebuild to the recorded SHA-256 of all %d tables" % (region, N_TABLES))
-    if src_tables is not None and built != list(src_tables):
-        ok = False; msgs.append("%s: committed PNGs differ from the source data" % region)
-    if region == "us":
+            msgs.append("%s: extract->build reproduces all %d bytes of %s" % (lang, N_TABLES * TABLE_SIZE, label))
+        if built != list(src_tables):
+            ok = False; msgs.append("%s: committed PNGs differ from the source data" % lang)
+    if lang == "us":
         try:
             if built != read_asset_tables():
                 ok = False; msgs.append("us: PNG build differs from assets/gfx/tiles/sFontGlyphs_*.bin")
@@ -377,15 +398,19 @@ def check_region(region, rom_dir):
                 msgs.append("us: PNG build is byte-identical to assets/gfx/tiles/sFontGlyphs_*.bin")
         except OSError as e:
             ok = False; msgs.append("us: %s" % e)
-    if len([p for p in pngdir.glob("glyph_*.png")]) != meta.get("png_files"):
-        ok = False; msgs.append("%s: PNG count differs from glyphs.json" % region)
     return ok, msgs
+
+
+def all_langs():
+    """Language directories that have a glyph map: the four releases first, then the translations."""
+    found = [d.name for d in sorted(glyphmap.TRANSLATE.iterdir()) if d.is_dir() and glyphmap.has_map(d)]
+    return [r for r in REGIONS if r in found] + [x for x in found if x not in REGIONS]
 
 
 def cmd_check(a):
     ok_all = True
-    for r in (a.region or REGIONS):
-        ok, msgs = check_region(r, a.rom_dir)
+    for r in (a.lang or all_langs()):
+        ok, msgs = check_lang(r, a.rom_dir)
         for m in msgs:
             print(("ok   " if ok else "FAIL ") + m)
         ok_all &= ok
@@ -394,22 +419,17 @@ def cmd_check(a):
 
 
 def cmd_seal(a):
-    pngdir = FONT_ASSETS / a.region
-    side = pngdir / "glyphs.json"
-    meta = json.loads(side.read_text(encoding="utf-8"))
-    glyphs = load_png_dir(pngdir)
-    tables = glyphs_to_tables(glyphs)
-    for t in range(N_TABLES):
-        meta["tables"][t]["sha256"] = sha(tables[t])
-    meta["png_files"] = len(glyphs)
-    side.write_text(json.dumps(meta, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
-    print("%s: sealed %d tables" % (a.region, N_TABLES))
+    directory = glyphmap.lang_dir(a.lang)
+    doc, glyphs = load_glyphs(directory)
+    doc["tables"] = table_docs(glyphs_to_tables(glyphs))
+    glyphmap.write(glyphmap.map_path(directory), doc)
+    print("%s: sealed %d tables" % (a.lang, N_TABLES))
     return 0
 
 
 def cmd_sheet(a):
     Image = require_pil()
-    glyphs = load_png_dir(FONT_ASSETS / a.region)
+    glyphs = load_glyphs(glyphmap.lang_dir(a.lang))[1]
     cols, scale = 16, 2
     sheet = Image.new("P", (cols * 17 * scale, (N_GLYPHS // cols) * 17 * scale), 2)
     sheet.putpalette([c for rgb in PALETTE for c in rgb])
@@ -421,7 +441,7 @@ def cmd_sheet(a):
             for dy in range(scale):
                 for dx in range(scale):
                     sheet.putpixel((gx + x * scale + dx, gy + y * scale + dy), v)
-    out = Path(a.out) if a.out else BUILD_DIR / a.region / "sheet.png"
+    out = Path(a.out) if a.out else BUILD_DIR / a.lang / "sheet.png"
     out.parent.mkdir(parents=True, exist_ok=True)
     sheet.save(out)
     print("wrote", out)
@@ -431,14 +451,14 @@ def cmd_sheet(a):
 def main(argv=None):
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     sub = ap.add_subparsers(dest="cmd", required=True)
-    p = sub.add_parser("extract"); p.add_argument("--region", required=True, choices=REGIONS)
-    p.add_argument("--rom"); p.add_argument("--out")
-    p = sub.add_parser("build"); p.add_argument("--region", required=True, choices=REGIONS)
-    p.add_argument("--src"); p.add_argument("--out"); p.add_argument("--write-assets", action="store_true")
-    p = sub.add_parser("check"); p.add_argument("--region", action="append", choices=REGIONS)
-    p.add_argument("--rom-dir")
-    p = sub.add_parser("seal"); p.add_argument("--region", required=True, choices=REGIONS)
-    p = sub.add_parser("sheet"); p.add_argument("--region", required=True, choices=REGIONS); p.add_argument("--out")
+
+    def lang_arg(p, required=True):
+        p.add_argument("--lang", "--region", dest="lang", required=required, help="language folder under translate/ (us eu de jp = original releases, pl, ...)")
+    p = sub.add_parser("extract"); lang_arg(p); p.add_argument("--rom"); p.add_argument("--out", help="language directory to write (default translate/<lang>)")
+    p = sub.add_parser("build"); lang_arg(p); p.add_argument("--src", help="language directory to read (default translate/<lang>)"); p.add_argument("--out"); p.add_argument("--write-assets", action="store_true")
+    p = sub.add_parser("check"); p.add_argument("--lang", "--region", dest="lang", action="append"); p.add_argument("--rom-dir")
+    p = sub.add_parser("seal"); lang_arg(p)
+    p = sub.add_parser("sheet"); lang_arg(p); p.add_argument("--out")
     a = ap.parse_args(argv)
     try:
         return {"extract": cmd_extract, "build": cmd_build, "check": cmd_check,

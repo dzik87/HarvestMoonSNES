@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Shared code of the translation tools (tools/translate/*, docs/translation.md).
 
-Reads the extracted dialog assets (assets/dialogs/<region>/bank_XX.txt, produced by tools/extract.py), the engine rules
+Reads the extracted dialog texts of the four releases (translate/<region>/bank_XX.txt, produced by tools/extract.py), the engine rules
 (defs/translation/engine.json), the variable map (defs/translation/var_map_jp_us.json) and a language directory
 (translate/<lang>/), and implements
 
@@ -11,7 +11,6 @@ Reads the extracted dialog assets (assets/dialogs/<region>/bank_XX.txt, produced
 
 Nothing in this module (or in the files it reads from git) contains game text.
 """
-import importlib.util
 import json
 import re
 import sys
@@ -19,22 +18,17 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 DEFS = ROOT / "defs" / "translation"
-ASSETS_DIALOGS = ROOT / "assets" / "dialogs"
-TRANSLATIONS = ROOT / "translate"
+TRANSLATIONS = ROOT / "translate"                 # one directory per language: the four releases (us eu de jp) and the translations
+ASSETS_DIALOGS = TRANSLATIONS                       # the extracted dialogs of a release are translate/<region>/bank_*.txt
 WORK = ROOT / "build" / "translate"
 
 NEXT, NUMV, TEXTV, OPTS, END = 0x00A2, 0xFFFC, 0xFFFD, 0xFFFE, 0xFFFF
 SPACE = 0x00B1
 
 
-def _load_dialog_module():
-    spec = importlib.util.spec_from_file_location("hm_dialog", ROOT / "tools" / "translate" / "dialog.py")
-    mod = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(mod)
-    return mod
-
-
-dialog = _load_dialog_module()
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import dialog                                                       # noqa: E402
+import glyphmap                                                     # noqa: E402
 
 
 def _console_safe():
@@ -76,7 +70,11 @@ def var_map():
 
 # ---------------------------------------------------------------- language directory
 class Lang:
-    """translate/<code>/lang.json plus the derived character map."""
+    """translate/<code>/lang.json plus the character map of the language (its glyph map, translate/<code>/glyphs/glyph_map.json).
+
+    `charmap`  glyph id -> character (every character of the glyph map)
+    `glyphs`   character -> {"id": glyph id} for the letters that the language adds to (or changes in) the font of its engine release
+    A language without a glyph folder uses the glyph map of its engine release unchanged."""
 
     def __init__(self, directory):
         self.dir = Path(directory)
@@ -86,19 +84,20 @@ class Lang:
         self.layout = self.cfg.get("layout", "wrap")
         self.autopage = bool(self.cfg.get("autopage", True))
         self.strings = self.cfg.get("strings", {})      # table -> {key: text}  (tools/translate/strings.py)
-        self.glyphs = {}                    # char -> {"id": int, "base": str, "mark": str}
-        for ch, g in self.cfg.get("glyphs", {}).items():
-            gid = int(str(g["id"]), 0)
-            self.glyphs[ch] = dict(g, id=gid)
-        self.charmap = self._build_charmap()
+        engine_doc = glyphmap.read(lang_dir(self.engine_region))
+        self.has_glyphs = glyphmap.has_map(self.dir)
+        doc = glyphmap.read(self.dir) if self.has_glyphs else engine_doc
+        self.glyph_doc = doc
+        self.charmap = dict(glyphmap.charmap(doc))
+        if self.has_glyphs:
+            for m in glyphmap.collisions(doc, engine_doc):
+                raise ValueError("%s: %s" % (self.code, m))
+        eng = glyphmap.charmap(engine_doc)
+        self.glyphs = {ch: {"id": gid} for gid, ch in self.charmap.items() if eng.get(gid) != ch}
 
-    def _build_charmap(self):
-        cm = dict(dialog.load_charmap(self.engine_region))        # glyph id -> char of the engine release
-        for ch, g in self.glyphs.items():
-            if g["id"] in cm and cm[g["id"]] != ch:
-                raise ValueError("%s: glyph id $%X of %r is already used by %r" % (self.code, g["id"], ch, cm[g["id"]]))
-            cm[g["id"]] = ch
-        return cm
+    @property
+    def glyph_dir(self):
+        return glyphmap.glyph_dir(self.dir)
 
     @property
     def path_dialogs(self):
@@ -110,15 +109,12 @@ class Lang:
 
 
 def lang_dir(code_or_path):
-    p = Path(code_or_path)
-    if p.is_dir():
-        return p
-    return TRANSLATIONS / code_or_path
+    return glyphmap.lang_dir(code_or_path)
 
 
 # ---------------------------------------------------------------- dialog assets
 def asset_blocks(region, root=None):
-    """{id: words} of the extracted dialogs of a release (assets/dialogs/<region>)."""
+    """{id: words} of the extracted dialogs of a release (translate/<region>)."""
     root = Path(root) if root else ASSETS_DIALOGS
     cm = dialog.load_charmap(region)
     out = {}
@@ -643,11 +639,9 @@ def load_translation(lang):
 
 def render_reference(words, region, ctx):
     """Readable form of the words of an extracted dialog with symbolic variables (`<VAR player>`); used by the worksheet only."""
-    cm = dialog.load_charmap(region)
-    if region == "jp":
-        cm = dict(cm)
-        for k, ch in read_json(DEFS / "jp_display_extra.json")["glyphs"].items():
-            cm.setdefault(int(k, 16), ch)           # display only: glyph ids the converter keeps as <XXXX>
+    cm = dict(dialog.load_charmap(region))
+    for k, ch in glyphmap.display_chars(glyphmap.read(lang_dir(region))).items():
+        cm.setdefault(k, ch)                        # display only (JP): glyph ids the converter keeps as <XXXX>
     text = dialog.words_to_text(words, cm)
 
     def sub(m):

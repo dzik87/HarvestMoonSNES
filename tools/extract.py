@@ -1,15 +1,16 @@
 #!/usr/bin/env python3
-"""Extracts the editable assets from the user's own ROM dumps into assets/ (git-ignored).
+"""Extracts the editable assets from the user's own ROM dumps into assets/ and, for the dialog text and the font of the four releases, translate/<us|eu|de|jp>/.
 
     python tools/extract.py --rom-dir DIR            # DIR is searched recursively for the four releases (US EU DE JP)
     python tools/extract.py --rom-dir DIR --only palettes,fonts
-    python tools/extract.py --rom-dir DIR --out /tmp/assets --compare assets   # extract elsewhere and diff with a tree
+    python tools/extract.py --rom-dir DIR --out /tmp/tree --compare .          # extract elsewhere (the tree gets assets/ and translate/) and diff with the repository
     python tools/extract.py --list
 
 The releases are recognised by size and CRC32 (tests/expected.json), so file names do not matter. A 512-byte copier
 header is stripped automatically. Missing releases only disable the steps that need them. No ROM data is ever
 written outside the output directory.
-See docs/extraction.md for the model (defs/ = committed structure, assets/ = extracted content).
+See docs/extraction.md for the model (defs/ = committed structure, assets/ and translate/{us,eu,de,jp} = extracted content;
+translate/pl and other translations are original work and never touched).
 """
 import argparse
 import binascii
@@ -24,6 +25,7 @@ sys.path.insert(0, str(ROOT / "tools"))
 from extract_steps import Context, all_steps  # noqa: E402
 
 ROM_SIZE = 2 * 1024 * 1024
+TREES = ("assets", "translate")            # roots of an extraction output tree
 GENERATED_SUFFIXES = (".bin", ".pal")      # build products inside assets/ (git-ignored), not extraction results
 
 
@@ -48,9 +50,9 @@ def find_roms(rom_dir: Path, verbose=False):
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--rom-dir", type=Path)
-    ap.add_argument("--out", type=Path, default=ROOT / "assets")
+    ap.add_argument("--out", type=Path, default=ROOT, help="output tree: gets assets/ and translate/ (default: the repository)")
     ap.add_argument("--only", help="comma separated step names")
-    ap.add_argument("--compare", type=Path, help="after extraction, diff --out against this tree and fail on differences")
+    ap.add_argument("--compare", type=Path, help="after extraction, diff --out against this tree (a repository root with assets/ and translate/) and fail on differences")
     ap.add_argument("--list", action="store_true")
     ap.add_argument("-v", "--verbose", action="store_true")
     a = ap.parse_args()
@@ -75,7 +77,7 @@ def main() -> int:
         roms[region] = q
     only = set(a.only.split(",")) if a.only else None
     done, rc = set(), 0
-    ctx = Context(roms=roms, root=ROOT, assets=a.out, defs=ROOT / "defs", verbose=a.verbose)
+    ctx = Context(roms=roms, root=ROOT, assets=a.out / "assets", translate=a.out / "translate", defs=ROOT / "defs", verbose=a.verbose)
     a.out.mkdir(parents=True, exist_ok=True)
     pending = [s for s in steps if (only is None or s.name in only)]
     while pending:
@@ -108,14 +110,16 @@ def main() -> int:
 
 
 def compare_trees(a: Path, b: Path):
-    """Differences between the extracted tree `a` and the reference tree `b`.  Only the top-level directories that the
-    extraction wrote to (assets/audio, assets/tables, ...) are compared, so `--only` runs and the work of other steps do not
-    show up as missing files."""
+    """Differences between the extracted tree `a` and the reference tree `b` (both hold assets/ and translate/).  Only the directories that the
+    extraction wrote to (assets/audio, assets/tables, translate/us, ...) are compared, so `--only` runs and the work of other steps (and the translations
+    in translate/, which are never extracted) do not show up as missing files."""
     out = []
-    fa = {p.relative_to(a).as_posix() for p in a.rglob("*") if p.is_file()}
-    scope = {f.split("/")[0] for f in fa}
-    fb = {p.relative_to(b).as_posix() for p in b.rglob("*")
-          if p.is_file() and p.relative_to(b).parts[0] in scope and p.suffix not in GENERATED_SUFFIXES}
+
+    def files(root):
+        return {p.relative_to(root).as_posix() for top in TREES if (root / top).is_dir() for p in (root / top).rglob("*") if p.is_file()}
+    fa = files(a)
+    scope = {"/".join(f.split("/")[:2]) for f in fa}
+    fb = {f for f in files(b) if "/".join(f.split("/")[:2]) in scope and not f.endswith(GENERATED_SUFFIXES)}
     for f in sorted(fa - fb):
         out.append("only extracted: " + f)
     for f in sorted(fb - fa):

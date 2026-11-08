@@ -15,7 +15,7 @@ import common as C                                          # noqa: E402
 def main(argv=None):
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("lang")
-    ap.add_argument("--assets")
+    ap.add_argument("--translate-dir", "--assets", dest="assets", help="directory with the <region>/bank_*.txt dialogs of the four releases (default translate)")
     a = ap.parse_args(argv)
     if not C.have_assets("jp", a.assets):
         sys.exit("The extracted dialogs are missing: python tools/extract.py --rom-dir <your dumps> (docs/extraction.md)")

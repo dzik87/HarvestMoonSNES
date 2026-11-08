@@ -1,0 +1,23 @@
+{
+ "_doc": "Letters that `python tools/translate/glyphs.py init <lang>` paints into the initial glyph PNGs of a translation (the font of the engine release plus these letters; glyph id, base letter of the engine font, diacritic mark of marks.json).  Only used once, to create translate/<lang>/glyphs/; afterwards the PNGs and glyph_map.json of the language are the source.",
+ "pl": {
+  "Ą": {"id": "0x43", "base": "A", "mark": "ogonek"},
+  "Ć": {"id": "0x44", "base": "C", "mark": "acute"},
+  "Ę": {"id": "0x45", "base": "E", "mark": "ogonek"},
+  "Ł": {"id": "0x46", "base": "L", "mark": "stroke"},
+  "Ń": {"id": "0x47", "base": "N", "mark": "acute"},
+  "Ó": {"id": "0x48", "base": "O", "mark": "acute"},
+  "Ś": {"id": "0x49", "base": "S", "mark": "acute"},
+  "Ź": {"id": "0x4A", "base": "Z", "mark": "acute"},
+  "Ż": {"id": "0x4B", "base": "Z", "mark": "dot"},
+  "ą": {"id": "0x4C", "base": "a", "mark": "ogonek"},
+  "ć": {"id": "0x4D", "base": "c", "mark": "acute"},
+  "ę": {"id": "0x4E", "base": "e", "mark": "ogonek"},
+  "ł": {"id": "0x4F", "base": "l", "mark": "stroke"},
+  "ń": {"id": "0x50", "base": "n", "mark": "acute"},
+  "ó": {"id": "0x51", "base": "o", "mark": "acute"},
+  "ś": {"id": "0x52", "base": "s", "mark": "acute"},
+  "ź": {"id": "0x53", "base": "z", "mark": "acute"},
+  "ż": {"id": "0x54", "base": "z", "mark": "dot"}
+ }
+}

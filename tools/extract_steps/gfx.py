@@ -1,7 +1,8 @@
 """Extraction steps for palettes, fonts and graphics (see docs/extraction.md).
 
   palettes   assets/gfx/palettes/**          colours of the 117 palettes (+ the releases' own versions)
-  fonts      assets/fonts/<region>/**        one PNG per glyph + glyphs.json
+  fonts      translate/<region>/glyphs/**    one PNG per glyph + glyph_map.json (+ lang.json)
+  dialogs    translate/<region>/*, translate/number_vars.csv   dialog texts and the dialog engine tables
   graphics   assets/gfx/{png,tilemaps}/**    composed images, remainder sheets, name tables, sidecars (tools/extract_steps/gfx_export.py)
 
 Layouts (bank order, blob names and sizes) come from defs/gfx/banks.json; the ROM supplies only the pixels, colours and tile maps.
@@ -35,16 +36,18 @@ def run_palettes(ctx: Context):
 
 def run_fonts(ctx: Context):
     import font
+    import glyphmap
     for region in ("US", "EU", "DE", "JP"):
         if region in ctx.roms:
-            n = font.extract_rom_bytes(region.lower(), ctx.rom_bytes(region), ctx.assets / "fonts" / region.lower())
+            glyphmap.write_lang_json(ctx.translate / region.lower(), region.lower())
+            n = font.extract_rom_bytes(region.lower(), ctx.rom_bytes(region), ctx.translate / region.lower())
             if ctx.verbose:
                 print("  %s: %d glyphs" % (region, n))
 
 
 def run_dialogs(ctx: Context):
     import dialog
-    n = dialog.extract_rom(roms_bytes(ctx), ctx.defs, ctx.assets / "dialogs")
+    n = dialog.extract_rom(roms_bytes(ctx), ctx.defs, ctx.translate)
     if ctx.verbose:
         print("  %d dialogs" % n)
 
@@ -66,7 +69,7 @@ def run_graphics(ctx: Context):
 STEPS = [
     Step("palettes", run_palettes, ["US"], [], "117 palettes of banks $A8/$A9 as JSON + PNG (colours), regional versions"),
     Step("presets", run_presets, ["US"], [], "PPU graphics presets (BG modes, name table / character bases, layers) of the map engine, assets/gfx/presets.csv"),
-    Step("fonts", run_fonts, ["US", "EU", "DE", "JP"], [], "dialog font glyphs (16x16 2bpp) of every release as PNG + glyphs.json"),
+    Step("fonts", run_fonts, ["US", "EU", "DE", "JP"], [], "dialog font glyphs (16x16 2bpp) of every release as PNG + glyph_map.json (translate/<region>/glyphs)"),
     Step("dialogs", run_dialogs, ["US", "EU", "DE", "JP"], [], "dialog texts of the four releases (banks $B6-$BB / $AA-$AC) and the dialog engine tables"),
     Step("graphics", run_graphics, ["US", "EU", "DE", "JP"], ["palettes", "presets", "areas", "objects", "tables"],
          "composed screen / frame PNGs, remainder sheets, name tables and sidecars of all 151 graphics blobs (US and the regional versions), palette map"),
