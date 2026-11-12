@@ -1,8 +1,8 @@
-name: audio-preview
+name: audio-render-check
 
-# Renders SPC + MP3 listening copies of all songs and sound effects.
+# Smoke test of the audio pipeline: renders SPC snapshots and short MP3 copies of all songs and sound effects.
 # Runs only when audio sources change (or by hand), never as part of the ROM build.
-# The output is a workflow artifact; it is not committed.
+# The output is discarded: this workflow does not upload artifacts (artifact quota); listen locally, see docs/workflow.md.
 
 on:
   push:
@@ -13,11 +13,6 @@ on:
       - 'tools/audio/**'
       - '.github/workflows/audio.yml'
   workflow_dispatch:
-    inputs:
-      seconds:
-        description: 'Length of each MP3 in seconds'
-        required: false
-        default: '90'
 
 jobs:
   render:
@@ -37,13 +32,4 @@ jobs:
           python3 tools/audio/audioconv.py spc --out build/listen/spc $(seq 1 49 | sed 's/^/--sfx /')
 
       - name: Render MP3
-        run: python3 tools/audio/audioconv.py render build/listen/spc --out build/listen/mp3 --format mp3 --seconds "${{ github.event.inputs.seconds || '90' }}"
-
-      - name: Upload audio for listening
-        uses: actions/upload-artifact@v4
-        with:
-          name: HarvestMoon-audio-listen
-          path: |
-            build/listen/spc
-            build/listen/mp3
-          retention-days: 14
+        run: python3 tools/audio/audioconv.py render build/listen/spc --out build/listen/mp3 --format mp3 --seconds 10

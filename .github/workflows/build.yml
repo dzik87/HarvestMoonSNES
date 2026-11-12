@@ -130,16 +130,6 @@ jobs:
             echo '```'
           } >> "$GITHUB_STEP_SUMMARY"
 
-      - name: Upload ROM
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: HarvestMoon-US
-          path: |
-            build/HarvestMoon.sfc
-            build-us.log
-          if-no-files-found: ignore
-
   # Slow tests run in parallel jobs so that the wall-clock time of a push stays near the longest one.
   slow-tests:
     runs-on: ubuntu-latest

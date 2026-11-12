@@ -29,13 +29,13 @@ Translated ROMs are a separate build on the US engine: `python tools/build.py --
 ## Audio preview (`.github/workflows/audio.yml`)
 
 Rendering SPC and MP3 copies of all songs and sound effects is slow, so it is not part of the ROM build. The separate
-`audio-preview` workflow runs only when `assets/audio/**` or `tools/audio/**` change (or by hand via *Run workflow*, with an
-optional length in seconds) and publishes the result as the `HarvestMoon-audio-listen` artifact (14 days, never committed).
-Locally: `python3 tools/audio/audioconv.py spc --all --out build/listen/spc`, then `audioconv.py render build/listen/spc --format mp3`.
+`audio-render-check` workflow runs only when `assets/audio/**`, `defs/audio/**` or `tools/audio/**` change (or by hand via *Run workflow*)
+as a smoke test of the pipeline (10-second MP3s); the output is discarded, because the repository's CI does not upload
+artifacts (GitHub artifact storage quota). To listen to the songs, run it locally: `python3 tools/audio/audioconv.py spc --all --out build/listen/spc`, then `audioconv.py render build/listen/spc --format mp3`.
 
 ## CI (`.github/workflows/build.yml`)
-Builds asar from the `third_party/asar` submodule (tag `v1.91`, cached), assembles the US ROM, compares size/CRC32/MD5/SHA-1 and exposes
-the result in run annotations and as the `HarvestMoon-US` artifact.
+Builds asar from the `third_party/asar` submodule (tag `v1.91`, cached), assembles the four ROMs, compares size/CRC32/MD5/SHA-1 and exposes
+the result in run annotations and the step summary. CI never uploads artifacts (GitHub artifact quota); build the ROM locally.
 
 ## Tests of the graphics pipeline
 `python3 tests/test_pngsync.py` runs in about 90 s (quick checks that skip the bit-exact rebuild, the round trip only for eu/de/jp).
